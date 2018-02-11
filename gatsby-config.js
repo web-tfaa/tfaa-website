@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'TMAC',
+    title: `TMAC`,
+    siteUrl: `https://www.texasmusicadministrators.com`,
+    description: `Website for the Texas Music Administrators Conference`,
   },
   plugins: [
     {
@@ -11,7 +13,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
-    `gatsby-plugin-glamor`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
