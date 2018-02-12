@@ -59,8 +59,8 @@ export default () =>
       <PageLink to={`/about/`}>
         About
       </PageLink>
-      <PageLink to={`/resource/`}>
-        Resource
+      <PageLink to={`/resources/`}>
+        Resources
       </PageLink>
       <PageLink to={`/membership/`}>
         Membership

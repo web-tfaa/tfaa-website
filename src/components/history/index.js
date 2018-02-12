@@ -17,7 +17,7 @@ const HistoryWrapper = styled.div`
 export default () =>
   <div>
     <HistoryTitle>
-      About {data.site.siteMetadata.title}
+      History
     </HistoryTitle>
     <HistoryWrapper>
       <div>
