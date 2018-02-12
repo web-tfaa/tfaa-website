@@ -4,6 +4,7 @@ import Helmet from "react-helmet"
 import styled from "styled-components";
 
 // Internal Dependencies
+import Footer from '../components/footer'
 import TopNav from '../components/top-nav'
 import { rhythm } from "../utils/typography";
 
@@ -30,5 +31,6 @@ export default ({ children }) => (
     <BodyWrapper>
       {children()}
     </BodyWrapper>
+    <Footer />
   </MainContentContainer>
 );
