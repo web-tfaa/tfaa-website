@@ -4,7 +4,7 @@ import Helmet from "react-helmet"
 import styled from "styled-components";
 
 // Internal Dependences
-import TopNav from '../../components/top-nav/TopNav'
+import TopNav from '../../components/top-nav'
 import { rhythm } from "../utils/typography";
 
 // Local Variables

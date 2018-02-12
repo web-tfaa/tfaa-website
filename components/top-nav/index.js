@@ -27,11 +27,11 @@ const LinkWrapper = styled.span`
 `;
 
 // Component Definition
-export default ({ children, data }) =>
+export default ({ children }) =>
   <Nav>
     <Link to={`/`}>
       <HomeLink>
-        {data.site.siteMetadata.title}
+        TMAC
       </HomeLink>
     </Link>
     <LinkWrapper>
@@ -40,13 +40,3 @@ export default ({ children, data }) =>
       </Link>
     </LinkWrapper>
   </Nav>
-
-export const query = graphql`
-  query TopNavQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`
