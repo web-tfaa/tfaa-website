@@ -14,6 +14,7 @@ const Nav = styled.nav`
   max-width: 960;
   padding: 1rem 2rem;
   border-bottom: 4px solid purple;
+  box-shadow: 2px 0 5px #222;
 `;
 
 const HomeLink = styled(Link)`
@@ -21,6 +22,8 @@ const HomeLink = styled(Link)`
   font-style: normal;
   text-decoration: none;
   background-image: none;
+  color: black;
+  font-weight: 500;
 `;
 
 const LinkWrapper = styled.span`

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { rhythm } from "../utils/typography";
 
 // Local Variables
-const Welcome = styled.h2`
+const Welcome = styled.h3`
   display: inline-block;
   border-bottom: solid 1px;
 `;
