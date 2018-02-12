@@ -13,8 +13,8 @@ const Nav = styled.nav`
   margin: 0 auto;
   max-width: 960;
   padding: 1rem 2rem;
-  border-bottom: 4px solid purple;
-  box-shadow: 2px 0 5px #222;
+  border-bottom: 4px solid #2D456F;
+  box-shadow: 3px 0 5px #2D456F;
 `;
 
 const LogoLWrapper = styled.div`
@@ -32,8 +32,12 @@ const HomeLink = styled(Link)`
   font-weight: 500;
 `;
 
+const PageLink = styled(Link)`
+  margin-left: 0.8rem;
+`;
+
 const TmacTitle = styled.span`
-  margin-left: 0.8em;
+  margin-left: 0.8rem;
 `;
 
 const LinkWrapper = styled.span`
@@ -52,8 +56,17 @@ export default () =>
       <TmacTitle>TMAC</TmacTitle>
     </HomeLink>
     <LinkWrapper>
-      <Link to={`/about/`}>
+      <PageLink to={`/about/`}>
         About
-      </Link>
+      </PageLink>
+      <PageLink to={`/resource/`}>
+        Resource
+      </PageLink>
+      <PageLink to={`/membership/`}>
+        Membership
+      </PageLink>
+      <PageLink to={`/sponsors/`}>
+        Sponsors
+      </PageLink>
     </LinkWrapper>
   </Nav>
