@@ -4,9 +4,14 @@ This website was constructed for Mario Luna and the Texas Music Administrators C
 
 ## Tools
 
-- GatsbyJS
+- <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="20"> GatsbyJS
 - React
+- Styled Components
 - CMS (coming soon...)
 
 ## Running in development
 `gatsby develop`
+
+[![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
+
+:musical_note: :trumpet: :saxophone: :stuck_out_tongue_winking_eye:
