@@ -1,5 +1,7 @@
+// External Dependences
 import React from "react";
 
+// Component Definition
 export default ({ data }) =>
   <div>
     <h1>
