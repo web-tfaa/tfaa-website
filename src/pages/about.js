@@ -1,34 +1,44 @@
-// External Dependences
+// External Dependencies
 import React from "react";
+import styled from "styled-components";
+
+// Internal Dependencies
+import Constitution from '../../components/constitution'
+
+// Local Variables
+const AboutTitle = styled.h3`
+  display: inline-block;
+  border-bottom: solid 1px;
+`;
 
 // Component Definition
 export default ({ data }) =>
   <div>
-    <h1>
+    <AboutTitle>
       About {data.site.siteMetadata.title}
-    </h1>
+    </AboutTitle>
     <section>
-      <h3>Our Mission</h3>
+      <h4>Our Mission</h4>
       <p>
         To promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
       </p>
     </section>
     <section>
-      <h3>Purpose</h3>
+      <h4>Purpose</h4>
       <p>
         The Texas Music Administrators Conference is organized exclusively for charitable, scientific and educational purposes, more specifically to promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
 
       </p>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">Constitution & Bylaws</a>
-      </h3>
+      </h4>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">Events</a>
-      </h3>
+      </h4>
       <ul>
         <li>Summer Convention</li>
         <li>Fall Retreat</li>
@@ -38,29 +48,29 @@ export default ({ data }) =>
       </ul>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">History</a>
-      </h3>
+      </h4>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">Officers</a>
-      </h3>
+      </h4>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">Past Presidents</a>
-      </h3>
+      </h4>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">Sponsors</a>
-      </h3>
+      </h4>
     </section>
     <section>
-      <h3>
+      <h4>
         <a href="#">Statements of Philosophy</a>
-      </h3>
+      </h4>
     </section>
   </div>
 

@@ -1,9 +1,9 @@
-// External Dependences
+// External Dependencies
 import React from "react";
 import Helmet from "react-helmet"
 import styled from "styled-components";
 
-// Internal Dependences
+// Internal Dependencies
 import TopNav from '../../components/top-nav'
 import { rhythm } from "../utils/typography";
 

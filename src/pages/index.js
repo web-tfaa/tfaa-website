@@ -1,9 +1,9 @@
-// External Dependences
+// External Dependencies
 import React from "react";
 import Link from "gatsby-link";
 import styled from "styled-components";
 
-// Interal Dependences
+// Internal Dependencies
 import { rhythm } from "../utils/typography";
 
 // Local Variables
