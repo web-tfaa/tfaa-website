@@ -18,20 +18,16 @@ const Footer = styled.footer`
   box-shadow: -3px 0 5px #2D456F;
 `;
 
-const PageLink = styled(Link)`
-  margin-left: 0.8rem;
-`;
-
-const TmacTitle = styled.span`
-  margin-left: 0.8rem;
-`;
-
-const LinkWrapper = styled.span`
-  justify-content: space-between;
+const FooterLink = styled.a`
+  margin-left: 0.25rem;
+  text-shadow: none;
 `;
 
 // Component Definition
 export default () =>
   <Footer>
-    Copyright &copy; 2016-2018 Texas Music Administrators Conference
+    <div>Copyright &copy; 2016-2018 | Texas Music Administrators Conference</div>
+    <div>Design by
+      <FooterLink href="http://www.drumsensei.com">Drumsensei Media</FooterLink>
+    </div>
   </Footer>
