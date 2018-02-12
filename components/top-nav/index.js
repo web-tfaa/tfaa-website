@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // Local Variables
 const Nav = styled.nav`
-  align-items: center;
+  align-items: baseline;
   box-sizing: border-box;
   display: flex;
   height: 64;
@@ -13,12 +13,14 @@ const Nav = styled.nav`
   margin: 0 auto;
   max-width: 960;
   padding: 0 24px;
+  border-bottom: 4px solid purple;
 `;
 
 const HomeLink = styled.h3`
-  margin-bottom: 2em;
   display: inline-block;
   font-style: normal;
+  text-decoration: none;
+  background-image: none;
 `;
 
 
