@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // Local Variables
 const Nav = styled.nav`
-  align-items: baseline;
+  align-items: center;
   box-sizing: border-box;
   display: flex;
   height: 64;
@@ -17,13 +17,23 @@ const Nav = styled.nav`
   box-shadow: 2px 0 5px #222;
 `;
 
+const LogoLWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const HomeLink = styled(Link)`
-  display: inline-block;
+  display: flex;
+  align-items: center;
   font-style: normal;
   text-decoration: none;
   background-image: none;
   color: black;
   font-weight: 500;
+`;
+
+const TmacTitle = styled.span`
+  margin-left: 0.8em;
 `;
 
 const LinkWrapper = styled.span`
@@ -34,7 +44,12 @@ const LinkWrapper = styled.span`
 export default () =>
   <Nav>
     <HomeLink to={`/`}>
-      TMAC
+      <img
+        style={{ marginBottom: 0 }}
+        height="25px"
+        src="http://res.cloudinary.com/drumsensei/image/upload/v1518414495/tmac-logo_upybjp.jpg"
+      />
+      <TmacTitle>TMAC</TmacTitle>
     </HomeLink>
     <LinkWrapper>
       <Link to={`/about/`}>
