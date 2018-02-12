@@ -1,9 +1,9 @@
 // External Dependencies
 import React from "react";
+import Link from "gatsby-link";
 import styled from "styled-components";
 
 // Internal Dependencies
-import Constitution from '../../components/constitution'
 
 // Local Variables
 const AboutTitle = styled.h3`
@@ -32,7 +32,9 @@ export default ({ data }) =>
     </section>
     <section>
       <h4>
-        <a href="#">Constitution & Bylaws</a>
+        <Link to={`/constitution/`}>
+          Constitution & Bylaws
+        </Link>
       </h4>
     </section>
     <section>
@@ -49,7 +51,9 @@ export default ({ data }) =>
     </section>
     <section>
       <h4>
-        <a href="#">History</a>
+        <Link to={`/history/`}>
+          History
+        </Link>
       </h4>
     </section>
     <section>
