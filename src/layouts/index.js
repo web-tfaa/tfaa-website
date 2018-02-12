@@ -8,15 +8,18 @@ import TopNav from '../../components/top-nav'
 import { rhythm } from "../utils/typography";
 
 // Local Variables
-const Wrapper = styled.div`
+const MainContentContainer = styled.div`
   margin: 0 auto;
   max-width: 960;
-  padding: 2em;
+`;
+
+const BodyWrapper = styled.div`
+  padding: 2rem;
 `;
 
 // Component Definition
 export default ({ children }) => (
-  <Wrapper>
+  <MainContentContainer>
     <Helmet defaultTitle={`Texas Music Administrators Conference`}>
       <meta name="twitter:site" content="@TXMusicLeaders" />
       <meta name="og:type" content="website" />
@@ -24,6 +27,8 @@ export default ({ children }) => (
       <html lang="en" amp />
     </Helmet>
     <TopNav />
-    {children()}
-  </Wrapper>
+    <BodyWrapper>
+      {children()}
+    </BodyWrapper>
+  </MainContentContainer>
 );

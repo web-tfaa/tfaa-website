@@ -12,30 +12,27 @@ const Nav = styled.nav`
   justify-content: space-between;
   margin: 0 auto;
   max-width: 960;
-  padding: 0 24px;
+  padding: 1rem 2rem;
   border-bottom: 4px solid purple;
 `;
 
-const HomeLink = styled.h3`
+const HomeLink = styled(Link)`
   display: inline-block;
   font-style: normal;
   text-decoration: none;
   background-image: none;
 `;
 
-
 const LinkWrapper = styled.span`
-  float: right;
+  justify-content: space-between;
 `;
 
 // Component Definition
-export default ({ children }) =>
+export default () =>
   <Nav>
-    <Link to={`/`}>
-      <HomeLink>
-        TMAC
-      </HomeLink>
-    </Link>
+    <HomeLink to={`/`}>
+      TMAC
+    </HomeLink>
     <LinkWrapper>
       <Link to={`/about/`}>
         About
