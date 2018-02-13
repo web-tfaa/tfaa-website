@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import SponsorCard from '../shared/sponsor-card';
+import sponsorData from './sponsor-data';
 
 // Local Variables
 const SponsorsContainer = styled.section`
@@ -21,6 +22,8 @@ const SponsorsWrapper = styled.div`
   flex-direction: column;
 `;
 
+console.log('sponsor data', sponsorData);
+
 // Component Definition
 export default () =>
   <SponsorsContainer>
@@ -31,21 +34,25 @@ export default () =>
       <SponsorCard
         max={2000}
         sponsorClass="Class Champion"
+        sponsorData={sponsorData.champion}
       />
       <SponsorCard
         min={1500}
         max={1999}
         sponsorClass="Gold Medal"
+        sponsorData={sponsorData.gold}
       />
       <SponsorCard
         min={1000}
         max={1499}
         sponsorClass="Silver Medal"
+        sponsorData={sponsorData.silver}
       />
       <SponsorCard
         min={500}
         max={999}
         sponsorClass="Bronze Medal"
+        sponsorData={sponsorData.bronze}
       />
     </SponsorsWrapper>
   </SponsorsContainer>

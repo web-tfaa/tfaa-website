@@ -1,5 +1,5 @@
 // External Dependencies
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import styled from 'styled-components';
@@ -14,6 +14,7 @@ const propTypes = {
   max: PropTypes.number,
   min: PropTypes.number,
   sponsorClass: PropTypes.string.isRequired,
+  sponsorData: PropTypes.array.isRequired,
 };
 
 const defaultProps = {
@@ -29,31 +30,61 @@ const SponsorCardWrapper = styled.div`
   box-shadow: rgba(25, 17, 34, 0.05) 0px 3px 10px;
 `;
 
-const SponsorCardTitle = styled.span`
+const SponsorCardTitle = styled.div`
   color: royalblue;
   font-weight: 600;
+  margin-bottom: 1rem;
 `;
 
 // Component Definition
-const SponsorCard = (props) => {
-  const {
-    max,
-    min,
-    sponsorClass,
-  } = props;
+class SponsorCard extends Component {
+  renderSponsors = (sponsorData) => {
+    const {
+      sponsorClass,
+    } = this.props;
 
-  const donationAmount = min
-    ? `${min.toLocaleString()}-${max.toLocaleString()}`
-    : `${max.toLocaleString()}+`;
+    const sponsorList = sponsorData.map(sponsor => {
+      return (
+        <div key={sponsor.name}>
+          <a href={sponsor.link}>{sponsor.name}</a>
+        </div>
+      );
+    });
 
-  return (
-    <SponsorCardWrapper>
-      <SponsorCardTitle>
-        {sponsorClass} Sponsor (${donationAmount} donation)
-      </SponsorCardTitle>
-    </SponsorCardWrapper>
-  );
-};
+    if (sponsorList.length < 1) {
+      return (
+        <div>
+          Please contact any TMAC officer about becoming a {sponsorClass} sponsor.
+        </div>
+      );
+    }
+    return sponsorList;
+  }
+
+  render() {
+    const {
+      max,
+      min,
+      sponsorClass,
+      sponsorData,
+    } = this.props;
+
+    console.log('yo', sponsorData);
+
+    const donationAmount = min
+      ? `${min.toLocaleString()}-${max.toLocaleString()}`
+      : `${max.toLocaleString()}+`;
+
+    return (
+      <SponsorCardWrapper>
+        <SponsorCardTitle>
+          {sponsorClass} Sponsor (${donationAmount} donation)
+        </SponsorCardTitle>
+        {this.renderSponsors(sponsorData)}
+      </SponsorCardWrapper>
+    );
+  }
+}
 
 SponsorCard.propTypes = propTypes;
 SponsorCard.defaultProps = defaultProps;
