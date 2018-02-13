@@ -73,8 +73,8 @@ export default () =>
       <PageLink to={`/resources/`}>
         Resources
       </PageLink>
-      <PageLink to={`/membership/`}>
-        Membership
+      <PageLink to={`/join/`}>
+        Join
       </PageLink>
       <PageLink to={`/sponsors/`}>
         Sponsors
