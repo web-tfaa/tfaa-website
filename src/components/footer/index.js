@@ -9,13 +9,14 @@ const Footer = styled.footer`
   background-color: #efefef;
   box-sizing: border-box;
   display: flex;
+  flex: 1 0 auto;
   height: 64;
   justify-content: space-between;
   margin: 0 auto;
   max-width: 960;
   padding: 1rem 2rem;
   border-top: 4px solid #2D456F;
-  box-shadow: -3px 0 5px #2D456F;
+  box-shadow: -2px 0 5px #444;
 `;
 
 const FooterLink = styled.a`

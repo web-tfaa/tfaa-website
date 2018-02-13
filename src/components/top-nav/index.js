@@ -9,6 +9,7 @@ const Nav = styled.nav`
   background-color: #efefef;
   box-sizing: border-box;
   display: flex;
+  flex: 1 0 auto;
   height: 64;
   justify-content: space-between;
   margin: 0 auto;
