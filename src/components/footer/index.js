@@ -10,7 +10,7 @@ const Footer = styled.footer`
   left: 0;
   bottom: 0;
   align-items: center;
-  background-color: #efefef;
+  background-color: #fbfafc;
   box-sizing: border-box;
   display: flex;
   height: 64;

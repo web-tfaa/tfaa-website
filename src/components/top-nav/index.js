@@ -6,7 +6,7 @@ import styled from "styled-components";
 // Local Variables
 const Nav = styled.nav`
   align-items: center;
-  background-color: #efefef;
+  background-color: #fbfafc;
   box-sizing: border-box;
   display: flex;
   flex: 1 0 auto;
@@ -21,7 +21,7 @@ const Nav = styled.nav`
 
 const HomeLink = styled(Link)`
   display: flex;
-  background-color: #efefef;
+  background-color: #fbfafc;
   align-items: center;
   font-style: normal;
   text-decoration: none;
@@ -37,7 +37,7 @@ const PageLink = styled(Link)`
 `;
 
 const TmacTitle = styled.span`
-  background-color: #efefef;
+  background-color: #fbfafc;
   margin-left: 0.8rem;
   text-decoration: none;
   background-image: none;
@@ -46,7 +46,7 @@ const TmacTitle = styled.span`
 
 const LinkWrapper = styled.span`
   justify-content: space-between;
-  background-color: #efefef;
+  background-color: #fbfafc;
   text-decoration: none;
   background-image: none;
   text-shadow: none;

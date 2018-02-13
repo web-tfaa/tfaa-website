@@ -11,15 +11,12 @@ import { rhythm } from "../utils/typography";
 // Local Variables
 const MainContentContainer = styled.div`
   margin: 0 auto;
-  ${'' /* display: flex;
-  flex-direction: column;
-  min-height: 100vh; */}
+  background-color: #fbfafc;
 `;
 
 const BodyWrapper = styled.div`
   padding: 2rem;
   height: 100%;
-  ${'' /* flex: 2 0 100%; */}
 `;
 
 // Component Definition
