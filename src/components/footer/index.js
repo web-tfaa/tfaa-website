@@ -5,11 +5,14 @@ import styled from "styled-components";
 
 // Local Variables
 const Footer = styled.footer`
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
   align-items: center;
   background-color: #efefef;
   box-sizing: border-box;
   display: flex;
-  flex: 1 0 auto;
   height: 64;
   justify-content: space-between;
   margin: 0 auto;
