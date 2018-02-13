@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Internal Dependencies
-import Join from '../components/join'
+import Members from '../components/members'
 
 // Component Definition
-export default () => <Join />;
+export default () => <Members />;
