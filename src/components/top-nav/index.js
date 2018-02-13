@@ -64,6 +64,9 @@ export default () =>
       <TmacTitle>TMAC</TmacTitle>
     </HomeLink>
     <LinkWrapper>
+      <PageLink to={`/`}>
+        Home
+      </PageLink>
       <PageLink to={`/about/`}>
         About
       </PageLink>
