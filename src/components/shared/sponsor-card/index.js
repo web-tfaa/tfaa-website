@@ -31,7 +31,7 @@ const SponsorCardWrapper = styled.div`
 `;
 
 const SponsorCardTitle = styled.div`
-  color: royalblue;
+  color: #32456B;
   font-weight: 600;
   margin-bottom: 1rem;
 `;
@@ -68,8 +68,6 @@ class SponsorCard extends Component {
       sponsorClass,
       sponsorData,
     } = this.props;
-
-    console.log('yo', sponsorData);
 
     const donationAmount = min
       ? `${min.toLocaleString()}-${max.toLocaleString()}`

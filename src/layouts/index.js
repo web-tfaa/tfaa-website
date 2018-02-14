@@ -8,6 +8,10 @@ import Footer from '../components/footer'
 import TopNav from '../components/top-nav'
 import { rhythm } from "../utils/typography";
 
+// from Gatsby www project
+import "../css/prism-coy.css"
+
+
 // Local Variables
 const MainContentContainer = styled.div`
   margin: 0 auto;

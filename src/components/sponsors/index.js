@@ -22,8 +22,6 @@ const SponsorsWrapper = styled.div`
   flex-direction: column;
 `;
 
-console.log('sponsor data', sponsorData);
-
 // Component Definition
 export default () =>
   <SponsorsContainer>
