@@ -2,17 +2,31 @@
   items:
     - title: All About TMAC
       link: /about/
-    - title: Constitution & Bylaws
-      link: /about/constitution/
-    - title: Events
-      link: /about/events/
-    - title: History
-      link: /about/history/
     - title: Officers
       link: /about/officers/
+    - title: Constitution & Bylaws
+      link: /about/constitution/
+    - title: Philosophy
+      link: /about/philosophy/
+- title: Events for TMAC
+  items:
+    - title: Events Overview
+      link: /about/events/
+    - title: Summer Convention
+      link: /about/convention/
+    - title: Fall Retreat
+      link: /about/fall-retreat/
+    - title: Fall Golf Tournament
+      link: /about/fall-golf-tournament/
+    - title: Winter Meetings
+      link: /about/winter-meetings/
+    - title: Job Fair / Job Fair Rules
+      link: /about/job-fair/
+- title: History of TMAC
+  items:
+    - title: History
+      link: /about/history/
     - title: Outstanding Administrators
       link: /about/outstanding-admin/
     - title: Past Presidents
       link: /about/past-presidents/
-    - title: Philosophy
-      link: /about/philosophy/
