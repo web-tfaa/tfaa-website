@@ -4,6 +4,7 @@ import Link from "gatsby-link";
 import styled from "styled-components";
 
 // Internal Dependencies
+import MastheadBg from '../components/masthead/masthead-bg';
 import { rhythm } from "../utils/typography";
 
 // Local Variables
@@ -15,6 +16,7 @@ const Welcome = styled.h3`
 // Component Definition
 export default () =>
   <div>
+    <MastheadBg />
     <Welcome>
       Welcome
     </Welcome>
