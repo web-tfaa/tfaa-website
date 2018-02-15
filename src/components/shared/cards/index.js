@@ -8,7 +8,7 @@ import { rhythm, scale, options } from "../../../utils/typography"
 import { vP, vPHd, vPVHd, vPVVHd } from "../../../utils/gutters"
 
 // Local Variables
-const CardWrapper = styled.div`
+const CardsWrapper = styled.div`
   display: flex;
   flex: 0 1 auto;
   flex-wrap: wrap;
@@ -20,9 +20,9 @@ const CardWrapper = styled.div`
 
 // Component Definition
 const Cards = ({ children }) => (
-  <CardWrapper>
+  <CardsWrapper>
     {children}
-  </CardWrapper>
+  </CardsWrapper>
 )
 
 export default Cards
