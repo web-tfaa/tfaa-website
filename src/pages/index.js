@@ -6,6 +6,7 @@ import styled from "styled-components";
 // Internal Dependencies
 import Cards from '../components/shared/cards';
 import Card from '../components/shared/cards/card';
+import CardHeadline from '../components/shared/cards/card-headline';
 import MastheadBg from '../components/masthead/masthead-bg';
 import { rhythm } from "../utils/typography";
 
@@ -24,6 +25,9 @@ export default () =>
     </Welcome>
     <Cards>
       <Card>
+        <CardHeadline>
+          Message from the President
+        </CardHeadline>
         <p>
           Greetings from the Texas Music Administrators Conference! The Texas Music Administrators Conference (TMAC) is an organization of music/fine arts administrators with a common goal&mdash;the continued pursuit of excellence in music education in Texas for all students. While our roles may be varied in our individual school districts we stand together to create a supportive environment so that all children in Texas are offered a quality music education.
         </p>
