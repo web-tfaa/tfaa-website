@@ -14,14 +14,6 @@ const vPHdOff = rhythm(presets.gutters.HdR - presets.logoOffset)
 const vPVHdOff = rhythm(presets.gutters.VHdR - presets.logoOffset)
 const vPVVHdOff = rhythm(presets.gutters.VVHdR - presets.logoOffset)
 
-// const cover = {
-//   top: 0,
-//   left: 0,
-//   right: 0,
-//   bottom: 0,
-//   position: absolute,
-// }
-
 const BackgroundWrapper = styled.div`
   top: 0;
   left: 0;
@@ -42,13 +34,13 @@ const LeftFill = styled.div`
   width: vPOff;
   z-index: -10;
   background: colors.ui.light;
-  [presets.Hd]: {
+  {presets.Hd}: {
     width: vPHdOff;
   }
-  [presets.VHd]: {
+  {presets.VHd}: {
     width: vPVHdOff;
   }
-  [presets.VVHd]: {
+  {presets.VVHd}: {
     width: vPVVHdOff;
   }
 `;
@@ -61,13 +53,13 @@ const LeftSvg = styled.svg`
   position: absolute;
   left: vPOff;
   z-index: -2;
-  [presets.Hd]: {
+  {presets.Hd}: {
     left: vPHdOff;
   }
-  [presets.VHd]: {
+  {presets.VHd}: {
     left: vPVHdOff;
   }
-  [presets.VVHd]: {
+  {presets.VVHd}: {
     left: vPVVHdOff;
   }
   width: 100%;
