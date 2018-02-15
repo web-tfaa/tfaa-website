@@ -96,7 +96,7 @@ const MastheadBg = () => (
     <style>
       {`
           .masthead-bg-right-light {
-            fill: ${colors.gatsby};
+            fill: #002868;
           }
           @media (max-width: 650px),
           (max-width: 768px) and (orientation:portrait) {
@@ -120,7 +120,7 @@ const MastheadBg = () => (
               width: 110%;
             }
             .masthead-bg-right-light {
-              fill: ${colors.lilac};
+              fill: #002868;
             }
           }
           ${presets.Hd}  {
@@ -136,21 +136,21 @@ const MastheadBg = () => (
       className="masthead-bg-right"
     >
       <InnerSvg
-        x="-15%"
-        y="-10%"
+        x="10%"
+        y="10%"
       >
         <rect
           className="masthead-bg-right-light"
           width="10000%"
           height="10000%"
-          fill={colors.lilac}
+          fill="#BF0A30"
           transform="rotate(45 100 50) translate(0 0)"
         />
         <rect
           className="masthead-bg-left-dark"
           width="10000%"
           height="10000%"
-          fill={colors.gatsby}
+          fill="#002868"
           transform="rotate(45 100 50) translate(1.25 0)"
         />
         {/*<polygon fill="blue" points="0,10 10,0 10,10" />*/}
