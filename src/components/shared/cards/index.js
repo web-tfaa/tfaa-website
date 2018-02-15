@@ -3,9 +3,9 @@ import React from "react"
 import styled from 'styled-components';
 
 // Internal Dependencies
-import presets from "../../utils/presets"
-import { rhythm, scale, options } from "../../utils/typography"
-import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
+import presets from "../../../utils/presets"
+import { rhythm, scale, options } from "../../../utils/typography"
+import { vP, vPHd, vPVHd, vPVVHd } from "../../../utils/gutters"
 
 // Local Variables
 const CardWrapper = styled.div`
