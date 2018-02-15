@@ -34,14 +34,14 @@ const LeftFill = styled.div`
   width: vPOff;
   z-index: -10;
   background: colors.ui.light;
-  {presets.Hd}: {
-    width: vPHdOff;
+  ${presets.Hd}: {
+    width: ${vPHdOff};
   }
-  {presets.VHd}: {
-    width: vPVHdOff;
+  ${presets.VHd}: {
+    width: ${vPVHdOff};
   }
-  {presets.VVHd}: {
-    width: vPVVHdOff;
+  ${presets.VVHd}: {
+    width: ${vPVVHdOff};
   }
 `;
 
@@ -51,16 +51,16 @@ const LeftSvg = styled.svg`
   right: 0;
   bottom: 0;
   position: absolute;
-  left: vPOff;
+  left: ${vPOff};
   z-index: -2;
-  {presets.Hd}: {
-    left: vPHdOff;
+  ${presets.Hd}: {
+    left: ${vPHdOff};
   }
-  {presets.VHd}: {
-    left: vPVHdOff;
+  ${presets.VHd}: {
+    left: ${vPVHdOff};
   }
-  {presets.VVHd}: {
-    left: vPVVHdOff;
+  ${presets.VVHd}: {
+    left: ${vPVVHdOff};
   }
   width: 100%;
   height: 100%;
@@ -115,7 +115,7 @@ const MastheadBg = () => (
               width: calc(125% + 4vh);
             }
           }
-          ${presets.Desktop}  {
+          ${presets.Desktop} {
             .masthead-bg-right {
               width: 110%;
             }
@@ -123,7 +123,7 @@ const MastheadBg = () => (
               fill: #002868;
             }
           }
-          ${presets.Hd}  {
+          ${presets.Hd} {
             .masthead-bg-right {
               width: calc(100%);
             }
