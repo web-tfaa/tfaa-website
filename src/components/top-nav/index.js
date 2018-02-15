@@ -34,6 +34,10 @@ const HomeLink = styled(Link)`
 const PageLink = styled(Link)`
   margin-left: 0.8rem;
   text-shadow: none;
+  text-decoration: none;
+  &:hover {
+    border-bottom: 1px solid #2D456F;
+  }
 `;
 
 const TmacTitle = styled.span`
