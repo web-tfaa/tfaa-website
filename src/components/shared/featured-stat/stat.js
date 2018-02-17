@@ -37,8 +37,8 @@ const Stat = (props) => {
         borderRadius: presets.radiusCir,
         fontSize: 20,
         [presets.Tablet]: {
-          flex: `0 0 25%`,
-          maxWidth: `25%`,
+          flex: `0 0 15%`,
+          maxWidth: `15%`,
           boxShadow: `0 1px 0 0 ${colors.ui.light}`,
           "&:nth-child(5),&:nth-child(6)": {
             boxShadow: `none`,
@@ -48,8 +48,8 @@ const Stat = (props) => {
           },
         },
         [presets.Hd]: {
-          flex: `0 0 25%`,
-          maxWidth: `25%`,
+          flex: `0 0 15%`,
+          maxWidth: `15%`,
           borderLeft: `1px solid ${colors.ui.light}`,
           "&:nth-child(4)": {
             boxShadow: `none`,

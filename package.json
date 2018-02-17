@@ -13,6 +13,7 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "date-fns": "^1.29.0",
     "gatsby": "^1.9.158",
     "gatsby-image": "^1.0.36",
     "gatsby-link": "^1.6.34",

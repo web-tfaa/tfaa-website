@@ -1,9 +1,13 @@
 // External Dependencies
-import React from 'react'
-import Link from "gatsby-link";
+import React from 'react';
+import Link from 'gatsby-link';
+import format from 'date-fns/format';
 
 // Internal Dependencies
-import { rhythm, scale, options } from "../../utils/typography"
+import { rhythm, scale, options } from '../../utils/typography';
+
+// Local Variables
+const currentYear = format(new Date(), ['YYYY']);
 
 // Component Definition
 export default () =>
@@ -19,7 +23,7 @@ export default () =>
       padding: '2em',
     }}
   >
-    <div>&copy; 2016-2018 | Texas Music Administrators Conference</div>
+    <div>&copy; 2016-{currentYear} | Texas Music Administrators Conference</div>
     <div>Built by
       <a
         css={{ marginLeft: 5 }}
