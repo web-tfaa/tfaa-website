@@ -16,7 +16,7 @@ export default class FourOhFour extends Component {
     return (
       <div>
         <MastheadBg />
-        <Container>
+        <Container hasSideBar={false}>
           <Cards>
             <Card css={{ width: '100%' }}>
               <h2>

@@ -1,18 +1,17 @@
 // Internal Dependencies
 import React from 'react';
-import { rhythm, scale, options } from "../../utils/typography"
-import presets from "../../utils/presets"
+import { options } from '../../utils/typography';
 
 // Component Definition
 const FuturaParagraph = ({ children }) => (
   <p
     css={{
       fontFamily: options.headerFontFamily.join(`,`),
-      marginBottom: 0,
+      lineHeight: '1.6',
     }}
   >
     {children}
   </p>
-)
+);
 
-export default FuturaParagraph
+export default FuturaParagraph;

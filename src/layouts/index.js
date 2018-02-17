@@ -30,6 +30,7 @@ const sidebarStyles = {
   display: `none`,
   position: `fixed`,
   top: `calc(${presets.headerHeight} - 1px)`,
+  paddingBottom: 96,
   overflowY: `auto`,
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
   WebkitOverflowScrolling: `touch`,
@@ -46,6 +47,7 @@ const sidebarStyles = {
   [presets.Desktop]: {
     width: rhythm(12),
     padding: rhythm(1),
+    paddingBottom: 96,
   },
 };
 
@@ -82,16 +84,7 @@ class DefaultLayout extends Component {
             },
           }}
         >
-          <div
-            css={{
-              ...sidebarStyles,
-              [presets.Tablet]: {
-                display: hasSidebar ? `block` : `none`,
-              },
-            }}
-          >
-            {/* <SidebarBody yaml={docsSidebar} /> */}
-          </div>
+
           <div
             css={{
               [presets.Tablet]: {
@@ -112,3 +105,14 @@ class DefaultLayout extends Component {
 }
 
 export default DefaultLayout;
+
+{/* <div
+  css={{
+    ...sidebarStyles,
+    [presets.Tablet]: {
+      display: hasSidebar ? `block` : `none`,
+    },
+  }}
+>
+  <SidebarBody yaml={docsSidebar} />
+</div> */}

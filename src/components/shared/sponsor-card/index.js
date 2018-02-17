@@ -3,11 +3,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import styled from 'styled-components';
-// import Img from "gatsby-image"
-
-// Internal Dependencies
-// import typography, { rhythm, scale } from '../utils/typography'
-// import presets, { colors } from '../utils/presets'
 
 // Local Variables
 const propTypes = {

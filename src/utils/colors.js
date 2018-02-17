@@ -65,7 +65,7 @@ const colors = {
   success: `#37b635`,
   warning: `#ec1818`,
   ui: {
-    bright: `#e0d6eb`,
+    bright: `#ccd4e0`,
     light: `#f5f3f7`,
     whisper: `#fbfafc`,
   },
