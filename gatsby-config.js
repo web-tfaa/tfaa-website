@@ -14,7 +14,7 @@ module.exports = {
     },
     `gatsby-plugin-react-next`,
     `gatsby-transformer-remark`,
-    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-glamorous`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
