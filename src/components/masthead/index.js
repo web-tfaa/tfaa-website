@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'gatsby-link'
 import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward'
+import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import CtaButton from './cta-button'
@@ -58,9 +59,9 @@ const MastheadContent = () => (
         css={{
           ...scale(0.7),
           color: texasFlagBlue,
-          lineHeight: 1,
+          lineHeight: 1.1,
           margin: 0,
-          marginBottom: `1.2em`,
+          marginBottom: `0.5em`,
           padding: 0,
           width: rhythm(10),
           //fontSize: `calc(12px + 2vh + 2vw)`,
@@ -89,8 +90,18 @@ const MastheadContent = () => (
           },
         }}
       >
-        Supporting Music Education in Texas
+        Texas Music Administrators Conference
       </h1>
+      <div
+        css={{
+          padding: 0,
+          marginBottom: '1.5em',
+          color: `${hex2rgba(texasFlagBlue, 0.9)}`,
+          fontSize: 20,
+        }}
+      >
+        Supporting Music Education in Texas
+      </div>
       <CtaButton to="/about/">
         <span css={{
           verticalAlign: `middle`,

@@ -1,87 +1,159 @@
 // External Dependencies
 import React from 'react'
 import Link from "gatsby-link";
-import styled from "styled-components";
+
+// Internal Dependencies
+import typography, { rhythm, scale } from "../../utils/typography"
+import presets, { colors } from "../../utils/presets"
+import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
 
 // Local Variables
-const Nav = styled.nav`
-  align-items: center;
-  background-color: #fbfafc;
-  box-sizing: border-box;
-  display: flex;
-  flex: 1 0 auto;
-  height: 64;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 960;
-  padding: 1rem 2rem;
-  border-bottom: 4px solid #2D456F;
-  box-shadow: 3px 0 5px #2D456F;
-`;
+const navItemStyles = {
+  ...scale(-1 / 3),
+  boxSizing: `border-box`,
+  display: `inline-block`,
+  color: `inherit`,
+  textDecoration: `none`,
+  textTransform: `uppercase`,
+  letterSpacing: `0.03em`,
+  lineHeight: `calc(${presets.headerHeight} - 6px)`,
+  padding: `6px ${rhythm(1 / 2)} 0`,
+  position: `relative`,
+  top: 0,
+  transition: `color .15s ease-out`,
+  "&:hover": {
+    opacity: 0.8,
+  },
+}
 
-const HomeLink = styled(Link)`
-  display: flex;
-  background-color: #fbfafc;
-  align-items: center;
-  font-style: normal;
-  text-decoration: none;
-  background-image: none;
-  color: black;
-  font-weight: 500;
-  text-shadow: none;
-`;
-
-const PageLink = styled(Link)`
-  margin-left: 0.8rem;
-  text-shadow: none;
-  text-decoration: none;
-  &:hover {
-    border-bottom: 1px solid #2D456F;
-  }
-`;
-
-const TmacTitle = styled.span`
-  background-color: #fbfafc;
-  margin-left: 0.8rem;
-  text-decoration: none;
-  background-image: none;
-  font-style: normal;
-`;
-
-const LinkWrapper = styled.span`
-  justify-content: space-between;
-  background-color: #fbfafc;
-  text-decoration: none;
-  background-image: none;
-  text-shadow: none;
-`;
+const NavItem = ({ linkTo, children, styles }) => (
+  <li
+    css={{
+      display: `inline-block`,
+      margin: 0,
+      ...styles,
+    }}
+  >
+    <Link to={linkTo} css={navItemStyles}>
+      {children}
+    </Link>
+  </li>
+);
 
 // Component Definition
-export default () =>
-  <Nav>
-    <HomeLink to={`/`}>
-      <img
-        style={{ marginBottom: 0 }}
-        height="25px"
-        src="http://res.cloudinary.com/drumsensei/image/upload/v1518414495/tmac-logo_upybjp.jpg"
-      />
-      <TmacTitle>TMAC</TmacTitle>
-    </HomeLink>
-    <LinkWrapper>
-      <PageLink to={`/`}>
-        Home
-      </PageLink>
-      <PageLink to={`/about/`}>
-        About
-      </PageLink>
-      <PageLink to={`/resources/`}>
-        Resources
-      </PageLink>
-      <PageLink to={`/members/`}>
-        Members
-      </PageLink>
-      <PageLink to={`/sponsors/`}>
-        Sponsors
-      </PageLink>
-    </LinkWrapper>
-  </Nav>
+export default ({ pathname }) => {
+  const isHomepage = pathname == '/';
+  const isBlog = pathname == '/blog';
+
+  const gutters = isHomepage
+  ? {
+      paddingLeft: vP,
+      paddingRight: vP,
+      paddingTop: rhythm(1.5),
+      [presets.Hd]: {
+        paddingLeft: vPHd,
+        paddingRight: vPHd,
+      },
+      [presets.VHd]: {
+        paddingLeft: vPVHd,
+        paddingRight: vPVHd,
+      },
+      [presets.VVHd]: {
+        paddingLeft: vPVVHd,
+        paddingRight: vPVVHd,
+      },
+    }
+  : {}
+
+  let styles = {};
+  if (isHomepage) {
+    styles.backgroundColor = `rgba(255,255,255,0)`
+    styles.borderBottomColor = `transparent`
+    styles[presets.Tablet] = {
+      position: isHomepage || isBlog ? `absolute` : `fixed`,
+    }
+  } else if (isBlog) {
+    styles.backgroundColor = `#fff`
+    styles[presets.Tablet] = {
+      borderBottomColor: `transparent`,
+      position: isHomepage || isBlog ? `absolute` : `fixed`,
+      backgroundColor: colors.ui.whisper,
+    }
+  }
+
+  return (
+    <div
+      role="navigation"
+      css={{
+        backgroundColor: `rgba(255,255,255,0.975)`,
+        position: isHomepage ? `absolute` : false,
+        height: presets.headerHeight,
+        zIndex: `2`,
+        left: 0,
+        right: 0,
+        [presets.Tablet]: {
+          position: 'fixed',
+        },
+        ...styles,
+      }}
+    >
+      <div
+        css={{
+          //maxWidth: rhythm(presets.maxWidth),
+          boxSizing: 'border-box',
+          borderBottom: '4px solid #2D456F',
+          boxShadow: '3px 0 5px #2D456F',
+          margin: `0 auto`,
+          paddingLeft: rhythm(3 / 4),
+          paddingRight: rhythm(3 / 4),
+          ...gutters,
+          fontFamily: typography.options.headerFontFamily.join(`,`),
+          display: `flex`,
+          alignItems: `center`,
+          width: `100%`,
+          height: `100%`,
+        }}
+      >
+        <NavItem linkTo={`/`} styles={{ fontSize: 18 }}>
+          <div
+            css={{
+              alignItems: `center`,
+              color: `inherit`,
+              display: `flex`,
+              textDecoration: `none`,
+              marginRight: rhythm(1 / 2),
+            }}
+          >
+            <img
+              style={{ marginBottom: 0 }}
+              height="30px"
+              src="http://res.cloudinary.com/drumsensei/image/upload/v1518414495/tmac-logo_upybjp.jpg"
+            />
+            <div css={{ marginLeft: '0.8em' }}>
+              TMAC
+            </div>
+          </div>
+        </NavItem>
+        <ul
+          css={{
+            display: `none`,
+            [presets.Tablet]: {
+              display: `flex`,
+              margin: 0,
+              padding: 0,
+              listStyle: `none`,
+              flexGrow: 1,
+              overflowX: `auto`,
+              maskImage: `linear-gradient(to right, transparent, white ${rhythm(1/8)}, white 98%, transparent)`,
+            },
+          }}
+        >
+          <NavItem linkTo="/about/">About</NavItem>
+          <NavItem linkTo="/resources/">Resources</NavItem>
+          <NavItem linkTo="/members/">Members</NavItem>
+          <NavItem linkTo="/sponsors/">Sponsors</NavItem>
+        </ul>
+      </div>
+  </div>
+  );
+}
