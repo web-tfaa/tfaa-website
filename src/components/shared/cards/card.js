@@ -1,18 +1,19 @@
 // External Dependencies
-import React from 'react'
+import React from 'react';
 
 // Internal Dependencies
-import presets, { colors } from '../../../utils/presets'
-import { rhythm, scale, options } from '../../../utils/typography'
-import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters'
+import presets, { colors } from '../../../utils/presets';
+import { rhythm, scale, options } from '../../../utils/typography';
+import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 
 // Component Definition
-const Card = ({ children }) => (
+const Card = ({ children, styles }) => (
   <div
     css={{
       boxSizing: `border-box`,
       display: `flex`,
       transform: `translateZ(0)`,
+      ...styles,
       [presets.Tablet]: {
         flex: `0 0 50%`,
         maxWidth: `50%`,
@@ -60,6 +61,6 @@ const Card = ({ children }) => (
       {children}
     </div>
   </div>
-)
+);
 
-export default Card
+export default Card;

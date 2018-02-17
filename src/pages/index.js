@@ -6,7 +6,7 @@ import Link from 'gatsby-link';
 import Cards from '../components/shared/cards';
 import Card from '../components/shared/cards/card';
 import CardHeadline from '../components/shared/cards/card-headline';
-import FuturaParagraph from '../components/shared/futura-paragraph'
+import FuturaParagraph from '../components/shared/futura-paragraph';
 import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead/';
 import { rhythm } from '../utils/typography';

@@ -20,7 +20,6 @@ export default () =>
       boxSizing: 'border-box',
       color: `inherit`,
       display: 'flex',
-      fontFamily: options.headerFontFamily.join(`,`),
       height: 64,
       justifyContent: 'space-between',
       margin: '0 auto',
