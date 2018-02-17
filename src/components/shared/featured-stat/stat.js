@@ -1,6 +1,7 @@
 // External Dependencies
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
@@ -13,6 +14,9 @@ const propTypes = {
   color: PropTypes.string.isRequired,
   icon: PropTypes.element.isRequired,
 };
+
+// Local Variables
+const texasFlagBlue = '#002868';
 
 // Component Definition
 const Stat = (props) => {
@@ -39,24 +43,11 @@ const Stat = (props) => {
         [presets.Tablet]: {
           flex: `0 0 15%`,
           maxWidth: `15%`,
-          boxShadow: `0 1px 0 0 ${colors.ui.light}`,
-          "&:nth-child(5),&:nth-child(6)": {
-            boxShadow: `none`,
-          },
-          "&:nth-child(2n)": {
-            borderLeft: `1px solid ${colors.ui.light}`,
-          },
+          boxShadow: `1px 3px 5px 0 #aaa`,
         },
         [presets.Hd]: {
           flex: `0 0 15%`,
           maxWidth: `15%`,
-          borderLeft: `1px solid ${colors.ui.light}`,
-          "&:nth-child(4)": {
-            boxShadow: `none`,
-          },
-          "&:nth-child(3n+1)": {
-            borderLeft: 0,
-          },
         },
       }}
     >
