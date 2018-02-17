@@ -37,19 +37,20 @@ const CtaButton = ({ to, overrideCSS, children }) => (
       },
       // Increase specificity
       "&&": {
-        border: `1px solid ${texasFlagBlue}`,
+        border: `1px solid ${texasFlagRed}`,
         boxShadow: `none`,
-        color: texasFlagBlue,
+        color: texasFlagRed,
         fontWeight: `normal`,
         backgroundColor: `transparent`,
         backgroundSize: `30px 30px`,
+        textDecoration: 'none',
         transition: `all ${presets.animation.speedDefault} ${
           presets.animation.curveDefault
         }`,
         ":hover, &:focus": {
           backgroundSize: `30px 30px`,
           backgroundColor: texasFlagRed,
-          backgroundImage: `linear-gradient(45deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
+          backgroundImage: `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
           color: `#fff`,
           animation: `${stripeAnimation} 2.8s linear infinite`,
         },

@@ -1,16 +1,16 @@
 // External Dependencies
-import React from "react";
+import React from 'react';
 
 // Internal Dependencies
-import presets, { colors } from "../../utils/presets"
-import { rhythm, scale, options } from "../../utils/typography"
-import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
+import presets, { colors } from '../../utils/presets';
+import { rhythm, scale, options } from '../../utils/typography';
+import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
 
 // Local Variables
-const vPOff = rhythm(presets.gutters.default - presets.logoOffset)
-const vPHdOff = rhythm(presets.gutters.HdR - presets.logoOffset)
-const vPVHdOff = rhythm(presets.gutters.VHdR - presets.logoOffset)
-const vPVVHdOff = rhythm(presets.gutters.VVHdR - presets.logoOffset)
+const vPOff = rhythm(presets.gutters.default - presets.logoOffset);
+const vPHdOff = rhythm(presets.gutters.HdR - presets.logoOffset);
+const vPVHdOff = rhythm(presets.gutters.VHdR - presets.logoOffset);
+const vPVVHdOff = rhythm(presets.gutters.VVHdR - presets.logoOffset);
 
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
@@ -22,7 +22,7 @@ const cover = {
   right: 0,
   bottom: 0,
   position: `absolute`,
-}
+};
 
 const MastheadBg = () => (
   <div
@@ -150,6 +150,6 @@ const MastheadBg = () => (
       </svg>
     </svg>
   </div>
-)
+);
 
-export default MastheadBg
+export default MastheadBg;

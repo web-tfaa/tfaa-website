@@ -13,10 +13,9 @@ import { rhythm } from '../utils/typography';
 
 // Local Variables
 
-
 // Component Definition
 export default () =>
-  <div>
+  <div css={{ position: `relative` }}>
     <MastheadBg />
     <div
       css={{
