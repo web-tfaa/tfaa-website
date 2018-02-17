@@ -52,6 +52,9 @@ const sidebarStyles = {
 // Component Definition
 class DefaultLayout extends Component {
   render() {
+    console.log('Hello and welcome to the TMAC website!');
+    console.log('If you like what you see, then go tell it\'s creators at Drumsensei Media (http://drumsensei.com)');
+
     const {
       children,
       location,

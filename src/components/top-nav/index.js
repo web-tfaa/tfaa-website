@@ -1,6 +1,7 @@
 // External Dependencies
 import React from 'react'
 import Link from "gatsby-link";
+import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import typography, { rhythm, scale } from "../../utils/typography"
@@ -8,6 +9,8 @@ import presets, { colors } from "../../utils/presets"
 import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
 
 // Local Variables
+// const texasFlagBlue = '#002868';
+
 const navItemStyles = {
   ...scale(-1 / 3),
   boxSizing: `border-box`,
@@ -23,6 +26,7 @@ const navItemStyles = {
   transition: `color .15s ease-out`,
   "&:hover": {
     opacity: 0.8,
+    textDecoration: 'underline',
   },
 }
 
@@ -67,7 +71,7 @@ export default ({ pathname }) => {
 
   let styles = {};
   if (isHomepage) {
-    styles.backgroundColor = `rgba(255,255,255,0)`
+    // styles.backgroundColor = `rgba(255,255,255,0)`
     styles.borderBottomColor = `transparent`
     styles[presets.Tablet] = {
       position: isHomepage || isBlog ? `absolute` : `fixed`,
@@ -85,7 +89,7 @@ export default ({ pathname }) => {
     <div
       role="navigation"
       css={{
-        backgroundColor: `rgba(255,255,255,0.975)`,
+        background: `${hex2rgba('#fbfafc', 0.8)}`,
         position: isHomepage ? `absolute` : false,
         height: presets.headerHeight,
         zIndex: `2`,
@@ -109,19 +113,19 @@ export default ({ pathname }) => {
           ...gutters,
           fontFamily: typography.options.headerFontFamily.join(`,`),
           display: `flex`,
-          alignItems: `center`,
+          alignItems: `flex-end`,
           width: `100%`,
           height: `100%`,
         }}
       >
-        <NavItem linkTo={`/`} styles={{ fontSize: 18 }}>
+        <NavItem linkTo={`/`}>
           <div
             css={{
               alignItems: `center`,
               color: `inherit`,
               display: `flex`,
               textDecoration: `none`,
-              marginRight: rhythm(1 / 2),
+              marginRight: rhythm(1/2),
             }}
           >
             <img
@@ -129,7 +133,11 @@ export default ({ pathname }) => {
               height="30px"
               src="http://res.cloudinary.com/drumsensei/image/upload/v1518414495/tmac-logo_upybjp.jpg"
             />
-            <div css={{ marginLeft: '0.8em' }}>
+            <div css={{
+              marginLeft: '0.8em',
+              fontSize: 24,
+              textDecoration: 'none',
+            }}>
               TMAC
             </div>
           </div>

@@ -1,15 +1,15 @@
 // External Dependencies
 import React from 'react';
-import Link from 'gatsby-link'
-import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward'
+import Link from 'gatsby-link';
+import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
-import CtaButton from './cta-button'
-import MastheadBg from './masthead-bg'
-import presets from '../../utils/presets'
-import { rhythm, scale, options } from '../../utils/typography'
-import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters'
+import CtaButton from './cta-button';
+import MastheadBg from './masthead-bg';
+import presets from '../../utils/presets';
+import { rhythm, scale, options } from '../../utils/typography';
+import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
 
 
 // Local Variables
@@ -59,7 +59,7 @@ const MastheadContent = () => (
         css={{
           ...scale(0.7),
           color: texasFlagBlue,
-          lineHeight: 1.1,
+          lineHeight: 1.2,
           margin: 0,
           marginBottom: `0.5em`,
           padding: 0,
@@ -117,8 +117,8 @@ const MastheadContent = () => (
       </CtaButton>
     </div>
   </div>
-)
+);
 
-const Masthead = () => <MastheadContent />
+const Masthead = () => <MastheadContent />;
 
-export default Masthead
+export default Masthead;
