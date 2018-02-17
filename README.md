@@ -4,9 +4,9 @@ This website was constructed for Mario Luna and the Texas Music Administrators C
 
 ## Tools
 
-- <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="20"> GatsbyJS
+- <img alt="Gatsby icon" src="https://www.gatsbyjs.org/monogram.svg" width="20"> GatsbyJS
 - React
-- Styled Components
+- 💄 Glamorous
 - CMS (coming soon...)
 
 ## Running in development

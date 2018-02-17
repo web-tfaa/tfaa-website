@@ -1,12 +1,10 @@
 // External Dependencies
 import React from "react";
-import styled from 'styled-components';
 
 // Internal Dependencies
 import presets, { colors } from "../../utils/presets"
 import { rhythm, scale, options } from "../../utils/typography"
 import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
-
 
 // Local Variables
 const vPOff = rhythm(presets.gutters.default - presets.logoOffset)
@@ -14,89 +12,73 @@ const vPHdOff = rhythm(presets.gutters.HdR - presets.logoOffset)
 const vPVHdOff = rhythm(presets.gutters.VHdR - presets.logoOffset)
 const vPVVHdOff = rhythm(presets.gutters.VVHdR - presets.logoOffset)
 
-const BackgroundWrapper = styled.div`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  overflow: hidden;
-  z-index: -1;
-`;
-
-const LeftFill = styled.div`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  right: auto,;
-  width: vPOff;
-  z-index: -10;
-  background: colors.ui.light;
-  ${presets.Hd}: {
-    width: ${vPHdOff};
-  }
-  ${presets.VHd}: {
-    width: ${vPVHdOff};
-  }
-  ${presets.VVHd}: {
-    width: ${vPVVHdOff};
-  }
-`;
-
-const LeftSvg = styled.svg`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  left: ${vPOff};
-  z-index: -2;
-  ${presets.Hd}: {
-    left: ${vPHdOff};
-  }
-  ${presets.VHd}: {
-    left: ${vPVHdOff};
-  }
-  ${presets.VVHd}: {
-    left: ${vPVVHdOff};
-  }
-  width: 100%;
-  height: 100%;
-`;
-
-const RightSvg = styled.svg`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  width: calc(180% - + 4vh);
-  height: 100%;
-  z-index: -1;
-  top: 2%;
-`;
-
-const InnerSvg = styled.svg`
-  overflow: visible;
-`;
+const texasFlagBlue = '#002868';
+const texasFlagRed = '#BF0A30';
 
 // Component Definition
+const cover = {
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  position: `absolute`,
+}
+
 const MastheadBg = () => (
-  <BackgroundWrapper className="masthead-bg">
-    <LeftFill className="masthead-bg-left-fill" />
-    <LeftSvg
+  <div
+    className="masthead-bg"
+    css={{
+      ...cover,
+      overflow: `hidden`,
+      zIndex: -1,
+    }}
+  >
+    <div
+      className="masthead-bg-left-fill"
+      css={{
+        ...cover,
+        right: `auto`,
+        width: vPOff,
+        zIndex: -10,
+        background: colors.ui.light,
+        [presets.Hd]: {
+          width: vPHdOff,
+        },
+        [presets.VHd]: {
+          width: vPVHdOff,
+        },
+        [presets.VVHd]: {
+          width: vPVVHdOff,
+        },
+      }}
+    />
+    <svg
       viewBox="0 0 10 10"
       preserveAspectRatio="xMinYMin slice"
       className="masthead-bg-left"
+      css={{
+        ...cover,
+        left: vPOff,
+        zIndex: -2,
+        [presets.Hd]: {
+          left: vPHdOff,
+        },
+        [presets.VHd]: {
+          left: vPVHdOff,
+        },
+        [presets.VVHd]: {
+          left: vPVVHdOff,
+        },
+        width: `100%`,
+        height: `100%`,
+      }}
     >
       <polygon fill={colors.ui.light} points="-5,-5 15,15 -5,15 " />
-    </LeftSvg>
+    </svg>
     <style>
       {`
           .masthead-bg-right-light {
-            fill: #002868;
+            fill: ${texasFlagRed};
           }
           @media (max-width: 650px),
           (max-width: 768px) and (orientation:portrait) {
@@ -115,48 +97,59 @@ const MastheadBg = () => (
               width: calc(125% + 4vh);
             }
           }
-          ${presets.Desktop} {
+          ${presets.Desktop}  {
             .masthead-bg-right {
               width: 110%;
             }
             .masthead-bg-right-light {
-              fill: #002868;
+              fill: ${texasFlagRed};
             }
           }
-          ${presets.Hd} {
+          ${presets.Hd}  {
             .masthead-bg-right {
               width: calc(100%);
             }
           }
         `}
     </style>
-    <RightSvg
+    <svg
       viewBox="0 0 10 10"
       preserveAspectRatio="xMidYMin meet"
       className="masthead-bg-right"
+      css={{
+        ...cover,
+        width: `calc(180% - + 4vh)`,
+        height: `100%`,
+        zIndex: -1,
+        top: `2%`,
+        //transition: `width 100ms linear`,
+      }}
     >
-      <InnerSvg
-        x="10%"
-        y="10%"
+      <svg
+        x="-15%"
+        y="-10%"
+        style={{
+          overflow: `visible`,
+        }}
       >
         <rect
           className="masthead-bg-right-light"
           width="10000%"
           height="10000%"
-          fill="#BF0A30"
+          fill={texasFlagRed}
           transform="rotate(45 100 50) translate(0 0)"
         />
         <rect
           className="masthead-bg-left-dark"
           width="10000%"
           height="10000%"
-          fill="#002868"
+          fill={texasFlagBlue}
           transform="rotate(45 100 50) translate(1.25 0)"
         />
         {/*<polygon fill="blue" points="0,10 10,0 10,10" />*/}
-      </InnerSvg>
-    </RightSvg>
-  </BackgroundWrapper>
+      </svg>
+    </svg>
+  </div>
 )
 
 export default MastheadBg

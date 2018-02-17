@@ -303,26 +303,3 @@ const options = {
 const typography = new Typography(options)
 
 export default typography
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import twinPeaksTheme from "typography-theme-twin-peaks";
-//
-// const typography = new Typography(twinPeaksTheme);
-//
-// export default typography;
