@@ -118,7 +118,15 @@ export default ({ pathname }) => {
           height: `100%`,
         }}
       >
-        <NavItem linkTo={`/`}>
+        <NavItem
+          css={{
+            "&:hover": {
+              opacity: 1,
+              textDecoration: 'none',
+            },
+          }}
+          linkTo={`/`}
+        >
           <div
             css={{
               alignItems: `center`,
