@@ -58,7 +58,7 @@ class DefaultLayout extends Component {
     } = this.props;
 
     const isHomepage = location.pathname == `/`;
-    const hasSidebar = !isHomepage || !location.pathname == `/sponsors`;
+    const hasSidebar = !location.pathname === `/sponsors` && !isHomepage;
 
     return (
       <div className={isHomepage ? `is-homepage` : ``}>

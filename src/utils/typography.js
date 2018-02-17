@@ -11,6 +11,9 @@ import {
   MIN_LARGER_DISPLAY_MEDIA_QUERY,
 } from "typography-breakpoint-constants"
 
+const texasFlagBlue = '#002868';
+const texasFlagRed = '#BF0A30';
+
 const options = {
   headerFontFamily: [
     `Futura PT`,
@@ -159,7 +162,7 @@ const options = {
       ".gatsby-resp-image-link + em a": {
         fontWeight: `normal`,
         fontFamily: options.headerFontFamily.join(`,`),
-        color: colors.gatsby,
+        color: texasFlagBlue,
       },
       ".main-body a": {
         color: `inherit`,
@@ -174,14 +177,14 @@ const options = {
       },
       ".post-body a": {
         fontSize: `102%`,
-        color: colors.gatsby,
+        color: texasFlagBlue,
       },
       ".main-body a:hover": {
         background: colors.ui.bright,
       },
       ".main-body a.anchor": {
         color: `inherit`,
-        fill: colors.gatsby,
+        fill: texasFlagBlue,
         textDecoration: `none`,
         borderBottom: `none`,
         boxShadow: `none`,
