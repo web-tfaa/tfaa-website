@@ -7,6 +7,7 @@ import Helmet from 'react-helmet';
 import Container from '../../components/shared/container';
 import SidebarBody from '../../components/shared/sidebar-body';
 import aboutSidebar from './about-links.yml';
+import presets from '../../utils/presets';
 
 // Component Definition
 export default ({ data }) => (
@@ -82,7 +83,17 @@ export default ({ data }) => (
         </h4>
       </section>
     </div>
-    <SidebarBody inline yaml={aboutSidebar} />
+    <div
+      css={{
+        display: `block`,
+        [presets.Tablet]: {
+          display: `none`,
+        },
+      }}
+    >
+      <h2>Documentation</h2>
+      <SidebarBody inline yaml={aboutSidebar} />
+    </div>
   </Container>
 );
 

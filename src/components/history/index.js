@@ -9,17 +9,17 @@ const HistoryTitle = styled.h3`
   border-bottom: solid 1px;
 `;
 
-const HistoryWrapper = styled.div`
-  display: flex;
-`;
-
 // Component Definition
 export default () =>
   <div>
     <HistoryTitle>
       History
     </HistoryTitle>
-    <HistoryWrapper>
+    <div
+      css={{
+        display: 'flex',
+      }}
+    >
       <div>
         <img src="http://res.cloudinary.com/drumsensei/image/upload/v1518414489/history-image_px2cgh.jpg"/>
       </div>
@@ -31,5 +31,5 @@ export default () =>
         Director of Fine Arts, Retired
         Irving ISD, Irving, Texas
       </div>
-    </HistoryWrapper>
+    </div>
   </div>
