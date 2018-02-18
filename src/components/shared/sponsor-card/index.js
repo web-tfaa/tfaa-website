@@ -1,8 +1,7 @@
 // External Dependencies
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Link from 'gatsby-link';
 
 // Local Variables
 const propTypes = {
@@ -16,20 +15,6 @@ const defaultProps = {
   max: null,
   min: null,
 };
-
-const SponsorCardWrapper = styled.div`
-  margin-bottom: 1rem;
-  padding: 2rem 3rem;
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: rgba(25, 17, 34, 0.05) 0px 3px 10px;
-`;
-
-const SponsorCardTitle = styled.div`
-  color: #32456B;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
 
 // Component Definition
 class SponsorCard extends Component {
@@ -69,12 +54,26 @@ class SponsorCard extends Component {
       : `${max.toLocaleString()}+`;
 
     return (
-      <SponsorCardWrapper>
-        <SponsorCardTitle>
+      <div
+        css={{
+          marginBottom: '1em',
+          padding: '2em 3em',
+          backgroundColor: 'white',
+          borderRadius: 4,
+          boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
+        }}
+      >
+        <div
+          css={{
+            color: '#32456B',
+            fontWeight: 600,
+            marginBottom: '1em',
+          }}
+        >
           {sponsorClass} Sponsor (${donationAmount} donation)
-        </SponsorCardTitle>
+        </div>
         {this.renderSponsors(sponsorData)}
-      </SponsorCardWrapper>
+      </div>
     );
   }
 }

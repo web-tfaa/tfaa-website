@@ -1,19 +1,19 @@
 // External Dependencies
-import React from 'react'
-import styled from "styled-components";
+import React from 'react';
 
 // Local Variables
-const ConstitutionTitle = styled.h3`
-  display: inline-block;
-  border-bottom: solid 1px;
-`;
 
 // Component Definition
 export default () => {
   <div>
-    <ConstitutionTitle>
+    <h3
+      css={{
+        display: 'inline-block',
+        borderBottom: '1px solid',
+      }}
+    >
       CONSTITUTION AND BYLAWS OF TEXAS MUSIC ADMINISTRATORS CONFERENCE
-    </ConstitutionTitle>
+    </h3>
     <div>
       ARTICLE I ORGANIZATION
       Section 1  Name: The name of the organization shall be the Texas Music Administrators Conference.

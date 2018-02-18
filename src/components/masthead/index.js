@@ -11,7 +11,6 @@ import presets from '../../utils/presets';
 import { rhythm, scale, options } from '../../utils/typography';
 import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
 
-
 // Local Variables
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';

@@ -5,12 +5,24 @@ import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import Footer from '../components/footer';
+import SidebarBody from '../components/shared/sidebar-body';
 import TopNav from '../components/top-nav';
+import aboutSidebar from "../pages/about/about-links.yml"
 import { rhythm, scale } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
 
 // from Gatsby www project
 import '../css/prism-coy.css';
+
+// Import Futura PT typeface
+import '../fonts/Webfonts/futurapt_book_macroman/stylesheet.css';
+import '../fonts/Webfonts/futurapt_bookitalic_macroman/stylesheet.css';
+import '../fonts/Webfonts/futurapt_demi_macroman/stylesheet.css';
+import '../fonts/Webfonts/futurapt_demiitalic_macroman/stylesheet.css';
+
+// Other fonts
+import 'typeface-spectral';
+import 'typeface-space-mono';
 
 // Local Variables
 const sidebarStyles = {
@@ -84,6 +96,19 @@ class DefaultLayout extends Component {
             },
           }}
         >
+          <div
+            css={{
+              ...sidebarStyles,
+              [presets.Tablet]: {
+                display:
+                  location.pathname.startsWith(`/about/`)
+                    ? `block`
+                    : `none`,
+              },
+            }}
+          >
+            <SidebarBody yaml={aboutSidebar} />
+          </div>
 
           <div
             css={{
@@ -105,14 +130,3 @@ class DefaultLayout extends Component {
 }
 
 export default DefaultLayout;
-
-{/* <div
-  css={{
-    ...sidebarStyles,
-    [presets.Tablet]: {
-      display: hasSidebar ? `block` : `none`,
-    },
-  }}
->
-  <SidebarBody yaml={docsSidebar} />
-</div> */}

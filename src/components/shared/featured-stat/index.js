@@ -43,7 +43,7 @@ const FeaturedStat = ({ children }) => (
       color={queueMusicIconColor}
       icon={queueMusicIcon}
     >
-      <div>{ageOfTmac} years serving our students</div>
+      <div>{ageOfTmac} Years Serving Our Students</div>
     </Stat>
     <Stat
       color={locationCityIconColor}
@@ -61,7 +61,7 @@ const FeaturedStat = ({ children }) => (
       color={faceIconColor}
       icon={faceIcon}
     >
-      <div>Serving 5+ million students</div>
+      <div>Serving 5+ Million Students</div>
     </Stat>
   </div>
 );
