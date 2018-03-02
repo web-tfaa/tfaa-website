@@ -12,7 +12,7 @@ import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 const propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
+  icon: PropTypes.func.isRequired,
 };
 
 // Local Variables
@@ -26,7 +26,6 @@ const Stat = (props) => {
     icon: Icon,
   } = props;
 
-  console.log('props for Stat', color);
   return (
     <div
       css={{
@@ -38,7 +37,7 @@ const Stat = (props) => {
         justifyContent: 'flex-start',
         alignItems: 'center',
         transform: `translateZ(0)`,
-        borderRadius: presets.radiusCir,
+        borderRadius: presets.radiusLg,
         fontSize: 20,
         [presets.Tablet]: {
           flex: `0 0 15%`,
