@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import styled from 'styled-components';
+import Helmet from 'react-helmet';
 
 // Internal Dependencies
 import SponsorCard from '../shared/sponsor-card';
@@ -25,6 +26,9 @@ const SponsorsWrapper = styled.div`
 // Component Definition
 export default () =>
   <SponsorsContainer>
+    <Helmet>
+      <title>TMAC | Sponsors</title>
+    </Helmet>
     <SponsorsTitle>
       Sponsors
     </SponsorsTitle>

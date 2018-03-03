@@ -2,6 +2,10 @@
 import React from "react";
 import Link from "gatsby-link";
 import styled from "styled-components";
+import Helmet from 'react-helmet';
+
+// Internal Dependencies
+import Container from '../shared/container';
 
 // Local Variables
 const MembersTitle = styled.h3`
@@ -15,11 +19,14 @@ const MembersWrapper = styled.div`
 
 // Component Definition
 export default () =>
-  <div>
+  <Container>
+    <Helmet>
+      <title>TMAC | Members</title>
+    </Helmet>
     <MembersTitle>
       Members
     </MembersTitle>
     <MembersWrapper>
       Members data
     </MembersWrapper>
-  </div>
+  </Container>

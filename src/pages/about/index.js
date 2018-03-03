@@ -13,7 +13,7 @@ import presets from '../../utils/presets';
 export default ({ data }) => (
   <Container>
     <Helmet>
-      <title>About</title>
+      <title>TMAC | About</title>
     </Helmet>
     <div>
       <h1

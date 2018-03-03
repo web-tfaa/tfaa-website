@@ -1,6 +1,7 @@
 // External Dependencies
 import React from 'react';
 import Link from 'gatsby-link';
+import Helmet from 'react-helmet';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -17,6 +18,9 @@ import { rhythm } from '../utils/typography';
 // Component Definition
 export default () =>
   <div>
+    <Helmet>
+      <title>TMAC | Home</title>
+    </Helmet>
     <MastheadBg />
     <div
       css={{
