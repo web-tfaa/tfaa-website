@@ -1,20 +1,18 @@
 // External Dependencies
 import React from "react";
 import Link from "gatsby-link";
-import styled from "styled-components";
-
-// Local Variables
-const HistoryTitle = styled.h3`
-  display: inline-block;
-  border-bottom: solid 1px;
-`;
 
 // Component Definition
 export default () =>
   <div>
-    <HistoryTitle>
+    <h3
+      css={{
+        display: 'inline-block',
+        borderBottom: 'solid 1px',
+      }}
+    >
       History
-    </HistoryTitle>
+    </h3>
     <div
       css={{
         display: 'flex',
