@@ -50,7 +50,7 @@ export default ({ pathname }) => {
     <div
       role="navigation"
       css={{
-        background: `${hex2rgba('#fbfafc', 0.8)}`,
+        background: `${hex2rgba('#fbfafc', 0.95)}`,
         // position: isHomepage ? `absolute` : false,
         height: presets.headerHeight,
         zIndex: `2`,
