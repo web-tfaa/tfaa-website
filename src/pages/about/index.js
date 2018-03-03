@@ -74,11 +74,6 @@ export default ({ data }) => (
       </section>
       <section>
         <h4>
-          <a href="#">Sponsors</a>
-        </h4>
-      </section>
-      <section>
-        <h4>
           <a href="#">Statements of Philosophy</a>
         </h4>
       </section>

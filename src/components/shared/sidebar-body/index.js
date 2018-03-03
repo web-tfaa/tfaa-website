@@ -59,7 +59,7 @@ const SectionLink = props => {
   // Don't show the main docs link on mobile as we put these
   // links on that main docs page so it's confusing to have
   // the page link to itself.
-  if (props.isInline && props.node.link === `/docs/`) {
+  if (props.isInline && props.node.link === `/about/`) {
     return null
   }
 
@@ -103,7 +103,7 @@ const SectionLink = props => {
         borderRadius: `100%`,
         top: `.5em`,
         left: `-.7em`,
-        fontWeight: `normal`,
+        fontWeight: `normdal`,
         position: `absolute`,
         transform: `scale(0.1)`,
         transition: `all ${presets.animation.speedDefault} ${

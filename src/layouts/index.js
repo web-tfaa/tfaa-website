@@ -66,9 +66,6 @@ const sidebarStyles = {
 // Component Definition
 class DefaultLayout extends Component {
   render() {
-    console.log('Hello and welcome to the TMAC website!');
-    console.log('If you like what you see, then go tell it\'s creators at Drumsensei Media (http://drumsensei.com)');
-
     const {
       children,
       location,
@@ -78,7 +75,7 @@ class DefaultLayout extends Component {
     const hasSidebar = !location.pathname === `/sponsors` && !isHomepage;
 
     return (
-      <div className={isHomepage ? `is-homepage` : ``}>
+      <div className={isHomepage && `is-homepage`}>
         <Helmet defaultTitle={`Texas Music Administrators Conference`}>
           <meta name="twitter:site" content="@TXMusicLeaders" />
           <meta name="og:type" content="website" />

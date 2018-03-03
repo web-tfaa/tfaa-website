@@ -46,51 +46,12 @@ const NavItem = ({ linkTo, children, styles }) => (
 
 // Component Definition
 export default ({ pathname }) => {
-  const isHomepage = pathname == '/';
-  const isBlog = pathname == '/blog';
-
-  const gutters = isHomepage
-  ? {
-      paddingLeft: vP,
-      paddingRight: vP,
-      paddingTop: rhythm(1.5),
-      [presets.Hd]: {
-        paddingLeft: vPHd,
-        paddingRight: vPHd,
-      },
-      [presets.VHd]: {
-        paddingLeft: vPVHd,
-        paddingRight: vPVHd,
-      },
-      [presets.VVHd]: {
-        paddingLeft: vPVVHd,
-        paddingRight: vPVVHd,
-      },
-    }
-  : {}
-
-  let styles = {};
-  if (isHomepage) {
-    // styles.backgroundColor = `rgba(255,255,255,0)`
-    styles.borderBottomColor = `transparent`
-    styles[presets.Tablet] = {
-      position: isHomepage || isBlog ? `absolute` : `fixed`,
-    }
-  } else if (isBlog) {
-    styles.backgroundColor = `#fff`
-    styles[presets.Tablet] = {
-      borderBottomColor: `transparent`,
-      position: isHomepage || isBlog ? `absolute` : `fixed`,
-      backgroundColor: colors.ui.whisper,
-    }
-  }
-
   return (
     <div
       role="navigation"
       css={{
         background: `${hex2rgba('#fbfafc', 0.8)}`,
-        position: isHomepage ? `absolute` : false,
+        // position: isHomepage ? `absolute` : false,
         height: presets.headerHeight,
         zIndex: `2`,
         left: 0,
@@ -98,7 +59,7 @@ export default ({ pathname }) => {
         [presets.Tablet]: {
           position: 'fixed',
         },
-        ...styles,
+        // ...styles,
       }}
     >
       <div
@@ -110,7 +71,6 @@ export default ({ pathname }) => {
           margin: `0 auto`,
           paddingLeft: rhythm(3 / 4),
           paddingRight: rhythm(3 / 4),
-          ...gutters,
           fontFamily: typography.options.headerFontFamily.join(`,`),
           display: `flex`,
           alignItems: `flex-end`,

@@ -4,19 +4,19 @@ import React from 'react';
 // Internal Dependencies
 import colors from './utils/colors';
 
-let stylesStr
+let stylesStr;
 if (process.env.NODE_ENV === `production`) {
   try {
-    stylesStr = require(`!raw-loader!../public/styles.css`)
+    stylesStr = require(`!raw-loader!../public/styles.css`);
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
 // Component Definition
 export default class HTML extends React.Component {
   render() {
-    let css
+    let css;
     if (process.env.NODE_ENV === `production`) {
       css = (
         <style
@@ -24,7 +24,7 @@ export default class HTML extends React.Component {
           key="gatsby-inlined-css"
           dangerouslySetInnerHTML={{ __html: stylesStr }}
         />
-      )
+      );
     }
 
     return (
