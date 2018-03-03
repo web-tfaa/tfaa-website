@@ -24,10 +24,10 @@ export default () =>
     <MastheadBg />
     <div
       css={{
-        display: `flex`,
-        flexDirection: `row`,
-        flexWrap: `wrap`,
-        justifyContent: `space-between`,
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
       }}
     >
       <MastheadContent />

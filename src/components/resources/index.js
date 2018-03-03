@@ -1,21 +1,10 @@
 // External Dependencies
 import React from "react";
 import Link from "gatsby-link";
-import styled from "styled-components";
 import Helmet from 'react-helmet';
 
 // Internal Dependencies
 import Container from '../shared/container';
-
-// Local Variables
-const ResourcesTitle = styled.h3`
-  display: inline-block;
-  border-bottom: solid 1px;
-`;
-
-const ResourcesWrapper = styled.div`
-  display: flex;
-`;
 
 // Component Definition
 export default () =>
@@ -23,10 +12,19 @@ export default () =>
     <Helmet>
       <title>TMAC | Resources</title>
     </Helmet>
-    <ResourcesTitle>
+    <h3
+      css={{
+        display: 'inline-block',
+        borderBottom: 'solid 1px',
+      }}
+    >
       Resources
-    </ResourcesTitle>
-    <ResourcesWrapper>
+    </h3>
+    <div
+      css={{
+        display: 'flex',
+      }}
+    >
       Resources data
-    </ResourcesWrapper>
+    </div>
   </Container>

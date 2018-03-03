@@ -1,38 +1,36 @@
 // External Dependencies
 import React from 'react';
 import Link from 'gatsby-link';
-import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
 // Internal Dependencies
 import SponsorCard from '../shared/sponsor-card';
 import sponsorData from './sponsor-data';
 
-// Local Variables
-const SponsorsContainer = styled.section`
-  text-align: center;
-`;
-
-const SponsorsTitle = styled.h3`
-  display: inline-block;
-  border-bottom: solid 1px;
-`;
-
-const SponsorsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 // Component Definition
 export default () =>
-  <SponsorsContainer>
+  <section
+    css={{
+      textAlign: 'center',
+    }}
+  >
     <Helmet>
       <title>TMAC | Sponsors</title>
     </Helmet>
-    <SponsorsTitle>
+    <h3
+      css={{
+        display: 'inline-block',
+        borderBottom: 'solid 1px',
+      }}
+    >
       Sponsors
-    </SponsorsTitle>
-    <SponsorsWrapper>
+    </h3>
+    <div
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <SponsorCard
         max={2000}
         sponsorClass="Class Champion"
@@ -56,5 +54,5 @@ export default () =>
         sponsorClass="Bronze Medal"
         sponsorData={sponsorData.bronze}
       />
-    </SponsorsWrapper>
-  </SponsorsContainer>
+    </div>
+  </section>
