@@ -7,10 +7,10 @@ import presets, { colors } from '../../utils/presets';
 import typography, { rhythm, scale, options } from '../../utils/typography';
 
 // Icons
-import faceIcon from 'react-icons/lib/md/face';
-import locationCityIcon from 'react-icons/lib/md/location-city';
-import queueMusicIcon from 'react-icons/lib/md/queue-music';
-import schoolIcon from 'react-icons/lib/md/school';
+import aboutIcon from 'react-icons/lib/md/info-outline';
+import membersIcon from 'react-icons/lib/md/person-outline';
+import resourcesIcon from 'react-icons/lib/md/folder-open';
+import sponsorsIcon from 'react-icons/lib/md/card-giftcard';
 
 // Local Variables
 const texasFlagBlue = '#002868';
@@ -20,7 +20,7 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
   <Link
     to={linkTo}
     css={{
-      color: '#333',
+      color: colors.gray.dark,
       fontSize: scale(-1 / 2).fontSize,
       letterSpacing: `0.0075rem`,
       lineHeight: 1,
@@ -73,22 +73,22 @@ export default () => (
     <MobileNavItem
       linkTo="/about/"
       label="About"
-      icon={faceIcon}
+      icon={aboutIcon}
     />
     <MobileNavItem
       linkTo="/resources/"
       label="Resources"
-      icon={locationCityIcon}
+      icon={resourcesIcon}
     />
     <MobileNavItem
       linkTo="/members/"
       label="Members"
-      icon={queueMusicIcon}
+      icon={membersIcon}
     />
     <MobileNavItem
       linkTo="/sponsors/"
       label="Sponsors"
-      icon={schoolIcon}
+      icon={sponsorsIcon}
     />
   </div>
 );
