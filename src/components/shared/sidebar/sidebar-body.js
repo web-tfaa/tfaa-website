@@ -46,7 +46,6 @@ const SectionLinks = props => {
         <SectionLink
           children={item.items}
           isInline={props.isInline}
-          isTutorial={props.isTutorial}
           key={index}
           node={item}
         />
@@ -69,7 +68,6 @@ const SectionLink = props => {
       <SectionLink
         children={childnode.items}
         isNested={true}
-        isTutorial={props.isTutorial}
         key={index}
         node={childnode}
       />
@@ -78,9 +76,7 @@ const SectionLink = props => {
 
   const item = props.node;
 
-  // If the last character is a * then the doc page is still in draft
-  const isDraft = item.title.slice(-1) === `*`;
-  const title = isDraft ? item.title.slice(0, -1) : item.title;
+  const title = item.title;
 
   const styles = {
     listItem: {
@@ -94,8 +90,8 @@ const SectionLink = props => {
       borderBottom: `none`,
       boxShadow: `none`,
       fontWeight: `normal`,
-      color: isDraft ? colors.gray.calm : colors.gray.text,
-      fontStyle: isDraft ? `italic` : false,
+      color: colors.gray.text,
+      fontStyle: false,
       "&:before": {
         content: ` `,
         height: 4,
@@ -103,7 +99,7 @@ const SectionLink = props => {
         borderRadius: `100%`,
         top: `.5em`,
         left: `-.7em`,
-        fontWeight: `normdal`,
+        fontWeight: `normal`,
         position: `absolute`,
         transform: `scale(0.1)`,
         transition: `all ${presets.animation.speedDefault} ${
@@ -134,11 +130,11 @@ const SectionLink = props => {
         ...styles.listItem,
         "& .nav-link": {
           ...styles.linkDefault,
-          color: isDraft ? colors.gray.calm : colors.gray.text,
+          color: colors.gray.text,
         },
         "& .nav-link-active": {
           ...styles.linkActive,
-          color: isDraft ? colors.gray.calm : colors.gray.text,
+          color: colors.gray.text,
           fontWeight: `normal`,
           "&:before": {
             display: `none`,
@@ -189,6 +185,7 @@ class SidebarBody extends React.Component {
     // Use original sizes on mobile as the text is inline
     // but smaller on > tablet so as not to compete with body text.
     const fontSize = isInline ? scale(0).fontSize : scale(-2 / 10).fontSize;
+
     const headerStyles = isInline
       ? {
           fontSize: scale(2/5).fontSize,

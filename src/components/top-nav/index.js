@@ -51,7 +51,6 @@ export default ({ pathname }) => {
       role="navigation"
       css={{
         background: `${hex2rgba('#fbfafc', 0.95)}`,
-        // position: isHomepage ? `absolute` : false,
         height: presets.headerHeight,
         zIndex: `2`,
         left: 0,
@@ -59,7 +58,6 @@ export default ({ pathname }) => {
         [presets.Tablet]: {
           position: 'fixed',
         },
-        // ...styles,
       }}
     >
       <div

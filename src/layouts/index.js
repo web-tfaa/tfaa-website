@@ -5,9 +5,14 @@ import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import Footer from '../components/footer';
-import SidebarBody from '../components/shared/sidebar-body';
 import TopNav from '../components/top-nav';
+import SidebarBody from '../components/shared/sidebar/sidebar-body';
+// import MobileNav from "../components/mobile-nav"
+
+// Sidebar data
 import aboutSidebar from "../pages/about/about-links.yml"
+
+// Helpers
 import { rhythm, scale } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
 
@@ -42,7 +47,6 @@ const sidebarStyles = {
   display: `none`,
   position: `fixed`,
   top: `calc(${presets.headerHeight} - 1px)`,
-  paddingBottom: 96,
   overflowY: `auto`,
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
   WebkitOverflowScrolling: `touch`,
@@ -59,9 +63,8 @@ const sidebarStyles = {
   [presets.Desktop]: {
     width: rhythm(12),
     padding: rhythm(1),
-    paddingBottom: 96,
   },
-};
+}
 
 // Component Definition
 class DefaultLayout extends Component {
@@ -71,18 +74,26 @@ class DefaultLayout extends Component {
       location,
     } = this.props;
 
-    const isHomepage = location.pathname == `/`;
-    const hasSidebar = !location.pathname === `/sponsors` && !isHomepage;
+    const path = location.pathname;
+
+    const isHomepage = path == `/`;
+
+    const hasSidebar = !path.slice(0, 9) === '/sponsors' ||
+      path.slice(0, 7) === '/about' ||
+      path.slice(0, 10) === '/resources' ||
+      path.slice(0, 8) === '/members';
+
+    const isSearchSource = hasSidebar;
 
     return (
-      <div className={isHomepage && `is-homepage`}>
+      <div className={isHomepage ? 'is-homepage' : ''}>
         <Helmet defaultTitle={`Texas Music Administrators Conference`}>
           <meta name="twitter:site" content="@TXMusicLeaders" />
           <meta name="og:type" content="website" />
           <meta name="og:site_name" content="TMAC" />
           <html lang="en" amp />
         </Helmet>
-        <TopNav pathname={location.pathname} />
+        <TopNav pathname={path} />
         <div
           className={hasSidebar ? `main-body has-sidebar` : `main-body`}
           css={{
@@ -93,12 +104,15 @@ class DefaultLayout extends Component {
             },
           }}
         >
+
+          {/* TODO Move this under about/index.js once Gatsby supports
+            multiple levels of layouts */}
           <div
             css={{
               ...sidebarStyles,
               [presets.Tablet]: {
                 display:
-                  location.pathname.startsWith(`/about/`)
+                  path.slice(0, 7) === `/about`
                     ? `block`
                     : `none`,
               },
@@ -107,7 +121,41 @@ class DefaultLayout extends Component {
             <SidebarBody yaml={aboutSidebar} />
           </div>
 
+          {/* TODO Move this under resources/index.js once Gatsby supports
+            multiple levels of layouts */}
           <div
+            css={{
+              ...sidebarStyles,
+              [presets.Tablet]: {
+                display:
+                  path.slice(0, 10) === `/resources`
+                    ? `block`
+                    : `none`,
+              },
+            }}
+          >
+            <SidebarBody yaml={aboutSidebar} />
+          </div>
+
+          {/* TODO Move this under members/index.js once Gatsby supports
+            multiple levels of layouts */}
+          <div
+            css={{
+              ...sidebarStyles,
+              [presets.Tablet]: {
+                display:
+                  path.slice(0, 8) === `/members`
+                    ? `block`
+                    : `none`,
+              },
+            }}
+          >
+            <SidebarBody yaml={aboutSidebar} />
+          </div>
+
+          {/* Main container */}
+          <div
+            className={isSearchSource ? 'docSearch-content' : ''}
             css={{
               [presets.Tablet]: {
                 paddingLeft: hasSidebar ? rhythm(10) : 0,
@@ -120,6 +168,7 @@ class DefaultLayout extends Component {
             {children()}
           </div>
         </div>
+        {/* <MobileNav /> */}
         <Footer />
       </div>
     );

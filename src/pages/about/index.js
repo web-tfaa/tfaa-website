@@ -4,21 +4,22 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 
 // Internal Dependencies
+import Sidebar from '../../components/shared/sidebar';
 import Container from '../../components/shared/container';
-import SidebarBody from '../../components/shared/sidebar-body';
 import aboutSidebar from './about-links.yml';
 import presets from '../../utils/presets';
 
 // Component Definition
 export default ({ data }) => (
-  <Container>
+  <div>
     <Helmet>
       <title>TMAC | About</title>
     </Helmet>
-    <div>
+    <Sidebar sidebarYaml={aboutSidebar} />
+    <Container>
       <h1
         css={{
-          marginTop: 0,
+          // marginTop: 0,
         }}
       >
         About {data.site.siteMetadata.title}
@@ -77,7 +78,7 @@ export default ({ data }) => (
           <a href="#">Statements of Philosophy</a>
         </h4>
       </section>
-    </div>
+    </Container>
     <div
       css={{
         display: `block`,
@@ -87,9 +88,8 @@ export default ({ data }) => (
       }}
     >
       <h2>Documentation</h2>
-      <SidebarBody inline yaml={aboutSidebar} />
     </div>
-  </Container>
+  </div>
 );
 
 export const query = graphql`
