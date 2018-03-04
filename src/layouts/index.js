@@ -5,9 +5,9 @@ import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import Footer from '../components/footer';
-import TopNav from '../components/top-nav';
+import TopNav from '../components/nav/top-nav';
 import SidebarBody from '../components/shared/sidebar/sidebar-body';
-// import MobileNav from "../components/mobile-nav"
+import MobileNav from "../components/nav/mobile-nav"
 
 // Sidebar data
 import aboutSidebar from "../pages/about/about-links.yml"
@@ -168,7 +168,7 @@ class DefaultLayout extends Component {
             {children()}
           </div>
         </div>
-        {/* <MobileNav /> */}
+        <MobileNav />
         <Footer />
       </div>
     );
