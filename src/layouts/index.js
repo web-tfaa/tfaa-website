@@ -79,7 +79,7 @@ class DefaultLayout extends Component {
     const isHomepage = path == `/`;
 
     const hasSidebar = !path.slice(0, 9) === '/sponsors' ||
-      path.slice(0, 7) === '/about' ||
+      path.slice(0, 6) === '/about' ||
       path.slice(0, 10) === '/resources' ||
       path.slice(0, 8) === '/members';
 
@@ -112,7 +112,7 @@ class DefaultLayout extends Component {
               ...sidebarStyles,
               [presets.Tablet]: {
                 display:
-                  path.slice(0, 7) === `/about`
+                  path.slice(0, 6) === `/about`
                     ? `block`
                     : `none`,
               },

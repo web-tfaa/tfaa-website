@@ -4,9 +4,7 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 
 // Internal Dependencies
-import Sidebar from '../../components/shared/sidebar';
 import Container from '../../components/shared/container';
-import aboutSidebar from './about-links.yml';
 import presets from '../../utils/presets';
 
 // Component Definition
@@ -15,7 +13,6 @@ export default ({ data }) => (
     <Helmet>
       <title>TMAC | About</title>
     </Helmet>
-    <Sidebar sidebarYaml={aboutSidebar} />
     <Container>
       <h1
         css={{
