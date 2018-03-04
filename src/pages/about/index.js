@@ -84,7 +84,7 @@ export default ({ data }) => (
         },
       }}
     >
-      <h2>Documentation</h2>
+      <h2>All About TMAC</h2>
     </div>
   </div>
 );

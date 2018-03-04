@@ -12,12 +12,15 @@ import locationCityIcon from 'react-icons/lib/md/location-city';
 import queueMusicIcon from 'react-icons/lib/md/queue-music';
 import schoolIcon from 'react-icons/lib/md/school';
 
+// Local Variables
+const texasFlagBlue = '#002868';
+
 // Component Definition
 const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
   <Link
     to={linkTo}
     css={{
-      color: colors.gatsby,
+      color: '#333',
       fontSize: scale(-1 / 2).fontSize,
       letterSpacing: `0.0075rem`,
       lineHeight: 1,
@@ -30,13 +33,12 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
   >
     <div
       css={{
-        // height: 32,
         display: `block`,
         margin: `0 auto`,
       }}
     >
       <Icon
-        fill="black"
+        fill={texasFlagBlue}
         height="32px"
         width="32px"
       />
