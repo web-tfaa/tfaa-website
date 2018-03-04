@@ -21,6 +21,9 @@ export default () =>
       display: 'flex',
       justifyContent: 'space-between',
       padding: '2em',
+      position: 'absolute',
+      left: 0,
+      right: 0,
     }}
   >
     <div>&copy; 2016-{currentYear} | Texas Music Administrators Conference</div>
