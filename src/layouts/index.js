@@ -76,17 +76,25 @@ class DefaultLayout extends Component {
 
     const path = location.pathname;
 
-    const isHomepage = path == `/`;
+    const isHome = path == `/`;
+    const isSponsors = path.slice(0, 9) === '/sponsors';
+    const isAbout = path.slice(0, 6) === '/about';
+    const isResources = path.slice(0, 10) === '/resources';
+    const isMembers = path.slice(0, 8) === '/members';
 
-    const hasSidebar = !path.slice(0, 9) === '/sponsors' ||
-      path.slice(0, 6) === '/about' ||
-      path.slice(0, 10) === '/resources' ||
-      path.slice(0, 8) === '/members';
 
-    const isSearchSource = hasSidebar;
+    const hasSidebar =
+      isAbout ||
+      isResources ||
+      isMembers;
+
+    const leftPadding = (rhythmSize) =>
+      hasSidebar
+        ? rhythm(rhythmSize)
+        : 0;
 
     return (
-      <div className={isHomepage ? 'is-homepage' : ''}>
+      <div className={isHome ? 'is-homepage' : ''}>
         <Helmet defaultTitle={`Texas Music Administrators Conference`}>
           <meta name="twitter:site" content="@TXMusicLeaders" />
           <meta name="og:type" content="website" />
@@ -100,7 +108,7 @@ class DefaultLayout extends Component {
             paddingTop: 0,
             [presets.Tablet]: {
               margin: `0 auto`,
-              paddingTop: isHomepage ? 0 : presets.headerHeight,
+              paddingTop: isHome ? 0 : presets.headerHeight,
             },
           }}
         >
@@ -155,13 +163,12 @@ class DefaultLayout extends Component {
 
           {/* Main container */}
           <div
-            className={isSearchSource ? 'docSearch-content' : ''}
             css={{
               [presets.Tablet]: {
-                paddingLeft: hasSidebar ? rhythm(10) : 0,
+                paddingLeft: leftPadding(10),
               },
               [presets.Desktop]: {
-                paddingLeft: hasSidebar ? rhythm(12) : 0,
+                paddingLeft: leftPadding(12),
               },
             }}
           >
