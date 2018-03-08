@@ -6,6 +6,10 @@ import Helmet from 'react-helmet';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import presets from '../../utils/presets';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+
+// Sidebar data
+import aboutSidebar from './about-links.yml';
 
 // Component Definition
 export default ({ data }) => (
@@ -75,17 +79,18 @@ export default ({ data }) => (
           <a href="#">Statements of Philosophy</a>
         </h4>
       </section>
+      <div
+        css={{
+          display: `block`,
+          [presets.Tablet]: {
+            display: `none`,
+          },
+        }}
+      >
+        <h2>All About TMAC</h2>
+        <SidebarBody inline yaml={aboutSidebar} />
+      </div>
     </Container>
-    <div
-      css={{
-        display: `block`,
-        [presets.Tablet]: {
-          display: `none`,
-        },
-      }}
-    >
-      <h2>All About TMAC</h2>
-    </div>
   </div>
 );
 
