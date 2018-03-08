@@ -7,13 +7,12 @@ import { rhythm, scale, options } from '../../../utils/typography';
 import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 
 // Component Definition
-const Card = ({ children, styles }) => (
+const Card = ({ children }) => (
   <div
     css={{
       boxSizing: `border-box`,
       display: `flex`,
       transform: `translateZ(0)`,
-      ...styles,
       [presets.Tablet]: {
         flex: `0 0 50%`,
         maxWidth: `50%`,
@@ -26,8 +25,8 @@ const Card = ({ children, styles }) => (
         },
       },
       [presets.Hd]: {
-        flex: `0 0 33.33333333%`,
-        maxWidth: `33.33333333%`,
+        flex: `0 0 90%`,
+        maxWidth: `90%`,
         borderLeft: `1px solid ${colors.ui.light}`,
         "&:nth-child(4)": {
           boxShadow: `none`,
