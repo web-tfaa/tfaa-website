@@ -10,7 +10,35 @@ import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 
 // Helpers
-import presets from '../../utils/presets';
+import presets, { colors } from '../../utils/presets';
+import { rhythm, scale, options } from '../../utils/typography';
+
+const PhilosophyCard = ({ children }) => (
+  <div
+    css={{
+      boxSizing: `border-box`,
+      display: `flex`,
+      transform: `translateZ(0)`,
+      boxShadow: `0 1px 0 0 ${colors.ui.light}`,
+      "&:nth-child(5),&:nth-child(6)": {
+        boxShadow: `none`,
+      },
+      "&:nth-child(2n)": {
+        borderLeft: `1px solid ${colors.ui.light}`,
+      },
+    }}
+  >
+    <div
+      css={{
+        padding: rhythm(presets.gutters.default / 2),
+        paddingBottom: 0,
+        transform: `translateZ(0)`,
+      }}
+    >
+      {children}
+    </div>
+  </div>
+);
 
 // Component Definition
 export default () => (
@@ -29,7 +57,7 @@ export default () => (
       <Container>
         <h1 css={{ marginTop: '1rem' }}>Statements of Philosophy</h1>
         <Cards>
-          <Card>
+          <PhilosophyCard>
             <CardHeadline>ASSESSMENT IN THE ARTS</CardHeadline>
             <h5 css={{ marginTop: '1rem' }}>Approved at the TMAC Fall Retreat, 2004</h5>
 
@@ -60,8 +88,8 @@ export default () => (
                 <li css={{ marginBottom: 0 }}>David McCullar, Vocal Representative</li>
               </ul>
             </FuturaParagraph>
-          </Card>
-          <Card>
+          </PhilosophyCard>
+          <PhilosophyCard>
             <CardHeadline>UIL MARCHING BAND PHILOSOPHY STATEMENT</CardHeadline>
             <h5 css={{ marginTop: '1rem' }}>Approved at the TMEA Business Meeting, 2006</h5>
 
@@ -86,34 +114,9 @@ export default () => (
             <FuturaParagraph>
               <span css={{ fontWeight: 600 }}>D.</span> TMAC recommends and supports a continued dialog regarding the escalating costs associated with marching band productions.
             </FuturaParagraph>
-          </Card>
+          </PhilosophyCard>
         </Cards>
       </Container>
     </div>
   </div>
 );
-
-// Mini Task Force Committee:
-//
-// Randy Bartlett, Chair
-// Lisa Roebuck, Elementary Music Representative
-// Deborah Kidwell, Orchestra Representative
-// â€śBuzzy” Green, Band Representative
-// David McCullar, Vocal Representative
-// UIL MARCHING BAND PHILOSOPHY STATEMENT
-// Approved at the:
-// TMEA Business Meeting, 2006
-//
-// Recognize:
-//
-// The Texas Music Administrators Conference recognizes that marching band continues to evolve as an art form. TMAC also recognizes that there are many types of adjudicated festival/competition experiences. TMAC support the commitment of UIL and TMAA to continually evaluate the requirements of the marching band in Texas and make the necessary revisions, as needed, in the adjudication instrument and process to meet the needs of this ever-changing medium of performance.
-//
-// Recommendations:
-//
-// A. TMAC is in complete support of and recommends that the integrity of the music and learning experience always remain the highest priority.
-//
-// B. TMAC recommends that all Texas high school marching band programs, in conjunction with the UIL music office, seek to ensure that the UIL State Marching Contest be established as the premier marching contest in the state of Texas.
-//
-// C. TMAC commends the UIL for its ongoing efforts in making the UIL marching competition at the region, area, and state levels remain the ultimate assessment and evaluation instrument for all Texas marching bands.
-//
-// D. TMAC recommends and supports a continued dialog regarding the escalating costs associated with marching band productions.
