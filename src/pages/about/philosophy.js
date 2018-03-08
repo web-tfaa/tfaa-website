@@ -19,12 +19,25 @@ const PhilosophyCard = ({ children }) => (
       boxSizing: `border-box`,
       display: `flex`,
       transform: `translateZ(0)`,
-      boxShadow: `0 1px 0 0 ${colors.ui.light}`,
-      "&:nth-child(5),&:nth-child(6)": {
-        boxShadow: `none`,
+      [presets.Tablet]: {
+        boxShadow: `0 1px 0 0 ${colors.ui.light}`,
+        "&:nth-child(5),&:nth-child(6)": {
+          boxShadow: `none`,
+        },
+        "&:nth-child(2n)": {
+          borderLeft: `1px solid ${colors.ui.light}`,
+        },
       },
-      "&:nth-child(2n)": {
+      [presets.Hd]: {
+        flex: `0 0 90%`,
+        maxWidth: `90%`,
         borderLeft: `1px solid ${colors.ui.light}`,
+        "&:nth-child(4)": {
+          boxShadow: `none`,
+        },
+        "&:nth-child(3n+1)": {
+          borderLeft: 0,
+        },
       },
     }}
   >
