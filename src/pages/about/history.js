@@ -1,6 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
-import React from 'react'
+import React from 'react';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
