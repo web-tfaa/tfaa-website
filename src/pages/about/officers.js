@@ -3,9 +3,9 @@ import Helmet from 'react-helmet';
 import React from 'react';
 
 // Internal Dependencies
-import Cards from '../../components/shared/cards';
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
+import Cards from '../../components/shared/cards';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 
 // Helpers
@@ -21,20 +21,16 @@ const Avatar = ({ alt, src }) => (
       flexShrink: 0,
       borderRadius: '50%',
       overflow: 'hidden',
-      width: 200,
-      height: 200,
+      width: 120,
+      height: 120,
       marginBottom: 16,
-      [presets.Tablet]: {
-        height: 160,
-        width: 160,
-      },
       [presets.Phablet]: {
         height: 140,
         width: 140,
       },
-      [presets.Mobile]: {
-        height: 120,
-        width: 120,
+      [presets.Tablet]: {
+        height: 160,
+        width: 160,
       },
     }}
   >

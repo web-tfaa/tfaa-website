@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 import React from 'react';
 
 // Internal Dependencies
-import Container from '../../components/shared/container';
 import CardHeadline from '../../components/shared/cards/card-headline';
+import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 
 // Component Definition
