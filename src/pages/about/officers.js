@@ -2,8 +2,8 @@
 import React from 'react'
 
 // Internal Dependencies
-import Constitution from '../components/constitution'
+// import Constitution from '../components/constitution'
 
 // Component Definition
 // export default () => <Constitution />;
-export default () => <div>Constitution will go here</div>;
+export default () => <div>Officer information will go here</div>;

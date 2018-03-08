@@ -44,7 +44,7 @@ export default ({ data }) => (
       </section>
       <section>
         <h4>
-          <Link to={`/constitution/`}>
+          <Link to={`/about/constitution/`}>
             Constitution & Bylaws
           </Link>
         </h4>
