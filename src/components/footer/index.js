@@ -16,13 +16,15 @@ export default () =>
       alignItems: 'center',
       background: '#fbfafc',
       borderTop: '4px solid #2D456F',
+      bottom: 0,
       boxShadow: '-2px 0 5px #444',
       boxSizing: 'border-box',
       display: 'flex',
+      fontSize: 16,
       justifyContent: 'space-between',
+      left: 0,
       padding: '2em',
       position: 'absolute',
-      left: 0,
       right: 0,
     }}
   >
