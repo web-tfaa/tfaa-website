@@ -14,14 +14,14 @@ import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
 const navItemStyles = {
   ...scale(-1 / 3),
   boxSizing: `border-box`,
-  display: `inline-block`,
   color: `inherit`,
-  textDecoration: `none`,
-  textTransform: `uppercase`,
+  display: `inline-block`,
   letterSpacing: `0.03em`,
   lineHeight: `calc(${presets.headerHeight} - 6px)`,
   padding: `6px ${rhythm(1 / 2)} 0`,
   position: `relative`,
+  textDecoration: `none`,
+  textTransform: `uppercase`,
   top: 0,
   transition: `color .15s ease-out`,
   "&:hover": {
@@ -51,10 +51,12 @@ export default ({ pathname }) => {
       role="navigation"
       css={{
         background: `${hex2rgba('#fbfafc', 0.95)}`,
+        display: 'flex',
+        flex: 1,
         height: presets.headerHeight,
-        zIndex: `2`,
         left: 0,
         right: 0,
+        zIndex: `2`,
         [presets.Tablet]: {
           position: 'fixed',
         },
@@ -63,17 +65,17 @@ export default ({ pathname }) => {
       <div
         css={{
           //maxWidth: rhythm(presets.maxWidth),
-          boxSizing: 'border-box',
+          alignItems: `flex-end`,
           borderBottom: '4px solid #2D456F',
           boxShadow: '3px 0 5px #2D456F',
+          boxSizing: 'border-box',
+          display: `flex`,
+          fontFamily: typography.options.headerFontFamily.join(`,`),
+          height: `100%`,
           margin: `0 auto`,
           paddingLeft: rhythm(3 / 4),
           paddingRight: rhythm(3 / 4),
-          fontFamily: typography.options.headerFontFamily.join(`,`),
-          display: `flex`,
-          alignItems: `flex-end`,
           width: `100%`,
-          height: `100%`,
         }}
       >
         <NavItem
@@ -90,8 +92,8 @@ export default ({ pathname }) => {
               alignItems: `center`,
               color: `inherit`,
               display: `flex`,
-              textDecoration: `none`,
               marginRight: rhythm(1/2),
+              textDecoration: `none`,
             }}
           >
             <img
@@ -100,8 +102,8 @@ export default ({ pathname }) => {
               src="http://res.cloudinary.com/drumsensei/image/upload/v1518414495/tmac-logo_upybjp.jpg"
             />
             <div css={{
-              marginLeft: '0.8em',
               fontSize: 24,
+              marginLeft: '0.8em',
               textDecoration: 'none',
             }}>
               TMAC
@@ -113,12 +115,12 @@ export default ({ pathname }) => {
             display: `none`,
             [presets.Tablet]: {
               display: `flex`,
-              margin: 0,
-              padding: 0,
-              listStyle: `none`,
               flexGrow: 1,
-              overflowX: `auto`,
+              listStyle: `none`,
+              margin: 0,
               maskImage: `linear-gradient(to right, transparent, white ${rhythm(1/8)}, white 98%, transparent)`,
+              overflowX: `auto`,
+              padding: 0,
             },
           }}
         >

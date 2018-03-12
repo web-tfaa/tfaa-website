@@ -43,16 +43,16 @@ const sidebarStyles = {
     colors.lilac,
     presets.shadowKeyUmbraOpacity
   )}`,
-  width: rhythm(10),
   display: `none`,
+  height: `calc(100vh - ${presets.headerHeight} + 1px)`,
+  overflowY: `auto`,
   position: `fixed`,
   top: `calc(${presets.headerHeight} - 1px)`,
-  overflowY: `auto`,
-  height: `calc(100vh - ${presets.headerHeight} + 1px)`,
+  width: rhythm(10),
   WebkitOverflowScrolling: `touch`,
   "::-webkit-scrollbar": {
-    width: `6px`,
     height: `6px`,
+    width: `6px`,
   },
   "::-webkit-scrollbar-thumb": {
     background: colors.ui.bright,
@@ -61,8 +61,8 @@ const sidebarStyles = {
     background: colors.ui.light,
   },
   [presets.Desktop]: {
-    width: rhythm(12),
     padding: rhythm(1),
+    width: rhythm(12),
   },
 }
 
@@ -94,7 +94,13 @@ class DefaultLayout extends Component {
         : 0;
 
     return (
-      <div className={isHome ? 'is-homepage' : ''}>
+      <div
+        className={isHome ? 'is-homepage' : ''}
+        css={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <Helmet defaultTitle={`Texas Music Administrators Conference`}>
           <meta name="twitter:site" content="@TXMusicLeaders" />
           <meta name="og:type" content="website" />
@@ -105,9 +111,12 @@ class DefaultLayout extends Component {
         <div
           className={hasSidebar ? `main-body has-sidebar` : `main-body`}
           css={{
+            display: 'flex',
+            flex: 1,
             paddingTop: 0,
+            minHeight: `calc(100vh - 4.8rem)`,
             [presets.Tablet]: {
-              margin: `0 auto`,
+              margin: isSponsors ? `0 auto` : '',
               paddingTop: isHome ? 0 : presets.headerHeight,
             },
           }}

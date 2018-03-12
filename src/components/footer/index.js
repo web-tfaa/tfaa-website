@@ -16,16 +16,14 @@ export default () =>
       alignItems: 'center',
       background: '#fbfafc',
       borderTop: '4px solid #2D456F',
-      bottom: 0,
       boxShadow: '-2px 0 5px #444',
       boxSizing: 'border-box',
       display: 'flex',
+      flex: 1,
       fontSize: 16,
       justifyContent: 'space-between',
-      left: 0,
       padding: '2em',
-      position: 'absolute',
-      right: 0,
+      zIndex: 10,
     }}
   >
     <div>&copy; 2016-{currentYear} | Texas Music Administrators Conference</div>
