@@ -2,7 +2,7 @@
 import React from 'react'
 
 // Internal Dependencies
-import Resources from '../components/resources'
+import Resources from '../../components/resources'
 
 // Component Definition
 export default () => <Resources />;

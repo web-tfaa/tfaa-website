@@ -7,10 +7,11 @@ import hex2rgba from 'hex2rgba';
 import Footer from '../components/footer';
 import TopNav from '../components/nav/top-nav';
 import SidebarBody from '../components/shared/sidebar/sidebar-body';
-import MobileNav from "../components/nav/mobile-nav"
+import MobileNav from '../components/nav/mobile-nav';
 
 // Sidebar data
-import aboutSidebar from "../pages/about/about-links.yml"
+import aboutSidebar from '../pages/about/about-links.yml';
+import resourcesSidebar from '../pages/resources/resources-links.yml';
 
 // Helpers
 import { rhythm, scale } from '../utils/typography';
@@ -151,7 +152,7 @@ class DefaultLayout extends Component {
               },
             }}
           >
-            <SidebarBody yaml={aboutSidebar} />
+            <SidebarBody yaml={resourcesSidebar} />
           </div>
 
           {/* TODO Move this under members/index.js once Gatsby supports
