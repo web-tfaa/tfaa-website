@@ -20,7 +20,7 @@ const officerStyles = {
 export default () => (
   <div>
     <Helmet>
-      <title>TMAC | History</title>
+      <title>TMAC | Constitution and Bylaws</title>
     </Helmet>
     <div
       css={{
