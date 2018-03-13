@@ -117,10 +117,13 @@ class DefaultLayout extends Component {
             display: 'flex',
             flex: 1,
             paddingTop: 0,
-            minHeight: `calc(100vh - 4.8rem)`,
+            minHeight: `calc(100vh - 4rem)`,
             [presets.Tablet]: {
               margin: isSponsors ? `0 auto` : '',
               paddingTop: isHome ? 0 : presets.headerHeight,
+            },
+            [presets.Desktop]: {
+              minHeight: `calc(100vh - 4rem)`,
             },
           }}
         >
