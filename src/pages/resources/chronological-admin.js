@@ -8,6 +8,7 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import { outstandingAdmin } from './resources-constants';
+import { options } from '../../utils/typography';
 
 // Local Variables
 
@@ -15,9 +16,9 @@ import { outstandingAdmin } from './resources-constants';
 class ChronologicalAdmin extends Component {
   renderTableRows = () =>
     outstandingAdmin.map(a => (
-      <tr>
+      <tr key={`${a.name}`}>
         <th>{a.year}</th>
-        <th><Link to={`/resources/people/${a.name.toLowerCase().split(' ').join('-')}`}>{a.name}</Link></th>
+        <th><Link to={`/resources/people/#${a.name.toLowerCase().split(' ').join('-')}`}>{a.name}</Link></th>
       </tr>
     ))
 
@@ -38,7 +39,12 @@ class ChronologicalAdmin extends Component {
           <Container>
             <CardHeadline>Outstanding Administrators</CardHeadline>
 
-            <FuturaParagraph>
+            <div
+              css={{
+                fontFamily: options.headerFontFamily.join(`,`),
+                lineHeight: '1.6',
+              }}
+            >
               Chronological listing of all TMAC Outstanding Administrator Award Recipients
               <table>
                 <thead>
@@ -51,7 +57,7 @@ class ChronologicalAdmin extends Component {
                   {this.renderTableRows()}
                 </tbody>
               </table>
-            </FuturaParagraph>
+            </div>
 
           </Container>
         </div>
