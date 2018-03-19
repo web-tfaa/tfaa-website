@@ -1,6 +1,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import React, { Component } from 'react';
+import Link from 'gatsby-link';
 
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';
@@ -16,7 +17,7 @@ class ChronologicalAdmin extends Component {
     outstandingAdmin.map(a => (
       <tr>
         <th>{a.year}</th>
-        <th>{a.name}</th>
+        <th><Link to={`/resources/people/${a.name.toLowerCase().split(' ').join('-')}`}>{a.name}</Link></th>
       </tr>
     ))
 
@@ -35,7 +36,7 @@ class ChronologicalAdmin extends Component {
           }}
         >
           <Container>
-            <CardHeadline>Chronological Listing</CardHeadline>
+            <CardHeadline>Outstanding Administrators</CardHeadline>
 
             <FuturaParagraph>
               Chronological listing of all TMAC Outstanding Administrator Award Recipients

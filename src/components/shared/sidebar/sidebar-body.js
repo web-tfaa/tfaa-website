@@ -151,6 +151,8 @@ const SectionLink = props => {
         },
       }
 
+  console.log('item link', item.link);
+
   return (
     <li key={item.title} css={linkStyle}>
       {item.link.charAt(0) == `#` ? (
