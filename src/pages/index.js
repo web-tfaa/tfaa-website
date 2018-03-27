@@ -16,7 +16,7 @@ import Stat from '../components/shared/featured-stat/stat';
 import { rhythm } from '../utils/typography';
 
 // Component Definition
-export default () =>
+export default () => (
   <div>
     <Helmet>
       <title>TMAC | Home</title>
@@ -50,3 +50,36 @@ export default () =>
       <FeaturedStat />
     </div>
   </div>
+);
+
+export const pageQuery = graphql`
+  query pageQuery {
+    allContentfulBlog(
+      filter: {
+        node_locale: { eq: "en-US" }
+      },
+      sort: {
+        fields: [createdAt], order: DESC
+      }
+    ) {
+      edges {
+        node {
+          id
+          title
+          slug
+          createdAt(formatString: "MMMM DD, YYYY")
+          featuredImage {
+            resolutions(width: 300) {
+              ...GatsbyContentfulResolutions
+            }
+          }
+          content {
+            childMarkdownRemark {
+              excerpt
+            }
+          }
+        }
+      }
+    }
+  }
+`

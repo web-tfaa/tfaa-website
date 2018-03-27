@@ -18,7 +18,7 @@ class ChronologicalAdmin extends Component {
     outstandingAdmin.map(a => (
       <tr key={`${a.name}`}>
         <th>{a.year}</th>
-        <th><Link to={`/resources/people/#${a.name.toLowerCase().split(' ').join('-')}`}>{a.name}</Link></th>
+        <th><Link to={`/resources/people/${a.name.toLowerCase().split(' ').join('-')}`}>{a.name}</Link></th>
       </tr>
     ))
 
