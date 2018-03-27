@@ -1,3 +1,8 @@
+// Give gatsby access to env keys
+require('dotenv').config({
+  path: `.env`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `TMAC`,
@@ -8,8 +13,8 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: `f9p2z2e3hcys`,
-        accessToken: `868b50738a280398c2e1067f1e980c54205a8563ff92957ba23352b0a47edbb4`,
+        spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
+        accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
       },
     },
     {
