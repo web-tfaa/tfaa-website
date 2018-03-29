@@ -15,6 +15,7 @@
   "dependencies": {
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
+    "firebase": "^4.12.0",
     "gatsby": "^1.9.243",
     "gatsby-cli": "^1.1.49",
     "gatsby-image": "^1.0.42",
@@ -35,6 +36,7 @@
     "gray-percentage": "^2.0.0",
     "hex2rgba": "0.0.1",
     "prop-types": "^15.6.1",
+    "react-auth-firebase": "^1.2.1",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
     "typeface-space-mono": "0.0.54",
