@@ -17,6 +17,7 @@ import resourcesSidebar from '../pages/resources/resources-links.yml';
 // Helpers
 import { rhythm, scale } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
+import { isLoggedIn } from '../utils/auth';
 
 // from Gatsby www project
 import '../css/prism-coy.css';
@@ -97,6 +98,8 @@ class DefaultLayout extends Component {
         ? rhythm(rhythmSize)
         : 0;
 
+    console.log('is logged in - layouts', isLoggedIn());
+
     return (
       <div
         className={isHome ? 'is-homepage' : ''}
@@ -163,19 +166,21 @@ class DefaultLayout extends Component {
 
           {/* TODO Move this under members/index.js once Gatsby supports
             multiple levels of layouts */}
-          <div
-            css={{
-              ...sidebarStyles,
-              [presets.Tablet]: {
-                display:
-                  path.slice(0, 8) === `/members`
-                    ? `block`
-                    : `none`,
-              },
-            }}
-          >
-            <SidebarBody yaml={membersSidebar} />
-          </div>
+          {isLoggedIn() && (
+            <div
+              css={{
+                ...sidebarStyles,
+                [presets.Tablet]: {
+                  display:
+                    path.slice(0, 8) === `/members`
+                      ? `block`
+                      : `none`,
+                },
+              }}
+            >
+              <SidebarBody yaml={membersSidebar} />
+            </div>
+          )}
 
           {/* Main container */}
           <div
