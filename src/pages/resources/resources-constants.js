@@ -1,4 +1,4 @@
-export const outstandingAdmin = [
+export default const outstandingAdmin = [
   {
     year: 1999,
     name: 'Woody Schober',

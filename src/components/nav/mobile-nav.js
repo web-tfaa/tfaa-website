@@ -7,10 +7,10 @@ import presets, { colors } from '../../utils/presets';
 import typography, { rhythm, scale, options } from '../../utils/typography';
 
 // Icons
-import aboutIcon from 'react-icons/lib/md/info-outline';
-import membersIcon from 'react-icons/lib/md/person-outline';
-import resourcesIcon from 'react-icons/lib/md/folder-open';
-import sponsorsIcon from 'react-icons/lib/md/card-giftcard';
+import CardGiftCard as SponsorsIcon from 'react-icons/lib/md/card-giftcard';
+import FolderOpen as ResourcesIcon from 'react-icons/lib/md/folder-open';
+import InfoOutline as AboutIcon from 'react-icons/lib/md/info-outline';
+import PersonOutline as MembersIcon from 'react-icons/lib/md/person-outline';
 
 // Local Variables
 const texasFlagBlue = '#002868';
@@ -73,22 +73,22 @@ export default () => (
     <MobileNavItem
       linkTo="/about/"
       label="About"
-      icon={aboutIcon}
+      icon={AboutIcon}
     />
     <MobileNavItem
       linkTo="/resources/"
       label="Resources"
-      icon={resourcesIcon}
+      icon={ResourcesIcon}
     />
     <MobileNavItem
       linkTo="/members/"
       label="Members"
-      icon={membersIcon}
+      icon={MembersIcon}
     />
     <MobileNavItem
       linkTo="/sponsors/"
       label="Sponsors"
-      icon={sponsorsIcon}
+      icon={SponsorsIcon}
     />
   </div>
 );
