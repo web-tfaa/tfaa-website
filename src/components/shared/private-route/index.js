@@ -12,7 +12,7 @@ export default ({ component: Component, ...rest }) => (
     {...rest}
     render={props =>
       !isLoggedIn() ? (
-        // If we’re not logged in, redirect to the home page.
+        // If we’re not logged in, redirect to the login page.
         <Redirect to={{ pathname: '/members/login' }} />
       ) : (
         <Component {...props} />

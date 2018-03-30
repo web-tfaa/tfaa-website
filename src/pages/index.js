@@ -69,7 +69,7 @@ export default (props) => (
       </Cards>
 
       <FeaturedStat />
-      {props.data.allContentfulBlog.edges.map((edge) => <BlogPost key={edge.node.id} node={edge.node} />)}
+      {/* {props.data.allContentfulBlog.edges.map((edge) => <BlogPost key={edge.node.id} node={edge.node} />)} */}
     </div>
   </div>
 );
