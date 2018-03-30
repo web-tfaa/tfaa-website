@@ -4,18 +4,31 @@ import { Link, withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import {
-  getCurrentUser,
+  getCurrentUser
   isLoggedIn,
   logout,
 } from '../../../utils/auth';
+
+// Local Styles
+const statusRootStyles = {
+  background: 'lightgrey',
+  fontSize: '87.5%',
+  padding: '0.25rem',
+};
+
+const statusTextStyles = {
+  margin: '0 auto',
+  maxWidth: 640,
+  textAlign: 'right',
+};
 
 // Component Definition
 export default withRouter(({ history }) => {
   let details;
   if (!isLoggedIn()) {
     details = (
-      <p className={styles['status__text']}>
-        To get the full app experience, you’ll need to{' '}
+      <p css={statusTextStyles}>
+        To access the Members area, you’ll need to{' '}
         <Link to="/members/login">log in</Link>.
       </p>
     );
@@ -23,7 +36,7 @@ export default withRouter(({ history }) => {
     const { name, email } = getCurrentUser();
 
     details = (
-      <p className={styles['status__text']}>
+      <p css={statusTextStyles}>
         Logged in as {name} ({email})!{' '}
         <a
           href="/"
@@ -38,5 +51,5 @@ export default withRouter(({ history }) => {
     );
   }
 
-  return <div className={styles.status}>{details}</div>;
+  return <div css={statusRootStyles}>{details}</div>;
 });

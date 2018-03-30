@@ -7,6 +7,16 @@ import Helmet from 'react-helmet';
 import Container from '../shared/container';
 import Status from './status';
 
+// Local Styles
+const titleStyles = {
+  display: 'inline-block',
+  borderBottom: 'solid 1px',
+};
+
+const contentStyles = {
+  display: 'flex',
+};
+
 // Component Definition
 export default () => (
   <div>
@@ -15,19 +25,10 @@ export default () => (
       <Helmet>
         <title>TMAC | Members</title>
       </Helmet>
-      <h3
-        css={{
-          display: 'inline-block',
-          borderBottom: 'solid 1px',
-        }}
-      >
+      <h3 css={titleStyles}>
         Members
       </h3>
-      <div
-        css={{
-          display: 'flex',
-        }}
-      >
+      <div css={contentStyles}>
         Members data
       </div>
     </Container>
