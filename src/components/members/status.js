@@ -42,7 +42,7 @@ export default withRouter(({ history }) => {
           href="/"
           onClick={event => {
             event.preventDefault();
-            logout(() => history.push('/members/login'));
+            logout(() => history.push('/members'));
           }}
         >
           log out

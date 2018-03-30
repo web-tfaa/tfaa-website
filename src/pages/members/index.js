@@ -31,7 +31,7 @@ class Login extends React.Component {
 
   render() {
     if (isLoggedIn()) {
-      return <Redirect to={{ pathname: '/members' }} />;
+      return <Redirect to={{ pathname: '/members/home' }} />;
     }
 
     return (
