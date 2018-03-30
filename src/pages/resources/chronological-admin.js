@@ -23,6 +23,8 @@ const tableContainerStyles = {
   lineHeight: '1.6',
 };
 
+// <Link to={`/resources/people/#${admin.name.toLowerCase().split(' ').join('-')}`}>
+
 // Component Definition
 class ChronologicalAdmin extends Component {
   renderTableRows = () =>
@@ -32,7 +34,6 @@ class ChronologicalAdmin extends Component {
         <tr key={`${admin.name}`}>
           <th>{admin.year}</th>
           <th>
-            {/* <Link to={`/resources/people/#${admin.name.toLowerCase().split(' ').join('-')}`}> */}
             <Link to={`/resources/people/woody-schober`}>
               {admin.name}
             </Link>
