@@ -4,8 +4,8 @@ import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 
 // Internal Dependencies
-import Container from '../shared/container';
-import Status from './status';
+import Container from '../../components/shared/container';
+import Status from '../../components/members/status';
 
 // Local Styles
 const titleStyles = {
