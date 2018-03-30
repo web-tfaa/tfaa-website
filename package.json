@@ -12,6 +12,13 @@
     "build": "gatsby build",
     "serve": "gatsby serve"
   },
+  "browserlist": [
+    "last 2 versions",
+    "safari >= 9",
+    "edge >= 13",
+    "chrome >= 50",
+    "firefox >= 50"
+  ],
   "dependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-regenerator": "^6.26.0",
