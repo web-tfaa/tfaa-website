@@ -98,8 +98,6 @@ class DefaultLayout extends Component {
         ? rhythm(rhythmSize)
         : 0;
 
-    console.log('is logged in - layouts', isLoggedIn());
-
     return (
       <div
         className={isHome ? 'is-homepage' : ''}

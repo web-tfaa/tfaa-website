@@ -17,6 +17,10 @@ import membersSidebar from '../../pages/members/members-links.yml';
 const texasFlagRed = '#BF0A30';
 
 // Local Styles
+const rootStyles = {
+  width: `0 auto`,
+};
+
 const titleStyles = {
   display: 'inline-block',
   borderBottom: 'solid 1px',
@@ -28,7 +32,7 @@ const contentStyles = {
 
 // Component Definition
 export default () => (
-  <div>
+  <div css={rootStyles}>
     <Status />
     <Container>
       <Helmet>
@@ -38,7 +42,7 @@ export default () => (
         Members
       </h3>
       <div css={contentStyles}>
-        Members data
+        Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
       </div>
       <div
         css={{

@@ -8,11 +8,13 @@ import {
   isLoggedIn,
   logout,
 } from '../../utils/auth';
+import { status } from '../../utils/colors';
 
 // Local Styles
 const statusRootStyles = {
-  background: 'lightgrey',
+  background: status,
   fontSize: '87.5%',
+  width: `0 auto`,
   padding: '0.25rem',
 };
 
@@ -37,7 +39,7 @@ export default withRouter(({ history }) => {
 
     details = (
       <p css={statusTextStyles}>
-        Logged in as {name} ({email})!{' '}
+        Logged in as {name} ({email}){' '}
         <a
           href="/"
           onClick={event => {

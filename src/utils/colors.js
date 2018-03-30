@@ -74,6 +74,7 @@ const colors = {
     copy: gray(12, 270),
     calm: gray(46, 270),
   },
+  status: `#f5eefe`,
 }
 
 let pointer = `a`
