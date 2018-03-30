@@ -11,16 +11,33 @@ import { outstandingAdmin } from './resources-constants';
 import { options } from '../../utils/typography';
 
 // Local Variables
+const rootStyles = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+};
+
+const tableContainerStyles = {
+  fontFamily: options.headerFontFamily.join(`,`),
+  lineHeight: '1.6',
+};
 
 // Component Definition
 class ChronologicalAdmin extends Component {
   renderTableRows = () =>
-    outstandingAdmin.map(a => (
-      <tr key={`${a.name}`}>
-        <th>{a.year}</th>
-        <th><Link to={`/resources/people/${a.name.toLowerCase().split(' ').join('-')}`}>{a.name}</Link></th>
-      </tr>
-    ))
+    outstandingAdmin.map(admin => {
+      console.log('admin', admin.name);
+      return (
+        <tr key={`${admin.name}`}>
+          <th>{admin.year}</th>
+          <th>
+            <Link to={`/resources/people/#${admin.name.toLowerCase().split(' ').join('-')}`}>
+              {admin.name}
+            </Link>
+          </th>
+        </tr>
+      )});
 
   render() {
     return (
@@ -29,21 +46,13 @@ class ChronologicalAdmin extends Component {
           <title>TMAC | Outstanding Administrators</title>
         </Helmet>
         <div
-          css={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}
+          css={rootStyles}
         >
           <Container>
             <CardHeadline>Outstanding Administrators</CardHeadline>
 
             <div
-              css={{
-                fontFamily: options.headerFontFamily.join(`,`),
-                lineHeight: '1.6',
-              }}
+              css={tableContainerStyles}
             >
               Chronological listing of all TMAC Outstanding Administrator Award Recipients
               <table>
