@@ -50,7 +50,7 @@ exports.onCreatePage = async ({ page, boundActionCreators }) => {
 };
 
 // Used to allow `async` to work in Gatsby
-exports.modifyBabelrc = ({ babelrc }) => ({
-    ...babelrc,
-    plugins: babelrc.plugins.concat(['transform-decorators-legacy', 'transform-regenerator']),
-  })
+// exports.modifyBabelrc = ({ babelrc }) => ({
+//     ...babelrc,
+//     plugins: babelrc.plugins.concat(['transform-decorators-legacy', 'transform-regenerator']),
+//   })

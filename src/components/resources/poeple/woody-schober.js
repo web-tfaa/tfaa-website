@@ -3,9 +3,9 @@ import Helmet from 'react-helmet';
 import React from 'react';
 
 // Internal Dependencies
-import CardHeadline from '../../../components/shared/cards/card-headline';
-import Container from '../../../components/shared/container';
-import FuturaParagraph from '../../../components/shared/futura-paragraph';
+import CardHeadline from '../../shared/cards/card-headline';
+import Container from '../../shared/container';
+import FuturaParagraph from '../../shared/futura-paragraph';
 
 // Component Definition
 export default () => (

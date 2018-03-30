@@ -9,10 +9,10 @@ import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 import Stat from './stat';
 
 // Icons
-import Face as FaceIcon from 'react-icons/lib/md/face';
-import LocationCity as LocationCityIcon from 'react-icons/lib/md/location-city';
-import QueueMusic as QueueMusicIcon from 'react-icons/lib/md/queue-music';
-import School as SchoolIcon from 'react-icons/lib/md/school';
+import Face from 'react-icons/lib/md/face';
+import LocationCity from 'react-icons/lib/md/location-city';
+import QueueMusic from 'react-icons/lib/md/queue-music';
+import School from 'react-icons/lib/md/school';
 
 // Icon colors
 const queueMusicIconColor = '#3598db';
@@ -41,25 +41,25 @@ const FeaturedStat = ({ children }) => (
   >
     <Stat
       color={queueMusicIconColor}
-      icon={QueueMusicIcon}
+      icon={QueueMusic}
     >
       <div>{ageOfTmac} Years Serving Our Students</div>
     </Stat>
     <Stat
       color={locationCityIconColor}
-      icon={LocationCityIcon}
+      icon={LocationCity}
     >
       <div>Serving {numberOfDistricts.toLocaleString()} School Districts</div>
     </Stat>
     <Stat
       color={schoolIconColor}
-      icon={SchoolIcon}
+      icon={School}
     >
       <div>Serving Over {numberOfSchools.toLocaleString()} Schools</div>
     </Stat>
     <Stat
       color={faceIconColor}
-      icon={FaceIcon}
+      icon={Face}
     >
       <div>Serving 5+ Million Students</div>
     </Stat>

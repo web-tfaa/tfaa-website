@@ -7,7 +7,7 @@ import Link from 'gatsby-link';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
-import { outstandingAdmin } from './resources-constants';
+import { outstandingAdmin } from '../../components/resources/resources-constants';
 import { options } from '../../utils/typography';
 
 // Local Variables
