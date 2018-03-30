@@ -58,9 +58,9 @@ const SectionLink = props => {
   // Don't show the main docs link on mobile as we put these
   // links on that main docs page so it's confusing to have
   // the page link to itself.
-  if (props.isInline && props.node.link === `/about/`) {
-    return null
-  }
+  // if (props.isInline && props.node.link === `/about/`) {
+  //   return null
+  // }
 
   let childnodes = null;
   if (props.children) {

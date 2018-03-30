@@ -96,7 +96,6 @@ export default ({ data }) => (
           border: 0,
           boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
         }} />
-        <h2>All About TMAC</h2>
         <SidebarBody inline yaml={aboutSidebar} />
       </div>
     </Container>

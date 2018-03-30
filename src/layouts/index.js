@@ -11,6 +11,7 @@ import MobileNav from '../components/nav/mobile-nav';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
+import membersSidebar from '../pages/members/members-links.yml';
 import resourcesSidebar from '../pages/resources/resources-links.yml';
 
 // Helpers
@@ -173,7 +174,7 @@ class DefaultLayout extends Component {
               },
             }}
           >
-            <SidebarBody yaml={aboutSidebar} />
+            <SidebarBody yaml={membersSidebar} />
           </div>
 
           {/* Main container */}
