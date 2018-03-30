@@ -4,10 +4,10 @@ import { Link, withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import {
-  getCurrentUser
+  getCurrentUser,
   isLoggedIn,
   logout,
-} from '../../../utils/auth';
+} from '../../utils/auth';
 
 // Local Styles
 const statusRootStyles = {

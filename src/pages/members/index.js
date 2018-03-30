@@ -4,9 +4,12 @@ import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 
 // Internal Dependencies
-import Container from '../shared/container';
-import LoginForm from './login-form';
-import { handleLogin, isLoggedIn } from '../utils/auth';
+import Container from '../../components/shared/container';
+import LoginForm from '../../components/members/login-form';
+import {
+  handleLogin,
+  isLoggedIn,
+} from '../../utils/auth';
 
 // Component Definition
 class Login extends React.Component {
