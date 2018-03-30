@@ -39,6 +39,7 @@
     "react-auth-firebase": "^1.2.1",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
+    "react-router-dom": "^4.2.2",
     "typeface-space-mono": "0.0.54",
     "typeface-spectral": "0.0.54",
     "typography-breakpoint-constants": "^0.15.10",
