@@ -1,9 +1,9 @@
-const path = require("path");
+const path = require('path');
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
   return new Promise((resolve, reject) => {
-    const blogPostTemplate = path.resolve("src/templates/blog-post.js");
+    const blogPostTemplate = path.resolve('src/templates/blog-post.js');
     resolve(
       graphql(`
         {
@@ -25,12 +25,26 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             path: edge.node.slug,
             component: blogPostTemplate,
             context: {
-              slug: edge.node.slug
-            }
-          })
-        })
+              slug: edge.node.slug,
+            },
+          });
+        });
         return;
       })
-    )
-  })
-}
+    );
+  });
+};
+
+// Used to add auth pages to the app
+exports.onCreatePage = async ({ page, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
+
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = '/app/:path';
+
+    // Update the page.
+    createPage(page);
+  }
+};
