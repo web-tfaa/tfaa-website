@@ -42,7 +42,7 @@ export default withRouter(({ handleSubmit, handleUpdate, history }) => (
     }}
   >
     <p>
-      Please log in with the username <code>gatsby</code> and the
+      For testing, please log in with the username <code>gatsby</code> and the
       password <code>demo</code>.
     </p>
     <label css={labelStyles}>
