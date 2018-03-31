@@ -38,12 +38,19 @@ const buttonStyles = {
 // Component Definition
 class LoginForm extends Component {
   state = {
-    username: '',
+    email: '',
     password: '',
   };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
+  }
+
+  handleUpdate = (event) => {
+    console.log('event is:', event.target.name);
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
 
   render() {
@@ -52,7 +59,7 @@ class LoginForm extends Component {
       signUpWithEmail,
       signOut,
       user,
-      error, 
+      error,
       // handleSubmit,
       // handleUpdate,
       history,
@@ -63,7 +70,24 @@ class LoginForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          ...form input to take email and password for sign in
+          <label css={labelStyles}>
+            Username
+            <input
+              css={inputStyles}
+              type="text"
+              name="email"
+              onChange={this.handleUpdate}
+            />
+          </label>
+          <label css={labelStyles}>
+            Password
+            <input
+              css={inputStyles}
+              type="password"
+              name="password"
+              onChange={this.handleUpdate}
+            />
+          </label>
           <button
             type="submit"
             onClick={() => signInWithEmail(email, password)}
@@ -93,4 +117,4 @@ const authConfig = {
   },
 };
 
-export default withFirebaseAuth(withRouter(App), firebase, authConfig);
+export default withFirebaseAuth(withRouter(LoginForm), firebase, authConfig);

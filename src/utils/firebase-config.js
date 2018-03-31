@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 // See firebase setup in above google firebase documentation url
 export const config = {
-  apiKey: process.env.process.env.GATSBY_FIREBASE_API_KEY,
+  apiKey: process.env.GATSBY_FIREBASE_API_KEY,
   authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
   projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
