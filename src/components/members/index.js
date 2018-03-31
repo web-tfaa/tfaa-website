@@ -1,14 +1,19 @@
 // External Dependencies
-import React from 'react';
+import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
 import Container from '../shared/container';
+import LoginForm from './login-form';
 import Status from './status';
 import SidebarBody from '../shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
+import {
+  handleLogin,
+  isLoggedIn,
+} from '../../utils/auth';
 
 // Sidebar data
 import membersSidebar from '../../pages/members/members-links.yml';
@@ -31,34 +36,70 @@ const contentStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div css={rootStyles}>
-    <Status />
-    <Container>
-      <Helmet>
-        <title>TMAC | Members</title>
-      </Helmet>
-      <h3 css={titleStyles}>
-        Members
-      </h3>
-      <div css={contentStyles}>
-        Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
+class Members extends Component {
+  state = {
+    username: '',
+    password: '',
+  };
+
+  handleUpdate(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    handleLogin(this.state);
+  }
+
+  render() {
+    let membersContent;
+    if (!isLoggedIn()) {
+      membersContent = (
+        <LoginForm
+          handleUpdate={e => this.handleUpdate(e)}
+          handleSubmit={e => this.handleSubmit(e)}
+        />
+      );
+    } else membersContent = (
+      <div>
+        <h3 css={titleStyles}>
+          Members
+        </h3>
+        <div css={contentStyles}>
+          Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
+        </div>
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            height: 6,
+            border: 0,
+            boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
+          }} />
+          <SidebarBody inline yaml={membersSidebar} />
+        </div>
       </div>
-      <div
-        css={{
-          display: `block`,
-          [presets.Tablet]: {
-            display: `none`,
-          },
-        }}
-      >
-        <hr css={{
-          height: 6,
-          border: 0,
-          boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
-        }} />
-        <SidebarBody inline yaml={membersSidebar} />
+    );
+
+    return (
+      <div css={rootStyles}>
+        <Status />
+        <Container>
+          <Helmet>
+            <title>TMAC | Members</title>
+          </Helmet>
+          {membersContent}
+        </Container>
       </div>
-    </Container>
-  </div>
-);
+    );
+  }
+}
+
+export default Members;
