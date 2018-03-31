@@ -1,6 +1,10 @@
 // External Dependencies
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+
+// Internal Dependencies
+import firebase from '../../utils/firebase-config';
+import withFirebaseAuth from 'react-auth-firebase';
 
 // Local Styles
 const rootStyles = {
@@ -32,37 +36,61 @@ const buttonStyles = {
 };
 
 // Component Definition
-export default withRouter(({ handleSubmit, handleUpdate, history }) => (
-  <form
-    css={rootStyles}
-    method="post"
-    onSubmit={event => {
-      handleSubmit(event);
-      history.push('/members');
-    }}
-  >
-    <p>
-      For testing, please log in with the username <code>gatsby</code> and the
-      password <code>demo</code>.
-    </p>
-    <label css={labelStyles}>
-      Username
-      <input
-        css={inputStyles}
-        type="text"
-        name="username"
-        onChange={handleUpdate}
-      />
-    </label>
-    <label css={labelStyles}>
-      Password
-      <input
-        css={inputStyles}
-        type="password"
-        name="password"
-        onChange={handleUpdate}
-      />
-    </label>
-    <input css={buttonStyles} type="submit" value="Log In" />
-  </form>
-));
+class LoginForm extends Component {
+  state = {
+    username: '',
+    password: '',
+  };
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  render() {
+    const {
+      signInWithEmail,
+      signUpWithEmail,
+      signOut,
+      user,
+      error, 
+      // handleSubmit,
+      // handleUpdate,
+      history,
+    } = this.props;
+
+    const { email, password } = this.state;
+
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          ...form input to take email and password for sign in
+          <button
+            type="submit"
+            onClick={() => signInWithEmail(email, password)}
+          >
+            SignIn
+          </button>
+        </form>
+        <form onSubmit={this.handleSubmit}>
+          ...form input to take email and password for sign up
+          <button
+            type="submit"
+            onClick={() => signUpWithEmail(email, password)}
+          >
+            SignUp
+          </button>
+        </form>
+      </div>
+    );
+  }
+}
+
+
+const authConfig = {
+  email: {
+    verifyOnSignup: true, // Sends verification email to user upon sign up
+    saveUserInDatabase: true // Saves user in database at /users ref
+  },
+};
+
+export default withFirebaseAuth(withRouter(App), firebase, authConfig);
