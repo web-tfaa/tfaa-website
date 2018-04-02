@@ -15,7 +15,7 @@ const statusRootStyles = {
   background: status,
   fontSize: '87.5%',
   width: `0 auto`,
-  padding: '0.25rem',
+  padding: '0.5rem',
 };
 
 const statusTextStyles = {
