@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import { withRouter } from 'react-router-dom';
+import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import firebase from '../../utils/firebase-config';
-import withFirebaseAuth from 'react-auth-firebase';
 
 // Local Styles
 const rootStyles = {
@@ -61,13 +61,17 @@ class LoginForm extends Component {
 
   handleClickSubmitButton = () => {
     const {
+      signInWithEmail,
+    } = this.props;
+
+    const {
       email,
       password,
     } = this.state;
 
-    signInWithEmail(email, password)
-      .then(res => history.push('/members'))
-      .catch(err => console.log('An error occurred:', err));
+    signInWithEmail(email, password);
+      // .then(res => history.push('/members'))
+      // .catch(err => console.log('An error occurred:', err));
   }
 
   togglePasswordInput = () => {
@@ -79,8 +83,7 @@ class LoginForm extends Component {
 
   render() {
     const {
-      signInWithEmail,
-      signUpWithEmail,
+      // signUpWithEmail,
       signOut,
       user,
       error,
@@ -91,6 +94,10 @@ class LoginForm extends Component {
       email,
       password,
     } = this.state;
+
+    console.log('user', user);
+
+    if (user) history.push('/members');
 
     return (
       <div>
@@ -157,7 +164,6 @@ class LoginForm extends Component {
     );
   }
 }
-
 
 const authConfig = {
   email: {

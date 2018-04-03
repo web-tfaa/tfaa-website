@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
+import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import Footer from '../components/footer';
@@ -18,6 +19,7 @@ import resourcesSidebar from '../pages/resources/resources-links.yml';
 import { rhythm, scale } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
 import { isLoggedIn } from '../utils/auth';
+import firebase from '../utils/firebase-config';
 
 // from Gatsby www project
 import '../css/prism-coy.css';
@@ -77,11 +79,12 @@ class DefaultLayout extends Component {
     const {
       children,
       location,
+      user,
     } = this.props;
 
     const path = location.pathname;
 
-    const isAuthenticated = isLoggedIn();
+    const isAuthenticated = Boolean(user);
 
     const isHome = path == `/`;
     const isSponsors = path.slice(0, 9) === '/sponsors';
@@ -203,4 +206,11 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+const authConfig = {
+  email: {
+    verifyOnSignup: true, // Sends verification email to user upon sign up
+    saveUserInDatabase: true // Saves user in database at /users ref
+  },
+};
+
+export default withFirebaseAuth(DefaultLayout, firebase, authConfig);

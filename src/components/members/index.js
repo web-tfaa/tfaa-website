@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
+import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import Container from '../shared/container';
@@ -10,10 +11,7 @@ import LoginForm from './login-form';
 import Status from './status';
 import SidebarBody from '../shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
-import {
-  handleLogin,
-  isLoggedIn,
-} from '../../utils/auth';
+import firebase from '../../utils/firebase-config';
 
 // Sidebar data
 import membersSidebar from '../../pages/members/members-links.yml';
@@ -54,15 +52,15 @@ class Members extends Component {
   }
 
   render() {
+    const {
+      user,
+    } = this.props;
+
+    console.log('user', user);
+
     let membersContent;
-    if (!isLoggedIn()) {
-      membersContent = (
-        <LoginForm
-          handleUpdate={e => this.handleUpdate(e)}
-          handleSubmit={e => this.handleSubmit(e)}
-        />
-      );
-    } else membersContent = (
+    if (!user) membersContent = <LoginForm />;
+    else membersContent = (
       <div>
         <h3 css={titleStyles}>
           Members
@@ -102,4 +100,11 @@ class Members extends Component {
   }
 }
 
-export default Members;
+const authConfig = {
+  email: {
+    verifyOnSignup: true, // Sends verification email to user upon sign up
+    saveUserInDatabase: true // Saves user in database at /users ref
+  },
+};
+
+export default withFirebaseAuth(Members, firebase, authConfig);

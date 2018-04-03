@@ -1,14 +1,15 @@
 // External Dependencies
 import React from 'react';
+import withFirebaseAuth from 'react-auth-firebase';
 import { Link, withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import {
   getCurrentUser,
-  isLoggedIn,
   logout,
 } from '../../utils/auth';
 import { status } from '../../utils/colors';
+import firebase from '../../utils/firebase-config';
 
 // Local Styles
 const statusRootStyles = {
@@ -25,9 +26,13 @@ const statusTextStyles = {
 };
 
 // Component Definition
-export default withRouter(({ history }) => {
+const Status = (props) => {
+  const {
+    user,
+  } = props;
+
   let details;
-  if (!isLoggedIn()) {
+  if (!user) {
     details = (
       <p css={statusTextStyles}>
         To access the Members area, you’ll need to{' '}
@@ -35,7 +40,10 @@ export default withRouter(({ history }) => {
       </p>
     );
   } else {
-    const { name, email } = getCurrentUser();
+    const {
+      name,
+      email,
+    } = getCurrentUser();
 
     details = (
       <p css={statusTextStyles}>
@@ -44,7 +52,7 @@ export default withRouter(({ history }) => {
           href="/"
           onClick={event => {
             event.preventDefault();
-            logout(() => history.push('/members'));
+            logout(() => history.push('/'));
           }}
         >
           log out
@@ -54,4 +62,13 @@ export default withRouter(({ history }) => {
   }
 
   return <div css={statusRootStyles}>{details}</div>;
-});
+};
+
+const authConfig = {
+  email: {
+    verifyOnSignup: true, // Sends verification email to user upon sign up
+    saveUserInDatabase: true // Saves user in database at /users ref
+  },
+};
+
+export default withFirebaseAuth(withRouter(Status), firebase, authConfig);

@@ -2,10 +2,12 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
+import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import LoginForm from '../../components/members/login-form';
+import firebase from '../../utils/firebase-config';
 import {
   handleLogin,
   isLoggedIn,
@@ -13,24 +15,12 @@ import {
 
 // Component Definition
 class Login extends React.Component {
-  state = {
-    username: '',
-    password: '',
-  };
-
-  handleUpdate(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    handleLogin(this.state);
-  }
-
   render() {
-    if (isLoggedIn()) {
+    const {
+      user,
+    } = this.props;
+
+    if (user) {
       return <Redirect to={{ pathname: '/members' }} />;
     }
 
@@ -39,13 +29,17 @@ class Login extends React.Component {
         <Helmet>
           <title>TMAC | Log In</title>
         </Helmet>
-        <LoginForm
-          handleUpdate={e => this.handleUpdate(e)}
-          handleSubmit={e => this.handleSubmit(e)}
-        />
+        <LoginForm />
       </Container>
     );
   }
 }
 
-export default Login;
+const authConfig = {
+  email: {
+    verifyOnSignup: true, // Sends verification email to user upon sign up
+    saveUserInDatabase: true // Saves user in database at /users ref
+  },
+};
+
+export default withFirebaseAuth(Login, firebase, authConfig);
