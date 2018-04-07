@@ -9,7 +9,7 @@ import {
   logout,
 } from '../../utils/auth';
 import { status } from '../../utils/colors';
-import firebase from '../../utils/firebase-config';
+// import firebase from '../../utils/firebase-config';
 
 // Local Styles
 const statusRootStyles = {
@@ -62,13 +62,6 @@ const Status = (props) => {
   }
 
   return <div css={statusRootStyles}>{details}</div>;
-};
-
-const authConfig = {
-  email: {
-    verifyOnSignup: true, // Sends verification email to user upon sign up
-    saveUserInDatabase: true // Saves user in database at /users ref
-  },
 };
 
 export default withFirebaseAuth(withRouter(Status), firebase, authConfig);

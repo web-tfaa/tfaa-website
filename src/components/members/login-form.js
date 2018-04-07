@@ -2,10 +2,9 @@
 import React, { Component } from 'react';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import { withRouter } from 'react-router-dom';
-import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
-import firebase from '../../utils/firebase-config';
+// import firebase from '../../utils/firebase-config';
 
 // Local Styles
 const rootStyles = {
@@ -172,4 +171,4 @@ const authConfig = {
   },
 };
 
-export default withFirebaseAuth(withRouter(LoginForm), firebase, authConfig);
+export default withRouter(LoginForm);

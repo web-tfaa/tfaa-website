@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
-import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import Footer from '../components/footer';
@@ -18,8 +17,8 @@ import resourcesSidebar from '../pages/resources/resources-links.yml';
 // Helpers
 import { rhythm, scale } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
-import { isLoggedIn } from '../utils/auth';
-import firebase from '../utils/firebase-config';
+// import { isLoggedIn } from '../utils/auth';
+// import firebase from '../utils/firebase-config';
 
 // from Gatsby www project
 import '../css/prism-coy.css';
@@ -79,12 +78,12 @@ class DefaultLayout extends Component {
     const {
       children,
       location,
-      user,
+      // user,
     } = this.props;
 
     const path = location.pathname;
 
-    const isAuthenticated = Boolean(user);
+    // const isAuthenticated = Boolean(user);
 
     const isHome = path == `/`;
     const isSponsors = path.slice(0, 9) === '/sponsors';
@@ -96,7 +95,7 @@ class DefaultLayout extends Component {
     const hasSidebar =
       isAbout ||
       isResources ||
-      (isAuthenticated && isMembers);
+      isMembers;
 
     const leftPadding = (rhythmSize) =>
       hasSidebar
@@ -169,8 +168,7 @@ class DefaultLayout extends Component {
 
           {/* TODO Move this under members/index.js once Gatsby supports
             multiple levels of layouts */}
-          {isAuthenticated && (
-            <div
+          <div
               css={{
                 ...sidebarStyles,
                 [presets.Tablet]: {
@@ -183,7 +181,6 @@ class DefaultLayout extends Component {
             >
               <SidebarBody yaml={membersSidebar} />
             </div>
-          )}
 
           {/* Main container */}
           <div
@@ -213,4 +210,4 @@ const authConfig = {
   },
 };
 
-export default withFirebaseAuth(DefaultLayout, firebase, authConfig);
+export default DefaultLayout;

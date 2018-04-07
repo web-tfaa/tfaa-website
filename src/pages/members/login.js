@@ -2,12 +2,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import LoginForm from '../../components/members/login-form';
-import firebase from '../../utils/firebase-config';
+// import firebase from '../../utils/firebase-config';
 import {
   handleLogin,
   isLoggedIn,
@@ -35,11 +34,4 @@ class Login extends React.Component {
   }
 }
 
-const authConfig = {
-  email: {
-    verifyOnSignup: true, // Sends verification email to user upon sign up
-    saveUserInDatabase: true // Saves user in database at /users ref
-  },
-};
-
-export default withFirebaseAuth(Login, firebase, authConfig);
+export default Login;

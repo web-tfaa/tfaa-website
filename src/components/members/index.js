@@ -3,15 +3,14 @@ import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
-import withFirebaseAuth from 'react-auth-firebase';
 
 // Internal Dependencies
 import Container from '../shared/container';
-import LoginForm from './login-form';
-import Status from './status';
+// import LoginForm from './login-form';
+// import Status from './status';
 import SidebarBody from '../shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
-import firebase from '../../utils/firebase-config';
+// import firebase from '../../utils/firebase-config';
 
 // Sidebar data
 import membersSidebar from '../../pages/members/members-links.yml';
@@ -52,15 +51,10 @@ class Members extends Component {
   }
 
   render() {
-    const {
-      user,
-    } = this.props;
 
-    console.log('user', user);
-
-    let membersContent;
-    if (!user) membersContent = <LoginForm />;
-    else membersContent = (
+    // let membersContent;
+    // if (!user) membersContent = <LoginForm />;
+    const membersContent = (
       <div>
         <h3 css={titleStyles}>
           Members
@@ -88,7 +82,7 @@ class Members extends Component {
 
     return (
       <div css={rootStyles}>
-        <Status />
+        {/* <Status /> */}
         <Container>
           <Helmet>
             <title>TMAC | Members</title>
@@ -107,4 +101,4 @@ const authConfig = {
   },
 };
 
-export default withFirebaseAuth(Members, firebase, authConfig);
+export default Members;

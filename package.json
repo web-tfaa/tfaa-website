@@ -46,7 +46,6 @@
     "hex2rgba": "0.0.1",
     "npm": "^5.8.0",
     "prop-types": "^15.6.1",
-    "react-auth-firebase": "^1.2.1",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
     "react-router-dom": "^4.2.2",

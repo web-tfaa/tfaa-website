@@ -34,23 +34,3 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     );
   });
 };
-
-// Used to add auth pages to the app
-exports.onCreatePage = async ({ page, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
-
-  // page.matchPath is a special key that's used for matching pages
-  // only on the client.
-  if (page.path.match(/^\/members/)) {
-    page.matchPath = '/members/:path';
-
-    // Update the page.
-    createPage(page);
-  }
-};
-
-// Used to allow `async` to work in Gatsby
-// exports.modifyBabelrc = ({ babelrc }) => ({
-//     ...babelrc,
-//     plugins: babelrc.plugins.concat(['transform-decorators-legacy', 'transform-regenerator']),
-//   })
