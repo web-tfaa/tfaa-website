@@ -32,7 +32,7 @@ class ChronologicalAdmin extends Component {
         <tr key={`${admin.name}`}>
           <th>{admin.year}</th>
           <th>
-            <Link to={`/resources/people/#${admin.name.toLowerCase().split(' ').join('-')}`}>
+            <Link to={`/resources/people/${admin.name.toLowerCase().split(' ').join('-')}`}>
             {/* <Link to={`/resources/people/woody-schober`}> */}
               {admin.name}
             </Link>
