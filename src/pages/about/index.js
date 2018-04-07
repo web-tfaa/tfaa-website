@@ -22,13 +22,7 @@ export default ({ data }) => (
       <title>TMAC | About</title>
     </Helmet>
     <Container>
-      <h1
-        css={{
-          // marginTop: 0,
-        }}
-      >
-        About {data.site.siteMetadata.title}
-      </h1>
+      <h1>About {data.site.siteMetadata.title}</h1>
       <section>
         <h4>Our Mission</h4>
         <p>

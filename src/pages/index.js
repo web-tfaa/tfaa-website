@@ -35,7 +35,6 @@ const BlogPost = ({node}) => {
     )
 }
 
-
 // Component Definition
 export default (props) => (
   <div>

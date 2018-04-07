@@ -17,8 +17,6 @@ import resourcesSidebar from '../pages/resources/resources-links.yml';
 // Helpers
 import { rhythm, scale } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
-// import { isLoggedIn } from '../utils/auth';
-// import firebase from '../utils/firebase-config';
 
 // from Gatsby www project
 import '../css/prism-coy.css';
@@ -202,12 +200,5 @@ class DefaultLayout extends Component {
     );
   }
 }
-
-const authConfig = {
-  email: {
-    verifyOnSignup: true, // Sends verification email to user upon sign up
-    saveUserInDatabase: true // Saves user in database at /users ref
-  },
-};
 
 export default DefaultLayout;
