@@ -17,14 +17,7 @@ export default () =>
     <Helmet>
       <title>TMAC | Sponsors</title>
     </Helmet>
-    <h3
-      css={{
-        display: 'inline-block',
-        borderBottom: 'solid 1px',
-      }}
-    >
-      Sponsors
-    </h3>
+    <h1>Sponsors</h1>
     <div
       css={{
         display: 'flex',

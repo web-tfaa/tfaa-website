@@ -22,11 +22,6 @@ const rootStyles = {
   width: `0 auto`,
 };
 
-const titleStyles = {
-  display: 'inline-block',
-  borderBottom: 'solid 1px',
-};
-
 const contentStyles = {
   display: 'flex',
 };
@@ -56,9 +51,7 @@ class Members extends Component {
   render() {
     const membersContent = (
       <div>
-        <h2 css={titleStyles}>
-          Members
-        </h2>
+        <h1>Members</h1>
         <div css={contentStyles}>
           Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
         </div>

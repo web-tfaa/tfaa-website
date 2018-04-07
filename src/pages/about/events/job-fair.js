@@ -72,8 +72,6 @@ export default () => (
         </p>
       </section>
 
-      <div><em>*Please note that this information is subject to change</em></div>
-
     </Container>
   </div>
 );
