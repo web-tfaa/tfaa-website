@@ -15,13 +15,24 @@ const indentStyles = {
 export default () => (
   <div>
     <Helmet>
-      <title>TMAC | Summer Round Table</title>
+      <title>TMAC | Job Fair</title>
     </Helmet>
     <Container>
-      <h1>2017 Summer Convention Round Table</h1>
+      <h1>TMAC Job Fair</h1>
+
+      <section>
+        <h4>Who</h4>
+        <p css={indentStyles}>
+          *District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see <Link to="/events/job-fair-rules">Job Fair Rules</Link>)
+        </p>
+      </section>
+
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>Friday, July 21, 2017</p>
+        <p css={indentStyles}>
+          Friday, February 16, 2018<br />
+          6:00-8:00 PM
+        </p>
       </section>
 
       <section>
@@ -34,7 +45,7 @@ export default () => (
           >
             Henry B. Gonzalez Convention Center
           </a>,&nbsp;
-          CC210 (tentative room assignment)
+          Bridge Hall
           <p>
             <a
               href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
@@ -48,19 +59,13 @@ export default () => (
       </section>
 
       <section>
-        <h4>Why</h4>
+        <h4>Contact</h4>
         <p css={indentStyles}>
-          Held in conjunction with the&nbsp;
-          <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>,&nbsp;
-          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
-          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions.
+          For more information contact <a href="mailto:">JD Janda</a>, TMAC President.
         </p>
       </section>
 
-      <section>
-        <h4>Who</h4>
-        <p css={indentStyles}>New music administrators are encouraged to attend!</p>
-      </section>
+      <div><em>*Please note that this information is subject to change</em></div>
 
     </Container>
   </div>

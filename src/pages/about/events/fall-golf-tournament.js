@@ -77,7 +77,7 @@ export default () => (
             </a>
           </p>
           <p>
-            Phone: (512) 444-0999
+            Phone: <a href="tel:+15124440999">(512) 444-0999</a>
           </p>
         </div>
       </section>

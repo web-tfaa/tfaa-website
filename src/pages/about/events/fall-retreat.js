@@ -19,6 +19,14 @@ export default () => (
     </Helmet>
     <Container>
       <h1>2017 TMAC Fall Retreat</h1>
+
+      <section>
+        <h4>Who</h4>
+        <p css={indentStyles}>
+          The TMAC Fall Retreat is open to all current TMAC members who are in good standing (registered and paid). There is no separate conference registration process.
+        </p>
+      </section>
+      
       <section>
         <h4>When</h4>
         <p css={indentStyles}>Wednesday, November 15 (6:30 PM) — Friday, November 17, 2017 (noon)</p>
@@ -46,17 +54,10 @@ export default () => (
             </a>
           </p>
           <p>
-            Phone: (512) 441-7900<br />
+            Phone: <a href="tel:+15124418900">(512) 441-7900</a><br />
             Fax: (512) 441-7899
           </p>
         </div>
-      </section>
-
-      <section>
-        <h4>Who</h4>
-        <p css={indentStyles}>
-          The TMAC Fall Retreat is open to all current TMAC members who are in good standing (registered and paid). There is no separate conference registration process.
-        </p>
       </section>
 
     </Container>
