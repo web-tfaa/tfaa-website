@@ -59,7 +59,7 @@ export default () => (
               rel="noopener noreferrer"
               target="_blank"
             >
-              900 E Market St<br />San Antonio, TX 78205
+              900 E. Market St<br />San Antonio, TX 78205
             </a>
           </p>
         </div>

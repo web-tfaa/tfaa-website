@@ -21,27 +21,28 @@ export default () => (
       <h1>2017 Summer Convention Round Table</h1>
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>Friday, July 21, 2017</p>
+        <p css={indentStyles}>Wednesday, February 14, 2018</p>
+        <p css={indentStyles}>12:00-5:00 PM</p>
       </section>
 
       <section>
         <h4>Where</h4>
         <div css={indentStyles}>
           <a
-            href="http://www.sahbgcc.com/"
+            href="http://www.marriott.com/hotels/travel/satdt-san-antonio-marriott-riverwalk/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Henry B. Gonzalez Convention Center
-          </a>,&nbsp;
-          CC210 (tentative room assignment)
+            Marriott Riverwalk
+          </a>,
+          Salon ABC (tentative location)
           <p>
             <a
-              href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
+              href="https://www.google.com/maps/place/889+E+Market+St,+San+Antonio,+TX+78205/@29.4224582,-98.4864776,17z/data=!3m1!4b1!4m5!3m4!1s0x865c58aa7befb2d7:0xb0912174007dfe05!8m2!3d29.4224582!4d-98.4842889"
               rel="noopener noreferrer"
               target="_blank"
             >
-              900 E. Market St<br />San Antonio, TX 78205
+              889 E. Market St<br />San Antonio, TX 78205
             </a>
           </p>
         </div>
@@ -51,15 +52,8 @@ export default () => (
         <h4>Why</h4>
         <p css={indentStyles}>
           Held in conjunction with the&nbsp;
-          <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>,&nbsp;
-          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
-          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions.
+          <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
         </p>
-      </section>
-
-      <section>
-        <h4>Who</h4>
-        <p css={indentStyles}>New music administrators are encouraged to attend!</p>
       </section>
 
     </Container>
