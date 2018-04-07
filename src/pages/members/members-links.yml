@@ -1,10 +1,10 @@
 - title: Members-Only Information
   items:
     - title: Member Directory
-      link: /about/
+      link: /members/
     - title: Member Good Stuff
-      link: /about/officers/
+      link: /members/officers/
     - title: Other Member Thing
-      link: /about/constitution/
+      link: /members/constitution/
     - title: One More Thing for Members
-      link: /about/philosophy/
+      link: /members/philosophy/
