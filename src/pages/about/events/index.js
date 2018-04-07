@@ -22,7 +22,7 @@ export default ({ data }) => (
           Held in conjunction with the&nbsp;
           <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>,&nbsp;
           <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
-          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions
+          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions.
           New music administrators are encouraged to attend!
         </p>
       </section>
@@ -34,7 +34,7 @@ export default ({ data }) => (
       </section>
       <section>
         <h4>Winter Round Table</h4>
-        <p>Round Table Meeting at the Texas Music Educators Association Convention</p>
+        <p>Round Table Meeting at the <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.</p>
       </section>
       <section>
         <h4>Job Fair</h4>
