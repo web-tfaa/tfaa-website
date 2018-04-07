@@ -66,7 +66,7 @@ export default () => (
         <Card>
           <Avatar
             alt="president picture"
-            src="http://res.cloudinary.com/drumsensei/image/upload/v1520487878/Janda_vfnenl.jpg"
+            src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Janda.jpg"
           />
           <CardHeadline>President</CardHeadline>
           <FuturaParagraph><a href="mailto:johnjanda@tomballisd.net">JD Janda</a></FuturaParagraph>
@@ -75,7 +75,7 @@ export default () => (
         <Card>
           <Avatar
             alt="vice-president picture"
-            src="http://res.cloudinary.com/drumsensei/image/upload/v1520487875/Moreno_gcct0g.jpg"
+            src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Moreno.jpg"
           />
           <CardHeadline>Vice-President</CardHeadline>
           <FuturaParagraph><a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a></FuturaParagraph>
@@ -83,8 +83,8 @@ export default () => (
         </Card>
         <Card>
           <Avatar
-            alt="vice-president picture"
-            src="http://res.cloudinary.com/drumsensei/image/upload/v1520487803/Lester_cbl78k.jpg"
+            alt="treasurer picture"
+            src="https://res.cloudinary.com/tmac/image/upload/v1523131021/Lester.jpg"
           />
           <CardHeadline>Treasurer</CardHeadline>
           <FuturaParagraph><a href="mailto:jon.lester@abileneisd.org">Jay Lester</a></FuturaParagraph>
@@ -92,8 +92,8 @@ export default () => (
         </Card>
         <Card>
           <Avatar
-            alt="president picture"
-            src="http://res.cloudinary.com/drumsensei/image/upload/v1520488181/Turner_a0buat.jpg"
+            alt="secretary picture"
+            src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Turner.jpg"
           />
           <CardHeadline>Secretary</CardHeadline>
           <FuturaParagraph><a href="mailto:jeff_turner@allenisd.org">Jeff Turner</a></FuturaParagraph>
@@ -101,8 +101,8 @@ export default () => (
         </Card>
         <Card>
           <Avatar
-            alt="president picture"
-            src="http://res.cloudinary.com/drumsensei/image/upload/v1520488589/Muths_nnamrv.jpg"
+            alt="past-president picture"
+            src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Muths.jpg"
           />
           <CardHeadline>Past-President</CardHeadline>
           <FuturaParagraph><a href="mailto:dmuths@hotmail.com">Dean Muths</a></FuturaParagraph>

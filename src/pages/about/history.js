@@ -23,7 +23,7 @@ export default () => (
     >
       <Container>
         <img
-          src="http://res.cloudinary.com/drumsensei/image/upload/v1518414489/history-image_px2cgh.jpg"
+          src="https://res.cloudinary.com/tmac/image/upload/v1523131020/history_woody-schober.jpg"
         />
         <CardHeadline>TMAC History</CardHeadline>
 

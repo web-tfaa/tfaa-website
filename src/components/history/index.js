@@ -19,7 +19,7 @@ export default () =>
       }}
     >
       <div>
-        <img src="http://res.cloudinary.com/drumsensei/image/upload/v1518414489/history-image_px2cgh.jpg"/>
+        <img src="https://res.cloudinary.com/tmac/image/upload/v1523131020/history_woody-schober.jpg"/>
       </div>
       <div>
         In the early 1970s a small group of music supervisors from the Dallas-Forth Worth metroplex met together periodically to share ideas and help each other with mutual related music concerns. This group began to expand and so we moved our meetings to Crystal's Pizza restaurant in Irving and found our meetings becoming more beneficial to each other. The meetings remained informal with no set agenda and no officers; the only constant was that I arranged the site and sent a reminder letter each month to the group. We all looked forward to our monthly meeting and always left the meetings with new ideas and a refreshed sense of purpose in our work.
