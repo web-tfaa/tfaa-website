@@ -35,7 +35,7 @@ class BlogPost extends Component {
   }
 }
 
-BlogPost.PropTypes = {
+BlogPost.propTypes = {
   data: PropTypes.object.isRequired
 }
 
