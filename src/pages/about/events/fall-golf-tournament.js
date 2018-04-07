@@ -40,12 +40,12 @@ export default () => (
         <h4>When</h4>
         <p css={indentStyles}>
           Wednesday, November 17th
-          <ul>
-            <li>10:30 AM — Warm-up/Check-in</li>
-            <li>11:00 AM — Lunch (provided by Conn-Selmer)</li>
-            <li>11:45 AM — Begin to tee off in groups</li>
-          </ul>
         </p>
+        <ul css={{ marginLeft: 36 }}>
+          <li>10:30 AM — Warm-up/Check-in</li>
+          <li>11:00 AM — Lunch (provided by Conn-Selmer)</li>
+          <li>11:45 AM — Begin to tee off in groups</li>
+        </ul>
       </section>
 
       <section>
