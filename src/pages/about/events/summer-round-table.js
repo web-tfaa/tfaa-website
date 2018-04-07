@@ -27,12 +27,22 @@ export default () => (
       <section>
         <h4>Where</h4>
         <div css={indentStyles}>
-          <a href="http://www.sahbgcc.com/">
+          <a
+            href="http://www.sahbgcc.com/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             Henry B. Gonzalez Convention Center
           </a>,&nbsp;
           CC210 (tentative room assignment)
           <p>
-            <a href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688">900 E Market St, San Antonio, TX 78205</a>
+            <a
+              href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              900 E Market St, San Antonio, TX 78205
+            </a>
           </p>
         </div>
       </section>
