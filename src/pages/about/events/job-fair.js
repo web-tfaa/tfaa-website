@@ -23,7 +23,14 @@ export default () => (
       <section>
         <h4>Who</h4>
         <p css={indentStyles}>
-          *District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see <Link to="/events/job-fair-rules">Job Fair Rules</Link>)
+          *District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see&nbsp;
+            <a
+              href="https://docs.google.com/document/d/1qA1cX-SQd7_A8CDYGDIPtjJawoSaCKstATsQXoojPoE/edit"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Job Fair Rules
+            </a>)
         </p>
       </section>
 
