@@ -4,10 +4,6 @@
       link: /resources/
     - title: Area Regional Representatives
       link: /resources/area-reps/
-    - title: Archives
-      link: /resources/archives/
-    - title: Questions
-      link: /resources/questions/
 - title: Outstanding Administrators
   items:
     - title: Chronological Listing
@@ -37,7 +33,7 @@
     - title: Nellie Ponikvar
       link: /resources/people#nellie-ponikvar/
     - title: Woody Schober
-      link: /resources/people#woody-schober
+      link: /resources/people/woody-schober
     - title: Henry Schraub
       link: /resources/people#henry-schraub/
     - title: Jan Schronk
