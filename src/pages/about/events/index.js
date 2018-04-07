@@ -1,6 +1,7 @@
 // External Dependencies
 import React from 'react';
 import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
 
 // Internal Dependencies
 import Container from '../../../components/shared/container';
@@ -18,22 +19,26 @@ export default ({ data }) => (
       <section>
         <h4>Summer Round Table</h4>
         <p>
-          hi
+          Held in conjunction with the&nbsp;
+          <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>,&nbsp;
+          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
+          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions
+          New music administrators are encouraged to attend!
         </p>
       </section>
       <section>
         <h4>Fall Retreat</h4>
         <p>
-          hello
+          The TMAC Fall Retreat is open to all current TMAC members who are in good standing (registered and paid). There is no separate conference registration process.
         </p>
       </section>
       <section>
         <h4>Winter Round Table</h4>
-        <p>hey there</p>
+        <p>Round Table Meeting at the Texas Music Educators Association Convention</p>
       </section>
       <section>
         <h4>Job Fair</h4>
-        <p>oh yeah</p>
+        <p>District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see Job Fair Rules)</p>
       </section>
     </Container>
   </div>
