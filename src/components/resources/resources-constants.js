@@ -124,7 +124,7 @@ export const pastPresidents = [
   },
   {
     year: '2000-2002',
-    name: 'Camille Bachl',
+    name: 'Camille Bach',
   },
   {
     year: '2002-2003',
