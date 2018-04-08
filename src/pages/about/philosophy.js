@@ -53,6 +53,17 @@ const PhilosophyCard = ({ children }) => (
   </div>
 );
 
+const FuturaDiv = ({ children }) => (
+  <div
+    css={{
+      fontFamily: options.headerFontFamily.join(`,`),
+      lineHeight: '1.6',
+    }}
+  >
+    {children}
+  </div>
+);
+
 // Component Definition
 export default () => (
   <div>
@@ -80,7 +91,7 @@ export default () => (
             <FuturaParagraph>
               The Vision Committee recommends that TMAC collaborate with TMEA to form a mini task force that will establish guidelines to aid districts in developing TEKS standard based assessments.
             </FuturaParagraph>
-            <FuturaParagraph>
+            <FuturaDiv>
               Vision Committee:
               <ul>
                 <li css={{ marginBottom: 0 }}>Randy Bartlett, Chair</li>
@@ -90,8 +101,8 @@ export default () => (
                 <li css={{ marginBottom: 0 }}>Barry Talley</li>
                 <li css={{ marginBottom: 0 }}>Craig Welle</li>
               </ul>
-            </FuturaParagraph>
-            <FuturaParagraph>
+            </FuturaDiv>
+            <FuturaDiv>
               Mini Task Force Committee:
               <ul>
                 <li css={{ marginBottom: 0 }}>Randy Bartlett, Chair</li>
@@ -100,7 +111,7 @@ export default () => (
                 <li css={{ marginBottom: 0 }}>Buzzy” Green, Band Representativ</li>
                 <li css={{ marginBottom: 0 }}>David McCullar, Vocal Representative</li>
               </ul>
-            </FuturaParagraph>
+            </FuturaDiv>
           </PhilosophyCard>
           <PhilosophyCard>
             <CardHeadline>UIL MARCHING BAND PHILOSOPHY STATEMENT</CardHeadline>

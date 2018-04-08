@@ -26,8 +26,8 @@ const tableContainerStyles = {
 // Component Definition
 class ChronologicalAdmin extends Component {
   renderTableRows = () =>
-    pastPresidents.map(pres => (
-      <tr key={`${pres.name}`}>
+    pastPresidents.map((pres, index) => (
+      <tr key={`${pres.name}-${index}`}>
         <th>{pres.year}</th>
         <th>
           <Link to={`/resources/people/${pres.name.toLowerCase().split(' ').join('-')}`}>

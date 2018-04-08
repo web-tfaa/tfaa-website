@@ -25,7 +25,7 @@ const FuturaSection = ({ children }) => (
   >
     {children}
   </section>
-)
+);
 
 // Component Definition
 export default () => (

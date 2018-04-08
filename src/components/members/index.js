@@ -7,9 +7,9 @@ import hex2rgba from 'hex2rgba';
 // Internal Dependencies
 import CardHeadline from '../shared/cards/card-headline';
 import Container from '../shared/container';
-import FuturaParagraph from '../shared/futura-paragraph';
 import SidebarBody from '../shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
+import { options } from '../../utils/typography';
 
 // Sidebar data
 import membersSidebar from '../../pages/members/members-links.yml';
@@ -29,6 +29,17 @@ const contentStyles = {
 const paddingStyles = {
   paddingLeft: 16,
 };
+
+const FuturaDiv = ({ children }) => (
+  <div
+    css={{
+      fontFamily: options.headerFontFamily.join(`,`),
+      lineHeight: '1.6',
+    }}
+  >
+    {children}
+  </div>
+);
 
 // Component Definition
 class Members extends Component {
@@ -61,8 +72,8 @@ class Members extends Component {
           css={{ marginTop: 36 }}
         >
           <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
-          <FuturaParagraph>(from the Texas Music Administrators Conference's <Link to="/about/constitution">Constitution and Bylaws</Link>)</FuturaParagraph>
-          <FuturaParagraph>
+          <FuturaDiv>(from the Texas Music Administrators Conference's <Link to="/about/constitution">Constitution and Bylaws</Link>)</FuturaDiv>
+          <FuturaDiv>
             <dl css={paddingStyles}>
               <dt>Section 1 &mdash; Membership</dt>
               <dd css={paddingStyles}>
@@ -81,7 +92,7 @@ class Members extends Component {
                 The non-voting membership categories must be adopted by the Board of Directors and proposed as an amendment to these by-laws to the membership as outlined in Article VI.
               </dd>
             </dl>
-          </FuturaParagraph>
+          </FuturaDiv>
         </section>
 
         <hr />
