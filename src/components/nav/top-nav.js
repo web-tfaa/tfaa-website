@@ -99,7 +99,7 @@ export default ({ pathname }) => {
             <img
               style={{ marginBottom: 0 }}
               height="30px"
-              src="https://res.cloudinary.com/drumsensei/image/upload/v1518414495/tmac-logo_upybjp.jpg"
+              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
             />
             <div css={{
               fontSize: 24,
