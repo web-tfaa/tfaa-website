@@ -75,6 +75,10 @@ export const outstandingAdmin = [
     year: '2017',
     name: 'Kathy Kuddes',
   },
+  {
+    year: '2018',
+    name: 'Monte Mast',
+  },
 ];
 
 export const pastPresidents = [
