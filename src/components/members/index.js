@@ -18,10 +18,6 @@ import membersSidebar from '../../pages/members/members-links.yml';
 const texasFlagRed = '#BF0A30';
 
 // Local Styles
-const rootStyles = {
-  width: `0 auto`,
-};
-
 const contentStyles = {
   display: 'flex',
 };
@@ -140,7 +136,13 @@ class Members extends Component {
     );
 
     return (
-      <div css={rootStyles}>
+      <div css={{
+        paddingLeft: 0,
+        width: `0 auto`,
+        [presets.Tablet]: {
+          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+        },
+      }}>
         <Container>
           <Helmet>
             <title>TMAC | Members</title>

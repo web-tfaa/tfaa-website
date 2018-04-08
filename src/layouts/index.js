@@ -94,7 +94,7 @@ class DefaultLayout extends Component {
     const hasSidebar =
       isAbout ||
       isResources ||
-      isMembers;
+      (isAuthenticated && isMembers);
 
     const leftPadding = (rhythmSize) =>
       hasSidebar
