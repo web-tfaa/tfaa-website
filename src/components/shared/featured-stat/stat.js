@@ -38,15 +38,18 @@ const Stat = (props) => {
         alignItems: 'center',
         transform: `translateZ(0)`,
         borderRadius: presets.radiusLg,
-        fontSize: 20,
+        fontSize: 15,
+        width: `60%`,
+        marginBottom: 16,
+        paddingBottom: 16,
         [presets.Tablet]: {
           flex: `0 0 15%`,
-          maxWidth: `15%`,
+          width: `90%`,
           boxShadow: `1px 3px 5px 0 #aaa`,
         },
         [presets.Hd]: {
           flex: `0 0 15%`,
-          maxWidth: `15%`,
+          width: `15%`,
         },
       }}
     >

@@ -8,8 +8,17 @@ import hex2rgba from 'hex2rgba';
 import CtaButton from './cta-button';
 import MastheadBg from './masthead-bg';
 import presets from '../../utils/presets';
-import { rhythm, scale, options } from '../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
+import {
+  options,
+  rhythm,
+  scale,
+} from '../../utils/typography';
+import {
+  vP,
+  vPHd,
+  vPVHd,
+  vPVVHd,
+} from '../../utils/gutters';
 
 // Local Variables
 const texasFlagBlue = '#002868';

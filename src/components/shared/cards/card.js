@@ -13,6 +13,7 @@ const Card = ({ children }) => (
       boxSizing: `border-box`,
       display: `flex`,
       transform: `translateZ(0)`,
+      paddingBottom: 16,
       [presets.Tablet]: {
         flex: `0 0 50%`,
         maxWidth: `50%`,

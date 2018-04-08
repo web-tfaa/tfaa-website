@@ -30,10 +30,11 @@ const ageOfTmac = differenceInYears(new Date(), new Date('Tue Feb 15 1983 00:00:
 const FeaturedStat = ({ children }) => (
   <div
     css={{
-      flex: `1 1 100%`,
       backgroundColor: `${colors.ui.light}`,
       display: 'flex',
       flex: '1 1 auto',
+      flex: `1 1 100%`,
+      flexWrap: 'wrap',
       justifyContent: 'space-around',
       padding: '2.5em',
       textAlign: 'center',
