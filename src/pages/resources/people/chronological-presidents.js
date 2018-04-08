@@ -26,19 +26,16 @@ const tableContainerStyles = {
 // Component Definition
 class ChronologicalAdmin extends Component {
   renderTableRows = () =>
-    pastPresidents.map(admin => {
-      console.log('admin', admin.name);
-      return (
-        <tr key={`${admin.name}`}>
-          <th>{admin.year}</th>
-          <th>
-            <Link to={`/resources/people/${admin.name.toLowerCase().split(' ').join('-')}`}>
-            {/* <Link to={`/resources/people/woody-schober`}> */}
-              {admin.name}
-            </Link>
-          </th>
-        </tr>
-      )});
+    pastPresidents.map(pres => (
+      <tr key={`${pres.name}`}>
+        <th>{pres.year}</th>
+        <th>
+          <Link to={`/resources/people/${pres.name.toLowerCase().split(' ').join('-')}`}>
+            {pres.name}
+          </Link>
+        </th>
+      </tr>
+    ));
 
   render() {
     return (
@@ -50,12 +47,10 @@ class ChronologicalAdmin extends Component {
           css={rootStyles}
         >
           <Container>
-            <CardHeadline>Outstanding Administrators</CardHeadline>
+            <CardHeadline>Past Presidents</CardHeadline>
 
-            <div
-              css={tableContainerStyles}
-            >
-              Chronological listing of all TMAC Outstanding Administrator Award Recipients
+            <div css={tableContainerStyles}>
+              Chronological listing of all past TMAC Presidents
               <table>
                 <thead>
                   <tr>
