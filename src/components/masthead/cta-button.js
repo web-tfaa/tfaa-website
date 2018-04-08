@@ -25,6 +25,7 @@ const CtaButton = ({ to, overrideCSS, children }) => (
       ...overrideCSS,
       ...scale(1 / 5),
       display: `inline-block`,
+      border: `1px solid white`,
       fontFamily: options.headerFontFamily.join(`,`),
       padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       borderRadius: presets.radius,
