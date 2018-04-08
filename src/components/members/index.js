@@ -60,6 +60,8 @@ class Members extends Component {
   }
 
   render() {
+    const isAuthenticated = false;
+
     const membersContent = (
       <div>
         <h1>Members</h1>
@@ -117,21 +119,23 @@ class Members extends Component {
           </iframe>
         </section>
 
-        <div
-          css={{
-            display: `block`,
-            [presets.Tablet]: {
-              display: `none`,
-            },
-          }}
-        >
-          <hr css={{
-            height: 6,
-            border: 0,
-            boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
-          }} />
-          <SidebarBody inline yaml={membersSidebar} />
-        </div>
+        {isAuthenticated &&
+          <div
+            css={{
+              display: `block`,
+              [presets.Tablet]: {
+                display: `none`,
+              },
+            }}
+          >
+            <hr css={{
+              height: 6,
+              border: 0,
+              boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
+            }} />
+            <SidebarBody inline yaml={membersSidebar} />
+          </div>
+        }
       </div>
     );
 

@@ -4,6 +4,7 @@ import Link from 'gatsby-link';
 import format from 'date-fns/format';
 
 // Internal Dependencies
+import presets from '../../utils/presets';
 import {
   rhythm,
   scale,
@@ -25,14 +26,26 @@ export default () =>
       display: 'flex',
       flex: 1,
       fontFamily: options.headerFontFamily.join(`,`),
-      fontSize: 16,
+      fontSize: 12,
       justifyContent: 'space-between',
-      padding: '2em',
+      padding: '1.25em',
       zIndex: 10,
+      [presets.Tablet]: {
+        fontSize: 16,
+        padding: '2em',
+      },
     }}
   >
-    <div>&copy; 2016-{currentYear} | Texas Music Administrators Conference</div>
-    <div>Built by
+    <div
+      css={{
+        maxWidth: '60%',
+      }}
+    >
+      &copy; 2016-{currentYear} | Texas Music Administrators Conference
+    </div>
+    <div
+    >
+      Built by
       <a
         css={{ marginLeft: 5 }}
         href="http://www.drumsensei.com"

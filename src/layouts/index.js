@@ -82,6 +82,7 @@ class DefaultLayout extends Component {
     const path = location.pathname;
 
     // const isAuthenticated = Boolean(user);
+    const isAuthenticated = false;
 
     const isHome = path == `/`;
     const isSponsors = path.slice(0, 9) === '/sponsors';
@@ -166,7 +167,8 @@ class DefaultLayout extends Component {
 
           {/* TODO Move this under members/index.js once Gatsby supports
             multiple levels of layouts */}
-          <div
+          {isAuthenticated &&
+            <div
               css={{
                 ...sidebarStyles,
                 [presets.Tablet]: {
@@ -179,6 +181,7 @@ class DefaultLayout extends Component {
             >
               <SidebarBody yaml={membersSidebar} />
             </div>
+          }
 
           {/* Main container */}
           <div
