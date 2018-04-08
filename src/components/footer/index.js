@@ -4,7 +4,11 @@ import Link from 'gatsby-link';
 import format from 'date-fns/format';
 
 // Internal Dependencies
-import { rhythm, scale, options } from '../../utils/typography';
+import {
+  rhythm,
+  scale,
+  options,
+} from '../../utils/typography';
 
 // Local Variables
 const currentYear = format(new Date(), ['YYYY']);
@@ -20,6 +24,7 @@ export default () =>
       boxSizing: 'border-box',
       display: 'flex',
       flex: 1,
+      fontFamily: options.headerFontFamily.join(`,`),
       fontSize: 16,
       justifyContent: 'space-between',
       padding: '2em',
