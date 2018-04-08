@@ -8,6 +8,8 @@
       link: /about/constitution/
     - title: Philosophy
       link: /about/philosophy/
+    - title: History
+      link: /about/history/
 - title: Events
   items:
     - title: Events Overview
@@ -22,11 +24,3 @@
       link: /about/events/winter-round-table/
     - title: Job Fair / Job Fair Rules
       link: /about/events/job-fair/
-- title: History of TMAC
-  items:
-    - title: History
-      link: /about/history/
-    - title: Outstanding Administrators
-      link: /resources/chronological-admin/
-    - title: Past Presidents
-      link: /resources/past-presidents/
