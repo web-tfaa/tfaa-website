@@ -5,7 +5,7 @@ import React from 'react';
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
-import FuturaParagraph from '../../components/shared/futura-paragraph';
+import { options } from '../../utils/typography';
 
 // Local Variables
 const paddingStyles = {
@@ -15,6 +15,17 @@ const paddingStyles = {
 const officerStyles = {
   paddingLeft: 32,
 };
+
+const FuturaSection = ({ children }) => (
+  <section
+    css={{
+      fontFamily: options.headerFontFamily.join(`,`),
+      lineHeight: '1.6',
+    }}
+  >
+    {children}
+  </section>
+)
 
 // Component Definition
 export default () => (
@@ -34,7 +45,7 @@ export default () => (
         <h1>Constitution and Bylaws of Texas Music Administrators Conference</h1>
         <CardHeadline>ARTICLE I &mdash; ORGANIZATION</CardHeadline>
 
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Name</dt>
             <dd css={paddingStyles}>
@@ -48,10 +59,10 @@ export default () => (
               The Texas Music Administrators Conference is organized exclusively for charitable, scientific and educational purposes, more specifically to promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
         <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Membership</dt>
             <dd css={paddingStyles}>
@@ -70,10 +81,10 @@ export default () => (
               The non-voting membership categories must be adopted by the Board of Directors and proposed as an amendment to these by-laws to the membership as outlined in Article VI.
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
         <CardHeadline>ARTICLE III &mdash; MEETINGS OF MEMBERS</CardHeadline>
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Fall Retreat</dt>
             <dd css={paddingStyles}>
@@ -113,10 +124,10 @@ export default () => (
               </ol>
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
         <CardHeadline>ARTICLE IV &mdash; BOARD OF DIRECTORS</CardHeadline>
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Board Role, Size, Compensation</dt>
             <dd css={paddingStyles}>
@@ -170,10 +181,10 @@ export default () => (
               Special meetings of the Board of Directors shall be called at the request of the President as deemed necessary to conduct the business of the organization.
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
         <CardHeadline>ARTICLE V &mdash; COMMITTEES</CardHeadline>
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Committee Formation</dt>
             <dd css={paddingStyles}>
@@ -192,33 +203,33 @@ export default () => (
               The Vice-President will chair the recognitions committee and invite no less than 2 active members to serve on this committee prior to the Fall Retreat. This committee will be charged with the task of soliciting nominations for “Outstanding Administrator” from the general Texas Music Educators Association Membership. From those TMAC members in good standing who are nominated, the committee will recommend a single honoree to the Board for approval. The honoree will be announced at the conclusion of the Fall Retreat and a formal presentation will be coordinated with the TMEA board during a general session at the February conference.
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
         <CardHeadline>ARTICLE VI &mdash; AMENDMENTS</CardHeadline>
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Amendments</dt>
             <dd css={paddingStyles}>
               These Bylaws may be amended, when necessary, by a two-thirds majority of the membership present and voting at a regular meeting. Proposed amendments must be submitted to the Secretary to be sent out to all members, prior to the meeting, with regular Membership meeting announcements.
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
         <CardHeadline>ARTICLE VII &mdash; STANDING RULES</CardHeadline>
-        <FuturaParagraph>
+        <FuturaSection>
           <dl css={paddingStyles}>
             <dt>Section 1 &mdash; Memorials</dt>
             <dd css={paddingStyles}>
               At the passing of a current or former TMAC member, the organization will make the donation of a sum not to exceed $500 per individual, to be designated by the Executive Board, to the Texas Music Educators Association Scholarship Fund in memory of the individual, their service to music education and their participation in TMAC.
             </dd>
           </dl>
-        </FuturaParagraph>
+        </FuturaSection>
 
-        <FuturaParagraph>
+        <FuturaSection>
           <em>
             These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These by-laws were amended on November 21, 2013 and again on February 12, 2014.
           </em>
-        </FuturaParagraph>
+        </FuturaSection>
       </Container>
     </div>
   </div>
