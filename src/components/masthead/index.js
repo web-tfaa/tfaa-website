@@ -22,7 +22,7 @@ const MastheadContent = () => (
     css={{
       display: `flex`,
       padding: vP,
-      paddingTop: rhythm(4),
+      paddingTop: rhythm(1),
       paddingBottom: rhythm(1),
       paddingBottom: rhythm(1),
       flexGrow: `0`,
@@ -93,18 +93,22 @@ const MastheadContent = () => (
       </h1>
       <div
         css={{
-          padding: 0,
-          marginBottom: '1.5em',
           color: `${hex2rgba(texasFlagBlue, 0.9)}`,
+          display: 'none',
           fontSize: 20,
+          marginBottom: '1.5em',
+          padding: 0,
+          width: rhythm(5),
+          [presets.Tablet]: {
+            display: 'block',
+            width: rhythm(12),
+          },
         }}
       >
         Supporting Music Education in Texas
       </div>
       <CtaButton to="/about/">
-        <span css={{
-          verticalAlign: `middle`,
-        }}>
+        <span css={{ verticalAlign: `middle` }}>
           Learn More
         </span>
         <ArrowForwardIcon

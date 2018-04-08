@@ -1,8 +1,8 @@
 // External Dependencies
-import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
 import React from 'react';
-import Img from "gatsby-image"
+import Helmet from 'react-helmet';
+import Img from 'gatsby-image';
+import Link from 'gatsby-link';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -17,22 +17,22 @@ import Stat from '../components/shared/featured-stat/stat';
 import { rhythm } from '../utils/typography';
 
 const BlogPost = ({node}) => {
-    return (
-        <div style={{
-            marginBottom: '1.5rem',
-            padding: '1.5rem',
-            border: '1px solid #ccc'
-        }}>
-            <h3><Link to={node.slug}>{node.title}</Link></h3>
-            <p>{node.createdAt}</p>
-            <div>
-                <div>
-                    <Img resolutions={node.featuredImage.resolutions}/>
-                </div>
-                <div>{node.content.childMarkdownRemark.excerpt}</div>
-            </div>
+  return (
+    <div style={{
+      marginBottom: '1.5rem',
+      padding: '1.5rem',
+      border: '1px solid #ccc'
+    }}>
+      <h3><Link to={node.slug}>{node.title}</Link></h3>
+      <p>{node.createdAt}</p>
+      <div>
+        <div>
+          <Img resolutions={node.featuredImage.resolutions}/>
         </div>
-    )
+        <div>{node.content.childMarkdownRemark.excerpt}</div>
+      </div>
+    </div>
+  )
 }
 
 // Component Definition

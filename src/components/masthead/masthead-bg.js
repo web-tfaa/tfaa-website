@@ -3,8 +3,17 @@ import React from 'react';
 
 // Internal Dependencies
 import presets, { colors } from '../../utils/presets';
-import { rhythm, scale, options } from '../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
+import {
+  options,
+  rhythm,
+  scale,
+} from '../../utils/typography';
+import {
+  vP,
+  vPHd,
+  vPVHd,
+  vPVVHd,
+} from '../../utils/gutters';
 
 // Local Variables
 const vPOff = rhythm(presets.gutters.default - presets.logoOffset);
@@ -17,11 +26,11 @@ const texasFlagRed = '#BF0A30';
 
 // Component Definition
 const cover = {
-  top: 0,
-  left: 0,
-  right: 0,
   bottom: 0,
+  left: 0,
   position: `absolute`,
+  right: 0,
+  top: 0,
 };
 
 const MastheadBg = () => (
@@ -137,7 +146,7 @@ const MastheadBg = () => (
           width="10000%"
           height="10000%"
           fill={texasFlagRed}
-          transform="rotate(45 100 50) translate(0 0)"
+          transform="rotate(45 100 50) translate(1 0)"
         />
         <rect
           className="masthead-bg-left-dark"
@@ -146,7 +155,6 @@ const MastheadBg = () => (
           fill={texasFlagBlue}
           transform="rotate(45 100 50) translate(1.25 0)"
         />
-        {/*<polygon fill="blue" points="0,10 10,0 10,10" />*/}
       </svg>
     </svg>
   </div>
