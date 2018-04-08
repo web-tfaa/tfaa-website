@@ -36,8 +36,12 @@ const FeaturedStat = ({ children }) => (
       flex: `1 1 100%`,
       flexWrap: 'wrap',
       justifyContent: 'space-around',
+      marginBottom: 68,
       padding: '2.5em',
       textAlign: 'center',
+      [presets.Tablet]: {
+        marginBottom: 0,
+      },
     }}
   >
     <Stat

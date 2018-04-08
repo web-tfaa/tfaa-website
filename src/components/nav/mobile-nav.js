@@ -54,18 +54,18 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
 export default () => (
   <div
     css={{
-      position: `fixed`,
-      display: `flex`,
-      justifyContent: `space-around`,
       alignItems: `center`,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      zIndex: 1,
-      borderTop: `1px solid ${colors.ui.light}`,
       background: colors.ui.whisper,
+      borderTop: `1px solid ${colors.ui.light}`,
+      bottom: 0,
+      display: `flex`,
       fontFamily: typography.options.headerFontFamily.join(`,`),
+      justifyContent: `space-around`,
+      left: 0,
       paddingBottom: `env(safe-area-inset-bottom)`,
+      position: `fixed`,
+      right: 0,
+      zIndex: 11,
       [presets.Tablet]: {
         display: `none`,
       },

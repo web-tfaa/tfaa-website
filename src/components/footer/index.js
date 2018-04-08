@@ -21,6 +21,7 @@ export default () =>
       alignItems: 'center',
       background: '#fbfafc',
       borderTop: '4px solid #2D456F',
+      bottom: 68,
       boxShadow: '-2px 0 5px #444',
       boxSizing: 'border-box',
       display: 'flex',
@@ -29,10 +30,12 @@ export default () =>
       fontSize: 12,
       justifyContent: 'space-between',
       padding: '1.25em',
+      position: 'relative',
       zIndex: 10,
       [presets.Tablet]: {
         fontSize: 16,
         padding: '2em',
+        position: 'static',
       },
     }}
   >
@@ -44,6 +47,9 @@ export default () =>
       &copy; 2016-{currentYear} | Texas Music Administrators Conference
     </div>
     <div
+      css={{
+        textAlign: 'right',
+      }}
     >
       Built by
       <a
