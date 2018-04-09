@@ -182,50 +182,52 @@ class LoginForm extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label css={labelStyles}>
-            Username
-            <input
-              css={inputStyles}
-              type="text"
-              name="email"
-              onChange={this.handleUpdate}
-            />
-          </label>
-          <label css={bottomLabelStyles}>
-            Password
-          </label>
-          <div
-            css={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: 16,
-            }}
-          >
-            <input
-              css={inputStyles}
-              id="showhide"
-              type="password"
-              name="password"
-              onChange={this.handleUpdate}
-            />
-            <div css={{ marginLeft: 8 }}>
-              <MdRemoveRedEye
-                css={{
-                  width: 20,
-                  height: 20,
-                }}
-                onClick={this.togglePasswordInput}
+        {!showSignUp &&
+          <form onSubmit={this.handleSubmit}>
+            <label css={labelStyles}>
+              Username
+              <input
+                css={inputStyles}
+                type="text"
+                name="email"
+                onChange={this.handleUpdate}
               />
+            </label>
+            <label css={bottomLabelStyles}>
+              Password
+            </label>
+            <div
+              css={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 16,
+              }}
+            >
+              <input
+                css={inputStyles}
+                id="showhide"
+                type="password"
+                name="password"
+                onChange={this.handleUpdate}
+              />
+              <div css={{ marginLeft: 8 }}>
+                <MdRemoveRedEye
+                  css={{
+                    width: 20,
+                    height: 20,
+                  }}
+                  onClick={this.togglePasswordInput}
+                />
+              </div>
             </div>
-          </div>
-          <button
-            type="submit"
-            onClick={this.handleClickSubmitButton}
-          >
-            Sign In
-          </button>
-        </form>
+            <button
+              type="submit"
+              onClick={this.handleClickSubmitButton}
+            >
+              Sign In
+            </button>
+          </form>
+        }
         {signUpElement}
       </div>
     );
