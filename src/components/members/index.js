@@ -64,7 +64,7 @@ class Members extends Component {
 
     const isAuthenticated = Boolean(authUser);
 
-    const membersContent = (
+    const nonMembersContent = (
       <div>
         <h1>Members</h1>
         <div css={contentStyles}>
@@ -120,24 +120,27 @@ class Members extends Component {
           >
           </iframe>
         </section>
+      </div>
+    );
 
-        {isAuthenticated &&
-          <div
-            css={{
-              display: `block`,
-              [presets.Tablet]: {
-                display: `none`,
-              },
-            }}
-          >
-            <hr css={{
-              height: 6,
-              border: 0,
-              boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
-            }} />
-            <SidebarBody inline yaml={membersSidebar} />
-          </div>
-        }
+    const membersContent = (
+      <div>
+        So much good stuff for the members!
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            height: 6,
+            border: 0,
+            boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
+          }} />
+          <SidebarBody inline yaml={membersSidebar} />
+        </div>
       </div>
     );
 
@@ -154,7 +157,7 @@ class Members extends Component {
             <title>TMAC | Members</title>
           </Helmet>
           <Status authUser={authUser} />
-          {membersContent}
+          {isAuthenticated ? membersContent: nonMembersContent}
         </Container>
       </div>
     );

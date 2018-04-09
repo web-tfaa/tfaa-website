@@ -4,7 +4,6 @@ import Img from 'gatsby-image';
 
 class BlogPost extends Component {
   render() {
-    console.log(this.props)
     const {
       title,
       createdAt,

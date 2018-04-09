@@ -3,10 +3,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 // Internal Dependencies
-import {
-  getCurrentUser,
-  logout,
-} from '../../utils/auth';
 import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { auth } from '../../firebase';
@@ -31,20 +27,16 @@ const Status = (props) => {
     authUser,
   } = props;
 
-  console.log('auth user, baby', authUser);
-
   const isAuthenticated = Boolean(authUser);
 
-  let details;
-  if (!isAuthenticated) {
-    details = (
+  const details = !isAuthenticated
+    ? (
       <p css={statusTextStyles}>
         To access the Members area, you’ll need to{' '}
         <Link to="/members/login">log in</Link>.
       </p>
-    );
-  } else {
-    details = (
+    )
+  : (
       <p css={statusTextStyles}>
         Logged in as {authUser.email}&nbsp;
         <a
@@ -70,7 +62,6 @@ const Status = (props) => {
         </a>
       </p>
     );
-  }
 
   return <div css={statusRootStyles}>{details}</div>;
 };

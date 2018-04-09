@@ -8,10 +8,6 @@ import Container from '../../components/shared/container';
 import LoginForm from '../../components/members/login-form';
 import { firebase } from '../../firebase';
 import presets from '../../utils/presets';
-import {
-  handleLogin,
-  isLoggedIn,
-} from '../../utils/auth';
 
 // Component Definition
 class Login extends React.Component {

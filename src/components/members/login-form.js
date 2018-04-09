@@ -154,8 +154,6 @@ class LoginForm extends Component {
       email,
     } = this.state;
 
-    console.log('heeyyyy');
-
     if (!email) {
       this.setState({
         emailError: 'Email is required',
