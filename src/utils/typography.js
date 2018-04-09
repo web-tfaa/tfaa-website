@@ -217,6 +217,10 @@ const options = {
       ".main-body button:hover": {
         background: colors.ui.bright,
       },
+      ".main-body button[disabled]": {
+        color: colors.gray.calm,
+        cursor: 'not-allowed',
+      },
       ".main-body label": {
         fontFamily: options.headerFontFamily.join(`,`),
         marginBottom: '0.25rem',

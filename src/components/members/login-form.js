@@ -60,10 +60,9 @@ class LoginForm extends Component {
   }
 
   handleUpdate = (event) => {
-    console.log('event is:', event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
-    });
+    }, this.handleUpdateRegisterError);
   }
 
   handleClickSubmitButton = () => {
@@ -115,9 +114,32 @@ class LoginForm extends Component {
   }
 
   handleUpdateRegisterError = (message) => {
-    this.setState({
-      registerError: message,
-    });
+    const {
+      passwordOne,
+      passwordTwo,
+    } = this.state;
+
+    console.log('hi!');
+
+    const hasInput = passwordOne !== '' && passwordTwo !== '';
+
+    if (!hasInput) {
+      this.setState({
+        registerError: '',
+      });
+    } else if (hasInput && passwordOne !== passwordTwo) {
+      this.setState({
+        registerError: 'Passwords should match',
+      });
+    } else if (hasInput && passwordOne === passwordTwo && passwordOne.length < 8) {
+      this.setState({
+        registerError: 'Password must be at least 8 characters long',
+      });
+    } else if (hasInput && passwordOne === passwordTwo) {
+      this.setState({
+        registerError: '',
+      });
+    }
   }
 
   render() {
@@ -138,7 +160,7 @@ class LoginForm extends Component {
       showSignUp,
     } = this.state;
 
-    console.log('this.state', this.state);
+    // console.log('this.state', this.state);
 
     const isAuthenticated = false;
 
@@ -248,6 +270,7 @@ class LoginForm extends Component {
             />
           </div>
           <button
+            disabled={registerError}
             type="submit"
             onClick={this.handleClickSignUpButton}
           >
@@ -266,9 +289,6 @@ class LoginForm extends Component {
       ];
 
     // When passwords don't match, we update the error message
-    if (passwordOne !== '' && passwordTwo !== '' && passwordOne !== passwordTwo) {
-      this.handleUpdateRegisterError('Passwords should match');
-    }
 
     return (
       <div className="login-form">
