@@ -4,6 +4,7 @@ import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
+import Container from '../shared/container';
 // import firebase from '../../utils/firebase-config';
 
 // Local Styles
@@ -147,7 +148,7 @@ class LoginForm extends Component {
             type="submit"
             onClick={this.handleClickSubmitButton}
           >
-            SignIn
+            Sign In
           </button>
         </form>
         {/* <form onSubmit={this.handleSubmit}>

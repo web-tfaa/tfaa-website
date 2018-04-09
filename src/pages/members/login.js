@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import Container from '../../components/shared/container';
 import LoginForm from '../../components/members/login-form';
 // import firebase from '../../utils/firebase-config';
+import presets from '../../utils/presets';
 import {
   handleLogin,
   isLoggedIn,
@@ -19,17 +20,26 @@ class Login extends React.Component {
       user,
     } = this.props;
 
-    if (user) {
+    const isAuthenticated = false;
+
+    if (isAuthenticated) {
       return <Redirect to={{ pathname: '/members' }} />;
     }
 
     return (
-      <Container>
-        <Helmet>
-          <title>TMAC | Log In</title>
-        </Helmet>
-        <LoginForm />
-      </Container>
+      <div css={{
+        paddingLeft: 0,
+        [presets.Tablet]: {
+          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+        },
+      }}>
+        <Container className="login-form">
+          <Helmet>
+            <title>TMAC | Log In</title>
+          </Helmet>
+          <LoginForm />
+        </Container>
+     </div>
     );
   }
 }
