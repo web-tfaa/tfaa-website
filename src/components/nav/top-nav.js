@@ -1,12 +1,22 @@
 // External Dependencies
-import React from 'react'
-import Link from "gatsby-link";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Link from 'gatsby-link';
 import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
-import typography, { rhythm, scale } from "../../utils/typography"
-import presets, { colors } from "../../utils/presets"
-import { vP, vPHd, vPVHd, vPVVHd } from "../../utils/gutters"
+import typography, { rhythm, scale } from '../../utils/typography';
+import presets, { colors } from '../../utils/presets';
+import {
+  auth,
+  firebase,
+} from '../../firebase';
+import {
+  vP,
+  vPHd,
+  vPVHd,
+  vPVVHd,
+} from '../../utils/gutters';
 
 // Local Variables
 // const texasFlagBlue = '#002868';
@@ -45,91 +55,131 @@ const NavItem = ({ linkTo, children, styles }) => (
 );
 
 // Component Definition
-export default ({ pathname }) => {
-  return (
-    <div
-      role="navigation"
-      css={{
-        background: `${hex2rgba('#fbfafc', 0.95)}`,
-        display: 'flex',
-        flex: 1,
-        height: presets.headerHeight,
-        left: 0,
-        right: 0,
-        zIndex: `2`,
-        [presets.Tablet]: {
-          position: 'fixed',
-        },
-      }}
-    >
+class TopNav extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authUser: null,
+    };
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState(() => ({ authUser }))
+        : this.setState(() => ({ authUser: null }));
+    });
+  }
+
+  render() {
+    const {
+      authUser,
+    } = this.state;
+
+    const isAuthenticated = Boolean(authUser);
+
+    return (
       <div
+        role="navigation"
         css={{
-          //maxWidth: rhythm(presets.maxWidth),
-          alignItems: `flex-end`,
-          borderBottom: '4px solid #2D456F',
-          boxShadow: '3px 0 5px #2D456F',
-          boxSizing: 'border-box',
-          display: `flex`,
-          fontFamily: typography.options.headerFontFamily.join(`,`),
-          height: `100%`,
-          margin: `0 auto`,
-          paddingLeft: rhythm(3 / 4),
-          paddingRight: rhythm(3 / 4),
-          width: `100%`,
+          background: `${hex2rgba('#fbfafc', 0.95)}`,
+          display: 'flex',
+          flex: 1,
+          height: presets.headerHeight,
+          left: 0,
+          right: 0,
+          zIndex: `2`,
+          [presets.Tablet]: {
+            position: 'fixed',
+          },
         }}
       >
-        <NavItem
+        <div
           css={{
-            "&:hover": {
-              opacity: 1,
-              textDecoration: 'none',
-            },
+            //maxWidth: rhythm(presets.maxWidth),
+            alignItems: `flex-end`,
+            borderBottom: '4px solid #2D456F',
+            boxShadow: '3px 0 5px #2D456F',
+            boxSizing: 'border-box',
+            display: `flex`,
+            fontFamily: typography.options.headerFontFamily.join(`,`),
+            height: `100%`,
+            margin: `0 auto`,
+            paddingLeft: rhythm(3 / 4),
+            paddingRight: rhythm(3 / 4),
+            width: `100%`,
           }}
-          linkTo={`/`}
         >
-          <div
+          <NavItem
             css={{
-              alignItems: `center`,
-              color: `inherit`,
-              display: `flex`,
-              marginRight: rhythm(1/2),
-              textDecoration: `none`,
+              "&:hover": {
+                opacity: 1,
+                textDecoration: 'none',
+              },
+            }}
+            linkTo={`/`}
+          >
+            <div
+              css={{
+                alignItems: `center`,
+                color: `inherit`,
+                display: `flex`,
+                marginRight: rhythm(1/2),
+                textDecoration: `none`,
+              }}
+            >
+              <img
+                style={{ marginBottom: 0 }}
+                height="30px"
+                src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+              />
+              <div css={{
+                fontSize: 24,
+                marginLeft: '0.8em',
+                textDecoration: 'none',
+              }}>
+                TMAC
+              </div>
+            </div>
+          </NavItem>
+          <ul
+            css={{
+              display: `none`,
+              [presets.Tablet]: {
+                display: `flex`,
+                flexGrow: 1,
+                listStyle: `none`,
+                margin: 0,
+                maskImage: `linear-gradient(to right, transparent, white ${rhythm(1/8)}, white 98%, transparent)`,
+                overflowX: `auto`,
+                padding: 0,
+              },
             }}
           >
-            <img
-              style={{ marginBottom: 0 }}
-              height="30px"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
-            />
-            <div css={{
-              fontSize: 24,
-              marginLeft: '0.8em',
-              textDecoration: 'none',
-            }}>
-              TMAC
-            </div>
-          </div>
-        </NavItem>
-        <ul
-          css={{
-            display: `none`,
-            [presets.Tablet]: {
-              display: `flex`,
-              flexGrow: 1,
-              listStyle: `none`,
-              margin: 0,
-              maskImage: `linear-gradient(to right, transparent, white ${rhythm(1/8)}, white 98%, transparent)`,
-              overflowX: `auto`,
-              padding: 0,
-            },
-          }}
-        >
-          <NavItem linkTo="/about/">About</NavItem>
-          <NavItem linkTo="/resources/">Resources</NavItem>
-          <NavItem linkTo="/members/">Members</NavItem>
-          <NavItem linkTo="/sponsors/">Sponsors</NavItem>
-        </ul>
-      </div>
-  </div>
-  );
+            <NavItem linkTo="/about/">About</NavItem>
+            <NavItem linkTo="/resources/">Resources</NavItem>
+            <NavItem linkTo="/members/">Members</NavItem>
+            <NavItem linkTo="/sponsors/">Sponsors</NavItem>
+            {isAuthenticated &&
+              <div
+                css={{
+                  float: 'right',
+                }}
+                onClick={auth.doSignOut}
+              >
+                <NavItem
+                  linkTo="/"
+                >
+                  Sign Out
+                </NavItem>
+              </div>
+            }
+          </ul>
+        </div>
+    </div>
+    );
+  }
 }
+
+export default TopNav;
