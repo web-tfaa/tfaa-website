@@ -219,11 +219,16 @@ const options = {
       },
       ".main-body label": {
         fontFamily: options.headerFontFamily.join(`,`),
+        marginBottom: '0.25rem',
       },
-      ".main-body input": {
+      ".main-body input[type=text] input[type=password]": {
         border: `1.5px solid ${colors.ui.bright}`,
         borderRadius: 2,
         fontFamily: options.headerFontFamily.join(`,`),
+        padding: '0.5rem',
+      },
+      ".main-body input:focus": {
+        border: `2px solid ${texasFlagBlue}`,
       },
       ".gatsby-highlight, .post .gatsby-resp-iframe-wrapper, .post .gatsby-resp-image-link": {
         marginLeft: rhythm(-options.blockMarginBottom),

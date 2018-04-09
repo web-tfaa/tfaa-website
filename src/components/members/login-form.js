@@ -1,10 +1,13 @@
 // External Dependencies
 import React, { Component } from 'react';
+import Link from 'gatsby-link';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../shared/container';
+import presets, { colors } from '../../utils/presets';
+import { options } from '../../utils/typography';
 // import firebase from '../../utils/firebase-config';
 
 // Local Styles
@@ -27,7 +30,7 @@ const bottomLabelStyles = {
 const inputStyles = {
   display: 'block',
   fontSize: '1rem',
-  padding: '0.25rem',
+  padding: '0.3rem',
 };
 
 const buttonStyles = {
@@ -48,6 +51,7 @@ class LoginForm extends Component {
     password: '',
     passwordOne: '',
     passwordTwo: '',
+    registerError: '',
     showSignUp: false,
   };
 
@@ -59,12 +63,6 @@ class LoginForm extends Component {
     console.log('event is:', event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
-    });
-  }
-
-  handleUpdatePasswordTwo = (event) => {
-    this.setState({
-      passwordTwo: event.target.value,
     });
   }
 
@@ -116,9 +114,9 @@ class LoginForm extends Component {
     });
   }
 
-  updateError = (message) => {
+  updateRegisterError = (message) => {
     this.setState({
-      error: message,
+      registerError: message,
     });
   }
 
@@ -136,6 +134,7 @@ class LoginForm extends Component {
       password,
       passwordOne,
       passwordTwo,
+      registerError,
       showSignUp,
     } = this.state;
 
@@ -154,23 +153,47 @@ class LoginForm extends Component {
         >
           Don&apos;t have an account?
         </div>,
-        <button
-          key="no-account-sign-up-button"
+        <span
+          css={{
+            color: `inherit`,
+            textDecoration: `none`,
+            transition: `all ${presets.animation.speedFast} ${
+              presets.animation.curveDefault
+            }`,
+            borderBottom: `1px solid ${colors.ui.bright}`,
+            boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
+            fontFamily: options.headerFontFamily.join(`,`),
+            fontWeight: `bold`,
+            '&:hover': {
+              background: colors.ui.bright,
+              cursor: 'pointer',
+            }
+          }}
+          key="no-account-sign-up-span"
           onClick={this.handleClickRegister}
-          type="submit"
         >
-          Register
-        </button>
+          Sign Up!
+        </span>
       ]
-      : (
-        <form onSubmit={this.handleSubmit}>
+      : [
+        <div
+          css={{ marginBottom: 16 }}
+          key="register-message"
+        >
+          Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
+          <Link to="/members#google-form-members">Members page</Link>.
+        </div>,
+        <form
+          key="register-form"
+          onSubmit={this.handleSubmit}
+        >
           <label css={labelStyles}>
             Username
             <input
               css={inputStyles}
               type="text"
               name="email"
-              onChange={(event) => this.handleUpdate(event)}
+              onChange={this.handleUpdate}
               placeholder="Email Address"
               value={email}
             />
@@ -190,7 +213,7 @@ class LoginForm extends Component {
               id="passwordOne"
               type="password"
               name="passwordOne"
-              onChange={(event) => this.handleUpdate(event)}
+              onChange={this.handleUpdate}
               placeholder="Password"
               value={passwordOne}
             />
@@ -205,7 +228,7 @@ class LoginForm extends Component {
             </div>
           </div>
           <label css={bottomLabelStyles}>
-            Re-enter Password
+            Confirm Password
           </label>
           <div
             css={{
@@ -219,13 +242,10 @@ class LoginForm extends Component {
               id="passwordTwo"
               type="password"
               name="passwordTwo"
-              onChange={(event) => this.handleUpdatePasswordTwo(event)}
+              onChange={this.handleUpdate}
               placeholder="Confirm Password"
               value={passwordTwo}
             />
-          </div>
-          <div css={{ color: 'red' }}>
-            {error}
           </div>
           <button
             type="submit"
@@ -233,12 +253,20 @@ class LoginForm extends Component {
           >
             Sign Up
           </button>
+          <div
+            css={{
+              color: 'red',
+              marginTop: 16,
+            }}
+          >
+            {registerError}
+          </div>
         </form>
-      );
+      ];
 
     // When passwords don't match, we update the error message
     if (passwordOne !== '' && passwordTwo !== '' && passwordOne !== passwordTwo) {
-      this.updateError('Passwords should match');
+      this.updateRegisterError('Passwords should match');
     }
 
     return (
@@ -291,6 +319,7 @@ class LoginForm extends Component {
             >
               Sign In
             </button>
+            {error && <div>{error.message}</div>}
           </form>
         }
         {signUpElement}
