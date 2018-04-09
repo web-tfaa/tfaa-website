@@ -46,6 +46,8 @@ class LoginForm extends Component {
   state = {
     email: '',
     password: '',
+    passwordOne: '',
+    passwordTwo: '',
     showSignUp: false,
   };
 
@@ -57,6 +59,12 @@ class LoginForm extends Component {
     console.log('event is:', event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  }
+
+  handleUpdatePasswordTwo = (event) => {
+    this.setState({
+      passwordTwo: event.target.value,
     });
   }
 
@@ -75,9 +83,23 @@ class LoginForm extends Component {
       // .catch(err => console.log('An error occurred:', err));
   }
 
+  toggleRegisterPasswordInput = () => {
+    const passOne = document.getElementById('passwordOne');
+    const passTwo = document.getElementById('passwordTwo');
+
+    if (passOne.type === 'password' && passTwo.type === 'password') {
+      passOne.setAttribute('type', 'text')
+      passTwo.setAttribute('type', 'text')
+    }
+    else {
+      passOne.setAttribute('type', 'password');
+      passTwo.setAttribute('type', 'password');
+    }
+  }
+
   togglePasswordInput = () => {
     const pass = document.getElementById('showhide');
-    console.log('hello!', pass);
+
     if (pass.type === 'password') pass.setAttribute('type', 'text')
     else pass.setAttribute('type', 'password');
   }
@@ -94,6 +116,12 @@ class LoginForm extends Component {
     });
   }
 
+  updateError = (message) => {
+    this.setState({
+      error: message,
+    });
+  }
+
   render() {
     const {
       // signUpWithEmail,
@@ -106,10 +134,12 @@ class LoginForm extends Component {
     const {
       email,
       password,
+      passwordOne,
+      passwordTwo,
       showSignUp,
     } = this.state;
 
-    console.log('user', user);
+    console.log('this.state', this.state);
 
     const isAuthenticated = false;
 
@@ -117,6 +147,7 @@ class LoginForm extends Component {
 
     const signUpElement = !showSignUp
       ? [
+        <hr key="login-form-divider" />,
         <div
           css={{ marginBottom: 16 }}
           key="no-account-text"
@@ -139,7 +170,9 @@ class LoginForm extends Component {
               css={inputStyles}
               type="text"
               name="email"
-              onChange={this.handleUpdate}
+              onChange={(event) => this.handleUpdate(event)}
+              placeholder="Email Address"
+              value={email}
             />
           </label>
           <label css={bottomLabelStyles}>
@@ -154,10 +187,12 @@ class LoginForm extends Component {
           >
             <input
               css={inputStyles}
-              id="showhide"
+              id="passwordOne"
               type="password"
-              name="password"
-              onChange={this.handleUpdate}
+              name="passwordOne"
+              onChange={(event) => this.handleUpdate(event)}
+              placeholder="Password"
+              value={passwordOne}
             />
             <div css={{ marginLeft: 8 }}>
               <MdRemoveRedEye
@@ -165,9 +200,32 @@ class LoginForm extends Component {
                   height: 20,
                   width: 20,
                 }}
-                onClick={this.togglePasswordInput}
+                onClick={this.toggleRegisterPasswordInput}
               />
             </div>
+          </div>
+          <label css={bottomLabelStyles}>
+            Re-enter Password
+          </label>
+          <div
+            css={{
+              alignItems: 'center',
+              display: 'flex',
+              marginBottom: 16,
+            }}
+          >
+            <input
+              css={inputStyles}
+              id="passwordTwo"
+              type="password"
+              name="passwordTwo"
+              onChange={(event) => this.handleUpdatePasswordTwo(event)}
+              placeholder="Confirm Password"
+              value={passwordTwo}
+            />
+          </div>
+          <div css={{ color: 'red' }}>
+            {error}
           </div>
           <button
             type="submit"
@@ -178,8 +236,13 @@ class LoginForm extends Component {
         </form>
       );
 
+    // When passwords don't match, we update the error message
+    if (passwordOne !== '' && passwordTwo !== '' && passwordOne !== passwordTwo) {
+      this.updateError('Passwords should match');
+    }
+
     return (
-      <div className="hello-there">
+      <div className="login-form">
         {!showSignUp &&
           <form onSubmit={this.handleSubmit}>
             <label css={labelStyles}>
@@ -189,6 +252,8 @@ class LoginForm extends Component {
                 type="text"
                 name="email"
                 onChange={this.handleUpdate}
+                placeholder="Email Address"
+                value={email}
               />
             </label>
             <label css={bottomLabelStyles}>
@@ -207,6 +272,8 @@ class LoginForm extends Component {
                 type="password"
                 name="password"
                 onChange={this.handleUpdate}
+                placeholder="Password"
+                value={password}
               />
               <div css={{ marginLeft: 8 }}>
                 <MdRemoveRedEye
