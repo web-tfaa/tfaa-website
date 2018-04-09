@@ -114,7 +114,7 @@ class LoginForm extends Component {
     });
   }
 
-  updateRegisterError = (message) => {
+  handleUpdateRegisterError = (message) => {
     this.setState({
       registerError: message,
     });
@@ -256,6 +256,7 @@ class LoginForm extends Component {
           <div
             css={{
               color: 'red',
+              fontFamily: options.headerFontFamily.join(`,`),
               marginTop: 16,
             }}
           >
@@ -266,7 +267,7 @@ class LoginForm extends Component {
 
     // When passwords don't match, we update the error message
     if (passwordOne !== '' && passwordTwo !== '' && passwordOne !== passwordTwo) {
-      this.updateRegisterError('Passwords should match');
+      this.handleUpdateRegisterError('Passwords should match');
     }
 
     return (

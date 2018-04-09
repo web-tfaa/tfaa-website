@@ -82,7 +82,7 @@ const options = {
         }`,
       },
       hr: {
-        backgroundColor: colors.ui.light,
+        backgroundColor: colors.ui.lilac,
       },
       "tt,code": {
         // background: `hsla(23, 60%, 97%, 1)`,

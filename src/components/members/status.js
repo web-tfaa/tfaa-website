@@ -7,12 +7,12 @@ import {
   getCurrentUser,
   logout,
 } from '../../utils/auth';
-import { status } from '../../utils/colors';
+import { colors } from '../../utils/presets';
 // import firebase from '../../utils/firebase-config';
 
 // Local Styles
 const statusRootStyles = {
-  background: status,
+  background: colors.status,
   fontSize: '87.5%',
   width: `0 auto`,
   padding: '0.5rem',
