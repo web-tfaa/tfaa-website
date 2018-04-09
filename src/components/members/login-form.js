@@ -12,8 +12,6 @@ const rootStyles = {
   margin: '1rem 0',
 };
 
-
-
 const labelStyles = {
   display: 'block',
   fontSize: '67.5%',
@@ -99,10 +97,10 @@ class LoginForm extends Component {
   render() {
     const {
       // signUpWithEmail,
-      signOut,
-      user,
       error,
       history,
+      signOut,
+      user,
     } = this.props;
 
     const {
@@ -149,8 +147,8 @@ class LoginForm extends Component {
           </label>
           <div
             css={{
-              display: 'flex',
               alignItems: 'center',
+              display: 'flex',
               marginBottom: 16,
             }}
           >
@@ -164,8 +162,8 @@ class LoginForm extends Component {
             <div css={{ marginLeft: 8 }}>
               <MdRemoveRedEye
                 css={{
-                  width: 20,
                   height: 20,
+                  width: 20,
                 }}
                 onClick={this.togglePasswordInput}
               />
@@ -181,7 +179,7 @@ class LoginForm extends Component {
       );
 
     return (
-      <div>
+      <div className="hello-there">
         {!showSignUp &&
           <form onSubmit={this.handleSubmit}>
             <label css={labelStyles}>
@@ -198,8 +196,8 @@ class LoginForm extends Component {
             </label>
             <div
               css={{
-                display: 'flex',
                 alignItems: 'center',
+                display: 'flex',
                 marginBottom: 16,
               }}
             >
@@ -213,8 +211,8 @@ class LoginForm extends Component {
               <div css={{ marginLeft: 8 }}>
                 <MdRemoveRedEye
                   css={{
-                    width: 20,
                     height: 20,
+                    width: 20,
                   }}
                   onClick={this.togglePasswordInput}
                 />

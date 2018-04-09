@@ -33,10 +33,17 @@ class Login extends React.Component {
           paddingLeft: !isAuthenticated ? '1.5rem' : 0,
         },
       }}>
-        <Container className="login-form">
+        <Container className="login">
           <Helmet>
             <title>TMAC | Log In</title>
           </Helmet>
+          <h1
+            css={{
+              margin: '1rem 0',
+            }}
+          >
+            Login
+          </h1>
           <LoginForm />
         </Container>
      </div>

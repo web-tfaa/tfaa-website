@@ -209,12 +209,21 @@ const options = {
           presets.animation.curveDefault
         }`,
         borderBottom: `1px solid ${colors.ui.bright}`,
+        borderRadius: 2,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
         fontFamily: options.headerFontFamily.join(`,`),
         fontWeight: `bold`,
       },
       ".main-body button:hover": {
         background: colors.ui.bright,
+      },
+      ".main-body label": {
+        fontFamily: options.headerFontFamily.join(`,`),
+      },
+      ".main-body input": {
+        border: `1.5px solid ${colors.ui.bright}`,
+        borderRadius: 2,
+        fontFamily: options.headerFontFamily.join(`,`),
       },
       ".gatsby-highlight, .post .gatsby-resp-iframe-wrapper, .post .gatsby-resp-image-link": {
         marginLeft: rhythm(-options.blockMarginBottom),
