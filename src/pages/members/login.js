@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import LoginForm from '../../components/members/login-form';
-// import firebase from '../../utils/firebase-config';
+import { firebase } from '../../firebase';
 import presets from '../../utils/presets';
 import {
   handleLogin,
@@ -15,12 +15,28 @@ import {
 
 // Component Definition
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authUser: null,
+    };
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState(() => ({ authUser }))
+        : this.setState(() => ({ authUser: null }));
+    });
+  }
+
   render() {
     const {
-      user,
-    } = this.props;
+      authUser,
+    } = this.state;
 
-    const isAuthenticated = false;
+    const isAuthenticated = Boolean(authUser);
 
     if (isAuthenticated) {
       return <Redirect to={{ pathname: '/members' }} />;

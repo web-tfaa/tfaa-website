@@ -85,7 +85,7 @@ class LoginForm extends Component {
       password,
     } = this.state;
 
-    auth.doSignInWithEmailAndPassword(email, passwordOne)
+    auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({
           ...INITIAL_STATE,
@@ -93,7 +93,7 @@ class LoginForm extends Component {
         }));
       })
       .catch(err => {
-        this.setState({ error: error });
+        this.setState({ error: err });
       });
   }
 
@@ -111,7 +111,7 @@ class LoginForm extends Component {
         }));
       })
       .catch(err => {
-        this.setState({ error: error });
+        this.setState({ error: err });
       });
   }
 
@@ -138,6 +138,7 @@ class LoginForm extends Component {
 
   handleClickRegister = () => {
     this.setState({
+      ...INITIAL_STATE,
       showSignUp: true,
     });
   }
@@ -221,8 +222,6 @@ class LoginForm extends Component {
 
   render() {
     const {
-      // signUpWithEmail,
-      error,
       history,
       signOut,
       user,
@@ -231,6 +230,7 @@ class LoginForm extends Component {
     const {
       email,
       emailError,
+      error,
       isAuthenticated,
       password,
       passwordError,
@@ -239,12 +239,6 @@ class LoginForm extends Component {
       registerError,
       showSignUp,
     } = this.state;
-
-    // console.log('this.state', this.state);
-
-    console.log('firebase', firebase.auth.currentUser);
-
-    // const isAuthenticated = false;
 
     if (isAuthenticated) history.push('/members');
 
