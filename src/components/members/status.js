@@ -1,6 +1,5 @@
 // External Dependencies
 import React from 'react';
-import withFirebaseAuth from 'react-auth-firebase';
 import { Link, withRouter } from 'react-router-dom';
 
 // Internal Dependencies
@@ -31,8 +30,11 @@ const Status = (props) => {
     user,
   } = props;
 
+  // TODO: Update this once firebase auth works
+  const isAuthenticated = false;
+
   let details;
-  if (!user) {
+  if (!isAuthenticated) {
     details = (
       <p css={statusTextStyles}>
         To access the Members area, you’ll need to{' '}
@@ -64,4 +66,4 @@ const Status = (props) => {
   return <div css={statusRootStyles}>{details}</div>;
 };
 
-export default withFirebaseAuth(withRouter(Status), firebase, authConfig);
+export default withRouter(Status);

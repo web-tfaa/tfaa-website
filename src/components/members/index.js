@@ -8,6 +8,7 @@ import hex2rgba from 'hex2rgba';
 import CardHeadline from '../shared/cards/card-headline';
 import Container from '../shared/container';
 import SidebarBody from '../shared/sidebar/sidebar-body';
+import Status from './status';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 
@@ -147,6 +148,7 @@ class Members extends Component {
           <Helmet>
             <title>TMAC | Members</title>
           </Helmet>
+          <Status />
           {membersContent}
         </Container>
       </div>
