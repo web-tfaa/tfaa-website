@@ -202,6 +202,20 @@ const options = {
         background: `none`,
         boxShadow: `none`,
       },
+      ".main-body button": {
+        color: `inherit`,
+        textDecoration: `none`,
+        transition: `all ${presets.animation.speedFast} ${
+          presets.animation.curveDefault
+        }`,
+        borderBottom: `1px solid ${colors.ui.bright}`,
+        boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
+        fontFamily: options.headerFontFamily.join(`,`),
+        fontWeight: `bold`,
+      },
+      ".main-body button:hover": {
+        background: colors.ui.bright,
+      },
       ".gatsby-highlight, .post .gatsby-resp-iframe-wrapper, .post .gatsby-resp-image-link": {
         marginLeft: rhythm(-options.blockMarginBottom),
         marginRight: rhythm(-options.blockMarginBottom),

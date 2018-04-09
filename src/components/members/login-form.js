@@ -12,6 +12,8 @@ const rootStyles = {
   margin: '1rem 0',
 };
 
+
+
 const labelStyles = {
   display: 'block',
   fontSize: '67.5%',
@@ -46,6 +48,7 @@ class LoginForm extends Component {
   state = {
     email: '',
     password: '',
+    showSignUp: false,
   };
 
   handleSubmit = (event) => {
@@ -81,6 +84,18 @@ class LoginForm extends Component {
     else pass.setAttribute('type', 'password');
   }
 
+  handleClickRegister = () => {
+    this.setState({
+      showSignUp: true,
+    });
+  }
+
+  handleClickSignUpButton = () => {
+    this.setState({
+      showSignUp: false,
+    });
+  }
+
   render() {
     const {
       // signUpWithEmail,
@@ -93,14 +108,32 @@ class LoginForm extends Component {
     const {
       email,
       password,
+      showSignUp,
     } = this.state;
 
     console.log('user', user);
 
-    if (user) history.push('/members');
+    const isAuthenticated = false;
 
-    return (
-      <div>
+    if (isAuthenticated) history.push('/members');
+
+    const signUpElement = !showSignUp
+      ? [
+        <div
+          css={{ marginBottom: 16 }}
+          key="no-account-text"
+        >
+          Don&apos;t have an account?
+        </div>,
+        <button
+          key="no-account-sign-up-button"
+          onClick={this.handleClickRegister}
+          type="submit"
+        >
+          Register
+        </button>
+      ]
+      : (
         <form onSubmit={this.handleSubmit}>
           <label css={labelStyles}>
             Username
@@ -111,10 +144,8 @@ class LoginForm extends Component {
               onChange={this.handleUpdate}
             />
           </label>
-          <label
-            css={bottomLabelStyles}>
+          <label css={bottomLabelStyles}>
             Password
-
           </label>
           <div
             css={{
@@ -130,11 +161,55 @@ class LoginForm extends Component {
               name="password"
               onChange={this.handleUpdate}
             />
-            <div
-              css={{
-                marginLeft: 8,
-              }}
-            >
+            <div css={{ marginLeft: 8 }}>
+              <MdRemoveRedEye
+                css={{
+                  width: 20,
+                  height: 20,
+                }}
+                onClick={this.togglePasswordInput}
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            onClick={this.handleClickSignUpButton}
+          >
+            Sign Up
+          </button>
+        </form>
+      );
+
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label css={labelStyles}>
+            Username
+            <input
+              css={inputStyles}
+              type="text"
+              name="email"
+              onChange={this.handleUpdate}
+            />
+          </label>
+          <label css={bottomLabelStyles}>
+            Password
+          </label>
+          <div
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: 16,
+            }}
+          >
+            <input
+              css={inputStyles}
+              id="showhide"
+              type="password"
+              name="password"
+              onChange={this.handleUpdate}
+            />
+            <div css={{ marginLeft: 8 }}>
               <MdRemoveRedEye
                 css={{
                   width: 20,
@@ -151,25 +226,10 @@ class LoginForm extends Component {
             Sign In
           </button>
         </form>
-        {/* <form onSubmit={this.handleSubmit}>
-          ...form input to take email and password for sign up
-          <button
-            type="submit"
-            onClick={() => signUpWithEmail(email, password)}
-          >
-            SignUp
-          </button>
-        </form> */}
+        {signUpElement}
       </div>
     );
   }
 }
-
-const authConfig = {
-  email: {
-    verifyOnSignup: true, // Sends verification email to user upon sign up
-    saveUserInDatabase: true // Saves user in database at /users ref
-  },
-};
 
 export default withRouter(LoginForm);
