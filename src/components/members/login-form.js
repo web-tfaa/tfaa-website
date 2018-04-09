@@ -8,7 +8,10 @@ import { withRouter } from 'react-router-dom';
 import Container from '../shared/container';
 import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
-import { auth } from '../../firebase';
+import {
+  auth,
+  firebase,
+} from '../../firebase';
 
 // Local Styles
 const rootStyles = {
@@ -48,7 +51,9 @@ const INITIAL_STATE = {
   email: '',
   emailError: '',
   error: '',
+  isAuthenticated: false,
   password: '',
+  passwordError: '',
   passwordOne: '',
   passwordTwo: '',
   registerError: null,
@@ -66,19 +71,6 @@ class LoginForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    const {
-      email,
-      passwordOne,
-    } = this.state;
-
-    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authuser => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-      })
-      .catch(err => {
-        this.setState({ error: error });
-      });
   }
 
   handleUpdate = (event) => {
@@ -130,14 +122,27 @@ class LoginForm extends Component {
   }
 
   handleClickSignUpButton = () => {
-    this.setState({
-      showSignUp: false,
-    });
+    const {
+      email,
+      passwordOne,
+    } = this.state;
+
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authuser => {
+        this.setState(() => ({
+          ...INITIAL_STATE,
+          isAuthenticated: true,
+        }));
+      })
+      .catch(err => {
+        this.setState({ error: error });
+      });
   }
 
   handleUpdateErrors = () => {
     this.handleUpdateEmailError();
-    this.handleUpdateRegisterError();
+    this.handleUpdateRegisterPasswordError();
+    this.handleUpdateLoginPasswordError();
   }
 
   handleUpdateEmailError = () => {
@@ -147,7 +152,11 @@ class LoginForm extends Component {
 
     console.log('heeyyyy');
 
-    if (regex.test(email)) {
+    if (!email) {
+      this.setState({
+        emailError: 'Email is required',
+      });
+    } else if (regex.test(email)) {
       this.setState({
         emailError: '',
       });
@@ -158,7 +167,7 @@ class LoginForm extends Component {
     }
   }
 
-  handleUpdateRegisterError = (message) => {
+  handleUpdateRegisterPasswordError = (message) => {
     const {
       passwordOne,
       passwordTwo,
@@ -185,6 +194,28 @@ class LoginForm extends Component {
     }
   }
 
+  handleUpdateLoginPasswordError = (message) => {
+    const {
+      password,
+    } = this.state;
+
+    const hasInput = password !== '';
+
+    if (!hasInput) {
+      this.setState({
+        passwordError: 'Password is required',
+      });
+    } else if (hasInput && password.length < 8) {
+      this.setState({
+        passwordError: 'Password must be at least 8 characters long',
+      });
+    } else if (hasInput && password.length > 7) {
+      this.setState({
+        passwordError: '',
+      });
+    }
+  }
+
   render() {
     const {
       // signUpWithEmail,
@@ -197,7 +228,9 @@ class LoginForm extends Component {
     const {
       email,
       emailError,
+      isAuthenticated,
       password,
+      passwordError,
       passwordOne,
       passwordTwo,
       registerError,
@@ -206,15 +239,17 @@ class LoginForm extends Component {
 
     // console.log('this.state', this.state);
 
-    const isAuthenticated = false;
+    console.log('firebase', firebase.auth.currentUser);
+
+    // const isAuthenticated = false;
 
     if (isAuthenticated) history.push('/members');
 
-    const hasInput = passwordOne !== '' && passwordTwo !== '';
+    const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid =
       !hasInput ||
       registerError ||
-      email === '';
+      emailError;
 
     const signUpElement = !showSignUp
       ? [
@@ -347,7 +382,10 @@ class LoginForm extends Component {
         </form>
       ];
 
-    // When passwords don't match, we update the error message
+    const hasLoginInput = password !== '' && email !== '';
+    const isLoginInvalid =
+      !hasLoginInput ||
+      emailError;
 
     return (
       <div className="login-form">
@@ -364,6 +402,15 @@ class LoginForm extends Component {
                 value={email}
               />
             </label>
+            <div
+              css={{
+                color: 'red',
+                fontFamily: options.headerFontFamily.join(`,`),
+                marginTop: 16,
+              }}
+            >
+              {emailError}
+            </div>
             <label css={bottomLabelStyles}>
               Password
             </label>
@@ -393,7 +440,17 @@ class LoginForm extends Component {
                 />
               </div>
             </div>
+            <div
+              css={{
+                color: 'red',
+                fontFamily: options.headerFontFamily.join(`,`),
+                margin: '16px 0',
+              }}
+            >
+              {passwordError}
+            </div>
             <button
+              disabled={isLoginInvalid}
               type="submit"
               onClick={this.handleClickSubmitButton}
             >
