@@ -16,9 +16,6 @@ import { firebase } from '../../firebase';
 // Sidebar data
 import membersSidebar from '../../pages/members/members-links.yml';
 
-// Local Variables
-const texasFlagRed = '#BF0A30';
-
 // Local Styles
 const contentStyles = {
   display: 'flex',
@@ -135,9 +132,9 @@ class Members extends Component {
           }}
         >
           <hr css={{
-            height: 6,
             border: 0,
-            boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
+            height: 2,
+            marginTop: 10,
           }} />
           <SidebarBody inline yaml={membersSidebar} />
         </div>

@@ -12,9 +12,6 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 // Sidebar data
 import resourcesSidebar from './resources-links.yml';
 
-// Local Variables
-const texasFlagRed = '#BF0A30';
-
 const ExternalLink = ({ children, to }) => (
   <a
     css={{
@@ -80,9 +77,9 @@ export default () =>
       }}
     >
       <hr css={{
-        height: 6,
         border: 0,
-        boxShadow: `inset 0 12px 12px -12px ${hex2rgba(texasFlagRed, 0.9)}`,
+        height: 2,
+        marginTop: 10,
       }} />
       <SidebarBody inline yaml={resourcesSidebar} />
     </div>

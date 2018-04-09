@@ -32,7 +32,7 @@ const Status = (props) => {
   const details = !isAuthenticated
     ? (
       <p css={statusTextStyles}>
-        To access the Members area, you’ll need to{' '}
+        To access the Members area, please&nbsp;
         <Link to="/members/login">log in</Link>.
       </p>
     )
