@@ -166,6 +166,12 @@ class LoginForm extends Component {
 
     if (isAuthenticated) history.push('/members');
 
+    const hasInput = passwordOne !== '' && passwordTwo !== '';
+    const isInvalid =
+      !hasInput ||
+      registerError ||
+      email === '';
+
     const signUpElement = !showSignUp
       ? [
         <hr key="login-form-divider" />,
@@ -270,7 +276,7 @@ class LoginForm extends Component {
             />
           </div>
           <button
-            disabled={registerError}
+            disabled={isInvalid}
             type="submit"
             onClick={this.handleClickSignUpButton}
           >
