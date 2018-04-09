@@ -7,8 +7,9 @@ import {
   getCurrentUser,
   logout,
 } from '../../utils/auth';
-import { colors } from '../../utils/presets';
-// import firebase from '../../utils/firebase-config';
+import presets, { colors } from '../../utils/presets';
+import { options } from '../../utils/typography';
+import { auth } from '../../firebase';
 
 // Local Styles
 const statusRootStyles = {
@@ -27,11 +28,12 @@ const statusTextStyles = {
 // Component Definition
 const Status = (props) => {
   const {
-    user,
+    authUser,
   } = props;
 
-  // TODO: Update this once firebase auth works
-  const isAuthenticated = false;
+  console.log('auth user, baby', authUser);
+
+  const isAuthenticated = Boolean(authUser);
 
   let details;
   if (!isAuthenticated) {
@@ -42,22 +44,29 @@ const Status = (props) => {
       </p>
     );
   } else {
-    const {
-      name,
-      email,
-    } = getCurrentUser();
-
     details = (
       <p css={statusTextStyles}>
-        Logged in as {name} ({email}){' '}
+        Logged in as {authUser.email}&nbsp;
         <a
-          href="/"
-          onClick={event => {
-            event.preventDefault();
-            logout(() => history.push('/'));
+          css={{
+            color: `inherit`,
+            textDecoration: `none`,
+            transition: `all ${presets.animation.speedFast} ${
+              presets.animation.curveDefault
+            }`,
+            borderBottom: `1px solid ${colors.ui.bright}`,
+            boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
+            fontFamily: options.headerFontFamily.join(`,`),
+            fontWeight: `bold`,
+            '&:hover': {
+              background: colors.ui.bright,
+              cursor: 'pointer',
+            }
           }}
+          href="/members"
+          onClick={auth.doSignOut}
         >
-          log out
+          Sign out
         </a>
       </p>
     );

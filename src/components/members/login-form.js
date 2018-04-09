@@ -81,17 +81,38 @@ class LoginForm extends Component {
 
   handleClickSubmitButton = () => {
     const {
-      signInWithEmail,
-    } = this.props;
-
-    const {
       email,
       password,
     } = this.state;
 
-    signInWithEmail(email, password);
-      // .then(res => history.push('/members'))
-      // .catch(err => console.log('An error occurred:', err));
+    auth.doSignInWithEmailAndPassword(email, passwordOne)
+      .then(() => {
+        this.setState(() => ({
+          ...INITIAL_STATE,
+          isAuthenticated: true,
+        }));
+      })
+      .catch(err => {
+        this.setState({ error: error });
+      });
+  }
+
+  handleClickSignUpButton = () => {
+    const {
+      email,
+      passwordOne,
+    } = this.state;
+
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authuser => {
+        this.setState(() => ({
+          ...INITIAL_STATE,
+          isAuthenticated: true,
+        }));
+      })
+      .catch(err => {
+        this.setState({ error: error });
+      });
   }
 
   toggleRegisterPasswordInput = () => {
@@ -119,24 +140,6 @@ class LoginForm extends Component {
     this.setState({
       showSignUp: true,
     });
-  }
-
-  handleClickSignUpButton = () => {
-    const {
-      email,
-      passwordOne,
-    } = this.state;
-
-    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authuser => {
-        this.setState(() => ({
-          ...INITIAL_STATE,
-          isAuthenticated: true,
-        }));
-      })
-      .catch(err => {
-        this.setState({ error: error });
-      });
   }
 
   handleUpdateErrors = () => {
@@ -379,6 +382,18 @@ class LoginForm extends Component {
           >
             Sign Up
           </button>
+          {error &&
+            <div
+              css={{
+                color: 'red',
+                fontWeight: 500,
+                fontFamily: options.headerFontFamily.join(`,`),
+                margin: '16px 0',
+              }}
+            >
+              {error.message}
+            </div>
+          }
         </form>
       ];
 
@@ -456,7 +471,18 @@ class LoginForm extends Component {
             >
               Sign In
             </button>
-            {error && <div>{error.message}</div>}
+            {error &&
+              <div
+                css={{
+                  color: 'red',
+                  fontWeight: 500,
+                  fontFamily: options.headerFontFamily.join(`,`),
+                  margin: '16px 0',
+                }}
+              >
+                {error.message}
+              </div>
+            }
           </form>
         }
         {signUpElement}

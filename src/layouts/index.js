@@ -8,6 +8,7 @@ import Footer from '../components/footer';
 import TopNav from '../components/nav/top-nav';
 import SidebarBody from '../components/shared/sidebar/sidebar-body';
 import MobileNav from '../components/nav/mobile-nav';
+import { firebase } from '../firebase';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
@@ -72,17 +73,35 @@ const sidebarStyles = {
 
 // Component Definition
 class DefaultLayout extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authUser: null,
+    };
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState(() => ({ authUser }))
+        : this.setState(() => ({ authUser: null }));
+    });
+  }
+
   render() {
     const {
       children,
       location,
-      // user,
     } = this.props;
+
+    const {
+      authUser,
+    } = this.state;
 
     const path = location.pathname;
 
-    // const isAuthenticated = Boolean(user);
-    const isAuthenticated = false;
+    const isAuthenticated = Boolean(authUser);
 
     const isHome = path == `/`;
     const isSponsors = path.slice(0, 9) === '/sponsors';

@@ -11,6 +11,7 @@ import SidebarBody from '../shared/sidebar/sidebar-body';
 import Status from './status';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
+import { firebase } from '../../firebase';
 
 // Sidebar data
 import membersSidebar from '../../pages/members/members-links.yml';
@@ -40,24 +41,28 @@ const FuturaDiv = ({ children }) => (
 
 // Component Definition
 class Members extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
+  constructor(props) {
+    super(props);
 
-  handleUpdate(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
+    this.state = {
+      authUser: null,
+    };
+  }
+
+  componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser
+        ? this.setState(() => ({ authUser }))
+        : this.setState(() => ({ authUser: null }));
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    handleLogin(this.state);
-  }
-
   render() {
-    const isAuthenticated = false;
+    const {
+      authUser,
+    } = this.state;
+
+    const isAuthenticated = Boolean(authUser);
 
     const membersContent = (
       <div>
@@ -148,7 +153,7 @@ class Members extends Component {
           <Helmet>
             <title>TMAC | Members</title>
           </Helmet>
-          <Status />
+          <Status authUser={authUser} />
           {membersContent}
         </Container>
       </div>
