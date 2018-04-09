@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import Container from '../shared/container';
 import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
-// import firebase from '../../utils/firebase-config';
+import { auth } from '../../firebase';
 
 // Local Styles
 const rootStyles = {
@@ -44,25 +44,47 @@ const buttonStyles = {
   transition: 'background-color 150ms linear',
 };
 
+const INITIAL_STATE = {
+  email: '',
+  emailError: '',
+  error: '',
+  password: '',
+  passwordOne: '',
+  passwordTwo: '',
+  registerError: null,
+  showSignUp: false,
+};
+
+// to check for a valid email address
+const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
+
 // Component Definition
 class LoginForm extends Component {
   state = {
-    email: '',
-    password: '',
-    passwordOne: '',
-    passwordTwo: '',
-    registerError: '',
-    showSignUp: false,
+    ...INITIAL_STATE,
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    const {
+      email,
+      passwordOne,
+    } = this.state;
+
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authuser => {
+        this.setState(() => ({ ...INITIAL_STATE }));
+      })
+      .catch(err => {
+        this.setState({ error: error });
+      });
   }
 
   handleUpdate = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
-    }, this.handleUpdateRegisterError);
+    }, this.handleUpdateErrors);
   }
 
   handleClickSubmitButton = () => {
@@ -113,13 +135,34 @@ class LoginForm extends Component {
     });
   }
 
+  handleUpdateErrors = () => {
+    this.handleUpdateEmailError();
+    this.handleUpdateRegisterError();
+  }
+
+  handleUpdateEmailError = () => {
+    const {
+      email,
+    } = this.state;
+
+    console.log('heeyyyy');
+
+    if (regex.test(email)) {
+      this.setState({
+        emailError: '',
+      });
+    } else if (email && !regex.test(email)) {
+      this.setState({
+        emailError: 'Use a valid email',
+      });
+    }
+  }
+
   handleUpdateRegisterError = (message) => {
     const {
       passwordOne,
       passwordTwo,
     } = this.state;
-
-    console.log('hi!');
 
     const hasInput = passwordOne !== '' && passwordTwo !== '';
 
@@ -153,6 +196,7 @@ class LoginForm extends Component {
 
     const {
       email,
+      emailError,
       password,
       passwordOne,
       passwordTwo,
@@ -226,6 +270,15 @@ class LoginForm extends Component {
               value={email}
             />
           </label>
+          <div
+            css={{
+              color: 'red',
+              fontFamily: options.headerFontFamily.join(`,`),
+              marginTop: 16,
+            }}
+          >
+            {emailError}
+          </div>
           <label css={bottomLabelStyles}>
             Password
           </label>
@@ -275,6 +328,15 @@ class LoginForm extends Component {
               value={passwordTwo}
             />
           </div>
+          <div
+            css={{
+              color: 'red',
+              fontFamily: options.headerFontFamily.join(`,`),
+              margin: '16px 0',
+            }}
+          >
+            {registerError}
+          </div>
           <button
             disabled={isInvalid}
             type="submit"
@@ -282,15 +344,6 @@ class LoginForm extends Component {
           >
             Sign Up
           </button>
-          <div
-            css={{
-              color: 'red',
-              fontFamily: options.headerFontFamily.join(`,`),
-              marginTop: 16,
-            }}
-          >
-            {registerError}
-          </div>
         </form>
       ];
 
