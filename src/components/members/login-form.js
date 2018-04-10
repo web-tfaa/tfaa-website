@@ -54,10 +54,6 @@ const INITIAL_STATE = {
   isAuthenticated: false,
   password: '',
   passwordError: '',
-  passwordOne: '',
-  passwordTwo: '',
-  registerError: null,
-  showSignUp: false,
 };
 
 // To check for a valid email address
@@ -101,38 +97,6 @@ class LoginForm extends Component {
       });
   }
 
-  handleClickSignUpButton = () => {
-    const {
-      email,
-      passwordOne,
-    } = this.state;
-
-    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authuser => {
-        this.setState(() => ({
-          ...INITIAL_STATE,
-          isAuthenticated: true,
-        }));
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
-  }
-
-  toggleRegisterPasswordInput = () => {
-    const passOne = document.getElementById('passwordOne');
-    const passTwo = document.getElementById('passwordTwo');
-
-    if (passOne.type === 'password' && passTwo.type === 'password') {
-      passOne.setAttribute('type', 'text')
-      passTwo.setAttribute('type', 'text')
-    }
-    else {
-      passOne.setAttribute('type', 'password');
-      passTwo.setAttribute('type', 'password');
-    }
-  }
-
   togglePasswordInput = () => {
     const pass = document.getElementById('showhide');
 
@@ -140,16 +104,16 @@ class LoginForm extends Component {
     else pass.setAttribute('type', 'password');
   }
 
-  handleClickRegister = () => {
-    this.setState({
-      ...INITIAL_STATE,
-      showSignUp: true,
-    });
+  handleClickSignUp = () => {
+    const {
+      history,
+    } = this.props;
+
+    history.push('/members/sign-up');
   }
 
   handleUpdateErrors = () => {
     this.handleUpdateEmailError();
-    this.handleUpdateRegisterPasswordError();
     this.handleUpdateLoginPasswordError();
   }
 
@@ -169,33 +133,6 @@ class LoginForm extends Component {
     } else if (email && !regex.test(email)) {
       this.setState({
         emailError: 'Use a valid email',
-      });
-    }
-  }
-
-  handleUpdateRegisterPasswordError = (message) => {
-    const {
-      passwordOne,
-      passwordTwo,
-    } = this.state;
-
-    const hasInput = passwordOne !== '' && passwordTwo !== '';
-
-    if (!hasInput) {
-      this.setState({
-        registerError: '',
-      });
-    } else if (hasInput && passwordOne !== passwordTwo) {
-      this.setState({
-        registerError: 'Passwords should match',
-      });
-    } else if (hasInput && passwordOne === passwordTwo && passwordOne.length < 8) {
-      this.setState({
-        registerError: 'Password must be at least 8 characters long',
-      });
-    } else if (hasInput && passwordOne === passwordTwo) {
-      this.setState({
-        registerError: '',
       });
     }
   }
@@ -236,63 +173,49 @@ class LoginForm extends Component {
       isAuthenticated,
       password,
       passwordError,
-      passwordOne,
-      passwordTwo,
-      registerError,
-      showSignUp,
     } = this.state;
 
     if (isAuthenticated) history.push('/members');
 
-    const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
-    const isInvalid =
-      !hasInput ||
-      registerError ||
+    const signUpElement = [
+      <hr key="login-form-divider" />,
+      <div
+        css={{ marginBottom: 16 }}
+        key="no-account-text"
+      >
+        Don&apos;t have an account?
+      </div>,
+      <span
+        css={{
+          color: `inherit`,
+          textDecoration: `none`,
+          transition: `all ${presets.animation.speedFast} ${
+            presets.animation.curveDefault
+          }`,
+          borderBottom: `1px solid ${colors.ui.bright}`,
+          boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
+          fontFamily: options.headerFontFamily.join(`,`),
+          fontWeight: `bold`,
+          '&:hover': {
+            background: colors.ui.bright,
+            cursor: 'pointer',
+          }
+        }}
+        key="no-account-sign-up-span"
+        onClick={this.handleClickSignUp}
+      >
+        Sign Up!
+      </span>
+    ];
+
+    const hasLoginInput = password !== '' && email !== '';
+    const isLoginInvalid =
+      !hasLoginInput ||
       emailError;
 
-    const signUpElement = !showSignUp
-      ? [
-        <hr key="login-form-divider" />,
-        <div
-          css={{ marginBottom: 16 }}
-          key="no-account-text"
-        >
-          Don&apos;t have an account?
-        </div>,
-        <span
-          css={{
-            color: `inherit`,
-            textDecoration: `none`,
-            transition: `all ${presets.animation.speedFast} ${
-              presets.animation.curveDefault
-            }`,
-            borderBottom: `1px solid ${colors.ui.bright}`,
-            boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-            fontFamily: options.headerFontFamily.join(`,`),
-            fontWeight: `bold`,
-            '&:hover': {
-              background: colors.ui.bright,
-              cursor: 'pointer',
-            }
-          }}
-          key="no-account-sign-up-span"
-          onClick={this.handleClickRegister}
-        >
-          Sign Up!
-        </span>
-      ]
-      : [
-        <div
-          css={{ marginBottom: 16 }}
-          key="register-message"
-        >
-          Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
-          <Link to="/members#google-form-members">Members page</Link>.
-        </div>,
-        <form
-          key="register-form"
-          onSubmit={this.handleSubmit}
-        >
+    return (
+      <div className="login-form">
+        <form onSubmit={this.handleSubmit}>
           <label css={labelStyles}>
             Username
             <input
@@ -325,12 +248,12 @@ class LoginForm extends Component {
           >
             <input
               css={inputStyles}
-              id="passwordOne"
+              id="showhide"
               type="password"
-              name="passwordOne"
+              name="password"
               onChange={this.handleUpdate}
               placeholder="Password"
-              value={passwordOne}
+              value={password}
             />
             <div css={{ marginLeft: 8 }}>
               <MdRemoveRedEye
@@ -338,29 +261,9 @@ class LoginForm extends Component {
                   height: 20,
                   width: 20,
                 }}
-                onClick={this.toggleRegisterPasswordInput}
+                onClick={this.togglePasswordInput}
               />
             </div>
-          </div>
-          <label css={bottomLabelStyles}>
-            Confirm Password
-          </label>
-          <div
-            css={{
-              alignItems: 'center',
-              display: 'flex',
-              marginBottom: 16,
-            }}
-          >
-            <input
-              css={inputStyles}
-              id="passwordTwo"
-              type="password"
-              name="passwordTwo"
-              onChange={this.handleUpdate}
-              placeholder="Confirm Password"
-              value={passwordTwo}
-            />
           </div>
           <div
             css={{
@@ -369,14 +272,14 @@ class LoginForm extends Component {
               margin: '16px 0',
             }}
           >
-            {registerError}
+            {passwordError}
           </div>
           <button
-            disabled={isInvalid}
+            disabled={isLoginInvalid}
             type="submit"
-            onClick={this.handleClickSignUpButton}
+            onClick={this.handleClickSubmitButton}
           >
-            Sign Up
+            Sign In
           </button>
           {error &&
             <div
@@ -391,96 +294,6 @@ class LoginForm extends Component {
             </div>
           }
         </form>
-      ];
-
-    const hasLoginInput = password !== '' && email !== '';
-    const isLoginInvalid =
-      !hasLoginInput ||
-      emailError;
-
-    return (
-      <div className="login-form">
-        {!showSignUp &&
-          <form onSubmit={this.handleSubmit}>
-            <label css={labelStyles}>
-              Username
-              <input
-                css={inputStyles}
-                type="text"
-                name="email"
-                onChange={this.handleUpdate}
-                placeholder="Email Address"
-                value={email}
-              />
-            </label>
-            <div
-              css={{
-                color: 'red',
-                fontFamily: options.headerFontFamily.join(`,`),
-                marginTop: 16,
-              }}
-            >
-              {emailError}
-            </div>
-            <label css={bottomLabelStyles}>
-              Password
-            </label>
-            <div
-              css={{
-                alignItems: 'center',
-                display: 'flex',
-                marginBottom: 16,
-              }}
-            >
-              <input
-                css={inputStyles}
-                id="showhide"
-                type="password"
-                name="password"
-                onChange={this.handleUpdate}
-                placeholder="Password"
-                value={password}
-              />
-              <div css={{ marginLeft: 8 }}>
-                <MdRemoveRedEye
-                  css={{
-                    height: 20,
-                    width: 20,
-                  }}
-                  onClick={this.togglePasswordInput}
-                />
-              </div>
-            </div>
-            <div
-              css={{
-                color: 'red',
-                fontFamily: options.headerFontFamily.join(`,`),
-                margin: '16px 0',
-              }}
-            >
-              {passwordError}
-            </div>
-            <button
-              disabled={isLoginInvalid}
-              type="submit"
-              onClick={this.handleClickSubmitButton}
-            >
-              Sign In
-            </button>
-            {error &&
-              <div
-                css={{
-                  color: 'red',
-                  fontWeight: 500,
-                  fontFamily: options.headerFontFamily.join(`,`),
-                  margin: '16px 0',
-                }}
-              >
-                {error.message}
-              </div>
-            }
-          </form>
-        }
         <p>
           <Link to="/members/pw-forget">Forgot Password?</Link>
         </p>

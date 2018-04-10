@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import {
   Link,
+  withRouter,
 } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import { auth } from '../../firebase';
+import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
-import { colors } from '../../utils/presets';
 
 // Local Functions
 const updateByPropertyName = (propertyName, value) => () => ({
@@ -41,6 +42,10 @@ class PasswordForgetForm extends Component {
   onSubmit = (event) => {
     event.preventDefault();
     const {
+      history,
+    } = this.props;
+
+    const {
       email,
     } = this.state;
 
@@ -64,7 +69,7 @@ class PasswordForgetForm extends Component {
   }
 
   handleRedirectToMembers = () => {
-    window.location.href = '/members/login';
+    history.push('/members/login');
   }
 
   render() {
@@ -77,7 +82,12 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '' || !regex.test(email);
 
     return (
-      <div>
+      <div css={{
+        paddingLeft: 0,
+        [presets.Tablet]: {
+          paddingLeft: '1.5rem',
+        },
+      }}>
         <Container className="password-forget">
           <Helmet>
             <title>TMAC | Forgot Password</title>
@@ -139,4 +149,4 @@ class PasswordForgetForm extends Component {
   }
 }
 
-export default PasswordForgetForm;
+export default withRouter(PasswordForgetForm);
