@@ -162,8 +162,6 @@ class LoginForm extends Component {
   render() {
     const {
       history,
-      signOut,
-      user,
     } = this.props;
 
     const {

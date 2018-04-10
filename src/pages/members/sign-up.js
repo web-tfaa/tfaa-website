@@ -168,8 +168,6 @@ class SignUpForm extends Component {
   render() {
     const {
       history,
-      signOut,
-      user,
     } = this.props;
 
     const {
@@ -182,6 +180,8 @@ class SignUpForm extends Component {
       passwordTwo,
       registerError,
     } = this.state;
+
+    if (isAuthenticated) history.push('/members');
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid =
