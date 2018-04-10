@@ -60,14 +60,18 @@ const INITIAL_STATE = {
   showSignUp: false,
 };
 
-// to check for a valid email address
+// To check for a valid email address
 const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 
 // Component Definition
 class LoginForm extends Component {
-  state = {
-    ...INITIAL_STATE,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...INITIAL_STATE,
+    };
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -477,6 +481,9 @@ class LoginForm extends Component {
             }
           </form>
         }
+        <p>
+          <Link to="/members/pw-forget">Forgot Password?</Link>
+        </p>
         {signUpElement}
       </div>
     );
