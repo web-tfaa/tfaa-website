@@ -149,11 +149,11 @@ class Members extends Component {
           paddingLeft: !isAuthenticated ? '1.5rem' : 0,
         },
       }}>
+        <Status authUser={authUser} />
         <Container>
           <Helmet>
             <title>TMAC | Members</title>
           </Helmet>
-          <Status authUser={authUser} />
           {isAuthenticated ? membersContent: nonMembersContent}
         </Container>
       </div>
