@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'gatsby-link';
 
 // Internal Dependencies
-import CardHeadline from '../shared/cards/card-headline';
+import CardHeadline from '../../components/shared/cards/card-headline';
 import { options } from '../../utils/typography';
 
 // Local Styles

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import LoginForm from '../../components/members/login-form';
+import LoginForm from './login-form';
 import { firebase } from '../../firebase';
 import presets from '../../utils/presets';
 

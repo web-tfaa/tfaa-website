@@ -76,34 +76,34 @@ export default (props) => (
   </div>
 );
 
-export const pageQuery = graphql`
-  query pageQuery {
-    allContentfulBlog(
-      filter: {
-        node_locale: { eq: "en-US" }
-      },
-      sort: {
-        fields: [createdAt], order: DESC
-      }
-    ) {
-      edges {
-        node {
-          id
-          title
-          slug
-          createdAt(formatString: "MMMM DD, YYYY")
-          featuredImage {
-            resolutions(width: 300) {
-              ...GatsbyContentfulResolutions
-            }
-          }
-          content {
-            childMarkdownRemark {
-              excerpt
-            }
-          }
-        }
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query pageQuery {
+//     allContentfulBlog(
+//       filter: {
+//         node_locale: { eq: "en-US" }
+//       },
+//       sort: {
+//         fields: [createdAt], order: DESC
+//       }
+//     ) {
+//       edges {
+//         node {
+//           id
+//           title
+//           slug
+//           createdAt(formatString: "MMMM DD, YYYY")
+//           featuredImage {
+//             resolutions(width: 300) {
+//               ...GatsbyContentfulResolutions
+//             }
+//           }
+//           content {
+//             childMarkdownRemark {
+//               excerpt
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
