@@ -4,14 +4,11 @@ import Helmet from 'react-helmet';
 
 // Internal Dependencies
 import Container from '../shared/container';
+import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
-import SidebarBody from '../shared/sidebar/sidebar-body';
 import Status from './status';
 import presets from '../../utils/presets';
 import { firebase } from '../../firebase';
-
-// Sidebar data
-import membersSidebar from '../../pages/members/members-links.yml';
 
 // Component Definition
 class Members extends Component {
@@ -38,27 +35,6 @@ class Members extends Component {
 
     const isAuthenticated = Boolean(authUser);
 
-    const membersContent = (
-      <div>
-        So much good stuff for the members!
-        <div
-          css={{
-            display: `block`,
-            [presets.Tablet]: {
-              display: `none`,
-            },
-          }}
-        >
-          <hr css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }} />
-          <SidebarBody inline yaml={membersSidebar} />
-        </div>
-      </div>
-    );
-
     return (
       <div css={{
         paddingLeft: 0,
@@ -72,7 +48,7 @@ class Members extends Component {
           <Helmet>
             <title>TMAC | Members</title>
           </Helmet>
-          {isAuthenticated ? membersContent : <NonMemberContent />}
+          {isAuthenticated ? <MemberContent /> : <NonMemberContent />}
         </Container>
       </div>
     );

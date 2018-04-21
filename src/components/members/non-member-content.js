@@ -7,8 +7,17 @@ import CardHeadline from '../shared/cards/card-headline';
 import { options } from '../../utils/typography';
 
 // Local Styles
+const constitutionStyles = {
+  marginTop: 36,
+};
+
 const contentStyles = {
   display: 'flex',
+};
+
+const iframeStyles = {
+  height: 600,
+  width: '100%',
 };
 
 const paddingStyles = {
@@ -37,10 +46,12 @@ const NonMemberContent = () => (
 
     <section
       className="members-constitution"
-      css={{ marginTop: 36 }}
+      css={constitutionStyles}
     >
       <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
-      <FuturaDiv>(from the Texas Music Administrators Conference's <Link to="/about/constitution">Constitution and Bylaws</Link>)</FuturaDiv>
+      <FuturaDiv>
+        (from the Texas Music Administrators Conference's <Link to="/about/constitution">Constitution and Bylaws</Link>)
+      </FuturaDiv>
       <FuturaDiv>
         <dl css={paddingStyles}>
           <dt>Section 1 &mdash; Membership</dt>
@@ -73,10 +84,7 @@ const NonMemberContent = () => (
       <iframe
         allowfullscreen
         aria-label="Google Forms, TMAC Membership Form 2017-2018"
-        css={{
-          height: 600,
-          width: '100%',
-        }}
+        css={iframeStyles}
         data-iframe-loaded="true"
         frameborder="0"
         onload="this.setAttribute('data-iframe-loaded', true)"
