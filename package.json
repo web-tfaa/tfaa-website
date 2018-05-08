@@ -24,7 +24,7 @@
     "babel-plugin-transform-regenerator": "^6.26.0",
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
-    "firebase": "^4.13.1",
+    "firebase": "^4.12.1",
     "firebaseui": "^2.7.0",
     "gatsby": "^1.9.259",
     "gatsby-cli": "^1.1.51",

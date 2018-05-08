@@ -37,7 +37,7 @@ const FuturaDiv = ({ children }) => (
 );
 
 // Component Definition
-const NonMemberContent = () => (
+export default () => (
   <div>
     <h1>Members</h1>
     <div css={contentStyles}>
@@ -94,5 +94,3 @@ const NonMemberContent = () => (
     </section>
   </div>
 );
-
-export default NonMemberContent;

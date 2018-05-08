@@ -7,7 +7,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     resolve(
       graphql(`
         {
-          allContentfulFileUpload(limit: 100) {
+          allContentfulFileShare(limit: 100) {
             edges {
               node {
                 id
@@ -21,7 +21,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           reject(result.errors);
         }
 
-        result.data.allContentfulFileUpload.edges.forEach(edge => {
+        result.data.allContentfulFileShare.edges.forEach(edge => {
           createPage({
             path: edge.node.slug,
             component: blogPostTemplate,
