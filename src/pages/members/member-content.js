@@ -37,24 +37,24 @@ export const MemberContent = ({ data }) => (
   </div>
 );
 
-export const pageQuery = graphql`
-  query pageQuery {
-    allContentfulFileUpload(
-      filter: {
-        node_locale: { eq: "en-US" }
-      },
-      sort: {
-        fields: [createdAt], order: DESC
-      }
-    ) {
-      edges {
-        node {
-          id
-          title
-          slug
-          createdAt(formatString: "MMMM DD, YYYY")
-        }
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query pageQuery {
+//     allContentfulFileUpload(
+//       filter: {
+//         node_locale: { eq: "en-US" }
+//       },
+//       sort: {
+//         fields: [createdAt], order: DESC
+//       }
+//     ) {
+//       edges {
+//         node {
+//           id
+//           title
+//           slug
+//           createdAt(formatString: "MMMM DD, YYYY")
+//         }
+//       }
+//     }
+//   }
+// `

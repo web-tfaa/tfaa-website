@@ -1,15 +1,15 @@
 // External Dependencies
-import Typography from "typography";
-import CodePlugin from "typography-plugin-code"
+import Typography from 'typography';
+import CodePlugin from 'typography-plugin-code';
 
 // Internal Dependencies
-import presets, { colors } from "./presets"
+import presets, { colors } from './presets';
 import {
   MOBILE_MEDIA_QUERY,
   TABLET_MEDIA_QUERY,
   MIN_DEFAULT_MEDIA_QUERY,
   MIN_LARGER_DISPLAY_MEDIA_QUERY,
-} from "typography-breakpoint-constants"
+} from 'typography-breakpoint-constants';
 
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';

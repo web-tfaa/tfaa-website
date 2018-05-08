@@ -22,7 +22,8 @@ class Members extends Component {
 
   componentDidMount() {
     firebase.auth.onAuthStateChanged(authUser => {
-      authUser
+      console.log('authUser is:', authUser);
+      return authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }));
     });
