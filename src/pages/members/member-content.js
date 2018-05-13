@@ -9,8 +9,8 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Component Definition
-export default ({ data }) => {
-  console.log('data is......', data);
+export default (props) => {
+  console.log('props is......', props);
   return (
     <div>
       So much good stuff for the members!
@@ -53,9 +53,9 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          title
-          slug
-          createdAt(formatString: "MMMM DD, YYYY")
+          # title
+          # slug
+          # createdAt(formatString: "MMMM DD, YYYY")
         }
       }
     }
