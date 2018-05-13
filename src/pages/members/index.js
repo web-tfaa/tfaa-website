@@ -21,18 +21,20 @@ class Members extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser => {
-      console.log('authUser is:', authUser);
-      return authUser
+    firebase.auth.onAuthStateChanged(authUser =>
+      authUser
         ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }));
-    });
+        : this.setState(() => ({ authUser: null }))
+    );
   }
 
   render() {
     const {
       authUser,
     } = this.state;
+
+
+    console.log('members index props →', this.props);
 
     const isAuthenticated = Boolean(authUser);
 
@@ -49,7 +51,10 @@ class Members extends Component {
           <Helmet>
             <title>TMAC | Members</title>
           </Helmet>
-          {isAuthenticated ? <MemberContent /> : <NonMemberContent />}
+          {isAuthenticated
+            ? <MemberContent contentfulData={this.props.data.allContentfulFileShare.edges} />
+            : <NonMemberContent />
+          }
         </Container>
       </div>
     );
@@ -57,3 +62,30 @@ class Members extends Component {
 }
 
 export default Members;
+
+export const pageQuery = graphql`
+  query MemberContent {
+    allContentfulFileShare(filter: { node_locale: { eq: "en-US" } }) {
+      edges {
+        node {
+          id
+          title
+          slug
+          createdAt(formatString: "MMMM DD, YYYY")
+        }
+      }
+    }
+    allContentfulAsset {
+      edges {
+        node {
+          file {
+            url
+            fileName
+            contentType
+          }
+
+        }
+      }
+    }
+  }
+`

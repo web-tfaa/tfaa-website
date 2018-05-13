@@ -2,25 +2,55 @@
 import React from 'react';
 
 // Internal Dependencies
+import Card from '../../components/shared/cards/card';
+import CardHeadline from '../../components/shared/cards/card-headline';
+import Cards from '../../components/shared/cards';
+// import FuturaParagraph from '../../components/shared/futura-paragraph';
 import presets from '../../utils/presets';
+import { options } from '../../utils/typography';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
+
+// Local Components
+const MemberCard = ({ node }) => {
+  console.log('inside MemberPost', node);
+  return (
+    <Card>
+      <CardHeadline>{node.title}</CardHeadline>
+      <h5 css={{ marginTop: '1rem' }}>{node.createdAt}</h5>
+      <FuturaDiv>{node.slug}</FuturaDiv>
+    </Card>
+  )
+}
+
+const FuturaDiv = ({ children }) => (
+  <div
+    css={{
+      fontFamily: options.headerFontFamily.join(`,`),
+      lineHeight: '1.6',
+    }}
+  >
+    {children}
+  </div>
+);
+
 // Component Definition
 export default (props) => {
-  console.log('props is......', props);
+  console.log('props.contentfulData', props.contentfulData);
   return (
     <div>
-      So much good stuff for the members!
-      {/* {data.allContentfulFileShare.edges.map((edge) => (
-        <div
-          css={{ color: 'hotpink' }}
-          key={edge.node.id}
-          node={edge.node}
-        />
-      ))} */}
+      <Cards>
+        {props.contentfulData.map((edge) => (
+          <MemberCard
+            key={edge.node.id}
+            node={edge.node}
+          />
+        ))}
+      </Cards>
+
       <div
         css={{
           display: `block`,
@@ -39,25 +69,3 @@ export default (props) => {
     </div>
   );
 };
-
-export const pageQuery = graphql`
-  query pageQuery {
-    allContentfulFileShare(
-      filter: {
-        node_locale: { eq: "en-US" }
-      },
-      sort: {
-        fields: [createdAt], order: DESC
-      }
-    ) {
-      edges {
-        node {
-          id
-          # title
-          # slug
-          # createdAt(formatString: "MMMM DD, YYYY")
-        }
-      }
-    }
-  }
-`

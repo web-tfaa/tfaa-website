@@ -21,15 +21,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           reject(result.errors);
         }
 
-        result.data.allContentfulFileShare.edges.forEach(edge => {
-          createPage({
-            path: edge.node.slug,
-            component: blogPostTemplate,
-            context: {
-              slug: edge.node.slug,
-            },
-          });
-        });
+        // result.data.allContentfulFileShare.edges.forEach(edge => {
+        //   createPage({
+        //     path: edge.node.slug,
+        //     component: blogPostTemplate,
+        //     context: {
+        //       slug: edge.node.slug,
+        //     },
+        //   });
+        // });
         return;
       })
     );

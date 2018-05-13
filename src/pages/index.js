@@ -8,7 +8,6 @@ import Link from 'gatsby-link';
 import Card from '../components/shared/cards/card';
 import CardHeadline from '../components/shared/cards/card-headline';
 import Cards from '../components/shared/cards';
-import Container from '../components/shared/container';
 import FeaturedStat from '../components/shared/featured-stat';
 import FuturaParagraph from '../components/shared/futura-paragraph';
 import MastheadBg from '../components/masthead/masthead-bg';
@@ -16,24 +15,24 @@ import MastheadContent from '../components/masthead/';
 import Stat from '../components/shared/featured-stat/stat';
 import { rhythm } from '../utils/typography';
 
-const BlogPost = ({node}) => {
-  return (
-    <div style={{
-      marginBottom: '1.5rem',
-      padding: '1.5rem',
-      border: '1px solid #ccc'
-    }}>
-      <h3><Link to={node.slug}>{node.title}</Link></h3>
-      <p>{node.createdAt}</p>
-      <div>
-        <div>
-          <Img resolutions={node.featuredImage.resolutions}/>
-        </div>
-        <div>{node.content.childMarkdownRemark.excerpt}</div>
-      </div>
-    </div>
-  )
-}
+// const BlogPost = ({node}) => {
+//   return (
+//     <div style={{
+//       marginBottom: '1.5rem',
+//       padding: '1.5rem',
+//       border: '1px solid #ccc'
+//     }}>
+//       <h3><Link to={node.slug}>{node.title}</Link></h3>
+//       <p>{node.createdAt}</p>
+//       <div>
+//         <div>
+//           <Img resolutions={node.featuredImage.resolutions}/>
+//         </div>
+//         <div>{node.content.childMarkdownRemark.excerpt}</div>
+//       </div>
+//     </div>
+//   )
+// }
 
 // Component Definition
 export default (props) => (
