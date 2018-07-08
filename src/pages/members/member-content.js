@@ -37,10 +37,15 @@ const FuturaDiv = ({ children }) => (
 // Component Definition
 export default (props) => {
   console.log('props.contentfulData', props);
+
+  const {
+    contentfulData,
+  } = props;
+
   return (
     <div>
       <Cards>
-        {props.contentfulData.map((edge) => (
+        {contentfulData && contentfulData.map((edge) => (
           <MemberCard
             key={edge.node.id}
             node={edge.node}
@@ -51,7 +56,7 @@ export default (props) => {
           title="TMAC file"
           width="200"
           height="200"
-          referrerpolicy="origin"
+          referrerPolicy="origin"
         >
           <p>Your browser does not support iframes.</p>
         </iframe>

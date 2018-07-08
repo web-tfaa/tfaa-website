@@ -82,12 +82,12 @@ export default () => (
       </p>
 
       <iframe
-        allowfullscreen
+        allowFullScreen
         aria-label="Google Forms, TMAC Membership Form 2017-2018"
         css={iframeStyles}
         data-iframe-loaded="true"
-        frameborder="0"
-        onload="this.setAttribute('data-iframe-loaded', true)"
+        frameBorder="0"
+        onLoad="this.setAttribute('data-iframe-loaded', true)"
         src="https://docs.google.com/forms/d/1uFOMrV52KJKXqO6ilM0Jern-suFxUfwGjjPgmGG6iOk/viewform?authuser=0&embedded=true"
       >
       </iframe>
