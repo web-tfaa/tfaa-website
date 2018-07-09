@@ -45,6 +45,7 @@
     "gray-percentage": "^2.0.0",
     "hex2rgba": "0.0.1",
     "npm": "^5.6.0",
+    "pdf.js-extract": "^0.0.9",
     "prop-types": "^15.6.2",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",

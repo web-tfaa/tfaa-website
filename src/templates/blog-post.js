@@ -39,22 +39,3 @@ BlogPost.propTypes = {
 }
 
 export default BlogPost;
-
-export const pageQuery = graphql`
-  query blogPostQuery($slug: String!) {
-    contentfulBlog(slug: { eq: $slug }) {
-      title
-      createdAt(formatString: "MMMM DD, YYYY")
-      featuredImage {
-        sizes(maxWidth: 800) {
-          ...GatsbyContentfulSizes
-        }
-      }
-      content {
-        childMarkdownRemark {
-          html
-        }
-      }
-    }
-  }
-`

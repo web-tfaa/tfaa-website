@@ -8223,6 +8223,10 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+pdf.js-extract@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/pdf.js-extract/-/pdf.js-extract-0.0.9.tgz#3892c8b7e14efefc8be283505aa7797a5470dd9b"
+
 pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
