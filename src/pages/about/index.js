@@ -35,14 +35,12 @@ export default ({ data }) => (
       </section>
       <section>
         <h4>
-          <Link to={`/about/constitution/`}>
-            Constitution & Bylaws
-          </Link>
+          <Link to={`/about/constitution/`}>Constitution & Bylaws</Link>
         </h4>
       </section>
       <section>
         <h4>
-          <a href="#">Events</a>
+          <Link to="/about/events">Events</Link>
         </h4>
         <ul>
           <li>Summer Convention</li>
@@ -54,24 +52,22 @@ export default ({ data }) => (
       </section>
       <section>
         <h4>
-          <Link to={`/history/`}>
-            History
-          </Link>
+          <Link to={`/about/history`}>History</Link>
         </h4>
       </section>
       <section>
         <h4>
-          <a href="#">Officers</a>
+          <Link to="/about/officers">Officers</Link>
         </h4>
       </section>
       <section>
         <h4>
-          <a href="#">Past Presidents</a>
+          <Link to="/resources/people/chronological-presidents">Past Presidents</Link>
         </h4>
       </section>
       <section>
         <h4>
-          <a href="#">Statements of Philosophy</a>
+          <Link to="/about/philosophy">Statements of Philosophy</Link>
         </h4>
       </section>
       <div
