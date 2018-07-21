@@ -33,9 +33,6 @@ class Members extends Component {
       authUser,
     } = this.state;
 
-
-    console.log('members index props →', this.props);
-
     const isAuthenticated = Boolean(authUser);
 
     return (
@@ -52,7 +49,12 @@ class Members extends Component {
             <title>TMAC | Members</title>
           </Helmet>
           {isAuthenticated
-            ? <MemberContent contentfulData={this.props.data.allContentfulFileShare.edges} />
+            ? (
+                <MemberContent
+                contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
+                contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
+              />
+            )
             : <NonMemberContent />
           }
         </Container>
@@ -69,9 +71,18 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          date
+          link
           title
           slug
           createdAt(formatString: "MMMM DD, YYYY")
+        }
+      }
+    }
+    allContentfulFileShareDescriptionTextNode {
+      edges {
+        node {
+          description
         }
       }
     }
