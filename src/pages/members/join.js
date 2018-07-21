@@ -24,12 +24,12 @@ import membersSidebar from './members-links.yml';
 //   contentfulFileShareData: PropTypes.array,
 //   contentfulFileShareDescriptionData: PropTypes.array,
 // };
-//
+
 // const defaultProps = {
 //   contentfulFileShareData: null,
 //   contentfulFileShareDescriptionData: null,
 // }
-//
+
 // const futuraStyles = {
 //   fontFamily: options.headerFontFamily.join(`,`),
 //   lineHeight: '1.6',
@@ -42,15 +42,14 @@ import membersSidebar from './members-links.yml';
 //     {children}
 //   </div>
 // );
-//
+
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>
 //     {children}
 //   </a>
 // );
-//
+
 // const MemberFileShareCard = ({ node, description }) => {
-//   console.log('node in MemberFileShareCard', node);
 //   return (
 //     <Card>
 //       <CardHeadline>{node.title}</CardHeadline>
@@ -100,7 +99,10 @@ class JoinContent extends Component {
             <title>TMAC | Join TMAC</title>
           </Helmet>
           <Cards>
-            hey there
+            <Card>
+              <CardHeadline>Join TMAC</CardHeadline>
+
+            </Card>
           </Cards>
         </Container>
 

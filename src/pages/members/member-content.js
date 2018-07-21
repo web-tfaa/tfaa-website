@@ -32,6 +32,8 @@ const futuraStyles = {
   marginBottom: '1rem',
 };
 
+const memberFileShareCardStyles = { marginTop: '1rem' };
+
 // Local Components
 const FuturaDiv = ({ children }) => (
   <div css={futuraStyles}>
@@ -50,7 +52,7 @@ const MemberFileShareCard = ({ node, description }) => {
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>
-      <h5 css={{ marginTop: '1rem' }}>{format(node.date, ['MMMM DD YYYY'])}</h5>
+      <h5 css={memberFileShareCardStyles}>{format(node.date, ['MMMM DD YYYY'])}</h5>
       <FuturaDiv>{description}</FuturaDiv>
       <FuturaAnchor download href={node.link}>Download</FuturaAnchor>
     </Card>
