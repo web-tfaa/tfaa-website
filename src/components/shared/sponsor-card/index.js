@@ -63,7 +63,7 @@ class SponsorCard extends Component {
           boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
         }}
       >
-        <div
+        <h3
           css={{
             color: '#32456B',
             fontWeight: 600,
@@ -71,7 +71,7 @@ class SponsorCard extends Component {
           }}
         >
           {sponsorClass} Sponsor (${donationAmount} donation)
-        </div>
+        </h3>
         {this.renderSponsors(sponsorData)}
       </div>
     );
