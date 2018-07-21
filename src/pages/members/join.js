@@ -97,12 +97,13 @@ class JoinContent extends Component {
           <Helmet>
             <title>TMAC | Join TMAC</title>
           </Helmet>
-          <Cards>
+          {/* <Cards>
             <Card>
               <CardHeadline>Join TMAC</CardHeadline>
 
             </Card>
-          </Cards>
+          </Cards> */}
+          Join TMAC
         </Container>
 
         <div

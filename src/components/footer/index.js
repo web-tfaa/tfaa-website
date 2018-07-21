@@ -1,9 +1,9 @@
 // External Dependencies
 import React from 'react';
-import Link from 'gatsby-link';
 import format from 'date-fns/format';
 
 // Internal Dependencies
+import FuturaParagraph from '../shared/futura-paragraph';
 import presets from '../../utils/presets';
 import {
   rhythm,
@@ -17,6 +17,7 @@ const currentYear = format(new Date(), ['YYYY']);
 // Component Definition
 export default () =>
   <footer
+    className="main-body"
     css={{
       alignItems: 'center',
       background: '#fbfafc',
@@ -44,19 +45,27 @@ export default () =>
         maxWidth: '60%',
       }}
     >
-      &copy; 2016-{currentYear} | Texas Music Administrators Conference
+      &copy; 2016-{currentYear} |
+      <a
+        css={{ marginLeft: 5 }}
+        href="http://www.texasmusicadministrators.com"
+      >
+        Texas Music Administrators Conference
+      </a>
     </div>
     <div
       css={{
         textAlign: 'right',
       }}
     >
-      Built by
-      <a
-        css={{ marginLeft: 5 }}
-        href="http://www.drumsensei.com"
-      >
-        Drumsensei Media
-      </a>
+      <FuturaParagraph>
+        Built by
+        <a
+          css={{ marginLeft: 5 }}
+          href="http://www.drumsensei.com"
+        >
+          Drumsensei Media
+        </a>
+      </FuturaParagraph>
     </div>
   </footer>
