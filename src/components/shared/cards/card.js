@@ -6,8 +6,17 @@ import presets, { colors } from '../../../utils/presets';
 import { rhythm, scale, options } from '../../../utils/typography';
 import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 
+// Local Variables
+const cover = {
+  bottom: 0,
+  left: 0,
+  position: `absolute`,
+  right: 0,
+  top: 0,
+};
+
 // Component Definition
-const Card = ({ children }) => (
+const Card = ({ children, shape }) => (
   <div
     css={{
       boxSizing: `border-box`,
@@ -58,6 +67,19 @@ const Card = ({ children }) => (
         },
       }}
     >
+    {shape && <svg
+      viewBox="0 0 10 10"
+      preserveAspectRatio="xMinYMin slice"
+      className="masthead-bg-left"
+      css={{
+        ...cover,
+        zIndex: -2,
+        width: `100%`,
+        height: `100%`,
+      }}
+    >
+      <polygon fill={colors.ui.light} points="-5,-5 35,15 -5,25 " />
+    </svg>}
       {children}
     </div>
   </div>

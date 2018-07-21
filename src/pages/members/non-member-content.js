@@ -1,10 +1,15 @@
 // External Dependencies
+import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
 
 // Internal Dependencies
+import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
+import Cards from '../../components/shared/cards';
+import CtaButton from '../../components/masthead/cta-button';
 import { options } from '../../utils/typography';
+import { colors } from '../../utils/presets';
 
 // Local Styles
 const constitutionStyles = {
@@ -13,6 +18,7 @@ const constitutionStyles = {
 
 const contentStyles = {
   display: 'flex',
+  marginBottom: '1rem',
 };
 
 const iframeStyles = {
@@ -30,6 +36,7 @@ const FuturaDiv = ({ children }) => (
     css={{
       fontFamily: options.headerFontFamily.join(`,`),
       lineHeight: '1.6',
+      marginBottom: '1rem',
     }}
   >
     {children}
@@ -40,13 +47,26 @@ const FuturaDiv = ({ children }) => (
 class NonMemberContent extends Component {
   render() {
     return (
-      <div>
-        <h1>Members</h1>
-        <div css={contentStyles}>
-          Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
-        </div>
+      <Cards>
+        <Card shape>
+          <h1>Membership</h1>
+          <div css={contentStyles}>
+            Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
+          </div>
+          <CtaButton to="/members/join">
+            <span css={{ verticalAlign: `middle` }}>
+              Join TMAC
+            </span>
+            <ArrowForwardIcon
+              css={{
+                verticalAlign: `baseline`,
+                marginLeft: `.6em`,
+              }}
+            />
+          </CtaButton>
+        </Card>
 
-        <section
+        <Card
           className="members-constitution"
           css={constitutionStyles}
         >
@@ -74,15 +94,14 @@ class NonMemberContent extends Component {
               </dd>
             </dl>
           </FuturaDiv>
-        </section>
+        </Card>
 
         <hr />
 
-        <section id="google-form-members">
-          <p>
+        {/* <section id="google-form-members">
+          <Card>
             Complete the <strong>TMAC Membership Form</strong> below to join the Texas Music Administrators Conference and participate in our events.
-          </p>
-
+          </Card>
           <iframe
             allowFullScreen
             aria-label="Google Forms, TMAC Membership Form 2017-2018"
@@ -92,8 +111,8 @@ class NonMemberContent extends Component {
             src="https://docs.google.com/forms/d/1uFOMrV52KJKXqO6ilM0Jern-suFxUfwGjjPgmGG6iOk/viewform?authuser=0&embedded=true"
           >
           </iframe>
-        </section>
-      </div>
+        </section> */}
+      </Cards>
     );
   }
 }

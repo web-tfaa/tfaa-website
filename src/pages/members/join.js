@@ -5,12 +5,11 @@ import Helmet from 'react-helmet';
 import React, { Component } from 'react';
 
 // Internal Dependencies
-import Container from '../../components/shared/container';
-import Status from './status';
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
-// import FuturaParagraph from '../../components/shared/futura-paragraph';
+import Container from '../../components/shared/container';
+import Status from './status';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
