@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
+import { navigateTo } from 'gatsby-link';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
@@ -167,10 +168,6 @@ class SignUpForm extends Component {
 
   render() {
     const {
-      history,
-    } = this.props;
-
-    const {
       email,
       emailError,
       error,
@@ -181,7 +178,7 @@ class SignUpForm extends Component {
       registerError,
     } = this.state;
 
-    if (isAuthenticated) history.push('/members');
+    if (isAuthenticated) navigateTo('/members');
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid =

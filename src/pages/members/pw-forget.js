@@ -5,6 +5,7 @@ import {
   Link,
   withRouter,
 } from 'react-router-dom';
+import { navigateTo } from 'gatsby-link';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -57,7 +58,7 @@ class PasswordForgetForm extends Component {
         }));
 
         setTimeout(
-          this.handleRedirectToMembers  ,
+          this.handleRedirectToMembers,
           7000,
         );
       })
@@ -69,7 +70,7 @@ class PasswordForgetForm extends Component {
   }
 
   handleRedirectToMembers = () => {
-    history.push('/members/login');
+    navigateTo('/members/login');
   }
 
   render() {

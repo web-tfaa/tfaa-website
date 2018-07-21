@@ -51,8 +51,8 @@ class Members extends Component {
           {isAuthenticated
             ? (
                 <MemberContent
-                contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
-                contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
+                  contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
+                  contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
               />
             )
             : <NonMemberContent />

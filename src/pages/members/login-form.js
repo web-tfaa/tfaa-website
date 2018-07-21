@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
+import { navigateTo } from 'gatsby-link';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
@@ -109,7 +110,7 @@ class LoginForm extends Component {
       history,
     } = this.props;
 
-    history.push('/members/sign-up');
+    navigateTo('/members/sign-up');
   }
 
   handleUpdateErrors = () => {
@@ -161,10 +162,6 @@ class LoginForm extends Component {
 
   render() {
     const {
-      history,
-    } = this.props;
-
-    const {
       email,
       emailError,
       error,
@@ -173,7 +170,7 @@ class LoginForm extends Component {
       passwordError,
     } = this.state;
 
-    if (isAuthenticated) history.push('/members');
+    if (isAuthenticated) navigateTo('/members');
 
     const signUpElement = [
       <hr key="login-form-divider" />,
