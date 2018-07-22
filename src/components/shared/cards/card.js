@@ -16,7 +16,7 @@ const cover = {
 };
 
 // Component Definition
-const Card = ({ children, shape }) => (
+const Card = ({ children }) => (
   <div
     css={{
       boxSizing: `border-box`,
@@ -67,19 +67,6 @@ const Card = ({ children, shape }) => (
         },
       }}
     >
-    {shape && <svg
-      viewBox="0 0 10 10"
-      preserveAspectRatio="xMinYMin slice"
-      className="masthead-bg-left"
-      css={{
-        ...cover,
-        zIndex: -2,
-        width: `100%`,
-        height: `100%`,
-      }}
-    >
-      <polygon fill={colors.ui.light} points="-5,-5 35,15 -5,25 " />
-    </svg>}
       {children}
     </div>
   </div>

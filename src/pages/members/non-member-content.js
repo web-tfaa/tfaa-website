@@ -48,7 +48,7 @@ class NonMemberContent extends Component {
   render() {
     return (
       <Cards>
-        <Card shape>
+        <Card>
           <CardHeadline>Membership</CardHeadline>
           <div css={contentStyles}>
             Our members promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
