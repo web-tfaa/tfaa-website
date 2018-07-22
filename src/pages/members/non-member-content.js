@@ -98,7 +98,7 @@ class NonMemberContent extends Component {
 
         <hr />
 
-        {/* <section id="google-form-members">
+        <section id="google-form-members">
           <Card>
             Complete the <strong>TMAC Membership Form</strong> below to join the Texas Music Administrators Conference and participate in our events.
           </Card>
@@ -111,7 +111,7 @@ class NonMemberContent extends Component {
             src="https://docs.google.com/forms/d/1uFOMrV52KJKXqO6ilM0Jern-suFxUfwGjjPgmGG6iOk/viewform?authuser=0&embedded=true"
           >
           </iframe>
-        </section> */}
+        </section>
       </Cards>
     );
   }
