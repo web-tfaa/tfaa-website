@@ -19,6 +19,7 @@ export default () =>
       <title>TMAC | Sponsors</title>
     </Helmet>
     <h1>Sponsors</h1>
+    <button>Become a sponsor</button>
     <Container>
       <div
         css={{

@@ -2,6 +2,8 @@
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React from 'react';
+import CheckIcon from 'react-icons/lib/md/check';
+import ClearIcon from 'react-icons/lib/md/clear';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -19,6 +21,7 @@ import membersSidebar from './members-links.yml';
 const propTypes = {
   contentfulFileShareData: PropTypes.array,
   contentfulFileShareDescriptionData: PropTypes.array,
+  memberEmail: PropTypes.string,
 };
 
 const defaultProps = {
@@ -33,6 +36,22 @@ const futuraStyles = {
 };
 
 const memberFileShareCardStyles = { marginTop: '1rem' };
+
+const taskIconStyles = {
+  marginRight: 8,
+  height: 24,
+  width: 24,
+};
+
+const checkIconStyles = {
+  ...taskIconStyles,
+  color: 'green',
+};
+
+const clearIconStyles = {
+  ...taskIconStyles,
+  color: 'red',
+};
 
 // Local Components
 const FuturaDiv = ({ children }) => (
@@ -64,6 +83,7 @@ const MemberContent = (props) => {
   const {
     contentfulFileShareData,
     contentfulFileShareDescriptionData,
+    memberEmail,
   } = props;
 
   // console.log('contentfulFileShareData', contentfulFileShareData);
@@ -71,7 +91,13 @@ const MemberContent = (props) => {
 
   return (
     <div>
+      <h1>Membership Dashboard</h1>
       <Cards>
+        <Card>
+          <CardHeadline>Tasks for {memberEmail}</CardHeadline>
+          <FuturaDiv><CheckIcon css={checkIconStyles} />Registered for 2018-2019 school year</FuturaDiv>
+          <FuturaDiv><ClearIcon css={clearIconStyles} />Paid 2018-2019 membership dues</FuturaDiv>
+        </Card>
         {contentfulFileShareData && contentfulFileShareData.map((edge, index) => (
           <MemberFileShareCard
             key={edge.node.id}

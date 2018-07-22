@@ -33,6 +33,8 @@ class Members extends Component {
       authUser,
     } = this.state;
 
+    console.log('authUser', authUser);
+
     const isAuthenticated = Boolean(authUser);
 
     return (
@@ -51,6 +53,7 @@ class Members extends Component {
           {isAuthenticated
             ? (
                 <MemberContent
+                  memberEmail={authUser.email}
                   contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
                   contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
               />

@@ -29,18 +29,18 @@ import membersSidebar from './members-links.yml';
 //   contentfulFileShareDescriptionData: null,
 // }
 
-// const futuraStyles = {
-//   fontFamily: options.headerFontFamily.join(`,`),
-//   lineHeight: '1.6',
-//   marginBottom: '1rem',
-// };
+const futuraStyles = {
+  fontFamily: options.headerFontFamily.join(`,`),
+  lineHeight: '1.6',
+  marginBottom: '1rem',
+};
 
 // Local Components
-// const FuturaDiv = ({ children }) => (
-//   <div css={futuraStyles}>
-//     {children}
-//   </div>
-// );
+const FuturaDiv = ({ children }) => (
+  <div css={futuraStyles}>
+    {children}
+  </div>
+);
 
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>
@@ -97,13 +97,23 @@ class JoinContent extends Component {
           <Helmet>
             <title>TMAC | Join TMAC</title>
           </Helmet>
-          {/* <Cards>
+          <Cards>
             <Card>
               <CardHeadline>Join TMAC</CardHeadline>
-
+              <FuturaDiv>
+                To join TMAC please complete these two steps:
+              </FuturaDiv>
+              <FuturaDiv>
+                1. Complete Registration Form
+              </FuturaDiv>
+              <FuturaDiv>
+                2. Pay dues online or via mail
+              </FuturaDiv>
             </Card>
-          </Cards> */}
-          Join TMAC
+          </Cards>
+          <FuturaDiv css={{ marginTop: 12 }}>
+            * Registration is not complete until payment is received.
+          </FuturaDiv>
         </Container>
 
         <div

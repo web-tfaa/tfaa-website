@@ -198,7 +198,7 @@ export default () => (
             <dd css={paddingStyles}>
               The Vice-President will chair the nominating committee and will invite active members to serve on this committee as directed by the President. The committee shall contact all possible nominees to determine their willingness to serve. A slate, containing the name of one or more active members who have agreed to run for the Secretary position must be presented to the Board for ratification prior to placing the election on a meeting agenda for the members. The committee members shall serve as the election officials, should a written ballot be taken on the election of the new board member.
             </dd>
-            <dt>Section 4 &mdash; ecognitions Committee</dt>
+            <dt>Section 4 &mdash; Recognitions Committee</dt>
             <dd css={paddingStyles}>
               The Vice-President will chair the recognitions committee and invite no less than 2 active members to serve on this committee prior to the Fall Retreat. This committee will be charged with the task of soliciting nominations for “Outstanding Administrator” from the general Texas Music Educators Association Membership. From those TMAC members in good standing who are nominated, the committee will recommend a single honoree to the Board for approval. The honoree will be announced at the conclusion of the Fall Retreat and a formal presentation will be coordinated with the TMEA board during a general session at the February conference.
             </dd>
