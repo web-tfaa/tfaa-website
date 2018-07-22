@@ -1,4 +1,4 @@
-export default {
+export const sponsors2017_2018 = {
   'champion': [
     {
       name: 'Brook Mays and H&H Music',

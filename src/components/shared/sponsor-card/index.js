@@ -67,11 +67,18 @@ class SponsorCard extends Component {
           css={{
             color: '#32456B',
             fontWeight: 600,
-            marginBottom: '1em',
           }}
         >
-          {sponsorClass} Sponsor (${donationAmount} donation)
+          {sponsorClass}
         </h3>
+        <h5
+          css ={{
+            color: '#32456B',
+            marginTop: '1.25rem',
+          }}
+        >
+          (${donationAmount} donation)
+        </h5>
         {this.renderSponsors(sponsorData)}
       </div>
     );
