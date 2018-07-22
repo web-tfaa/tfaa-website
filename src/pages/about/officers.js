@@ -35,6 +35,7 @@ const Avatar = ({ alt, src }) => (
     }}
   >
     <img
+      alt={alt}
       css={{
         width: '100%',
         height: '100%',
@@ -42,7 +43,6 @@ const Avatar = ({ alt, src }) => (
         // Handle non-square image. The property isn't supported by IE11.
         // objectFit: 'cover',
       }}
-      alt={alt}
       src={src}
     />
   </div>

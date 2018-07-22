@@ -3,7 +3,6 @@ import React from 'react';
 
 // Internal Dependencies
 import { rhythm, scale, options } from '../../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 
 // Component Definition
 const Cards = ({ children }) => (

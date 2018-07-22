@@ -3,7 +3,7 @@ import React from 'react';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
-import { rhythm, scale, options } from '../../../utils/typography';
+import { rhythm } from '../../../utils/typography';
 import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 
 // Local Variables
@@ -19,6 +19,7 @@ const cover = {
 const Card = ({ children }) => (
   <div
     css={{
+      borderBottom: `1px solid ${colors.ui.light}`,
       boxSizing: `border-box`,
       display: `flex`,
       transform: `translateZ(0)`,
