@@ -60,3 +60,10 @@ export const sponsors2017_2018 = {
     },
   ],
 };
+
+export const sponsors2018_2019 = {
+  'champion': [],
+  'gold': [],
+  'silver': [],
+  'bronze': [],
+};

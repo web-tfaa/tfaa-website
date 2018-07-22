@@ -16,6 +16,8 @@ const defaultProps = {
   min: null,
 };
 
+const emptySponsorStyles = { maxWidth: '75%' };
+
 // Component Definition
 class SponsorCard extends Component {
   renderSponsors = (sponsorData) => {
@@ -33,8 +35,8 @@ class SponsorCard extends Component {
 
     if (sponsorList.length < 1) {
       return (
-        <div>
-          Please contact any TMAC officer about becoming a {sponsorClass} sponsor.
+        <div css={emptySponsorStyles}>
+          Please <Link to="/about/officers">contact any TMAC officer</Link> about becoming a <span css={{  fontWeight: '600' }}>{sponsorClass}</span> sponsor.
         </div>
       );
     }
@@ -56,11 +58,14 @@ class SponsorCard extends Component {
     return (
       <div
         css={{
-          marginBottom: '1em',
-          padding: '2em 3em',
+          alignItems: 'center',
           backgroundColor: 'white',
           borderRadius: 4,
           boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
+          display: 'flex',
+          flexDirection: 'column',
+          marginBottom: '1em',
+          padding: '2em 3em',
         }}
       >
         <h3

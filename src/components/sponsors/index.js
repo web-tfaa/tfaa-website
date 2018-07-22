@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 // Internal Dependencies
 import Container from '../shared/container';
 import SponsorCard from '../shared/sponsor-card';
-import { sponsors2017_2018 as sponsorData } from './sponsor-data';
+import { sponsors2018_2019 as sponsorData } from './sponsor-data';
 
 // Component Definition
 export default () =>
