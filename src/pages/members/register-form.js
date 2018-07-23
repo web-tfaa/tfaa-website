@@ -88,7 +88,7 @@ const INITIAL_STATE = {
 
 // To check for a valid email address
 const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-const zipRegex = /^\d{5}((?:[-\s]\d{4})|(\d{4}))?$/;
+const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Component Definition
 class RegisterForm extends Component {
@@ -144,15 +144,19 @@ class RegisterForm extends Component {
       email,
     } = this.state;
 
-    if (!email) {
-      this.setState({
-        emailError: 'Email is required',
-      });
-    } else if (emailRegex.test(email)) {
+    if (!email && value) {
       this.setState({
         emailError: '',
       });
-    } else if (email && !emailRegex.test(email)) {
+    } else if (email && !value) {
+      this.setState({
+        emailError: 'Email is required',
+      });
+    } else if (email && value && emailRegex.test(value)) {
+      this.setState({
+        emailError: '',
+      });
+    } else if (email && value && !emailRegex.test(value)) {
       this.setState({
         emailError: 'Use a valid email',
       });
@@ -160,30 +164,25 @@ class RegisterForm extends Component {
   }
 
   handleUpdateZipError = (value) => {
-    const {
-      zip,
-    } = this.state;
+    // const {
+    //   zip,
+    // } = this.state;
 
-    console.log(zip, value);
+    // console.log('yo', zip, value);
 
-    if (!zip && value) {
-      this.setState({
-        zipError: '',
-      });
-    } else if (zip && !value) {
+    if (!value) {
       this.setState({
         zipError: 'ZIP Code is required',
       });
-    } else if (zip && value && zipRegex.test(value)) {
+    } else if (value && zipRegex.test(value)) {
       this.setState({
         zipError: '',
       });
-    } else if (zip && value && !zipRegex.test(value)) {
+    } else if (value && !zipRegex.test(value)) {
       this.setState({
         zipError: 'Use a valid ZIP Code',
       });
     }
-
   }
 
   handleUpdateInputError = (name, value) => {
@@ -240,13 +239,6 @@ class RegisterForm extends Component {
           this.setState({ cityError: '' });
         } else if (city && !value) {
           this.setState({ cityError: 'City is required' });
-        }
-        break;
-      case 'zip':
-        if (!zip && value) {
-          this.setState({ zipError: '' });
-        } else if (zip && !value) {
-          this.setState({ zipError: 'ZIP Code is required' });
         }
         break;
       case 'officePhone':
@@ -414,11 +406,26 @@ class RegisterForm extends Component {
             css={inputStyles}
             name="zip"
             onChange={this.handleUpdate}
-            placeholder="e.g. Dallas"
+            placeholder="e.g. 75150"
             value={zip}
           />
           <div css={baseErrorStyles}>
             {zipError}
+          </div>
+
+          {/* EMAIL */}
+          <label css={labelStyles}>
+            Email
+          </label>
+          <input
+            css={inputStyles}
+            name="email"
+            onChange={this.handleUpdate}
+            placeholder="e.g. music@austinisd.edu"
+            value={email}
+          />
+          <div css={baseErrorStyles}>
+            {emailError}
           </div>
 
           {/* SUBMIT BUTTON */}

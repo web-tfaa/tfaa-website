@@ -58,7 +58,7 @@ export default () =>
         textAlign: 'right',
       }}
     >
-      <FuturaParagraph>
+      <div>
         Built by
         <a
           css={{ marginLeft: 5 }}
@@ -66,6 +66,6 @@ export default () =>
         >
           Drumsensei Media
         </a>
-      </FuturaParagraph>
+      </div>
     </div>
   </footer>
