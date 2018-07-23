@@ -6,6 +6,8 @@ import presets, { colors } from '../../../utils/presets';
 import { rhythm } from '../../../utils/typography';
 import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 
+console.log('WHAT', vPVHd);
+
 // Local Variables
 const cover = {
   bottom: 0,

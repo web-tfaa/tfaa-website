@@ -338,4 +338,4 @@ const _options = {
 const typography = new Typography(_options);
 const { rhythm, scale, options } = typography;
 
-export default typography;
+export { rhythm, scale, options, typography as default };
