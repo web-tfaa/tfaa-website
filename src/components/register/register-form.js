@@ -131,10 +131,7 @@ class RegisterForm extends Component {
       lastName,
     } = this.state;
 
-    console.log('NICE!', {
-      firstName,
-      lastName,
-    });
+    console.log('NICE!', this.state);
 
     // auth.doSignInWithEmailAndPassword(email, password)
     //   .then(() => {

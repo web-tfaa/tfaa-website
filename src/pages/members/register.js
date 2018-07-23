@@ -15,7 +15,7 @@ import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
 import CtaButton from '../../components/masthead/cta-button';
-import RegisterForm from './register-form';
+import RegisterForm from '../../components/register/register-form';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -106,7 +106,7 @@ class JoinContent extends Component {
           <CardHeadline>Register for TMAC</CardHeadline>
 
           <RegisterForm />
-          
+
           <div style={{ marginTop: '1.5rem' }}>
             * Registration is not complete until payment is received.
           </div>
