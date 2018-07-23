@@ -15,10 +15,10 @@ import aboutSidebar from './about-links.yml';
 // Component Definition
 export default ({ data }) => (
   <div>
-    <Helmet>
-      <title>TMAC | About</title>
-    </Helmet>
     <Container>
+      <Helmet>
+        <title>TMAC | About</title>
+      </Helmet>
       <h1>About {data.site.siteMetadata.title}</h1>
       <section>
         <h4>Our Mission</h4>

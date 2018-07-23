@@ -69,8 +69,14 @@ export default () => (
             src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Moreno.jpg"
           />
           <CardHeadline>President</CardHeadline>
-          <FuturaParagraph><a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a></FuturaParagraph>
-          <FuturaParagraph>Coordinator of Fine Arts, Austin ISD</FuturaParagraph>
+          <FuturaParagraph>
+            <a href="mailto:patricia.h.moreno@austinisd.org">
+              Patricia Moreno
+            </a>
+          </FuturaParagraph>
+          <FuturaParagraph>
+            Coordinator of Fine Arts, Austin ISD
+          </FuturaParagraph>
         </Card>
         <Card>
           <Avatar
@@ -78,8 +84,14 @@ export default () => (
             src="https://res.cloudinary.com/tmac/image/upload/v1523131021/Lester.jpg"
           />
           <CardHeadline>Vice-President</CardHeadline>
-          <FuturaParagraph><a href="mailto:jon.lester@abileneisd.org">Jay Lester</a></FuturaParagraph>
-          <FuturaParagraph>Executive Director of Fine Arts, Abilene ISD</FuturaParagraph>
+          <FuturaParagraph>
+            <a href="mailto:jon.lester@abileneisd.org">
+              Jay Lester
+            </a>
+          </FuturaParagraph>
+          <FuturaParagraph>
+            Executive Director of Fine Arts, Abilene ISD
+          </FuturaParagraph>
         </Card>
         <Card>
           <Avatar
@@ -87,8 +99,14 @@ export default () => (
             src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Turner.jpg"
           />
           <CardHeadline>Treasurer</CardHeadline>
-          <FuturaParagraph><a href="mailto:jeff_turner@allenisd.org">Jeff Turner</a></FuturaParagraph>
-          <FuturaParagraph>Director of Fine Arts, Allen ISD</FuturaParagraph>
+          <FuturaParagraph>
+            <a href="mailto:jeff_turner@allenisd.org">
+              Jeff Turner
+            </a>
+          </FuturaParagraph>
+          <FuturaParagraph>
+            Director of Fine Arts, Allen ISD
+          </FuturaParagraph>
         </Card>
         <Card>
           <Avatar
@@ -96,8 +114,14 @@ export default () => (
             src="https://res.cloudinary.com/tmac/image/upload/v1532300879/jim-egger.jpg"
           />
           <CardHeadline>Secretary</CardHeadline>
-          <FuturaParagraph><a href="mailto:jim.egger@mcallenisd.net">Jim Egger</a></FuturaParagraph>
-          <FuturaParagraph>Director of Fine Arts, McAllen ISD</FuturaParagraph>
+          <FuturaParagraph>
+            <a href="mailto:jim.egger@mcallenisd.net">
+              Jim Egger
+            </a>
+          </FuturaParagraph>
+          <FuturaParagraph>
+            Director of Fine Arts, McAllen ISD
+          </FuturaParagraph>
         </Card>
         <Card>
           <Avatar
@@ -105,8 +129,14 @@ export default () => (
             src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Janda.jpg"
           />
           <CardHeadline>Past-President</CardHeadline>
-          <FuturaParagraph><a href="mailto:johnjanda@tomballisd.net">JD Janda</a></FuturaParagraph>
-          <FuturaParagraph>Director of Fine Arts, Tomball ISD</FuturaParagraph>
+          <FuturaParagraph>
+            <a href="mailto:johnjanda@tomballisd.net">
+              JD Janda
+            </a>
+          </FuturaParagraph>
+          <FuturaParagraph>
+            Director of Fine Arts, Tomball ISD
+          </FuturaParagraph>
         </Card>
       </Cards>
     </div>

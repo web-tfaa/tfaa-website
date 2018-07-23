@@ -37,7 +37,7 @@ export default () => (
       <section>
         <h4>When</h4>
         <p css={indentStyles}>
-          Friday, February 16, 2018<br />
+          Friday, February 15 2019<br />
           6:00-8:00 PM
         </p>
       </section>
@@ -68,7 +68,7 @@ export default () => (
       <section>
         <h4>Contact</h4>
         <p css={indentStyles}>
-          For more information contact <a href="mailto:">JD Janda</a>, TMAC President.
+          For more information contact <a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a>, TMAC President.
         </p>
       </section>
 
