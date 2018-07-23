@@ -65,7 +65,7 @@ const FuturaDiv = ({ children }) => (
 // };
 
 // Component Definition
-class JoinContent extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
@@ -132,4 +132,4 @@ class JoinContent extends Component {
   }
 }
 
-export default JoinContent;
+export default Register;

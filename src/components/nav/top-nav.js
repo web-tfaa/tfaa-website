@@ -1,8 +1,8 @@
 // External Dependencies
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Link from 'gatsby-link';
 import hex2rgba from 'hex2rgba';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import typography, { rhythm, scale } from '../../utils/typography';
@@ -17,9 +17,6 @@ import {
   vPVHd,
   vPVVHd,
 } from '../../utils/gutters';
-
-// Local Variables
-// const texasFlagBlue = '#002868';
 
 const navItemStyles = {
   ...scale(-1 / 3),

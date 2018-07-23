@@ -1,11 +1,15 @@
 // External Dependencies
-import React from 'react';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
+import React from 'react';
+import {
+  graphql,
+  Link,
+} from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
@@ -13,8 +17,8 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import aboutSidebar from './about-links.yml';
 
 // Component Definition
-export default ({ data }) => (
-  <div>
+export default ({ data, location }) => (
+  <Layout location={location}>
     <Container>
       <Helmet>
         <title>TMAC | About</title>
@@ -86,7 +90,7 @@ export default ({ data }) => (
         <SidebarBody inline yaml={aboutSidebar} />
       </div>
     </Container>
-  </div>
+  </Layout>
 );
 
 export const query = graphql`

@@ -1,8 +1,10 @@
 // External Dependencies
-import React, { Component } from 'react';
-import Link from 'gatsby-link';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
-import { navigateTo } from 'gatsby-link';
+import React, { Component } from 'react';
+import {
+  Link,
+  push,
+} from 'gatsby';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
@@ -106,11 +108,7 @@ class LoginForm extends Component {
   }
 
   handleClickSignUp = () => {
-    const {
-      history,
-    } = this.props;
-
-    navigateTo('/members/sign-up');
+    push('/members/sign-up');
   }
 
   handleUpdateErrors = () => {
@@ -170,7 +168,7 @@ class LoginForm extends Component {
       passwordError,
     } = this.state;
 
-    if (isAuthenticated) navigateTo('/members');
+    if (isAuthenticated) push('/members');
 
     const signUpElement = [
       <hr key="login-form-divider" />,

@@ -1,13 +1,15 @@
 // External Dependencies
-import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import React, { Component } from 'react';
+import { graphql } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
-import Status from './status';
 import presets from '../../utils/presets';
+import Status from './status';
 import { firebase } from '../../firebase';
 
 // Component Definition
@@ -33,35 +35,35 @@ class Members extends Component {
       authUser,
     } = this.state;
 
-    console.log('authUser', authUser);
-
     const isAuthenticated = Boolean(authUser);
 
     return (
-      <div css={{
-        paddingLeft: 0,
-        width: `0 auto`,
-        [presets.Tablet]: {
-          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-        },
-      }}>
-        <Status authUser={authUser} />
-        <Container>
-          <Helmet>
-            <title>TMAC | Members</title>
-          </Helmet>
-          {isAuthenticated
-            ? (
-                <MemberContent
-                  memberEmail={authUser.email}
-                  contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
-                  contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
-              />
-            )
-            : <NonMemberContent />
-          }
-        </Container>
-      </div>
+      <Layout location={this.props.location}>
+        <div css={{
+          paddingLeft: 0,
+          width: `0 auto`,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+          <Status authUser={authUser} />
+          <Container>
+            <Helmet>
+              <title>TMAC | Members</title>
+            </Helmet>
+            {isAuthenticated
+              ? (
+                  <MemberContent
+                    memberEmail={authUser.email}
+                    contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
+                    contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
+                />
+              )
+              : <NonMemberContent />
+            }
+          </Container>
+        </div>
+      </Layout>
     );
   }
 }

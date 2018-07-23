@@ -1,7 +1,7 @@
 // External Dependencies
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'gatsby-link';
+import React, { Component } from 'react';
+import { Link } from 'gatsby';
 
 // Local Variables
 const propTypes = {

@@ -1,10 +1,13 @@
 // External Dependencies
-import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import React from 'react';
+import {
+  graphql,
+  Link,
+} from 'gatsby';
 
 // Internal Dependencies
-import Container from '../../../components/shared/container';
+import Container from '../../components/shared/container';
 
 // Component Definition
 export default ({ data }) => (

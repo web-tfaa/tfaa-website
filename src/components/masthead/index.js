@@ -1,8 +1,8 @@
 // External Dependencies
 import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import hex2rgba from 'hex2rgba';
-import Link from 'gatsby-link';
 import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import CtaButton from './cta-button';

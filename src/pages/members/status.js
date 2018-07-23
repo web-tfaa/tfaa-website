@@ -1,11 +1,12 @@
 // External Dependencies
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import presets, { colors } from '../../utils/presets';
-import { options } from '../../utils/typography';
 import { auth } from '../../firebase';
+import { options } from '../../utils/typography';
 
 // Local Styles
 const statusRootStyles = {

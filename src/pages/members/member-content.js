@@ -67,7 +67,6 @@ const FuturaAnchor = ({ children, href }) => (
 );
 
 const MemberFileShareCard = ({ node, description }) => {
-  console.log('node in MemberFileShareCard', node);
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>
@@ -85,9 +84,6 @@ const MemberContent = (props) => {
     contentfulFileShareDescriptionData,
     memberEmail,
   } = props;
-
-  // console.log('contentfulFileShareData', contentfulFileShareData);
-  console.log('contentfulFileShareDescriptionData', contentfulFileShareDescriptionData);
 
   return (
     <div>

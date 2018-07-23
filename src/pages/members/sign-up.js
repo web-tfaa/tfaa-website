@@ -1,9 +1,11 @@
 // External Dependencies
-import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
-import { navigateTo } from 'gatsby-link';
+import React, { Component } from 'react';
+import {
+  Link,
+  push,
+} from 'gatsby';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
@@ -178,7 +180,7 @@ class SignUpForm extends Component {
       registerError,
     } = this.state;
 
-    if (isAuthenticated) navigateTo('/members');
+    if (isAuthenticated) push('/members');
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid =

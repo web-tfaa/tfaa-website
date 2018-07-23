@@ -1,13 +1,12 @@
 // External Dependencies
+import hex2rgba from 'hex2rgba';
 import React from 'react';
-import Link from "gatsby-link"
+import { css } from 'glamor';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
-import { rhythm, scale, options } from "../../utils/typography"
-import presets, { colors } from "../../utils/presets"
-import hex2rgba from "hex2rgba"
-
-import { css } from "glamor"
+import { rhythm, scale, options } from '../../utils/typography';
+import presets, { colors } from '../../utils/presets';
 
 // Local Variables
 const texasFlagBlue = '#002868';

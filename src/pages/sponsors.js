@@ -1,8 +1,13 @@
 // External Dependencies
-import React from 'react'
+import React from 'react';
 
 // Internal Dependencies
-import Sponsors from '../components/sponsors'
+import Layout from '../components/layout';
+import Sponsors from '../components/sponsors';
 
 // Component Definition
-export default () => <Sponsors />;
+export default (props) => (
+  <Layout location={props.location}>
+    <Sponsors />
+  </Layout>
+);

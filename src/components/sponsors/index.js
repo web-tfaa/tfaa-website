@@ -1,7 +1,7 @@
 // External Dependencies
-import React from 'react';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
+import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../shared/container';
@@ -9,12 +9,8 @@ import SponsorCard from '../shared/sponsor-card';
 import { sponsors2018_2019 as sponsorData } from './sponsor-data';
 
 // Component Definition
-export default () =>
-  <section
-    css={{
-      textAlign: 'center',
-    }}
-  >
+export default () => (
+  <section css={{ textAlign: 'center' }}>
     <Helmet>
       <title>TMAC | Sponsors</title>
     </Helmet>
@@ -53,3 +49,4 @@ export default () =>
       </div>
     </Container>
   </section>
+);

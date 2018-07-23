@@ -1,7 +1,9 @@
 // External Dependencies
 import React, { Component } from 'react';
-import Link from 'gatsby-link';
-import { navigateTo } from 'gatsby-link';
+import {
+  Link,
+  push,
+} from 'gatsby';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
@@ -131,8 +133,6 @@ class RegisterForm extends Component {
       lastName,
     } = this.state;
 
-    console.log('NICE!', this.state);
-
     // auth.doSignInWithEmailAndPassword(email, password)
     //   .then(() => {
     //     this.setState(() => ({
@@ -247,7 +247,6 @@ class RegisterForm extends Component {
         }
         break;
       case 'cellPhone':
-        console.log('value!', value);
         if (!cellPhone && value) {
           this.setState({ cellPhoneError: '' });
         } else if (cellPhone && !value) {
@@ -284,7 +283,7 @@ class RegisterForm extends Component {
       officeFax,
     } = this.state;
 
-    if (isAuthenticated) navigateTo('/members');
+    if (isAuthenticated) push('/members');
 
     const hasInput = firstName !== '' && lastName !== '';
 

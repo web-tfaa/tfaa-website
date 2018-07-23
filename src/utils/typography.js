@@ -14,7 +14,7 @@ import {
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
 
-const options = {
+const _options = {
   headerFontFamily: [
     `Futura PT`,
     `-apple-system`,
@@ -335,6 +335,7 @@ const options = {
   },
 }
 
-const typography = new Typography(options)
+const typography = new Typography(_options);
+const { rhythm, scale, options } = typography;
 
-export default typography
+export default typography;

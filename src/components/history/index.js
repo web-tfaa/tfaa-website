@@ -1,9 +1,9 @@
 // External Dependencies
-import React from "react";
-import Link from "gatsby-link";
+import React from 'react';
+import { Link } from 'gatsby';
 
 // Component Definition
-export default () =>
+export default () => (
   <div>
     <h3
       css={{
@@ -13,11 +13,7 @@ export default () =>
     >
       History
     </h3>
-    <div
-      css={{
-        display: 'flex',
-      }}
-    >
+    <div css={{ display: 'flex' }}>
       <div>
         <img src="https://res.cloudinary.com/tmac/image/upload/v1523131020/history_woody-schober.jpg"/>
       </div>
@@ -31,3 +27,4 @@ export default () =>
       </div>
     </div>
   </div>
+);

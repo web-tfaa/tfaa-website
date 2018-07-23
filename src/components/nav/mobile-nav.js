@@ -1,6 +1,6 @@
 // External Dependencies
 import React from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import presets, { colors } from '../../utils/presets';

@@ -1,10 +1,10 @@
 // External Dependencies
-import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
-import Container from '../../../components/shared/container';
+import Container from '../../components/shared/container';
 
 // Local Variables
 const indentStyles = {
@@ -14,32 +14,14 @@ const indentStyles = {
 // Component Definition
 export default () => (
   <div>
+    <Helmet>
+      <title>TMAC | Summer Round Table</title>
+    </Helmet>
     <Container>
-      <Helmet>
-        <title>TMAC | Job Fair</title>
-      </Helmet>
-      <h1>TMAC Job Fair</h1>
-
-      <section>
-        <h4>Who</h4>
-        <p css={indentStyles}>
-          *District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see&nbsp;
-            <a
-              href="https://docs.google.com/document/d/1qA1cX-SQd7_A8CDYGDIPtjJawoSaCKstATsQXoojPoE/edit"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Job Fair Rules
-            </a>)
-        </p>
-      </section>
-
+      <h1>2017 Summer Convention Round Table</h1>
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>
-          Friday, February 15, 2019<br />
-          6:00-8:00 PM
-        </p>
+        <p css={indentStyles}>Friday, July 21, 2017</p>
       </section>
 
       <section>
@@ -52,7 +34,7 @@ export default () => (
           >
             Henry B. Gonzalez Convention Center
           </a>,&nbsp;
-          Bridge Hall
+          CC210 (tentative room assignment)
           <p>
             <a
               href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
@@ -66,10 +48,18 @@ export default () => (
       </section>
 
       <section>
-        <h4>Contact</h4>
+        <h4>Why</h4>
         <p css={indentStyles}>
-          For more information contact <a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a>, TMAC President.
+          Held in conjunction with the&nbsp;
+          <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>,&nbsp;
+          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
+          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions.
         </p>
+      </section>
+
+      <section>
+        <h4>Who</h4>
+        <p css={indentStyles}>New music administrators are encouraged to attend!</p>
       </section>
 
     </Container>

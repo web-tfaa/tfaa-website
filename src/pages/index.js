@@ -1,8 +1,8 @@
 // External Dependencies
-import React from 'react';
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
-import Link from 'gatsby-link';
+import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -10,6 +10,7 @@ import CardHeadline from '../components/shared/cards/card-headline';
 import Cards from '../components/shared/cards';
 import FeaturedStat from '../components/shared/featured-stat';
 import FuturaParagraph from '../components/shared/futura-paragraph';
+import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead/';
 import Stat from '../components/shared/featured-stat/stat';
@@ -36,7 +37,7 @@ import { rhythm } from '../utils/typography';
 
 // Component Definition
 export default (props) => (
-  <div>
+  <Layout location={props.location}>
     <Helmet>
       <title>TMAC | Home</title>
     </Helmet>
@@ -72,7 +73,7 @@ export default (props) => (
       <FeaturedStat />
       {/* {props.data.allContentfulBlog.edges.map((edge) => <BlogPost key={edge.node.id} node={edge.node} />)} */}
     </div>
-  </div>
+  </Layout>
 );
 
 // export const pageQuery = graphql`

@@ -1,7 +1,7 @@
 // External Dependencies
 import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import React, { Component , Fragment } from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';

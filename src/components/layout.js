@@ -4,10 +4,10 @@ import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
-import Footer from '../components/footer';
-import TopNav from '../components/nav/top-nav';
-import SidebarBody from '../components/shared/sidebar/sidebar-body';
-import MobileNav from '../components/nav/mobile-nav';
+import Footer from './footer';
+import TopNav from './nav/top-nav';
+import SidebarBody from './shared/sidebar/sidebar-body';
+import MobileNav from './nav/mobile-nav';
 import { firebase } from '../firebase';
 
 // Sidebar data
@@ -213,7 +213,7 @@ class DefaultLayout extends Component {
               },
             }}
           >
-            {children()}
+            {children}
           </div>
         </div>
         <MobileNav />

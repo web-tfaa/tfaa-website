@@ -1,16 +1,15 @@
 // External Dependencies
-import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import React, { Component } from 'react';
 import {
-  Link,
   withRouter,
 } from 'react-router-dom';
-import { navigateTo } from 'gatsby-link';
+import { push } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import { auth } from '../../firebase';
 import presets, { colors } from '../../utils/presets';
+import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
 // Local Functions
@@ -42,9 +41,6 @@ class PasswordForgetForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const {
-      history,
-    } = this.props;
 
     const {
       email,
@@ -70,7 +66,7 @@ class PasswordForgetForm extends Component {
   }
 
   handleRedirectToMembers = () => {
-    navigateTo('/members/login');
+    push('/members/login');
   }
 
   render() {

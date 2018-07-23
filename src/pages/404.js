@@ -1,6 +1,6 @@
 // External Dependencies
 import React, { Component } from 'react';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -8,13 +8,14 @@ import CardHeadline from '../components/shared/cards/card-headline';
 import Cards from '../components/shared/cards';
 import Container from '../components/shared/container';
 import FuturaParagraph from '../components/shared/futura-paragraph';
+import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 
 // Component Definition
 export default class FourOhFour extends Component {
-  render() {
+  render({ location }) {
     return (
-      <div>
+      <Layout location={location} >
         <MastheadBg />
         <Container hasSideBar={false}>
           <Cards>
@@ -28,7 +29,7 @@ export default class FourOhFour extends Component {
             </Card>
           </Cards>
         </Container>
-      </div>
+      </Layout>
     );
   }
 }

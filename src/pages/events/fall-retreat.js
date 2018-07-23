@@ -1,10 +1,10 @@
 // External Dependencies
-import React from 'react';
 import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
+import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
-import Container from '../../../components/shared/container';
+import Container from '../../components/shared/container';
 
 // Local Variables
 const indentStyles = {
@@ -26,7 +26,7 @@ export default () => (
           The TMAC Fall Retreat is open to all current TMAC members who are in good standing (registered and paid). There is no separate conference registration process.
         </p>
       </section>
-      
+
       <section>
         <h4>When</h4>
         <p css={indentStyles}>Wednesday, November 15 (6:30 PM) — Friday, November 17, 2017 (noon)</p>
