@@ -7,8 +7,6 @@ import {
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
-import Container from '../../components/shared/container';
-import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import {
   auth,

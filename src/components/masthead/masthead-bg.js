@@ -3,17 +3,7 @@ import React from 'react';
 
 // Internal Dependencies
 import presets, { colors } from '../../utils/presets';
-import {
-  options,
-  rhythm,
-  scale,
-} from '../../utils/typography';
-import {
-  vP,
-  vPHd,
-  vPVHd,
-  vPVVHd,
-} from '../../utils/gutters';
+import { rhythm } from '../../utils/typography';
 
 // Local Variables
 const vPOff = rhythm(presets.gutters.default - presets.logoOffset);

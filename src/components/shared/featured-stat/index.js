@@ -4,8 +4,6 @@ import differenceInYears from 'date-fns/difference_in_years'
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
-import { rhythm, scale, options } from '../../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
 import Stat from './stat';
 
 // Icons
@@ -21,7 +19,6 @@ const schoolIconColor = '#f9b320';
 const faceIconColor = '#b96af7';
 
 // Local Variables
-const texasFlagBlue = '#002868';
 const numberOfDistricts = 1246;
 const numberOfSchools = 3000;
 const ageOfTmac = differenceInYears(new Date(), new Date('Tue Feb 15 1983 00:00:00 GMT-0600 (CST)'));
@@ -32,7 +29,6 @@ const FeaturedStat = ({ children }) => (
     css={{
       backgroundColor: `${colors.ui.light}`,
       display: 'flex',
-      flex: '1 1 auto',
       flex: `1 1 100%`,
       flexWrap: 'wrap',
       justifyContent: 'space-around',

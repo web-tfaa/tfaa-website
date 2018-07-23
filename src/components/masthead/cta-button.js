@@ -6,7 +6,7 @@ import { Link } from 'gatsby';
 
 // Internal Dependencies
 import { rhythm, scale, options } from '../../utils/typography';
-import presets, { colors } from '../../utils/presets';
+import presets from '../../utils/presets';
 
 // Local Variables
 const texasFlagBlue = '#002868';

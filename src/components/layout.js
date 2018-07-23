@@ -16,7 +16,7 @@ import membersSidebar from '../pages/members/members-links.yml';
 import resourcesSidebar from '../pages/resources/resources-links.yml';
 
 // Helpers
-import { rhythm, scale } from '../utils/typography';
+import { rhythm } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
 
 // from Gatsby www project
@@ -103,7 +103,7 @@ class DefaultLayout extends Component {
 
     const isAuthenticated = Boolean(authUser);
 
-    const isHome = path == `/`;
+    const isHome = path === `/`;
     const isSponsors = path.slice(0, 9) === '/sponsors';
     const isAbout = path.slice(0, 6) === '/about';
     const isResources = path.slice(0, 10) === '/resources';

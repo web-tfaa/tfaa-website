@@ -12,7 +12,6 @@ import {
 } from 'typography-breakpoint-constants';
 
 const texasFlagBlue = '#002868';
-const texasFlagRed = '#BF0A30';
 
 const _options = {
   headerFontFamily: [

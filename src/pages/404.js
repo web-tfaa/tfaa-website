@@ -4,7 +4,6 @@ import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
-import CardHeadline from '../components/shared/cards/card-headline';
 import Cards from '../components/shared/cards';
 import Container from '../components/shared/container';
 import FuturaParagraph from '../components/shared/futura-paragraph';

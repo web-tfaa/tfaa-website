@@ -3,7 +3,7 @@ import React from 'react'
 
 // Internal Dependencies
 import presets from "../../../utils/presets"
-import { rhythm, scale, options } from "../../../utils/typography"
+import { scale } from "../../../utils/typography"
 
 // Component Definition
 const CardHeadline = ({ children }) => (

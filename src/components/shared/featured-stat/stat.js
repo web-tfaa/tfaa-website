@@ -1,12 +1,11 @@
 // External Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
-import presets, { colors } from '../../../utils/presets';
-import { rhythm, scale, options } from '../../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
+import presets from '../../../utils/presets';
+import { rhythm } from '../../../utils/typography';
+import { vP, vPHd, vPVHd } from '../../../utils/gutters';
 
 // Local Variables
 const propTypes = {
@@ -14,9 +13,6 @@ const propTypes = {
   color: PropTypes.string.isRequired,
   icon: PropTypes.func.isRequired,
 };
-
-// Local Variables
-const texasFlagBlue = '#002868';
 
 // Component Definition
 const Stat = (props) => {

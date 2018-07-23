@@ -3,7 +3,7 @@ import React from "react"
 
 // Internal Dependencies
 import presets from "../../../utils/presets"
-import { rhythm, scale, options } from "../../../utils/typography"
+import { rhythm, options } from "../../../utils/typography"
 
 // Local Variables
 

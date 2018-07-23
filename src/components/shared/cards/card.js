@@ -4,18 +4,16 @@ import React from 'react';
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
 import { rhythm } from '../../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../../utils/gutters';
-
-console.log('WHAT', vPVHd);
+import { vP, vPHd, vPVHd } from '../../../utils/gutters';
 
 // Local Variables
-const cover = {
-  bottom: 0,
-  left: 0,
-  position: `absolute`,
-  right: 0,
-  top: 0,
-};
+// const cover = {
+//   bottom: 0,
+//   left: 0,
+//   position: `absolute`,
+//   right: 0,
+//   top: 0,
+// };
 
 // Component Definition
 const Card = ({ children }) => (

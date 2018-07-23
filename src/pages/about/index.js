@@ -1,6 +1,5 @@
 // External Dependencies
 import Helmet from 'react-helmet';
-import hex2rgba from 'hex2rgba';
 import React from 'react';
 import {
   graphql,

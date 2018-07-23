@@ -1,6 +1,5 @@
 // External Dependencies
 import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
-import format from 'date-fns/format';
 import Helmet from 'react-helmet';
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';

@@ -1,7 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import React from 'react';
-import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';

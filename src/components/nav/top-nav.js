@@ -1,22 +1,15 @@
 // External Dependencies
 import hex2rgba from 'hex2rgba';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
 import typography, { rhythm, scale } from '../../utils/typography';
-import presets, { colors } from '../../utils/presets';
+import presets from '../../utils/presets';
 import {
   auth,
   firebase,
 } from '../../firebase';
-import {
-  vP,
-  vPHd,
-  vPVHd,
-  vPVVHd,
-} from '../../utils/gutters';
 
 const navItemStyles = {
   ...scale(-1 / 3),
@@ -127,6 +120,7 @@ class TopNav extends Component {
               }}
             >
               <img
+                alt="TMAC logo"
                 style={{ marginBottom: 0 }}
                 height="30px"
                 src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"

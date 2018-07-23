@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import React from 'react';
 
 // Internal Dependencies
-import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
@@ -11,7 +10,7 @@ import FuturaParagraph from '../../components/shared/futura-paragraph';
 
 // Helpers
 import presets, { colors } from '../../utils/presets';
-import { rhythm, scale, options } from '../../utils/typography';
+import { rhythm, options } from '../../utils/typography';
 
 const PhilosophyCard = ({ children }) => (
   <div

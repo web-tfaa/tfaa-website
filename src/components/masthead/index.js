@@ -2,14 +2,11 @@
 import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import hex2rgba from 'hex2rgba';
 import React from 'react';
-import { Link } from 'gatsby';
 
 // Internal Dependencies
 import CtaButton from './cta-button';
-import MastheadBg from './masthead-bg';
 import presets from '../../utils/presets';
 import {
-  options,
   rhythm,
   scale,
 } from '../../utils/typography';
@@ -22,7 +19,6 @@ import {
 
 // Local Variables
 const texasFlagBlue = '#002868';
-const texasFlagRed = '#BF0A30';
 
 // Component Definition
 const MastheadContent = () => (
@@ -32,7 +28,6 @@ const MastheadContent = () => (
       display: `flex`,
       padding: vP,
       paddingTop: rhythm(1),
-      paddingBottom: rhythm(1),
       paddingBottom: rhythm(1),
       flexGrow: `0`,
       flexShrink: `1`,

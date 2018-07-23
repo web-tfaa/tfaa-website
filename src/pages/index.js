@@ -1,8 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
-import Img from 'gatsby-image';
 import React from 'react';
-import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -13,8 +11,6 @@ import FuturaParagraph from '../components/shared/futura-paragraph';
 import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead/';
-import Stat from '../components/shared/featured-stat/stat';
-import { rhythm } from '../utils/typography';
 
 // const BlogPost = ({node}) => {
 //   return (

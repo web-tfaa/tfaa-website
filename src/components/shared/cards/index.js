@@ -1,9 +1,6 @@
 // External Dependencies
 import React from 'react';
 
-// Internal Dependencies
-import { rhythm, scale, options } from '../../../utils/typography';
-
 // Component Definition
 const Cards = ({ children }) => (
   <div

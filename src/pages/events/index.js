@@ -1,10 +1,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import React from 'react';
-import {
-  graphql,
-  Link,
-} from 'gatsby';
+import { graphql } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';

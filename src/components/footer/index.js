@@ -3,13 +3,8 @@ import React from 'react';
 import format from 'date-fns/format';
 
 // Internal Dependencies
-import FuturaParagraph from '../shared/futura-paragraph';
 import presets from '../../utils/presets';
-import {
-  rhythm,
-  scale,
-  options,
-} from '../../utils/typography';
+import { options } from '../../utils/typography';
 
 // Local Variables
 const currentYear = format(new Date(), ['YYYY']);
