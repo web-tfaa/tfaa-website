@@ -140,23 +140,15 @@ class RegisterForm extends Component {
   }
 
   handleUpdateEmailError = (value) => {
-    const {
-      email,
-    } = this.state;
-
-    if (!email && value) {
-      this.setState({
-        emailError: '',
-      });
-    } else if (email && !value) {
+    if (!value) {
       this.setState({
         emailError: 'Email is required',
       });
-    } else if (email && value && emailRegex.test(value)) {
+    } else if (value && emailRegex.test(value)) {
       this.setState({
         emailError: '',
       });
-    } else if (email && value && !emailRegex.test(value)) {
+    } else if (value && !emailRegex.test(value)) {
       this.setState({
         emailError: 'Use a valid email',
       });
@@ -164,12 +156,6 @@ class RegisterForm extends Component {
   }
 
   handleUpdateZipError = (value) => {
-    // const {
-    //   zip,
-    // } = this.state;
-
-    // console.log('yo', zip, value);
-
     if (!value) {
       this.setState({
         zipError: 'ZIP Code is required',
