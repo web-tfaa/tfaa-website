@@ -90,6 +90,16 @@ const INITIAL_STATE = {
 const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
+// Local Functions
+const formatPhone = (phone) => {
+  let cleanPhone = phone;
+  if (cleanPhone.startsWith('1')) cleanPhone = cleanPhone.slice(1);
+  if (cleanPhone.length !== 10) return phone;
+  return `(${cleanPhone.substr(0, 3)}) ${cleanPhone.substr(3, 3)}-${cleanPhone.substr(6, 4)}`;
+}
+
+const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
+
 // Component Definition
 class RegisterForm extends Component {
   constructor(props) {
@@ -105,7 +115,12 @@ class RegisterForm extends Component {
   }
 
   handleUpdate = (event) => {
-    this.setState({
+    if (event.target.name.endsWith('Phone') || event.target.name.endsWith('Fax')) {
+      this.setState({
+        [event.target.name]: stripPhone(event.target.value),
+      }, this.handleUpdateErrors(event.target.name, event.target.value));
+    }
+    else this.setState({
       [event.target.name]: event.target.value,
     }, this.handleUpdateErrors(event.target.name, event.target.value));
   }
@@ -235,6 +250,7 @@ class RegisterForm extends Component {
         }
         break;
       case 'cellPhone':
+        console.log('value!', value);
         if (!cellPhone && value) {
           this.setState({ cellPhoneError: '' });
         } else if (cellPhone && !value) {
@@ -413,6 +429,48 @@ class RegisterForm extends Component {
           <div css={baseErrorStyles}>
             {emailError}
           </div>
+
+          {/* OFFICE PHONE */}
+          <label css={labelStyles}>
+            Office Phone
+          </label>
+          <input
+            css={inputStyles}
+            name="officePhone"
+            onChange={this.handleUpdate}
+            placeholder="e.g. (512) 555-1919"
+            value={formatPhone(officePhone)}
+          />
+          <div css={baseErrorStyles}>
+            {officePhoneError}
+          </div>
+
+          {/* CELL PHONE */}
+          <label css={labelStyles}>
+            Cell Phone
+          </label>
+          <input
+            css={inputStyles}
+            name="cellPhone"
+            onChange={this.handleUpdate}
+            placeholder="e.g. (512) 555-1919"
+            value={formatPhone(cellPhone)}
+          />
+          <div css={baseErrorStyles}>
+            {cellPhoneError}
+          </div>
+
+          {/* OFFICE FAX */}
+          <label css={labelStyles}>
+            Office Fax
+          </label>
+          <input
+            css={inputStyles}
+            name="officeFax"
+            onChange={this.handleUpdate}
+            placeholder="e.g. (512) 555-1919"
+            value={formatPhone(officeFax)}
+          />
 
           {/* SUBMIT BUTTON */}
           <button
