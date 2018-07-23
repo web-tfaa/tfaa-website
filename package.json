@@ -12,7 +12,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve"
   },
-  "browserlist": [
+  "browserslist": [
     "last 2 versions",
     "safari >= 9",
     "edge >= 13",

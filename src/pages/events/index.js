@@ -8,10 +8,11 @@ import {
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 
 // Component Definition
 export default ({ data }) => (
-  <div>
+  <Layout>
     <Helmet>
       <title>TMAC | Events</title>
     </Helmet>
@@ -44,7 +45,7 @@ export default ({ data }) => (
         <p>District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see Job Fair Rules)</p>
       </section>
     </Container>
-  </div>
+  </Layout>
 );
 
 export const query = graphql`
