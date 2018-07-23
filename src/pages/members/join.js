@@ -101,13 +101,16 @@ class JoinContent extends Component {
             <Card>
               <CardHeadline>Join TMAC</CardHeadline>
               <FuturaDiv>
-                To join TMAC please complete these two steps:
+                To join TMAC please complete these three steps:
               </FuturaDiv>
               <FuturaDiv>
-                1. Complete Registration Form
+                1. Complete Registration Form.
               </FuturaDiv>
               <FuturaDiv>
-                2. Pay dues online or via mail
+                2. Pay dues online or via mail.
+              </FuturaDiv>
+              <FuturaDiv>
+                3. Register for a website login.
               </FuturaDiv>
             </Card>
           </Cards>

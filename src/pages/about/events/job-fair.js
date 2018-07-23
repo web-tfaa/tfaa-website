@@ -14,10 +14,10 @@ const indentStyles = {
 // Component Definition
 export default () => (
   <div>
-    <Helmet>
-      <title>TMAC | Job Fair</title>
-    </Helmet>
     <Container>
+      <Helmet>
+        <title>TMAC | Job Fair</title>
+      </Helmet>
       <h1>TMAC Job Fair</h1>
 
       <section>
@@ -37,7 +37,7 @@ export default () => (
       <section>
         <h4>When</h4>
         <p css={indentStyles}>
-          Friday, February 15 2019<br />
+          Friday, February 15, 2019<br />
           6:00-8:00 PM
         </p>
       </section>
