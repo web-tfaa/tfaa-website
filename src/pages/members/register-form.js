@@ -20,8 +20,9 @@ const rootStyles = {
 
 const labelStyles = {
   display: 'block',
-  fontSize: '67.5%',
-  letterSpacing: '0.125em',
+  fontFamily: options.bodyFontFamily.join(`,`),
+  fontSize: '90%',
+  letterSpacing: '0.025rem',
   marginTop: 16,
   textTransform: 'uppercase',
 };
@@ -34,6 +35,7 @@ const inputStyles = {
   display: 'block',
   fontSize: '1rem',
   padding: '0.3rem',
+  minWidth: '70%',
 };
 
 const buttonStyles = {
@@ -50,7 +52,7 @@ const buttonStyles = {
 const baseErrorStyles = {
   color: 'red',
   fontFamily: options.headerFontFamily.join(`,`),
-  marginTop: 16,
+  marginTop: '0.5rem',
 };
 
 const lastErrorStyles = {
@@ -59,18 +61,34 @@ const lastErrorStyles = {
 };
 
 const INITIAL_STATE = {
+  isAuthenticated: false,
   firstName: '',
   firstNameError: '',
   lastName: '',
   lastNameError: '',
-  error: '',
-  isAuthenticated: false,
-  password: '',
-  passwordError: '',
+  title: '',
+  titleError: '',
+  district: '',
+  districtError: '',
+  address1: '',
+  address1Error: '',
+  address2: '',
+  city: '',
+  cityError: '',
+  zip: '',
+  zipError: '',
+  email: '',
+  emailError: '',
+  officePhone: '',
+  officePhoneError: '',
+  cellPhone: '',
+  cellPhoneError: '',
+  officeFax: '',
 };
 
 // To check for a valid email address
-const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
+const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
+const zipRegex = /^\d{5}((?:[-\s]\d{4})|(\d{4}))?$/;
 
 // Component Definition
 class RegisterForm extends Component {
@@ -116,11 +134,12 @@ class RegisterForm extends Component {
   }
 
   handleUpdateErrors = (name, value) => {
-    if (value && name === 'email') this.handleUpdateEmailError();
+    if (name === 'email') this.handleUpdateEmailError(value);
+    else if (name === 'zip') this.handleUpdateZipError(value);
     else this.handleUpdateInputError(name, value);
   }
 
-  handleUpdateEmailError = () => {
+  handleUpdateEmailError = (value) => {
     const {
       email,
     } = this.state;
@@ -129,21 +148,55 @@ class RegisterForm extends Component {
       this.setState({
         emailError: 'Email is required',
       });
-    } else if (regex.test(email)) {
+    } else if (emailRegex.test(email)) {
       this.setState({
         emailError: '',
       });
-    } else if (email && !regex.test(email)) {
+    } else if (email && !emailRegex.test(email)) {
       this.setState({
         emailError: 'Use a valid email',
       });
     }
   }
 
+  handleUpdateZipError = (value) => {
+    const {
+      zip,
+    } = this.state;
+
+    console.log(zip, value);
+
+    if (!zip && value) {
+      this.setState({
+        zipError: '',
+      });
+    } else if (zip && !value) {
+      this.setState({
+        zipError: 'ZIP Code is required',
+      });
+    } else if (zip && value && zipRegex.test(value)) {
+      this.setState({
+        zipError: '',
+      });
+    } else if (zip && value && !zipRegex.test(value)) {
+      this.setState({
+        zipError: 'Use a valid ZIP Code',
+      });
+    }
+
+  }
+
   handleUpdateInputError = (name, value) => {
     const {
       firstName,
       lastName,
+      title,
+      district,
+      address1,
+      city,
+      zip,
+      officePhone,
+      cellPhone,
     } = this.state;
 
     switch (name) {
@@ -161,22 +214,84 @@ class RegisterForm extends Component {
           this.setState({ lastNameError: 'Last Name is required' });
         }
         break;
+      case 'title':
+        if (!title && value) {
+          this.setState({ titleError: '' });
+        } else if (title && !value) {
+          this.setState({ titleError: 'Title is required' });
+        }
+        break;
+      case 'district':
+        if (!district && value) {
+          this.setState({ districtError: '' });
+        } else if (district && !value) {
+          this.setState({ districtError: 'District is required' });
+        }
+        break;
+      case 'address1':
+        if (!address1 && value) {
+          this.setState({ address1Error: '' });
+        } else if (address1 && !value) {
+          this.setState({ address1Error: 'Address 1 is required' });
+        }
+        break;
+      case 'city':
+        if (!city && value) {
+          this.setState({ cityError: '' });
+        } else if (city && !value) {
+          this.setState({ cityError: 'City is required' });
+        }
+        break;
+      case 'zip':
+        if (!zip && value) {
+          this.setState({ zipError: '' });
+        } else if (zip && !value) {
+          this.setState({ zipError: 'ZIP Code is required' });
+        }
+        break;
+      case 'officePhone':
+        if (!officePhone && value) {
+          this.setState({ officePhoneError: '' });
+        } else if (officePhone && !value) {
+          this.setState({ officePhoneError: 'Office Phone is required' });
+        }
+        break;
+      case 'cellPhone':
+        if (!cellPhone && value) {
+          this.setState({ cellPhoneError: '' });
+        } else if (cellPhone && !value) {
+          this.setState({ cellPhoneError: 'Cell Phone is required' });
+        }
+        break;
     }
   }
 
   render() {
     const {
+      isAuthenticated,
       firstName,
       firstNameError,
       lastName,
       lastNameError,
-      error,
-      isAuthenticated,
-      password,
-      passwordError,
+      title,
+      titleError,
+      district,
+      districtError,
+      address1,
+      address1Error,
+      address2,
+      city,
+      cityError,
+      zip,
+      zipError,
+      email,
+      emailError,
+      officePhone,
+      officePhoneError,
+      cellPhone,
+      cellPhoneError,
+      officeFax,
     } = this.state;
-
-    // console.log('FIRST NAME →', firstName, firstNameError);
 
     if (isAuthenticated) navigateTo('/members');
 
@@ -218,25 +333,104 @@ class RegisterForm extends Component {
           <div css={baseErrorStyles}>
             {lastNameError}
           </div>
+
+          {/* TITLE */}
+          <label css={labelStyles}>
+            Title
+          </label>
+          <input
+            css={inputStyles}
+            name="title"
+            onChange={this.handleUpdate}
+            placeholder="e.g. Director of Fine Arts"
+            value={title}
+          />
+          <div css={baseErrorStyles}>
+            {titleError}
+          </div>
+
+          {/* DISTRICT */}
+          <label css={labelStyles}>
+            District
+          </label>
+          <input
+            css={inputStyles}
+            name="district"
+            onChange={this.handleUpdate}
+            placeholder="e.g. Texas ISD"
+            value={district}
+          />
+          <div css={baseErrorStyles}>
+            {districtError}
+          </div>
+
+          {/* ADDRESS 1 */}
+          <label css={labelStyles}>
+            Address 1
+          </label>
+          <input
+            css={inputStyles}
+            name="address1"
+            onChange={this.handleUpdate}
+            placeholder="e.g. 123 Main St."
+            value={address1}
+          />
+          <div css={baseErrorStyles}>
+            {address1Error}
+          </div>
+
+          {/* ADDRESS 2 */}
+          <label css={labelStyles}>
+            Address 2
+          </label>
+          <input
+            css={inputStyles}
+            name="address2"
+            onChange={this.handleUpdate}
+            placeholder="e.g. Suite 19"
+            value={address2}
+          />
+
+          {/* CITY */}
+          <label css={labelStyles}>
+            City
+          </label>
+          <input
+            css={inputStyles}
+            name="city"
+            onChange={this.handleUpdate}
+            placeholder="e.g. Dallas"
+            value={city}
+          />
+          <div css={baseErrorStyles}>
+            {cityError}
+          </div>
+
+          {/* ZIP */}
+          <label css={labelStyles}>
+            ZIP Code
+          </label>
+          <input
+            css={inputStyles}
+            name="zip"
+            onChange={this.handleUpdate}
+            placeholder="e.g. Dallas"
+            value={zip}
+          />
+          <div css={baseErrorStyles}>
+            {zipError}
+          </div>
+
+          {/* SUBMIT BUTTON */}
           <button
+            css={{ marginTop: '1rem', padding: '8px 12px' }}
             disabled={!hasValidInput}
             type="submit"
             onClick={this.handleClickSubmitButton}
           >
             Submit
           </button>
-          {error &&
-            <div
-              css={{
-                color: 'red',
-                fontWeight: 500,
-                fontFamily: options.headerFontFamily.join(`,`),
-                margin: '16px 0',
-              }}
-            >
-              {error.message}
-            </div>
-          }
+
         </form>
       </div>
     );

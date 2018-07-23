@@ -222,7 +222,7 @@ const options = {
         cursor: 'not-allowed',
       },
       ".main-body label": {
-        fontFamily: options.headerFontFamily.join(`,`),
+        fontFamily: options.bodyFontFamily.join(`,`),
         marginBottom: '0.25rem',
       },
       ".main-body input[type=text] input[type=password]": {
