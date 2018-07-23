@@ -138,7 +138,7 @@ class LoginForm extends Component {
     }
   }
 
-  handleUpdateLoginPasswordError = (message) => {
+  handleUpdateLoginPasswordError = () => {
     const {
       password,
     } = this.state;

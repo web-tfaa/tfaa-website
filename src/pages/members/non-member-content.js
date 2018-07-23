@@ -100,24 +100,22 @@ class NonMemberContent extends Component {
               </dl>
             </FuturaDiv>
           </Card>
-
-          <hr />
-
-          <section id="google-form-members">
-            <Card>
-              Complete the <strong>TMAC Membership Form</strong> below to join the Texas Music Administrators Conference and participate in our events.
-            </Card>
-            <iframe
-              allowFullScreen
-              aria-label="Google Forms, TMAC Membership Form 2017-2018"
-              css={iframeStyles}
-              data-iframe-loaded="true"
-              frameBorder="0"
-              src="https://docs.google.com/forms/d/1uFOMrV52KJKXqO6ilM0Jern-suFxUfwGjjPgmGG6iOk/viewform?authuser=0&embedded=true"
-            >
-            </iframe>
-          </section>
         </Cards>
+
+        <section id="google-form-members" style={{ marginTop: '1.5rem' }}>
+          <FuturaDiv>
+            Complete the <strong>TMAC Membership Form</strong> below to join the Texas Music Administrators Conference and participate in our events.
+          </FuturaDiv>
+          <iframe
+            allowFullScreen
+            aria-label="Google Forms, TMAC Membership Form 2017-2018"
+            css={iframeStyles}
+            data-iframe-loaded="true"
+            frameBorder="0"
+            src="https://docs.google.com/forms/d/1uFOMrV52KJKXqO6ilM0Jern-suFxUfwGjjPgmGG6iOk/viewform?authuser=0&embedded=true"
+          >
+          </iframe>
+        </section>
       </Fragment>
     );
   }

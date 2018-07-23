@@ -15,6 +15,7 @@ import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
 import CtaButton from '../../components/masthead/cta-button';
+import RegisterForm from './register-form';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -99,41 +100,13 @@ class JoinContent extends Component {
         <Status authUser={authUser} />
         <Container>
           <Helmet>
-            <title>TMAC | Join TMAC</title>
+            <title>TMAC | Register</title>
           </Helmet>
-          <Cards>
-            <Card>
-              <CardHeadline>Join TMAC</CardHeadline>
-              <FuturaDiv>
-                To join TMAC please complete these three steps:
-              </FuturaDiv>
-              <FuturaDiv>
-                <span css={boldStyles}>1.</span> Complete the Registration Form.
-              </FuturaDiv>
-              <FuturaDiv>
-                <span css={boldStyles}>2.</span> Pay dues online or via mail.
-              </FuturaDiv>
-              <FuturaDiv>
-                <span css={boldStyles}>3.</span> Sign up for a TMAC website login.
-              </FuturaDiv>
-              <CtaButton
-                overrideCSS={{
-                  marginTop: '1.5rem',
-                }}
-                to="/members/register"
-              >
-                <span css={{ verticalAlign: `middle` }}>
-                  Register Me
-                </span>
-                <ArrowForwardIcon
-                  css={{
-                    verticalAlign: `baseline`,
-                    marginLeft: `.6em`,
-                  }}
-                />
-              </CtaButton>
-            </Card>
-          </Cards>
+
+          <CardHeadline>Register for TMAC</CardHeadline>
+
+          <RegisterForm />
+          
           <div style={{ marginTop: '1.5rem' }}>
             * Registration is not complete until payment is received.
           </div>
