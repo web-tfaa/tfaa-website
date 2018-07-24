@@ -11,24 +11,20 @@ import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 
 // Component Definition
-export default class FourOhFour extends Component {
-  render({ location }) {
-    return (
-      <Layout>
-        <MastheadBg />
-        <Container hasSideBar={false}>
-          <Cards>
-            <Card css={{ width: '100%' }}>
-              <h2>
-                This is not the page you are looking for
-              </h2>
-              <FuturaParagraph>
-                Try heading back to our <Link to={'/'}>main page</Link> to find out more about TMAC!
-              </FuturaParagraph>
-            </Card>
-          </Cards>
-        </Container>
-      </Layout>
-    );
-  }
-}
+export default ({ location }) => (
+  <Layout location={location}>
+    <MastheadBg />
+    <Container hasSideBar={false}>
+      <Cards>
+        <Card css={{ width: '100%' }}>
+          <h2>
+            This is not the page you are looking for
+          </h2>
+          <FuturaParagraph>
+            Try heading back to our <Link to={'/'}>main page</Link> to find out more about TMAC!
+          </FuturaParagraph>
+        </Card>
+      </Cards>
+    </Container>
+  </Layout>
+);
