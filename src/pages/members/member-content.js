@@ -125,4 +125,5 @@ const MemberContent = (props) => {
 };
 
 MemberContent.propTypes = propTypes;
+MemberContent.defaultProps = defaultProps;
 export default MemberContent;

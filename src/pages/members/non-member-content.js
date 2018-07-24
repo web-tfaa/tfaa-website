@@ -9,7 +9,6 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import CtaButton from '../../components/masthead/cta-button';
 import { options } from '../../utils/typography';
-import { colors } from '../../utils/presets';
 
 // Local Styles
 const constitutionStyles = {
@@ -113,6 +112,7 @@ class NonMemberContent extends Component {
             data-iframe-loaded="true"
             frameBorder="0"
             src="https://docs.google.com/forms/d/1uFOMrV52KJKXqO6ilM0Jern-suFxUfwGjjPgmGG6iOk/viewform?authuser=0&embedded=true"
+            title="TMAC Google Registration Form"
           >
           </iframe>
         </section>

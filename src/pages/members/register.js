@@ -1,20 +1,20 @@
 // External Dependencies
-import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
-import format from 'date-fns/format';
+// import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
+// import format from 'date-fns/format';
 import Helmet from 'react-helmet';
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Internal Dependencies
-import Card from '../../components/shared/cards/card';
+// import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
-import Cards from '../../components/shared/cards';
+// import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import Status from './status';
 import presets from '../../utils/presets';
-import { options } from '../../utils/typography';
+// import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
-import CtaButton from '../../components/masthead/cta-button';
+// import CtaButton from '../../components/masthead/cta-button';
 import RegisterForm from '../../components/register/register-form';
 
 // Sidebar Data
@@ -32,20 +32,20 @@ import membersSidebar from './members-links.yml';
 //   contentfulFileShareDescriptionData: null,
 // }
 
-const futuraStyles = {
-  fontFamily: options.headerFontFamily.join(`,`),
-  lineHeight: '1.6',
-  marginBottom: '1rem',
-};
+// const futuraStyles = {
+//   fontFamily: options.headerFontFamily.join(`,`),
+//   lineHeight: '1.6',
+//   marginBottom: '1rem',
+// };
 
-const boldStyles = { fontWeight: 600 };
+// const boldStyles = { fontWeight: 600 };
 
 // Local Components
-const FuturaDiv = ({ children }) => (
-  <div css={futuraStyles}>
-    {children}
-  </div>
-);
+// const FuturaDiv = ({ children }) => (
+//   <div css={futuraStyles}>
+//     {children}
+//   </div>
+// );
 
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>

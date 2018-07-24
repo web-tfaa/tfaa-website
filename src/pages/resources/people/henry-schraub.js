@@ -32,6 +32,7 @@ export default () => (
     <div css={rootStyles}>
       <Container>
         <img
+          alt="Henry Schraub"
           css={imageStyles}
           src="https://res.cloudinary.com/tmac/image/upload/v1523144823/henry-schraub.jpg"
         />

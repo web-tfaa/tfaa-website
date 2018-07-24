@@ -32,6 +32,7 @@ export default () => (
     <div css={rootStyles}>
       <Container>
         <img
+          alt="David Lambert"
           css={imageStyles}
           src="https://res.cloudinary.com/tmac/image/upload/v1523145946/david-lambert.jpg"
         />

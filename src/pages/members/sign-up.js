@@ -10,17 +10,16 @@ import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import presets, { colors } from '../../utils/presets';
+import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import {
   auth,
-  firebase,
 } from '../../firebase';
 
 // Local Styles
-const rootStyles = {
-  margin: '1rem 0',
-};
+// const rootStyles = {
+//   margin: '1rem 0',
+// };
 
 const labelStyles = {
   display: 'block',
@@ -40,16 +39,16 @@ const inputStyles = {
   padding: '0.3rem',
 };
 
-const buttonStyles = {
-  backgroundColor: 'rebeccapurple',
-  border: 0,
-  color: 'white',
-  fontSize: '1.25rem',
-  fontWeight: 'bold',
-  marginTop: '0.5rem',
-  padding: '0.25rem 1rem',
-  transition: 'background-color 150ms linear',
-};
+// const buttonStyles = {
+//   backgroundColor: 'rebeccapurple',
+//   border: 0,
+//   color: 'white',
+//   fontSize: '1.25rem',
+//   fontWeight: 'bold',
+//   marginTop: '0.5rem',
+//   padding: '0.25rem 1rem',
+//   transition: 'background-color 150ms linear',
+// };
 
 const INITIAL_STATE = {
   email: '',
@@ -174,7 +173,6 @@ class SignUpForm extends Component {
       emailError,
       error,
       isAuthenticated,
-      passwordError,
       passwordOne,
       passwordTwo,
       registerError,

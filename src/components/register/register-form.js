@@ -1,22 +1,22 @@
 // External Dependencies
 import React, { Component } from 'react';
 import {
-  Link,
+  // Link,
   push,
 } from 'gatsby';
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import { options } from '../../utils/typography';
-import {
-  auth,
-  firebase,
-} from '../../firebase';
+// import {
+//   auth,
+//   firebase,
+// } from '../../firebase';
 
 // Local Styles
-const rootStyles = {
-  margin: '1rem 0',
-};
+// const rootStyles = {
+//   margin: '1rem 0',
+// };
 
 const labelStyles = {
   display: 'block',
@@ -27,9 +27,9 @@ const labelStyles = {
   textTransform: 'uppercase',
 };
 
-const bottomLabelStyles = {
-  ...labelStyles,
-};
+// const bottomLabelStyles = {
+//   ...labelStyles,
+// };
 
 const inputStyles = {
   display: 'block',
@@ -38,16 +38,16 @@ const inputStyles = {
   minWidth: '70%',
 };
 
-const buttonStyles = {
-  backgroundColor: 'rebeccapurple',
-  border: 0,
-  color: 'white',
-  fontSize: '1.25rem',
-  fontWeight: 'bold',
-  marginTop: '0.5rem',
-  padding: '0.25rem 1rem',
-  transition: 'background-color 150ms linear',
-};
+// const buttonStyles = {
+//   backgroundColor: 'rebeccapurple',
+//   border: 0,
+//   color: 'white',
+//   fontSize: '1.25rem',
+//   fontWeight: 'bold',
+//   marginTop: '0.5rem',
+//   padding: '0.25rem 1rem',
+//   transition: 'background-color 150ms linear',
+// };
 
 const baseErrorStyles = {
   color: 'red',
@@ -55,10 +55,10 @@ const baseErrorStyles = {
   marginTop: '0.5rem',
 };
 
-const lastErrorStyles = {
-  ...baseErrorStyles,
-  margin: '16px 0',
-};
+// const lastErrorStyles = {
+//   ...baseErrorStyles,
+//   margin: '16px 0',
+// };
 
 const INITIAL_STATE = {
   isAuthenticated: false,
@@ -125,11 +125,11 @@ class RegisterForm extends Component {
     }, this.handleUpdateErrors(event.target.name, event.target.value));
   }
 
-  handleClickSubmitButton = () => {
-    const {
-      firstName,
-      lastName,
-    } = this.state;
+  handleClickSubmitButton = (event) => {
+    // const {
+    //   firstName,
+    //   lastName,
+    // } = this.state;
 
     // auth.doSignInWithEmailAndPassword(email, password)
     //   .then(() => {
@@ -189,7 +189,6 @@ class RegisterForm extends Component {
       district,
       address1,
       city,
-      zip,
       officePhone,
       cellPhone,
     } = this.state;
@@ -250,6 +249,8 @@ class RegisterForm extends Component {
         } else if (cellPhone && !value) {
           this.setState({ cellPhoneError: 'Cell Phone is required' });
         }
+        break;
+      default:
         break;
     }
   }
