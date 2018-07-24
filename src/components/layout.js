@@ -12,6 +12,7 @@ import { firebase } from '../firebase';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
+import eventsSidebar from '../pages/events/events-links.yml';
 import membersSidebar from '../pages/members/members-links.yml';
 import resourcesSidebar from '../pages/resources/resources-links.yml';
 
@@ -106,12 +107,14 @@ class DefaultLayout extends Component {
     const isHome = path === `/`;
     const isSponsors = path.slice(0, 9) === '/sponsors';
     const isAbout = path.slice(0, 6) === '/about';
+    const isEvents = path.slice(0, 7) === '/events';
     const isResources = path.slice(0, 10) === '/resources';
     const isMembers = path.slice(0, 8) === '/members';
 
 
     const hasSidebar =
       isAbout ||
+      isEvents ||
       isResources ||
       (isAuthenticated && isMembers);
 
@@ -166,6 +169,22 @@ class DefaultLayout extends Component {
             }}
           >
             <SidebarBody yaml={aboutSidebar} />
+          </div>
+
+          {/* TODO Move this under events/index.js once Gatsby supports
+            multiple levels of layouts */}
+          <div
+            css={{
+              ...sidebarStyles,
+              [presets.Tablet]: {
+                display:
+                  path.slice(0, 7) === `/events`
+                    ? `block`
+                    : `none`,
+              },
+            }}
+          >
+            <SidebarBody yaml={eventsSidebar} />
           </div>
 
           {/* TODO Move this under resources/index.js once Gatsby supports

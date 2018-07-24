@@ -6,17 +6,20 @@ import { graphql } from 'gatsby';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
+import presets from '../../utils/presets';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+
+// Sidebar data
+import eventsSidebar from './events-links.yml';
 
 // Component Definition
-export default ({ data }) => (
-  <Layout>
+export default ({ data, location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Events</title>
     </Helmet>
     <Container>
-      <h1>
-       {data.site.siteMetadata.title} Events
-      </h1>
+      <h1>{data.site.siteMetadata.title} Events</h1>
       <section>
         <h4>Summer Round Table</h4>
         <p>
@@ -41,6 +44,21 @@ export default ({ data }) => (
         <h4>Job Fair</h4>
         <p>District representatives must be TMAC members to participate in the TMAC/TMEA job fair (see Job Fair Rules)</p>
       </section>
+      <div
+        css={{
+          display: `block`,
+          [presets.Tablet]: {
+            display: `none`,
+          },
+        }}
+      >
+        <hr css={{
+          border: 0,
+          height: 2,
+          marginTop: 10,
+        }} />
+        <SidebarBody inline yaml={eventsSidebar} />
+      </div>
     </Container>
   </Layout>
 );

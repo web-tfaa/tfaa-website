@@ -43,7 +43,7 @@ export default ({ data, location }) => (
       </section>
       <section>
         <h4>
-          <Link to="/about/events">Events</Link>
+          <Link to="/events">Events</Link>
         </h4>
         <ul>
           <li>Summer Convention</li>

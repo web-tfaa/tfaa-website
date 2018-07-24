@@ -149,6 +149,7 @@ class TopNav extends Component {
             }}
           >
             <NavItem linkTo="/about/">About</NavItem>
+            <NavItem linkTo="/events/">Events</NavItem>
             <NavItem linkTo="/resources/">Resources</NavItem>
             <NavItem linkTo="/members/">Membership</NavItem>
             <NavItem linkTo="/sponsors/">Sponsors</NavItem>

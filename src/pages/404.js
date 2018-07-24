@@ -14,7 +14,7 @@ import MastheadBg from '../components/masthead/masthead-bg';
 export default class FourOhFour extends Component {
   render({ location }) {
     return (
-      <Layout location={location} >
+      <Layout>
         <MastheadBg />
         <Container hasSideBar={false}>
           <Cards>
