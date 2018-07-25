@@ -105,7 +105,7 @@ class Register extends Component {
               <title>TMAC | Register</title>
             </Helmet>
 
-            <CardHeadline>Register for TMAC</CardHeadline>
+            <CardHeadline>1. Register for TMAC</CardHeadline>
 
             <RegisterForm />
 
