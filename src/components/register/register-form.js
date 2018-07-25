@@ -7,6 +7,7 @@ import {
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
+import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 // import {
 //   auth,
@@ -130,6 +131,8 @@ class RegisterForm extends Component {
     //   firstName,
     //   lastName,
     // } = this.state;
+
+    console.log('form is:', this.state);
 
     // auth.doSignInWithEmailAndPassword(email, password)
     //   .then(() => {
@@ -284,7 +287,16 @@ class RegisterForm extends Component {
 
     if (isAuthenticated) push('/members');
 
-    const hasInput = firstName !== '' && lastName !== '';
+    const hasInput = firstName !== ''
+      && lastName !== ''
+      && title !== ''
+      && district !== ''
+      && address1 !== ''
+      && city !== ''
+      && zip !== ''
+      && email !== ''
+      && officePhone !== ''
+      && cellPhone !== '';
 
     const hasValidInput = hasInput;
 
@@ -479,6 +491,7 @@ class RegisterForm extends Component {
               disabled={!hasValidInput}
               type="submit"
               onClick={this.handleClickSubmitButton}
+              style={{ color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}` }}
             >
               Continue to Step 2
             </button>
