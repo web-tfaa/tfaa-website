@@ -468,9 +468,14 @@ class RegisterForm extends Component {
           />
 
           {/* SUBMIT BUTTON */}
-          <div css={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div
+            css={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
             <button
-              css={{ marginTop: '1rem', padding: '8px 12px' }}
+              css={{ marginTop: '2rem', padding: '8px 12px' }}
               disabled={!hasValidInput}
               type="submit"
               onClick={this.handleClickSubmitButton}

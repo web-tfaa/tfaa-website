@@ -13,11 +13,6 @@ import presets, { colors } from '../../utils/presets';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
-// Local Functions
-const updateByPropertyName = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
-
 // Local Variables
 const texasFlagBlue = '#002868';
 
@@ -26,6 +21,11 @@ const INITIAL_STATE = {
   error: null,
   showSuccessMessage: false,
 };
+
+// Local Functions
+const updateByPropertyName = (propertyName, value) => () => ({
+  [propertyName]: value,
+});
 
 // To check for a valid email address
 const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
@@ -91,13 +91,16 @@ class PasswordForgetForm extends Component {
             <Helmet>
               <title>TMAC | Forgot Password</title>
             </Helmet>
-            <h1
+            <h2
               css={{
                 margin: '1rem 0',
               }}
             >
               Password Reset
-            </h1>
+            </h2>
+
+            <hr css={{ background: 'darkred', height: 3 }} />
+
             {showSuccessMessage &&
               <div
                 css={{

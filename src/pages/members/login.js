@@ -51,13 +51,16 @@ class Login extends React.Component {
             <Helmet>
               <title>TMAC | Log In</title>
             </Helmet>
-            <h1
+            <h2
               css={{
                 margin: '1rem 0',
               }}
             >
               Login
-            </h1>
+            </h2>
+
+            <hr css={{ background: 'darkred', height: 3 }} />
+
             <LoginForm />
           </Container>
        </div>

@@ -12,7 +12,7 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import Status from './status';
-import presets, { colors } from '../../utils/presets';
+import presets from '../../utils/presets';
 // import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
 // import CtaButton from '../../components/masthead/cta-button';
@@ -66,7 +66,7 @@ import membersSidebar from './members-links.yml';
 // };
 
 // Component Definition
-class Register extends Component {
+class Payment extends Component {
   constructor(props) {
     super(props);
 
@@ -102,14 +102,14 @@ class Register extends Component {
           <Status authUser={authUser} />
           <Container>
             <Helmet>
-              <title>TMAC | Register</title>
+              <title>TMAC | Payment</title>
             </Helmet>
 
-            <h2>1. Register for TMAC</h2>
+            <h2>2. Pay TMAC Dues</h2>
 
             <hr css={{ background: 'darkred', height: 3 }} />
 
-            <RegisterForm />
+            <div>Radio buttons for active/retired</div>
 
             <div style={{ marginTop: '1.5rem' }}>
               * Registration is not complete until payment is received.
@@ -137,4 +137,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default Payment;

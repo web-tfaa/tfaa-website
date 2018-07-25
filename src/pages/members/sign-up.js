@@ -38,6 +38,7 @@ const inputStyles = {
   display: 'block',
   fontSize: '1rem',
   padding: '0.3rem',
+  minWidth: '70%',
 };
 
 // const buttonStyles = {
@@ -199,15 +200,18 @@ class SignUpForm extends Component {
             <Helmet>
               <title>TMAC | Sign Up</title>
             </Helmet>
-            <h1
+            <h2
               css={{
                 margin: '1rem 0',
               }}
             >
               Sign Up
-            </h1>
+            </h2>
+
+            <hr css={{ background: 'darkred', height: 3, maxWidth: '75%' }} />
+
             <div
-              css={{ marginBottom: 16 }}
+              css={{ marginBottom: 16, maxWidth: '70%' }}
               key="register-message"
             >
               Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
@@ -219,15 +223,15 @@ class SignUpForm extends Component {
             >
               <label css={labelStyles}>
                 Username
-                <input
-                  css={inputStyles}
-                  type="text"
-                  name="email"
-                  onChange={this.handleUpdate}
-                  placeholder="Email Address"
-                  value={email}
-                />
               </label>
+              <input
+                css={inputStyles}
+                type="text"
+                name="email"
+                onChange={this.handleUpdate}
+                placeholder="Email Address"
+                value={email}
+              />
               <div
                 css={{
                   color: 'red',
@@ -295,13 +299,25 @@ class SignUpForm extends Component {
               >
                 {registerError}
               </div>
-              <button
-                disabled={isInvalid}
-                type="submit"
-                onClick={this.handleClickSignUpButton}
+
+              {/* SUBMIT BUTTON */}
+              <div
+                css={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  maxWidth: '70%',
+                }}
               >
-                Sign Up
-              </button>
+                <button
+                  css={{ marginTop: '1rem', padding: '8px 12px' }}
+                  disabled={isInvalid}
+                  type="submit"
+                  onClick={this.handleClickSignUpButton}
+                >
+                  Sign Up
+                </button>
+              </div>
+
               {error &&
                 <div
                   css={{

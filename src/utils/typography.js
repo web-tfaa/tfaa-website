@@ -222,6 +222,7 @@ const _options = {
       },
       ".main-body label": {
         fontFamily: options.headerFontFamily.join(`,`),
+        fontWeight: 600,
         marginBottom: '0.25rem',
       },
       ".main-body input[type=text] input[type=password]": {

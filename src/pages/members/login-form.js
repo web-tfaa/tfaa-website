@@ -21,8 +21,9 @@ import {
 
 const labelStyles = {
   display: 'block',
-  fontSize: '67.5%',
-  letterSpacing: '0.125em',
+  fontSize: '90%',
+  letterSpacing: '0.1rem',
+  marginTop: 16,
   textTransform: 'uppercase',
 };
 
@@ -35,6 +36,7 @@ const inputStyles = {
   display: 'block',
   fontSize: '1rem',
   padding: '0.3rem',
+  minWidth: '100%',
 };
 
 // const buttonStyles = {
@@ -169,7 +171,7 @@ class LoginForm extends Component {
     if (isAuthenticated) push('/members');
 
     const signUpElement = [
-      <hr key="login-form-divider" />,
+      <hr key="login-form-divider"  css={{ background: 'darkred', height: 3 }} />,
       <div
         css={{ marginBottom: 16 }}
         key="no-account-text"
@@ -208,16 +210,16 @@ class LoginForm extends Component {
       <div className="login-form">
         <form onSubmit={this.handleSubmit}>
           <label css={labelStyles}>
-            Username
-            <input
-              css={inputStyles}
-              type="text"
-              name="email"
-              onChange={this.handleUpdate}
-              placeholder="Email Address"
-              value={email}
-            />
+            Email Address
           </label>
+          <input
+            css={inputStyles}
+            type="text"
+            name="email"
+            onChange={this.handleUpdate}
+            placeholder="Email Address"
+            value={email}
+          />
           <div
             css={{
               color: 'red',
@@ -265,13 +267,24 @@ class LoginForm extends Component {
           >
             {passwordError}
           </div>
-          <button
-            disabled={isLoginInvalid}
-            type="submit"
-            onClick={this.handleClickSubmitButton}
+
+          {/* SUBMIT BUTTON */}
+          <div
+            css={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
           >
-            Sign In
-          </button>
+            <button
+              css={{ marginTop: '1rem', padding: '8px 12px' }}
+              disabled={isLoginInvalid}
+              type="submit"
+              onClick={this.handleClickSubmitButton}
+            >
+              Sign In
+            </button>
+          </div>
+
           {error &&
             <div
               css={{
@@ -285,9 +298,11 @@ class LoginForm extends Component {
             </div>
           }
         </form>
+
         <p>
           <Link to="/members/pw-forget">Forgot Password?</Link>
         </p>
+
         {signUpElement}
       </div>
     );

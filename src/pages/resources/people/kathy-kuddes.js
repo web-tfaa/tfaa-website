@@ -12,6 +12,7 @@ import Layout from '../../../components/layout';
 import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
 import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
