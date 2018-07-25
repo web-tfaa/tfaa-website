@@ -50,6 +50,12 @@ const inputStyles = {
 //   transition: 'background-color 150ms linear',
 // };
 
+const baseErrorStyles = {
+  color: 'red',
+  fontFamily: options.headerFontFamily.join(`,`),
+  marginTop: '0.5rem',
+};
+
 const INITIAL_STATE = {
   email: '',
   emailError: '',
@@ -258,13 +264,7 @@ class LoginForm extends Component {
               />
             </div>
           </div>
-          <div
-            css={{
-              color: 'red',
-              fontFamily: options.headerFontFamily.join(`,`),
-              margin: '16px 0',
-            }}
-          >
+          <div css={baseErrorStyles}>
             {passwordError}
           </div>
 

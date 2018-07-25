@@ -52,6 +52,12 @@ const inputStyles = {
 //   transition: 'background-color 150ms linear',
 // };
 
+const baseErrorStyles = {
+  color: 'red',
+  fontFamily: options.headerFontFamily.join(`,`),
+  marginTop: '0.5rem',
+};
+
 const INITIAL_STATE = {
   email: '',
   emailError: '',
@@ -215,7 +221,7 @@ class SignUpForm extends Component {
               key="register-message"
             >
               Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
-              <Link to="/members#google-form-members">Members page</Link>.
+              <Link to="/members">Members page</Link>.
             </div>
             <form
               key="register-form"
@@ -232,13 +238,7 @@ class SignUpForm extends Component {
                 placeholder="Email Address"
                 value={email}
               />
-              <div
-                css={{
-                  color: 'red',
-                  fontFamily: options.headerFontFamily.join(`,`),
-                  marginTop: 16,
-                }}
-              >
+              <div css={baseErrorStyles}>
                 {emailError}
               </div>
               <label css={bottomLabelStyles}>
@@ -290,13 +290,7 @@ class SignUpForm extends Component {
                   value={passwordTwo}
                 />
               </div>
-              <div
-                css={{
-                  color: 'red',
-                  fontFamily: options.headerFontFamily.join(`,`),
-                  margin: '16px 0',
-                }}
-              >
+              <div css={baseErrorStyles}>
                 {registerError}
               </div>
 
