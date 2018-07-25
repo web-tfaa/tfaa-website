@@ -7,13 +7,13 @@ import { Link } from 'gatsby';
 import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import { outstandingAdmin } from '../../../components/resources/resources-constants';
+import { options } from '../../../utils/typography';
 
 // Sidebar data
 import Layout from '../../../components/layout';
 import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
 import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
-import { options } from '../../../utils/typography';
 
 // Local Variables
 const rootStyles = {

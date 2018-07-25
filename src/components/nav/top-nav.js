@@ -28,7 +28,7 @@ const navItemStyles = {
     opacity: 0.8,
     textDecoration: 'underline',
   },
-}
+};
 
 const NavItem = ({ linkTo, children, styles }) => (
   <li

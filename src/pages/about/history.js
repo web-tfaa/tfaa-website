@@ -6,10 +6,16 @@ import React from 'react';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
+import Layout from '../../components/layout';
+import presets from '../../utils/presets';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+
+// Sidebar data
+import aboutSidebar from './about-links.yml';
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | History</title>
     </Helmet>
@@ -41,7 +47,24 @@ export default () => (
         <div>Woody Schober,</div>
         <div>Director of Fine Arts, Retired</div>
         <div>Irving ISD, Irving, Texas</div>
+
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={aboutSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

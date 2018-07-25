@@ -5,7 +5,13 @@ import React from 'react';
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import { options } from '../../utils/typography';
+import presets from '../../utils/presets';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+
+// Sidebar data
+import aboutSidebar from './about-links.yml';
 
 // Local Variables
 const paddingStyles = {
@@ -28,8 +34,8 @@ const FuturaSection = ({ children }) => (
 );
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Constitution and Bylaws</title>
     </Helmet>
@@ -230,7 +236,23 @@ export default () => (
             These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These by-laws were amended on November 21, 2013 and again on February 12, 2014.
           </em>
         </FuturaSection>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={aboutSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

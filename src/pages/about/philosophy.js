@@ -7,6 +7,11 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
+import Layout from '../../components/layout';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+
+// Sidebar data
+import aboutSidebar from './about-links.yml';
 
 // Helpers
 import presets, { colors } from '../../utils/presets';
@@ -64,8 +69,8 @@ const FuturaDiv = ({ children }) => (
 );
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Philosophy</title>
     </Helmet>
@@ -139,7 +144,23 @@ export default () => (
             </FuturaParagraph>
           </PhilosophyCard>
         </Cards>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={aboutSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );
