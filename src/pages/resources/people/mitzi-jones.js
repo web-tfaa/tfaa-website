@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Mitzi Jones</title>
     </Helmet>
@@ -55,7 +61,23 @@ export default () => (
         <FuturaParagraph>
           Mitzi and her husband Michael (orchestra director, Katy ISD Mayde Creek High School) have two sons. Matthew is a student at Texas A & M University and Philip is beginning his journey as a Katy High School Tiger. She enjoys performing on her principle instrument, violin, gardening, volunteering at church and school and being a proud and loud Katy Tiger Varsity football fan!
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

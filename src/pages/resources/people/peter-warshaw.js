@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Peter Warshaw</title>
     </Helmet>
@@ -49,7 +55,23 @@ export default () => (
         <FuturaParagraph>
           Under Mr. Warshaw’s leadership, Leander ISD fine arts programs annually present district-wide events showcasing the work of student artists and performers. Additionally, four LISD groups have performed at the Midwest Clinic, two at the Western International Band Clinic, and two at the TMEA Convention.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

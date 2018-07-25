@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Bob Bryant</title>
     </Helmet>
@@ -61,7 +67,23 @@ export default () => (
         <FuturaParagraph>
           He presently serves as the President of the Texas Music Administrators Conference, the state organization for music/fine arts administrators. Mr. Bryant is the Founder and Board President of the Katy Jazz Association and serves on the Board of the Katy Culture and Arts Alliance. He is an active member of the Texas Music Educators Association, Texas Bandmasters Association, National Band Association, Texas Music Adjudicators Association, Texas Music Administrators Conference, and the Phi Beta Mu – Alpha Chapter professional band fraternity. He also fulfills a busy schedule as a clinician, adjudicator, and staff development provider throughout Texas.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

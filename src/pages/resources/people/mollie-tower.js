@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Mollie Tower</title>
     </Helmet>
@@ -51,7 +57,23 @@ export default () => (
         <FuturaParagraph>
           As a third generation educator, she is delighted that her two daughters – Debbie Tannert and Sheryl Maklary – are both master teachers in their fields. She also has a granddaughter, Christina Tannert, who is working toward a degree from Trinity University to become a Choral Director.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

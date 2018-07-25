@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Mike Mamminga</title>
     </Helmet>
@@ -54,7 +60,23 @@ export default () => (
         <FuturaParagraph>
           Dr. Mamminga also enjoys a passion for real estate. He is currently a REALTOR® in residential sales with the renowned Dallas real estate firm of Allie Beth Allman & Associates.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

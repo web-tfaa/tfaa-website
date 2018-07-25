@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Cody Myers</title>
     </Helmet>
@@ -52,7 +58,23 @@ export default () => (
         <FuturaParagraph>
           Cody Myers holds membership in the Texas Music Educators Association, Alpha Chapter of Phi Beta Mu, and is Past President of both the Texas Music Administrators Conference and the Texas Bandmasters Association. He served six years on the UIL Technical Advisory Committee. Mr. Myers performs with the First Baptist Church Orchestra in Amarillo. He is married to Starrla, a first grade teacher and sign language specialist. They have two grown children. Kaci serves in the United States Navy, and Holt served as a United States Marine.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

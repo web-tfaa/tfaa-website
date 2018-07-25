@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Woody Schober</title>
     </Helmet>
@@ -52,7 +58,23 @@ export default () => (
         <FuturaParagraph>
           He is a current member of the Entertainment Series of Irving Board of Directors. He is a current member and past president of the Irving Noon-Day Lions Club. He sings with the Singing Men of Texas and conducts the Irving Silvertones. His wife, Carol, is a retired teacher and his daughter, Lynn, works at the Irving Independent School District Administration Building. His son, David, and family live in Nashville where he is a recording engineer. In addition to their children, Carol and Woody have five wonderful grandchildren and one great-grandchild. Two of their grandchildren and a son-in-law also work in the Irving Independent School District.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Bob Lewis</title>
     </Helmet>
@@ -43,7 +49,7 @@ export default () => (
           Bob Lewis retired in 1990 as Director of Fine Arts for the Northside Independent School District in San Antonio, Texas after serving forty-one years as a music educator.
         </FuturaParagraph>
         <FuturaParagraph>
-          Lewis was band director for one year in Sanderson, one year in Abilene, six years in Hondo, and thirty-three years in Northside. Under Lewis`s direction the Northside High School Band (later John Marshall High School) grew from thirty-six members to three hundred ninety members in 1975 when he became an administrator. The band established a tradition of excellence in local, state, and national music and marching competitions.
+          Lewis was band director for one year in Sanderson, one year in Abilene, six years in Hondo, and thirty-three years in Northside. Under Lewis's direction the Northside High School Band (later John Marshall High School) grew from thirty-six members to three hundred ninety members in 1975 when he became an administrator. The band established a tradition of excellence in local, state, and national music and marching competitions.
         </FuturaParagraph>
         <FuturaParagraph>
           As Director of Fine Arts Lewis established the elementary music program, the elementary art program, the string orchestra program, and continued to expand the band, choir, orchestra, art, and theater arts programs, and Northside's performing groups have continued the tradition of excellence. At the time of his retirement in 1990 there were over 50,000 students involved in fine arts programs.
@@ -60,7 +66,23 @@ export default () => (
         <FuturaParagraph>
           In 2001 the Northside District named a school Bob Lewis Elementary School in appreciation for his contributions to the district.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

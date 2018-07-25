@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Henry Schraub</title>
     </Helmet>
@@ -51,7 +57,23 @@ export default () => (
         <FuturaParagraph>
           He served as TMEA Region 5 Band Chairman and Region 5 TMEA Chairman. He is a Past-President of the Texas Music Educators Association and the Texas Music Adjudicators Association. Mr. Schraub received the 2000 Outstanding Music Educator Award for Texas from the National Federation of Interscholastic Music Associations. He was named the 2002-2003 Music Administrator of the Year by the Texas Music Administrators Conference. The Birdville Independent School District was recognized as one of the “100 Best Communities for Music Education in America”. In 2007 Mr. Schraub was inducted into the Phi Beta Mu Texas Bandmasters Hall of Fame.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

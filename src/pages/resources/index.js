@@ -26,8 +26,8 @@ const ExternalLink = ({ children, to }) => (
 );
 
 // Component Definition
-export default (props) => (
-  <Layout location={props.location}>
+export default ({ location }) => (
+  <Layout location={location}>
     <Container>
       <Helmet>
         <title>TMAC | Resources</title>

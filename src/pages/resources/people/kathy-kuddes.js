@@ -7,6 +7,11 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +29,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Kathy Kuddes</title>
     </Helmet>
@@ -55,7 +60,23 @@ export default () => (
         <FuturaParagraph>
           In addition to her school work Kathy continues to sing in her local church choir, ring in one of the handbell choirs and plays occasionally in a flute ensemble. She is an avid student of American folk music, plays mountain dulcimer and autoharp, and has recently taken up the hammered dulcimer. She and her husband, Kent, spend their leisure time traveling and doting on their dachshunds. Their travels have included Britain, South Korea, Japan, the Czech Republic, Hungary, Spain, Portugal, Germany, the Caribbean and Australia. In 2007 Kent established a named scholarship at Millikin University in Kathy’s name to support a music education student in the pursuit of their degree at her Alma Mater.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

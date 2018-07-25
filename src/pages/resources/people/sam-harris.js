@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -25,8 +31,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Sam Harris</title>
     </Helmet>
@@ -52,7 +58,23 @@ export default () => (
         <FuturaParagraph>
           He is sought after as an adjudicator and clinician as well as presenting staff development sessions across the state. In addition to his service to the Texas Music Administrators Conference his professional affiliations include the Texas Music Educators Association, Music Educators National Conference, Texas Music Educators Conference, Texas Choral Directors Association, Texas Bandmasters Association, Texas Art Educators Association, Texas Educational Theater Association, Texas Dance Educators Association, Texas Music Adjudicators Association, American Choral Directors Association, and Phi Mu Alpha Sinfonia.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

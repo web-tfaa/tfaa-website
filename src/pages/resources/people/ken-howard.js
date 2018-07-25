@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Ken Howard</title>
     </Helmet>
@@ -48,7 +54,23 @@ export default () => (
         <FuturaParagraph>
           Mr. Howard was active in state and national professional organizations, holding offices including National Elementary Committee Chairman for the American Choral Directors Association, Vice President of the Texas Choral Directors Association, and Vice President of the Texas Music Educators Association. He served on the Texas State Textbook Committee. Locally, Mr. Howard was a member of the board of directors, and later president of the Waco Civic Chorus; he also served on the boards of the WISD Foundation, the Greater Waco Council for the Arts, and the Central Texas Council for Music Education. In retirement, he was active in the Waco Welcome Corps, the Coalition for Music Education, and the Gideons International. In 1988, Baylor University School of Music awarded him special recognition for distinguished service in music education. In 2001, a group of former high school students and friends established a scholarship at Baylor in his honor, and in 2008, he was honored with the Distinguished Retired Faculty Award by the WISD Education Foundation.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );

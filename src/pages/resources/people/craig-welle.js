@@ -7,6 +7,12 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import Container from '../../../components/shared/container';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 
+// Sidebar data
+import Layout from '../../../components/layout';
+import presets from '../../../utils/presets';
+import resourcesSidebar from '../resources-links.yml';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+
 // Local Variables
 const rootStyles = {
   display: 'flex',
@@ -24,8 +30,8 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Craig Welle</title>
     </Helmet>
@@ -58,7 +64,23 @@ export default () => (
         <FuturaParagraph>
           In 2005, Craig took the position of Director of Fine Arts in Dallas Independent School District and in 2007 was named Executive Director for Enrichment Curriculum and Instruction, supervising the district-wide fine arts, physical education, library media services, instructional technology, JROTC, languages other than English and out of school time enrichment programs in the District. A large part of his work has been to establish and implement standards of service for all students in the district in all enrichment subjects. Implementation of these standards is being accomplished through the Thriving Minds initiative, a partnership among Dallas ISD, City of Dallas and community partners coordinated by Big Thought, a local non-profit organization. As part of this project, Dallas ISD doubled the number of district-funded music teachers in order to place them at all elementary campuses by formula based upon enrollment. Another major focus has been to increase student participation in band beginning with the middle school programs where numbers increased from 2,243 in 2004 to 4,010 in 2010. The number of Dallas ISD middle school and high school music groups participating in yearly UIL events increased from 87 in 2005-06 to 128 in 2009-10 and in 2009, Welle was elected chair of the Region 20 Music UIL Executive Committee.
         </FuturaParagraph>
+        {/* Mobile sidebar */}
+        <div
+          css={{
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}
+        >
+          <hr css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }} />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
       </Container>
     </div>
-  </div>
+  </Layout>
 );
