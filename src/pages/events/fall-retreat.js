@@ -4,6 +4,12 @@ import React from 'react';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
+import presets from '../../utils/presets';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+
+// Sidebar data
+import eventsSidebar from './events-links.yml';
 
 // Local Variables
 const indentStyles = {
@@ -11,8 +17,8 @@ const indentStyles = {
 };
 
 // Component Definition
-export default () => (
-  <div>
+export default ({ location }) => (
+  <Layout location={location}>
     <Helmet>
       <title>TMAC | Fall Retreat</title>
     </Helmet>
@@ -58,7 +64,22 @@ export default () => (
           </p>
         </div>
       </section>
+      <div
+        css={{
+          display: `block`,
+          [presets.Tablet]: {
+            display: `none`,
+          },
+        }}
+      >
+        <hr css={{
+          border: 0,
+          height: 2,
+          marginTop: 10,
+        }} />
+        <SidebarBody inline yaml={eventsSidebar} />
+      </div>
 
     </Container>
-  </div>
+  </Layout>
 );
