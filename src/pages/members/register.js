@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import CardHeadline from '../../components/shared/cards/card-headline';
 // import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import Status from './status';
 import presets from '../../utils/presets';
 // import { options } from '../../utils/typography';
@@ -90,44 +91,46 @@ class Register extends Component {
     const isAuthenticated = Boolean(authUser);
 
     return (
-      <div css={{
-        paddingLeft: 0,
-        width: `0 auto`,
-        [presets.Tablet]: {
-          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-        },
-      }}>
-        <Status authUser={authUser} />
-        <Container>
-          <Helmet>
-            <title>TMAC | Register</title>
-          </Helmet>
+      <Layout location={this.props.location}>
+        <div css={{
+          paddingLeft: 0,
+          width: `0 auto`,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+          <Status authUser={authUser} />
+          <Container>
+            <Helmet>
+              <title>TMAC | Register</title>
+            </Helmet>
 
-          <CardHeadline>Register for TMAC</CardHeadline>
+            <CardHeadline>Register for TMAC</CardHeadline>
 
-          <RegisterForm />
+            <RegisterForm />
 
-          <div style={{ marginTop: '1.5rem' }}>
-            * Registration is not complete until payment is received.
+            <div style={{ marginTop: '1.5rem' }}>
+              * Registration is not complete until payment is received.
+            </div>
+          </Container>
+
+          <div
+            css={{
+              display: `block`,
+              [presets.Tablet]: {
+                display: `none`,
+              },
+            }}
+          >
+            <hr css={{
+              border: 0,
+              height: 2,
+              marginTop: 10,
+            }} />
+            <SidebarBody inline yaml={membersSidebar} />
           </div>
-        </Container>
-
-        <div
-          css={{
-            display: `block`,
-            [presets.Tablet]: {
-              display: `none`,
-            },
-          }}
-        >
-          <hr css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }} />
-          <SidebarBody inline yaml={membersSidebar} />
         </div>
-      </div>
+      </Layout>
     );
   }
 }

@@ -73,6 +73,7 @@ export default ({ data, location }) => (
           <Link to="/about/philosophy">Statements of Philosophy</Link>
         </h4>
       </section>
+      {/* Mobile sidebar */}
       <div
         css={{
           display: `block`,

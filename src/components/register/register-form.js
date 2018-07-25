@@ -20,9 +20,8 @@ import { options } from '../../utils/typography';
 
 const labelStyles = {
   display: 'block',
-  fontFamily: options.bodyFontFamily.join(`,`),
   fontSize: '90%',
-  letterSpacing: '0.025rem',
+  letterSpacing: '0.1rem',
   marginTop: 16,
   textTransform: 'uppercase',
 };
@@ -72,6 +71,7 @@ const INITIAL_STATE = {
   districtError: '',
   address1: '',
   address1Error: '',
+  // Address2 is not required, so cannot have an error
   address2: '',
   city: '',
   cityError: '',

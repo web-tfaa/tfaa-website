@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import LoginForm from './login-form';
 import { firebase } from '../../firebase';
 import presets from '../../utils/presets';
@@ -39,26 +40,28 @@ class Login extends React.Component {
     }
 
     return (
-      <div css={{
-        paddingLeft: 0,
-        [presets.Tablet]: {
-          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-        },
-      }}>
-        <Container className="login">
-          <Helmet>
-            <title>TMAC | Log In</title>
-          </Helmet>
-          <h1
-            css={{
-              margin: '1rem 0',
-            }}
-          >
-            Login
-          </h1>
-          <LoginForm />
-        </Container>
-     </div>
+      <Layout location={this.props.location}>
+        <div css={{
+          paddingLeft: 0,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+          <Container className="login">
+            <Helmet>
+              <title>TMAC | Log In</title>
+            </Helmet>
+            <h1
+              css={{
+                margin: '1rem 0',
+              }}
+            >
+              Login
+            </h1>
+            <LoginForm />
+          </Container>
+       </div>
+     </Layout>
     );
   }
 }

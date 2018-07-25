@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import {
@@ -187,134 +188,136 @@ class SignUpForm extends Component {
       emailError;
 
     return (
-      <div css={{
-        paddingLeft: 0,
-        [presets.Tablet]: {
-          paddingLeft: '1.5rem',
-        },
-      }}>
-        <Container className="sign-up">
-          <Helmet>
-            <title>TMAC | Sign Up</title>
-          </Helmet>
-          <h1
-            css={{
-              margin: '1rem 0',
-            }}
-          >
-            Sign Up
-          </h1>
-          <div
-            css={{ marginBottom: 16 }}
-            key="register-message"
-          >
-            Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
-            <Link to="/members#google-form-members">Members page</Link>.
-          </div>
-          <form
-            key="register-form"
-            onSubmit={this.handleSubmit}
-          >
-            <label css={labelStyles}>
-              Username
-              <input
-                css={inputStyles}
-                type="text"
-                name="email"
-                onChange={this.handleUpdate}
-                placeholder="Email Address"
-                value={email}
-              />
-            </label>
-            <div
+      <Layout location={this.props.location}>
+        <div css={{
+          paddingLeft: 0,
+          [presets.Tablet]: {
+            paddingLeft: '1.5rem',
+          },
+        }}>
+          <Container className="sign-up">
+            <Helmet>
+              <title>TMAC | Sign Up</title>
+            </Helmet>
+            <h1
               css={{
-                color: 'red',
-                fontFamily: options.headerFontFamily.join(`,`),
-                marginTop: 16,
+                margin: '1rem 0',
               }}
-            >
-              {emailError}
-            </div>
-            <label css={bottomLabelStyles}>
-              Password
-            </label>
-            <div
-              css={{
-                alignItems: 'center',
-                display: 'flex',
-                marginBottom: 16,
-              }}
-            >
-              <input
-                css={inputStyles}
-                id="passwordOne"
-                type="password"
-                name="passwordOne"
-                onChange={this.handleUpdate}
-                placeholder="Password"
-                value={passwordOne}
-              />
-              <div css={{ marginLeft: 8 }}>
-                <MdRemoveRedEye
-                  css={{
-                    height: 20,
-                    width: 20,
-                  }}
-                  onClick={this.toggleRegisterPasswordInput}
-                />
-              </div>
-            </div>
-            <label css={bottomLabelStyles}>
-              Confirm Password
-            </label>
-            <div
-              css={{
-                alignItems: 'center',
-                display: 'flex',
-                marginBottom: 16,
-              }}
-            >
-              <input
-                css={inputStyles}
-                id="passwordTwo"
-                type="password"
-                name="passwordTwo"
-                onChange={this.handleUpdate}
-                placeholder="Confirm Password"
-                value={passwordTwo}
-              />
-            </div>
-            <div
-              css={{
-                color: 'red',
-                fontFamily: options.headerFontFamily.join(`,`),
-                margin: '16px 0',
-              }}
-            >
-              {registerError}
-            </div>
-            <button
-              disabled={isInvalid}
-              type="submit"
-              onClick={this.handleClickSignUpButton}
             >
               Sign Up
-            </button>
-            {error &&
+            </h1>
+            <div
+              css={{ marginBottom: 16 }}
+              key="register-message"
+            >
+              Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
+              <Link to="/members#google-form-members">Members page</Link>.
+            </div>
+            <form
+              key="register-form"
+              onSubmit={this.handleSubmit}
+            >
+              <label css={labelStyles}>
+                Username
+                <input
+                  css={inputStyles}
+                  type="text"
+                  name="email"
+                  onChange={this.handleUpdate}
+                  placeholder="Email Address"
+                  value={email}
+                />
+              </label>
               <div
                 css={{
                   color: 'red',
-                  fontWeight: 500,
+                  fontFamily: options.headerFontFamily.join(`,`),
+                  marginTop: 16,
+                }}
+              >
+                {emailError}
+              </div>
+              <label css={bottomLabelStyles}>
+                Password
+              </label>
+              <div
+                css={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  marginBottom: 16,
+                }}
+              >
+                <input
+                  css={inputStyles}
+                  id="passwordOne"
+                  type="password"
+                  name="passwordOne"
+                  onChange={this.handleUpdate}
+                  placeholder="Password"
+                  value={passwordOne}
+                />
+                <div css={{ marginLeft: 8 }}>
+                  <MdRemoveRedEye
+                    css={{
+                      height: 20,
+                      width: 20,
+                    }}
+                    onClick={this.toggleRegisterPasswordInput}
+                  />
+                </div>
+              </div>
+              <label css={bottomLabelStyles}>
+                Confirm Password
+              </label>
+              <div
+                css={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  marginBottom: 16,
+                }}
+              >
+                <input
+                  css={inputStyles}
+                  id="passwordTwo"
+                  type="password"
+                  name="passwordTwo"
+                  onChange={this.handleUpdate}
+                  placeholder="Confirm Password"
+                  value={passwordTwo}
+                />
+              </div>
+              <div
+                css={{
+                  color: 'red',
                   fontFamily: options.headerFontFamily.join(`,`),
                   margin: '16px 0',
                 }}
               >
-                {error.message}
+                {registerError}
               </div>
-            }
-          </form>
-        </Container>
-      </div>
+              <button
+                disabled={isInvalid}
+                type="submit"
+                onClick={this.handleClickSignUpButton}
+              >
+                Sign Up
+              </button>
+              {error &&
+                <div
+                  css={{
+                    color: 'red',
+                    fontWeight: 500,
+                    fontFamily: options.headerFontFamily.join(`,`),
+                    margin: '16px 0',
+                  }}
+                >
+                  {error.message}
+                </div>
+              }
+            </form>
+          </Container>
+        </div>
+      </Layout>
     );
   }
 }

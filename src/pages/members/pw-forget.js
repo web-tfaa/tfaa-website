@@ -8,6 +8,7 @@ import { push } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Layout from '../../components/layout';
 import presets, { colors } from '../../utils/presets';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
@@ -79,69 +80,71 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '' || !regex.test(email);
 
     return (
-      <div css={{
-        paddingLeft: 0,
-        [presets.Tablet]: {
-          paddingLeft: '1.5rem',
-        },
-      }}>
-        <Container className="password-forget">
-          <Helmet>
-            <title>TMAC | Forgot Password</title>
-          </Helmet>
-          <h1
-            css={{
-              margin: '1rem 0',
-            }}
-          >
-            Password Reset
-          </h1>
-          {showSuccessMessage &&
-            <div
+      <Layout location={this.props.location}>
+        <div css={{
+          paddingLeft: 0,
+          [presets.Tablet]: {
+            paddingLeft: '1.5rem',
+          },
+        }}>
+          <Container className="password-forget">
+            <Helmet>
+              <title>TMAC | Forgot Password</title>
+            </Helmet>
+            <h1
               css={{
-                background: colors.status,
-                color: texasFlagBlue,
-                fontWeight: 500,
-                marginBottom: 16,
-                padding: '0.5rem',
+                margin: '1rem 0',
               }}
             >
-              Check your email to reset your password!
-            </div>
-          }
-          <form onSubmit={this.onSubmit}>
-            <input
-              css={{
-                display: 'block',
-                fontFamily: options.headerFontFamily.join(`,`),
-                fontSize: '1rem',
-                marginBottom: 24,
-                padding: '0.2rem',
-                width: 288,
-              }}
-              onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
-              placeholder="Email Address"
-              type="text"
-              value={this.state.email}
-            />
-            <button disabled={isInvalid} type="submit">
-              Reset My Password
-            </button>
-            {error &&
+              Password Reset
+            </h1>
+            {showSuccessMessage &&
               <div
                 css={{
-                  color: 'red',
+                  background: colors.status,
+                  color: texasFlagBlue,
                   fontWeight: 500,
-                  fontFamily: options.headerFontFamily.join(`,`),
-                  margin: '16px 0',
+                  marginBottom: 16,
+                  padding: '0.5rem',
                 }}
               >
-                {error.message}
+                Check your email to reset your password!
               </div>
             }
-          </form>
-        </Container>
-      </div>
+            <form onSubmit={this.onSubmit}>
+              <input
+                css={{
+                  display: 'block',
+                  fontFamily: options.headerFontFamily.join(`,`),
+                  fontSize: '1rem',
+                  marginBottom: 24,
+                  padding: '0.2rem',
+                  width: 288,
+                }}
+                onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+                placeholder="Email Address"
+                type="text"
+                value={this.state.email}
+              />
+              <button disabled={isInvalid} type="submit">
+                Reset My Password
+              </button>
+              {error &&
+                <div
+                  css={{
+                    color: 'red',
+                    fontWeight: 500,
+                    fontFamily: options.headerFontFamily.join(`,`),
+                    margin: '16px 0',
+                  }}
+                >
+                  {error.message}
+                </div>
+              }
+            </form>
+          </Container>
+        </div>
+      </Layout>
     );
   }
 }

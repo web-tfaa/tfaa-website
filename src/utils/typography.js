@@ -221,7 +221,7 @@ const _options = {
         cursor: 'not-allowed',
       },
       ".main-body label": {
-        fontFamily: options.bodyFontFamily.join(`,`),
+        fontFamily: options.headerFontFamily.join(`,`),
         marginBottom: '0.25rem',
       },
       ".main-body input[type=text] input[type=password]": {
