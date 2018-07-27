@@ -7,6 +7,7 @@ import {
 import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
+import googleConfig from '../../utils/google-config';
 import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 // import {
@@ -109,6 +110,46 @@ class RegisterForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+  }
+
+  componentDidMount() {
+    // 1. Load the JavaScript client library.
+    window.gapi.load("client:auth2", this.initClient);
+  }
+
+  initClient = () => {
+    // 2. Initialize the JavaScript client library.
+    window.gapi.client
+      .init({
+        apiKey: googleConfig.apiKey,
+        clientId: googleConfig.clientId,
+        discoveryDocs: googleConfig.discoveryDocs,
+        scope: googleConfig.scopes,
+      })
+      .then((res) => {
+        console.log('1 res', res);
+      // 3. Initialize and make the API request.
+      this.handleClientLoad(this.onload);
+    });
+  }
+
+  handleClientLoad = () => {
+    window.gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: '1Qjzo-uUYI0GB4aI4DPWO-xp4m5gbsS5AAUZrroJfSos',
+      majorDimension: 'COLUMNS',
+      range: 'Sheet1!A2:A500',
+    }).then((res) => {
+      console.log('response →', res);
+    });
+  }
+
+  onLoad = (data, error) => {
+    if (data) {
+      const cars = data.cars;
+      this.setState({ cars });
+    } else {
+      this.setState({ error });
+    }
   }
 
   handleSubmit = (event) => {
