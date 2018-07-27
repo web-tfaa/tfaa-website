@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import googleConfig from '../../utils/google-config';
 import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
+import { removeErrorKeys } from '../../utils/helpers';
 // import {
 //   auth,
 //   firebase,
@@ -173,7 +174,14 @@ class RegisterForm extends Component {
     //   lastName,
     // } = this.state;
 
-    console.log('form is:', this.state);
+    const form = this.state;
+
+    console.log('pure form is:', form);
+
+
+    const formNoErrors = removeErrorKeys(form);
+
+    console.log('no errors!', formNoErrors);
 
     // auth.doSignInWithEmailAndPassword(email, password)
     //   .then(() => {
