@@ -89,6 +89,8 @@ const INITIAL_STATE = {
   officeFax: '',
 };
 
+const VALUE_INPUT_OPTION = 'USER_ENTERED';
+
 // To check for a valid email address
 const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
@@ -136,10 +138,11 @@ class RegisterForm extends Component {
 
   handleClientLoad = () => {
     window.gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1Qjzo-uUYI0GB4aI4DPWO-xp4m5gbsS5AAUZrroJfSos',
+      spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
       majorDimension: 'COLUMNS',
       range: 'Sheet1!A2:A500',
-    }).then((res) => {
+    })
+    .then((res) => {
       console.log('response →', res);
     });
   }
@@ -169,19 +172,38 @@ class RegisterForm extends Component {
   }
 
   handleClickSubmitButton = (event) => {
-    // const {
-    //   firstName,
-    //   lastName,
-    // } = this.state;
+    const originalForm = this.state;
 
-    const form = this.state;
+    const form = removeErrorKeys(originalForm);
+    console.log('no errors!', form);
 
-    console.log('pure form is:', form);
+    const body = {
+      values: [
+        [form.firstName],
+        [form.lastName],
+        [form.title],
+        [form.district],
+        [form.address1],
+        [form.address2],
+        [form.city],
+        [form.zip],
+        [form.email],
+        [form.officePhone],
+        [form.cellPhone],
+        [form.officeFax],
+      ],
+    };
 
-
-    const formNoErrors = removeErrorKeys(form);
-
-    console.log('no errors!', formNoErrors);
+    window.gapi.client.sheets.spreadsheets.values.update({
+      spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
+      range: 'Sheet1!A2:A500',
+      valueInputOption: VALUE_INPUT_OPTION,
+      resource: body,
+    })
+    .then((res) => {
+      const result = res.result;
+      console.log(`${result.updatedCells} cells updated.`);
+    });
 
     // auth.doSignInWithEmailAndPassword(email, password)
     //   .then(() => {

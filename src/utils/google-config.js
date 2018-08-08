@@ -5,5 +5,5 @@ export default {
   discoveryDocs:
     ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-  scopes: "https://www.googleapis.com/auth/spreadsheets.readonly",
+  scopes: "https://www.googleapis.com/auth/spreadsheets",
 };
