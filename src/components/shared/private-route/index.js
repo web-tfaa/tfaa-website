@@ -1,22 +1,22 @@
 // External Dependencies
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+// import { Redirect, Route } from 'react-router-dom';
+import { Router, navigate } from '@reach/router';
 
 // Internal Dependencies
 import { isLoggedIn } from '../../../utils/auth';
 
-// More info at https://reacttraining.com/react-router/web/example/auth-workflow
 // Component Definition
-export default ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      !isLoggedIn() ? (
-        // If we’re not logged in, redirect to the login page.
-        <Redirect to={{ pathname: '/members/login' }} />
-      ) : (
-        <Component {...props} />
-      )
-    }
-  />
-);
+export default ({ component: Component, ...rest }) => {
+  if (!isLoggedIn() && window.location.pathname !== '/login') {
+    // If we are not logged in, redirect to the home page
+    navigate('/login');
+    return null;
+  }
+
+  return (
+    <Router
+      <Component {...rest} />
+    <Router/>
+  );
+};

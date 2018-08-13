@@ -161,7 +161,6 @@ const SectionLink = props => {
         <Link
           activeClassName="nav-link-active"
           className="nav-link"
-          exact
           to={item.link}
         >
           {title}

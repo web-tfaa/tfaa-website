@@ -1,6 +1,5 @@
 // External Dependencies
 import React from 'react';
-import { Link } from 'gatsby';
 
 // Component Definition
 export default () => (

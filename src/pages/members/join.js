@@ -81,7 +81,7 @@ class JoinContent extends Component {
     );
 
     window.gapi.auth2.init({
-      client_id: process.env.GATSBY_CLIENT_ID
+      client_id: process.env.GATSBY_CLIENT_ID,
     })
     .then((response) => {
       console.log('response from gapi.auth2 call,', response);
