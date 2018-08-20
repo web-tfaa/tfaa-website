@@ -76,7 +76,7 @@ class NonMemberContent extends Component {
           >
             <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
             <FuturaDiv>
-              (from the Texas Music Administrators Conference's <Link to="/about/constitution">Constitution and Bylaws</Link>)
+              (from the Texas Music Administrators Conference's <Link to={'/about/constitution'}>Constitution and Bylaws</Link>)
             </FuturaDiv>
             <FuturaDiv>
               <dl css={paddingStyles}>

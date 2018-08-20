@@ -1,6 +1,5 @@
 // External Dependencies
 import React from 'react';
-// import { Redirect, Route } from 'react-router-dom';
 import { Router, navigate } from '@reach/router';
 
 // Internal Dependencies

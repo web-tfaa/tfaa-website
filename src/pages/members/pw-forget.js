@@ -1,9 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import React, { Component } from 'react';
-import {
-  withRouter,
-} from 'react-router-dom';
 import { push } from 'gatsby';
 
 // Internal Dependencies
@@ -152,4 +149,4 @@ class PasswordForgetForm extends Component {
   }
 }
 
-export default withRouter(PasswordForgetForm);
+export default PasswordForgetForm;

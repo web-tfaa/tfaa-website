@@ -4,7 +4,6 @@ import {
   // Link,
   push,
 } from 'gatsby';
-import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import googleConfig from '../../utils/google-config';
@@ -574,4 +573,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default withRouter(RegisterForm);
+export default RegisterForm;

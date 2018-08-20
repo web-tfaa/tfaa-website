@@ -1,6 +1,5 @@
 // External Dependencies
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
@@ -34,7 +33,7 @@ const Status = (props) => {
     ? (
       <p css={statusTextStyles}>
         To access the Members area, please&nbsp;
-        <Link to="/members/login">log in</Link>.
+        <Link to={'/members/login'}>log in</Link>.
       </p>
     )
   : (
@@ -67,4 +66,4 @@ const Status = (props) => {
   return <div css={statusRootStyles}>{details}</div>;
 };
 
-export default withRouter(Status);
+export default Status;

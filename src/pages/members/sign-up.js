@@ -6,7 +6,6 @@ import {
   Link,
   push,
 } from 'gatsby';
-import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -221,7 +220,7 @@ class SignUpForm extends Component {
               key="register-message"
             >
               Registration is open to TMAC members. For information about joining TMAC, head over to the&nbsp;
-              <Link to="/members">Members page</Link>.
+              <Link to={'/members'}>Members page</Link>.
             </div>
             <form
               key="register-form"
@@ -332,4 +331,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default withRouter(SignUpForm);
+export default SignUpForm;

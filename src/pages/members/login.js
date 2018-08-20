@@ -1,7 +1,7 @@
 // External Dependencies
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Redirect } from 'react-router-dom';
+import { push } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -28,6 +28,10 @@ class Login extends React.Component {
     });
   }
 
+  handleRedirectToMembers = () => {
+    push('/members/login');
+  }
+
   render() {
     const {
       authUser,
@@ -36,7 +40,7 @@ class Login extends React.Component {
     const isAuthenticated = Boolean(authUser);
 
     if (isAuthenticated) {
-      return <Redirect to={{ pathname: '/members' }} />;
+      return this.handleRedirectToMembers;
     }
 
     return (

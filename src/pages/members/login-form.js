@@ -5,7 +5,6 @@ import {
   Link,
   push,
 } from 'gatsby';
-import { withRouter } from 'react-router-dom';
 
 // Internal Dependencies
 import presets, { colors } from '../../utils/presets';
@@ -300,7 +299,7 @@ class LoginForm extends Component {
         </form>
 
         <p>
-          <Link to="/members/pw-forget">Forgot Password?</Link>
+          <Link to={'/members/pw-forget'}>Forgot Password?</Link>
         </p>
 
         {signUpElement}
@@ -309,4 +308,4 @@ class LoginForm extends Component {
   }
 }
 
-export default withRouter(LoginForm);
+export default LoginForm;
