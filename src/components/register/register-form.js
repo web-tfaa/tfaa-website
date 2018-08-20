@@ -131,11 +131,19 @@ class RegisterForm extends Component {
       .then((res) => {
         console.log('1 res', res);
       // 3. Initialize and make the API request.
-      this.handleClientLoad(this.onload);
+
+      var user = window.gapi.auth2.getAuthInstance().currentUser.get();
+
+      var oauthToken = user.getAuthResponse().access_token;
+
+      console.log('oauthToken', oauthToken);
+
+      // this.handleClientLoad(this.onload);
     });
   }
 
   handleClientLoad = () => {
+    console.log('inside handleClientLoad');
     window.gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
       majorDimension: 'COLUMNS',
@@ -148,9 +156,11 @@ class RegisterForm extends Component {
 
   onLoad = (data, error) => {
     if (data) {
+      console.log('data');
       const cars = data.cars;
       this.setState({ cars });
     } else {
+      console.log('error');
       this.setState({ error });
     }
   }
