@@ -87,7 +87,7 @@ const MemberContent = (props) => {
 
   return (
     <div>
-      <h1>Membership Dashboard</h1>
+      <h1>Member Dashboard</h1>
       <Cards>
         <Card>
           <CardHeadline>Tasks for {memberEmail}</CardHeadline>
