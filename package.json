@@ -58,7 +58,7 @@
     "typography-theme-twin-peaks": "^0.15.11"
   },
   "engines": {
-    "node": "^8.11.3",
+    "node": "^8.11.4",
     "npm": "^6.2.0"
   }
 }
