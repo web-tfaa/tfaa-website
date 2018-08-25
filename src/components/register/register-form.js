@@ -1,7 +1,6 @@
 // External Dependencies
 import React, { Component } from 'react';
 import {
-  // Link,
   push,
 } from 'gatsby';
 
@@ -16,10 +15,6 @@ import { removeErrorKeys } from '../../utils/helpers';
 // } from '../../firebase';
 
 // Local Styles
-// const rootStyles = {
-//   margin: '1rem 0',
-// };
-
 const labelStyles = {
   display: 'block',
   fontSize: '90%',
@@ -85,6 +80,7 @@ const INITIAL_STATE = {
   officePhoneError: '',
   cellPhone: '',
   cellPhoneError: '',
+  // OfficeFax is not required, so cannot have an error
   officeFax: '',
 };
 
@@ -567,11 +563,16 @@ class RegisterForm extends Component {
             }}
           >
             <button
-              css={{ marginTop: '2rem', padding: '8px 12px' }}
+              css={{
+                marginTop: '2rem',
+                padding: '8px 12px',
+              }}
               disabled={!hasValidInput}
               type="submit"
               onClick={this.handleClickSubmitButton}
-              style={{ color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}` }}
+              style={{
+                color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}`,
+              }}
             >
               Continue to Step 2
             </button>
