@@ -56,39 +56,41 @@ const baseErrorStyles = {
 //   margin: '16px 0',
 // };
 
+// All form values here must exactly match the column header names in the
+//  associated Google Sheet to which we are writing this form data
 const INITIAL_STATE = {
   isAuthenticated: false,
-  firstName: '',
-  firstNameError: '',
-  lastName: '',
-  lastNameError: '',
-  title: '',
-  titleError: '',
-  district: '',
-  districtError: '',
-  address1: '',
-  address1Error: '',
+  First_Name: '',
+  First_NameError: '',
+  Last_Name: '',
+  Last_NameError: '',
+  Title: '',
+  TitleError: '',
+  District: '',
+  DistrictError: '',
+  Address_1: '',
+  Address_1Error: '',
   // Address2 is not required, so cannot have an error
-  address2: '',
-  city: '',
-  cityError: '',
-  zip: '',
-  zipError: '',
-  email: '',
-  emailError: '',
-  officePhone: '',
-  officePhoneError: '',
-  cellPhone: '',
-  cellPhoneError: '',
+  Address_2: '',
+  City: '',
+  CityError: '',
+  Zip_Code: '',
+  Zip_CodeError: '',
+  Email: '',
+  EmailError: '',
+  Office_Phone: '',
+  Office_PhoneError: '',
+  Cell_Phone: '',
+  Cell_PhoneError: '',
   // OfficeFax is not required, so cannot have an error
-  officeFax: '',
+  Office_Fax: '',
 };
 
 const VALUE_INPUT_OPTION = 'USER_ENTERED';
 
-// To check for a valid email address
-const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
+// To check for a valid Email address
+const EmailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
+const Zip_CodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Local Functions
 const formatPhone = (phone) => {
@@ -112,7 +114,7 @@ class RegisterForm extends Component {
 
   componentDidMount() {
     // 1. Load the JavaScript client library.
-    window.gapi.load("client:auth2", this.initClient);
+    // window.gapi.load("client:auth2", this.initClient);
   }
 
   initClient = () => {
@@ -184,33 +186,35 @@ class RegisterForm extends Component {
 
     const body = {
       values: [
-        [form.firstName],
-        [form.lastName],
-        [form.title],
-        [form.district],
-        [form.address1],
-        [form.address2],
-        [form.city],
-        [form.zip],
-        [form.email],
-        [form.officePhone],
-        [form.cellPhone],
-        [form.officeFax],
+        [form.First_Name],
+        [form.Last_Name],
+        [form.Title],
+        [form.District],
+        [form.Address_1],
+        [form.Address_2],
+        [form.City],
+        [form.Zip_Code],
+        [form.Email],
+        [form.Office_Phone],
+        [form.Cell_Phone],
+        [form.Office_Fax],
       ],
     };
 
-    window.gapi.client.sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-      range: 'Sheet1!A2:A500',
-      valueInputOption: VALUE_INPUT_OPTION,
-      resource: body,
-    })
-    .then((res) => {
-      const result = res.result;
-      console.log(`${result.updatedCells} cells updated.`);
-    });
+    console.log('JSON.stringify', JSON.stringify(form));
 
-    // auth.doSignInWithEmailAndPassword(email, password)
+    // window.gapi.client.sheets.spreadsheets.values.update({
+    //   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
+    //   range: 'Sheet1!A2:A500',
+    //   valueInputOption: VALUE_INPUT_OPTION,
+    //   resource: body,
+    // })
+    // .then((res) => {
+    //   const result = res.result;
+    //   console.log(`${result.updatedCells} cells updated.`);
+    // });
+
+    // auth.doSignInWithEmailAndPassword(Email, password)
     //   .then(() => {
     //     this.setState(() => ({
     //       ...INITIAL_STATE,
@@ -223,110 +227,110 @@ class RegisterForm extends Component {
   }
 
   handleUpdateErrors = (name, value) => {
-    if (name === 'email') this.handleUpdateEmailError(value);
-    else if (name === 'zip') this.handleUpdateZipError(value);
+    if (name === 'Email') this.handleUpdateEmailError(value);
+    else if (name === 'Zip_Code') this.handleUpdateZip_CodeError(value);
     else this.handleUpdateInputError(name, value);
   }
 
   handleUpdateEmailError = (value) => {
     if (!value) {
       this.setState({
-        emailError: 'Email is required',
+        EmailError: 'Email is required',
       });
-    } else if (value && emailRegex.test(value)) {
+    } else if (value && EmailRegex.test(value)) {
       this.setState({
-        emailError: '',
+        EmailError: '',
       });
-    } else if (value && !emailRegex.test(value)) {
+    } else if (value && !EmailRegex.test(value)) {
       this.setState({
-        emailError: 'Use a valid email',
+        EmailError: 'Use a valid Email',
       });
     }
   }
 
-  handleUpdateZipError = (value) => {
+  handleUpdateZip_CodeError = (value) => {
     if (!value) {
       this.setState({
-        zipError: 'ZIP Code is required',
+        Zip_CodeError: 'ZIP Code is required',
       });
-    } else if (value && zipRegex.test(value)) {
+    } else if (value && Zip_CodeRegex.test(value)) {
       this.setState({
-        zipError: '',
+        Zip_CodeError: '',
       });
-    } else if (value && !zipRegex.test(value)) {
+    } else if (value && !Zip_CodeRegex.test(value)) {
       this.setState({
-        zipError: 'Use a valid ZIP Code',
+        Zip_CodeError: 'Use a valid ZIP Code',
       });
     }
   }
 
   handleUpdateInputError = (name, value) => {
     const {
-      firstName,
-      lastName,
-      title,
-      district,
-      address1,
-      city,
-      officePhone,
-      cellPhone,
+      First_Name,
+      Last_Name,
+      Title,
+      District,
+      Address_1,
+      City,
+      Office_Phone,
+      Cell_Phone,
     } = this.state;
 
     switch (name) {
-      case 'firstName':
-        if (!firstName && value) {
-          this.setState({ firstNameError: '' });
-        } else if (firstName && !value) {
-          this.setState({ firstNameError: 'First Name is required' });
+      case 'First_Name':
+        if (!First_Name && value) {
+          this.setState({ First_NameError: '' });
+        } else if (First_Name && !value) {
+          this.setState({ First_NameError: 'First Name is required' });
         }
         break;
-      case 'lastName':
-        if (!lastName && value) {
-          this.setState({ lastNameError: '' });
-        } else if (lastName && !value) {
-          this.setState({ lastNameError: 'Last Name is required' });
+      case 'Last_Name':
+        if (!Last_Name && value) {
+          this.setState({ Last_NameError: '' });
+        } else if (Last_Name && !value) {
+          this.setState({ Last_NameError: 'Last Name is required' });
         }
         break;
-      case 'title':
-        if (!title && value) {
-          this.setState({ titleError: '' });
-        } else if (title && !value) {
-          this.setState({ titleError: 'Title is required' });
+      case 'Title':
+        if (!Title && value) {
+          this.setState({ TitleError: '' });
+        } else if (Title && !value) {
+          this.setState({ TitleError: 'Title is required' });
         }
         break;
-      case 'district':
-        if (!district && value) {
-          this.setState({ districtError: '' });
-        } else if (district && !value) {
-          this.setState({ districtError: 'District is required' });
+      case 'District':
+        if (!District && value) {
+          this.setState({ DistrictError: '' });
+        } else if (District && !value) {
+          this.setState({ DistrictError: 'District is required' });
         }
         break;
-      case 'address1':
-        if (!address1 && value) {
-          this.setState({ address1Error: '' });
-        } else if (address1 && !value) {
-          this.setState({ address1Error: 'Address 1 is required' });
+      case 'Address_1':
+        if (!Address_1 && value) {
+          this.setState({ Address_1Error: '' });
+        } else if (Address_1 && !value) {
+          this.setState({ Address_1Error: 'Address 1 is required' });
         }
         break;
-      case 'city':
-        if (!city && value) {
-          this.setState({ cityError: '' });
-        } else if (city && !value) {
-          this.setState({ cityError: 'City is required' });
+      case 'City':
+        if (!City && value) {
+          this.setState({ CityError: '' });
+        } else if (City && !value) {
+          this.setState({ CityError: 'City is required' });
         }
         break;
-      case 'officePhone':
-        if (!officePhone && value) {
-          this.setState({ officePhoneError: '' });
-        } else if (officePhone && !value) {
-          this.setState({ officePhoneError: 'Office Phone is required' });
+      case 'Office_Phone':
+        if (!Office_Phone && value) {
+          this.setState({ Office_PhoneError: '' });
+        } else if (Office_Phone && !value) {
+          this.setState({ Office_PhoneError: 'Office Phone is required' });
         }
         break;
-      case 'cellPhone':
-        if (!cellPhone && value) {
-          this.setState({ cellPhoneError: '' });
-        } else if (cellPhone && !value) {
-          this.setState({ cellPhoneError: 'Cell Phone is required' });
+      case 'Cell_Phone':
+        if (!Cell_Phone && value) {
+          this.setState({ Cell_PhoneError: '' });
+        } else if (Cell_Phone && !value) {
+          this.setState({ Cell_PhoneError: 'Cell Phone is required' });
         }
         break;
       default:
@@ -337,42 +341,42 @@ class RegisterForm extends Component {
   render() {
     const {
       isAuthenticated,
-      firstName,
-      firstNameError,
-      lastName,
-      lastNameError,
-      title,
-      titleError,
-      district,
-      districtError,
-      address1,
-      address1Error,
-      address2,
-      city,
-      cityError,
-      zip,
-      zipError,
-      email,
-      emailError,
-      officePhone,
-      officePhoneError,
-      cellPhone,
-      cellPhoneError,
-      officeFax,
+      First_Name,
+      First_NameError,
+      Last_Name,
+      Last_NameError,
+      Title,
+      TitleError,
+      District,
+      DistrictError,
+      Address_1,
+      Address_1Error,
+      Address_2,
+      City,
+      CityError,
+      Zip_Code,
+      Zip_CodeError,
+      Email,
+      EmailError,
+      Office_Phone,
+      Office_PhoneError,
+      Cell_Phone,
+      Cell_PhoneError,
+      Office_Fax,
     } = this.state;
 
     if (isAuthenticated) push('/members');
 
-    const hasInput = firstName !== ''
-      && lastName !== ''
-      && title !== ''
-      && district !== ''
-      && address1 !== ''
-      && city !== ''
-      && zip !== ''
-      && email !== ''
-      && officePhone !== ''
-      && cellPhone !== '';
+    const hasInput = First_Name !== ''
+      && Last_Name !== ''
+      && Title !== ''
+      && District !== ''
+      && Address_1 !== ''
+      && City !== ''
+      && Zip_Code !== ''
+      && Email !== ''
+      && Office_Phone !== ''
+      && Cell_Phone !== '';
 
     const hasValidInput = hasInput;
 
@@ -387,13 +391,13 @@ class RegisterForm extends Component {
           <input
             css={inputStyles}
             type="text"
-            name="firstName"
+            name="First_Name"
             onChange={this.handleUpdate}
             placeholder="e.g. Sally"
-            value={firstName}
+            value={First_Name}
           />
           <div css={baseErrorStyles}>
-            {firstNameError}
+            {First_NameError}
           </div>
 
           {/* LAST NAME */}
@@ -402,13 +406,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="lastName"
+            name="Last_Name"
             onChange={this.handleUpdate}
             placeholder="e.g. Drumm"
-            value={lastName}
+            value={Last_Name}
           />
           <div css={baseErrorStyles}>
-            {lastNameError}
+            {Last_NameError}
           </div>
 
           {/* TITLE */}
@@ -417,13 +421,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="title"
+            name="Title"
             onChange={this.handleUpdate}
             placeholder="e.g. Director of Fine Arts"
-            value={title}
+            value={Title}
           />
           <div css={baseErrorStyles}>
-            {titleError}
+            {TitleError}
           </div>
 
           {/* DISTRICT */}
@@ -432,13 +436,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="district"
+            name="District"
             onChange={this.handleUpdate}
             placeholder="e.g. Texas ISD"
-            value={district}
+            value={District}
           />
           <div css={baseErrorStyles}>
-            {districtError}
+            {DistrictError}
           </div>
 
           {/* ADDRESS 1 */}
@@ -447,13 +451,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="address1"
+            name="Address_1"
             onChange={this.handleUpdate}
             placeholder="e.g. 123 Main St."
-            value={address1}
+            value={Address_1}
           />
           <div css={baseErrorStyles}>
-            {address1Error}
+            {Address_1Error}
           </div>
 
           {/* ADDRESS 2 */}
@@ -462,10 +466,10 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="address2"
+            name="Address_2"
             onChange={this.handleUpdate}
             placeholder="e.g. Suite 19"
-            value={address2}
+            value={Address_2}
           />
 
           {/* CITY */}
@@ -474,13 +478,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="city"
+            name="City"
             onChange={this.handleUpdate}
             placeholder="e.g. Dallas"
-            value={city}
+            value={City}
           />
           <div css={baseErrorStyles}>
-            {cityError}
+            {CityError}
           </div>
 
           {/* ZIP */}
@@ -489,13 +493,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="zip"
+            name="Zip_Code"
             onChange={this.handleUpdate}
             placeholder="e.g. 75150"
-            value={zip}
+            value={Zip_Code}
           />
           <div css={baseErrorStyles}>
-            {zipError}
+            {Zip_CodeError}
           </div>
 
           {/* EMAIL */}
@@ -504,13 +508,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="email"
+            name="Email"
             onChange={this.handleUpdate}
             placeholder="e.g. music@austinisd.edu"
-            value={email}
+            value={Email}
           />
           <div css={baseErrorStyles}>
-            {emailError}
+            {EmailError}
           </div>
 
           {/* OFFICE PHONE */}
@@ -519,13 +523,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="officePhone"
+            name="Office_Phone"
             onChange={this.handleUpdate}
             placeholder="e.g. (512) 555-1919"
-            value={formatPhone(officePhone)}
+            value={formatPhone(Office_Phone)}
           />
           <div css={baseErrorStyles}>
-            {officePhoneError}
+            {Office_PhoneError}
           </div>
 
           {/* CELL PHONE */}
@@ -534,13 +538,13 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="cellPhone"
+            name="Cell_Phone"
             onChange={this.handleUpdate}
             placeholder="e.g. (512) 555-1919"
-            value={formatPhone(cellPhone)}
+            value={formatPhone(Cell_Phone)}
           />
           <div css={baseErrorStyles}>
-            {cellPhoneError}
+            {Cell_PhoneError}
           </div>
 
           {/* OFFICE FAX */}
@@ -549,10 +553,10 @@ class RegisterForm extends Component {
           </label>
           <input
             css={inputStyles}
-            name="officeFax"
+            name="Office_Fax"
             onChange={this.handleUpdate}
             placeholder="e.g. (512) 555-1919"
-            value={formatPhone(officeFax)}
+            value={formatPhone(Office_Fax)}
           />
 
           {/* SUBMIT BUTTON */}
