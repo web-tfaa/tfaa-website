@@ -1,18 +1,16 @@
 // External Dependencies
 import React, { Component } from 'react';
-import {
-  push,
-} from 'gatsby';
+import { push } from 'gatsby';
 
 // Internal Dependencies
 import googleConfig from '../../utils/google-config';
 import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { removeErrorKeys } from '../../utils/helpers';
-// import {
-//   auth,
-//   firebase,
-// } from '../../firebase';
+import {
+  auth,
+  firebase,
+} from '../../firebase';
 
 // Local Styles
 const labelStyles = {
@@ -59,6 +57,7 @@ const baseErrorStyles = {
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
 const INITIAL_STATE = {
+  honeypot: '',
   isAuthenticated: false,
   First_Name: '',
   First_NameError: '',
@@ -110,16 +109,17 @@ class RegisterForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+    this.gapi = window.gapi;
   }
 
   componentDidMount() {
     // 1. Load the JavaScript client library.
-    // window.gapi.load("client:auth2", this.initClient);
+    this.gapi.load("client:auth2", this.initClient);
   }
 
   initClient = () => {
     // 2. Initialize the JavaScript client library.
-    window.gapi.client
+    this.gapi.client
       .init({
         apiKey: googleConfig.apiKey,
         clientId: googleConfig.clientId,
@@ -130,19 +130,19 @@ class RegisterForm extends Component {
         console.log('1 res', res);
       // 3. Initialize and make the API request.
 
-      var user = window.gapi.auth2.getAuthInstance().currentUser.get();
+      var user = this.gapi.auth2.getAuthInstance().currentUser.get();
 
       var oauthToken = user.getAuthResponse().access_token;
 
       console.log('oauthToken', oauthToken);
 
-      // this.handleClientLoad(this.onload);
+      this.handleClientLoad(this.onload);
     });
   }
 
   handleClientLoad = () => {
     console.log('inside handleClientLoad');
-    window.gapi.client.sheets.spreadsheets.values.get({
+    this.gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
       majorDimension: 'COLUMNS',
       range: 'Sheet1!A2:A500',
@@ -179,40 +179,31 @@ class RegisterForm extends Component {
   }
 
   handleClickSubmitButton = (event) => {
+    event.preventDefault();
+
     const originalForm = this.state;
 
+    // The Google Sheet doesn't need these values
     const form = removeErrorKeys(originalForm);
+    delete form.isAuthenticated;
+    delete form.honeypot;
+
     console.log('no errors!', form);
 
-    const body = {
-      values: [
-        [form.First_Name],
-        [form.Last_Name],
-        [form.Title],
-        [form.District],
-        [form.Address_1],
-        [form.Address_2],
-        [form.City],
-        [form.Zip_Code],
-        [form.Email],
-        [form.Office_Phone],
-        [form.Cell_Phone],
-        [form.Office_Fax],
-      ],
-    };
+    const body = JSON.stringify(form);
 
-    console.log('JSON.stringify', JSON.stringify(form));
+    // console.log('body', JSON.stringify(form));
 
-    // window.gapi.client.sheets.spreadsheets.values.update({
-    //   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-    //   range: 'Sheet1!A2:A500',
-    //   valueInputOption: VALUE_INPUT_OPTION,
-    //   resource: body,
-    // })
-    // .then((res) => {
-    //   const result = res.result;
-    //   console.log(`${result.updatedCells} cells updated.`);
-    // });
+    this.gapi.client.sheets.spreadsheets.values.update({
+      spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
+      range: 'Sheet1!A2:A500',
+      valueInputOption: VALUE_INPUT_OPTION,
+      resource: body,
+    })
+    .then((res) => {
+      const result = res.result;
+      console.log(`${result.updatedCells} cells updated.`);
+    });
 
     // auth.doSignInWithEmailAndPassword(Email, password)
     //   .then(() => {
@@ -338,8 +329,14 @@ class RegisterForm extends Component {
     }
   }
 
+  validateHuman = (data) => {
+    if (data) return false;
+    return true;
+  };
+
   render() {
     const {
+      honeypot,
       isAuthenticated,
       First_Name,
       First_NameError,
@@ -378,11 +375,14 @@ class RegisterForm extends Component {
       && Office_Phone !== ''
       && Cell_Phone !== '';
 
-    const hasValidInput = hasInput;
+    const hasValidInput = hasInput && this.validateHuman(honeypot);
 
     return (
       <div className="login-form">
-        <form onSubmit={this.handleSubmit}>
+        <form
+          onSubmit={this.handleSubmit}
+          target='hidden-iframe'
+        >
 
           {/* FIRST NAME */}
           <label css={labelStyles}>
@@ -559,11 +559,22 @@ class RegisterForm extends Component {
             value={formatPhone(Office_Fax)}
           />
 
+          {/* Hidden input to help curtail spam */}
+          <input
+            css={{ opacity: 0, height: 1, width: 1 }}
+            id="honeypot"
+            name="honeypot"
+            onChange={this.handleUpdate}
+            type="text"
+            value={honeypot}
+          />
+
           {/* SUBMIT BUTTON */}
           <div
             css={{
               display: 'flex',
               justifyContent: 'flex-end',
+              transform: 'translateY(-24px)',
             }}
           >
             <button
@@ -580,6 +591,7 @@ class RegisterForm extends Component {
             >
               Continue to Step 2
             </button>
+            <iframe name='hidden-iframe' style={{ display: 'none' }}></iframe>
           </div>
 
         </form>
