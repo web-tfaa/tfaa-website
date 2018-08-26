@@ -18,6 +18,10 @@ import presets from '../../utils/presets';
 import { firebase } from '../../firebase';
 // import CtaButton from '../../components/masthead/cta-button';
 import RegisterForm from '../../components/register/register-form';
+import RegisterEmail from '../../components/register/register-email';
+import RegisterInfo from '../../components/register/register-info';
+import RegisterPayment from '../../components/register/register-payment';
+
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -66,6 +70,10 @@ import membersSidebar from './members-links.yml';
 //   );
 // };
 
+/*
+  Main container for the Registration process
+*/
+
 // Component Definition
 class Register extends Component {
   constructor(props) {
@@ -105,6 +113,8 @@ class Register extends Component {
             <Helmet>
               <title>TMAC | Register</title>
             </Helmet>
+
+            {/* Children change depending on which step is active */}
 
             <h2>2. Register for TMAC</h2>
 

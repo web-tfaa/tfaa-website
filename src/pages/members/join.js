@@ -102,46 +102,48 @@ class JoinContent extends Component {
             <Helmet>
               <title>TMAC | Join TMAC</title>
             </Helmet>
-            <Cards>
-                <div
-                  css={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: 32,
-                  }}
-                >
-                  <CardHeadline>Join TMAC</CardHeadline>
-                  <SpacedDiv>
-                    To join TMAC please complete these three steps:
-                  </SpacedDiv>
-                  <SpacedDiv>
-                    <span css={boldStyles}>1.</span> Sign up for a TMAC website login.
-                  </SpacedDiv>
-                  <SpacedDiv>
-                    <span css={boldStyles}>2.</span> Complete the Registration Form.
-                  </SpacedDiv>
-                  <SpacedDiv>
-                    <span css={boldStyles}>3.</span> Pay dues online (or with check via mail).
-                  </SpacedDiv>
-                  <CtaButton
-                    overrideCSS={{
-                      alignSelf: 'flex-end',
-                      marginTop: '1.5rem',
+
+              <div
+                css={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: 32,
+                }}
+              >
+                <CardHeadline>Join TMAC</CardHeadline>
+                <SpacedDiv>
+                  To join TMAC please complete these three steps:
+                </SpacedDiv>
+                <SpacedDiv>
+                  <span css={boldStyles}>1.</span> Sign up for a TMAC website login.
+                </SpacedDiv>
+                <SpacedDiv>
+                  <span css={boldStyles}>2.</span> Complete the Registration Form.
+                </SpacedDiv>
+                <SpacedDiv>
+                  <span css={boldStyles}>3.</span> Pay dues online (or with check via mail).
+                </SpacedDiv>
+              </div>
+
+              <div
+                css={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <CtaButton to="/members/register">
+                  <span css={{ verticalAlign: `middle` }}>
+                    Begin Registration
+                  </span>
+                  <ArrowForwardIcon
+                    css={{
+                      verticalAlign: `baseline`,
+                      marginLeft: `.6em`,
                     }}
-                    to="/members/register"
-                  >
-                    <span css={{ verticalAlign: `middle` }}>
-                      Begin Registration
-                    </span>
-                    <ArrowForwardIcon
-                      css={{
-                        verticalAlign: `baseline`,
-                        marginLeft: `.6em`,
-                      }}
-                    />
-                  </CtaButton>
-                </div>
-            </Cards>
+                  />
+                </CtaButton>
+              </div>
+
             <div style={{ marginTop: '1.5rem' }}>
               * Registration is not complete until payment is received.
             </div>

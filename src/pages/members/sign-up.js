@@ -17,10 +17,6 @@ import {
 } from '../../firebase';
 
 // Local Styles
-// const rootStyles = {
-//   margin: '1rem 0',
-// };
-
 const labelStyles = {
   display: 'block',
   fontSize: '67.5%',
@@ -36,8 +32,8 @@ const bottomLabelStyles = {
 const inputStyles = {
   display: 'block',
   fontSize: '1rem',
-  padding: '0.3rem',
   minWidth: '70%',
+  padding: '0.3rem',
 };
 
 // const buttonStyles = {
@@ -205,11 +201,7 @@ class SignUpForm extends Component {
             <Helmet>
               <title>TMAC | Sign Up</title>
             </Helmet>
-            <h2
-              css={{
-                margin: '1rem 0',
-              }}
-            >
+            <h2 css={{ margin: '1rem 0' }}>
               Sign Up
             </h2>
 
@@ -231,10 +223,10 @@ class SignUpForm extends Component {
               </label>
               <input
                 css={inputStyles}
-                type="text"
                 name="email"
                 onChange={this.handleUpdate}
                 placeholder="Email Address"
+                type="text"
                 value={email}
               />
               <div css={baseErrorStyles}>
@@ -253,10 +245,10 @@ class SignUpForm extends Component {
                 <input
                   css={inputStyles}
                   id="passwordOne"
-                  type="password"
                   name="passwordOne"
                   onChange={this.handleUpdate}
                   placeholder="Password"
+                  type="password"
                   value={passwordOne}
                 />
                 <div css={{ marginLeft: 8 }}>
@@ -282,10 +274,10 @@ class SignUpForm extends Component {
                 <input
                   css={inputStyles}
                   id="passwordTwo"
-                  type="password"
                   name="passwordTwo"
                   onChange={this.handleUpdate}
                   placeholder="Confirm Password"
+                  type="password"
                   value={passwordTwo}
                 />
               </div>
@@ -304,8 +296,8 @@ class SignUpForm extends Component {
                 <button
                   css={{ marginTop: '1rem', padding: '8px 12px' }}
                   disabled={isInvalid}
-                  type="submit"
                   onClick={this.handleClickSignUpButton}
+                  type="submit"
                 >
                   Sign Up
                 </button>
@@ -315,8 +307,8 @@ class SignUpForm extends Component {
                 <div
                   css={{
                     color: 'red',
-                    fontWeight: 500,
                     fontFamily: options.headerFontFamily.join(`,`),
+                    fontWeight: 500,
                     margin: '16px 0',
                   }}
                 >
