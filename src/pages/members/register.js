@@ -7,12 +7,13 @@ import React, { Component } from 'react';
 
 // Internal Dependencies
 // import Card from '../../components/shared/cards/card';
-import CardHeadline from '../../components/shared/cards/card-headline';
+// import CardHeadline from '../../components/shared/cards/card-headline';
 // import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import Status from './status';
-import presets, { colors } from '../../utils/presets';
+// import presets, { colors } from '../../utils/presets';
+import presets from '../../utils/presets';
 // import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
 // import CtaButton from '../../components/masthead/cta-button';
@@ -105,7 +106,7 @@ class Register extends Component {
               <title>TMAC | Register</title>
             </Helmet>
 
-            <h2>1. Register for TMAC</h2>
+            <h2>2. Register for TMAC</h2>
 
             <hr css={{ background: 'darkred', height: 3 }} />
 

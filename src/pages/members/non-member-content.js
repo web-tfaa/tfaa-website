@@ -20,10 +20,10 @@ const contentStyles = {
   marginBottom: '1rem',
 };
 
-const iframeStyles = {
-  height: 600,
-  width: '100%',
-};
+// const iframeStyles = {
+//   height: 600,
+//   width: '100%',
+// };
 
 const paddingStyles = {
   paddingLeft: 16,
@@ -101,7 +101,7 @@ class NonMemberContent extends Component {
           </Card>
         </Cards>
 
-        <section id="google-form-members" style={{ marginTop: '1.5rem' }}>
+        {/* <section id="google-form-members" style={{ marginTop: '1.5rem' }}>
           <FuturaDiv>
             Complete the <strong>TMAC Membership Form</strong> below to join the Texas Music Administrators Conference and participate in our events.
           </FuturaDiv>
@@ -115,7 +115,7 @@ class NonMemberContent extends Component {
             title="TMAC Google Registration Form"
           >
           </iframe>
-        </section>
+        </section> */}
       </Fragment>
     );
   }

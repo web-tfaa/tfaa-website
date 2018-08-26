@@ -4,13 +4,13 @@ import { push } from 'gatsby';
 
 // Internal Dependencies
 import googleConfig from '../../utils/google-config';
-import { colors } from '../../utils/presets';
+// import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { removeErrorKeys } from '../../utils/helpers';
-import {
-  auth,
-  firebase,
-} from '../../firebase';
+// import {
+  // auth,
+  // firebase,
+// } from '../../firebase';
 
 // Local Styles
 const labelStyles = {
@@ -379,10 +379,7 @@ class RegisterForm extends Component {
 
     return (
       <div className="login-form">
-        <form
-          onSubmit={this.handleSubmit}
-          target='hidden-iframe'
-        >
+        <form onSubmit={this.handleSubmit}>
 
           {/* FIRST NAME */}
           <label css={labelStyles}>
@@ -591,7 +588,6 @@ class RegisterForm extends Component {
             >
               Continue to Step 2
             </button>
-            <iframe name='hidden-iframe' style={{ display: 'none' }}></iframe>
           </div>
 
         </form>

@@ -115,13 +115,13 @@ class JoinContent extends Component {
                     To join TMAC please complete these three steps:
                   </SpacedDiv>
                   <SpacedDiv>
-                    <span css={boldStyles}>1.</span> Complete the Registration Form.
+                    <span css={boldStyles}>1.</span> Sign up for a TMAC website login.
                   </SpacedDiv>
                   <SpacedDiv>
-                    <span css={boldStyles}>2.</span> Pay dues online (or with check via mail).
+                    <span css={boldStyles}>2.</span> Complete the Registration Form.
                   </SpacedDiv>
                   <SpacedDiv>
-                    <span css={boldStyles}>3.</span> Sign up for a TMAC website login.
+                    <span css={boldStyles}>3.</span> Pay dues online (or with check via mail).
                   </SpacedDiv>
                   <CtaButton
                     overrideCSS={{
