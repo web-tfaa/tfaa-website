@@ -3,7 +3,7 @@
 // import format from 'date-fns/format';
 import Helmet from 'react-helmet';
 // import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
 // import Card from '../../components/shared/cards/card';
@@ -21,7 +21,6 @@ import RegisterForm from '../../components/register/register-form';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
-
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -80,7 +79,10 @@ class Register extends Component {
     super(props);
 
     this.state = {
+      activeStep: 1,
       authUser: null,
+      // Possible completed steps are [1, 2, 3]
+      completedSteps: [],
     };
   }
 
@@ -90,6 +92,45 @@ class Register extends Component {
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }))
     );
+  }
+
+  getCurrentStepContent() {
+    const {
+      activeStep,
+    } = this.state;
+
+    const step1Content = (
+      <RegisterEmail />
+    );
+
+    const step2Content = (
+      <Fragment>
+
+
+
+        <RegisterForm />
+      </Fragment>
+    );
+
+    const step3Content = (
+      <RegisterPayment />
+    );
+
+    switch (activeStep) {
+      case 1:
+        return step1Content;
+        break;
+      case 2:
+        return step2Content;
+        break;
+      case 3:
+        return step3Content;
+        break;
+      default:
+        return step1Content;
+        break;
+
+    }
   }
 
   render() {
@@ -116,11 +157,7 @@ class Register extends Component {
 
             {/* Children change depending on which step is active */}
 
-            <h2>2. Register for TMAC</h2>
-
-            <hr css={{ background: 'darkred', height: 3 }} />
-
-            <RegisterForm />
+            {this.getCurrentStepContent()}
 
             <div style={{ marginTop: '1.5rem' }}>
               * Registration is not complete until payment is received.

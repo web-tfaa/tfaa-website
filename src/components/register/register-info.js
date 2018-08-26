@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 
 // Internal Dependencies
+import RegisterHr from './register-hr';
 // import Card from '../../components/shared/cards/card';
 // import CardHeadline from '../../components/shared/cards/card-headline';
 // import Cards from '../../components/shared/cards';
@@ -91,6 +92,7 @@ class RegisterEmail extends Component {
     return (
       <section>
         <h2>2. Register for TMAC</h2>
+        <RegisterHr />
         Register Info
       </section>
     );
