@@ -21,6 +21,8 @@ import RegisterForm from '../../components/register/register-form';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
+import RegisterStepper from '../../components/register/register-stepper';
+
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -105,9 +107,7 @@ class Register extends Component {
 
     const step2Content = (
       <Fragment>
-
-
-
+        <RegisterInfo />
         <RegisterForm />
       </Fragment>
     );
@@ -156,6 +156,8 @@ class Register extends Component {
             </Helmet>
 
             {/* Children change depending on which step is active */}
+
+            <RegisterStepper />
 
             {this.getCurrentStepContent()}
 
