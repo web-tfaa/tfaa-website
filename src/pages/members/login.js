@@ -3,7 +3,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import {
   Link,
-  push,
+  navigate,
 } from 'gatsby';
 
 // Internal Dependencies
@@ -33,7 +33,7 @@ class Login extends React.Component {
   }
 
   handleRedirectToMembers = () => {
-    push('/members/login');
+    navigate('/members/login');
   }
 
   render() {

@@ -1,6 +1,6 @@
 // External Dependencies
 import React, { Component } from 'react';
-import { push } from 'gatsby';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import googleConfig from '../../utils/google-config';
@@ -362,7 +362,7 @@ class RegisterForm extends Component {
       Office_Fax,
     } = this.state;
 
-    if (isAuthenticated) push('/members');
+    if (isAuthenticated) navigate('/members');
 
     const hasInput = First_Name !== ''
       && Last_Name !== ''

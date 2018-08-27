@@ -1,7 +1,7 @@
 // External Dependencies
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import React, { Component } from 'react';
-import { push } from 'gatsby';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import { options } from '../../utils/typography';
@@ -173,7 +173,7 @@ class SignUpForm extends Component {
       registerError,
     } = this.state;
 
-    if (isAuthenticated) push('/members');
+    if (isAuthenticated) navigate('/members');
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid =

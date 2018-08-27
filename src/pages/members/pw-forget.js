@@ -1,7 +1,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import React, { Component } from 'react';
-import { push } from 'gatsby';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -64,7 +64,7 @@ class PasswordForgetForm extends Component {
   }
 
   handleRedirectToMembers = () => {
-    push('/members/login');
+    navigate('/members/login');
   }
 
   render() {

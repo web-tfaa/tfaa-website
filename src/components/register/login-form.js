@@ -3,7 +3,7 @@ import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import React, { Component } from 'react';
 import {
   Link,
-  push,
+  navigate,
 } from 'gatsby';
 
 // Internal Dependencies
@@ -164,7 +164,7 @@ class LoginForm extends Component {
       passwordError,
     } = this.state;
 
-    if (isAuthenticated) push('/members');
+    if (isAuthenticated) navigate('/members');
 
     const hasLoginInput = password !== '' && email !== '';
     const isLoginInvalid =

@@ -1,7 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import { push } from 'gatsby';
+import React, { Component } from 'react';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import presets, { colors } from '../../utils/presets';
@@ -12,30 +12,39 @@ import { options } from '../../utils/typography';
 // Component Definition
 class SignInUpElement extends Component {
   static propTypes = {
-    signUp: PropTypes.bool,
+    onClickSignIn: PropTypes.func,
+    viewSignUp: PropTypes.bool,
   };
 
   static defaultProps = {
-    signUp: false,
+    onClickSignIn: null,
+    viewSignUp: false,
   };
 
   handleClickSignIn = () => {
-    push('/members/login');
+    const {
+      onClickSignIn,
+    } = this.props;
+
+    return Boolean(onClickSignIn)
+      ? onClickSignIn
+      : navigate('/members/login');
   }
 
   handleClickSignUp = () => {
-    push('/members/sign-up');
+    navigate('/members/sign-up');
   }
 
   render() {
     const {
-      signUp,
+      onClickSignIn,
+      viewSignUp,
     } = this.props;
 
     return (
-      <Fragment>
+      <div css={{ marginBottom: 32 }}>
         <div css={{ marginBottom: 16 }}>
-          {`${signUp ? 'Don\'t' : 'Already'}`} have an account?
+          {`${viewSignUp ? 'Don\'t' : 'Already'}`} have an account?
         </div>
         <span
           css={{
@@ -53,11 +62,14 @@ class SignInUpElement extends Component {
               cursor: 'pointer',
             }
           }}
-          onClick={signUp ? this.handleClickSignUp : this.handleClickSignIn}
+          onClick={viewSignUp
+            ? this.handleClickSignUp
+            : (onClickSignIn || this.handleClickSignIn)}
+          role="button"
         >
-          {`Sign ${signUp ? 'Up' : 'In'}!`}
+          {`Sign ${viewSignUp ? 'Up' : 'In'}!`}
         </span>
-      </Fragment>
+      </div>
     );
   }
 }
