@@ -1,5 +1,6 @@
 // External Dependencies
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
@@ -60,6 +61,14 @@ const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 
 // Component Definition
 class SignUpForm extends Component {
+  static propTypes = {
+    onRegisterSignUp: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onRegisterSignUp: null,
+  };
+
   constructor(props) {
     super(props);
 
@@ -164,6 +173,10 @@ class SignUpForm extends Component {
 
   render() {
     const {
+      onRegisterSignUp,
+    } = this.props;
+
+    const {
       email,
       emailError,
       error,
@@ -173,7 +186,11 @@ class SignUpForm extends Component {
       registerError,
     } = this.state;
 
-    if (isAuthenticated) navigate('/members');
+    if (isAuthenticated) {
+      return Boolean(onRegisterSignUp)
+        ? onRegisterSignUp
+        : navigate('/members');
+    }
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid =

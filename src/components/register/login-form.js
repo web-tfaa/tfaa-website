@@ -1,16 +1,12 @@
 // External Dependencies
 import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  Link,
-  navigate,
-} from 'gatsby';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import { options } from '../../utils/typography';
-import {
-  auth,
-} from '../../firebase';
+import { auth } from '../../firebase';
 
 // Local Styles
 const labelStyles = {
@@ -64,6 +60,14 @@ const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 
 // Component Definition
 class LoginForm extends Component {
+  static propTypes = {
+    onRegisterLogin: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onRegisterLogin: null,
+  };
+
   constructor(props) {
     super(props);
 
@@ -156,6 +160,10 @@ class LoginForm extends Component {
 
   render() {
     const {
+      onRegisterLogin,
+    } = this.props;
+
+    const {
       email,
       emailError,
       error,
@@ -164,7 +172,11 @@ class LoginForm extends Component {
       passwordError,
     } = this.state;
 
-    if (isAuthenticated) navigate('/members');
+    if (isAuthenticated) {
+      return Boolean(onRegisterLogin)
+        ? onRegisterLogin
+        : navigate('/members');
+    }
 
     const hasLoginInput = password !== '' && email !== '';
     const isLoginInvalid =

@@ -1,6 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -13,6 +13,7 @@ import { options } from '../../utils/typography';
 // Component Definition
 class RegisterEmail extends Component {
   static propTypes = {
+    advanceToNextStep: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
   };
 
@@ -25,7 +26,6 @@ class RegisterEmail extends Component {
   }
 
   handleClickSignInLink = () => {
-    console.log('dope');
     this.setState({
       viewingSignUp: false,
     });
@@ -33,6 +33,7 @@ class RegisterEmail extends Component {
 
   render() {
     const {
+      advanceToNextStep,
       isAuthenticated,
     } = this.props;
 
@@ -40,19 +41,31 @@ class RegisterEmail extends Component {
       viewingSignUp,
     } = this.state;
 
-    console.log('isAuthenticated in register-email', isAuthenticated, { viewingSignUp });
+    console.log('isAuthenticated in register-email', isAuthenticated);
+
+    const childrenElements = isAuthenticated
+      ? (
+        <Fragment>
+          <h1>Login Successful</h1>
+          <p>Now loading Step 2...</p>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <p>
+            All members registering after 9/1/2018 will need to sign up for a new login here to complete online registration.
+          </p>
+          <FormHr />
+          <SignUpForm onRegisterSignUp={advanceToNextStep} />
+          <FormHr />
+          <SignInUpElement onClickSignIn={this.handleClickSignInLink} viewSignUp={false} />
+          {!viewingSignUp && <LoginForm onRegisterLogin={advanceToNextStep} />}
+        </Fragment>
+      );
 
     return (
       <section>
         <h2>1. Sign up for TMAC website login</h2>
-        <p>
-          All members registering after 9/1/2018 will need to sign up for a new login here to complete online registration.
-        </p>
-        <FormHr />
-        <SignUpForm />
-        <FormHr />
-        <SignInUpElement onClickSignIn={this.handleClickSignInLink} viewSignUp={false} />
-        {!viewingSignUp && <LoginForm />}
+        {childrenElements}
       </section>
     );
   }

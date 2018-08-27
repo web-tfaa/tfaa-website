@@ -29,47 +29,6 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
-// const propTypes = {
-//   contentfulFileShareData: PropTypes.array,
-//   contentfulFileShareDescriptionData: PropTypes.array,
-// };
-
-// const defaultProps = {
-//   contentfulFileShareData: null,
-//   contentfulFileShareDescriptionData: null,
-// }
-
-// const futuraStyles = {
-//   fontFamily: options.headerFontFamily.join(`,`),
-//   lineHeight: '1.6',
-//   marginBottom: '1rem',
-// };
-
-// const boldStyles = { fontWeight: 600 };
-
-// Local Components
-// const FuturaDiv = ({ children }) => (
-//   <div css={futuraStyles}>
-//     {children}
-//   </div>
-// );
-
-// const FuturaAnchor = ({ children, href }) => (
-//   <a href={href} css={futuraStyles}>
-//     {children}
-//   </a>
-// );
-
-// const MemberFileShareCard = ({ node, description }) => {
-//   return (
-//     <Card>
-//       <CardHeadline>{node.title}</CardHeadline>
-//       <h5 css={{ marginTop: '1rem' }}>{format(node.date, ['MMMM DD YYYY'])}</h5>
-//       <FuturaDiv>{description}</FuturaDiv>
-//       <FuturaAnchor download href={node.link}>Download</FuturaAnchor>
-//     </Card>
-//   );
-// };
 
 /*
   Main container for the Registration process
@@ -96,24 +55,34 @@ class Register extends Component {
     );
   }
 
+  advanceToNextStep = () => {
+    this.setState({
+      activeStep: this.state.activeStep + 1,
+      completedSteps: this.state.completedSteps.push(0),
+    })
+  }
+
   getCurrentStepContent(isAuthenticated) {
     const {
       activeStep,
     } = this.state;
 
     const step1Content = (
-      <RegisterEmail isAuthenticated={isAuthenticated} />
+      <RegisterEmail
+        isAuthenticated={isAuthenticated}
+        advanceToNextStep={this.advanceToNextStep}
+      />
     );
 
     const step2Content = (
       <Fragment>
-        <RegisterInfo />
+        <RegisterInfo advanceToNextStep={this.advanceToNextStep} />
         <RegisterForm />
       </Fragment>
     );
 
     const step3Content = (
-      <RegisterPayment />
+      <RegisterPayment advanceToNextStep={this.advanceToNextStep} />
     );
 
     switch (activeStep) {
