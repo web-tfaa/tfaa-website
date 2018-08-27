@@ -29,6 +29,7 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
+const localCompletedRegistrationSteps = JSON.parse(localStorage.getItem('completedRegistrationSteps'));
 
 /*
   Main container for the Registration process
@@ -40,10 +41,10 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      activeStep: 0,
+      activeStep: localCompletedRegistrationSteps ? localCompletedRegistrationSteps.length : 0,
       authUser: null,
       // Possible completed steps are [0, 1, 2]
-      completedSteps: [],
+      completedSteps: localCompletedRegistrationSteps || [],
     };
   }
 
@@ -60,12 +61,15 @@ class Register extends Component {
       activeStep: this.state.activeStep + 1,
       completedSteps: this.state.completedSteps.push(step),
     })
+    localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]))
   }
 
   getCurrentStepContent(isAuthenticated) {
     const {
       activeStep,
     } = this.state;
+
+    console.log({ activeStep });
 
     const step1Content = (
       <RegisterEmail
