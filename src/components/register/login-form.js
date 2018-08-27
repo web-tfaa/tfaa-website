@@ -181,7 +181,6 @@ class LoginForm extends Component {
       password,
       passwordError,
     } = this.state;
-    console.log('this.isSubmitting', this.isSubmitting);
 
     if (isAuthenticated) {
       console.log('1');

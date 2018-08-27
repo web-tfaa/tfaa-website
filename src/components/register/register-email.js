@@ -32,7 +32,10 @@ class RegisterEmail extends Component {
       advanceToNextStep,
     } = this.props;
 
-    advanceToNextStep(0);
+    setTimeout(() =>
+      advanceToNextStep(0),
+      3000
+    );
   };
 
   handleClickSignInLink = () => {
