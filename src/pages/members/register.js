@@ -96,13 +96,13 @@ class Register extends Component {
     );
   }
 
-  getCurrentStepContent() {
+  getCurrentStepContent(isAuthenticated) {
     const {
       activeStep,
     } = this.state;
 
     const step1Content = (
-      <RegisterEmail />
+      <RegisterEmail isAuthenticated={isAuthenticated} />
     );
 
     const step2Content = (
@@ -129,7 +129,6 @@ class Register extends Component {
       default:
         return step1Content;
         break;
-
     }
   }
 
@@ -137,9 +136,13 @@ class Register extends Component {
     const {
       activeStep,
       authUser,
+      completedSteps,
     } = this.state;
 
     const isAuthenticated = Boolean(authUser);
+
+    const hasCompletedAllSteps = completedSteps.includes(2);
+    console.log('hasCompletedAllSteps', hasCompletedAllSteps);
 
     return (
       <Layout location={this.props.location}>
@@ -158,9 +161,9 @@ class Register extends Component {
 
             {/* Children change depending on which step is active */}
 
-            <RegisterStepper activeStep={activeStep} />
+            <RegisterStepper isAuthenticated={isAuthenticated} activeStep={activeStep} />
 
-            {this.getCurrentStepContent()}
+            {this.getCurrentStepContent(isAuthenticated)}
 
             <div style={{ marginTop: '1.5rem' }}>
               * Registration is not complete until payment is received.

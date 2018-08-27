@@ -1,6 +1,6 @@
 // External Dependencies
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 // Material-UI Dependencies
 import Stepper from '@material-ui/core/Stepper';
@@ -12,6 +12,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 // Local Variables
 const propTypes = {
   activeStep: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 // Local Functions
@@ -29,9 +30,10 @@ class RegisterStepper extends Component {
   render() {
     const {
       activeStep,
+      isAuthenticated,
     } = this.props;
 
-    const steps = getSteps();
+    const steps = getSteps(isAuthenticated);
 
     return (
       <div sss={{ width: '90%' }}>
