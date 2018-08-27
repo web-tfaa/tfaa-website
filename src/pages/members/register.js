@@ -55,11 +55,11 @@ class Register extends Component {
     );
   }
 
-  advanceToNextStep = () => {
+  advanceToNextStep = (step) => {
     console.log('3');
     this.setState({
       activeStep: this.state.activeStep + 1,
-      completedSteps: this.state.completedSteps.push(0),
+      completedSteps: this.state.completedSteps.push(step),
     })
   }
 
@@ -111,7 +111,7 @@ class Register extends Component {
 
     const isAuthenticated = Boolean(authUser);
 
-    const hasCompletedAllSteps = completedSteps.includes(2);
+    const hasCompletedAllSteps = completedSteps.length === 3;
     console.log('hasCompletedAllSteps', hasCompletedAllSteps);
 
     return (

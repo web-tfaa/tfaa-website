@@ -74,6 +74,12 @@ class LoginForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+
+    this.isSubmitting = false;
+  }
+
+  componentWillUnmount() {
+    this.isSubmitting = false;
   }
 
   handleSubmit = (event) => {
@@ -87,6 +93,8 @@ class LoginForm extends Component {
   }
 
   handleClickSubmitButton = () => {
+    this.isSubmitting = true;
+
     const {
       email,
       password,
@@ -94,10 +102,12 @@ class LoginForm extends Component {
 
     auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState(() => ({
-          ...INITIAL_STATE,
-          isAuthenticated: true,
-        }));
+        if (this.isSubmitting) {
+          this.setState(() => ({
+            ...INITIAL_STATE,
+            isAuthenticated: true,
+          }));
+        }
       })
       .catch(err => {
         this.setState({ error: err });
@@ -171,8 +181,7 @@ class LoginForm extends Component {
       password,
       passwordError,
     } = this.state;
-
-    console.log({ onRegisterLogin });
+    console.log('this.isSubmitting', this.isSubmitting);
 
     if (isAuthenticated) {
       console.log('1');

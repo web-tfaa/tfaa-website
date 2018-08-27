@@ -586,7 +586,7 @@ class RegisterForm extends Component {
                 color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}`,
               }}
             >
-              Continue to Step 2
+              Continue to Step 3
             </button>
           </div>
 

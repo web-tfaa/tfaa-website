@@ -32,7 +32,7 @@ class RegisterEmail extends Component {
       advanceToNextStep,
     } = this.props;
 
-    return advanceToNextStep;
+    advanceToNextStep(0);
   };
 
   handleClickSignInLink = () => {
