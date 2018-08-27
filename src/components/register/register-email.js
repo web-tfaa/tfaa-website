@@ -1,41 +1,38 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
-// import Card from '../../components/shared/cards/card';
-// import CardHeadline from '../../components/shared/cards/card-headline';
-// import Cards from '../../components/shared/cards';
-// import Container from '../../components/shared/container';
-// import Layout from '../../components/layout';
-// import Status from './status';
-// import presets from '../../utils/presets';
-// import { options } from '../../utils/typography';
-// import { firebase } from '../../firebase';
-// import CtaButton from '../../components/masthead/cta-button';
+import LoginForm from './login-form';
+import presets, { colors } from '../../utils/presets';
+import SignInUpElement from './sign-in-up-element';
+import { options } from '../../utils/typography';
 
-// Local Variables
-const propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-};
 
 // Component Definition
 class RegisterEmail extends Component {
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
+
   render() {
     const {
       isAuthenticated,
     } = this.props;
 
+    console.log('isAuthenticated in register-email', isAuthenticated);
+
     return (
       <section>
         <h2>1. Sign up for TMAC website login</h2>
         <FormHr />
-        Register Email
+        <LoginForm />
+        <FormHr />
+        <SignInUpElement />
       </section>
     );
   }
 }
 
-RegisterEmail.propTypes = propTypes;
 export default RegisterEmail;

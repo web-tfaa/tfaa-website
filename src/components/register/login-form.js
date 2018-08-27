@@ -7,17 +7,12 @@ import {
 } from 'gatsby';
 
 // Internal Dependencies
-import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import {
   auth,
 } from '../../firebase';
 
 // Local Styles
-// const rootStyles = {
-//   margin: '1rem 0',
-// };
-
 const labelStyles = {
   display: 'block',
   fontSize: '90%',
@@ -34,8 +29,8 @@ const bottomLabelStyles = {
 const inputStyles = {
   display: 'block',
   fontSize: '1rem',
-  padding: '0.3rem',
   minWidth: '100%',
+  padding: '0.3rem',
 };
 
 // const buttonStyles = {
@@ -112,10 +107,6 @@ class LoginForm extends Component {
     else pass.setAttribute('type', 'password');
   }
 
-  handleClickSignUp = () => {
-    push('/members/sign-up');
-  }
-
   handleUpdateErrors = () => {
     this.handleUpdateEmailError();
     this.handleUpdateLoginPasswordError();
@@ -175,37 +166,6 @@ class LoginForm extends Component {
 
     if (isAuthenticated) push('/members');
 
-    const signUpElement = [
-      <hr key="login-form-divider"  css={{ background: 'darkred', height: 3 }} />,
-      <div
-        css={{ marginBottom: 16 }}
-        key="no-account-text"
-      >
-        Don&apos;t have an account?
-      </div>,
-      <span
-        css={{
-          color: `inherit`,
-          textDecoration: `none`,
-          transition: `all ${presets.animation.speedFast} ${
-            presets.animation.curveDefault
-          }`,
-          borderBottom: `1px solid ${colors.ui.bright}`,
-          boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-          fontFamily: options.headerFontFamily.join(`,`),
-          fontWeight: `bold`,
-          '&:hover': {
-            background: colors.ui.bright,
-            cursor: 'pointer',
-          }
-        }}
-        key="no-account-sign-up-span"
-        onClick={this.handleClickSignUp}
-      >
-        Sign Up!
-      </span>
-    ];
-
     const hasLoginInput = password !== '' && email !== '';
     const isLoginInvalid =
       !hasLoginInput ||
@@ -219,10 +179,10 @@ class LoginForm extends Component {
           </label>
           <input
             css={inputStyles}
-            type="text"
             name="email"
             onChange={this.handleUpdate}
             placeholder="Email Address"
+            type="text"
             value={email}
           />
           <div
@@ -247,10 +207,10 @@ class LoginForm extends Component {
             <input
               css={inputStyles}
               id="showhide"
-              type="password"
               name="password"
               onChange={this.handleUpdate}
               placeholder="Password"
+              type="password"
               value={password}
             />
             <div css={{ marginLeft: 8 }}>
@@ -277,8 +237,8 @@ class LoginForm extends Component {
             <button
               css={{ marginTop: '1rem', padding: '8px 12px' }}
               disabled={isLoginInvalid}
-              type="submit"
               onClick={this.handleClickSubmitButton}
+              type="submit"
             >
               Sign In
             </button>
@@ -288,8 +248,8 @@ class LoginForm extends Component {
             <div
               css={{
                 color: 'red',
-                fontWeight: 500,
                 fontFamily: options.headerFontFamily.join(`,`),
+                fontWeight: 500,
                 margin: '16px 0',
               }}
             >
@@ -297,12 +257,6 @@ class LoginForm extends Component {
             </div>
           }
         </form>
-
-        <p>
-          <Link to={'/members/pw-forget'}>Forgot Password?</Link>
-        </p>
-
-        {signUpElement}
       </div>
     );
   }

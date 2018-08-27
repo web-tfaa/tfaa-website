@@ -1,12 +1,16 @@
 // External Dependencies
 import React from 'react';
 import Helmet from 'react-helmet';
-import { push } from 'gatsby';
+import {
+  Link,
+  push,
+} from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
-import LoginForm from './login-form';
+import LoginForm from '../../components/register/login-form';
 import { firebase } from '../../firebase';
 import presets from '../../utils/presets';
 
@@ -63,9 +67,15 @@ class Login extends React.Component {
               Login
             </h2>
 
-            <hr css={{ background: 'darkred', height: 3 }} />
+            <FormHr />
 
             <LoginForm />
+
+            <FormHr />
+
+            <p>
+              <Link to={'/members/pw-forget'}>Forgot Password?</Link>
+            </p>
           </Container>
        </div>
      </Layout>
