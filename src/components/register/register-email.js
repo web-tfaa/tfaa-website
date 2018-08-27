@@ -1,6 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -25,6 +26,15 @@ class RegisterEmail extends Component {
     };
   }
 
+  handleAdvanceStep = () => {
+    console.log('2');
+    const {
+      advanceToNextStep,
+    } = this.props;
+
+    return advanceToNextStep;
+  };
+
   handleClickSignInLink = () => {
     this.setState({
       viewingSignUp: false,
@@ -33,7 +43,6 @@ class RegisterEmail extends Component {
 
   render() {
     const {
-      advanceToNextStep,
       isAuthenticated,
     } = this.props;
 
@@ -41,13 +50,21 @@ class RegisterEmail extends Component {
       viewingSignUp,
     } = this.state;
 
-    console.log('isAuthenticated in register-email', isAuthenticated);
-
     const childrenElements = isAuthenticated
       ? (
         <Fragment>
-          <h1>Login Successful</h1>
-          <p>Now loading Step 2...</p>
+          <h2>Login Successful</h2>
+          <div
+            css={{
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              margin: 32,
+            }}
+          >
+            <p>Now loading step 2...</p>
+            <CircularProgress size={64} thickness={4} />
+          </div>
         </Fragment>
       ) : (
         <Fragment>
@@ -55,10 +72,10 @@ class RegisterEmail extends Component {
             All members registering after 9/1/2018 will need to sign up for a new login here to complete online registration.
           </p>
           <FormHr />
-          <SignUpForm onRegisterSignUp={advanceToNextStep} />
+          <SignUpForm onRegisterSignUp={this.handleAdvanceStep} />
           <FormHr />
           <SignInUpElement onClickSignIn={this.handleClickSignInLink} viewSignUp={false} />
-          {!viewingSignUp && <LoginForm onRegisterLogin={advanceToNextStep} />}
+          {!viewingSignUp && <LoginForm onRegisterLogin={this.handleAdvanceStep} />}
         </Fragment>
       );
 

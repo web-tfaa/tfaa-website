@@ -172,9 +172,12 @@ class LoginForm extends Component {
       passwordError,
     } = this.state;
 
+    console.log({ onRegisterLogin });
+
     if (isAuthenticated) {
-      return Boolean(onRegisterLogin)
-        ? onRegisterLogin
+      console.log('1');
+      Boolean(onRegisterLogin)
+        ? onRegisterLogin()
         : navigate('/members');
     }
 
