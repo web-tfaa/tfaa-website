@@ -15,8 +15,13 @@ const propTypes = {
 };
 
 // Local Functions
-function getSteps() {
-  return ['Sign up for TMAC website login', 'Complete registration form', 'Pay TMAC dues'];
+function getSteps(isAuthenticated = false) {
+  return [
+    // We show a different message if the user is already logged in
+    isAuthenticated ? 'Login to the TMAC members area' : 'Sign up for TMAC website login',
+    'Complete registration form',
+    'Pay TMAC dues',
+  ];
 }
 
 // Component Definition
