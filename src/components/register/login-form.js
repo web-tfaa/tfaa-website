@@ -183,7 +183,6 @@ class LoginForm extends Component {
     } = this.state;
 
     if (isAuthenticated) {
-      console.log('1');
       Boolean(onRegisterLogin)
         ? onRegisterLogin()
         : navigate('/members');

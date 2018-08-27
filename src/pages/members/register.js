@@ -56,7 +56,6 @@ class Register extends Component {
   }
 
   advanceToNextStep = (step) => {
-    console.log('3');
     this.setState({
       activeStep: this.state.activeStep + 1,
       completedSteps: this.state.completedSteps.push(step),

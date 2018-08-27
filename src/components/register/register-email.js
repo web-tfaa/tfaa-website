@@ -27,14 +27,13 @@ class RegisterEmail extends Component {
   }
 
   handleAdvanceStep = () => {
-    console.log('2');
     const {
       advanceToNextStep,
     } = this.props;
 
     setTimeout(() =>
       advanceToNextStep(0),
-      3000
+      3500
     );
   };
 
