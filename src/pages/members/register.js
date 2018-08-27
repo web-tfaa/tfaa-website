@@ -81,9 +81,9 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      activeStep: 1,
+      activeStep: 0,
       authUser: null,
-      // Possible completed steps are [1, 2, 3]
+      // Possible completed steps are [0, 1, 2]
       completedSteps: [],
     };
   }
@@ -117,13 +117,13 @@ class Register extends Component {
     );
 
     switch (activeStep) {
-      case 1:
+      case 0:
         return step1Content;
         break;
-      case 2:
+      case 1:
         return step2Content;
         break;
-      case 3:
+      case 2:
         return step3Content;
         break;
       default:
@@ -135,6 +135,7 @@ class Register extends Component {
 
   render() {
     const {
+      activeStep,
       authUser,
     } = this.state;
 
@@ -157,7 +158,7 @@ class Register extends Component {
 
             {/* Children change depending on which step is active */}
 
-            <RegisterStepper />
+            <RegisterStepper activeStep={activeStep} />
 
             {this.getCurrentStepContent()}
 
