@@ -7,10 +7,11 @@ import googleConfig from '../../utils/google-config';
 // import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { removeErrorKeys } from '../../utils/helpers';
-// import {
+import {
   // auth,
+  db,
   // firebase,
-// } from '../../firebase';
+} from '../../firebase';
 
 // Local Styles
 const labelStyles = {
@@ -107,6 +108,7 @@ class RegisterForm extends Component {
     super(props);
 
     this.state = {
+      progress: 0,
       ...INITIAL_STATE,
     };
 
@@ -115,20 +117,20 @@ class RegisterForm extends Component {
 
   componentDidMount() {
     // 1. Load the JavaScript client library.
-    window.gapi.load("client", this.initClient);
+    // window.gapi.load("client", this.initClient);
   }
 
-  initClient = () => {
+  // initClient = () => {
     // 2. Initialize the JavaScript client library.
-    window.gapi.client
-      .init({
-        apiKey: googleConfig.apiKey,
-        clientId: googleConfig.clientId,
-        discoveryDocs: googleConfig.discoveryDocs,
-        scope: googleConfig.scopes,
-      })
-      .then((res) => {
-        console.log('1 res', res);
+    // window.gapi.client
+    //   .init({
+    //     apiKey: googleConfig.apiKey,
+    //     clientId: googleConfig.clientId,
+    //     discoveryDocs: googleConfig.discoveryDocs,
+    //     scope: googleConfig.scopes,
+    //   })
+    //   .then((res) => {
+    //     console.log('1 res', res);
         // 3. Initialize and make the API request.
 
         // var user = this.gapi.auth2.getAuthInstance().currentUser.get();
@@ -137,53 +139,42 @@ class RegisterForm extends Component {
 
         // console.log('oauthToken', oauthToken);
 
-        this.handleClientLoad(this.onload);
-      });
-  }
+      //   this.handleClientLoad(this.onload);
+      // });
+  // }
 
-  handleClientLoad = () => {
-    console.log('inside handleClientLoad');
-    window.gapi.client.load("sheets", "v4", () => {
-      window.gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-        majorDimension: 'COLUMNS',
-        range: 'Sheet1!A2:A500',
-      })
-      .then(
-        (res) => {
-          console.log('response →', res);
-        },
-        (err) => {
-          console.log('error →', err);
-        }
-      );
-    });
-  }
+  // handleClientLoad = () => {
+  //   console.log('inside handleClientLoad');
+  //   window.gapi.client.load("sheets", "v4", () => {
+  //     window.gapi.client.sheets.spreadsheets.values.get({
+  //       spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
+  //       majorDimension: 'COLUMNS',
+  //       range: 'Sheet1!A2:A500',
+  //     })
+  //     .then(
+  //       (res) => {
+  //         console.log('response →', res);
+  //       },
+  //       (err) => {
+  //         console.log('error →', err);
+  //       }
+  //     );
+  //   });
+  // }
 
-  onLoad = (data, error) => {
-    if (data) {
-      console.log('data');
-      const cars = data.cars;
-      this.setState({ cars });
-    } else {
-      console.log('error');
-      this.setState({ error });
-    }
-  }
+  // onLoad = (data, error) => {
+  //   if (data) {
+  //     console.log('data');
+  //     const cars = data.cars;
+  //     this.setState({ cars });
+  //   } else {
+  //     console.log('error');
+  //     this.setState({ error });
+  //   }
+  // }
 
   handleSubmit = (event) => {
     event.preventDefault();
-  }
-
-  handleUpdate = (event) => {
-    if (event.target.name.endsWith('Phone') || event.target.name.endsWith('Fax')) {
-      this.setState({
-        [event.target.name]: stripPhone(event.target.value),
-      }, this.handleUpdateErrors(event.target.name, event.target.value));
-    }
-    else this.setState({
-      [event.target.name]: event.target.value,
-    }, this.handleUpdateErrors(event.target.name, event.target.value));
   }
 
   handleClickSubmitButton = (event) => {
@@ -202,16 +193,16 @@ class RegisterForm extends Component {
 
     // console.log('body', JSON.stringify(form));
 
-    this.gapi.client.sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-      range: 'Sheet1!A2:A500',
-      valueInputOption: VALUE_INPUT_OPTION,
-      resource: body,
-    })
-    .then((res) => {
-      const result = res.result;
-      console.log(`${result.updatedCells} cells updated.`);
-    });
+    // this.gapi.client.sheets.spreadsheets.values.update({
+    //   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
+    //   range: 'Sheet1!A2:A500',
+    //   valueInputOption: VALUE_INPUT_OPTION,
+    //   resource: body,
+    // })
+    // .then((res) => {
+    //   const result = res.result;
+    //   console.log(`${result.updatedCells} cells updated.`);
+    // });
 
     // auth.doSignInWithEmailAndPassword(Email, password)
     //   .then(() => {
@@ -223,6 +214,17 @@ class RegisterForm extends Component {
     //   .catch(err => {
     //     this.setState({ error: err });
     //   });
+  }
+
+  handleUpdate = (event) => {
+    if (event.target.name.endsWith('Phone') || event.target.name.endsWith('Fax')) {
+      this.setState({
+        [event.target.name]: stripPhone(event.target.value),
+      }, this.handleUpdateErrors(event.target.name, event.target.value));
+    }
+    else this.setState({
+      [event.target.name]: event.target.value,
+    }, this.handleUpdateErrors(event.target.name, event.target.value));
   }
 
   handleUpdateErrors = (name, value) => {
