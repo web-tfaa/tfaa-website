@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 // Internal Dependencies
 // import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
-import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import Status from './status';

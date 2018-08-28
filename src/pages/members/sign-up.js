@@ -1,6 +1,5 @@
 // External Dependencies
 import Helmet from 'react-helmet';
-import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
 

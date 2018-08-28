@@ -74,8 +74,8 @@ export default class HTML extends React.Component {
             id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
-          {this.props.postBodyComponents}
           <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
+          {this.props.postBodyComponents}
         </body>
       </html>
     )

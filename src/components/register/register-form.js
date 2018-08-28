@@ -109,17 +109,18 @@ class RegisterForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
-    this.gapi = window.gapi;
+
+    // this.gapi = window.gapi;
   }
 
   componentDidMount() {
     // 1. Load the JavaScript client library.
-    this.gapi.load("client:auth2", this.initClient);
+    window.gapi.load("client", this.initClient);
   }
 
   initClient = () => {
     // 2. Initialize the JavaScript client library.
-    this.gapi.client
+    window.gapi.client
       .init({
         apiKey: googleConfig.apiKey,
         clientId: googleConfig.clientId,
@@ -128,27 +129,34 @@ class RegisterForm extends Component {
       })
       .then((res) => {
         console.log('1 res', res);
-      // 3. Initialize and make the API request.
+        // 3. Initialize and make the API request.
 
-      var user = this.gapi.auth2.getAuthInstance().currentUser.get();
+        // var user = this.gapi.auth2.getAuthInstance().currentUser.get();
 
-      var oauthToken = user.getAuthResponse().access_token;
+        // var oauthToken = user.getAuthResponse().access_token;
 
-      console.log('oauthToken', oauthToken);
+        // console.log('oauthToken', oauthToken);
 
-      this.handleClientLoad(this.onload);
-    });
+        this.handleClientLoad(this.onload);
+      });
   }
 
   handleClientLoad = () => {
     console.log('inside handleClientLoad');
-    this.gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-      majorDimension: 'COLUMNS',
-      range: 'Sheet1!A2:A500',
-    })
-    .then((res) => {
-      console.log('response →', res);
+    window.gapi.client.load("sheets", "v4", () => {
+      window.gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
+        majorDimension: 'COLUMNS',
+        range: 'Sheet1!A2:A500',
+      })
+      .then(
+        (res) => {
+          console.log('response →', res);
+        },
+        (err) => {
+          console.log('error →', err);
+        }
+      );
     });
   }
 

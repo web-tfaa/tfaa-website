@@ -1,4 +1,5 @@
-import * as firebase from 'firebase';
+import firebase from "firebase";
+import "firebase/storage";
 
 // https://firebase.google.com/docs/web/setup?authuser=0
 
@@ -31,8 +32,10 @@ if (!firebase.apps.length) {
 
 const db = firebase.database();
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 export {
-  db,
   auth,
+  db,
+  storage,
 };

@@ -19,29 +19,7 @@ import FormHr from '../shared/form-hr';
 
 // Component Definition
 class RegisterEmail extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      authUser: null,
-    };
-  }
-
-  componentDidMount() {
-    // firebase.auth.onAuthStateChanged(authUser =>
-    //   authUser
-    //     ? this.setState(() => ({ authUser }))
-    //     : this.setState(() => ({ authUser: null }))
-    // );
-  }
-
   render() {
-    const {
-      authUser,
-    } = this.state;
-
-    const isAuthenticated = Boolean(authUser);
-
     return (
       <section>
         <h2>3. Pay TMAC Dues</h2>

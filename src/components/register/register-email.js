@@ -7,9 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import FormHr from '../shared/form-hr';
 import SignUpForm from './signup-form';
 import LoginForm from './login-form';
-import presets, { colors } from '../../utils/presets';
 import SignInUpElement from './sign-in-up-element';
-import { options } from '../../utils/typography';
 
 // Component Definition
 class RegisterEmail extends Component {

@@ -89,20 +89,22 @@ class Register extends Component {
       <RegisterPayment advanceToNextStep={this.advanceToNextStep} />
     );
 
+    let currentStepContent;
     switch (activeStep) {
       case 0:
-        return step1Content;
+        currentStepContent = step1Content;
         break;
       case 1:
-        return step2Content;
+        currentStepContent = step2Content;
         break;
       case 2:
-        return step3Content;
+        currentStepContent = step3Content;
         break;
       default:
-        return step1Content;
+        currentStepContent = step1Content;
         break;
     }
+    return currentStepContent;
   }
 
   render() {
