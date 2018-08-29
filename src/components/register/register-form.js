@@ -108,7 +108,6 @@ class RegisterForm extends Component {
     super(props);
 
     this.state = {
-      progress: 0,
       ...INITIAL_STATE,
     };
 
@@ -189,9 +188,21 @@ class RegisterForm extends Component {
 
     console.log('no errors!', form);
 
-    const body = JSON.stringify(form);
+    // console.log('body', form);
 
-    // console.log('body', JSON.stringify(form));
+    const url = 'https://script.google.com/macros/s/AKfycbxP1dG-WAWKrCrkilTh8Yyxi4vg2mV8MvF-R59ZQpE4PYRys0c/exec';
+
+    fetch(url, {
+      method: 'POST',
+      contentType: 'application/json',
+      body: JSON.stringify(form),
+    })
+      .then((res) => {
+        console.log('res from POST', res);
+      })
+      .then(res => res.json())
+      .then(data => console.log('success with JSON response', data))
+      .catch(err => console.log('failed with error', err));
 
     // this.gapi.client.sheets.spreadsheets.values.update({
     //   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,

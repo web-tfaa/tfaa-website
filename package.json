@@ -57,7 +57,8 @@
     "typography-breakpoint-constants": "^0.15.10",
     "typography-plugin-code": "^0.16.11",
     "typography-theme-kirkham": "^0.16.3",
-    "typography-theme-twin-peaks": "^0.15.11"
+    "typography-theme-twin-peaks": "^0.15.11",
+    "whatwg-fetch": "^2.0.4"
   },
   "engines": {
     "node": "^8.11.4",
