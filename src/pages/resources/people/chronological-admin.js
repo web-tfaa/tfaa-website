@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
 
@@ -30,16 +31,16 @@ const tableContainerStyles = {
 
 // Component Definition
 class ChronologicalAdmin extends Component {
+  static propTypes = {
+    location: PropTypes.shape({}).isRequired,
+  };
+
   renderTableRows = () =>
     outstandingAdmin.map(admin => (
       <tr key={`${admin.name}`}>
         <th>{admin.year}</th>
         <th>
-          <Link
-            to={`/resources/people/${admin.name
-              .toLowerCase()
-              .split(' ')
-              .join('-')}`}>
+          <Link to={`/resources/people/${admin.name.toLowerCase().split(' ').join('-')}`}>
             {admin.name}
           </Link>
         </th>
