@@ -3,15 +3,13 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import googleConfig from '../../utils/google-config';
+// import googleConfig from '../../utils/google-config';
 // import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { removeErrorKeys } from '../../utils/helpers';
 import {
-  // auth,
-  db,
-  // firebase,
-} from '../../firebase';
+  doCreateEntry,
+} from '../../db';
 
 // Local Styles
 const labelStyles = {
@@ -86,11 +84,11 @@ const INITIAL_STATE = {
   Office_Fax: '',
 };
 
-const VALUE_INPUT_OPTION = 'USER_ENTERED';
+// const VALUE_INPUT_OPTION = 'USER_ENTERED';
 
 // To check for a valid Email address
 const EmailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-const Zip_CodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
+const ZipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Local Functions
 const formatPhone = phone => {
@@ -191,22 +189,24 @@ class RegisterForm extends Component {
 
     console.log('no errors!', form);
 
-    const url =
-      'https://script.google.com/macros/s/AKfycbxP1dG-WAWKrCrkilTh8Yyxi4vg2mV8MvF-R59ZQpE4PYRys0c/exec';
+    doCreateEntry(form);
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(form),
-    })
-      .then(res => {
-        console.log('res from POST', res);
-      })
-      .then(res => res.json())
-      .then(data => console.log('success with JSON response', data))
-      .catch(err => console.log('failed with error', err));
+    // const url =
+    //   'https://script.google.com/macros/s/AKfycbxP1dG-WAWKrCrkilTh8Yyxi4vg2mV8MvF-R59ZQpE4PYRys0c/exec';
+
+    // fetch(url, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(form),
+    // })
+    //   .then(res => {
+    //     console.log('res from POST', res);
+    //   })
+    //   .then(res => res.json())
+    //   .then(data => console.log('success with JSON response', data))
+    //   .catch(err => console.log('failed with error', err));
 
     // this.gapi.client.sheets.spreadsheets.values.update({
     //   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
@@ -253,7 +253,7 @@ class RegisterForm extends Component {
 
   handleUpdateErrors = (name, value) => {
     if (name === 'Email') this.handleUpdateEmailError(value);
-    else if (name === 'Zip_Code') this.handleUpdateZip_CodeError(value);
+    else if (name === 'Zip_Code') this.handleUpdateZipCodeError(value);
     else this.handleUpdateInputError(name, value);
   };
 
@@ -273,16 +273,16 @@ class RegisterForm extends Component {
     }
   };
 
-  handleUpdateZip_CodeError = value => {
+  handleUpdateZipCodeError = value => {
     if (!value) {
       this.setState({
         Zip_CodeError: 'ZIP Code is required',
       });
-    } else if (value && Zip_CodeRegex.test(value)) {
+    } else if (value && ZipCodeRegex.test(value)) {
       this.setState({
         Zip_CodeError: '',
       });
-    } else if (value && !Zip_CodeRegex.test(value)) {
+    } else if (value && !ZipCodeRegex.test(value)) {
       this.setState({
         Zip_CodeError: 'Use a valid ZIP Code',
       });

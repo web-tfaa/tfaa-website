@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import "firebase/firestore";
 
 // https://firebase.google.com/docs/web/setup?authuser=0
 
@@ -29,7 +30,7 @@ if (!firebase.apps.length) {
   firebase.initializeApp(devConfig);
 }
 
-const db = firebase.database();
 const auth = firebase.auth();
+const db = firebase.firestore();
 
 export { auth, db };
