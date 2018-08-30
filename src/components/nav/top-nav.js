@@ -1,5 +1,6 @@
 // External Dependencies
 import hex2rgba from 'hex2rgba';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
 
@@ -39,6 +40,11 @@ const NavItem = ({ linkTo, children, styles }) => (
     </Link>
   </li>
 );
+NavItem.propTypes = {
+  children: PropTypes.element.isRequired,
+  linkTo: PropTypes.string.isRequired,
+  styles: PropTypes.shape({}).isRequired,
+};
 
 // Component Definition
 class TopNav extends Component {
@@ -51,11 +57,11 @@ class TopNav extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser => {
+    firebase.auth.onAuthStateChanged(authUser =>
       authUser
         ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }));
-    });
+        : this.setState(() => ({ authUser: null })),
+    );
   }
 
   render() {
@@ -80,7 +86,7 @@ class TopNav extends Component {
         }}>
         <div
           css={{
-            //maxWidth: rhythm(presets.maxWidth),
+            // maxWidth: rhythm(presets.maxWidth),
             alignItems: `flex-end`,
             borderBottom: '4px solid #2D456F',
             boxShadow: '3px 0 5px #2D456F',
@@ -100,7 +106,7 @@ class TopNav extends Component {
                 textDecoration: 'none',
               },
             }}
-            linkTo={`/`}>
+            linkTo="/">
             <div
               css={{
                 alignItems: `center`,
@@ -150,7 +156,11 @@ class TopNav extends Component {
                 css={{
                   float: 'right',
                 }}
-                onClick={auth.doSignOut}>
+                onClick={auth.doSignOut}
+                role="button"
+                tabIndex={0}
+                onKeyUp={auth.doSignOut}
+              >
                 <NavItem linkTo="/">Sign Out</NavItem>
               </div>
             )}

@@ -1,17 +1,15 @@
 // External Dependencies
 import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import Helmet from 'react-helmet';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Internal Dependencies
-// import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import Status from './status';
 import presets from '../../utils/presets';
-// import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
 import CtaButton from '../../components/masthead/cta-button';
 
@@ -20,18 +18,7 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
-// const propTypes = {
-//   contentfulFileShareData: PropTypes.array,
-//   contentfulFileShareDescriptionData: PropTypes.array,
-// };
-
-// const defaultProps = {
-//   contentfulFileShareData: null,
-//   contentfulFileShareDescriptionData: null,
-// }
-
 const futuraStyles = {
-  // fontFamily: options.headerFontFamily.join(`,`),
   lineHeight: '1.6',
   marginBottom: '1rem',
 };
@@ -40,6 +27,7 @@ const boldStyles = { fontWeight: 600 };
 
 // Local Components
 const SpacedDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
+SpacedDiv.propTypes = { children: PropTypes.element.isRequired };
 
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>
@@ -60,6 +48,10 @@ const SpacedDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
 
 // Component Definition
 class JoinContent extends Component {
+  static propTypes = {
+    location: PropTypes.shape({}).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -78,12 +70,13 @@ class JoinContent extends Component {
   }
 
   render() {
+    const { location } = this.props;
     const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <div
           css={{
             paddingLeft: 0,

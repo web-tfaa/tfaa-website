@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 
@@ -14,6 +15,11 @@ import { firebase } from '../../firebase';
 
 // Component Definition
 class Members extends Component {
+  static propTypes = {
+    data: PropTypes.shape({}).isRequired,
+    location: PropTypes.shape({}).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -32,12 +38,16 @@ class Members extends Component {
   }
 
   render() {
+    const {
+      data,
+      location,
+    } = this.props;
     const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <div
           css={{
             paddingLeft: 0,
@@ -55,10 +65,10 @@ class Members extends Component {
               <MemberContent
                 memberEmail={authUser.email}
                 contentfulFileShareData={
-                  this.props.data.allContentfulFileShare.edges
+                  data.allContentfulFileShare.edges
                 }
                 contentfulFileShareDescriptionData={
-                  this.props.data.allContentfulFileShareDescriptionTextNode
+                  data.allContentfulFileShareDescriptionTextNode
                     .edges
                 }
               />

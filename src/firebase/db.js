@@ -9,5 +9,3 @@ export const doCreateEntry = (form) =>
       console.log('Document written with ID: ', docRef.id);
     })
     .catch(err => console.log('Error adding document', err));
-
-// export const onceGetUsers = () => db.ref('users').once('value');

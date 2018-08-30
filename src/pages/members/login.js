@@ -1,6 +1,7 @@
 // External Dependencies
-import React from 'react';
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Link, navigate } from 'gatsby';
 
 // Internal Dependencies
@@ -8,11 +9,15 @@ import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
-import { firebase } from '../../firebase';
 import presets from '../../utils/presets';
+import { firebase } from '../../firebase';
 
 // Component Definition
-class Login extends React.Component {
+class Login extends Component {
+  static propTypes = {
+    location: PropTypes.shape({}).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -22,11 +27,11 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser => {
+    firebase.auth.onAuthStateChanged(authUser =>
       authUser
         ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }));
-    });
+        : this.setState(() => ({ authUser: null })),
+    );
   }
 
   handleRedirectToMembers = () => {
@@ -34,6 +39,7 @@ class Login extends React.Component {
   };
 
   render() {
+    const { location } = this.props;
     const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
@@ -43,7 +49,7 @@ class Login extends React.Component {
     }
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <div
           css={{
             paddingLeft: 0,
@@ -69,7 +75,7 @@ class Login extends React.Component {
             <FormHr />
 
             <p>
-              <Link to={'/members/pw-forget'}>Forgot Password?</Link>
+              <Link to="/members/pw-forget">Forgot Password?</Link>
             </p>
           </Container>
         </div>

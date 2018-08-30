@@ -5,8 +5,6 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-// import googleConfig from '../../utils/google-config';
-// import { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { removeErrorKeys } from '../../utils/helpers';
 import {
@@ -50,11 +48,6 @@ const baseErrorStyles = {
   marginTop: '0.5rem',
 };
 
-// const lastErrorStyles = {
-//   ...baseErrorStyles,
-//   margin: '16px 0',
-// };
-
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
 const INITIAL_STATE = {
@@ -86,8 +79,6 @@ const INITIAL_STATE = {
   Office_Fax: '',
 };
 
-// const VALUE_INPUT_OPTION = 'USER_ENTERED';
-
 // To check for a valid Email address
 const EmailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 const ZipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
@@ -114,66 +105,7 @@ class RegisterForm extends Component {
       ...INITIAL_STATE,
     };
 
-    // this.gapi = window.gapi;
   }
-
-  componentDidMount() {
-    // 1. Load the JavaScript client library.
-    // window.gapi.load("client", this.initClient);
-  }
-
-  // initClient = () => {
-  // 2. Initialize the JavaScript client library.
-  // window.gapi.client
-  //   .init({
-  //     apiKey: googleConfig.apiKey,
-  //     clientId: googleConfig.clientId,
-  //     discoveryDocs: googleConfig.discoveryDocs,
-  //     scope: googleConfig.scopes,
-  //   })
-  //   .then((res) => {
-  //     console.log('1 res', res);
-  // 3. Initialize and make the API request.
-
-  // var user = this.gapi.auth2.getAuthInstance().currentUser.get();
-
-  // var oauthToken = user.getAuthResponse().access_token;
-
-  // console.log('oauthToken', oauthToken);
-
-  //   this.handleClientLoad(this.onload);
-  // });
-  // }
-
-  // handleClientLoad = () => {
-  //   console.log('inside handleClientLoad');
-  //   window.gapi.client.load("sheets", "v4", () => {
-  //     window.gapi.client.sheets.spreadsheets.values.get({
-  //       spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-  //       majorDimension: 'COLUMNS',
-  //       range: 'Sheet1!A2:A500',
-  //     })
-  //     .then(
-  //       (res) => {
-  //         console.log('response →', res);
-  //       },
-  //       (err) => {
-  //         console.log('error →', err);
-  //       }
-  //     );
-  //   });
-  // }
-
-  // onLoad = (data, error) => {
-  //   if (data) {
-  //     console.log('data');
-  //     const cars = data.cars;
-  //     this.setState({ cars });
-  //   } else {
-  //     console.log('error');
-  //     this.setState({ error });
-  //   }
-  // }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -191,48 +123,7 @@ class RegisterForm extends Component {
 
     form.Timestamp = new Date();
 
-    console.log('no errors!', form);
-
     doCreateEntry(form);
-
-    // const url =
-    //   'https://script.google.com/macros/s/AKfycbxP1dG-WAWKrCrkilTh8Yyxi4vg2mV8MvF-R59ZQpE4PYRys0c/exec';
-
-    // fetch(url, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(form),
-    // })
-    //   .then(res => {
-    //     console.log('res from POST', res);
-    //   })
-    //   .then(res => res.json())
-    //   .then(data => console.log('success with JSON response', data))
-    //   .catch(err => console.log('failed with error', err));
-
-    // this.gapi.client.sheets.spreadsheets.values.update({
-    //   spreadsheetId: process.env.GATSBY_SPREADSHEET_ID,
-    //   range: 'Sheet1!A2:A500',
-    //   valueInputOption: VALUE_INPUT_OPTION,
-    //   resource: body,
-    // })
-    // .then((res) => {
-    //   const result = res.result;
-    //   console.log(`${result.updatedCells} cells updated.`);
-    // });
-
-    // auth.doSignInWithEmailAndPassword(Email, password)
-    //   .then(() => {
-    //     this.setState(() => ({
-    //       ...INITIAL_STATE,
-    //       isAuthenticated: true,
-    //     }));
-    //   })
-    //   .catch(err => {
-    //     this.setState({ error: err });
-    //   });
   };
 
   handleUpdate = event => {

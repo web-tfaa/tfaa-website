@@ -1,13 +1,14 @@
 // External Dependencies
-import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 // Internal Dependencies
 import Footer from './footer';
-import TopNav from './nav/top-nav';
-import SidebarBody from './shared/sidebar/sidebar-body';
 import MobileNav from './nav/mobile-nav';
+import SidebarBody from './shared/sidebar/sidebar-body';
+import TopNav from './nav/top-nav';
 import { firebase } from '../firebase';
 
 // Sidebar data
@@ -74,6 +75,11 @@ const sidebarStyles = {
 
 // Component Definition
 class DefaultLayout extends Component {
+  static propTypes = {
+    children: PropTypes.element.isRequired,
+    location: PropTypes.shape({}).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -83,19 +89,24 @@ class DefaultLayout extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser => {
+    firebase.auth.onAuthStateChanged(authUser =>
       authUser
         ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }));
-    });
+        : this.setState(() => ({ authUser: null })),
+    );
   }
 
   render() {
-    const { children, location } = this.props;
+    const {
+      children,
+      location: {
+        pathname: path,
+      },
+    } = this.props;
 
     const { authUser } = this.state;
 
-    const path = location.pathname;
+    // const path = location.pathname;
 
     const isAuthenticated = Boolean(authUser);
 
@@ -118,7 +129,7 @@ class DefaultLayout extends Component {
           display: 'flex',
           flexDirection: 'column',
         }}>
-        <Helmet defaultTitle={`Texas Music Administrators Conference`}>
+        <Helmet defaultTitle="Texas Music Administrators Conference">
           <meta name="twitter:site" content="@TXMusicLeaders" />
           <meta name="og:type" content="website" />
           <meta name="og:site_name" content="TMAC" />

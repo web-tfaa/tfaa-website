@@ -2,7 +2,7 @@
 // import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 // import format from 'date-fns/format';
 import Helmet from 'react-helmet';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Internal Dependencies
@@ -23,15 +23,6 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
-// const propTypes = {
-//   contentfulFileShareData: PropTypes.array,
-//   contentfulFileShareDescriptionData: PropTypes.array,
-// };
-
-// const defaultProps = {
-//   contentfulFileShareData: null,
-//   contentfulFileShareDescriptionData: null,
-// }
 
 // const futuraStyles = {
 //   fontFamily: options.headerFontFamily.join(`,`),
@@ -42,31 +33,13 @@ import membersSidebar from './members-links.yml';
 // const boldStyles = { fontWeight: 600 };
 
 // Local Components
-// const FuturaDiv = ({ children }) => (
-//   <div css={futuraStyles}>
-//     {children}
-//   </div>
-// );
-
-// const FuturaAnchor = ({ children, href }) => (
-//   <a href={href} css={futuraStyles}>
-//     {children}
-//   </a>
-// );
-
-// const MemberFileShareCard = ({ node, description }) => {
-//   return (
-//     <Card>
-//       <CardHeadline>{node.title}</CardHeadline>
-//       <h5 css={{ marginTop: '1rem' }}>{format(node.date, ['MMMM DD YYYY'])}</h5>
-//       <FuturaDiv>{description}</FuturaDiv>
-//       <FuturaAnchor download href={node.link}>Download</FuturaAnchor>
-//     </Card>
-//   );
-// };
 
 // Component Definition
 class Payment extends Component {
+  static propTypes = {
+    location: PropTypes.shape({}).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -85,12 +58,13 @@ class Payment extends Component {
   }
 
   render() {
+    const { location } = this.props;
     const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <div
           css={{
             paddingLeft: 0,

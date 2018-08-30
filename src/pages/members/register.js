@@ -2,7 +2,7 @@
 // import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 // import format from 'date-fns/format';
 import Helmet from 'react-helmet';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
@@ -38,6 +38,10 @@ const localCompletedRegistrationSteps = JSON.parse(
 
 // Component Definition
 class Register extends Component {
+  static propTypes = {
+    location: PropTypes.shape({}).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -59,14 +63,6 @@ class Register extends Component {
           : this.setState(() => ({ authUser: null })),
     );
   }
-
-  advanceToNextStep = step => {
-    this.setState({
-      activeStep: this.state.activeStep + 1,
-      completedSteps: this.state.completedSteps.push(step),
-    });
-    localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]));
-  };
 
   getCurrentStepContent(isAuthenticated) {
     const { activeStep } = this.state;
@@ -109,8 +105,26 @@ class Register extends Component {
     return currentStepContent;
   }
 
+  advanceToNextStep = step => {
+    const {
+      activeStep,
+      completedSteps,
+    } = this.state;
+
+    this.setState({
+      activeStep: activeStep + 1,
+      completedSteps: completedSteps.push(step),
+    });
+    localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]));
+  };
+
   render() {
-    const { activeStep, authUser, completedSteps } = this.state;
+    const { location } = this.props;
+    const {
+      activeStep,
+      authUser,
+      completedSteps,
+    } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
@@ -118,7 +132,7 @@ class Register extends Component {
     console.log('hasCompletedAllSteps', hasCompletedAllSteps);
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <div
           css={{
             paddingLeft: 0,
