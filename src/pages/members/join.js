@@ -39,11 +39,7 @@ const futuraStyles = {
 const boldStyles = { fontWeight: 600 };
 
 // Local Components
-const SpacedDiv = ({ children }) => (
-  <div css={futuraStyles}>
-    {children}
-  </div>
-);
+const SpacedDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
 
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>
@@ -73,75 +69,75 @@ class JoinContent extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser =>
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }))
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
     );
   }
 
   render() {
-    const {
-      authUser,
-    } = this.state;
+    const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
     return (
       <Layout location={this.props.location}>
-        <div css={{
-          paddingLeft: 0,
-          width: `0 auto`,
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}>
+        <div
+          css={{
+            paddingLeft: 0,
+            width: `0 auto`,
+            [presets.Tablet]: {
+              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+            },
+          }}>
           <Status authUser={authUser} />
           <Container>
             <Helmet>
               <title>TMAC | Join TMAC</title>
             </Helmet>
 
-              <div
-                css={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: 32,
-                }}
-              >
-                <CardHeadline>Join TMAC</CardHeadline>
-                <SpacedDiv>
-                  To join TMAC please complete these three steps:
-                </SpacedDiv>
-                <SpacedDiv>
-                  <span css={boldStyles}>1.</span> Sign up for a TMAC website login.
-                </SpacedDiv>
-                <SpacedDiv>
-                  <span css={boldStyles}>2.</span> Complete the Registration Form.
-                </SpacedDiv>
-                <SpacedDiv>
-                  <span css={boldStyles}>3.</span> Pay dues online (or with check via mail).
-                </SpacedDiv>
-              </div>
+            <div
+              css={{
+                display: 'flex',
+                flexDirection: 'column',
+                padding: 32,
+              }}>
+              <CardHeadline>Join TMAC</CardHeadline>
+              <SpacedDiv>
+                To join TMAC please complete these three steps:
+              </SpacedDiv>
+              <SpacedDiv>
+                <span css={boldStyles}>1.</span> Sign up for a TMAC website
+                login.
+              </SpacedDiv>
+              <SpacedDiv>
+                <span css={boldStyles}>2.</span> Complete the Registration Form.
+              </SpacedDiv>
+              <SpacedDiv>
+                <span css={boldStyles}>3.</span> Pay dues online (or with check
+                via mail).
+              </SpacedDiv>
+            </div>
 
-              <div
-                css={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <CtaButton to="/members/register">
-                  <span css={{ verticalAlign: `middle` }}>
-                    Begin Registration
-                  </span>
-                  <ArrowForwardIcon
-                    css={{
-                      verticalAlign: `baseline`,
-                      marginLeft: `.6em`,
-                    }}
-                  />
-                </CtaButton>
-              </div>
+            <div
+              css={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+              }}>
+              <CtaButton to="/members/register">
+                <span css={{ verticalAlign: `middle` }}>
+                  Begin Registration
+                </span>
+                <ArrowForwardIcon
+                  css={{
+                    verticalAlign: `baseline`,
+                    marginLeft: `.6em`,
+                  }}
+                />
+              </CtaButton>
+            </div>
 
             <div style={{ marginTop: '1.5rem' }}>
               * Registration is not complete until payment is received.
@@ -154,13 +150,14 @@ class JoinContent extends Component {
               [presets.Tablet]: {
                 display: `none`,
               },
-            }}
-          >
-            <hr css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }} />
+            }}>
+            <hr
+              css={{
+                border: 0,
+                height: 2,
+                marginTop: 10,
+              }}
+            />
             <SidebarBody inline yaml={membersSidebar} />
           </div>
         </div>

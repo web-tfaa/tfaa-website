@@ -28,13 +28,17 @@ export default ({ location }) => (
       <section>
         <h4>Who</h4>
         <p css={indentStyles}>
-          The TMAC Fall Retreat is open to all current TMAC members who are in good standing (registered and paid). There is no separate conference registration process.
+          The TMAC Fall Retreat is open to all current TMAC members who are in
+          good standing (registered and paid). There is no separate conference
+          registration process.
         </p>
       </section>
 
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>Wednesday, November 15 (6:30 PM) — Friday, November 17, 2017 (noon)</p>
+        <p css={indentStyles}>
+          Wednesday, November 15 (6:30 PM) — Friday, November 17, 2017 (noon)
+        </p>
       </section>
 
       <section>
@@ -44,8 +48,7 @@ export default ({ location }) => (
             <a
               href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"
               rel="noopener noreferrer"
-              target="_blank"
-            >
+              target="_blank">
               Austin Airport Marriott South
             </a>
           </p>
@@ -53,13 +56,15 @@ export default ({ location }) => (
             <a
               href="https://www.google.com/maps/place/4415+S+IH+35+Frontage+Rd,+Austin,+TX+78744/@30.2109504,-97.755463,17z/data=!3m1!4b1!4m5!3m4!1s0x8644b49cb7935da1:0x5a86d0320722c79b!8m2!3d30.2109504!4d-97.7532743"
               rel="noopener noreferrer"
-              target="_blank"
-            >
-              4415 South IH-35<br />Austin, Texas 78744
+              target="_blank">
+              4415 South IH-35
+              <br />
+              Austin, Texas 78744
             </a>
           </p>
           <p>
-            Phone: <a href="tel:+15124418900">(512) 441-7900</a><br />
+            Phone: <a href="tel:+15124418900">(512) 441-7900</a>
+            <br />
             Fax: (512) 441-7899
           </p>
         </div>
@@ -70,16 +75,16 @@ export default ({ location }) => (
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={eventsSidebar} />
       </div>
-
     </Container>
   </Layout>
 );

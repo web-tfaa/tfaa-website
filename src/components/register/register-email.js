@@ -25,14 +25,9 @@ class RegisterEmail extends Component {
   }
 
   handleAdvanceStep = () => {
-    const {
-      advanceToNextStep,
-    } = this.props;
+    const { advanceToNextStep } = this.props;
 
-    setTimeout(() =>
-      advanceToNextStep(0),
-      3500
-    );
+    setTimeout(() => advanceToNextStep(0), 3500);
   };
 
   handleClickSignInLink = () => {
@@ -42,42 +37,42 @@ class RegisterEmail extends Component {
   };
 
   render() {
-    const {
-      isAuthenticated,
-    } = this.props;
+    const { isAuthenticated } = this.props;
 
-    const {
-      viewingSignUp,
-    } = this.state;
+    const { viewingSignUp } = this.state;
 
-    const childrenElements = isAuthenticated
-      ? (
-        <Fragment>
-          <h2>Login Successful</h2>
-          <div
-            css={{
-              alignItems: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              margin: 32,
-            }}
-          >
-            <p>Now loading step 2...</p>
-            <CircularProgress size={64} thickness={4} />
-          </div>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <p>
-            All members registering after 9/1/2018 will need to sign up for a new login here to complete online registration.
-          </p>
-          <FormHr />
-          <SignUpForm onRegisterSignUp={this.handleAdvanceStep} />
-          <FormHr />
-          <SignInUpElement onClickSignIn={this.handleClickSignInLink} viewSignUp={false} />
-          {!viewingSignUp && <LoginForm onRegisterLogin={this.handleAdvanceStep} />}
-        </Fragment>
-      );
+    const childrenElements = isAuthenticated ? (
+      <Fragment>
+        <h2>Login Successful</h2>
+        <div
+          css={{
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            margin: 32,
+          }}>
+          <p>Now loading step 2...</p>
+          <CircularProgress size={64} thickness={4} />
+        </div>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <p>
+          All members registering after 9/1/2018 will need to sign up for a new
+          login here to complete online registration.
+        </p>
+        <FormHr />
+        <SignUpForm onRegisterSignUp={this.handleAdvanceStep} />
+        <FormHr />
+        <SignInUpElement
+          onClickSignIn={this.handleClickSignInLink}
+          viewSignUp={false}
+        />
+        {!viewingSignUp && (
+          <LoginForm onRegisterLogin={this.handleAdvanceStep} />
+        )}
+      </Fragment>
+    );
 
     return (
       <section>

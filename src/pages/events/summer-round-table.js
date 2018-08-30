@@ -35,18 +35,18 @@ export default ({ location }) => (
           <a
             href="http://www.sahbgcc.com/"
             rel="noopener noreferrer"
-            target="_blank"
-          >
+            target="_blank">
             Henry B. Gonzalez Convention Center
-          </a>,&nbsp;
-          CC210 (tentative room assignment)
+          </a>
+          ,&nbsp; CC210 (tentative room assignment)
           <p>
             <a
               href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
               rel="noopener noreferrer"
-              target="_blank"
-            >
-              900 E. Market St<br />San Antonio, TX 78205
+              target="_blank">
+              900 E. Market St
+              <br />
+              San Antonio, TX 78205
             </a>
           </p>
         </div>
@@ -56,15 +56,24 @@ export default ({ location }) => (
         <h4>Why</h4>
         <p css={indentStyles}>
           Held in conjunction with the&nbsp;
-          <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>,&nbsp;
-          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
-          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer conventions.
+          <a href="http://www.texasbandmasters.org/">
+            Texas Bandmasters Association
+          </a>
+          ,&nbsp;
+          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>
+          , and&nbsp;
+          <a href="https://www.todaweb.org/">
+            Texas Orchestra Directors Association
+          </a>{' '}
+          summer conventions.
         </p>
       </section>
 
       <section>
         <h4>Who</h4>
-        <p css={indentStyles}>New music administrators are encouraged to attend!</p>
+        <p css={indentStyles}>
+          New music administrators are encouraged to attend!
+        </p>
       </section>
       <div
         css={{
@@ -72,16 +81,16 @@ export default ({ location }) => (
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={eventsSidebar} />
       </div>
-
     </Container>
   </Layout>
 );

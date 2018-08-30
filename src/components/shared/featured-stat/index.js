@@ -1,6 +1,6 @@
 // External Dependencies
 import React from 'react';
-import differenceInYears from 'date-fns/difference_in_years'
+import differenceInYears from 'date-fns/difference_in_years';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
@@ -21,7 +21,10 @@ const faceIconColor = '#b96af7';
 // Local Variables
 const numberOfDistricts = 1246;
 const numberOfSchools = 3000;
-const ageOfTmac = differenceInYears(new Date(), new Date('Tue Feb 15 1983 00:00:00 GMT-0600 (CST)'));
+const ageOfTmac = differenceInYears(
+  new Date(),
+  new Date('Tue Feb 15 1983 00:00:00 GMT-0600 (CST)'),
+);
 
 // Component Definition
 const FeaturedStat = ({ children }) => (
@@ -38,30 +41,17 @@ const FeaturedStat = ({ children }) => (
       [presets.Tablet]: {
         marginBottom: 0,
       },
-    }}
-  >
-    <Stat
-      color={queueMusicIconColor}
-      icon={QueueMusic}
-    >
+    }}>
+    <Stat color={queueMusicIconColor} icon={QueueMusic}>
       <div>{ageOfTmac} Years Serving Our Students</div>
     </Stat>
-    <Stat
-      color={locationCityIconColor}
-      icon={LocationCity}
-    >
+    <Stat color={locationCityIconColor} icon={LocationCity}>
       <div>Serving {numberOfDistricts.toLocaleString()} School Districts</div>
     </Stat>
-    <Stat
-      color={schoolIconColor}
-      icon={School}
-    >
+    <Stat color={schoolIconColor} icon={School}>
       <div>Serving Over {numberOfSchools.toLocaleString()} Schools</div>
     </Stat>
-    <Stat
-      color={faceIconColor}
-      icon={Face}
-    >
+    <Stat color={faceIconColor} icon={Face}>
       <div>Serving 5+ Million Students</div>
     </Stat>
   </div>

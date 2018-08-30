@@ -37,53 +37,46 @@ class PasswordForgetForm extends Component {
     };
   }
 
-  onSubmit = (event) => {
+  onSubmit = event => {
     event.preventDefault();
 
-    const {
-      email,
-    } = this.state;
+    const { email } = this.state;
 
-    auth.doPasswordReset(email)
+    auth
+      .doPasswordReset(email)
       .then(() => {
         this.setState(() => ({
           ...INITIAL_STATE,
           showSuccessMessage: true,
         }));
 
-        setTimeout(
-          this.handleRedirectToMembers,
-          7000,
-        );
+        setTimeout(this.handleRedirectToMembers, 7000);
       })
       .catch(error => {
         this.setState({
           error,
         });
       });
-  }
+  };
 
   handleRedirectToMembers = () => {
     navigate('/members/login');
-  }
+  };
 
   render() {
-    const {
-      email,
-      error,
-      showSuccessMessage,
-    } = this.state;
+    const { email, error, showSuccessMessage } = this.state;
 
     const isInvalid = email === '' || !regex.test(email);
 
     return (
       <Layout location={this.props.location}>
-        <div css={{
-          paddingLeft: 0,
-          [presets.Tablet]: {
-            paddingLeft: '1.5rem',
-          },
-        }}>
+        <div
+          css={{
+            paddingLeft: 0,
+            [presets.Tablet]: {
+              paddingLeft: '1.5rem',
+            },
+          }}>
           <Container className="password-forget">
             <Helmet>
               <title>TMAC | Forgot Password</title>
@@ -91,14 +84,13 @@ class PasswordForgetForm extends Component {
             <h2
               css={{
                 margin: '1rem 0',
-              }}
-            >
+              }}>
               Password Reset
             </h2>
 
             <hr css={{ background: 'darkred', height: 3 }} />
 
-            {showSuccessMessage &&
+            {showSuccessMessage && (
               <div
                 css={{
                   background: colors.status,
@@ -106,11 +98,10 @@ class PasswordForgetForm extends Component {
                   fontWeight: 500,
                   marginBottom: 16,
                   padding: '0.5rem',
-                }}
-              >
+                }}>
                 Check your email to reset your password!
               </div>
-            }
+            )}
             <form onSubmit={this.onSubmit}>
               <input
                 css={{
@@ -121,7 +112,11 @@ class PasswordForgetForm extends Component {
                   padding: '0.2rem',
                   width: 288,
                 }}
-                onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
+                onChange={event =>
+                  this.setState(
+                    updateByPropertyName('email', event.target.value),
+                  )
+                }
                 placeholder="Email Address"
                 type="text"
                 value={this.state.email}
@@ -129,18 +124,17 @@ class PasswordForgetForm extends Component {
               <button disabled={isInvalid} type="submit">
                 Reset My Password
               </button>
-              {error &&
+              {error && (
                 <div
                   css={{
                     color: 'red',
                     fontWeight: 500,
                     fontFamily: options.headerFontFamily.join(`,`),
                     margin: '16px 0',
-                  }}
-                >
+                  }}>
                   {error.message}
                 </div>
-              }
+              )}
             </form>
           </Container>
         </div>

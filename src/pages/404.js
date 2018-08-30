@@ -17,11 +17,10 @@ export default ({ location }) => (
     <Container hasSideBar={false}>
       <Cards>
         <Card css={{ width: '100%' }}>
-          <h2>
-            This is not the page you are looking for
-          </h2>
+          <h2>This is not the page you are looking for</h2>
           <FuturaParagraph>
-            Try heading back to our <Link to={'/'}>main page</Link> to find out more about TMAC!
+            Try heading back to our <Link to={'/'}>main page</Link> to find out
+            more about TMAC!
           </FuturaParagraph>
         </Card>
       </Cards>

@@ -35,7 +35,11 @@ class ChronologicalAdmin extends Component {
       <tr key={`${pres.name}-${index}`}>
         <th>{pres.year}</th>
         <th>
-          <Link to={`/resources/people/${pres.name.toLowerCase().split(' ').join('-')}`}>
+          <Link
+            to={`/resources/people/${pres.name
+              .toLowerCase()
+              .split(' ')
+              .join('-')}`}>
             {pres.name}
           </Link>
         </th>
@@ -48,9 +52,7 @@ class ChronologicalAdmin extends Component {
         <Helmet>
           <title>TMAC | Past Presidents</title>
         </Helmet>
-        <div
-          css={rootStyles}
-        >
+        <div css={rootStyles}>
           <Container>
             <CardHeadline>Past Presidents</CardHeadline>
 
@@ -63,9 +65,7 @@ class ChronologicalAdmin extends Component {
                     <th>Name</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {this.renderTableRows()}
-                </tbody>
+                <tbody>{this.renderTableRows()}</tbody>
               </table>
             </div>
             {/* Mobile sidebar */}
@@ -75,16 +75,16 @@ class ChronologicalAdmin extends Component {
                 [presets.Tablet]: {
                   display: `none`,
                 },
-              }}
-            >
-              <hr css={{
-                border: 0,
-                height: 2,
-                marginTop: 10,
-              }} />
+              }}>
+              <hr
+                css={{
+                  border: 0,
+                  height: 2,
+                  marginTop: 10,
+                }}
+              />
               <SidebarBody inline yaml={resourcesSidebar} />
             </div>
-
           </Container>
         </div>
       </Layout>

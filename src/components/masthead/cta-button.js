@@ -13,9 +13,9 @@ const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
 
 let stripeAnimation = css.keyframes({
-  "0%": { backgroundPosition: `0 0` },
-  "100%": { backgroundPosition: `30px 60px` },
-})
+  '0%': { backgroundPosition: `0 0` },
+  '100%': { backgroundPosition: `30px 60px` },
+});
 
 // Component Definition
 const CtaButton = ({ to, overrideCSS, children }) => (
@@ -36,7 +36,7 @@ const CtaButton = ({ to, overrideCSS, children }) => (
         padding: `${rhythm(1 / 2)} ${rhythm(1)}`,
       },
       // Increase specificity
-      "&&": {
+      '&&': {
         border: `1px solid ${texasFlagRed}`,
         boxShadow: `none`,
         color: texasFlagRed,
@@ -47,27 +47,26 @@ const CtaButton = ({ to, overrideCSS, children }) => (
         transition: `all ${presets.animation.speedDefault} ${
           presets.animation.curveDefault
         }`,
-        ":hover, &:focus": {
+        ':hover, &:focus': {
           backgroundSize: `30px 30px`,
           backgroundColor: texasFlagRed,
           backgroundImage: `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
           color: `#fff`,
           animation: `${stripeAnimation} 2.8s linear infinite`,
         },
-        ":focus": {
+        ':focus': {
           outline: 0,
           boxShadow: `0 0 0 0.2rem ${hex2rgba(texasFlagBlue, 0.25)}`,
         },
-        ":after": {
+        ':after': {
           content: ``,
           display: `block`,
         },
       },
     }}
-    to={to}
-  >
+    to={to}>
     {children}
   </Link>
-)
+);
 
-export default CtaButton
+export default CtaButton;

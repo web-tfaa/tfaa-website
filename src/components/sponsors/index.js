@@ -20,8 +20,7 @@ export default () => (
         css={{
           display: 'flex',
           flexDirection: 'column',
-        }}
-      >
+        }}>
         <SponsorCard
           max={2000}
           sponsorClass="Class Champion"

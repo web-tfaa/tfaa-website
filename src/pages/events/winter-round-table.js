@@ -36,18 +36,18 @@ export default ({ location }) => (
           <a
             href="http://www.marriott.com/hotels/travel/satdt-san-antonio-marriott-riverwalk/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
             rel="noopener noreferrer"
-            target="_blank"
-          >
+            target="_blank">
             Marriott Riverwalk
-          </a>,
-          Salon ABC (tentative location)
+          </a>
+          , Salon ABC (tentative location)
           <p>
             <a
               href="https://www.google.com/maps/place/889+E+Market+St,+San+Antonio,+TX+78205/@29.4224582,-98.4864776,17z/data=!3m1!4b1!4m5!3m4!1s0x865c58aa7befb2d7:0xb0912174007dfe05!8m2!3d29.4224582!4d-98.4842889"
               rel="noopener noreferrer"
-              target="_blank"
-            >
-              889 E. Market St<br />San Antonio, TX 78205
+              target="_blank">
+              889 E. Market St
+              <br />
+              San Antonio, TX 78205
             </a>
           </p>
         </div>
@@ -57,7 +57,10 @@ export default ({ location }) => (
         <h4>Why</h4>
         <p css={indentStyles}>
           Held in conjunction with the&nbsp;
-          <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
+          <a href="https://www.tmea.org/">
+            Texas Music Educators Association
+          </a>{' '}
+          convention.
         </p>
       </section>
       <div
@@ -66,16 +69,16 @@ export default ({ location }) => (
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={eventsSidebar} />
       </div>
-
     </Container>
   </Layout>
 );

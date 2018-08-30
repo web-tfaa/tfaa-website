@@ -13,14 +13,10 @@ const Section = props => (
       css={{
         ...props.headerStyles,
         marginTop: props.index === 0 ? 0 : rhythm(3 / 2),
-      }}
-    >
+      }}>
       {props.title}
     </h3>
-    <SectionLinks
-      {...props}
-      title={props.title}
-    />
+    <SectionLinks {...props} title={props.title} />
   </div>
 );
 
@@ -37,11 +33,10 @@ const SectionLinks = props => {
       css={{
         ...listStyles,
         // For nested <ul>s in the "Tutorial" section
-        "& ul": {
+        '& ul': {
           ...listStyles,
         },
-      }}
-    >
+      }}>
       {props.items.map((item, index) => (
         <SectionLink
           children={item.items}
@@ -52,7 +47,7 @@ const SectionLinks = props => {
       ))}
     </ul>
   );
-}
+};
 
 const SectionLink = props => {
   // Don't show the main docs link on mobile as we put these
@@ -82,8 +77,8 @@ const SectionLink = props => {
     listItem: {
       marginBottom: options.blockMarginBottom / 2,
       lineHeight: 1.3,
-      paddingTop: rhythm(1/8),
-      paddingBottom: rhythm(1/8),
+      paddingTop: rhythm(1 / 8),
+      paddingBottom: rhythm(1 / 8),
     },
     linkDefault: {
       position: `relative`,
@@ -92,7 +87,7 @@ const SectionLink = props => {
       fontWeight: `normal`,
       color: colors.gray.text,
       fontStyle: false,
-      "&:before": {
+      '&:before': {
         content: ` `,
         height: 4,
         width: 4,
@@ -118,38 +113,38 @@ const SectionLink = props => {
       opacity: 1,
       color: colors.gatsby,
       fontWeight: `bold`,
-      "&:before": {
+      '&:before': {
         background: colors.gatsby,
         transform: `scale(1)`,
       },
     },
-  }
+  };
 
   const linkStyle = props.isNested
     ? {
         ...styles.listItem,
-        "& .nav-link": {
+        '& .nav-link': {
           ...styles.linkDefault,
           color: colors.gray.text,
         },
-        "& .nav-link-active": {
+        '& .nav-link-active': {
           ...styles.linkActive,
           color: colors.gray.text,
           fontWeight: `normal`,
-          "&:before": {
+          '&:before': {
             display: `none`,
           },
         },
       }
     : {
         ...styles.listItem,
-        "& > .nav-link": {
+        '& > .nav-link': {
           ...styles.linkDefault,
         },
-        "& > .nav-link-active": {
+        '& > .nav-link-active': {
           ...styles.linkActive,
         },
-      }
+      };
 
   return (
     <li key={item.title} css={linkStyle}>
@@ -161,22 +156,18 @@ const SectionLink = props => {
         <Link
           activeClassName="nav-link-active"
           className="nav-link"
-          to={item.link}
-        >
+          to={item.link}>
           {title}
         </Link>
       )}
       {childnodes ? <ul>{childnodes}</ul> : null}
     </li>
   );
-}
+};
 
 class SidebarBody extends React.Component {
   render() {
-    const {
-      yaml,
-      inline,
-    } = this.props;
+    const { yaml, inline } = this.props;
 
     const menu = yaml;
     const isInline = inline;
@@ -187,30 +178,28 @@ class SidebarBody extends React.Component {
 
     const headerStyles = isInline
       ? {
-          fontSize: scale(2/5).fontSize,
+          fontSize: scale(2 / 5).fontSize,
         }
       : {
-          fontSize: scale(-2/5).fontSize,
+          fontSize: scale(-2 / 5).fontSize,
           color: colors.lilac,
           textTransform: `uppercase`,
           letterSpacing: `.15em`,
           fontWeight: `normal`,
-        }
+        };
 
     return (
       <div
         css={{
           padding: isInline ? 0 : rhythm(3 / 4),
         }}
-        className="docSearch-sidebar"
-      >
+        className="docSearch-sidebar">
         {menu.map((section, index) => (
           <div
             key={index}
             css={{
               fontSize,
-            }}
-          >
+            }}>
             <Section
               {...section}
               headerStyles={headerStyles}

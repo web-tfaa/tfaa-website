@@ -37,8 +37,7 @@ const Avatar = ({ alt, src }) => (
         height: 160,
         width: 160,
       },
-    }}
-  >
+    }}>
     <img
       css={{
         width: '100%',
@@ -66,8 +65,7 @@ export default ({ location }) => (
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
-        }}
-      >
+        }}>
         <Cards>
           <Card>
             <Avatar
@@ -75,7 +73,9 @@ export default ({ location }) => (
               src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Turner.jpg"
             />
             <CardHeadline>DFW Area</CardHeadline>
-            <FuturaParagraph><a href="mailto:jeffrey.turner@allenisd.org">Jeff Turner</a></FuturaParagraph>
+            <FuturaParagraph>
+              <a href="mailto:jeffrey.turner@allenisd.org">Jeff Turner</a>
+            </FuturaParagraph>
             <FuturaParagraph>Allen ISD</FuturaParagraph>
           </Card>
           <Card>
@@ -84,7 +84,9 @@ export default ({ location }) => (
               src="https://res.cloudinary.com/tmac/image/upload/v1523154886/lisa-roebuck.jpg"
             />
             <CardHeadline>Central Texas</CardHeadline>
-            <FuturaParagraph><a href="mailto:lisa_roebuck@roundrockisd.org">Lisa Roebuck</a></FuturaParagraph>
+            <FuturaParagraph>
+              <a href="mailto:lisa_roebuck@roundrockisd.org">Lisa Roebuck</a>
+            </FuturaParagraph>
             <FuturaParagraph>Round Rock ISD</FuturaParagraph>
           </Card>
           <Card>
@@ -93,7 +95,9 @@ export default ({ location }) => (
               src="https://res.cloudinary.com/tmac/image/upload/v1523158252/manny-gamez.jpg"
             />
             <CardHeadline>South Texas</CardHeadline>
-            <FuturaParagraph><a href="mailto:manuel.gamez@pfisd.net">Manny Gamez</a></FuturaParagraph>
+            <FuturaParagraph>
+              <a href="mailto:manuel.gamez@pfisd.net">Manny Gamez</a>
+            </FuturaParagraph>
             <FuturaParagraph>Mission CISD</FuturaParagraph>
           </Card>
           <Card>
@@ -102,7 +106,9 @@ export default ({ location }) => (
               src="https://res.cloudinary.com/tmac/image/upload/v1523157293/monte-mast-square.jpg"
             />
             <CardHeadline>Greater Houston</CardHeadline>
-            <FuturaParagraph><a href="mailto:mmast@kleinisd.net">Monte Mast</a></FuturaParagraph>
+            <FuturaParagraph>
+              <a href="mailto:mmast@kleinisd.net">Monte Mast</a>
+            </FuturaParagraph>
             <FuturaParagraph>Klein ISD</FuturaParagraph>
           </Card>
           <Card>
@@ -111,7 +117,11 @@ export default ({ location }) => (
               src="https://res.cloudinary.com/tmac/image/upload/v1523157441/christopher-anderson.jpg"
             />
             <CardHeadline>West Texas</CardHeadline>
-            <FuturaParagraph><a href="mailto:canderson60@lubbockisd.org">Christopher Anderson</a></FuturaParagraph>
+            <FuturaParagraph>
+              <a href="mailto:canderson60@lubbockisd.org">
+                Christopher Anderson
+              </a>
+            </FuturaParagraph>
             <FuturaParagraph>Lubbock ISD</FuturaParagraph>
           </Card>
         </Cards>
@@ -122,13 +132,14 @@ export default ({ location }) => (
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={resourcesSidebar} />
       </div>
     </Container>

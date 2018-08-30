@@ -15,12 +15,8 @@ const propTypes = {
 };
 
 // Component Definition
-const Stat = (props) => {
-  const {
-    children,
-    color,
-    icon: Icon,
-  } = props;
+const Stat = props => {
+  const { children, color, icon: Icon } = props;
 
   return (
     <div
@@ -47,8 +43,7 @@ const Stat = (props) => {
           flex: `0 0 15%`,
           width: `15%`,
         },
-      }}
-    >
+      }}>
       <div
         css={{
           padding: rhythm(presets.gutters.default / 2),
@@ -67,13 +62,11 @@ const Stat = (props) => {
           [presets.VVHd]: {
             padding: vPVHd,
           },
-        }}
-      >
+        }}>
         <div
           css={{
             marginBottom: 16,
-          }}
-        >
+          }}>
           <Icon fill={color} width="48px" height="48px" />
         </div>
         {children}

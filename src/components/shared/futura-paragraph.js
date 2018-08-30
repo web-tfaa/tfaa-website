@@ -8,8 +8,7 @@ const FuturaParagraph = ({ children }) => (
     css={{
       fontFamily: options.headerFontFamily.join(`,`),
       lineHeight: '1.6',
-    }}
-  >
+    }}>
     {children}
   </p>
 );

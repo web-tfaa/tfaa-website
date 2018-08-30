@@ -23,44 +23,48 @@ class Members extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser =>
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }))
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
     );
   }
 
   render() {
-    const {
-      authUser,
-    } = this.state;
+    const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
     return (
       <Layout location={this.props.location}>
-        <div css={{
-          paddingLeft: 0,
-          width: `0 auto`,
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}>
+        <div
+          css={{
+            paddingLeft: 0,
+            width: `0 auto`,
+            [presets.Tablet]: {
+              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+            },
+          }}>
           <Status authUser={authUser} />
           <Container>
             <Helmet>
               <title>TMAC | Members</title>
             </Helmet>
-            {isAuthenticated
-              ? (
-                  <MemberContent
-                    memberEmail={authUser.email}
-                    contentfulFileShareData={this.props.data.allContentfulFileShare.edges}
-                    contentfulFileShareDescriptionData={this.props.data.allContentfulFileShareDescriptionTextNode.edges}
-                />
-              )
-              : <NonMemberContent />
-            }
+            {isAuthenticated ? (
+              <MemberContent
+                memberEmail={authUser.email}
+                contentfulFileShareData={
+                  this.props.data.allContentfulFileShare.edges
+                }
+                contentfulFileShareDescriptionData={
+                  this.props.data.allContentfulFileShareDescriptionTextNode
+                    .edges
+                }
+              />
+            ) : (
+              <NonMemberContent />
+            )}
           </Container>
         </div>
       </Layout>
@@ -99,9 +103,8 @@ export const pageQuery = graphql`
             fileName
             contentType
           }
-
         }
       }
     }
   }
-`
+`;

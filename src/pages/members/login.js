@@ -1,10 +1,7 @@
 // External Dependencies
 import React from 'react';
 import Helmet from 'react-helmet';
-import {
-  Link,
-  navigate,
-} from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -34,12 +31,10 @@ class Login extends React.Component {
 
   handleRedirectToMembers = () => {
     navigate('/members/login');
-  }
+  };
 
   render() {
-    const {
-      authUser,
-    } = this.state;
+    const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
@@ -49,12 +44,13 @@ class Login extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <div css={{
-          paddingLeft: 0,
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}>
+        <div
+          css={{
+            paddingLeft: 0,
+            [presets.Tablet]: {
+              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+            },
+          }}>
           <Container className="login">
             <Helmet>
               <title>TMAC | Log In</title>
@@ -62,8 +58,7 @@ class Login extends React.Component {
             <h2
               css={{
                 margin: '1rem 0',
-              }}
-            >
+              }}>
               Login
             </h2>
 
@@ -77,8 +72,8 @@ class Login extends React.Component {
               <Link to={'/members/pw-forget'}>Forgot Password?</Link>
             </p>
           </Container>
-       </div>
-     </Layout>
+        </div>
+      </Layout>
     );
   }
 }

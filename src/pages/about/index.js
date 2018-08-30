@@ -1,10 +1,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import React from 'react';
-import {
-  graphql,
-  Link,
-} from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -26,14 +23,21 @@ export default ({ data, location }) => (
       <section>
         <h4>Our Mission</h4>
         <p>
-          To promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
+          To promote and support music education and music educators through
+          collaboration, networking, and the sharing of best practices so that
+          every child in Texas is assured of receiving quality instruction in
+          the understanding, appreciation, and performance of music.
         </p>
       </section>
       <section>
         <h4>Purpose</h4>
         <p>
-          The Texas Music Administrators Conference is organized exclusively for charitable, scientific and educational purposes, more specifically to promote and support music education and music educators through collaboration, networking, and the sharing of best practices so that every child in Texas is assured of receiving quality instruction in the understanding, appreciation, and performance of music.
-
+          The Texas Music Administrators Conference is organized exclusively for
+          charitable, scientific and educational purposes, more specifically to
+          promote and support music education and music educators through
+          collaboration, networking, and the sharing of best practices so that
+          every child in Texas is assured of receiving quality instruction in
+          the understanding, appreciation, and performance of music.
         </p>
       </section>
       <section>
@@ -65,7 +69,9 @@ export default ({ data, location }) => (
       </section>
       <section>
         <h4>
-          <Link to="/resources/people/chronological-presidents">Past Presidents</Link>
+          <Link to="/resources/people/chronological-presidents">
+            Past Presidents
+          </Link>
         </h4>
       </section>
       <section>
@@ -80,13 +86,14 @@ export default ({ data, location }) => (
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={aboutSidebar} />
       </div>
     </Container>
@@ -101,4 +108,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

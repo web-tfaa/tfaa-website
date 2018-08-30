@@ -30,8 +30,7 @@ const MastheadBg = () => (
       ...cover,
       overflow: `hidden`,
       zIndex: -1,
-    }}
-  >
+    }}>
     <div
       className="masthead-bg-left-fill"
       css={{
@@ -70,8 +69,7 @@ const MastheadBg = () => (
         },
         width: `100%`,
         height: `100%`,
-      }}
-    >
+      }}>
       <polygon fill={colors.ui.light} points="-5,-5 15,15 -5,15 " />
     </svg>
     <style>
@@ -122,15 +120,13 @@ const MastheadBg = () => (
         zIndex: -1,
         top: `2%`,
         //transition: `width 100ms linear`,
-      }}
-    >
+      }}>
       <svg
         x="-15%"
         y="-10%"
         style={{
           overflow: `visible`,
-        }}
-      >
+        }}>
         <rect
           className="masthead-bg-right-light"
           width="10000%"

@@ -25,29 +25,24 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
       letterSpacing: `0.0075rem`,
       lineHeight: 1,
       padding: `${rhythm(options.blockMarginBottom / 4)} ${rhythm(
-        options.blockMarginBottom
+        options.blockMarginBottom,
       )} ${rhythm(options.blockMarginBottom / 2)} `,
       textDecoration: `none`,
       textAlign: `center`,
-    }}
-  >
+    }}>
     <div
       css={{
         display: `block`,
         margin: `0 auto`,
-      }}
-    >
-      <Icon
-        fill={texasFlagBlue}
-        height="32px"
-        width="32px"
-      />
+      }}>
+      <Icon fill={texasFlagBlue} height="32px" width="32px" />
     </div>
     <div
       css={{
         marginTop: 8,
-      }}
-    >{label}</div>
+      }}>
+      {label}
+    </div>
   </Link>
 );
 
@@ -69,27 +64,10 @@ export default () => (
       [presets.Tablet]: {
         display: `none`,
       },
-    }}
-  >
-    <MobileNavItem
-      linkTo="/about/"
-      label="About"
-      icon={InfoOutline}
-    />
-    <MobileNavItem
-      linkTo="/resources/"
-      label="Resources"
-      icon={FolderOpen}
-    />
-    <MobileNavItem
-      linkTo="/members/"
-      label="Members"
-      icon={PersonOutline}
-    />
-    <MobileNavItem
-      linkTo="/sponsors/"
-      label="Sponsors"
-      icon={CardGiftCard}
-    />
+    }}>
+    <MobileNavItem linkTo="/about/" label="About" icon={InfoOutline} />
+    <MobileNavItem linkTo="/resources/" label="Resources" icon={FolderOpen} />
+    <MobileNavItem linkTo="/members/" label="Members" icon={PersonOutline} />
+    <MobileNavItem linkTo="/sponsors/" label="Sponsors" icon={CardGiftCard} />
   </div>
 );

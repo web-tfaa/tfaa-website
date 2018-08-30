@@ -6,16 +6,8 @@ import React from 'react';
 // Internal Dependencies
 import CtaButton from './cta-button';
 import presets from '../../utils/presets';
-import {
-  rhythm,
-  scale,
-} from '../../utils/typography';
-import {
-  vP,
-  vPHd,
-  vPVHd,
-  vPVVHd,
-} from '../../utils/gutters';
+import { rhythm, scale } from '../../utils/typography';
+import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
 
 // Local Variables
 const texasFlagBlue = '#002868';
@@ -55,8 +47,7 @@ const MastheadContent = () => (
       [presets.VVHd]: {
         paddingLeft: vPVVHd,
       },
-    }}
-  >
+    }}>
     <div>
       <h1
         css={{
@@ -71,7 +62,7 @@ const MastheadContent = () => (
           [presets.Mobile]: {
             width: rhythm(10),
           },
-          "@media (min-width: 650px)": {
+          '@media (min-width: 650px)': {
             fontSize: scale(1).fontSize,
             width: rhythm(12),
           },
@@ -91,8 +82,7 @@ const MastheadContent = () => (
             fontSize: scale(1.6).fontSize,
             width: rhythm(18),
           },
-        }}
-      >
+        }}>
         Texas Music Administrators Conference
       </h1>
       <div
@@ -107,14 +97,11 @@ const MastheadContent = () => (
             display: 'block',
             width: rhythm(12),
           },
-        }}
-      >
+        }}>
         Supporting Music Education in Texas
       </div>
       <CtaButton to="/about/">
-        <span css={{ verticalAlign: `middle` }}>
-          Learn More
-        </span>
+        <span css={{ verticalAlign: `middle` }}>Learn More</span>
         <ArrowForwardIcon
           css={{
             verticalAlign: `baseline`,

@@ -27,7 +27,13 @@ export default ({ location }) => (
 
       <section>
         <p>
-          The 5th annual Texas Music Administrators Conference Golf Tournament is scheduled in conjunction with our Fall Retreat on Wednesday, November 17th. If you are interested in participating, please communicate directly with <a href="mailto:David_Jennison@roundrockisd.org">David Jennison</a>, Assistant Director of Instrumental Music, Round Rock I.S.D., to reserve your spot.
+          The 5th annual Texas Music Administrators Conference Golf Tournament
+          is scheduled in conjunction with our Fall Retreat on Wednesday,
+          November 17th. If you are interested in participating, please
+          communicate directly with{' '}
+          <a href="mailto:David_Jennison@roundrockisd.org">David Jennison</a>,
+          Assistant Director of Instrumental Music, Round Rock I.S.D., to
+          reserve your spot.
         </p>
       </section>
 
@@ -38,14 +44,15 @@ export default ({ location }) => (
 
       <section>
         <h4>What</h4>
-        <p css={indentStyles}>Golf scramble (Best Ball format with mulligans and cheating encouraged!)</p>
+        <p css={indentStyles}>
+          Golf scramble (Best Ball format with mulligans and cheating
+          encouraged!)
+        </p>
       </section>
 
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>
-          Wednesday, November 17th
-        </p>
+        <p css={indentStyles}>Wednesday, November 17th</p>
         <ul css={{ marginLeft: 36 }}>
           <li>10:30 AM — Warm-up/Check-in</li>
           <li>11:00 AM — Lunch (provided by Conn-Selmer)</li>
@@ -60,25 +67,26 @@ export default ({ location }) => (
             <a
               href="http://www.austintexas.gov/department/jimmy-clay-course"
               rel="noopener noreferrer"
-              target="_blank"
-            >
+              target="_blank">
               Jimmy Clay
-            </a> or&nbsp;
+            </a>{' '}
+            or&nbsp;
             <a
               href="http://www.austintexas.gov/department/roy-kizer-course"
               rel="noopener noreferrer"
-              target="_blank"
-            >
+              target="_blank">
               Roy Kizer
-            </a>&nbsp;Municipal Golf Courses
+            </a>
+            &nbsp;Municipal Golf Courses
           </p>
           <p>
             <a
               href="https://www.google.com/maps/place/5400+Jimmy+Clay+Dr,+Austin,+TX+78744/@30.1839103,-97.7341085,17z/data=!3m1!4b1!4m5!3m4!1s0x8644b399c09e5c25:0xbf41df44818b84e6!8m2!3d30.1839103!4d-97.7319198?shorturl=1"
               rel="noopener noreferrer"
-              target="_blank"
-            >
-             5400 Jimmy Clay Dr<br />Austin, TX 78744
+              target="_blank">
+              5400 Jimmy Clay Dr
+              <br />
+              Austin, TX 78744
             </a>
           </p>
           <p>
@@ -94,23 +102,25 @@ export default ({ location }) => (
         </p>
       </section>
 
-      <div><em>*Please note that this information is subject to change</em></div>
+      <div>
+        <em>*Please note that this information is subject to change</em>
+      </div>
       <div
         css={{
           display: `block`,
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={eventsSidebar} />
       </div>
-
     </Container>
   </Layout>
 );

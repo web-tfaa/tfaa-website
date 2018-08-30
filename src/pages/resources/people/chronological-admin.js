@@ -35,7 +35,11 @@ class ChronologicalAdmin extends Component {
       <tr key={`${admin.name}`}>
         <th>{admin.year}</th>
         <th>
-          <Link to={`/resources/people/${admin.name.toLowerCase().split(' ').join('-')}`}>
+          <Link
+            to={`/resources/people/${admin.name
+              .toLowerCase()
+              .split(' ')
+              .join('-')}`}>
             {admin.name}
           </Link>
         </th>
@@ -43,23 +47,20 @@ class ChronologicalAdmin extends Component {
     ));
 
   render() {
-    const {
-      location,
-    } = this.props;
+    const { location } = this.props;
 
     return (
       <Layout location={location}>
         <Helmet>
           <title>TMAC | Outstanding Administrators</title>
         </Helmet>
-        <div
-          css={rootStyles}
-        >
+        <div css={rootStyles}>
           <Container>
             <CardHeadline>Outstanding Administrators</CardHeadline>
 
             <div css={tableContainerStyles}>
-              Chronological listing of all TMAC Outstanding Administrator Award Recipients
+              Chronological listing of all TMAC Outstanding Administrator Award
+              Recipients
               <table>
                 <thead>
                   <tr>
@@ -67,9 +68,7 @@ class ChronologicalAdmin extends Component {
                     <th>Name</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {this.renderTableRows()}
-                </tbody>
+                <tbody>{this.renderTableRows()}</tbody>
               </table>
             </div>
             <div
@@ -78,16 +77,16 @@ class ChronologicalAdmin extends Component {
                 [presets.Tablet]: {
                   display: `none`,
                 },
-              }}
-            >
-              <hr css={{
-                border: 0,
-                height: 2,
-                marginTop: 10,
-              }} />
+              }}>
+              <hr
+                css={{
+                  border: 0,
+                  height: 2,
+                  marginTop: 10,
+                }}
+              />
               <SidebarBody inline yaml={resourcesSidebar} />
             </div>
-
           </Container>
         </div>
       </Layout>

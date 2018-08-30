@@ -20,10 +20,8 @@ const emptySponsorStyles = { maxWidth: '75%' };
 
 // Component Definition
 class SponsorCard extends Component {
-  renderSponsors = (sponsorData) => {
-    const {
-      sponsorClass,
-    } = this.props;
+  renderSponsors = sponsorData => {
+    const { sponsorClass } = this.props;
 
     const sponsorList = sponsorData.map(sponsor => {
       return (
@@ -36,20 +34,17 @@ class SponsorCard extends Component {
     if (sponsorList.length < 1) {
       return (
         <div css={emptySponsorStyles}>
-          Please <Link to="/about/officers">contact any TMAC officer</Link> about becoming a <span css={{  fontWeight: '600' }}>{sponsorClass}</span> sponsor.
+          Please <Link to="/about/officers">contact any TMAC officer</Link>{' '}
+          about becoming a{' '}
+          <span css={{ fontWeight: '600' }}>{sponsorClass}</span> sponsor.
         </div>
       );
     }
     return sponsorList;
-  }
+  };
 
   render() {
-    const {
-      max,
-      min,
-      sponsorClass,
-      sponsorData,
-    } = this.props;
+    const { max, min, sponsorClass, sponsorData } = this.props;
 
     const donationAmount = min
       ? `${min.toLocaleString()}-${max.toLocaleString()}`
@@ -66,23 +61,21 @@ class SponsorCard extends Component {
           flexDirection: 'column',
           marginBottom: '1em',
           padding: '2em 3em',
-        }}
-      >
+        }}>
         <h3
           css={{
             color: '#32456B',
             fontWeight: 600,
-          }}
-        >
+          }}>
           {sponsorClass}
         </h3>
         <h5
-          css ={{
+          css={{
             color: '#32456B',
             marginTop: '1.25rem',
-          }}
-        >
-          (${donationAmount} donation)
+          }}>
+          ($
+          {donationAmount} donation)
         </h5>
         {this.renderSponsors(sponsorData)}
       </div>

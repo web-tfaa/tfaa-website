@@ -11,10 +11,9 @@ const Cards = ({ children }) => (
       background: `#fff`,
       boxShadow: `0 5px 20px rgba(25, 17, 34, 0.1)`,
       transform: `translateZ(0)`,
-    }}
-  >
+    }}>
     {children}
   </div>
-)
+);
 
-export default Cards
+export default Cards;

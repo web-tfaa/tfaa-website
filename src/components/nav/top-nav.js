@@ -6,10 +6,7 @@ import { Link } from 'gatsby';
 // Internal Dependencies
 import typography, { rhythm, scale } from '../../utils/typography';
 import presets from '../../utils/presets';
-import {
-  auth,
-  firebase,
-} from '../../firebase';
+import { auth, firebase } from '../../firebase';
 
 const navItemStyles = {
   ...scale(-1 / 3),
@@ -24,7 +21,7 @@ const navItemStyles = {
   textTransform: `uppercase`,
   top: 0,
   transition: `color .15s ease-out`,
-  "&:hover": {
+  '&:hover': {
     opacity: 0.8,
     textDecoration: 'underline',
   },
@@ -36,8 +33,7 @@ const NavItem = ({ linkTo, children, styles }) => (
       display: `inline-block`,
       margin: 0,
       ...styles,
-    }}
-  >
+    }}>
     <Link to={linkTo} css={navItemStyles}>
       {children}
     </Link>
@@ -63,9 +59,7 @@ class TopNav extends Component {
   }
 
   render() {
-    const {
-      authUser,
-    } = this.state;
+    const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
@@ -83,8 +77,7 @@ class TopNav extends Component {
           [presets.Tablet]: {
             position: 'fixed',
           },
-        }}
-      >
+        }}>
         <div
           css={{
             //maxWidth: rhythm(presets.maxWidth),
@@ -99,37 +92,35 @@ class TopNav extends Component {
             paddingLeft: rhythm(3 / 4),
             paddingRight: rhythm(3 / 4),
             width: `100%`,
-          }}
-        >
+          }}>
           <NavItem
             css={{
-              "&:hover": {
+              '&:hover': {
                 opacity: 1,
                 textDecoration: 'none',
               },
             }}
-            linkTo={`/`}
-          >
+            linkTo={`/`}>
             <div
               css={{
                 alignItems: `center`,
                 color: `inherit`,
                 display: `flex`,
-                marginRight: rhythm(1/2),
+                marginRight: rhythm(1 / 2),
                 textDecoration: `none`,
-              }}
-            >
+              }}>
               <img
                 alt="TMAC logo"
                 style={{ marginBottom: 0 }}
                 height="30px"
                 src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
               />
-              <div css={{
-                fontSize: 24,
-                marginLeft: '0.8em',
-                textDecoration: 'none',
-              }}>
+              <div
+                css={{
+                  fontSize: 24,
+                  marginLeft: '0.8em',
+                  textDecoration: 'none',
+                }}>
                 TMAC
               </div>
             </div>
@@ -142,34 +133,30 @@ class TopNav extends Component {
                 flexGrow: 1,
                 listStyle: `none`,
                 margin: 0,
-                maskImage: `linear-gradient(to right, transparent, white ${rhythm(1/8)}, white 98%, transparent)`,
+                maskImage: `linear-gradient(to right, transparent, white ${rhythm(
+                  1 / 8,
+                )}, white 98%, transparent)`,
                 overflowX: `auto`,
                 padding: 0,
               },
-            }}
-          >
+            }}>
             <NavItem linkTo="/about/">About</NavItem>
             <NavItem linkTo="/events/">Events</NavItem>
             <NavItem linkTo="/resources/">Resources</NavItem>
             <NavItem linkTo="/members/">Membership</NavItem>
             <NavItem linkTo="/sponsors/">Sponsors</NavItem>
-            {isAuthenticated &&
+            {isAuthenticated && (
               <div
                 css={{
                   float: 'right',
                 }}
-                onClick={auth.doSignOut}
-              >
-                <NavItem
-                  linkTo="/"
-                >
-                  Sign Out
-                </NavItem>
+                onClick={auth.doSignOut}>
+                <NavItem linkTo="/">Sign Out</NavItem>
               </div>
-            }
+            )}
           </ul>
         </div>
-    </div>
+      </div>
     );
   }
 }

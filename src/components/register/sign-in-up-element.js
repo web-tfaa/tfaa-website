@@ -22,29 +22,22 @@ class SignInUpElement extends Component {
   };
 
   handleClickSignIn = () => {
-    const {
-      onClickSignIn,
-    } = this.props;
+    const { onClickSignIn } = this.props;
 
-    Boolean(onClickSignIn)
-      ? onClickSignIn()
-      : navigate('/members/login');
-  }
+    Boolean(onClickSignIn) ? onClickSignIn() : navigate('/members/login');
+  };
 
   handleClickSignUp = () => {
     navigate('/members/sign-up');
-  }
+  };
 
   render() {
-    const {
-      onClickSignIn,
-      viewSignUp,
-    } = this.props;
+    const { onClickSignIn, viewSignUp } = this.props;
 
     return (
       <div css={{ marginBottom: 32 }}>
         <div css={{ marginBottom: 16 }}>
-          {`${viewSignUp ? 'Don\'t' : 'Already'}`} have an account?
+          {`${viewSignUp ? "Don't" : 'Already'}`} have an account?
         </div>
         <span
           css={{
@@ -60,13 +53,14 @@ class SignInUpElement extends Component {
             '&:hover': {
               background: colors.ui.bright,
               cursor: 'pointer',
-            }
+            },
           }}
-          onClick={viewSignUp
-            ? this.handleClickSignUp
-            : (onClickSignIn || this.handleClickSignIn)}
-          role="button"
-        >
+          onClick={
+            viewSignUp
+              ? this.handleClickSignUp
+              : onClickSignIn || this.handleClickSignIn
+          }
+          role="button">
           {`Sign ${viewSignUp ? 'Up' : 'In'}!`}
         </span>
       </div>

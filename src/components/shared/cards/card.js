@@ -28,10 +28,10 @@ const Card = ({ children }) => (
         flex: `0 0 50%`,
         maxWidth: `50%`,
         boxShadow: `0 1px 0 0 ${colors.ui.light}`,
-        "&:nth-child(5),&:nth-child(6)": {
+        '&:nth-child(5),&:nth-child(6)': {
           boxShadow: `none`,
         },
-        "&:nth-child(2n)": {
+        '&:nth-child(2n)': {
           borderLeft: `1px solid ${colors.ui.light}`,
         },
       },
@@ -39,15 +39,14 @@ const Card = ({ children }) => (
         flex: `0 0 90%`,
         maxWidth: `90%`,
         borderLeft: `1px solid ${colors.ui.light}`,
-        "&:nth-child(4)": {
+        '&:nth-child(4)': {
           boxShadow: `none`,
         },
-        "&:nth-child(3n+1)": {
+        '&:nth-child(3n+1)': {
           borderLeft: 0,
         },
       },
-    }}
-  >
+    }}>
     <div
       css={{
         padding: rhythm(presets.gutters.default / 2),
@@ -66,8 +65,7 @@ const Card = ({ children }) => (
         [presets.VVHd]: {
           padding: vPVHd,
         },
-      }}
-    >
+      }}>
       {children}
     </div>
   </div>

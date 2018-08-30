@@ -77,23 +77,24 @@ class SignUpForm extends Component {
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-  }
+  };
 
-  handleUpdate = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    }, this.handleUpdateErrors);
-  }
+  handleUpdate = event => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      this.handleUpdateErrors,
+    );
+  };
 
   handleClickSignUpButton = () => {
-    const {
-      email,
-      passwordOne,
-    } = this.state;
+    const { email, passwordOne } = this.state;
 
-    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
+    auth
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authuser => {
         this.setState(() => ({
           ...INITIAL_STATE,
@@ -103,31 +104,28 @@ class SignUpForm extends Component {
       .catch(err => {
         this.setState({ error: err });
       });
-  }
+  };
 
   toggleRegisterPasswordInput = () => {
     const passOne = document.getElementById('passwordOne');
     const passTwo = document.getElementById('passwordTwo');
 
     if (passOne.type === 'password' && passTwo.type === 'password') {
-      passOne.setAttribute('type', 'text')
-      passTwo.setAttribute('type', 'text')
-    }
-    else {
+      passOne.setAttribute('type', 'text');
+      passTwo.setAttribute('type', 'text');
+    } else {
       passOne.setAttribute('type', 'password');
       passTwo.setAttribute('type', 'password');
     }
-  }
+  };
 
   handleUpdateErrors = () => {
     this.handleUpdateEmailError();
     this.handleUpdateRegisterPasswordError();
-  }
+  };
 
   handleUpdateEmailError = () => {
-    const {
-      email,
-    } = this.state;
+    const { email } = this.state;
 
     if (!email) {
       this.setState({
@@ -142,13 +140,10 @@ class SignUpForm extends Component {
         emailError: 'Use a valid email',
       });
     }
-  }
+  };
 
-  handleUpdateRegisterPasswordError = (message) => {
-    const {
-      passwordOne,
-      passwordTwo,
-    } = this.state;
+  handleUpdateRegisterPasswordError = message => {
+    const { passwordOne, passwordTwo } = this.state;
 
     const hasInput = passwordOne !== '' && passwordTwo !== '';
 
@@ -160,7 +155,11 @@ class SignUpForm extends Component {
       this.setState({
         registerError: 'Passwords should match',
       });
-    } else if (hasInput && passwordOne === passwordTwo && passwordOne.length < 8) {
+    } else if (
+      hasInput &&
+      passwordOne === passwordTwo &&
+      passwordOne.length < 8
+    ) {
       this.setState({
         registerError: 'Password must be at least 8 characters long',
       });
@@ -169,12 +168,10 @@ class SignUpForm extends Component {
         registerError: '',
       });
     }
-  }
+  };
 
   render() {
-    const {
-      onRegisterSignUp,
-    } = this.props;
+    const { onRegisterSignUp } = this.props;
 
     const {
       email,
@@ -193,19 +190,11 @@ class SignUpForm extends Component {
     }
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
-    const isInvalid =
-      !hasInput ||
-      registerError ||
-      emailError;
+    const isInvalid = !hasInput || registerError || emailError;
 
     return (
-      <form
-        key="signup-form"
-        onSubmit={this.handleSubmit}
-      >
-        <label css={labelStyles}>
-          Username
-        </label>
+      <form key="signup-form" onSubmit={this.handleSubmit}>
+        <label css={labelStyles}>Username</label>
         <input
           css={inputStyles}
           name="email"
@@ -214,19 +203,14 @@ class SignUpForm extends Component {
           type="text"
           value={email}
         />
-        <div css={baseErrorStyles}>
-          {emailError}
-        </div>
-        <label css={bottomLabelStyles}>
-          Password
-        </label>
+        <div css={baseErrorStyles}>{emailError}</div>
+        <label css={bottomLabelStyles}>Password</label>
         <div
           css={{
             alignItems: 'center',
             display: 'flex',
             marginBottom: 16,
-          }}
-        >
+          }}>
           <input
             css={inputStyles}
             id="passwordOne"
@@ -246,16 +230,13 @@ class SignUpForm extends Component {
             />
           </div>
         </div>
-        <label css={bottomLabelStyles}>
-          Confirm Password
-        </label>
+        <label css={bottomLabelStyles}>Confirm Password</label>
         <div
           css={{
             alignItems: 'center',
             display: 'flex',
             marginBottom: 16,
-          }}
-        >
+          }}>
           <input
             css={inputStyles}
             id="passwordTwo"
@@ -266,9 +247,7 @@ class SignUpForm extends Component {
             value={passwordTwo}
           />
         </div>
-        <div css={baseErrorStyles}>
-          {registerError}
-        </div>
+        <div css={baseErrorStyles}>{registerError}</div>
 
         {/* SUBMIT BUTTON */}
         <div
@@ -276,30 +255,27 @@ class SignUpForm extends Component {
             display: 'flex',
             justifyContent: 'flex-end',
             maxWidth: '70%',
-          }}
-        >
+          }}>
           <button
             css={{ marginTop: '1rem', padding: '8px 12px' }}
             disabled={isInvalid}
             onClick={this.handleClickSignUpButton}
-            type="submit"
-          >
+            type="submit">
             Sign Up
           </button>
         </div>
 
-        {error &&
+        {error && (
           <div
             css={{
               color: 'red',
               fontFamily: options.headerFontFamily.join(`,`),
               fontWeight: 500,
               margin: '16px 0',
-            }}
-          >
+            }}>
             {error.message}
           </div>
-        }
+        )}
       </form>
     );
   }

@@ -39,13 +39,13 @@ const sidebarStyles = {
   backgroundColor: colors.ui.whisper,
   boxShadow: `inset 0 4px 5px 0 ${hex2rgba(
     colors.gatsby,
-    presets.shadowKeyPenumbraOpacity
+    presets.shadowKeyPenumbraOpacity,
   )}, inset 0 1px 10px 0 ${hex2rgba(
     colors.lilac,
-    presets.shadowAmbientShadowOpacity
+    presets.shadowAmbientShadowOpacity,
   )}, inset 0 2px 4px -1px ${hex2rgba(
     colors.lilac,
-    presets.shadowKeyUmbraOpacity
+    presets.shadowKeyUmbraOpacity,
   )}`,
   display: `none`,
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
@@ -55,14 +55,14 @@ const sidebarStyles = {
   width: rhythm(10),
   paddingBottom: rhythm(3.5),
   WebkitOverflowScrolling: `touch`,
-  "::-webkit-scrollbar": {
+  '::-webkit-scrollbar': {
     height: `6px`,
     width: `6px`,
   },
-  "::-webkit-scrollbar-thumb": {
+  '::-webkit-scrollbar-thumb': {
     background: colors.ui.bright,
   },
-  "::-webkit-scrollbar-track": {
+  '::-webkit-scrollbar-track': {
     background: colors.ui.light,
   },
   [presets.Desktop]: {
@@ -70,7 +70,7 @@ const sidebarStyles = {
     paddingBottom: rhythm(3.5),
     width: rhythm(12),
   },
-}
+};
 
 // Component Definition
 class DefaultLayout extends Component {
@@ -91,14 +91,9 @@ class DefaultLayout extends Component {
   }
 
   render() {
-    const {
-      children,
-      location,
-    } = this.props;
+    const { children, location } = this.props;
 
-    const {
-      authUser,
-    } = this.state;
+    const { authUser } = this.state;
 
     const path = location.pathname;
 
@@ -111,17 +106,10 @@ class DefaultLayout extends Component {
     const isResources = path.slice(0, 10) === '/resources';
     const isMembers = path.slice(0, 8) === '/members';
 
-
     const hasSidebar =
-      isAbout ||
-      isEvents ||
-      isResources ||
-      (isAuthenticated && isMembers);
+      isAbout || isEvents || isResources || (isAuthenticated && isMembers);
 
-    const leftPadding = (rhythmSize) =>
-      hasSidebar
-        ? rhythm(rhythmSize)
-        : 0;
+    const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
 
     return (
       <div
@@ -129,8 +117,7 @@ class DefaultLayout extends Component {
         css={{
           display: 'flex',
           flexDirection: 'column',
-        }}
-      >
+        }}>
         <Helmet defaultTitle={`Texas Music Administrators Conference`}>
           <meta name="twitter:site" content="@TXMusicLeaders" />
           <meta name="og:type" content="website" />
@@ -152,22 +139,16 @@ class DefaultLayout extends Component {
             [presets.Desktop]: {
               minHeight: `calc(100vh - 4rem)`,
             },
-          }}
-        >
-
+          }}>
           {/* TODO Move this under about/index.js once Gatsby supports
             multiple levels of layouts */}
           <div
             css={{
               ...sidebarStyles,
               [presets.Tablet]: {
-                display:
-                  path.slice(0, 6) === `/about`
-                    ? `block`
-                    : `none`,
+                display: path.slice(0, 6) === `/about` ? `block` : `none`,
               },
-            }}
-          >
+            }}>
             <SidebarBody yaml={aboutSidebar} />
           </div>
 
@@ -177,13 +158,9 @@ class DefaultLayout extends Component {
             css={{
               ...sidebarStyles,
               [presets.Tablet]: {
-                display:
-                  path.slice(0, 7) === `/events`
-                    ? `block`
-                    : `none`,
+                display: path.slice(0, 7) === `/events` ? `block` : `none`,
               },
-            }}
-          >
+            }}>
             <SidebarBody yaml={eventsSidebar} />
           </div>
 
@@ -193,33 +170,25 @@ class DefaultLayout extends Component {
             css={{
               ...sidebarStyles,
               [presets.Tablet]: {
-                display:
-                  path.slice(0, 10) === `/resources`
-                    ? `block`
-                    : `none`,
+                display: path.slice(0, 10) === `/resources` ? `block` : `none`,
               },
-            }}
-          >
+            }}>
             <SidebarBody yaml={resourcesSidebar} />
           </div>
 
           {/* TODO Move this under members/index.js once Gatsby supports
             multiple levels of layouts */}
-          {isAuthenticated &&
+          {isAuthenticated && (
             <div
               css={{
                 ...sidebarStyles,
                 [presets.Tablet]: {
-                  display:
-                    path.slice(0, 8) === `/members`
-                      ? `block`
-                      : `none`,
+                  display: path.slice(0, 8) === `/members` ? `block` : `none`,
                 },
-              }}
-            >
+              }}>
               <SidebarBody yaml={membersSidebar} />
             </div>
-          }
+          )}
 
           {/* Main container */}
           <div
@@ -230,8 +199,7 @@ class DefaultLayout extends Component {
               [presets.Desktop]: {
                 paddingLeft: leftPadding(12),
               },
-            }}
-          >
+            }}>
             {children}
           </div>
         </div>

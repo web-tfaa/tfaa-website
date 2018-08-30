@@ -8,17 +8,16 @@ class BlogPost extends Component {
       title,
       createdAt,
       featuredImage,
-      content
-    } = this.props.data.contentfulBlog
+      content,
+    } = this.props.data.contentfulBlog;
 
     return (
       <div>
         <h1
           style={{
-            borderBottom: "1px solid #ccc",
-            paddingBottom: "0.5rem"
-          }}
-        >
+            borderBottom: '1px solid #ccc',
+            paddingBottom: '0.5rem',
+          }}>
           {title}
         </h1>
         <p>{createdAt}</p>
@@ -30,12 +29,12 @@ class BlogPost extends Component {
           dangerouslySetInnerHTML={{ __html: content.childMarkdownRemark.html }}
         />
       </div>
-    )
+    );
   }
 }
 
 BlogPost.propTypes = {
-  data: PropTypes.object.isRequired
-}
+  data: PropTypes.object.isRequired,
+};
 
 export default BlogPost;

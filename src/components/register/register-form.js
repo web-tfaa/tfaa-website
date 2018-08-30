@@ -93,14 +93,17 @@ const EmailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 const Zip_CodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Local Functions
-const formatPhone = (phone) => {
+const formatPhone = phone => {
   let cleanPhone = phone;
   if (cleanPhone.startsWith('1')) cleanPhone = cleanPhone.slice(1);
   if (cleanPhone.length !== 10) return phone;
-  return `(${cleanPhone.substr(0, 3)}) ${cleanPhone.substr(3, 3)}-${cleanPhone.substr(6, 4)}`;
-}
+  return `(${cleanPhone.substr(0, 3)}) ${cleanPhone.substr(
+    3,
+    3,
+  )}-${cleanPhone.substr(6, 4)}`;
+};
 
-const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
+const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
 class RegisterForm extends Component {
@@ -120,26 +123,26 @@ class RegisterForm extends Component {
   }
 
   // initClient = () => {
-    // 2. Initialize the JavaScript client library.
-    // window.gapi.client
-    //   .init({
-    //     apiKey: googleConfig.apiKey,
-    //     clientId: googleConfig.clientId,
-    //     discoveryDocs: googleConfig.discoveryDocs,
-    //     scope: googleConfig.scopes,
-    //   })
-    //   .then((res) => {
-    //     console.log('1 res', res);
-        // 3. Initialize and make the API request.
+  // 2. Initialize the JavaScript client library.
+  // window.gapi.client
+  //   .init({
+  //     apiKey: googleConfig.apiKey,
+  //     clientId: googleConfig.clientId,
+  //     discoveryDocs: googleConfig.discoveryDocs,
+  //     scope: googleConfig.scopes,
+  //   })
+  //   .then((res) => {
+  //     console.log('1 res', res);
+  // 3. Initialize and make the API request.
 
-        // var user = this.gapi.auth2.getAuthInstance().currentUser.get();
+  // var user = this.gapi.auth2.getAuthInstance().currentUser.get();
 
-        // var oauthToken = user.getAuthResponse().access_token;
+  // var oauthToken = user.getAuthResponse().access_token;
 
-        // console.log('oauthToken', oauthToken);
+  // console.log('oauthToken', oauthToken);
 
-      //   this.handleClientLoad(this.onload);
-      // });
+  //   this.handleClientLoad(this.onload);
+  // });
   // }
 
   // handleClientLoad = () => {
@@ -172,11 +175,11 @@ class RegisterForm extends Component {
   //   }
   // }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-  }
+  };
 
-  handleClickSubmitButton = (event) => {
+  handleClickSubmitButton = event => {
     event.preventDefault();
 
     const originalForm = this.state;
@@ -188,16 +191,17 @@ class RegisterForm extends Component {
 
     console.log('no errors!', form);
 
-    // console.log('body', form);
-
-    const url = 'https://script.google.com/macros/s/AKfycbxP1dG-WAWKrCrkilTh8Yyxi4vg2mV8MvF-R59ZQpE4PYRys0c/exec';
+    const url =
+      'https://script.google.com/macros/s/AKfycbxP1dG-WAWKrCrkilTh8Yyxi4vg2mV8MvF-R59ZQpE4PYRys0c/exec';
 
     fetch(url, {
       method: 'POST',
-      contentType: 'application/json',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(form),
     })
-      .then((res) => {
+      .then(res => {
         console.log('res from POST', res);
       })
       .then(res => res.json())
@@ -225,26 +229,35 @@ class RegisterForm extends Component {
     //   .catch(err => {
     //     this.setState({ error: err });
     //   });
-  }
+  };
 
-  handleUpdate = (event) => {
-    if (event.target.name.endsWith('Phone') || event.target.name.endsWith('Fax')) {
-      this.setState({
-        [event.target.name]: stripPhone(event.target.value),
-      }, this.handleUpdateErrors(event.target.name, event.target.value));
-    }
-    else this.setState({
-      [event.target.name]: event.target.value,
-    }, this.handleUpdateErrors(event.target.name, event.target.value));
-  }
+  handleUpdate = event => {
+    if (
+      event.target.name.endsWith('Phone') ||
+      event.target.name.endsWith('Fax')
+    ) {
+      this.setState(
+        {
+          [event.target.name]: stripPhone(event.target.value),
+        },
+        this.handleUpdateErrors(event.target.name, event.target.value),
+      );
+    } else
+      this.setState(
+        {
+          [event.target.name]: event.target.value,
+        },
+        this.handleUpdateErrors(event.target.name, event.target.value),
+      );
+  };
 
   handleUpdateErrors = (name, value) => {
     if (name === 'Email') this.handleUpdateEmailError(value);
     else if (name === 'Zip_Code') this.handleUpdateZip_CodeError(value);
     else this.handleUpdateInputError(name, value);
-  }
+  };
 
-  handleUpdateEmailError = (value) => {
+  handleUpdateEmailError = value => {
     if (!value) {
       this.setState({
         EmailError: 'Email is required',
@@ -258,9 +271,9 @@ class RegisterForm extends Component {
         EmailError: 'Use a valid Email',
       });
     }
-  }
+  };
 
-  handleUpdateZip_CodeError = (value) => {
+  handleUpdateZip_CodeError = value => {
     if (!value) {
       this.setState({
         Zip_CodeError: 'ZIP Code is required',
@@ -274,7 +287,7 @@ class RegisterForm extends Component {
         Zip_CodeError: 'Use a valid ZIP Code',
       });
     }
-  }
+  };
 
   handleUpdateInputError = (name, value) => {
     const {
@@ -348,9 +361,9 @@ class RegisterForm extends Component {
       default:
         break;
     }
-  }
+  };
 
-  validateHuman = (data) => {
+  validateHuman = data => {
     if (data) return false;
     return true;
   };
@@ -385,27 +398,25 @@ class RegisterForm extends Component {
 
     if (isAuthenticated) navigate('/members');
 
-    const hasInput = First_Name !== ''
-      && Last_Name !== ''
-      && Title !== ''
-      && District !== ''
-      && Address_1 !== ''
-      && City !== ''
-      && Zip_Code !== ''
-      && Email !== ''
-      && Office_Phone !== ''
-      && Cell_Phone !== '';
+    const hasInput =
+      First_Name !== '' &&
+      Last_Name !== '' &&
+      Title !== '' &&
+      District !== '' &&
+      Address_1 !== '' &&
+      City !== '' &&
+      Zip_Code !== '' &&
+      Email !== '' &&
+      Office_Phone !== '' &&
+      Cell_Phone !== '';
 
     const hasValidInput = hasInput && this.validateHuman(honeypot);
 
     return (
       <div className="login-form">
         <form onSubmit={this.handleSubmit}>
-
           {/* FIRST NAME */}
-          <label css={labelStyles}>
-            First Name
-          </label>
+          <label css={labelStyles}>First Name</label>
           <input
             css={inputStyles}
             type="text"
@@ -414,14 +425,10 @@ class RegisterForm extends Component {
             placeholder="e.g. Sally"
             value={First_Name}
           />
-          <div css={baseErrorStyles}>
-            {First_NameError}
-          </div>
+          <div css={baseErrorStyles}>{First_NameError}</div>
 
           {/* LAST NAME */}
-          <label css={labelStyles}>
-            Last Name
-          </label>
+          <label css={labelStyles}>Last Name</label>
           <input
             css={inputStyles}
             name="Last_Name"
@@ -429,14 +436,10 @@ class RegisterForm extends Component {
             placeholder="e.g. Drumm"
             value={Last_Name}
           />
-          <div css={baseErrorStyles}>
-            {Last_NameError}
-          </div>
+          <div css={baseErrorStyles}>{Last_NameError}</div>
 
           {/* TITLE */}
-          <label css={labelStyles}>
-            Title
-          </label>
+          <label css={labelStyles}>Title</label>
           <input
             css={inputStyles}
             name="Title"
@@ -444,14 +447,10 @@ class RegisterForm extends Component {
             placeholder="e.g. Director of Fine Arts"
             value={Title}
           />
-          <div css={baseErrorStyles}>
-            {TitleError}
-          </div>
+          <div css={baseErrorStyles}>{TitleError}</div>
 
           {/* DISTRICT */}
-          <label css={labelStyles}>
-            District
-          </label>
+          <label css={labelStyles}>District</label>
           <input
             css={inputStyles}
             name="District"
@@ -459,14 +458,10 @@ class RegisterForm extends Component {
             placeholder="e.g. Texas ISD"
             value={District}
           />
-          <div css={baseErrorStyles}>
-            {DistrictError}
-          </div>
+          <div css={baseErrorStyles}>{DistrictError}</div>
 
           {/* ADDRESS 1 */}
-          <label css={labelStyles}>
-            Address 1
-          </label>
+          <label css={labelStyles}>Address 1</label>
           <input
             css={inputStyles}
             name="Address_1"
@@ -474,14 +469,10 @@ class RegisterForm extends Component {
             placeholder="e.g. 123 Main St."
             value={Address_1}
           />
-          <div css={baseErrorStyles}>
-            {Address_1Error}
-          </div>
+          <div css={baseErrorStyles}>{Address_1Error}</div>
 
           {/* ADDRESS 2 */}
-          <label css={labelStyles}>
-            Address 2
-          </label>
+          <label css={labelStyles}>Address 2</label>
           <input
             css={inputStyles}
             name="Address_2"
@@ -491,9 +482,7 @@ class RegisterForm extends Component {
           />
 
           {/* CITY */}
-          <label css={labelStyles}>
-            City
-          </label>
+          <label css={labelStyles}>City</label>
           <input
             css={inputStyles}
             name="City"
@@ -501,14 +490,10 @@ class RegisterForm extends Component {
             placeholder="e.g. Dallas"
             value={City}
           />
-          <div css={baseErrorStyles}>
-            {CityError}
-          </div>
+          <div css={baseErrorStyles}>{CityError}</div>
 
           {/* ZIP */}
-          <label css={labelStyles}>
-            ZIP Code
-          </label>
+          <label css={labelStyles}>ZIP Code</label>
           <input
             css={inputStyles}
             name="Zip_Code"
@@ -516,14 +501,10 @@ class RegisterForm extends Component {
             placeholder="e.g. 75150"
             value={Zip_Code}
           />
-          <div css={baseErrorStyles}>
-            {Zip_CodeError}
-          </div>
+          <div css={baseErrorStyles}>{Zip_CodeError}</div>
 
           {/* EMAIL */}
-          <label css={labelStyles}>
-            Email
-          </label>
+          <label css={labelStyles}>Email</label>
           <input
             css={inputStyles}
             name="Email"
@@ -531,14 +512,10 @@ class RegisterForm extends Component {
             placeholder="e.g. music@austinisd.edu"
             value={Email}
           />
-          <div css={baseErrorStyles}>
-            {EmailError}
-          </div>
+          <div css={baseErrorStyles}>{EmailError}</div>
 
           {/* OFFICE PHONE */}
-          <label css={labelStyles}>
-            Office Phone
-          </label>
+          <label css={labelStyles}>Office Phone</label>
           <input
             css={inputStyles}
             name="Office_Phone"
@@ -546,14 +523,10 @@ class RegisterForm extends Component {
             placeholder="e.g. (512) 555-1919"
             value={formatPhone(Office_Phone)}
           />
-          <div css={baseErrorStyles}>
-            {Office_PhoneError}
-          </div>
+          <div css={baseErrorStyles}>{Office_PhoneError}</div>
 
           {/* CELL PHONE */}
-          <label css={labelStyles}>
-            Cell Phone
-          </label>
+          <label css={labelStyles}>Cell Phone</label>
           <input
             css={inputStyles}
             name="Cell_Phone"
@@ -561,14 +534,10 @@ class RegisterForm extends Component {
             placeholder="e.g. (512) 555-1919"
             value={formatPhone(Cell_Phone)}
           />
-          <div css={baseErrorStyles}>
-            {Cell_PhoneError}
-          </div>
+          <div css={baseErrorStyles}>{Cell_PhoneError}</div>
 
           {/* OFFICE FAX */}
-          <label css={labelStyles}>
-            Office Fax
-          </label>
+          <label css={labelStyles}>Office Fax</label>
           <input
             css={inputStyles}
             name="Office_Fax"
@@ -593,8 +562,7 @@ class RegisterForm extends Component {
               display: 'flex',
               justifyContent: 'flex-end',
               transform: 'translateY(-24px)',
-            }}
-          >
+            }}>
             <button
               css={{
                 marginTop: '2rem',
@@ -605,12 +573,10 @@ class RegisterForm extends Component {
               onClick={this.handleClickSubmitButton}
               style={{
                 color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}`,
-              }}
-            >
+              }}>
               Continue to Step 3
             </button>
           </div>
-
         </form>
       </div>
     );

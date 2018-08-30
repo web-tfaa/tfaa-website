@@ -1,4 +1,4 @@
-const colors = require(`./colors`).default
+const colors = require(`./colors`).default;
 
 module.exports = {
   colors: colors,
@@ -35,4 +35,4 @@ module.exports = {
   },
   logoOffset: 1.8,
   headerHeight: `3.5rem`,
-}
+};

@@ -1,9 +1,9 @@
 // External Dependencies
-import React from "react"
+import React from 'react';
 
 // Internal Dependencies
-import presets from "../../../utils/presets"
-import { rhythm, options } from "../../../utils/typography"
+import presets from '../../../utils/presets';
+import { rhythm, options } from '../../../utils/typography';
 
 // Local Variables
 
@@ -23,8 +23,7 @@ export default ({ children, className, hasSideBar = true, css = {} }) => (
       },
       ...css,
     }}
-    className={className}
-  >
+    className={className}>
     {children}
   </div>
 );

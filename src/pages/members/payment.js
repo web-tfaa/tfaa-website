@@ -76,29 +76,29 @@ class Payment extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser =>
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }))
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
     );
   }
 
   render() {
-    const {
-      authUser,
-    } = this.state;
+    const { authUser } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
     return (
       <Layout location={this.props.location}>
-        <div css={{
-          paddingLeft: 0,
-          width: `0 auto`,
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}>
+        <div
+          css={{
+            paddingLeft: 0,
+            width: `0 auto`,
+            [presets.Tablet]: {
+              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+            },
+          }}>
           <Status authUser={authUser} />
           <Container>
             <Helmet>
@@ -122,13 +122,14 @@ class Payment extends Component {
               [presets.Tablet]: {
                 display: `none`,
               },
-            }}
-          >
-            <hr css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }} />
+            }}>
+            <hr
+              css={{
+                border: 0,
+                height: 2,
+                marginTop: 10,
+              }}
+            />
             <SidebarBody inline yaml={membersSidebar} />
           </div>
         </div>

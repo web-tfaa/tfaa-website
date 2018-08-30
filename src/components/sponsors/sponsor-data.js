@@ -1,5 +1,5 @@
 export const sponsors2017_2018 = {
-  'champion': [
+  champion: [
     {
       name: 'Brook Mays and H&H Music',
       link: 'http://www.brookmays.com/',
@@ -41,9 +41,8 @@ export const sponsors2017_2018 = {
       link: 'http://www.westmusic.com/',
     },
   ],
-  'gold': [
-  ],
-  'silver': [
+  gold: [],
+  silver: [
     {
       name: 'Conn-Selmer, Inc.',
       link: 'https://www.conn-selmer.com/en-us',
@@ -53,7 +52,7 @@ export const sponsors2017_2018 = {
       link: 'https://www.musicfirst.com/',
     },
   ],
-  'bronze': [
+  bronze: [
     {
       name: 'Rhythm Band Instruments',
       link: 'http://rhythmband.com/',
@@ -62,8 +61,8 @@ export const sponsors2017_2018 = {
 };
 
 export const sponsors2018_2019 = {
-  'champion': [],
-  'gold': [],
-  'silver': [],
-  'bronze': [],
+  champion: [],
+  gold: [],
+  silver: [],
+  bronze: [],
 };

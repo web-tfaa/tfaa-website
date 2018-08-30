@@ -82,25 +82,26 @@ class LoginForm extends Component {
     this.isSubmitting = false;
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-  }
+  };
 
-  handleUpdate = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    }, this.handleUpdateErrors);
-  }
+  handleUpdate = event => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      this.handleUpdateErrors,
+    );
+  };
 
   handleClickSubmitButton = () => {
     this.isSubmitting = true;
 
-    const {
-      email,
-      password,
-    } = this.state;
+    const { email, password } = this.state;
 
-    auth.doSignInWithEmailAndPassword(email, password)
+    auth
+      .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         if (this.isSubmitting) {
           this.setState(() => ({
@@ -112,24 +113,22 @@ class LoginForm extends Component {
       .catch(err => {
         this.setState({ error: err });
       });
-  }
+  };
 
   togglePasswordInput = () => {
     const pass = document.getElementById('showhide');
 
-    if (pass.type === 'password') pass.setAttribute('type', 'text')
+    if (pass.type === 'password') pass.setAttribute('type', 'text');
     else pass.setAttribute('type', 'password');
-  }
+  };
 
   handleUpdateErrors = () => {
     this.handleUpdateEmailError();
     this.handleUpdateLoginPasswordError();
-  }
+  };
 
   handleUpdateEmailError = () => {
-    const {
-      email,
-    } = this.state;
+    const { email } = this.state;
 
     if (!email) {
       this.setState({
@@ -144,12 +143,10 @@ class LoginForm extends Component {
         emailError: 'Use a valid email',
       });
     }
-  }
+  };
 
   handleUpdateLoginPasswordError = () => {
-    const {
-      password,
-    } = this.state;
+    const { password } = this.state;
 
     const hasInput = password !== '';
 
@@ -166,12 +163,10 @@ class LoginForm extends Component {
         passwordError: '',
       });
     }
-  }
+  };
 
   render() {
-    const {
-      onRegisterLogin,
-    } = this.props;
+    const { onRegisterLogin } = this.props;
 
     const {
       email,
@@ -183,22 +178,16 @@ class LoginForm extends Component {
     } = this.state;
 
     if (isAuthenticated) {
-      Boolean(onRegisterLogin)
-        ? onRegisterLogin()
-        : navigate('/members');
+      Boolean(onRegisterLogin) ? onRegisterLogin() : navigate('/members');
     }
 
     const hasLoginInput = password !== '' && email !== '';
-    const isLoginInvalid =
-      !hasLoginInput ||
-      emailError;
+    const isLoginInvalid = !hasLoginInput || emailError;
 
     return (
       <div className="login-form">
         <form onSubmit={this.handleSubmit}>
-          <label css={labelStyles}>
-            Email Address
-          </label>
+          <label css={labelStyles}>Email Address</label>
           <input
             css={inputStyles}
             name="email"
@@ -212,20 +201,16 @@ class LoginForm extends Component {
               color: 'red',
               fontFamily: options.headerFontFamily.join(`,`),
               marginTop: 16,
-            }}
-          >
+            }}>
             {emailError}
           </div>
-          <label css={bottomLabelStyles}>
-            Password
-          </label>
+          <label css={bottomLabelStyles}>Password</label>
           <div
             css={{
               alignItems: 'center',
               display: 'flex',
               marginBottom: 16,
-            }}
-          >
+            }}>
             <input
               css={inputStyles}
               id="showhide"
@@ -245,39 +230,34 @@ class LoginForm extends Component {
               />
             </div>
           </div>
-          <div css={baseErrorStyles}>
-            {passwordError}
-          </div>
+          <div css={baseErrorStyles}>{passwordError}</div>
 
           {/* SUBMIT BUTTON */}
           <div
             css={{
               display: 'flex',
               justifyContent: 'flex-end',
-            }}
-          >
+            }}>
             <button
               css={{ marginTop: '1rem', padding: '8px 12px' }}
               disabled={isLoginInvalid}
               onClick={this.handleClickSubmitButton}
-              type="submit"
-            >
+              type="submit">
               Sign In
             </button>
           </div>
 
-          {error &&
+          {error && (
             <div
               css={{
                 color: 'red',
                 fontFamily: options.headerFontFamily.join(`,`),
                 fontWeight: 500,
                 margin: '16px 0',
-              }}
-            >
+              }}>
               {error.message}
             </div>
-          }
+          )}
         </form>
       </div>
     );

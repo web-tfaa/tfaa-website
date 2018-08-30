@@ -18,13 +18,13 @@ const sidebarStyles = {
   backgroundColor: colors.ui.whisper,
   boxShadow: `inset 0 4px 5px 0 ${hex2rgba(
     colors.gatsby,
-    presets.shadowKeyPenumbraOpacity
+    presets.shadowKeyPenumbraOpacity,
   )}, inset 0 1px 10px 0 ${hex2rgba(
     colors.lilac,
-    presets.shadowAmbientShadowOpacity
+    presets.shadowAmbientShadowOpacity,
   )}, inset 0 2px 4px -1px ${hex2rgba(
     colors.lilac,
-    presets.shadowKeyUmbraOpacity
+    presets.shadowKeyUmbraOpacity,
   )}`,
   width: rhythm(10),
   display: `none`,
@@ -34,14 +34,14 @@ const sidebarStyles = {
   overflowY: `auto`,
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
   WebkitOverflowScrolling: `touch`,
-  "::-webkit-scrollbar": {
+  '::-webkit-scrollbar': {
     width: `6px`,
     height: `6px`,
   },
-  "::-webkit-scrollbar-thumb": {
+  '::-webkit-scrollbar-thumb': {
     background: colors.ui.bright,
   },
-  "::-webkit-scrollbar-track": {
+  '::-webkit-scrollbar-track': {
     background: colors.ui.light,
   },
   [presets.Desktop]: {
@@ -55,10 +55,8 @@ const sidebarStyles = {
 };
 
 // Component Definition
-const Sidebar = (props) => {
-  const {
-    sidebarYaml,
-  } = props;
+const Sidebar = props => {
+  const { sidebarYaml } = props;
 
   return (
     <div css={{ ...sidebarStyles }}>

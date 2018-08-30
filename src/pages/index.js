@@ -32,7 +32,7 @@ import MastheadContent from '../components/masthead/';
 // }
 
 // Component Definition
-export default (props) => (
+export default props => (
   <Layout location={props.location}>
     <Helmet>
       <title>TMAC | Home</title>
@@ -44,22 +44,36 @@ export default (props) => (
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-      }}
-    >
+      }}>
       <MastheadContent />
 
       <Cards>
         <Card>
           <CardHeadline>Message from the President</CardHeadline>
           <FuturaParagraph>
-            Greetings from the Texas Music Administrators Conference! The Texas Music Administrators Conference (TMAC) is an organization of music/fine arts administrators with a common goal&mdash;the continued pursuit of excellence in music education in Texas for all students. While our roles may be varied in our individual school districts we stand together to create a supportive environment so that all children in Texas are offered a quality music education.
+            Greetings from the Texas Music Administrators Conference! The Texas
+            Music Administrators Conference (TMAC) is an organization of
+            music/fine arts administrators with a common goal&mdash;the
+            continued pursuit of excellence in music education in Texas for all
+            students. While our roles may be varied in our individual school
+            districts we stand together to create a supportive environment so
+            that all children in Texas are offered a quality music education.
           </FuturaParagraph>
           <FuturaParagraph>
-            If you are a music/fine arts administrator, an aspiring administrator, or if you are responsible for the organizing or supervision of music activities in your district, we encourage you to become a member of TMAC. We will be hosting a Summer Round Table session during the summer TBA/TCDA/TODA conferences in San Antonio on Friday, July 27, 2018 - everyone is invited to attend! Our Fall Conference, for TMAC members only, will be held November 17-19, 2018 in Austin, Texas. If you would like more information on registering for the Fall Conference, please contact a TMAC Officer.
+            If you are a music/fine arts administrator, an aspiring
+            administrator, or if you are responsible for the organizing or
+            supervision of music activities in your district, we encourage you
+            to become a member of TMAC. We will be hosting a Summer Round Table
+            session during the summer TBA/TCDA/TODA conferences in San Antonio
+            on Friday, July 27, 2018 - everyone is invited to attend! Our Fall
+            Conference, for TMAC members only, will be held November 17-19, 2018
+            in Austin, Texas. If you would like more information on registering
+            for the Fall Conference, please contact a TMAC Officer.
           </FuturaParagraph>
 
           <FuturaParagraph>
-            <a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a>, President
+            <a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a>
+            , President
             <br />
             Texas Music Administrators Conference
           </FuturaParagraph>

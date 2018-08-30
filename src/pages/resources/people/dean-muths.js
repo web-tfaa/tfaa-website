@@ -45,9 +45,7 @@ export default ({ location }) => (
         <h2 css={headingNameStyles}>Dean Muths</h2>
         <CardHeadline>TMAC Past President, 2016-2017</CardHeadline>
 
-        <FuturaParagraph>
-          Dean Muth's bio coming soon!
-        </FuturaParagraph>
+        <FuturaParagraph>Dean Muth's bio coming soon!</FuturaParagraph>
         {/* Mobile sidebar */}
         <div
           css={{
@@ -55,13 +53,14 @@ export default ({ location }) => (
             [presets.Tablet]: {
               display: `none`,
             },
-          }}
-        >
-          <hr css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }} />
+          }}>
+          <hr
+            css={{
+              border: 0,
+              height: 2,
+              marginTop: 10,
+            }}
+          />
           <SidebarBody inline yaml={resourcesSidebar} />
         </div>
       </Container>

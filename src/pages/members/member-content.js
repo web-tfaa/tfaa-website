@@ -27,7 +27,7 @@ const propTypes = {
 const defaultProps = {
   contentfulFileShareData: null,
   contentfulFileShareDescriptionData: null,
-}
+};
 
 const futuraStyles = {
   fontFamily: options.headerFontFamily.join(`,`),
@@ -54,11 +54,7 @@ const clearIconStyles = {
 };
 
 // Local Components
-const FuturaDiv = ({ children }) => (
-  <div css={futuraStyles}>
-    {children}
-  </div>
-);
+const FuturaDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
 
 const FuturaAnchor = ({ children, href }) => (
   <a href={href} css={futuraStyles}>
@@ -70,15 +66,19 @@ const MemberFileShareCard = ({ node, description }) => {
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>
-      <h5 css={memberFileShareCardStyles}>{format(node.date, ['MMMM DD YYYY'])}</h5>
+      <h5 css={memberFileShareCardStyles}>
+        {format(node.date, ['MMMM DD YYYY'])}
+      </h5>
       <FuturaDiv>{description}</FuturaDiv>
-      <FuturaAnchor download href={node.link}>Download</FuturaAnchor>
+      <FuturaAnchor download href={node.link}>
+        Download
+      </FuturaAnchor>
     </Card>
   );
 };
 
 // Component Definition
-const MemberContent = (props) => {
+const MemberContent = props => {
   const {
     contentfulFileShareData,
     contentfulFileShareDescriptionData,
@@ -91,18 +91,27 @@ const MemberContent = (props) => {
       <Cards>
         <Card>
           <CardHeadline>Tasks for {memberEmail}</CardHeadline>
-          <FuturaDiv><CheckIcon css={checkIconStyles} />Registered for 2018-2019 school year</FuturaDiv>
-          <FuturaDiv><ClearIcon css={clearIconStyles} />Paid 2018-2019 membership dues</FuturaDiv>
+          <FuturaDiv>
+            <CheckIcon css={checkIconStyles} />
+            Registered for 2018-2019 school year
+          </FuturaDiv>
+          <FuturaDiv>
+            <ClearIcon css={clearIconStyles} />
+            Paid 2018-2019 membership dues
+          </FuturaDiv>
         </Card>
-        {contentfulFileShareData && contentfulFileShareData.map((edge, index) => (
-          <MemberFileShareCard
-            key={edge.node.id}
-            node={edge.node}
-            description={contentfulFileShareDescriptionData
-              ? contentfulFileShareDescriptionData[index].node.description
-              : null}
-          />
-        ))}
+        {contentfulFileShareData &&
+          contentfulFileShareData.map((edge, index) => (
+            <MemberFileShareCard
+              key={edge.node.id}
+              node={edge.node}
+              description={
+                contentfulFileShareDescriptionData
+                  ? contentfulFileShareDescriptionData[index].node.description
+                  : null
+              }
+            />
+          ))}
       </Cards>
 
       <div
@@ -111,13 +120,14 @@ const MemberContent = (props) => {
           [presets.Tablet]: {
             display: `none`,
           },
-        }}
-      >
-        <hr css={{
-          border: 0,
-          height: 2,
-          marginTop: 10,
-        }} />
+        }}>
+        <hr
+          css={{
+            border: 0,
+            height: 2,
+            marginTop: 10,
+          }}
+        />
         <SidebarBody inline yaml={membersSidebar} />
       </div>
     </div>

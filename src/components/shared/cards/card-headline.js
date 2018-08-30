@@ -1,9 +1,9 @@
 // External Dependencies
-import React from 'react'
+import React from 'react';
 
 // Internal Dependencies
-import presets from "../../../utils/presets"
-import { scale } from "../../../utils/typography"
+import presets from '../../../utils/presets';
+import { scale } from '../../../utils/typography';
 
 // Component Definition
 const CardHeadline = ({ children }) => (
@@ -24,10 +24,9 @@ const CardHeadline = ({ children }) => (
       [presets.VVHd]: {
         fontSize: scale(7 / 10).fontSize,
       },
-    }}
-  >
+    }}>
     {children}
   </h2>
-)
+);
 
-export default CardHeadline
+export default CardHeadline;

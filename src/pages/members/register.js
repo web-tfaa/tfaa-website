@@ -23,13 +23,14 @@ import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 
-
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
-const localCompletedRegistrationSteps = JSON.parse(localStorage.getItem('completedRegistrationSteps'));
+const localCompletedRegistrationSteps = JSON.parse(
+  localStorage.getItem('completedRegistrationSteps'),
+);
 
 /*
   Main container for the Registration process
@@ -41,7 +42,9 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      activeStep: localCompletedRegistrationSteps ? localCompletedRegistrationSteps.length : 0,
+      activeStep: localCompletedRegistrationSteps
+        ? localCompletedRegistrationSteps.length
+        : 0,
       authUser: null,
       // Possible completed steps are [0, 1, 2]
       completedSteps: localCompletedRegistrationSteps || [],
@@ -49,25 +52,24 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser =>
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }))
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
     );
   }
 
-  advanceToNextStep = (step) => {
+  advanceToNextStep = step => {
     this.setState({
       activeStep: this.state.activeStep + 1,
       completedSteps: this.state.completedSteps.push(step),
-    })
-    localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]))
-  }
+    });
+    localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]));
+  };
 
   getCurrentStepContent(isAuthenticated) {
-    const {
-      activeStep,
-    } = this.state;
+    const { activeStep } = this.state;
 
     console.log({ activeStep });
 
@@ -108,11 +110,7 @@ class Register extends Component {
   }
 
   render() {
-    const {
-      activeStep,
-      authUser,
-      completedSteps,
-    } = this.state;
+    const { activeStep, authUser, completedSteps } = this.state;
 
     const isAuthenticated = Boolean(authUser);
 
@@ -121,13 +119,14 @@ class Register extends Component {
 
     return (
       <Layout location={this.props.location}>
-        <div css={{
-          paddingLeft: 0,
-          width: `0 auto`,
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}>
+        <div
+          css={{
+            paddingLeft: 0,
+            width: `0 auto`,
+            [presets.Tablet]: {
+              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+            },
+          }}>
           <Status authUser={authUser} />
           <Container>
             <Helmet>
@@ -136,7 +135,10 @@ class Register extends Component {
 
             {/* Children change depending on which step is active */}
 
-            <RegisterStepper isAuthenticated={isAuthenticated} activeStep={activeStep} />
+            <RegisterStepper
+              isAuthenticated={isAuthenticated}
+              activeStep={activeStep}
+            />
 
             {this.getCurrentStepContent(isAuthenticated)}
 
@@ -151,13 +153,14 @@ class Register extends Component {
               [presets.Tablet]: {
                 display: `none`,
               },
-            }}
-          >
-            <hr css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }} />
+            }}>
+            <hr
+              css={{
+                border: 0,
+                height: 2,
+                marginTop: 10,
+              }}
+            />
             <SidebarBody inline yaml={membersSidebar} />
           </div>
         </div>

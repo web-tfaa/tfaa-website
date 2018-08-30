@@ -38,8 +38,7 @@ const Avatar = ({ alt, src }) => (
         height: 160,
         width: 160,
       },
-    }}
-  >
+    }}>
     <img
       alt={alt}
       css={{
@@ -67,8 +66,7 @@ export default ({ location }) => (
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
-        }}
-      >
+        }}>
         <Cards>
           <Card>
             <Avatar
@@ -92,9 +90,7 @@ export default ({ location }) => (
             />
             <CardHeadline>Vice-President</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:jon.lester@abileneisd.org">
-                Jay Lester
-              </a>
+              <a href="mailto:jon.lester@abileneisd.org">Jay Lester</a>
             </FuturaParagraph>
             <FuturaParagraph>
               Executive Director of Fine Arts, Abilene ISD
@@ -107,13 +103,9 @@ export default ({ location }) => (
             />
             <CardHeadline>Treasurer</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:jeff_turner@allenisd.org">
-                Jeff Turner
-              </a>
+              <a href="mailto:jeff_turner@allenisd.org">Jeff Turner</a>
             </FuturaParagraph>
-            <FuturaParagraph>
-              Director of Fine Arts, Allen ISD
-            </FuturaParagraph>
+            <FuturaParagraph>Director of Fine Arts, Allen ISD</FuturaParagraph>
           </Card>
           <Card>
             <Avatar
@@ -122,9 +114,7 @@ export default ({ location }) => (
             />
             <CardHeadline>Secretary</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:jim.egger@mcallenisd.net">
-                Jim Egger
-              </a>
+              <a href="mailto:jim.egger@mcallenisd.net">Jim Egger</a>
             </FuturaParagraph>
             <FuturaParagraph>
               Director of Fine Arts, McAllen ISD
@@ -137,9 +127,7 @@ export default ({ location }) => (
             />
             <CardHeadline>Past-President</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:johnjanda@tomballisd.net">
-                JD Janda
-              </a>
+              <a href="mailto:johnjanda@tomballisd.net">JD Janda</a>
             </FuturaParagraph>
             <FuturaParagraph>
               Director of Fine Arts, Tomball ISD
@@ -153,13 +141,14 @@ export default ({ location }) => (
             [presets.Tablet]: {
               display: `none`,
             },
-          }}
-        >
-          <hr css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }} />
+          }}>
+          <hr
+            css={{
+              border: 0,
+              height: 2,
+              marginTop: 10,
+            }}
+          />
           <SidebarBody inline yaml={aboutSidebar} />
         </div>
       </div>

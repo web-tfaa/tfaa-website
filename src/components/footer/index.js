@@ -10,7 +10,7 @@ import { options } from '../../utils/typography';
 const currentYear = format(new Date(), ['YYYY']);
 
 // Component Definition
-export default () =>
+export default () => (
   <footer
     className="main-body"
     css={{
@@ -33,34 +33,27 @@ export default () =>
         padding: '2em',
         position: 'static',
       },
-    }}
-  >
+    }}>
     <div
       css={{
         maxWidth: '60%',
-      }}
-    >
-      &copy; 2016-{currentYear} |
-      <a
-        css={{ marginLeft: 5 }}
-        href="http://www.texasmusicadministrators.com"
-      >
+      }}>
+      &copy; 2016-
+      {currentYear} |
+      <a css={{ marginLeft: 5 }} href="http://www.texasmusicadministrators.com">
         Texas Music Administrators Conference
       </a>
     </div>
     <div
       css={{
         textAlign: 'right',
-      }}
-    >
+      }}>
       <div>
         Built by
-        <a
-          css={{ marginLeft: 5 }}
-          href="http://www.drumsensei.com"
-        >
+        <a css={{ marginLeft: 5 }} href="http://www.drumsensei.com">
           Drumsensei Media
         </a>
       </div>
     </div>
   </footer>
+);

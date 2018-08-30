@@ -19,7 +19,9 @@ const propTypes = {
 function getSteps(isAuthenticated = false) {
   return [
     // We show a different message if the user is already logged in
-    isAuthenticated ? 'Login to the TMAC members area' : 'Sign up for TMAC website login',
+    isAuthenticated
+      ? 'Login to the TMAC members area'
+      : 'Sign up for TMAC website login',
     'Complete registration form',
     'Pay TMAC dues',
   ];
@@ -28,10 +30,7 @@ function getSteps(isAuthenticated = false) {
 // Component Definition
 class RegisterStepper extends Component {
   render() {
-    const {
-      activeStep,
-      isAuthenticated,
-    } = this.props;
+    const { activeStep, isAuthenticated } = this.props;
 
     const steps = getSteps(isAuthenticated);
 

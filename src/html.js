@@ -5,7 +5,7 @@ import React from 'react';
 import colors from './utils/colors';
 
 let stylesStr;
-if (process.env.NODE_ENV === `production`){
+if (process.env.NODE_ENV === `production`) {
   try {
     stylesStr = require(`!raw-loader!../publicstyles.css`);
   } catch (err) {
@@ -67,17 +67,23 @@ export default class HTML extends React.Component {
             color={colors.gatsby}
           />
           <meta name="msapplication-config" content={`/browserconfig.xml`} />
-          <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" defer />
+          <script
+            src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"
+            defer
+          />
         </head>
         <body {...this.props.bodyAttributes}>
           <div
             id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
-          <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
+          <script
+            src="https://apis.google.com/js/api.js"
+            type="text/javascript"
+          />
           {this.props.postBodyComponents}
         </body>
       </html>
-    )
+    );
   }
 }
