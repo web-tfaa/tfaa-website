@@ -78,9 +78,7 @@ const colors = {
 };
 
 let pointer = `a`;
-colorStr
-  .split(`\n`)
-  .reverse()
+colorStr.split(`\n`).reverse()
   .forEach(c => {
     if (c === ``) return;
     colors[pointer].push(c);
