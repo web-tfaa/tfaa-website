@@ -1,4 +1,4 @@
-import { auth } from '../services/firebase';
+import { auth } from './firebase';
 
 // Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>

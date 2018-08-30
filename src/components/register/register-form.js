@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 // External Dependencies
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
@@ -9,7 +11,7 @@ import { options } from '../../utils/typography';
 import { removeErrorKeys } from '../../utils/helpers';
 import {
   doCreateEntry,
-} from '../../db';
+} from '../../firebase/db';
 
 // Local Styles
 const labelStyles = {
@@ -186,6 +188,8 @@ class RegisterForm extends Component {
     const form = removeErrorKeys(originalForm);
     delete form.isAuthenticated;
     delete form.honeypot;
+
+    form.Timestamp = new Date();
 
     console.log('no errors!', form);
 
@@ -416,135 +420,159 @@ class RegisterForm extends Component {
       <div className="login-form">
         <form onSubmit={this.handleSubmit}>
           {/* FIRST NAME */}
-          <label css={labelStyles}>First Name</label>
-          <input
-            css={inputStyles}
-            type="text"
-            name="First_Name"
-            onChange={this.handleUpdate}
-            placeholder="e.g. Sally"
-            value={First_Name}
-          />
+          <label css={labelStyles} htmlFor="First_Name">
+            First Name
+            <input
+              css={inputStyles}
+              type="text"
+              name="First_Name"
+              onChange={this.handleUpdate}
+              placeholder="e.g. Sally"
+              value={First_Name}
+            />
+          </label>
           <div css={baseErrorStyles}>{First_NameError}</div>
 
           {/* LAST NAME */}
-          <label css={labelStyles}>Last Name</label>
-          <input
-            css={inputStyles}
-            name="Last_Name"
-            onChange={this.handleUpdate}
-            placeholder="e.g. Drumm"
-            value={Last_Name}
-          />
+          <label css={labelStyles} htmlFor="Last_Name">
+            Last Name
+            <input
+              css={inputStyles}
+              name="Last_Name"
+              onChange={this.handleUpdate}
+              placeholder="e.g. Drumm"
+              value={Last_Name}
+            />
+          </label>
           <div css={baseErrorStyles}>{Last_NameError}</div>
 
           {/* TITLE */}
-          <label css={labelStyles}>Title</label>
-          <input
-            css={inputStyles}
-            name="Title"
-            onChange={this.handleUpdate}
-            placeholder="e.g. Director of Fine Arts"
-            value={Title}
-          />
+          <label css={labelStyles} htmlFor="Title">
+            Title
+            <input
+              css={inputStyles}
+              name="Title"
+              onChange={this.handleUpdate}
+              placeholder="e.g. Director of Fine Arts"
+              value={Title}
+            />
+          </label>
           <div css={baseErrorStyles}>{TitleError}</div>
 
           {/* DISTRICT */}
-          <label css={labelStyles}>District</label>
-          <input
-            css={inputStyles}
-            name="District"
-            onChange={this.handleUpdate}
-            placeholder="e.g. Texas ISD"
-            value={District}
-          />
+          <label css={labelStyles} htmlFor="District">
+            District
+            <input
+              css={inputStyles}
+              name="District"
+              onChange={this.handleUpdate}
+              placeholder="e.g. Texas ISD"
+              value={District}
+            />
+          </label>
           <div css={baseErrorStyles}>{DistrictError}</div>
 
           {/* ADDRESS 1 */}
-          <label css={labelStyles}>Address 1</label>
-          <input
-            css={inputStyles}
-            name="Address_1"
-            onChange={this.handleUpdate}
-            placeholder="e.g. 123 Main St."
-            value={Address_1}
-          />
+          <label css={labelStyles} htmlFor="Address_1">
+            Address 1
+            <input
+              css={inputStyles}
+              name="Address_1"
+              onChange={this.handleUpdate}
+              placeholder="e.g. 123 Main St."
+              value={Address_1}
+            />
+          </label>
           <div css={baseErrorStyles}>{Address_1Error}</div>
 
           {/* ADDRESS 2 */}
-          <label css={labelStyles}>Address 2</label>
-          <input
-            css={inputStyles}
-            name="Address_2"
-            onChange={this.handleUpdate}
-            placeholder="e.g. Suite 19"
-            value={Address_2}
-          />
+          <label css={labelStyles} htmlFor="Address_2">
+            Address 2
+            <input
+              css={inputStyles}
+              name="Address_2"
+              onChange={this.handleUpdate}
+              placeholder="e.g. Suite 19"
+              value={Address_2}
+            />
+          </label>
 
           {/* CITY */}
-          <label css={labelStyles}>City</label>
-          <input
-            css={inputStyles}
-            name="City"
-            onChange={this.handleUpdate}
-            placeholder="e.g. Dallas"
-            value={City}
-          />
+          <label css={labelStyles} htmlFor="City">
+            City
+            <input
+              css={inputStyles}
+              name="City"
+              onChange={this.handleUpdate}
+              placeholder="e.g. Dallas"
+              value={City}
+            />
+          </label>
           <div css={baseErrorStyles}>{CityError}</div>
 
           {/* ZIP */}
-          <label css={labelStyles}>ZIP Code</label>
-          <input
-            css={inputStyles}
-            name="Zip_Code"
-            onChange={this.handleUpdate}
-            placeholder="e.g. 75150"
-            value={Zip_Code}
-          />
+          <label css={labelStyles} htmlFor="Zip_Code">
+            ZIP Code
+            <input
+              css={inputStyles}
+              name="Zip_Code"
+              onChange={this.handleUpdate}
+              placeholder="e.g. 75150"
+              value={Zip_Code}
+            />
+          </label>
           <div css={baseErrorStyles}>{Zip_CodeError}</div>
 
           {/* EMAIL */}
-          <label css={labelStyles}>Email</label>
-          <input
-            css={inputStyles}
-            name="Email"
-            onChange={this.handleUpdate}
-            placeholder="e.g. music@austinisd.edu"
-            value={Email}
-          />
+          <label css={labelStyles} htmlFor="Email">
+            Email
+            <input
+              css={inputStyles}
+              name="Email"
+              onChange={this.handleUpdate}
+              placeholder="e.g. music@austinisd.edu"
+              value={Email}
+            />
+          </label>
           <div css={baseErrorStyles}>{EmailError}</div>
 
           {/* OFFICE PHONE */}
-          <label css={labelStyles}>Office Phone</label>
-          <input
-            css={inputStyles}
-            name="Office_Phone"
-            onChange={this.handleUpdate}
-            placeholder="e.g. (512) 555-1919"
-            value={formatPhone(Office_Phone)}
-          />
+          <label css={labelStyles} htmlFor="Office_Phone">
+            Office Phone
+            <input
+              css={inputStyles}
+              name="Office_Phone"
+              onChange={this.handleUpdate}
+              placeholder="e.g. (512) 555-1919"
+              value={formatPhone(Office_Phone)}
+            />
+          </label>
           <div css={baseErrorStyles}>{Office_PhoneError}</div>
 
           {/* CELL PHONE */}
-          <label css={labelStyles}>Cell Phone</label>
-          <input
-            css={inputStyles}
-            name="Cell_Phone"
-            onChange={this.handleUpdate}
-            placeholder="e.g. (512) 555-1919"
-            value={formatPhone(Cell_Phone)}
-          />
+          <label css={labelStyles} htmlFor="Cell_Phone">
+            Cell Phone
+            <input
+              css={inputStyles}
+              name="Cell_Phone"
+              onChange={this.handleUpdate}
+              placeholder="e.g. (512) 555-1919"
+              value={formatPhone(Cell_Phone)}
+            />
+          </label>
           <div css={baseErrorStyles}>{Cell_PhoneError}</div>
 
           {/* OFFICE FAX */}
-          <label css={labelStyles}>Office Fax</label>
-          <input
-            css={inputStyles}
-            name="Office_Fax"
-            onChange={this.handleUpdate}
-            placeholder="e.g. (512) 555-1919"
-            value={formatPhone(Office_Fax)}
-          />
+          <label css={labelStyles} htmlFor="Office_Fax">
+            Office Fax
+            <input
+              css={inputStyles}
+              name="Office_Fax"
+              onChange={this.handleUpdate}
+              placeholder="e.g. (512) 555-1919"
+              value={formatPhone(Office_Fax)}
+            />
+          </label>
 
           {/* Hidden input to help curtail spam */}
           <input
