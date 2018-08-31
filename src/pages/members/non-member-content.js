@@ -8,7 +8,7 @@ import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import CtaButton from '../../components/masthead/cta-button';
-import { options } from '../../utils/typography';
+import FuturaDiv from '../../components/shared/futura-div;'
 
 // Local Styles
 const constitutionStyles = {
@@ -28,18 +28,6 @@ const contentStyles = {
 const paddingStyles = {
   paddingLeft: 16,
 };
-
-// Local Variables
-const FuturaDiv = ({ children }) => (
-  <div
-    css={{
-      fontFamily: options.headerFontFamily.join(`,`),
-      lineHeight: '1.6',
-      marginBottom: '1rem',
-    }}>
-    {children}
-  </div>
-);
 
 // Component Definition
 class NonMemberContent extends Component {
@@ -73,8 +61,8 @@ class NonMemberContent extends Component {
           <Card className="members-constitution" css={constitutionStyles}>
             <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
             <FuturaDiv>
-              (from the Texas Music Administrators Conference's{' '}
-              <Link to={'/about/constitution'}>Constitution and Bylaws</Link>)
+              (from the Texas Music Administrators Conference&apos;s{' '}
+              <Link to="/about/constitution">Constitution and Bylaws</Link>)
             </FuturaDiv>
             <FuturaDiv>
               <dl css={paddingStyles}>

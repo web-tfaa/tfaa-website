@@ -28,12 +28,11 @@ const navItemStyles = {
   },
 };
 
-const NavItem = ({ linkTo, children, styles }) => (
+const NavItem = ({ linkTo, children }) => (
   <li
     css={{
       display: `inline-block`,
       margin: 0,
-      ...styles,
     }}>
     <Link to={linkTo} css={navItemStyles}>
       {children}
@@ -41,9 +40,11 @@ const NavItem = ({ linkTo, children, styles }) => (
   </li>
 );
 NavItem.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.shape({}),
+    PropTypes.string,
+  ]).isRequired,
   linkTo: PropTypes.string.isRequired,
-  styles: PropTypes.shape({}).isRequired,
 };
 
 // Component Definition

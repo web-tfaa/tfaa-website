@@ -76,7 +76,10 @@ const sidebarStyles = {
 // Component Definition
 class DefaultLayout extends Component {
   static propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.array,
+    ]).isRequired,
     location: PropTypes.shape({}).isRequired,
   };
 

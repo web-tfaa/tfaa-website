@@ -19,6 +19,7 @@ import membersSidebar from './members-links.yml';
 
 // Local Variables
 const futuraStyles = {
+  // fontFamily: options.headerFontFamily.join(`,`),
   lineHeight: '1.6',
   marginBottom: '1rem',
 };
@@ -27,7 +28,12 @@ const boldStyles = { fontWeight: 600 };
 
 // Local Components
 const SpacedDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
-SpacedDiv.propTypes = { children: PropTypes.element.isRequired };
+SpacedDiv.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+  ]).isRequired,
+};
 
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>
@@ -47,7 +53,7 @@ SpacedDiv.propTypes = { children: PropTypes.element.isRequired };
 // };
 
 // Component Definition
-class JoinContent extends Component {
+class JoinContainer extends Component {
   static propTypes = {
     location: PropTypes.shape({}).isRequired,
   };
@@ -159,4 +165,4 @@ class JoinContent extends Component {
   }
 }
 
-export default JoinContent;
+export default JoinContainer;

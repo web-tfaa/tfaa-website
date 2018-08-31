@@ -4,17 +4,18 @@ import React from 'react';
 import { options } from '../../utils/typography';
 
 // Component Definition
-const FuturaParagraph = ({ children }) => (
-  <p
+const FuturaDiv = ({ children }) => (
+  <div
     css={{
       fontFamily: options.headerFontFamily.join(`,`),
       lineHeight: '1.6',
+      marginBottom: '1rem',
     }}>
     {children}
-  </p>
+  </div>
 );
 
-FuturaParagraph.propTypes = {
+FuturaDiv.propTypes = {
   children: PropTypes.string.isRequired,
 }
-export default FuturaParagraph;
+export default FuturaDiv;
