@@ -8,7 +8,7 @@ import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import CtaButton from '../../components/masthead/cta-button';
-import FuturaDiv from '../../components/shared/futura-div;'
+import FuturaDiv from '../../components/shared/futura-div';
 
 // Local Styles
 const constitutionStyles = {

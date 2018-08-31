@@ -16,6 +16,10 @@ const FuturaDiv = ({ children }) => (
 );
 
 FuturaDiv.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.shape({}),
+  ]).isRequired,
 }
 export default FuturaDiv;
