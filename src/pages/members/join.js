@@ -7,33 +7,19 @@ import React, { Component } from 'react';
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
-import Layout from '../../components/layout';
-import Status from './status';
-import presets from '../../utils/presets';
-import { firebase } from '../../firebase';
 import CtaButton from '../../components/masthead/cta-button';
+import FuturaDiv from '../../components/shared/futura-div';
+import Layout from '../../components/layout';
+import presets from '../../utils/presets';
+import Status from './status';
+import { firebase } from '../../firebase';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
-const futuraStyles = {
-  // fontFamily: options.headerFontFamily.join(`,`),
-  lineHeight: '1.6',
-  marginBottom: '1rem',
-};
-
 const boldStyles = { fontWeight: 600 };
-
-// Local Components
-const SpacedDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
-SpacedDiv.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.string,
-  ]).isRequired,
-};
 
 // const FuturaAnchor = ({ children, href }) => (
 //   <a href={href} css={futuraStyles}>
@@ -104,20 +90,20 @@ class JoinContainer extends Component {
                 padding: 32,
               }}>
               <CardHeadline>Join TMAC</CardHeadline>
-              <SpacedDiv>
+              <FuturaDiv>
                 To join TMAC please complete these three steps:
-              </SpacedDiv>
-              <SpacedDiv>
+              </FuturaDiv>
+              <FuturaDiv>
                 <span css={boldStyles}>1.</span> Sign up for a TMAC website
                 login.
-              </SpacedDiv>
-              <SpacedDiv>
+              </FuturaDiv>
+              <FuturaDiv>
                 <span css={boldStyles}>2.</span> Complete the Registration Form.
-              </SpacedDiv>
-              <SpacedDiv>
+              </FuturaDiv>
+              <FuturaDiv>
                 <span css={boldStyles}>3.</span> Pay dues online (or with check
                 via mail).
-              </SpacedDiv>
+              </FuturaDiv>
             </div>
 
             <div

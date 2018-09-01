@@ -123,7 +123,9 @@ class RegisterForm extends Component {
 
     form.Timestamp = new Date();
 
-    doCreateEntry(form);
+    const documentId = `${form.First_Name}${form.Last_Name}`;
+
+    doCreateEntry(form, documentId);
   };
 
   handleUpdate = event => {
