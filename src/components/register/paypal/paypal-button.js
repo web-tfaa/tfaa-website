@@ -8,17 +8,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import scriptLoader from 'react-async-script-loader';
 
 // Component Definition
 class PaypalButton extends React.Component {
   static propTypes = {
     client: PropTypes.shape({}).isRequired,
     commit: PropTypes.bool.isRequired,
-    currency: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
     env: PropTypes.string.isRequired,
-    isScriptLoaded: PropTypes.bool.isRequired,
-    isScriptLoadSucceed: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     onError: PropTypes.func.isRequired,
     onSuccess: PropTypes.func.isRequired,
@@ -39,49 +36,28 @@ class PaypalButton extends React.Component {
   }
 
   componentDidMount() {
-    const {
-      isScriptLoaded,
-      isScriptLoadSucceed,
-    } = this.props;
-
-    if (isScriptLoaded && isScriptLoadSucceed) {
+    if (this.paypal) {
       this.setState({ showButton: true });
     }
   }
 
   /* eslint-disable react/no-did-update-set-state */
-  componentDidUpdate(prevProps) {
-    const {
-      isScriptLoaded,
-      isScriptLoadSucceed,
-    } = this.props;
-
-    const {
-      showButton,
-    } = this.state;
-
-    const isLoadedButWasntLoadedBefore =
-      !showButton &&
-      !prevProps.isScriptLoaded &&
-      isScriptLoaded;
-
-    if (isLoadedButWasntLoadedBefore) {
-      if (isScriptLoadSucceed) {
-        this.setState({ showButton: true });
-      }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.paypal && !prevState.showButton) {
+      this.setState({ showButton: true });
     }
   }
 
   render() {
     const {
-      total,
+      client,
+      commit,
       currency,
       env,
-      commit,
-      client,
-      onSuccess,
-      onError,
       onCancel,
+      onError,
+      onSuccess,
+      total,
     } = this.props;
 
     const {
@@ -104,8 +80,8 @@ class PaypalButton extends React.Component {
       actions.payment.execute()
         .then(() => {
           const payment = {
-            paid: true,
             cancelled: false,
+            paid: true,
             payerID: data.payerID,
             paymentID: data.paymentID,
             paymentToken: data.paymentToken,
@@ -123,13 +99,13 @@ class PaypalButton extends React.Component {
       <div>
         {showButton && (
           <PayPalButton
-            env={env}
             client={client}
             commit={commit}
-            payment={payment}
+            env={env}
             onAuthorize={onAuthorize}
             onCancel={onCancel}
             onError={onError}
+            payment={payment}
           />)
         }
       </div>
@@ -137,6 +113,4 @@ class PaypalButton extends React.Component {
   }
 }
 
-export default scriptLoader(
-  'https://www.paypalobjects.com/api/checkout.js'
-)(PaypalButton);
+export default PaypalButton;

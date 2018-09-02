@@ -10,11 +10,8 @@ import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
 
 // Component Definition
 class RegisterPayment extends Component {
-  static propTypes = {
-    location: PropTypes.shape({}).isRequired,
-  };
-
   render() {
+    console.log('this.props', this.props);
     return (
       <section>
         <h2>3. Pay TMAC Dues</h2>

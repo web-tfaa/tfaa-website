@@ -6,6 +6,8 @@ import PaypalButton from './paypal-button';
 
 // Local Variables
 const CLIENT = {
+  // Current using the sandbox id from this paypal demo
+  // https://github.com/paypal/paypal-checkout-demo/blob/master/src/react.htm
   sandbox: process.env.GATSBY_PAYPAL_CLIENT_ID_SANDBOX,
   production: process.env.GATSBY_PAYPAL_CLIENT_ID_PRODUCTION,
 };

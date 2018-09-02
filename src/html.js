@@ -81,6 +81,7 @@ export default class HTML extends React.Component {
             src="https://apis.google.com/js/api.js"
             type="text/javascript"
           />
+          <script src="https://www.paypalobjects.com/api/checkout.js" />
           {this.props.postBodyComponents}
         </body>
       </html>
