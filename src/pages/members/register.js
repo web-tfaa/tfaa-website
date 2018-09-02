@@ -46,9 +46,10 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      activeStep: localCompletedRegistrationSteps
-        ? localCompletedRegistrationSteps.length
-        : 0,
+      // activeStep: localCompletedRegistrationSteps
+      //   ? localCompletedRegistrationSteps.length
+      //   : 0,
+      activeStep: 2,
       authUser: null,
       // Possible completed steps are [0, 1, 2]
       completedSteps: localCompletedRegistrationSteps || [],
@@ -66,8 +67,6 @@ class Register extends Component {
 
   getCurrentStepContent(isAuthenticated) {
     const { activeStep } = this.state;
-
-    console.log({ activeStep });
 
     const step1Content = (
       <RegisterEmail

@@ -4,30 +4,28 @@ import React, { Component } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
-// import Card from '../../components/shared/cards/card';
-// import CardHeadline from '../../components/shared/cards/card-headline';
-// import Cards from '../../components/shared/cards';
-// import Container from '../../components/shared/container';
-// import Layout from '../../components/layout';
-// import Status from './status';
-// import presets from '../../utils/presets';
-// import { options } from '../../utils/typography';
-// import { firebase } from '../../firebase';
-// import CtaButton from '../../components/masthead/cta-button';
 
 // Local Variables
+import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
 
 // Component Definition
-class RegisterEmail extends Component {
+class RegisterPayment extends Component {
+  static propTypes = {
+    location: PropTypes.shape({}).isRequired,
+  };
+
   render() {
     return (
       <section>
         <h2>3. Pay TMAC Dues</h2>
         <FormHr />
-        Register Payment
+        Click button for magic to happen!
+
+        <PaypalButtonWrapper />
+
       </section>
     );
   }
 }
 
-export default RegisterEmail;
+export default RegisterPayment;
