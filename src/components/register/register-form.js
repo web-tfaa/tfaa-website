@@ -121,9 +121,8 @@ class RegisterForm extends Component {
     delete form.isAuthenticated;
     delete form.honeypot;
 
-    form.Timestamp = new Date();
-
-    const documentId = `${form.First_Name}${form.Last_Name}`;
+    // This will identify each row in the database and serve as the document name
+    const documentId = `${form.First_Name}_${form.Last_Name}`;
 
     doCreateEntry(form, documentId);
   };
