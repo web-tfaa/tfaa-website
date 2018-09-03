@@ -5,14 +5,14 @@ import { css } from 'glamor';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
-import { rhythm, scale, options } from '../../utils/typography';
 import presets from '../../utils/presets';
+import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Variables
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
 
-let stripeAnimation = css.keyframes({
+const stripeAnimation = css.keyframes({
   '0%': { backgroundPosition: `0 0` },
   '100%': { backgroundPosition: `30px 60px` },
 });

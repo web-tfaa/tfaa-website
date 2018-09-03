@@ -105,6 +105,11 @@ class RegisterForm extends Component {
       ...INITIAL_STATE,
     };
 
+    this.activeComponent = true;
+  }
+
+  componentWillUnmount() {
+    this.activeComponent = false;
   }
 
   handleSubmit = event => {
@@ -128,23 +133,25 @@ class RegisterForm extends Component {
   };
 
   handleUpdate = event => {
-    if (
-      event.target.name.endsWith('Phone') ||
-      event.target.name.endsWith('Fax')
-    ) {
-      this.setState(
-        {
-          [event.target.name]: stripPhone(event.target.value),
-        },
-        this.handleUpdateErrors(event.target.name, event.target.value),
-      );
-    } else
-      this.setState(
-        {
-          [event.target.name]: event.target.value,
-        },
-        this.handleUpdateErrors(event.target.name, event.target.value),
-      );
+    if (this.activeComponent) {
+      if (
+        event.target.name.endsWith('Phone') ||
+        event.target.name.endsWith('Fax')
+      ) {
+        this.setState(
+          {
+            [event.target.name]: stripPhone(event.target.value),
+          },
+          this.handleUpdateErrors(event.target.name, event.target.value),
+        );
+      } else
+        this.setState(
+          {
+            [event.target.name]: event.target.value,
+          },
+          this.handleUpdateErrors(event.target.name, event.target.value),
+        );
+      }
   };
 
   handleUpdateErrors = (name, value) => {
@@ -154,108 +161,114 @@ class RegisterForm extends Component {
   };
 
   handleUpdateEmailError = value => {
-    if (!value) {
-      this.setState({
-        EmailError: 'Email is required',
-      });
-    } else if (value && EmailRegex.test(value)) {
-      this.setState({
-        EmailError: '',
-      });
-    } else if (value && !EmailRegex.test(value)) {
-      this.setState({
-        EmailError: 'Use a valid Email',
-      });
+    if (this.activeComponent) {
+      if (!value) {
+        this.setState({
+          EmailError: 'Email is required',
+        });
+      } else if (value && EmailRegex.test(value)) {
+        this.setState({
+          EmailError: '',
+        });
+      } else if (value && !EmailRegex.test(value)) {
+        this.setState({
+          EmailError: 'Use a valid Email',
+        });
+      }
     }
   };
 
   handleUpdateZipCodeError = value => {
-    if (!value) {
-      this.setState({
-        Zip_CodeError: 'ZIP Code is required',
-      });
-    } else if (value && ZipCodeRegex.test(value)) {
-      this.setState({
-        Zip_CodeError: '',
-      });
-    } else if (value && !ZipCodeRegex.test(value)) {
-      this.setState({
-        Zip_CodeError: 'Use a valid ZIP Code',
-      });
+    if (this.activeComponent) {
+      if (!value) {
+        this.setState({
+          Zip_CodeError: 'ZIP Code is required',
+        });
+      } else if (value && ZipCodeRegex.test(value)) {
+        this.setState({
+          Zip_CodeError: '',
+        });
+      } else if (value && !ZipCodeRegex.test(value)) {
+        this.setState({
+          Zip_CodeError: 'Use a valid ZIP Code',
+        });
+      }
     }
   };
 
   handleUpdateInputError = (name, value) => {
-    const {
-      First_Name,
-      Last_Name,
-      Title,
-      District,
-      Address_1,
-      City,
-      Office_Phone,
-      Cell_Phone,
-    } = this.state;
+    if (this.activeComponent) {
+      const {
+        First_Name,
+        Last_Name,
+        Title,
+        District,
+        Address_1,
+        City,
+        Office_Phone,
+        Cell_Phone,
+      } = this.state;
 
-    switch (name) {
-      case 'First_Name':
-        if (!First_Name && value) {
-          this.setState({ First_NameError: '' });
-        } else if (First_Name && !value) {
-          this.setState({ First_NameError: 'First Name is required' });
-        }
-        break;
-      case 'Last_Name':
-        if (!Last_Name && value) {
-          this.setState({ Last_NameError: '' });
-        } else if (Last_Name && !value) {
-          this.setState({ Last_NameError: 'Last Name is required' });
-        }
-        break;
-      case 'Title':
-        if (!Title && value) {
-          this.setState({ TitleError: '' });
-        } else if (Title && !value) {
-          this.setState({ TitleError: 'Title is required' });
-        }
-        break;
-      case 'District':
-        if (!District && value) {
-          this.setState({ DistrictError: '' });
-        } else if (District && !value) {
-          this.setState({ DistrictError: 'District is required' });
-        }
-        break;
-      case 'Address_1':
-        if (!Address_1 && value) {
-          this.setState({ Address_1Error: '' });
-        } else if (Address_1 && !value) {
-          this.setState({ Address_1Error: 'Address 1 is required' });
-        }
-        break;
-      case 'City':
-        if (!City && value) {
-          this.setState({ CityError: '' });
-        } else if (City && !value) {
-          this.setState({ CityError: 'City is required' });
-        }
-        break;
-      case 'Office_Phone':
-        if (!Office_Phone && value) {
-          this.setState({ Office_PhoneError: '' });
-        } else if (Office_Phone && !value) {
-          this.setState({ Office_PhoneError: 'Office Phone is required' });
-        }
-        break;
-      case 'Cell_Phone':
-        if (!Cell_Phone && value) {
-          this.setState({ Cell_PhoneError: '' });
-        } else if (Cell_Phone && !value) {
-          this.setState({ Cell_PhoneError: 'Cell Phone is required' });
-        }
-        break;
-      default:
-        break;
+      switch (name) {
+        case 'First_Name':
+          if (!First_Name && value) {
+            this.setState({ First_NameError: '' });
+          } else if (First_Name && !value) {
+            this.setState({ First_NameError: 'First Name is required' });
+          }
+          break;
+        case 'Last_Name':
+          if (!Last_Name && value) {
+            this.setState({ Last_NameError: '' });
+          } else if (Last_Name && !value) {
+            this.setState({ Last_NameError: 'Last Name is required' });
+          }
+          break;
+        case 'Title':
+          if (!Title && value) {
+            this.setState({ TitleError: '' });
+          } else if (Title && !value) {
+            this.setState({ TitleError: 'Title is required' });
+          }
+          break;
+        case 'District':
+          if (!District && value) {
+            this.setState({ DistrictError: '' });
+          } else if (District && !value) {
+            this.setState({ DistrictError: 'District is required' });
+          }
+          break;
+        case 'Address_1':
+          if (!Address_1 && value) {
+            this.setState({ Address_1Error: '' });
+          } else if (Address_1 && !value) {
+            this.setState({ Address_1Error: 'Address 1 is required' });
+          }
+          break;
+        case 'City':
+          if (!City && value) {
+            this.setState({ CityError: '' });
+          } else if (City && !value) {
+            this.setState({ CityError: 'City is required' });
+          }
+          break;
+        case 'Office_Phone':
+          if (!Office_Phone && value) {
+            this.setState({ Office_PhoneError: '' });
+          } else if (Office_Phone && !value) {
+            this.setState({ Office_PhoneError: 'Office Phone is required' });
+          }
+          break;
+        case 'Cell_Phone':
+          if (!Cell_Phone && value) {
+            this.setState({ Cell_PhoneError: '' });
+          } else if (Cell_Phone && !value) {
+            this.setState({ Cell_PhoneError: 'Cell Phone is required' });
+          }
+          break;
+        default:
+          break;
+      }
     }
   };
 

@@ -54,6 +54,8 @@ class Register extends Component {
       // Possible completed steps are [0, 1, 2]
       completedSteps: localCompletedRegistrationSteps || [],
     };
+
+    this.activeComponent = true;
   }
 
   componentDidMount() {
@@ -63,6 +65,10 @@ class Register extends Component {
           ? this.setState(() => ({ authUser }))
           : this.setState(() => ({ authUser: null })),
     );
+  }
+
+  componentWillUnmount() {
+    this.activeComponent = false;
   }
 
   getCurrentStepContent(isAuthenticated) {
@@ -110,11 +116,13 @@ class Register extends Component {
       completedSteps,
     } = this.state;
 
-    this.setState({
-      activeStep: activeStep + 1,
-      completedSteps: completedSteps.push(step),
-    });
-    localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]));
+    if (this.activeComponent) {
+      this.setState({
+        activeStep: activeStep + 1,
+        completedSteps: completedSteps.push(step),
+      });
+      localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]));
+    }
   };
 
   render() {

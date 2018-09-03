@@ -95,7 +95,7 @@ class SignUpForm extends Component {
 
     auth
       .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authuser => {
+      .then(() => {
         this.setState(() => ({
           ...INITIAL_STATE,
           isAuthenticated: true,
@@ -142,7 +142,7 @@ class SignUpForm extends Component {
     }
   };
 
-  handleUpdateRegisterPasswordError = message => {
+  handleUpdateRegisterPasswordError = () => {
     const { passwordOne, passwordTwo } = this.state;
 
     const hasInput = passwordOne !== '' && passwordTwo !== '';
@@ -184,9 +184,7 @@ class SignUpForm extends Component {
     } = this.state;
 
     if (isAuthenticated) {
-      return Boolean(onRegisterSignUp)
-        ? onRegisterSignUp
-        : navigate('/members');
+      return onRegisterSignUp || navigate('/members');
     }
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';

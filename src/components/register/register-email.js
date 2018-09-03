@@ -20,28 +20,53 @@ class RegisterEmail extends Component {
     super(props);
 
     this.state = {
+      hasCompletedRegisterEmail: false,
       viewingSignUp: true,
     };
+
+    this.activeComponent = true;
   }
 
-  handleAdvanceStep = () => {
-    const { advanceToNextStep } = this.props;
+  componentWillUnmount() {
+    this.activeComponent = false;
+  }
 
-    setTimeout(() => advanceToNextStep(0), 3500);
+  handleCompleteEmailStep = () => {
+    if (this.activeComponent) {
+      const { advanceToNextStep } = this.props;
+      const { hasCompletedRegisterEmail } = this.state;
+
+      if (hasCompletedRegisterEmail) {
+        setTimeout(() => advanceToNextStep(0), 3500);
+      }
+    }
   };
 
   handleClickSignInLink = () => {
-    this.setState({
-      viewingSignUp: false,
-    });
+    if (this.activeComponent) {
+      this.setState({
+        viewingSignUp: false,
+      });
+    }
   };
+
+  handleUpdateCompletedStep = () => {
+    if (this.activeComponent) {
+      this.setState({
+        hasCompletedRegisterEmail: true,
+      }, () => this.handleCompleteEmailStep());
+    }
+  }
 
   render() {
     const { isAuthenticated } = this.props;
 
-    const { viewingSignUp } = this.state;
+    const {
+      hasCompletedRegisterEmail,
+      viewingSignUp,
+    } = this.state;
 
-    const childrenElements = isAuthenticated ? (
+    const childrenElements = isAuthenticated && hasCompletedRegisterEmail ? (
       <Fragment>
         <h2>Login Successful</h2>
         <div
@@ -62,14 +87,14 @@ class RegisterEmail extends Component {
           login here to complete online registration.
         </p>
         <FormHr />
-        <SignUpForm onRegisterSignUp={this.handleAdvanceStep} />
+        <SignUpForm onRegisterSignUp={this.handleCompleteEmailStep} />
         <FormHr />
         <SignInUpElement
           onClickSignIn={this.handleClickSignInLink}
           viewSignUp={false}
         />
         {!viewingSignUp && (
-          <LoginForm onRegisterLogin={this.handleAdvanceStep} />
+          <LoginForm onRegisterLogin={this.handleCompleteEmailStep} />
         )}
       </Fragment>
     );

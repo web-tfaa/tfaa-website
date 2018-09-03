@@ -1,4 +1,5 @@
 // External Dependencies
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Local Dependencies
@@ -6,7 +7,7 @@ import PaypalButton from './paypal-button';
 
 // Local Variables
 const CLIENT = {
-  // Current using the sandbox id from this paypal demo
+  // Currently using the sandbox id from this paypal demo
   // https://github.com/paypal/paypal-checkout-demo/blob/master/src/react.htm
   sandbox: process.env.GATSBY_PAYPAL_CLIENT_ID_SANDBOX,
   production: process.env.GATSBY_PAYPAL_CLIENT_ID_PRODUCTION,
@@ -18,15 +19,24 @@ const ENV = process.env.NODE_ENV === 'production'
 
 // Component Definition
 class PaypalButtonWrapper extends Component {
+  static propTypes = {
+    amount: PropTypes.number.isRequired,
+  };
+
+  handleSuccess = (payment) =>
+  console.log('Successful payment!', payment);
+
+  handleError = (error) =>
+  console.log('Erroneous payment OR failed to load script!', error);
+
+  handleCancel = (data) =>
+  console.log('Cancelled payment!', data);
+
   render() {
-    const onSuccess = (payment) =>
-      console.log('Successful payment!', payment);
+    const {
+      amount,
+    } = this.props;
 
-    const onError = (error) =>
-      console.log('Erroneous payment OR failed to load script!', error);
-
-    const onCancel = (data) =>
-      console.log('Cancelled payment!', data);
 
     return (
       <div>
@@ -35,10 +45,10 @@ class PaypalButtonWrapper extends Component {
           env={ENV}
           commit
           currency="USD"
-          total={100}
-          onSuccess={onSuccess}
-          onError={onError}
-          onCancel={onCancel}
+          total={amount}
+          onSuccess={this.handleSuccess}
+          onError={this.handleError}
+          onCancel={this.handleCancel}
         />
       </div>
     );

@@ -106,6 +106,7 @@ class PaypalButton extends React.Component {
             onCancel={onCancel}
             onError={onError}
             payment={payment}
+            style={{ label: 'pay', tagline: 'false', size: 'medium' }}
           />)
         }
       </div>
