@@ -85,11 +85,6 @@ export default class HTML extends React.Component {
             type="text/javascript"
           />
           <script src="https://www.paypalobjects.com/api/checkout.js" />
-          <iframe
-            id="iframe-invoice"
-            style={{ height: 0, width: 0, position: 'absolute' }}
-            title="Print TMAC Invoice"
-          />
           {this.props.postBodyComponents}
         </body>
       </html>

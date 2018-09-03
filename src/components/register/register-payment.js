@@ -1,6 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ReactToPrint from 'react-to-print';
 
 // Material-UI Dependencies
 import FormControl from '@material-ui/core/FormControl';
@@ -74,20 +75,7 @@ class RegisterPayment extends Component {
         setTimeout(() => onCompleteStep(2), 3500);
       }
     }
-  }
-
-  handlePrintInvoice = () => {
-    console.log('yes');
-
-    const content = document.getElementById('invoice-container');
-    const frame = document.getElementById('iframe-invoice');
-
-    frame.document.open();
-    frame.document.write(content.innerHTML);
-    frame.document.close();
-    frame.focus();
-    frame.print();
-  }
+  };
 
   handleUpdateCompletedStep = () => {
     if (this.activeComponent) {
@@ -95,7 +83,7 @@ class RegisterPayment extends Component {
         hasCompletedRegisterPaymentStep: true,
       }, () => this.handleCompletePaymentStep());
     }
-  }
+  };
 
   render() {
     const {
@@ -144,20 +132,25 @@ class RegisterPayment extends Component {
         </h3>
 
         <div css={{ marginLeft: 32, marginTop: 24 }}>
-          <div css={{ marginBottom: 24 }}>Print an invoice here.</div>
-          <button
-            type="button"
-            onClick={this.handlePrintInvoice}
-          >
-            Print Invoice
-          </button>
+          <div css={{ marginBottom: 24 }}>
+            Follow these easy steps:
+            <ol>
+              <li>Click the button below to print an invoice.</li>
+              <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
+            </ol>
+          </div>
+          <ReactToPrint
+            trigger={() => <button type="button">Print Invoice</button>}
+            content={() => this.printInvoice}
+          />
+          <div css={{ display: 'none' }}>
+            <Invoice
+              ref={(el) => { this.printInvoice = el; } }
+              amount={this.getCurrentAmount()}
+              isInvoice
+            />
+          </div>
         </div>
-
-        <Invoice
-          amount={this.getCurrentAmount()}
-          isInvoice
-        />
-
       </section>
     );
   }

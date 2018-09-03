@@ -17,12 +17,15 @@ const Invoice = (props) => {
   return (
     <section
       css={{
-        border: '2px solid #2D456F',
-        boxShadow: '3px 0 5px #2D456F',
-        boxSizing: 'border-box',
-        height: 900,
+        // display: 'flex',
+        // justifyContent: 'center',
+        // flexDirection: 'column',
+        border: '1px solid #2D456F',
+        // boxShadow: '3px 0 5px #2D456F',
+        // boxSizing: 'border-box',
+        height: 1050,
         margin: 24,
-        width: 670,
+        width: 745,
       }}
       id="invoice-container"
     >
@@ -87,6 +90,7 @@ const Invoice = (props) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        marginTop: 48,
       }}>
         <InvoiceTable amount={amount} />
 
