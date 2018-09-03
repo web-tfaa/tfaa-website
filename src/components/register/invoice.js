@@ -79,9 +79,9 @@ const Invoice = (props) => {
           <div><strong>Texas Music Administrators Conference</strong></div>
           <div>c/o Jeff Turner</div>
           <div>Allen ISD</div>
-          <div>Fine Arts Dept. – PAC</div>
-          <div>1500 Barbara Jordan Blvd.</div>
-          <div>Allen, TX 78723</div>
+          <div>Fine Arts Dept.</div>
+          <div>300 Rivercrest Blvd. </div>
+          <div>Allen, TX 75002</div>
         </div>
 
         <div>

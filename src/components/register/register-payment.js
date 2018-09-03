@@ -114,6 +114,7 @@ class RegisterPayment extends Component {
               <div css={{ display: 'none' }}>
                 <Invoice
                   amount={this.getCurrentAmount()}
+                  isActive={value === 'active'}
                   isInvoice={false}
                   paymentDetails={paymentDetails}
                   ref={(el) => { this.printInvoice = el; } }
