@@ -12,7 +12,7 @@ import SignInUpElement from './sign-in-up-element';
 // Component Definition
 class RegisterEmail extends Component {
   static propTypes = {
-    advanceToNextStep: PropTypes.func.isRequired,
+    onCompleteStep: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
   };
 
@@ -33,11 +33,11 @@ class RegisterEmail extends Component {
 
   handleCompleteEmailStep = () => {
     if (this.activeComponent) {
-      const { advanceToNextStep } = this.props;
+      const { onCompleteStep } = this.props;
       const { hasCompletedRegisterEmail } = this.state;
 
       if (hasCompletedRegisterEmail) {
-        setTimeout(() => advanceToNextStep(0), 3500);
+        setTimeout(() => onCompleteStep(0), 3500);
       }
     }
   };

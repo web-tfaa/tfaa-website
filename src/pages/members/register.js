@@ -77,19 +77,19 @@ class Register extends Component {
     const step1Content = (
       <RegisterEmail
         isAuthenticated={isAuthenticated}
-        advanceToNextStep={this.advanceToNextStep}
+        onCompleteStep={this.handleCompleteStep}
       />
     );
 
     const step2Content = (
       <Fragment>
-        <RegisterInfo advanceToNextStep={this.advanceToNextStep} />
+        <RegisterInfo onCompleteStep={this.handleCompleteStep} />
         <RegisterForm />
       </Fragment>
     );
 
     const step3Content = (
-      <RegisterPayment advanceToNextStep={this.advanceToNextStep} />
+      <RegisterPayment onCompleteStep={this.handleCompleteStep} />
     );
 
     let currentStepContent;
@@ -110,7 +110,7 @@ class Register extends Component {
     return currentStepContent;
   }
 
-  advanceToNextStep = step => {
+  handleCompleteStep = step => {
     const {
       activeStep,
       completedSteps,

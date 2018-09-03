@@ -3,35 +3,21 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Material-UI Dependencies
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import { withStyles } from '@material-ui/core/styles';
-// import green from '@material-ui/core/colors/green';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
-// import { colors } from '../../utils/presets';
-
-// Local Dependencies
+import Invoice from './invoice';
 import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
-
-// Local Variables
-const styles = {
-  label: {
-    marginBottom: 12,
-  },
-};
 
 // Component Definition
 class RegisterPayment extends Component {
   static propTypes = {
-    classes: PropTypes.shape({
-      label: PropTypes.string.isRequired,
-    }).isRequired,
-    advanceToNextStep: PropTypes.func.isRequired,
+    onCompleteStep: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -74,7 +60,7 @@ class RegisterPayment extends Component {
   handleCompletePaymentStep = () => {
     if (this.activeComponent) {
       const {
-        advanceToNextStep,
+        onCompleteStep,
       } = this.props;
 
       const {
@@ -85,9 +71,22 @@ class RegisterPayment extends Component {
       console.log('hasCompletedPayment', hasCompletedPayment);
 
       if (hasCompletedRegisterPaymentStep) {
-        setTimeout(() => advanceToNextStep(2), 3500);
+        setTimeout(() => onCompleteStep(2), 3500);
       }
     }
+  }
+
+  handlePrintInvoice = () => {
+    console.log('yes');
+
+    const content = document.getElementById('invoice-container');
+    const frame = document.getElementById('iframe-invoice');
+
+    frame.document.open();
+    frame.document.write(content.innerHTML);
+    frame.document.close();
+    frame.focus();
+    frame.print();
   }
 
   handleUpdateCompletedStep = () => {
@@ -100,18 +99,15 @@ class RegisterPayment extends Component {
 
   render() {
     const {
-      classes,
       value,
     } = this.state;
-
-    console.log('props', classes);
 
     return (
       <section>
         <h2>3. Pay TMAC Dues</h2>
         <FormHr />
 
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" style={{ marginLeft: 32 }}>
           <FormLabel
             component="legend"
             style={{ marginBottom: 12 }}
@@ -143,9 +139,25 @@ class RegisterPayment extends Component {
           </RadioGroup>
         </FormControl>
 
+        <h3>
+          Need to pay later?
+        </h3>
+
+        <div css={{ marginLeft: 32, marginTop: 24 }}>
+          <div css={{ marginBottom: 24 }}>Print an invoice here.</div>
+          <button
+            type="button"
+            onClick={this.handlePrintInvoice}
+          >
+            Print Invoice
+          </button>
+        </div>
+
+        <Invoice amount={this.getCurrentAmount()} />
+
       </section>
     );
   }
 }
 
-export default withStyles(styles)(RegisterPayment);
+export default RegisterPayment;
