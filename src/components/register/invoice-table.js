@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 // Local Variables
 const styles = theme => ({
   root: {
-    width: '70%',
+    width: '80%',
     marginLeft: 32,
     marginRight: 32,
     marginTop: theme.spacing.unit * 3,
