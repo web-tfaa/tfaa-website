@@ -21,16 +21,26 @@ const ENV = process.env.NODE_ENV === 'production'
 class PaypalButtonWrapper extends Component {
   static propTypes = {
     amount: PropTypes.number.isRequired,
+    onSuccessfulPayment: PropTypes.func.isRequired,
   };
 
-  handleSuccess = (payment) =>
-  console.log('Successful payment!', payment);
+  handleSuccess = (payment) => {
+    const {
+      onSuccessfulPayment,
+    } = this.props;
 
-  handleError = (error) =>
-  console.log('Erroneous payment OR failed to load script!', error);
+    console.log('Successful payment!', payment);
 
-  handleCancel = (data) =>
-  console.log('Cancelled payment!', data);
+    onSuccessfulPayment(payment)
+  };
+
+  handleError = (error) => {
+    console.log('Erroneous payment OR failed to load script!', error);
+  };
+
+  handleCancel = (data) => {
+    console.log('Cancelled payment!', data);
+  };
 
   render() {
     const {

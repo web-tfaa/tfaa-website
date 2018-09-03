@@ -1,6 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
 
 // Material-UI Dependencies
@@ -27,6 +27,7 @@ class RegisterPayment extends Component {
     this.state = {
       hasCompletedPayment: false,
       hasCompletedRegisterPaymentStep: false,
+      paymentDetails: {},
       value: 'active',
     };
 
@@ -77,16 +78,24 @@ class RegisterPayment extends Component {
     }
   };
 
-  handleUpdateCompletedStep = () => {
+  handleUpdateCompletedStep = (payment) => {
     if (this.activeComponent) {
       this.setState({
-        hasCompletedRegisterPaymentStep: true,
-      }, () => this.handleCompletePaymentStep());
+        hasCompletedPayment: true,
+        paymentDetails: {
+          payerId: payment.payerID,
+          paymentId: payment.paymentID,
+        }
+      });
+      console.log('');
+      // }, () => this.handleCompletePaymentStep());
     }
   };
 
   render() {
     const {
+      hasCompletedPayment,
+      paymentDetails,
       value,
     } = this.state;
 
@@ -94,71 +103,96 @@ class RegisterPayment extends Component {
       <section>
         <h2>3. Pay TMAC Dues</h2>
         <FormHr />
-
-        <div css={{ marginBottom: 48 }}>
-          <h3 css={{ marginBottom: 24 }}>
-            Pay now with Paypal
-          </h3>
-
-          <FormControl component="fieldset" style={{ marginLeft: 32 }}>
-            <FormLabel
-              component="legend"
-              style={{ marginBottom: 12 }}
-            >
-              Choose your membership level below
-            </FormLabel>
-            <RadioGroup
-              aria-label="TMAC membership levels"
-              name="membershipLevels"
-              onChange={this.handleChangeRadioSelection}
-              value={value}
-            >
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Active $50"
-                value="active"
+        {hasCompletedPayment
+          ? (
+            <Fragment>
+              <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
+              <ReactToPrint
+                content={() => this.printInvoice}
+                trigger={() => <button type="button">Print Receipt</button>}
               />
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Retired $30"
-                value="retired"
-              />
-              {/* <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Sponsor $0"
-                value="sponsor"
-              /> */}
-              <PaypalButtonWrapper amount={this.getCurrentAmount()} />
-            </RadioGroup>
-          </FormControl>
-        </div>
+              <div css={{ display: 'none' }}>
+                <Invoice
+                  amount={this.getCurrentAmount()}
+                  isInvoice={false}
+                  paymentDetails={paymentDetails}
+                  ref={(el) => { this.printInvoice = el; } }
+                />
+              </div>
+            </Fragment>
+          )
+        : (
+          <Fragment>
+            <div css={{ marginBottom: 48 }}>
+              <h3 css={{ marginBottom: 24 }}>
+                Pay now with Paypal
+              </h3>
 
-        <div>
-          <h3>
-            Need to pay later?
-          </h3>
-
-          <div css={{ marginLeft: 32, marginTop: 24 }}>
-            <div css={{ marginBottom: 24 }}>
-              Follow these easy steps:
-              <ol>
-                <li>Click the button below to print an invoice.</li>
-                <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
-              </ol>
+              <FormControl component="fieldset" style={{ marginLeft: 32 }}>
+                <FormLabel
+                  component="legend"
+                  style={{ marginBottom: 12 }}
+                >
+                  Choose your membership level below
+                </FormLabel>
+                <RadioGroup
+                  aria-label="TMAC membership levels"
+                  name="membershipLevels"
+                  onChange={this.handleChangeRadioSelection}
+                  value={value}
+                >
+                  <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Active $50.00"
+                    value="active"
+                  />
+                  <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Retired $30.00"
+                    value="retired"
+                  />
+                  {/* <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Sponsor $0"
+                    value="sponsor"
+                  /> */}
+                  <PaypalButtonWrapper
+                    amount={this.getCurrentAmount()}
+                    onSuccessfulPayment={this.handleUpdateCompletedStep}
+                  />
+                </RadioGroup>
+              </FormControl>
             </div>
-            <ReactToPrint
-              trigger={() => <button type="button">Print Invoice</button>}
-              content={() => this.printInvoice}
-            />
-            <div css={{ display: 'none' }}>
-              <Invoice
-                ref={(el) => { this.printInvoice = el; } }
-                amount={this.getCurrentAmount()}
-                isInvoice
-              />
+
+            <div>
+              <h3>
+                Need to pay later?
+              </h3>
+
+              <div css={{ marginLeft: 32, marginTop: 24 }}>
+                <div css={{ marginBottom: 24 }}>
+                  Follow these easy steps:
+                  <ol>
+                    <li>Click the button below to print an invoice.</li>
+                    <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
+                  </ol>
+                </div>
+                <ReactToPrint
+                  content={() => this.printInvoice}
+                  trigger={() => <button type="button">Print Invoice</button>}
+                />
+                <div css={{ display: 'none' }}>
+                  <Invoice
+                    amount={this.getCurrentAmount()}
+                    isActive={value === 'active'}
+                    isInvoice
+                    ref={(el) => { this.printInvoice = el; } }
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </Fragment>
+        )}
       </section>
     );
   }

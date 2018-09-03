@@ -1,6 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -11,7 +11,9 @@ import InvoiceTable from './invoice-table';
 const Invoice = (props) => {
   const {
     amount,
+    isActive,
     isInvoice,
+    paymentDetails,
   } = props;
 
   return (
@@ -38,9 +40,9 @@ const Invoice = (props) => {
       >
         <img
           alt="TMAC logo"
-          style={{ position: 'absolute' }}
           height="80px"
           src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+          style={{ position: 'absolute' }}
         />
         <h2 css={{ margin: 0, textAlign: 'right' }}>
           {isInvoice ? 'INVOICE' : "RECEIPT"}
@@ -48,18 +50,23 @@ const Invoice = (props) => {
       </header>
       <FormHr red />
 
-      <div css={{
-        margin: '0 32px',
-      }}>
+      <div css={{margin: '0 32px'}}>
         <h3>Texas Music Administrators Conference</h3>
         <p css={{ fontSize: 14 }}><em>&quot;...promoting and supporting music education&quot;</em></p>
-        <div><strong>Invoice #:</strong> 201819-001</div>
+        <div><strong>{isInvoice ? 'Invoice' : 'Receipt'}#:</strong> 201819-001</div>
         <div><strong>Date:</strong> 2018-09-03</div>
+
+        {!isInvoice && paymentDetails.payerId && (
+          <Fragment>
+            <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>
+            <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>
+          </Fragment>
+        )}
       </div>
 
       <div css={{
-        fontSize: 14,
         display: 'flex',
+        fontSize: 14,
         justifyContent: 'space-around',
         margin: '0 32px',
       }}>
@@ -92,7 +99,7 @@ const Invoice = (props) => {
         justifyContent: 'center',
         marginTop: 48,
       }}>
-        <InvoiceTable amount={amount} />
+        <InvoiceTable amount={amount} isActive={isActive} />
 
         <div css={{
           margin: '72px 32px',
@@ -118,7 +125,15 @@ const Invoice = (props) => {
 
 Invoice.propTypes = {
   amount: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
   isInvoice: PropTypes.bool.isRequired,
+  paymentDetails: PropTypes.shape({
+    payerId: PropTypes.string,
+    paymentId: PropTypes.string,
+  }),
+};
+Invoice.defaultProps = {
+  paymentDetails: {},
 };
 
 export default Invoice;
