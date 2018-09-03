@@ -21,10 +21,10 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
+    marginBottom: 0,
     minWidth: 200,
   },
   row: {
-    paddingLeft: 24,
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
@@ -34,13 +34,18 @@ const styles = theme => ({
 // Local Components
 const CustomTableCell = withStyles(theme => ({
   head: {
-    paddingLeft: 24,
     backgroundColor: '#EDF2F8',
     color: theme.palette.common.black,
     fontWeight: 600,
+    '&:first-child': {
+      paddingLeft: 24,
+    },
   },
   body: {
     fontSize: 14,
+    '&:first-child': {
+      paddingLeft: 24,
+    },
   },
 }))(TableCell);
 

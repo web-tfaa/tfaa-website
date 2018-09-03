@@ -96,9 +96,9 @@ const _options = {
         paddingBottom: `0.1em`,
       },
       '.gatsby-highlight': {
-        //background: colors.a[0],
+        // background: colors.a[0],
         background: `#fdfaf6`,
-        //boxShadow: `inset 0 0 0 1px ${colors.a[1]}`,
+        // boxShadow: `inset 0 0 0 1px ${colors.a[1]}`,
         boxShadow: `inset 0 0 0 1px #faede5`,
         borderRadius: `${presets.radius}px`,
         padding: rhythm(options.blockMarginBottom),
@@ -123,7 +123,7 @@ const _options = {
         lineHeight: options.baseLineHeight,
       },
       '.gatsby-highlight-code-line': {
-        //background: colors.a[1],
+        // background: colors.a[1],
         background: `#faede5`,
         marginRight: `${rhythm(-options.blockMarginBottom)}`,
         marginLeft: `${rhythm(-options.blockMarginBottom)}`,
@@ -142,7 +142,7 @@ const _options = {
         background: colors.a[2],
       },
       '.gatsby-highlight::-webkit-scrollbar-track': {
-        //background: colors.a[1],
+        // background: colors.a[1],
         background: `#faede5`,
         borderRadius: `0 0 ${presets.radiusLg}px ${presets.radiusLg}px`,
       },
@@ -249,7 +249,7 @@ const _options = {
           borderRight: 0,
         },
         '.gatsby-highlight': {
-          //boxShadow: `inset 0 1px 0 0 ${colors.a[1]}, inset 0 -1px 0 0 ${colors.a[1]}`,
+          // boxShadow: `inset 0 1px 0 0 ${colors.a[1]}, inset 0 -1px 0 0 ${colors.a[1]}`,
           boxShadow: `inset 0 1px 0 0 #faede5, inset 0 -1px 0 0 #faede5`,
         },
       },
