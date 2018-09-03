@@ -95,60 +95,68 @@ class RegisterPayment extends Component {
         <h2>3. Pay TMAC Dues</h2>
         <FormHr />
 
-        <FormControl component="fieldset" style={{ marginLeft: 32 }}>
-          <FormLabel
-            component="legend"
-            style={{ marginBottom: 12 }}
-          >
-            Choose your membership level below
-          </FormLabel>
-          <RadioGroup
-            aria-label="TMAC membership levels"
-            name="membershipLevels"
-            onChange={this.handleChangeRadioSelection}
-            value={value}
-          >
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Active $50"
-              value="active"
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Retired $30"
-              value="retired"
-            />
-            {/* <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Sponsor $0"
-              value="sponsor"
-            /> */}
-            <PaypalButtonWrapper amount={this.getCurrentAmount()} />
-          </RadioGroup>
-        </FormControl>
+        <div css={{ marginBottom: 48 }}>
+          <h3 css={{ marginBottom: 24 }}>
+            Pay now with Paypal
+          </h3>
 
-        <h3>
-          Need to pay later?
-        </h3>
+          <FormControl component="fieldset" style={{ marginLeft: 32 }}>
+            <FormLabel
+              component="legend"
+              style={{ marginBottom: 12 }}
+            >
+              Choose your membership level below
+            </FormLabel>
+            <RadioGroup
+              aria-label="TMAC membership levels"
+              name="membershipLevels"
+              onChange={this.handleChangeRadioSelection}
+              value={value}
+            >
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Active $50"
+                value="active"
+              />
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Retired $30"
+                value="retired"
+              />
+              {/* <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Sponsor $0"
+                value="sponsor"
+              /> */}
+              <PaypalButtonWrapper amount={this.getCurrentAmount()} />
+            </RadioGroup>
+          </FormControl>
+        </div>
 
-        <div css={{ marginLeft: 32, marginTop: 24 }}>
-          <div css={{ marginBottom: 24 }}>
-            Follow these easy steps:
-            <ol>
-              <li>Click the button below to print an invoice.</li>
-              <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
-            </ol>
-          </div>
-          <ReactToPrint
-            trigger={() => <button type="button">Print Invoice</button>}
-            content={() => this.printInvoice}
-          />
-          <div css={{ display: 'none' }}>
-            <Invoice
-              ref={(el) => { this.printInvoice = el; } }
-              amount={this.getCurrentAmount()}
-              isInvoice
+        <div>
+          <h3>
+            Need to pay later?
+          </h3>
+
+          <div css={{ marginLeft: 32, marginTop: 24 }}>
+            <div css={{ marginBottom: 24 }}>
+              Follow these easy steps:
+              <ol>
+                <li>Click the button below to print an invoice.</li>
+                <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
+              </ol>
+            </div>
+            <ReactToPrint
+              trigger={() => <button type="button">Print Invoice</button>}
+              content={() => this.printInvoice}
             />
+            <div css={{ display: 'none' }}>
+              <Invoice
+                ref={(el) => { this.printInvoice = el; } }
+                amount={this.getCurrentAmount()}
+                isInvoice
+              />
+            </div>
           </div>
         </div>
       </section>
