@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 // Local Variables
 const styles = theme => ({
   root: {
-    width: '90%',
+    width: '70%',
     marginLeft: 32,
     marginRight: 32,
     marginTop: theme.spacing.unit * 3,
@@ -24,6 +24,7 @@ const styles = theme => ({
     minWidth: 200,
   },
   row: {
+    paddingLeft: 24,
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
@@ -33,6 +34,7 @@ const styles = theme => ({
 // Local Components
 const CustomTableCell = withStyles(theme => ({
   head: {
+    paddingLeft: 24,
     backgroundColor: '#EDF2F8',
     color: theme.palette.common.black,
     fontWeight: 600,
@@ -61,9 +63,13 @@ const InvoiceTable = (props) => {
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">
-              TMAC registration fee for name-goes-here
+              TMAC registration fee for <strong>name-goes-here</strong>
+              <br />
+              for the 2018-2019 school year.
             </CustomTableCell>
-            <CustomTableCell numeric>{amount.toLocaleString()}</CustomTableCell>
+            <CustomTableCell numeric>
+              ${amount.toFixed(2).toLocaleString()}
+            </CustomTableCell>
           </TableRow>
         </TableBody>
       </Table>

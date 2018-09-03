@@ -4,16 +4,7 @@ import React from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
-// import Card from '../../components/shared/cards/card';
-// import CardHeadline from '../../components/shared/cards/card-headline';
-// import Cards from '../../components/shared/cards';
-// import Container from '../../components/shared/container';
-// import Layout from '../../components/layout';
-// import Status from './status';
-import { colors } from '../../utils/presets';
-// import { options } from '../../utils/typography';
-// import { firebase } from '../../firebase';
-// import CtaButton from '../../components/masthead/cta-button';
+// import { colors } from '../../utils/presets';
 import InvoiceTable from './invoice-table';
 
 // Component Definition
@@ -47,15 +38,23 @@ const Invoice = (props) => {
         </h2>
       </header>
       <FormHr red />
+
       <div css={{ margin: '0 32px' }}>
         <h3>Texas Music Administrators Conference</h3>
         <p css={{ fontSize: 14 }}><em>&quot;...promoting and supporting music education&quot;</em></p>
       </div>
 
-      <InvoiceTable amount={amount} />
+      <div css={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <InvoiceTable amount={amount} />
 
-      <div css={{ marginTop: 32, textAlign: 'center' }}>
-        Make all checks payable to: <strong>Texas Music Administrators Conference (TMAC)</strong>
+        <div css={{ marginTop: 32, textAlign: 'center' }}>
+          Make all checks payable to: <strong>Texas Music Administrators Conference (TMAC)</strong>
+        </div>
       </div>
 
       <footer css={{ fontSize: 12, textAlign: 'center', margin: '12px 48px' }}>
