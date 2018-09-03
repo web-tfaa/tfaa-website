@@ -153,7 +153,10 @@ class RegisterPayment extends Component {
           </button>
         </div>
 
-        <Invoice amount={this.getCurrentAmount()} />
+        <Invoice
+          amount={this.getCurrentAmount()}
+          isInvoice
+        />
 
       </section>
     );

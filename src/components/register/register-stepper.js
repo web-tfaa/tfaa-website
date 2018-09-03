@@ -6,8 +6,6 @@ import React, { Component } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-// import Button from '@material-ui/core/Button';
-// import Typography from '@material-ui/core/Typography';
 
 // Local Variables
 const propTypes = {
@@ -35,7 +33,7 @@ class RegisterStepper extends Component {
     const steps = getSteps(isAuthenticated);
 
     return (
-      <div sss={{ width: '90%' }}>
+      <div>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map(label => {
             return (

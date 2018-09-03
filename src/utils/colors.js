@@ -76,6 +76,7 @@ const colors = {
   },
   status: `#f5eefe`,
   texasFlagBlue: '#002868',
+  texasFlagRed: '#BF0A30',
 };
 
 let pointer = `a`;
