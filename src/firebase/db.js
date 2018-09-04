@@ -28,6 +28,39 @@ export const doUpdateEntry = (form, documentId) =>
       console.log(`Error updating payment info for ${form.First_Name} ${form.Last_Name} document`, err);
     });
 
-// export const doGetInvoiceId = () =>
-//   db.collection('Document_ID')
-//     .doc('invoice_18-19')
+
+// Invoice actions
+export const doGetInvoiceId = (callback) =>
+  db.collection('Document_ID')
+    .doc('invoice_18-19')
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        console.log('documnet data for invoice→', doc.data());
+        callback(doc.data().currentInvoiceId);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('no such document for invoice');
+      }
+    })
+    .catch((err) => {
+      console.log('Error getting document for invoice:', err);
+    });
+
+// Invoice actions
+export const doGetReceiptId = (callback) =>
+  db.collection('Document_ID')
+    .doc('receipt_18-19')
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        console.log('documnet data for receipt →', doc.data());
+        callback(doc.data().currentReceiptId);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('no such document for receipt');
+      }
+    })
+    .catch((err) => {
+      console.log('Error getting document for receipt:', err);
+    });

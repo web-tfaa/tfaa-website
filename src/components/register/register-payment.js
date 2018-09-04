@@ -14,6 +14,10 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHr from '../shared/form-hr';
 import Invoice from './invoice';
 import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
+import {
+  doGetInvoiceId,
+  doGetReceiptId,
+} from '../../firebase/db'
 
 // Component Definition
 class RegisterPayment extends Component {
@@ -28,11 +32,20 @@ class RegisterPayment extends Component {
     this.state = {
       hasCompletedPayment: false,
       hasCompletedRegisterPaymentStep: false,
+      invoiceId: '',
       paymentDetails: {},
+      receiptId: '',
       value: 'active',
     };
 
     this.activeComponent = true;
+  }
+
+  componentDidMount() {
+    if (this.activeComponent) {
+      doGetInvoiceId(this.handleGetCurrentInvoiceId);
+      doGetReceiptId(this.handleGetCurrentReceiptId);
+    }
   }
 
   componentWillUnmount() {
@@ -91,6 +104,22 @@ class RegisterPayment extends Component {
     }
   };
 
+  handleGetCurrentInvoiceId = (invoiceId) => {
+    if (this.activeComponent) {
+      this.setState({
+        invoiceId,
+      });
+    }
+  }
+
+  handleGetCurrentReceiptId = (receiptId) => {
+    if (this.activeComponent) {
+      this.setState({
+        receiptId,
+      });
+    }
+  }
+
   render() {
     const {
       form,
@@ -98,7 +127,9 @@ class RegisterPayment extends Component {
 
     const {
       hasCompletedPayment,
+      invoiceId,
       paymentDetails,
+      receiptId,
       value,
     } = this.state;
 
@@ -121,6 +152,7 @@ class RegisterPayment extends Component {
                   isActive={value === 'active'}
                   isInvoice={false}
                   paymentDetails={paymentDetails}
+                  receiptId={receiptId}
                   ref={(el) => { this.printInvoice = el; } }
                 />
               </div>
@@ -190,6 +222,7 @@ class RegisterPayment extends Component {
                   <Invoice
                     amount={this.getCurrentAmount()}
                     form={form}
+                    invoiceId={invoiceId}
                     isActive={value === 'active'}
                     isInvoice
                     ref={(el) => { this.printInvoice = el; } }

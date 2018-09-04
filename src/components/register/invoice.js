@@ -15,9 +15,11 @@ const Invoice = (props) => {
   const {
     amount,
     form,
+    invoiceId,
     isActive,
     isInvoice,
     paymentDetails,
+    receiptId,
   } = props;
 
   return (
@@ -52,7 +54,11 @@ const Invoice = (props) => {
       <div css={{ fontSize: 14, margin: '0 32px' }}>
         <h3>Texas Music Administrators Conference</h3>
         <p css={{ fontSize: 14 }}><em>&quot;...promoting and supporting music education&quot;</em></p>
-        <div><strong>{isInvoice ? 'Invoice' : 'Receipt'}#:</strong> 201819-001</div>
+        <div>
+          <strong>
+            {isInvoice ? 'Invoice' : 'Receipt'}#:
+          </strong>{' '}
+          201819-{isInvoice ? invoiceId : receiptId}</div>
         <div><strong>Date:</strong> {currentDate}</div>
 
         {!isInvoice && paymentDetails.payerId && (
@@ -133,15 +139,19 @@ const Invoice = (props) => {
 Invoice.propTypes = {
   amount: PropTypes.number.isRequired,
   form: PropTypes.shape({}).isRequired,
+  invoiceId: PropTypes.string,
   isActive: PropTypes.bool.isRequired,
   isInvoice: PropTypes.bool.isRequired,
   paymentDetails: PropTypes.shape({
     payerId: PropTypes.string,
     paymentId: PropTypes.string,
   }),
+  receiptId: PropTypes.string,
 };
 Invoice.defaultProps = {
+  invoiceId: '0001',
   paymentDetails: {},
+  receiptId: '0001',
 };
 
 export default Invoice;
