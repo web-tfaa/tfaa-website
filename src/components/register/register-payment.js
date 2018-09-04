@@ -17,6 +17,8 @@ import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
 import {
   doGetInvoiceId,
   doGetReceiptId,
+  doUpdateInvoiceId,
+  doUpdatReceiptId,
 } from '../../firebase/db'
 
 // Component Definition
@@ -26,15 +28,17 @@ class RegisterPayment extends Component {
     onCompleteStep: PropTypes.func.isRequired,
   };
 
+  counter = 0;
+
   constructor(props) {
     super(props);
 
     this.state = {
       hasCompletedPayment: false,
       hasCompletedRegisterPaymentStep: false,
-      invoiceId: '',
+      invoiceId: null,
       paymentDetails: {},
-      receiptId: '',
+      receiptId: null,
       value: 'active',
     };
 
@@ -43,13 +47,20 @@ class RegisterPayment extends Component {
 
   componentDidMount() {
     if (this.activeComponent) {
+      console.log('count', this.counter += 1);
       doGetInvoiceId(this.handleGetCurrentInvoiceId);
       doGetReceiptId(this.handleGetCurrentReceiptId);
     }
   }
 
   componentWillUnmount() {
+    const { hasCompletedPayment } = this.state;
+
     this.activeComponent = false;
+
+    return hasCompletedPayment
+      ? this.handleIncrementReceiptId()
+      : this.handleIncrementInvoiceId();
   }
 
   getCurrentAmount = () => {
@@ -92,6 +103,16 @@ class RegisterPayment extends Component {
     }
   };
 
+  handleIncrementInvoiceId = () => {
+    // Called when unmounting the component if no purchase made
+    return doUpdateInvoiceId();
+  };
+
+  handleIncrementReceiptId = () => {
+    // Called when unmounting the component if no purchase made
+    return doUpdatReceiptId();
+  };
+
   handleUpdateCompletedStep = (payment) => {
     if (this.activeComponent) {
       this.setState({
@@ -110,7 +131,7 @@ class RegisterPayment extends Component {
         invoiceId,
       });
     }
-  }
+  };
 
   handleGetCurrentReceiptId = (receiptId) => {
     if (this.activeComponent) {
@@ -118,7 +139,7 @@ class RegisterPayment extends Component {
         receiptId,
       });
     }
-  }
+  };
 
   render() {
     const {
@@ -142,7 +163,7 @@ class RegisterPayment extends Component {
             <Fragment>
               <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
               <ReactToPrint
-                content={() => this.printInvoice}
+                content={() => this.printReceipt}
                 trigger={() => <button type="button">Print Receipt</button>}
               />
               <div css={{ display: 'none' }}>
@@ -153,7 +174,7 @@ class RegisterPayment extends Component {
                   isInvoice={false}
                   paymentDetails={paymentDetails}
                   receiptId={receiptId}
-                  ref={(el) => { this.printInvoice = el; } }
+                  ref={(el) => { this.printReceipt = el; } }
                 />
               </div>
             </Fragment>
@@ -216,7 +237,14 @@ class RegisterPayment extends Component {
                 </div>
                 <ReactToPrint
                   content={() => this.printInvoice}
-                  trigger={() => <button type="button">Print Invoice</button>}
+                  trigger={() => (
+                    <button
+                      type="button"
+                      onClick={() => this.handleIncrementInvoiceId()}
+                    >
+                      Print Invoice
+                    </button>
+                  )}
                 />
                 <div css={{ display: 'none' }}>
                   <Invoice

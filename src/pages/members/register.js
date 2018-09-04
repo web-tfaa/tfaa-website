@@ -17,7 +17,6 @@ import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
 import { firebase } from '../../firebase';
-import { doGetInvoiceId } from '../../firebase/db'
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -124,19 +123,12 @@ class Register extends Component {
     const {
       activeStep,
       authUser,
-      form,
       completedSteps,
     } = this.state;
-
-    doGetInvoiceId();
-
-    console.log('ACTIVE step', activeStep, '\n\n', form);
 
     const isAuthenticated = Boolean(authUser);
 
     const hasCompletedAllSteps = completedSteps.length === 3;
-
-    console.log('hasCompletedAllSteps', hasCompletedAllSteps);
 
     return (
       <Layout location={location}>

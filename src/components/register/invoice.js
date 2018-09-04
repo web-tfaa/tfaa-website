@@ -58,7 +58,7 @@ const Invoice = (props) => {
           <strong>
             {isInvoice ? 'Invoice' : 'Receipt'}#:
           </strong>{' '}
-          201819-{isInvoice ? invoiceId : receiptId}</div>
+          201819-00{isInvoice ? invoiceId : receiptId}</div>
         <div><strong>Date:</strong> {currentDate}</div>
 
         {!isInvoice && paymentDetails.payerId && (
@@ -139,19 +139,19 @@ const Invoice = (props) => {
 Invoice.propTypes = {
   amount: PropTypes.number.isRequired,
   form: PropTypes.shape({}).isRequired,
-  invoiceId: PropTypes.string,
+  invoiceId: PropTypes.number,
   isActive: PropTypes.bool.isRequired,
   isInvoice: PropTypes.bool.isRequired,
   paymentDetails: PropTypes.shape({
     payerId: PropTypes.string,
     paymentId: PropTypes.string,
   }),
-  receiptId: PropTypes.string,
+  receiptId: PropTypes.number,
 };
 Invoice.defaultProps = {
-  invoiceId: '0001',
+  invoiceId: 1,
   paymentDetails: {},
-  receiptId: '0001',
+  receiptId: 1,
 };
 
 export default Invoice;
