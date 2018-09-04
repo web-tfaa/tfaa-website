@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
+// Material-UI Dependencies
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 // Internal Dependencies
 import { options } from '../../utils/typography';
 import {
@@ -93,6 +96,7 @@ class RegisterForm extends Component {
 
     this.state = {
       ...INITIAL_STATE,
+      hasCompletedRegisterInfoForm: false,
     };
 
     this.activeComponent = true;
@@ -119,9 +123,9 @@ class RegisterForm extends Component {
     // This will identify each row in the database and serve as the document name
     const documentId = `${form.First_Name}_${form.Last_Name}`;
 
-    doCreateEntry(form, documentId, this.handleCompleteInfoStep)
+    doCreateEntry(form, documentId, this.handleUpdateCompletedStep)
 
-    // Update the form data and advance the steps
+    // Update the form data and advance the steps with the above callback function
   };
 
   handleCompleteInfoStep = () => {
@@ -131,6 +135,14 @@ class RegisterForm extends Component {
       setTimeout(() => onCompleteStep(0), 4000);
     }
   };
+
+  handleUpdateCompletedStep = () => {
+    if (this.activeComponent) {
+      this.setState({
+        hasCompletedRegisterInfoForm: true,
+      }, () => this.handleCompleteInfoStep())
+    }
+  }
 
   handleUpdate = event => {
     if (this.activeComponent) {
@@ -279,30 +291,31 @@ class RegisterForm extends Component {
 
   render() {
     const {
-      honeypot,
-      isAuthenticated,
-      First_Name,
-      First_NameError,
-      Last_Name,
-      Last_NameError,
-      Title,
-      TitleError,
-      District,
-      DistrictError,
       Address_1,
       Address_1Error,
       Address_2,
-      City,
-      CityError,
-      Zip_Code,
-      Zip_CodeError,
-      Email,
-      EmailError,
-      Office_Phone,
-      Office_PhoneError,
       Cell_Phone,
       Cell_PhoneError,
+      City,
+      CityError,
+      District,
+      DistrictError,
+      Email,
+      EmailError,
+      First_Name,
+      First_NameError,
+      hasCompletedRegisterInfoForm,
+      honeypot,
+      isAuthenticated,
+      Last_Name,
+      Last_NameError,
       Office_Fax,
+      Office_Phone,
+      Office_PhoneError,
+      Title,
+      TitleError,
+      Zip_Code,
+      Zip_CodeError,
     } = this.state;
 
     if (isAuthenticated) navigate('/members');
@@ -323,194 +336,211 @@ class RegisterForm extends Component {
 
     return (
       <div className="login-form">
-        <form onSubmit={this.handleSubmit}>
-          {/* FIRST NAME */}
-          <label css={labelStyles} htmlFor="First_Name">
-            First Name
-            <input
-              css={inputStyles}
-              type="text"
-              name="First_Name"
-              onChange={this.handleUpdate}
-              placeholder="e.g. Sally"
-              value={First_Name}
-            />
-          </label>
-          <div css={baseErrorStyles}>{First_NameError}</div>
-
-          {/* LAST NAME */}
-          <label css={labelStyles} htmlFor="Last_Name">
-            Last Name
-            <input
-              css={inputStyles}
-              name="Last_Name"
-              onChange={this.handleUpdate}
-              placeholder="e.g. Drumm"
-              value={Last_Name}
-            />
-          </label>
-          <div css={baseErrorStyles}>{Last_NameError}</div>
-
-          {/* TITLE */}
-          <label css={labelStyles} htmlFor="Title">
-            Title
-            <input
-              css={inputStyles}
-              name="Title"
-              onChange={this.handleUpdate}
-              placeholder="e.g. Director of Fine Arts"
-              value={Title}
-            />
-          </label>
-          <div css={baseErrorStyles}>{TitleError}</div>
-
-          {/* DISTRICT */}
-          <label css={labelStyles} htmlFor="District">
-            District
-            <input
-              css={inputStyles}
-              name="District"
-              onChange={this.handleUpdate}
-              placeholder="e.g. Texas ISD"
-              value={District}
-            />
-          </label>
-          <div css={baseErrorStyles}>{DistrictError}</div>
-
-          {/* ADDRESS 1 */}
-          <label css={labelStyles} htmlFor="Address_1">
-            Address 1
-            <input
-              css={inputStyles}
-              name="Address_1"
-              onChange={this.handleUpdate}
-              placeholder="e.g. 123 Main St."
-              value={Address_1}
-            />
-          </label>
-          <div css={baseErrorStyles}>{Address_1Error}</div>
-
-          {/* ADDRESS 2 */}
-          <label css={labelStyles} htmlFor="Address_2">
-            Address 2
-            <input
-              css={inputStyles}
-              name="Address_2"
-              onChange={this.handleUpdate}
-              placeholder="e.g. Suite 19"
-              value={Address_2}
-            />
-          </label>
-
-          {/* CITY */}
-          <label css={labelStyles} htmlFor="City">
-            City
-            <input
-              css={inputStyles}
-              name="City"
-              onChange={this.handleUpdate}
-              placeholder="e.g. Dallas"
-              value={City}
-            />
-          </label>
-          <div css={baseErrorStyles}>{CityError}</div>
-
-          {/* ZIP */}
-          <label css={labelStyles} htmlFor="Zip_Code">
-            ZIP Code
-            <input
-              css={inputStyles}
-              name="Zip_Code"
-              onChange={this.handleUpdate}
-              placeholder="e.g. 75150"
-              value={Zip_Code}
-            />
-          </label>
-          <div css={baseErrorStyles}>{Zip_CodeError}</div>
-
-          {/* EMAIL */}
-          <label css={labelStyles} htmlFor="Email">
-            Email
-            <input
-              css={inputStyles}
-              name="Email"
-              onChange={this.handleUpdate}
-              placeholder="e.g. music@austinisd.edu"
-              value={Email}
-            />
-          </label>
-          <div css={baseErrorStyles}>{EmailError}</div>
-
-          {/* OFFICE PHONE */}
-          <label css={labelStyles} htmlFor="Office_Phone">
-            Office Phone
-            <input
-              css={inputStyles}
-              name="Office_Phone"
-              onChange={this.handleUpdate}
-              placeholder="e.g. (512) 555-1919"
-              value={formatPhone(Office_Phone)}
-            />
-          </label>
-          <div css={baseErrorStyles}>{Office_PhoneError}</div>
-
-          {/* CELL PHONE */}
-          <label css={labelStyles} htmlFor="Cell_Phone">
-            Cell Phone
-            <input
-              css={inputStyles}
-              name="Cell_Phone"
-              onChange={this.handleUpdate}
-              placeholder="e.g. (512) 555-1919"
-              value={formatPhone(Cell_Phone)}
-            />
-          </label>
-          <div css={baseErrorStyles}>{Cell_PhoneError}</div>
-
-          {/* OFFICE FAX */}
-          <label css={labelStyles} htmlFor="Office_Fax">
-            Office Fax
-            <input
-              css={inputStyles}
-              name="Office_Fax"
-              onChange={this.handleUpdate}
-              placeholder="e.g. (512) 555-1919"
-              value={formatPhone(Office_Fax)}
-            />
-          </label>
-
-          {/* Hidden input to help curtail spam */}
-          <input
-            css={{ opacity: 0, height: 1, width: 1 }}
-            id="honeypot"
-            name="honeypot"
-            onChange={this.handleUpdate}
-            type="text"
-            value={honeypot}
-          />
-
-          {/* SUBMIT BUTTON */}
-          <div
-            css={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              transform: 'translateY(-24px)',
-            }}>
-            <button
+        {hasCompletedRegisterInfoForm
+          ? (
+            <div
               css={{
-                marginTop: '2rem',
-                padding: '8px 12px',
-              }}
-              disabled={!hasValidInput}
-              type="submit"
-              onClick={this.handleClickSubmitButton}
-              style={{
-                color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}`,
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                margin: 32,
               }}>
-              Continue to Step 3
-            </button>
-          </div>
-        </form>
+              <h2>Information Form Complete</h2>
+              <p css={{ marginBottom: 32 }}>Now loading step 3...</p>
+              <CircularProgress size={64} thickness={4} />
+            </div>
+          )
+          : (
+            <form onSubmit={this.handleSubmit}>
+              {/* FIRST NAME */}
+              <label css={labelStyles} htmlFor="First_Name">
+                First Name
+                <input
+                  css={inputStyles}
+                  name="First_Name"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Sally"
+                  type="text"
+                  value={First_Name}
+                />
+              </label>
+              <div css={baseErrorStyles}>{First_NameError}</div>
+
+              {/* LAST NAME */}
+              <label css={labelStyles} htmlFor="Last_Name">
+                Last Name
+                <input
+                  css={inputStyles}
+                  name="Last_Name"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Drumm"
+                  value={Last_Name}
+                />
+              </label>
+              <div css={baseErrorStyles}>{Last_NameError}</div>
+
+              {/* TITLE */}
+              <label css={labelStyles} htmlFor="Title">
+                Title
+                <input
+                  css={inputStyles}
+                  name="Title"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Director of Fine Arts"
+                  value={Title}
+                />
+              </label>
+              <div css={baseErrorStyles}>{TitleError}</div>
+
+              {/* DISTRICT */}
+              <label css={labelStyles} htmlFor="District">
+                District
+                <input
+                  css={inputStyles}
+                  name="District"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Texas ISD"
+                  value={District}
+                />
+              </label>
+              <div css={baseErrorStyles}>{DistrictError}</div>
+
+              {/* ADDRESS 1 */}
+              <label css={labelStyles} htmlFor="Address_1">
+                Address 1
+                <input
+                  css={inputStyles}
+                  name="Address_1"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. 123 Main St."
+                  value={Address_1}
+                />
+              </label>
+              <div css={baseErrorStyles}>{Address_1Error}</div>
+
+              {/* ADDRESS 2 */}
+              <label css={labelStyles} htmlFor="Address_2">
+                Address 2
+                <input
+                  css={inputStyles}
+                  name="Address_2"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Suite 19"
+                  value={Address_2}
+                />
+              </label>
+
+              {/* CITY */}
+              <label css={labelStyles} htmlFor="City">
+                City
+                <input
+                  css={inputStyles}
+                  name="City"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Dallas"
+                  value={City}
+                />
+              </label>
+              <div css={baseErrorStyles}>{CityError}</div>
+
+              {/* ZIP */}
+              <label css={labelStyles} htmlFor="Zip_Code">
+                ZIP Code
+                <input
+                  css={inputStyles}
+                  name="Zip_Code"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. 75150"
+                  value={Zip_Code}
+                />
+              </label>
+              <div css={baseErrorStyles}>{Zip_CodeError}</div>
+
+              {/* EMAIL */}
+              <label css={labelStyles} htmlFor="Email">
+                Email
+                <input
+                  css={inputStyles}
+                  name="Email"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. music@austinisd.edu"
+                  value={Email}
+                />
+              </label>
+              <div css={baseErrorStyles}>{EmailError}</div>
+
+              {/* OFFICE PHONE */}
+              <label css={labelStyles} htmlFor="Office_Phone">
+                Office Phone
+                <input
+                  css={inputStyles}
+                  name="Office_Phone"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. (512) 555-1919"
+                  value={formatPhone(Office_Phone)}
+                />
+              </label>
+              <div css={baseErrorStyles}>{Office_PhoneError}</div>
+
+              {/* CELL PHONE */}
+              <label css={labelStyles} htmlFor="Cell_Phone">
+                Cell Phone
+                <input
+                  css={inputStyles}
+                  name="Cell_Phone"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. (512) 555-1919"
+                  value={formatPhone(Cell_Phone)}
+                />
+              </label>
+              <div css={baseErrorStyles}>{Cell_PhoneError}</div>
+
+              {/* OFFICE FAX */}
+              <label css={labelStyles} htmlFor="Office_Fax">
+                Office Fax
+                <input
+                  css={inputStyles}
+                  name="Office_Fax"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. (512) 555-1919"
+                  value={formatPhone(Office_Fax)}
+                />
+              </label>
+
+              {/* Hidden input to help curtail spam */}
+              <input
+                css={{ opacity: 0, height: 1, width: 1 }}
+                id="honeypot"
+                name="honeypot"
+                onChange={this.handleUpdate}
+                type="text"
+                value={honeypot}
+              />
+
+              {/* SUBMIT BUTTON */}
+              <div
+                css={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  transform: 'translateY(-24px)',
+                }}>
+                <button
+                  css={{
+                    marginTop: '2rem',
+                    padding: '8px 12px',
+                  }}
+                  disabled={!hasValidInput}
+                  onClick={this.handleClickSubmitButton}
+                  style={{
+                    color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}`,
+                  }}
+                  type="submit"
+                >
+                  Continue to Step 3
+                </button>
+              </div>
+            </form>
+          )}
       </div>
     );
   }

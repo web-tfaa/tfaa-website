@@ -198,7 +198,7 @@ class SignUpForm extends Component {
     return (
       <form key="signup-form" onSubmit={this.handleSubmit}>
         <label css={labelStyles} htmlFor="email">
-          Username
+          Email Address
           <input
             css={inputStyles}
             name="email"

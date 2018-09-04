@@ -101,7 +101,6 @@ class Register extends Component {
     } = this.state;
 
     if (this.activeComponent) {
-      console.log('active comp-completedSteps', completedSteps);
       this.setState({
         activeStep: activeStep + 1,
         completedSteps: [...completedSteps, ...step],

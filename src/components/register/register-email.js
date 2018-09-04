@@ -1,6 +1,8 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+
+// Material-UI Dependencies
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Internal Dependencies
@@ -75,7 +77,7 @@ class RegisterEmail extends Component {
           margin: 32,
         }}>
         <h2>Login Successful</h2>
-        <p>Now loading step 2...</p>
+        <p css={{ marginBottom: 32 }}>Now loading step 2...</p>
         <CircularProgress size={64} thickness={4} />
       </div>
     ) : (

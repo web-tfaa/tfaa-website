@@ -3,13 +3,13 @@ import Typography from 'typography';
 import CodePlugin from 'typography-plugin-code';
 
 // Internal Dependencies
-import presets, { colors } from './presets';
 import {
   MOBILE_MEDIA_QUERY,
   TABLET_MEDIA_QUERY,
   MIN_DEFAULT_MEDIA_QUERY,
   MIN_LARGER_DISPLAY_MEDIA_QUERY,
 } from 'typography-breakpoint-constants';
+import presets, { colors } from './presets';
 
 const texasFlagBlue = '#002868';
 
@@ -233,6 +233,18 @@ const _options = {
       },
       '.main-body input:focus': {
         border: `2px solid ${texasFlagBlue}`,
+      },
+      '::-webkit-input-placeholder': {
+        color: texasFlagBlue,
+        opacity: 0.45,
+      },
+      '::-moz-placeholder': {
+        color: texasFlagBlue,
+        opacity: 0.45,
+      },
+      ':-ms-input-placeholder': {
+        color: texasFlagBlue,
+        opacity: 0.45,
       },
       '.gatsby-highlight, .post .gatsby-resp-iframe-wrapper, .post .gatsby-resp-image-link': {
         marginLeft: rhythm(-options.blockMarginBottom),

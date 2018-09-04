@@ -73,7 +73,7 @@ class RegisterPayment extends Component {
       console.log('hasCompletedPayment', hasCompletedPayment);
 
       if (hasCompletedRegisterPaymentStep) {
-        setTimeout(() => onCompleteStep(2), 3500);
+        setTimeout(() => onCompleteStep(2), 4000);
       }
     }
   };

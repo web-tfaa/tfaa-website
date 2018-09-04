@@ -16,7 +16,6 @@ const RegisterInfo = (props) => {
     <section>
       <h2>2. Register for TMAC</h2>
       <FormHr />
-      Register Info
       <RegisterForm onCompleteStep={onCompleteStep} />
     </section>
   );
