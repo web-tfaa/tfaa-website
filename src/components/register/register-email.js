@@ -67,19 +67,17 @@ class RegisterEmail extends Component {
     } = this.state;
 
     const childrenElements = isAuthenticated && hasCompletedRegisterEmail ? (
-      <Fragment>
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          margin: 32,
+        }}>
         <h2>Login Successful</h2>
-        <div
-          css={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            margin: 32,
-          }}>
-          <p>Now loading step 2...</p>
-          <CircularProgress size={64} thickness={4} />
-        </div>
-      </Fragment>
+        <p>Now loading step 2...</p>
+        <CircularProgress size={64} thickness={4} />
+      </div>
     ) : (
       <Fragment>
         <p>

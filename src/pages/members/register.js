@@ -12,7 +12,6 @@ import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import RegisterEmail from '../../components/register/register-email';
-import RegisterForm from '../../components/register/register-form';
 import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
@@ -22,11 +21,6 @@ import { firebase } from '../../firebase';
 // Sidebar Data
 import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
-
-// Local Variables
-const localCompletedRegistrationSteps = JSON.parse(
-  localStorage.getItem('completedRegistrationSteps'),
-);
 
 // Component Definition
 class Register extends Component {
@@ -38,13 +32,11 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      activeStep: localCompletedRegistrationSteps
-        ? localCompletedRegistrationSteps.length
-        : 0,
-      // activeStep: 0,
+      activeStep: 0,
       authUser: null,
+      form: {},
       // Possible completed steps are [0, 1, 2]
-      completedSteps: localCompletedRegistrationSteps || [],
+      completedSteps: [],
     };
 
     this.activeComponent = true;
@@ -76,7 +68,6 @@ class Register extends Component {
     const step2Content = (
       <Fragment>
         <RegisterInfo onCompleteStep={this.handleCompleteStep} />
-        <RegisterForm />
       </Fragment>
     );
 
@@ -102,18 +93,23 @@ class Register extends Component {
     return currentStepContent;
   }
 
-  handleCompleteStep = step => {
+  handleCompleteStep = (step, updatedForm) => {
     const {
       activeStep,
       completedSteps,
+      form,
     } = this.state;
 
     if (this.activeComponent) {
+      console.log('active comp-completedSteps', completedSteps);
       this.setState({
         activeStep: activeStep + 1,
-        completedSteps: completedSteps.push(step),
+        completedSteps: [...completedSteps, ...step],
+        form: {
+          ...form,
+          ...updatedForm,
+        },
       });
-      localStorage.setItem('completedRegistrationSteps', JSON.stringify([step]));
     }
   };
 
@@ -125,9 +121,12 @@ class Register extends Component {
       completedSteps,
     } = this.state;
 
+    console.log('ACTIVE step', activeStep);
+
     const isAuthenticated = Boolean(authUser);
 
     const hasCompletedAllSteps = completedSteps.length === 3;
+
     console.log('hasCompletedAllSteps', hasCompletedAllSteps);
 
     return (

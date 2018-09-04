@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 
 // External Dependencies
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
@@ -83,6 +84,10 @@ const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
 class RegisterForm extends Component {
+  static propTypes = {
+    onCompleteStep: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -114,7 +119,17 @@ class RegisterForm extends Component {
     // This will identify each row in the database and serve as the document name
     const documentId = `${form.First_Name}_${form.Last_Name}`;
 
-    doCreateEntry(form, documentId);
+    doCreateEntry(form, documentId, this.handleCompleteInfoStep)
+
+    // Update the form data and advance the steps
+  };
+
+  handleCompleteInfoStep = () => {
+    if (this.activeComponent) {
+      const { onCompleteStep } = this.props;
+
+      setTimeout(() => onCompleteStep(0), 4000);
+    }
   };
 
   handleUpdate = event => {

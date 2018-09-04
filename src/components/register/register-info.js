@@ -1,31 +1,29 @@
 // External Dependencies
-// import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
-// import Card from '../../components/shared/cards/card';
-// import CardHeadline from '../../components/shared/cards/card-headline';
-// import Cards from '../../components/shared/cards';
-// import Container from '../../components/shared/container';
-// import Layout from '../../components/layout';
-// import Status from './status';
-// import presets from '../../utils/presets';
-// import { options } from '../../utils/typography';
-// import { firebase } from '../../firebase';
-// import CtaButton from '../../components/masthead/cta-button';
+import RegisterForm from './register-form';
 
 // Component Definition
-class RegisterEmail extends Component {
-  render() {
-    return (
-      <section>
-        <h2>2. Register for TMAC</h2>
-        <FormHr />
-        Register Info
-      </section>
-    );
-  }
-}
+const RegisterInfo = (props) => {
+  const {
+    onCompleteStep,
+  } = props;
 
-export default RegisterEmail;
+  return (
+    <section>
+      <h2>2. Register for TMAC</h2>
+      <FormHr />
+      Register Info
+      <RegisterForm onCompleteStep={onCompleteStep} />
+    </section>
+  );
+};
+
+RegisterInfo.propTypes = {
+  onCompleteStep: PropTypes.func.isRequired,
+};
+
+export default RegisterInfo;
