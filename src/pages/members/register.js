@@ -56,7 +56,10 @@ class Register extends Component {
   }
 
   getCurrentStepContent(isAuthenticated) {
-    const { activeStep } = this.state;
+    const {
+      activeStep,
+      form,
+    } = this.state;
 
     const step1Content = (
       <RegisterEmail
@@ -72,7 +75,10 @@ class Register extends Component {
     );
 
     const step3Content = (
-      <RegisterPayment onCompleteStep={this.handleCompleteStep} />
+      <RegisterPayment
+        form={form}
+        onCompleteStep={this.handleCompleteStep}
+      />
     );
 
     let currentStepContent;
@@ -117,10 +123,11 @@ class Register extends Component {
     const {
       activeStep,
       authUser,
+      form,
       completedSteps,
     } = this.state;
 
-    console.log('ACTIVE step', activeStep);
+    console.log('ACTIVE step', activeStep, '\n\n', form);
 
     const isAuthenticated = Boolean(authUser);
 

@@ -18,6 +18,7 @@ import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
 // Component Definition
 class RegisterPayment extends Component {
   static propTypes = {
+    form: PropTypes.shape({}).isRequired,
     onCompleteStep: PropTypes.func.isRequired,
   };
 
@@ -92,6 +93,10 @@ class RegisterPayment extends Component {
 
   render() {
     const {
+      form,
+    } = this.props;
+
+    const {
       hasCompletedPayment,
       paymentDetails,
       value,
@@ -112,6 +117,7 @@ class RegisterPayment extends Component {
               <div css={{ display: 'none' }}>
                 <Invoice
                   amount={this.getCurrentAmount()}
+                  form={form}
                   isActive={value === 'active'}
                   isInvoice={false}
                   paymentDetails={paymentDetails}
@@ -183,6 +189,7 @@ class RegisterPayment extends Component {
                 <div css={{ display: 'none' }}>
                   <Invoice
                     amount={this.getCurrentAmount()}
+                    form={form}
                     isActive={value === 'active'}
                     isInvoice
                     ref={(el) => { this.printInvoice = el; } }

@@ -7,7 +7,7 @@ export const doCreateEntry = (form, documentId, callback) =>
     .set(form)
     .then(() => {
       console.log(`Registration for ${form.First_Name} ${form.Last_Name} was successful`);
-      callback();
+      callback(form);
     })
     .catch(err =>{
       console.log(`Error adding registration for ${form.First_Name} ${form.Last_Name} document`, err);

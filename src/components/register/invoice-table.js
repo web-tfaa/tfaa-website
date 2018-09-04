@@ -54,6 +54,7 @@ const InvoiceTable = (props) => {
   const {
     amount,
     classes,
+    form,
     isActive,
   } = props;
 
@@ -69,7 +70,7 @@ const InvoiceTable = (props) => {
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">
-              TMAC {isActive ? 'Active' : 'Retired'} registration fee for <strong>name-goes-here</strong>
+              TMAC {isActive ? 'Active' : 'Retired'} registration fee for <strong>{form.First_Name} {form.Last_Name}</strong>
               <br />
               for the 2018-2019 school year.
             </CustomTableCell>
@@ -86,6 +87,7 @@ const InvoiceTable = (props) => {
 InvoiceTable.propTypes = {
   amount: PropTypes.number.isRequired,
   classes: PropTypes.shape({}).isRequired,
+  form: PropTypes.shape({}).isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 

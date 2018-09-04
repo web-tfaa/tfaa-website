@@ -1,4 +1,5 @@
 // External Dependencies
+import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
@@ -6,10 +7,14 @@ import React, { Fragment } from 'react';
 import FormHr from '../shared/form-hr';
 import InvoiceTable from './invoice-table';
 
+// Local Variables
+const currentDate = format(new Date(), ['M/D/YYYY']);
+
 // Component Definition
 const Invoice = (props) => {
   const {
     amount,
+    form,
     isActive,
     isInvoice,
     paymentDetails,
@@ -48,7 +53,7 @@ const Invoice = (props) => {
         <h3>Texas Music Administrators Conference</h3>
         <p css={{ fontSize: 14 }}><em>&quot;...promoting and supporting music education&quot;</em></p>
         <div><strong>{isInvoice ? 'Invoice' : 'Receipt'}#:</strong> 201819-001</div>
-        <div><strong>Date:</strong> 2018-09-03</div>
+        <div><strong>Date:</strong> {currentDate}</div>
 
         {!isInvoice && paymentDetails.payerId && (
           <Fragment>
@@ -58,33 +63,34 @@ const Invoice = (props) => {
         )}
       </div>
 
-      <div css={{
-        display: 'flex',
-        fontSize: 14,
-        justifyContent: 'space-around',
-        margin: '0 32px',
-      }}>
-        <div>
-          <h4>FROM</h4>
-          <div css={{ marginBottom: 12 }}>
-            Upon receipt of this invoice,<br />
-            please kindly remit payment to:
+      {isInvoice && (
+        <div css={{
+          display: 'flex',
+          fontSize: 14,
+          justifyContent: 'space-around',
+          margin: '0 32px',
+        }}>
+          <div>
+            <h4>FROM</h4>
+            <div css={{ marginBottom: 12 }}>
+              Upon receipt of this invoice,<br />
+              please kindly remit payment to:
+            </div>
+            <div><strong>Texas Music Administrators Conference</strong></div>
+            <div>c/o Jeff Turner</div>
+            <div>Allen ISD</div>
+            <div>Fine Arts Dept.</div>
+            <div>300 Rivercrest Blvd. </div>
+            <div>Allen, TX 75002</div>
           </div>
-          <div><strong>Texas Music Administrators Conference</strong></div>
-          <div>c/o Jeff Turner</div>
-          <div>Allen ISD</div>
-          <div>Fine Arts Dept.</div>
-          <div>300 Rivercrest Blvd. </div>
-          <div>Allen, TX 75002</div>
-        </div>
 
-        <div>
-          <h4>TO</h4>
-          <div>&quot;District&quot;</div>
-          <div>&quot;District Address&quot;</div>
-          <div>&quot;City&quot;, TX &quot;Zipcode&quot;</div>
+            <div>
+              <h4>TO</h4>
+              <div>{form.District}</div>
+              <div>Accounts Payable</div>
+            </div>
         </div>
-      </div>
+      )}
 
       <div css={{
         alignItems: 'center',
@@ -93,14 +99,21 @@ const Invoice = (props) => {
         justifyContent: 'center',
         marginTop: 48,
       }}>
-        <InvoiceTable amount={amount} isActive={isActive} />
+        <InvoiceTable amount={amount} form={form} isActive={isActive} />
 
         <div css={{
           margin: '72px 32px',
           textAlign: 'center',
          }}>
-          Make all checks payable to:<br />
-          <strong>Texas Music Administrators Conference (TMAC)</strong>
+          {isInvoice
+            ? (
+              <span>
+                Make all checks payable to:<br />
+                <strong>Texas Music Administrators Conference (TMAC)</strong>
+              </span>
+            ) : (
+              <strong>Thank you for joining TMAC for this school year!</strong>
+            )}
         </div>
       </div>
 
@@ -119,6 +132,7 @@ const Invoice = (props) => {
 
 Invoice.propTypes = {
   amount: PropTypes.number.isRequired,
+  form: PropTypes.shape({}).isRequired,
   isActive: PropTypes.bool.isRequired,
   isInvoice: PropTypes.bool.isRequired,
   paymentDetails: PropTypes.shape({

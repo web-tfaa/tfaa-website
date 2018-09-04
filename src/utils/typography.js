@@ -235,16 +235,16 @@ const _options = {
         border: `2px solid ${texasFlagBlue}`,
       },
       '::-webkit-input-placeholder': {
-        color: texasFlagBlue,
-        opacity: 0.45,
+        color: colors.gray.calm,
+        opacity: 0.55,
       },
       '::-moz-placeholder': {
-        color: texasFlagBlue,
-        opacity: 0.45,
+        color: colors.gray.calm,
+        opacity: 0.55,
       },
       ':-ms-input-placeholder': {
-        color: texasFlagBlue,
-        opacity: 0.45,
+        color: colors.gray.calm,
+        opacity: 0.55,
       },
       '.gatsby-highlight, .post .gatsby-resp-iframe-wrapper, .post .gatsby-resp-image-link': {
         marginLeft: rhythm(-options.blockMarginBottom),

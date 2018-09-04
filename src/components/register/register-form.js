@@ -128,19 +128,19 @@ class RegisterForm extends Component {
     // Update the form data and advance the steps with the above callback function
   };
 
-  handleCompleteInfoStep = () => {
+  handleCompleteInfoStep = (form) => {
     if (this.activeComponent) {
       const { onCompleteStep } = this.props;
 
-      setTimeout(() => onCompleteStep(0), 4000);
+      setTimeout(() => onCompleteStep(0, form), 4000);
     }
   };
 
-  handleUpdateCompletedStep = () => {
+  handleUpdateCompletedStep = (form) => {
     if (this.activeComponent) {
       this.setState({
         hasCompletedRegisterInfoForm: true,
-      }, () => this.handleCompleteInfoStep())
+      }, () => this.handleCompleteInfoStep(form))
     }
   }
 
