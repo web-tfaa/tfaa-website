@@ -1,40 +1,32 @@
+/*
+  Main container for the Registration process
+*/
+
 // External Dependencies
-// import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
-// import format from 'date-fns/format';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
-// import Card from '../../components/shared/cards/card';
-// import CardHeadline from '../../components/shared/cards/card-headline';
-// import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import Status from './status';
-// import presets, { colors } from '../../utils/presets';
 import presets from '../../utils/presets';
-// import { options } from '../../utils/typography';
-import { firebase } from '../../firebase';
-// import CtaButton from '../../components/masthead/cta-button';
-import RegisterForm from '../../components/register/register-form';
 import RegisterEmail from '../../components/register/register-email';
+import RegisterForm from '../../components/register/register-form';
 import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
+import Status from './status';
+import { firebase } from '../../firebase';
 
 // Sidebar Data
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
 const localCompletedRegistrationSteps = JSON.parse(
   localStorage.getItem('completedRegistrationSteps'),
 );
-
-/*
-  Main container for the Registration process
-*/
 
 // Component Definition
 class Register extends Component {
@@ -46,10 +38,10 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      // activeStep: localCompletedRegistrationSteps
-      //   ? localCompletedRegistrationSteps.length
-      //   : 0,
-      activeStep: 2,
+      activeStep: localCompletedRegistrationSteps
+        ? localCompletedRegistrationSteps.length
+        : 0,
+      // activeStep: 0,
       authUser: null,
       // Possible completed steps are [0, 1, 2]
       completedSteps: localCompletedRegistrationSteps || [],
@@ -163,9 +155,9 @@ class Register extends Component {
 
             {this.getCurrentStepContent(isAuthenticated)}
 
-            <div style={{ marginTop: '1.5rem' }}>
+            {!hasCompletedAllSteps && <div style={{ marginTop: '1.5rem' }}>
               * Registration is not complete until payment is received.
-            </div>
+            </div>}
           </Container>
 
           <div

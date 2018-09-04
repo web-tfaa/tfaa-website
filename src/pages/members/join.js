@@ -21,23 +21,6 @@ import membersSidebar from './members-links.yml';
 // Local Variables
 const boldStyles = { fontWeight: 600 };
 
-// const FuturaAnchor = ({ children, href }) => (
-//   <a href={href} css={futuraStyles}>
-//     {children}
-//   </a>
-// );
-
-// const MemberFileShareCard = ({ node, description }) => {
-//   return (
-//     <Card>
-//       <CardHeadline>{node.title}</CardHeadline>
-//       <h5 css={{ marginTop: '1rem' }}>{format(node.date, ['MMMM DD YYYY'])}</h5>
-//       <FuturaDiv>{description}</FuturaDiv>
-//       <FuturaAnchor download href={node.link}>Download</FuturaAnchor>
-//     </Card>
-//   );
-// };
-
 // Component Definition
 class JoinContainer extends Component {
   static propTypes = {
@@ -101,8 +84,7 @@ class JoinContainer extends Component {
                 <span css={boldStyles}>2.</span> Complete the Registration Form.
               </FuturaDiv>
               <FuturaDiv>
-                <span css={boldStyles}>3.</span> Pay dues online (or with check
-                via mail).
+                <span css={boldStyles}>3.</span> Pay dues online using PayPal (or mail invoice with  check via mail).
               </FuturaDiv>
             </div>
 

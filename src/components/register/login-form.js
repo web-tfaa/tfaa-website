@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import { options } from '../../utils/typography';
 import { auth } from '../../firebase';
+import { emailRegex } from '../../utils/helpers';
+import { options } from '../../utils/typography';
 
 // Local Styles
 const labelStyles = {
@@ -29,17 +30,6 @@ const inputStyles = {
   padding: '0.3rem',
 };
 
-// const buttonStyles = {
-//   backgroundColor: 'rebeccapurple',
-//   border: 0,
-//   color: 'white',
-//   fontSize: '1.25rem',
-//   fontWeight: 'bold',
-//   marginTop: '0.5rem',
-//   padding: '0.25rem 1rem',
-//   transition: 'background-color 150ms linear',
-// };
-
 const baseErrorStyles = {
   color: 'red',
   fontFamily: options.headerFontFamily.join(`,`),
@@ -54,9 +44,6 @@ const INITIAL_STATE = {
   password: '',
   passwordError: '',
 };
-
-// To check for a valid email address
-const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 
 // Component Definition
 class LoginForm extends Component {
@@ -75,11 +62,22 @@ class LoginForm extends Component {
       ...INITIAL_STATE,
     };
 
-    this.isSubmitting = false;
+    this.activeComponent = true;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { onRegisterLogin } = this.props;
+    const { isAuthenticated } = this.state;
+
+    if (isAuthenticated !== prevState.isAuthenticated) {
+      return onRegisterLogin
+        ? onRegisterLogin()
+        : navigate('/members');
+    }
   }
 
   componentWillUnmount() {
-    this.isSubmitting = false;
+    this.activeComponent = false;
   }
 
   handleSubmit = event => {
@@ -87,32 +85,32 @@ class LoginForm extends Component {
   };
 
   handleUpdate = event => {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      this.handleUpdateErrors,
-    );
+    if (this.activeComponent) {
+      this.setState({
+          [event.target.name]: event.target.value,
+      }, this.handleUpdateErrors);
+    }
   };
 
   handleClickSubmitButton = () => {
-    this.isSubmitting = true;
+    if (this.activeComponent) {
+      const {
+        email,
+        password,
+      } = this.state;
 
-    const { email, password } = this.state;
-
-    auth
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        if (this.isSubmitting) {
+      auth
+        .doSignInWithEmailAndPassword(email, password)
+        .then(() => {
           this.setState(() => ({
             ...INITIAL_STATE,
             isAuthenticated: true,
           }));
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
+        })
+        .catch(err => {
+          this.setState({ error: err });
+        });
+    }
   };
 
   togglePasswordInput = () => {
@@ -128,58 +126,55 @@ class LoginForm extends Component {
   };
 
   handleUpdateEmailError = () => {
-    const { email } = this.state;
+    if (this.activeComponent) {
+      const { email } = this.state;
 
-    if (!email) {
-      this.setState({
-        emailError: 'Email is required',
-      });
-    } else if (regex.test(email)) {
-      this.setState({
-        emailError: '',
-      });
-    } else if (email && !regex.test(email)) {
-      this.setState({
-        emailError: 'Use a valid email',
-      });
+      if (!email) {
+        this.setState({
+          emailError: 'Email is required',
+        });
+      } else if (emailRegex.test(email)) {
+        this.setState({
+          emailError: '',
+        });
+      } else if (email && !emailRegex.test(email)) {
+        this.setState({
+          emailError: 'Use a valid email',
+        });
+      }
     }
   };
 
   handleUpdateLoginPasswordError = () => {
-    const { password } = this.state;
+    if (this.activeComponent) {
+      const { password } = this.state;
 
-    const hasInput = password !== '';
+      const hasInput = password !== '';
 
-    if (!hasInput) {
-      this.setState({
-        passwordError: 'Password is required',
-      });
-    } else if (hasInput && password.length < 8) {
-      this.setState({
-        passwordError: 'Password must be at least 8 characters long',
-      });
-    } else if (hasInput && password.length > 7) {
-      this.setState({
-        passwordError: '',
-      });
+      if (!hasInput) {
+        this.setState({
+          passwordError: 'Password is required',
+        });
+      } else if (hasInput && password.length < 8) {
+        this.setState({
+          passwordError: 'Password must be at least 8 characters long',
+        });
+      } else if (hasInput && password.length > 7) {
+        this.setState({
+          passwordError: '',
+        });
+      }
     }
   };
 
   render() {
-    const { onRegisterLogin } = this.props;
-
     const {
       email,
       emailError,
       error,
-      isAuthenticated,
       password,
       passwordError,
     } = this.state;
-
-    if (isAuthenticated) {
-      Boolean(onRegisterLogin) ? onRegisterLogin() : navigate('/members');
-    }
 
     const hasLoginInput = password !== '' && email !== '';
     const isLoginInvalid = !hasLoginInput || emailError;
@@ -187,15 +182,17 @@ class LoginForm extends Component {
     return (
       <div className="login-form">
         <form onSubmit={this.handleSubmit}>
-          <label css={labelStyles}>Email Address</label>
-          <input
-            css={inputStyles}
-            name="email"
-            onChange={this.handleUpdate}
-            placeholder="Email Address"
-            type="text"
-            value={email}
-          />
+          <label css={labelStyles} htmlFor="email">
+            Email Address
+            <input
+              css={inputStyles}
+              name="email"
+              onChange={this.handleUpdate}
+              placeholder="Email Address"
+              type="text"
+              value={email}
+            />
+          </label>
           <div
             css={{
               color: 'red',
@@ -204,23 +201,25 @@ class LoginForm extends Component {
             }}>
             {emailError}
           </div>
-          <label css={bottomLabelStyles}>Password</label>
           <div
             css={{
               alignItems: 'center',
               display: 'flex',
               marginBottom: 16,
             }}>
-            <input
-              css={inputStyles}
-              id="showhide"
-              name="password"
-              onChange={this.handleUpdate}
-              placeholder="Password"
-              type="password"
-              value={password}
-            />
-            <div css={{ marginLeft: 8 }}>
+            <label css={bottomLabelStyles} htmlFor="password">
+              Password
+              <input
+                css={inputStyles}
+                id="showhide"
+                name="password"
+                onChange={this.handleUpdate}
+                placeholder="Password"
+                type="password"
+                value={password}
+              />
+            </label>
+            <div css={{ margin: '30px 0 0 12px' }}>
               <MdRemoveRedEye
                 css={{
                   height: 20,

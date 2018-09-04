@@ -50,7 +50,7 @@ const Invoice = (props) => {
       </header>
       <FormHr red />
 
-      <div css={{margin: '0 32px'}}>
+      <div css={{ fontSize: 14, margin: '0 32px' }}>
         <h3>Texas Music Administrators Conference</h3>
         <p css={{ fontSize: 14 }}><em>&quot;...promoting and supporting music education&quot;</em></p>
         <div><strong>{isInvoice ? 'Invoice' : 'Receipt'}#:</strong> 201819-001</div>

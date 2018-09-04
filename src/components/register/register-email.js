@@ -87,14 +87,14 @@ class RegisterEmail extends Component {
           login here to complete online registration.
         </p>
         <FormHr />
-        <SignUpForm onRegisterSignUp={this.handleCompleteEmailStep} />
+        <SignUpForm onRegisterSignUp={this.handleUpdateCompletedStep} />
         <FormHr />
         <SignInUpElement
           onClickSignIn={this.handleClickSignInLink}
           viewSignUp={false}
         />
         {!viewingSignUp && (
-          <LoginForm onRegisterLogin={this.handleCompleteEmailStep} />
+          <LoginForm onRegisterLogin={this.handleUpdateCompletedStep} />
         )}
       </Fragment>
     );

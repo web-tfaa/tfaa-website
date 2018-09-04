@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import { options } from '../../utils/typography';
 import { auth } from '../../firebase';
+import { emailRegex } from '../../utils/helpers';
+import { options } from '../../utils/typography';
 
 // Local Styles
 const labelStyles = {
@@ -34,17 +35,6 @@ const baseErrorStyles = {
   marginTop: '0.5rem',
 };
 
-// const buttonStyles = {
-//   backgroundColor: 'rebeccapurple',
-//   border: 0,
-//   color: 'white',
-//   fontSize: '1.25rem',
-//   fontWeight: 'bold',
-//   marginTop: '0.5rem',
-//   padding: '0.25rem 1rem',
-//   transition: 'background-color 150ms linear',
-// };
-
 // Local Variables
 const INITIAL_STATE = {
   email: '',
@@ -55,9 +45,6 @@ const INITIAL_STATE = {
   passwordTwo: '',
   registerError: null,
 };
-
-// To check for a valid email address
-const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 
 // Component Definition
 class SignUpForm extends Component {
@@ -75,6 +62,23 @@ class SignUpForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+
+    this.activeComponent = true;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { onRegisterSignUp } = this.props;
+    const { isAuthenticated } = this.state;
+
+    if (isAuthenticated !== prevState.isAuthenticated) {
+      return onRegisterSignUp
+        ? onRegisterSignUp()
+        : navigate('/members');
+    }
+  }
+
+  componentWillUnmount() {
+    this.activeComponent = false;
   }
 
   handleSubmit = event => {
@@ -82,28 +86,32 @@ class SignUpForm extends Component {
   };
 
   handleUpdate = event => {
-    this.setState(
-      {
+    if (this.activeComponent) {
+      this.setState({
         [event.target.name]: event.target.value,
-      },
-      this.handleUpdateErrors,
-    );
+      }, this.handleUpdateErrors);
+    }
   };
 
   handleClickSignUpButton = () => {
-    const { email, passwordOne } = this.state;
+    if (this.activeComponent) {
+      const {
+        email,
+        passwordOne,
+      } = this.state;
 
-    auth
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(() => {
-        this.setState(() => ({
-          ...INITIAL_STATE,
-          isAuthenticated: true,
-        }));
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
+      auth
+        .doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then(() => {
+          this.setState(() => ({
+            ...INITIAL_STATE,
+            isAuthenticated: true,
+          }));
+        })
+        .catch(err => {
+          this.setState({ error: err });
+        });
+    }
   };
 
   toggleRegisterPasswordInput = () => {
@@ -125,100 +133,101 @@ class SignUpForm extends Component {
   };
 
   handleUpdateEmailError = () => {
-    const { email } = this.state;
+    if (this.activeComponent) {
+      const { email } = this.state;
 
-    if (!email) {
-      this.setState({
-        emailError: 'Email is required',
-      });
-    } else if (regex.test(email)) {
-      this.setState({
-        emailError: '',
-      });
-    } else if (email && !regex.test(email)) {
-      this.setState({
-        emailError: 'Use a valid email',
-      });
+      if (!email) {
+        this.setState({
+          emailError: 'Email is required',
+        });
+      } else if (emailRegex.test(email)) {
+        this.setState({
+          emailError: '',
+        });
+      } else if (email && !emailRegex.test(email)) {
+        this.setState({
+          emailError: 'Use a valid email',
+        });
+      }
     }
   };
 
   handleUpdateRegisterPasswordError = () => {
-    const { passwordOne, passwordTwo } = this.state;
+    if (this.activeComponent) {
+      const { passwordOne, passwordTwo } = this.state;
 
-    const hasInput = passwordOne !== '' && passwordTwo !== '';
+      const hasInput = passwordOne !== '' && passwordTwo !== '';
 
-    if (!hasInput) {
-      this.setState({
-        registerError: '',
-      });
-    } else if (hasInput && passwordOne !== passwordTwo) {
-      this.setState({
-        registerError: 'Passwords should match',
-      });
-    } else if (
-      hasInput &&
-      passwordOne === passwordTwo &&
-      passwordOne.length < 8
-    ) {
-      this.setState({
-        registerError: 'Password must be at least 8 characters long',
-      });
-    } else if (hasInput && passwordOne === passwordTwo) {
-      this.setState({
-        registerError: '',
-      });
+      if (!hasInput) {
+        this.setState({
+          registerError: '',
+        });
+      } else if (hasInput && passwordOne !== passwordTwo) {
+        this.setState({
+          registerError: 'Passwords should match',
+        });
+      } else if (
+        hasInput &&
+        passwordOne === passwordTwo &&
+        passwordOne.length < 8
+      ) {
+        this.setState({
+          registerError: 'Password must be at least 8 characters long',
+        });
+      } else if (hasInput && passwordOne === passwordTwo) {
+        this.setState({
+          registerError: '',
+        });
+      }
     }
   };
 
   render() {
-    const { onRegisterSignUp } = this.props;
-
     const {
       email,
       emailError,
       error,
-      isAuthenticated,
       passwordOne,
       passwordTwo,
       registerError,
     } = this.state;
-
-    if (isAuthenticated) {
-      return onRegisterSignUp || navigate('/members');
-    }
 
     const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
     const isInvalid = !hasInput || registerError || emailError;
 
     return (
       <form key="signup-form" onSubmit={this.handleSubmit}>
-        <label css={labelStyles}>Username</label>
-        <input
-          css={inputStyles}
-          name="email"
-          onChange={this.handleUpdate}
-          placeholder="Email Address"
-          type="text"
-          value={email}
-        />
+        <label css={labelStyles} htmlFor="email">
+          Username
+          <input
+            css={inputStyles}
+            name="email"
+            onChange={this.handleUpdate}
+            placeholder="Email Address"
+            type="text"
+            value={email}
+          />
+        </label>
         <div css={baseErrorStyles}>{emailError}</div>
-        <label css={bottomLabelStyles}>Password</label>
         <div
           css={{
             alignItems: 'center',
             display: 'flex',
             marginBottom: 16,
           }}>
-          <input
-            css={inputStyles}
-            id="passwordOne"
-            name="passwordOne"
-            onChange={this.handleUpdate}
-            placeholder="Password"
-            type="password"
-            value={passwordOne}
-          />
-          <div css={{ marginLeft: 8 }}>
+          <label css={bottomLabelStyles} htmlFor="passwordOne">
+            Password
+            <input
+              css={inputStyles}
+              id="passwordOne"
+              name="passwordOne"
+              onChange={this.handleUpdate}
+              placeholder="Password"
+              type="password"
+              value={passwordOne}
+            />
+          </label>
+          <div css={{ margin: '27px 0 0 12px' }}>
             <MdRemoveRedEye
               css={{
                 height: 20,
@@ -228,22 +237,24 @@ class SignUpForm extends Component {
             />
           </div>
         </div>
-        <label css={bottomLabelStyles}>Confirm Password</label>
         <div
           css={{
             alignItems: 'center',
             display: 'flex',
             marginBottom: 16,
           }}>
-          <input
-            css={inputStyles}
-            id="passwordTwo"
-            name="passwordTwo"
-            onChange={this.handleUpdate}
-            placeholder="Confirm Password"
-            type="password"
-            value={passwordTwo}
-          />
+          <label css={bottomLabelStyles} htmlFor="passwordTwo">
+            Confirm Password
+            <input
+              css={inputStyles}
+              id="passwordTwo"
+              name="passwordTwo"
+              onChange={this.handleUpdate}
+              placeholder="Confirm Password"
+              type="password"
+              value={passwordTwo}
+            />
+          </label>
         </div>
         <div css={baseErrorStyles}>{registerError}</div>
 

@@ -6,7 +6,11 @@ import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import { options } from '../../utils/typography';
-import { removeErrorKeys } from '../../utils/helpers';
+import {
+  emailRegex,
+  removeErrorKeys,
+  zipCodeRegex,
+} from '../../utils/helpers';
 import {
   doCreateEntry,
 } from '../../firebase/db';
@@ -20,27 +24,12 @@ const labelStyles = {
   textTransform: 'uppercase',
 };
 
-// const bottomLabelStyles = {
-//   ...labelStyles,
-// };
-
 const inputStyles = {
   display: 'block',
   fontSize: '1rem',
   padding: '0.3rem',
   minWidth: '70%',
 };
-
-// const buttonStyles = {
-//   backgroundColor: 'rebeccapurple',
-//   border: 0,
-//   color: 'white',
-//   fontSize: '1.25rem',
-//   fontWeight: 'bold',
-//   marginTop: '0.5rem',
-//   padding: '0.25rem 1rem',
-//   transition: 'background-color 150ms linear',
-// };
 
 const baseErrorStyles = {
   color: 'red',
@@ -78,10 +67,6 @@ const INITIAL_STATE = {
   // OfficeFax is not required, so cannot have an error
   Office_Fax: '',
 };
-
-// To check for a valid Email address
-const EmailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-const ZipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Local Functions
 const formatPhone = phone => {
@@ -166,11 +151,11 @@ class RegisterForm extends Component {
         this.setState({
           EmailError: 'Email is required',
         });
-      } else if (value && EmailRegex.test(value)) {
+      } else if (value && emailRegex.test(value)) {
         this.setState({
           EmailError: '',
         });
-      } else if (value && !EmailRegex.test(value)) {
+      } else if (value && !emailRegex.test(value)) {
         this.setState({
           EmailError: 'Use a valid Email',
         });
@@ -184,11 +169,11 @@ class RegisterForm extends Component {
         this.setState({
           Zip_CodeError: 'ZIP Code is required',
         });
-      } else if (value && ZipCodeRegex.test(value)) {
+      } else if (value && zipCodeRegex.test(value)) {
         this.setState({
           Zip_CodeError: '',
         });
-      } else if (value && !ZipCodeRegex.test(value)) {
+      } else if (value && !zipCodeRegex.test(value)) {
         this.setState({
           Zip_CodeError: 'Use a valid ZIP Code',
         });

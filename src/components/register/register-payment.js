@@ -86,9 +86,7 @@ class RegisterPayment extends Component {
           payerId: payment.payerID,
           paymentId: payment.paymentID,
         }
-      });
-      console.log('');
-      // }, () => this.handleCompletePaymentStep());
+      }, () => this.handleCompletePaymentStep());
     }
   };
 
