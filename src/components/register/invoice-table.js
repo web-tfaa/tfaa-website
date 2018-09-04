@@ -56,6 +56,7 @@ const InvoiceTable = (props) => {
     classes,
     form,
     isActive,
+    isInvoice,
   } = props;
 
   return (
@@ -64,7 +65,7 @@ const InvoiceTable = (props) => {
         <TableHead>
           <TableRow>
             <CustomTableCell>Description</CustomTableCell>
-            <CustomTableCell numeric>Total</CustomTableCell>
+            <CustomTableCell numeric>Total{!isInvoice && ' Paid'}</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -88,6 +89,7 @@ InvoiceTable.propTypes = {
   amount: PropTypes.number.isRequired,
   classes: PropTypes.shape({}).isRequired,
   form: PropTypes.shape({}).isRequired,
+  isInvoice: PropTypes.bool.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 

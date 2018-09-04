@@ -119,6 +119,7 @@ class RegisterForm extends Component {
     const form = removeErrorKeys(originalForm);
     delete form.isAuthenticated;
     delete form.honeypot;
+    delete form.hasCompletedRegisterInfoForm;
 
     // This will identify each row in the database and serve as the document name
     const documentId = `${form.First_Name}_${form.Last_Name}`;

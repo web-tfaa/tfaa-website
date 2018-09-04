@@ -17,25 +17,23 @@ import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
 import {
   doGetInvoiceId,
   doGetReceiptId,
+  doUpdateEntry,
   doUpdateInvoiceId,
-  doUpdatReceiptId,
+  doUpdateReceiptId,
 } from '../../firebase/db'
 
 // Component Definition
 class RegisterPayment extends Component {
   static propTypes = {
     form: PropTypes.shape({}).isRequired,
-    onCompleteStep: PropTypes.func.isRequired,
+    // onCompleteStep: PropTypes.func.isRequired,
   };
-
-  counter = 0;
 
   constructor(props) {
     super(props);
 
     this.state = {
       hasCompletedPayment: false,
-      hasCompletedRegisterPaymentStep: false,
       invoiceId: null,
       paymentDetails: {},
       receiptId: null,
@@ -47,7 +45,6 @@ class RegisterPayment extends Component {
 
   componentDidMount() {
     if (this.activeComponent) {
-      console.log('count', this.counter += 1);
       doGetInvoiceId(this.handleGetCurrentInvoiceId);
       doGetReceiptId(this.handleGetCurrentReceiptId);
     }
@@ -87,19 +84,24 @@ class RegisterPayment extends Component {
   handleCompletePaymentStep = () => {
     if (this.activeComponent) {
       const {
-        onCompleteStep,
+        form,
       } = this.props;
 
       const {
-        hasCompletedPayment,
-        hasCompletedRegisterPaymentStep,
+        invoiceId,
+        paymentDetails,
+        receiptId,
       } = this.state;
 
-      console.log('hasCompletedPayment', hasCompletedPayment);
+      const documentId = `${form.First_Name}_${form.Last_Name}`;
 
-      if (hasCompletedRegisterPaymentStep) {
-        setTimeout(() => onCompleteStep(2), 4000);
+      const updatedForm = {
+        ...paymentDetails,
+        invoiceId,
+        receiptId,
       }
+
+      doUpdateEntry(updatedForm, documentId)
     }
   };
 
@@ -109,8 +111,8 @@ class RegisterPayment extends Component {
   };
 
   handleIncrementReceiptId = () => {
-    // Called when unmounting the component if no purchase made
-    return doUpdatReceiptId();
+    // Called when unmounting the component when user completed the purchase
+    return doUpdateReceiptId();
   };
 
   handleUpdateCompletedStep = (payment) => {

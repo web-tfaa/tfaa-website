@@ -96,7 +96,7 @@ export const doGetReceiptId = (callback) =>
       console.log('Error getting document for receipt:', err);
     });
 
-export const doUpdatReceiptId = () =>
+export const doUpdateReceiptId = () =>
   db.runTransaction((transaction) =>
     transaction
       .get(receiptDocRef)

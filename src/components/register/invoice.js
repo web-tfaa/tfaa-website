@@ -105,7 +105,7 @@ const Invoice = (props) => {
         justifyContent: 'center',
         marginTop: 48,
       }}>
-        <InvoiceTable amount={amount} form={form} isActive={isActive} />
+        <InvoiceTable amount={amount} form={form} isActive={isActive} isInvoice={isInvoice} />
 
         <div css={{
           margin: '72px 32px',
