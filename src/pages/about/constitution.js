@@ -384,7 +384,10 @@ const Constitution = ({ location }) => (
 );
 
 Constitution.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default Constitution;

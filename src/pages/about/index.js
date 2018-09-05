@@ -102,8 +102,11 @@ const About = ({ data, location }) => (
 );
 
 About.propTypes = {
-  data: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default About;

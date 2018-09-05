@@ -56,7 +56,7 @@ const PhilosophyCard = ({ children }) => (
   </div>
 );
 PhilosophyCard.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 const FuturaDiv = ({ children }) => (
@@ -69,7 +69,12 @@ const FuturaDiv = ({ children }) => (
   </div>
 );
 FuturaDiv.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({}),
+    ])
+  ).isRequired,
 };
 
 // Component Definition
@@ -207,7 +212,10 @@ const Philosophy = ({ location }) => (
 );
 
 Philosophy.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default Philosophy;

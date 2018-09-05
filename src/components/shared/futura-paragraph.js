@@ -15,6 +15,11 @@ const FuturaParagraph = ({ children }) => (
 );
 
 FuturaParagraph.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.element,
+    PropTypes.node,
+  ]).isRequired,
 }
 export default FuturaParagraph;

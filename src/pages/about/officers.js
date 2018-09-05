@@ -162,7 +162,10 @@ const Officers = ({ location }) => (
 );
 
 Officers.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default Officers;

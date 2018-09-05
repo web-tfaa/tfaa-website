@@ -97,7 +97,10 @@ const History = ({ location }) => (
 );
 
 History.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default History;

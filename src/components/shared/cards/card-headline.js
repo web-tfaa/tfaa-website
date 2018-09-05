@@ -1,4 +1,5 @@
 // External Dependencies
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -28,5 +29,9 @@ const CardHeadline = ({ children }) => (
     {children}
   </h2>
 );
+
+CardHeadline.propTypes = {
+  children: PropTypes.string.isRequired,
+};
 
 export default CardHeadline;
