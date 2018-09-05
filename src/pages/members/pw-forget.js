@@ -11,7 +11,7 @@ import Layout from '../../components/layout';
 import presets, { colors } from '../../utils/presets';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
-import { emailRegex } from '../../helpers';
+import { emailRegex } from '../../utils/helpers';
 
 // Local Variables
 const texasFlagBlue = '#002868';
