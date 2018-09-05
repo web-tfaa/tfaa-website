@@ -26,9 +26,11 @@ const devConfig = {
 //   ? prodConfig
 //   : devConfig;
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(devConfig);
-}
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(devConfig);
+// }
+firebase.initializeApp(devConfig);
+
 
 const auth = firebase.auth();
 const db = firebase.firestore();
