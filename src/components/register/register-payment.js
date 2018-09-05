@@ -89,14 +89,17 @@ class RegisterPayment extends Component {
 
       const {
         paymentDetails,
-        value
+        value,
       } = this.state;
+
+      const isActive = value === 'active';
 
       const documentId = `${form.First_Name}_${form.Last_Name}`;
 
       const updatedForm = {
         ...paymentDetails,
-        level: value,
+        level: isActive ? 'Active' : 'Retired',
+        amount: isActive ? 50.00 : 30.00,
       }
 
       doUpdateEntry(updatedForm, documentId)

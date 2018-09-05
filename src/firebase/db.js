@@ -19,6 +19,7 @@ export const doUpdateEntry = (form, documentId) =>
     .update({
       Payment_Method: form.paymentId ? 'paypal' : 'invoiced',
       Level: form.level,
+      Amount_Paid: form.amount,
     })
     .then(() => {
       console.log(`Updating payment info for ${form.First_Name} ${form.Last_Name} was successful`);
