@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -30,7 +31,7 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default ({ location }) => (
+const BobLewis = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Bob Lewis</title>
@@ -53,7 +54,7 @@ export default ({ location }) => (
         <FuturaParagraph>
           Lewis was band director for one year in Sanderson, one year in
           Abilene, six years in Hondo, and thirty-three years in Northside.
-          Under Lewis's direction the Northside High School Band (later John
+          Under Lewis&apos;s direction the Northside High School Band (later John
           Marshall High School) grew from thirty-six members to three hundred
           ninety members in 1975 when he became an administrator. The band
           established a tradition of excellence in local, state, and national
@@ -63,7 +64,7 @@ export default ({ location }) => (
           As Director of Fine Arts Lewis established the elementary music
           program, the elementary art program, the string orchestra program, and
           continued to expand the band, choir, orchestra, art, and theater arts
-          programs, and Northside's performing groups have continued the
+          programs, and Northside&apos;s performing groups have continued the
           tradition of excellence. At the time of his retirement in 1990 there
           were over 50,000 students involved in fine arts programs.
         </FuturaParagraph>
@@ -114,3 +115,12 @@ export default ({ location }) => (
     </div>
   </Layout>
 );
+
+BobLewis.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default BobLewis;

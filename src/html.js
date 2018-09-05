@@ -7,6 +7,7 @@ import React from 'react';
 // Internal Dependencies
 import colors from './utils/colors';
 
+// eslint-disable-next-line
 let stylesStr;
 if (process.env.NODE_ENV === `production`) {
   try {

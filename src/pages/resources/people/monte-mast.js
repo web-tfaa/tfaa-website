@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -31,7 +32,7 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default ({ location }) => (
+const MonteMast = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Monte Mast</title>
@@ -134,3 +135,12 @@ export default ({ location }) => (
     </div>
   </Layout>
 );
+
+MonteMast.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default MonteMast;

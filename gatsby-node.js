@@ -1,11 +1,11 @@
-const path = require('path');
-const { createFilePath } = require(`gatsby-source-filesystem`);
-const fs = require('fs');
+// const path = require('path');
+// const { createFilePath } = require(`gatsby-source-filesystem`);
+// const fs = require('fs');
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+exports.createPages = ({ graphql }) => {
+  // const { createPage } = actions;
   return new Promise((resolve, reject) => {
-    const blogPostTemplate = path.resolve('src/templates/blog-post.js');
+    // const blogPostTemplate = path.resolve('src/templates/blog-post.js');
     resolve(
       graphql(`
         {
@@ -32,7 +32,7 @@ exports.createPages = ({ graphql, actions }) => {
         //     },
         //   });
         // });
-        return;
+        // return;
       })
     );
   });

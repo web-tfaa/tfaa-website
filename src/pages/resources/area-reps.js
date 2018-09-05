@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -51,9 +52,13 @@ const Avatar = ({ alt, src }) => (
     />
   </div>
 );
+Avatar.propTypes = {
+  alt: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+};
 
 // Component Definition
-export default ({ location }) => (
+const AreaReps = ({ location }) => (
   <Layout location={location}>
     <Container>
       <Helmet>
@@ -145,3 +150,12 @@ export default ({ location }) => (
     </Container>
   </Layout>
 );
+
+AreaReps.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default AreaReps;

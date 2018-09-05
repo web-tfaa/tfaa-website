@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -23,9 +24,13 @@ const ExternalLink = ({ children, to }) => (
     {children}
   </a>
 );
+ExternalLink.propTypes = {
+  children: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
 
 // Component Definition
-const Resources = ({ isAuthenticated, location }) => {
+const Resources = ({ location }) => {
   return (
     <Layout location={location}>
       <Container>
@@ -187,6 +192,13 @@ const Resources = ({ isAuthenticated, location }) => {
       </Container>
     </Layout>
   );
+};
+
+Resources.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default Resources;

@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -30,7 +31,7 @@ const headingNameStyles = {
 };
 
 // Component Definition
-export default ({ location }) => (
+const RandyBartlett = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Randy Bartlett</title>
@@ -104,3 +105,12 @@ export default ({ location }) => (
     </div>
   </Layout>
 );
+
+RandyBartlett.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default RandyBartlett;

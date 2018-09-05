@@ -72,7 +72,13 @@ const CtaButton = ({ to, overrideCSS, children }) => (
 
 CtaButton.propTypes = {
   to: PropTypes.string.isRequired,
-  overrideCSS: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  overrideCSS: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+  ]).isRequired,
+};
+CtaButton.defaultProps = {
+  overrideCSS: '',
 };
 export default CtaButton;
