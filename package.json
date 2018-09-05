@@ -40,7 +40,6 @@
     "gatsby-plugin-sharp": "next",
     "gatsby-plugin-typography": "next",
     "gatsby-source-contentful": "next",
-    "gatsby-source-filesystem": "next",
     "gatsby-transformer-sharp": "next",
     "glamor": "^2.20.40",
     "googleapis": "^33.0.0",

@@ -17,13 +17,6 @@ module.exports = {
         accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
-      },
-    },
     `gatsby-plugin-glamor`,
     {
       resolve: `gatsby-plugin-typography`,
