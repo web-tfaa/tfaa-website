@@ -29,10 +29,12 @@ class PaypalButton extends React.Component {
       showButton: false,
     };
 
-    window.React = React;
-    window.ReactDOM = ReactDOM;
+    if (typeof window !== 'undefined') {
+      window.React = React;
+      window.ReactDOM = ReactDOM;
 
-    this.paypal = window.paypal;
+      this.paypal = window.paypal;
+    }
   }
 
   componentDidMount() {
