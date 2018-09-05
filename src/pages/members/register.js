@@ -87,7 +87,7 @@ class Register extends Component {
       case 1:
         currentStepContent = step2Content;
         break;
-      case 2:
+      case 2: case 3:
         currentStepContent = step3Content;
         break;
       default:
@@ -125,9 +125,9 @@ class Register extends Component {
     } = this.state;
 
     const isAuthenticated = Boolean(authUser);
+    const hasCompletedAllSteps = completedSteps.length >= 3;
 
-    const hasCompletedAllSteps = completedSteps.length === 3;
-
+    /* Children change depending on which step is active */
     return (
       <Layout location={location}>
         <div
@@ -143,8 +143,6 @@ class Register extends Component {
             <Helmet>
               <title>TMAC | Register</title>
             </Helmet>
-
-            {/* Children change depending on which step is active */}
 
             <RegisterStepper
               isAuthenticated={isAuthenticated}

@@ -26,7 +26,7 @@ import {
 class RegisterPayment extends Component {
   static propTypes = {
     form: PropTypes.shape({}).isRequired,
-    // onCompleteStep: PropTypes.func.isRequired,
+    onCompleteStep: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -85,6 +85,7 @@ class RegisterPayment extends Component {
     if (this.activeComponent) {
       const {
         form,
+        onCompleteStep,
       } = this.props;
 
       const {
@@ -102,7 +103,8 @@ class RegisterPayment extends Component {
         amount: isActive ? 50.00 : 30.00,
       }
 
-      doUpdateEntry(updatedForm, documentId)
+      onCompleteStep(2, updatedForm);
+      doUpdateEntry(updatedForm, documentId);
     }
   };
 
@@ -168,7 +170,13 @@ class RegisterPayment extends Component {
             <Fragment>
               <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
               <p>{isActive ? 'Active' : 'Retired'} Member - {isActive ? '$50.00' : '$30.00'}</p>
-              <strong>Thank you for joining TMAC for this school year!</strong>
+              <p>{form.First_Name} {form.Last_Name}, {form.District}</p>
+
+              <h3 css={{ marginTop: 48 }}>Thank you for joining TMAC for this school year!</h3>
+              <FormHr />
+
+              <p>Please click below to print a copy of your receipt.</p>
+
               <ReactToPrint
                 content={() => this.printReceipt}
                 trigger={() => <button type="button">Print Receipt</button>}
