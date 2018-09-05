@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -17,7 +18,7 @@ const indentStyles = {
 };
 
 // Component Definition
-export default ({ location }) => (
+const SummerRoundTable = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Summer Round Table</title>
@@ -94,3 +95,12 @@ export default ({ location }) => (
     </Container>
   </Layout>
 );
+
+SummerRoundTable.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default SummerRoundTable;

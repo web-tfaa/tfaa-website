@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -17,7 +18,7 @@ const indentStyles = {
 };
 
 // Component Definition
-export default ({ location }) => (
+const FallGolfTournament = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Fall Golf Tournament</title>
@@ -124,3 +125,12 @@ export default ({ location }) => (
     </Container>
   </Layout>
 );
+
+FallGolfTournament.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default FallGolfTournament;

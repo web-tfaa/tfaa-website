@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { graphql } from 'gatsby';
 
@@ -13,7 +14,7 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import eventsSidebar from './events-links.yml';
 
 // Component Definition
-export default ({ data, location }) => (
+const Events = ({ data, location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Events</title>
@@ -78,6 +79,16 @@ export default ({ data, location }) => (
     </Container>
   </Layout>
 );
+
+Events.propTypes = {
+  data: PropTypes.shape({}).isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+export default Events;
 
 export const query = graphql`
   query EventsQuery {
