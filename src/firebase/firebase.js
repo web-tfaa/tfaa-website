@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import "firebase/firestore";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 // https://firebase.google.com/docs/web/setup?authuser=0
 
