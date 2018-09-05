@@ -5,7 +5,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -69,9 +69,7 @@ class Register extends Component {
     );
 
     const step2Content = (
-      <Fragment>
-        <RegisterInfo onCompleteStep={this.handleCompleteStep} />
-      </Fragment>
+      <RegisterInfo onCompleteStep={this.handleCompleteStep} />
     );
 
     const step3Content = (

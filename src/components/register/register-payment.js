@@ -88,17 +88,15 @@ class RegisterPayment extends Component {
       } = this.props;
 
       const {
-        invoiceId,
         paymentDetails,
-        receiptId,
+        value
       } = this.state;
 
       const documentId = `${form.First_Name}_${form.Last_Name}`;
 
       const updatedForm = {
         ...paymentDetails,
-        invoiceId,
-        receiptId,
+        level: value,
       }
 
       doUpdateEntry(updatedForm, documentId)
@@ -156,6 +154,8 @@ class RegisterPayment extends Component {
       value,
     } = this.state;
 
+    const isActive = value === 'active';
+
     return (
       <section>
         <h2>3. Pay TMAC Dues</h2>
@@ -164,6 +164,8 @@ class RegisterPayment extends Component {
           ? (
             <Fragment>
               <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
+              <p>{isActive ? 'Active' : 'Retired'} Member - {isActive ? '$50.00' : '$30.00'}</p>
+              <strong>Thank you for joining TMAC for this school year!</strong>
               <ReactToPrint
                 content={() => this.printReceipt}
                 trigger={() => <button type="button">Print Receipt</button>}
