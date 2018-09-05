@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 
@@ -13,7 +14,7 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import aboutSidebar from './about-links.yml';
 
 // Component Definition
-export default ({ data, location }) => (
+const About = ({ data, location }) => (
   <Layout location={location}>
     <Container>
       <Helmet>
@@ -42,7 +43,7 @@ export default ({ data, location }) => (
       </section>
       <section>
         <h4>
-          <Link to={`/about/constitution/`}>Constitution & Bylaws</Link>
+          <Link to="/about/constitution/">Constitution & Bylaws</Link>
         </h4>
       </section>
       <section>
@@ -59,7 +60,7 @@ export default ({ data, location }) => (
       </section>
       <section>
         <h4>
-          <Link to={`/about/history`}>History</Link>
+          <Link to="/about/history">History</Link>
         </h4>
       </section>
       <section>
@@ -99,6 +100,13 @@ export default ({ data, location }) => (
     </Container>
   </Layout>
 );
+
+About.propTypes = {
+  data: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+};
+
+export default About;
 
 export const query = graphql`
   query AboutQuery {

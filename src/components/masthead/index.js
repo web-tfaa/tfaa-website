@@ -58,7 +58,7 @@ const MastheadContent = () => (
           marginBottom: `0.5em`,
           padding: 0,
           width: rhythm(10),
-          //fontSize: `calc(12px + 2vh + 2vw)`,
+          // fontSize: `calc(12px + 2vh + 2vw)`,
           [presets.Mobile]: {
             width: rhythm(10),
           },

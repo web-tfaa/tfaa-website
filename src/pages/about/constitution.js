@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -31,9 +32,12 @@ const FuturaSection = ({ children }) => (
     {children}
   </section>
 );
+FuturaSection.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 // Component Definition
-export default ({ location }) => (
+const Constitution = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Constitution and Bylaws</title>
@@ -378,3 +382,9 @@ export default ({ location }) => (
     </div>
   </Layout>
 );
+
+Constitution.propTypes = {
+  location: PropTypes.string.isRequired,
+};
+
+export default Constitution;

@@ -1,16 +1,17 @@
 // External Dependencies
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
-
-// Internal Dependencies
-import presets, { colors } from '../../utils/presets';
-import typography, { rhythm, scale, options } from '../../utils/typography';
 
 // Icons
 import CardGiftCard from 'react-icons/lib/md/card-giftcard';
 import FolderOpen from 'react-icons/lib/md/folder-open';
 import InfoOutline from 'react-icons/lib/md/info-outline';
 import PersonOutline from 'react-icons/lib/md/person-outline';
+
+// Internal Dependencies
+import presets, { colors } from '../../utils/presets';
+import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Variables
 const texasFlagBlue = '#002868';
@@ -45,8 +46,13 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
     </div>
   </Link>
 );
+MobileNavItem.propTypes = {
+  linkTo: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.func.isRequired,
+};
 
-export default () => (
+const MobileNav = () => (
   <div
     css={{
       alignItems: `center`,
@@ -54,7 +60,7 @@ export default () => (
       borderTop: `1px solid ${colors.ui.light}`,
       bottom: 0,
       display: `flex`,
-      fontFamily: typography.options.headerFontFamily.join(`,`),
+      fontFamily: options.headerFontFamily.join(`,`),
       justifyContent: `space-around`,
       left: 0,
       paddingBottom: `env(safe-area-inset-bottom)`,
@@ -71,3 +77,5 @@ export default () => (
     <MobileNavItem linkTo="/sponsors/" label="Sponsors" icon={CardGiftCard} />
   </div>
 );
+
+export default MobileNav;

@@ -1,5 +1,6 @@
 // External Dependencies
 import hex2rgba from 'hex2rgba';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'glamor';
 import { Link } from 'gatsby';
@@ -69,4 +70,9 @@ const CtaButton = ({ to, overrideCSS, children }) => (
   </Link>
 );
 
+CtaButton.propTypes = {
+  to: PropTypes.string.isRequired,
+  overrideCSS: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+};
 export default CtaButton;

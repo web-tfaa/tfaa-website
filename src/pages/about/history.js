@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -14,7 +15,7 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import aboutSidebar from './about-links.yml';
 
 // Component Definition
-export default ({ location }) => (
+const History = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | History</title>
@@ -37,7 +38,7 @@ export default ({ location }) => (
           In the early 1970s a small group of music supervisors from the
           Dallas-Forth Worth metroplex met together periodically to share ideas
           and help each other with mutual related music concerns. This group
-          began to expand and so we moved our meetings to Crystal's Pizza
+          began to expand and so we moved our meetings to Crystal&apos;s Pizza
           restaurant in Irving and found our meetings becoming more beneficial
           to each other. The meetings remained informal with no set agenda and
           no officers; the only constant was that I arranged the site and sent a
@@ -94,3 +95,9 @@ export default ({ location }) => (
     </div>
   </Layout>
 );
+
+History.propTypes = {
+  location: PropTypes.string.isRequired,
+};
+
+export default History;

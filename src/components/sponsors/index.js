@@ -5,7 +5,7 @@ import React from 'react';
 // Internal Dependencies
 import Container from '../shared/container';
 import SponsorCard from '../shared/sponsor-card';
-import { sponsors2018_2019 as sponsorData } from './sponsor-data';
+import { sponsors201718 as sponsorData } from './sponsor-data';
 
 // Component Definition
 export default () => (
@@ -14,7 +14,6 @@ export default () => (
       <title>TMAC | Sponsors</title>
     </Helmet>
     <h1>Sponsors</h1>
-    <button>Become a sponsor</button>
     <Container>
       <div
         css={{

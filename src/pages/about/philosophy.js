@@ -1,5 +1,6 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
@@ -54,6 +55,9 @@ const PhilosophyCard = ({ children }) => (
     </div>
   </div>
 );
+PhilosophyCard.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 const FuturaDiv = ({ children }) => (
   <div
@@ -64,9 +68,12 @@ const FuturaDiv = ({ children }) => (
     {children}
   </div>
 );
+FuturaDiv.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 // Component Definition
-export default ({ location }) => (
+const Philosophy = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Philosophy</title>
@@ -198,3 +205,9 @@ export default ({ location }) => (
     </div>
   </Layout>
 );
+
+Philosophy.propTypes = {
+  location: PropTypes.string.isRequired,
+};
+
+export default Philosophy;

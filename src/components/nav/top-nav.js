@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
-import typography, { rhythm, scale } from '../../utils/typography';
+import { rhythm, scale, options } from '../../utils/typography';
 import presets from '../../utils/presets';
 import { auth, firebase } from '../../firebase';
 
@@ -93,7 +93,7 @@ class TopNav extends Component {
             boxShadow: '3px 0 5px #2D456F',
             boxSizing: 'border-box',
             display: `flex`,
-            fontFamily: typography.options.headerFontFamily.join(`,`),
+            fontFamily: options.headerFontFamily.join(`,`),
             height: `100%`,
             margin: `0 auto`,
             paddingLeft: rhythm(3 / 4),

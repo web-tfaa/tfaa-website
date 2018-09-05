@@ -119,7 +119,7 @@ const MastheadBg = () => (
         height: `100%`,
         zIndex: -1,
         top: `2%`,
-        //transition: `width 100ms linear`,
+        // transition: `width 100ms linear`,
       }}>
       <svg
         x="-15%"
