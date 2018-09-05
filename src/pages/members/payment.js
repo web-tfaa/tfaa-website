@@ -1,38 +1,18 @@
 // External Dependencies
-// import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
-// import format from 'date-fns/format';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Internal Dependencies
-// import Card from '../../components/shared/cards/card';
-// import CardHeadline from '../../components/shared/cards/card-headline';
-// import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import Status from './status';
 import presets from '../../utils/presets';
-// import { options } from '../../utils/typography';
 import { firebase } from '../../firebase';
-// import CtaButton from '../../components/masthead/cta-button';
-// import RegisterForm from '../../components/register/register-form';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
-
-// Local Variables
-
-// const futuraStyles = {
-//   fontFamily: options.headerFontFamily.join(`,`),
-//   lineHeight: '1.6',
-//   marginBottom: '1rem',
-// };
-
-// const boldStyles = { fontWeight: 600 };
-
-// Local Components
 
 // Component Definition
 class Payment extends Component {

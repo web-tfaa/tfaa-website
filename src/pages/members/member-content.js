@@ -9,7 +9,7 @@ import ClearIcon from 'react-icons/lib/md/clear';
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
-// import FuturaParagraph from '../../components/shared/futura-paragraph';
+import FuturaDiv from '../../components/shared/futura-div';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 
@@ -18,17 +18,6 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
 // Local Variables
-const propTypes = {
-  contentfulFileShareData: PropTypes.array,
-  contentfulFileShareDescriptionData: PropTypes.array,
-  memberEmail: PropTypes.string,
-};
-
-const defaultProps = {
-  contentfulFileShareData: null,
-  contentfulFileShareDescriptionData: null,
-};
-
 const futuraStyles = {
   fontFamily: options.headerFontFamily.join(`,`),
   lineHeight: '1.6',
@@ -54,13 +43,15 @@ const clearIconStyles = {
 };
 
 // Local Components
-const FuturaDiv = ({ children }) => <div css={futuraStyles}>{children}</div>;
-
 const FuturaAnchor = ({ children, href }) => (
   <a href={href} css={futuraStyles}>
     {children}
   </a>
 );
+FuturaAnchor.propTypes = {
+  children: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+};;
 
 const MemberFileShareCard = ({ node, description }) => {
   return (
@@ -75,6 +66,10 @@ const MemberFileShareCard = ({ node, description }) => {
       </FuturaAnchor>
     </Card>
   );
+};
+MemberFileShareCard.propTypes = {
+  node: PropTypes.shape({}).isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 // Component Definition
@@ -134,6 +129,14 @@ const MemberContent = props => {
   );
 };
 
-MemberContent.propTypes = propTypes;
-MemberContent.defaultProps = defaultProps;
+MemberContent.propTypes = {
+  contentfulFileShareData: PropTypes.arrayOf(PropTypes.string),
+  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.string),
+  memberEmail: PropTypes.string,
+};;
+MemberContent.defaultProps = {
+  contentfulFileShareData: null,
+  contentfulFileShareDescriptionData: null,
+};;
+
 export default MemberContent;

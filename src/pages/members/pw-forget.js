@@ -1,14 +1,17 @@
 // External Dependencies
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import presets, { colors } from '../../utils/presets';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
+import { emailRegex } from '../../helpers';
 
 // Local Variables
 const texasFlagBlue = '#002868';
@@ -24,11 +27,15 @@ const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
 });
 
-// To check for a valid email address
-const regex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-
 // Component Definition
 class PasswordForgetForm extends Component {
+  static propTypes = {
+    location: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -64,12 +71,20 @@ class PasswordForgetForm extends Component {
   };
 
   render() {
-    const { email, error, showSuccessMessage } = this.state;
+    const {
+      location,
+    } = this.props;
 
-    const isInvalid = email === '' || !regex.test(email);
+    const {
+      email,
+      error,
+      showSuccessMessage,
+    } = this.state;
+
+    const isInvalid = email === '' || !emailRegex.test(email);
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <div
           css={{
             paddingLeft: 0,
@@ -88,7 +103,7 @@ class PasswordForgetForm extends Component {
               Password Reset
             </h2>
 
-            <hr css={{ background: 'darkred', height: 3 }} />
+            <FormHr />
 
             {showSuccessMessage && (
               <div
@@ -119,7 +134,7 @@ class PasswordForgetForm extends Component {
                 }
                 placeholder="Email Address"
                 type="text"
-                value={this.state.email}
+                value={email}
               />
               <button disabled={isInvalid} type="submit">
                 Reset My Password

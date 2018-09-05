@@ -1,4 +1,5 @@
 // External Dependencies
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
 
@@ -30,7 +31,7 @@ const Status = props => {
   const details = !isAuthenticated ? (
     <p css={statusTextStyles}>
       To access the Members area, please&nbsp;
-      <Link to={'/members/login'}>log in</Link>.
+      <Link to="/members/login">log in</Link>.
     </p>
   ) : (
     <p css={statusTextStyles}>
@@ -60,6 +61,13 @@ const Status = props => {
   );
 
   return <div css={statusRootStyles}>{details}</div>;
+};
+
+Status.propTypes = {
+  authUser: PropTypes.shape({}),
+};
+Status.defaultProps = {
+  authUser: null,
 };
 
 export default Status;
