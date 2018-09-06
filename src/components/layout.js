@@ -138,7 +138,7 @@ class DefaultLayout extends Component {
           <meta name="og:site_name" content="TMAC" />
           <html lang="en" amp />
         </Helmet>
-        <TopNav pathname={path} />
+        <TopNav isAuthenticated={isAuthenticated} />
         <div
           className={hasSidebar ? `main-body has-sidebar` : `main-body`}
           css={{
