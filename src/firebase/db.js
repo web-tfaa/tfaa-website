@@ -2,7 +2,7 @@ import { db } from './firebase';
 
 // User API
 export const doCreateEntry = (form, documentId, callback) =>
-  db.collection('registration_18-19')
+  typeof window !== 'undefined' && db.collection('registration_18-19')
     .doc(documentId)
     .set(form)
     .then(() => {
@@ -14,7 +14,7 @@ export const doCreateEntry = (form, documentId, callback) =>
     });
 
 export const doUpdateEntry = (form, documentId) =>
-  db.collection('registration_18-19')
+  typeof window !== 'undefined' && db.collection('registration_18-19')
     .doc(documentId)
     .update({
       Payment_Method: form.paymentId ? 'paypal' : 'invoiced',
@@ -30,10 +30,10 @@ export const doUpdateEntry = (form, documentId) =>
 
 
 // Invoice actions
-const invoiceDocRef = db.collection('Document_ID').doc('invoice_18-19');
+const invoiceDocRef = typeof window !== 'undefined' && db.collection('Document_ID').doc('invoice_18-19');
 
 export const doGetInvoiceId = (callback) =>
-  db.collection('Document_ID')
+  typeof window !== 'undefined' && db.collection('Document_ID')
     .doc('invoice_18-19')
     .get()
     .then((doc) => {
@@ -50,7 +50,7 @@ export const doGetInvoiceId = (callback) =>
     });
 
 export const doUpdateInvoiceId = () =>
-  db.runTransaction((transaction) =>
+  typeof window !== 'undefined' && db.runTransaction((transaction) =>
     transaction
       .get(invoiceDocRef)
       .then((doc) => {
@@ -77,10 +77,10 @@ export const doUpdateInvoiceId = () =>
 
 
 // Receipt actions
-const receiptDocRef = db.collection('Document_ID').doc('receipt_18-19');
+const receiptDocRef = typeof window !== 'undefined' && db.collection('Document_ID').doc('receipt_18-19');
 
 export const doGetReceiptId = (callback) =>
-  db.collection('Document_ID')
+  typeof window !== 'undefined' && db.collection('Document_ID')
     .doc('receipt_18-19')
     .get()
     .then((doc) => {
@@ -97,7 +97,7 @@ export const doGetReceiptId = (callback) =>
     });
 
 export const doUpdateReceiptId = () =>
-  db.runTransaction((transaction) =>
+  typeof window !== 'undefined' && db.runTransaction((transaction) =>
     transaction
       .get(receiptDocRef)
       .then((doc) => {
