@@ -4,22 +4,22 @@ import React, { Component } from 'react';
 import { Link } from 'gatsby';
 
 // Local Variables
-const propTypes = {
-  max: PropTypes.number,
-  min: PropTypes.number,
-  sponsorClass: PropTypes.string.isRequired,
-  sponsorData: PropTypes.array.isRequired,
-};
-
-const defaultProps = {
-  max: null,
-  min: null,
-};
-
 const emptySponsorStyles = { maxWidth: '75%' };
 
 // Component Definition
 class SponsorCard extends Component {
+  static propTypes = {
+    max: PropTypes.number,
+    min: PropTypes.number,
+    sponsorClass: PropTypes.string.isRequired,
+    sponsorData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  };
+
+  static defaultProps = {
+    max: null,
+    min: null,
+  };
+
   renderSponsors = sponsorData => {
     const { sponsorClass } = this.props;
 
@@ -83,6 +83,4 @@ class SponsorCard extends Component {
   }
 }
 
-SponsorCard.propTypes = propTypes;
-SponsorCard.defaultProps = defaultProps;
 export default SponsorCard;
