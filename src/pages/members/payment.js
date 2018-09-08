@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import Firebase from '../../firebase';
 import Layout from '../../components/layout';
 import Status from './status';
 import presets from '../../utils/presets';
+import { firebase } from '../../firebase';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -26,25 +26,15 @@ class Payment extends Component {
     this.state = {
       authUser: null,
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
-    this.firebase = new Firebase();
-
-    if (this.activeComponent) {
-      this.firebase.auth.onAuthStateChanged(
-        authUser =>
-          authUser
-            ? this.setState(() => ({ authUser }))
-            : this.setState(() => ({ authUser: null })),
-      );
-    }
-  }
-
-  componentWillUnmount() {
-    this.activeComponent = false;
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
+    );
   }
 
   render() {

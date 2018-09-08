@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Internal Dependencies
-import Firebase from '../firebase';
 import Footer from './footer';
 import MobileNav from './nav/mobile-nav';
 import SidebarBody from './shared/sidebar/sidebar-body';
 import TopNav from './nav/top-nav';
+import { firebase } from '../firebase';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
@@ -92,9 +92,7 @@ class DefaultLayout extends Component {
   }
 
   componentDidMount() {
-    this.firebase = new Firebase();
-
-    this.firebase.auth.onAuthStateChanged(authUser =>
+    firebase.auth.onAuthStateChanged(authUser =>
       authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null })),

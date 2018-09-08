@@ -6,12 +6,12 @@ import { graphql } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import Firebase from '../../firebase';
 import Layout from '../../components/layout';
 import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
 import presets from '../../utils/presets';
 import Status from './status';
+import { firebase } from '../../firebase';
 
 // Component Definition
 class Members extends Component {
@@ -31,10 +31,8 @@ class Members extends Component {
   }
 
   componentDidMount() {
-    this.firebase = new Firebase();
-
     if (this.activeComponent) {
-      this.firebase.auth.onAuthStateChanged(
+      firebase.auth.onAuthStateChanged(
         authUser =>
           authUser
             ? this.setState(() => ({ authUser }))

@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import Firebase from '../../firebase';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import RegisterEmail from '../../components/register/register-email';
@@ -17,6 +16,7 @@ import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
+import { firebase } from '../../firebase';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -43,16 +43,12 @@ class Register extends Component {
   }
 
   componentDidMount() {
-    this.firebase = new Firebase();
-
-    if (this.activeComponent) {
-      this.firebase.auth.onAuthStateChanged(
-        authUser =>
-          authUser
-            ? this.setState(() => ({ authUser }))
-            : this.setState(() => ({ authUser: null })),
-      );
-    }
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
+    );
   }
 
   componentWillUnmount() {

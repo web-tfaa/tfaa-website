@@ -8,11 +8,11 @@ import React, { Component } from 'react';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import CtaButton from '../../components/masthead/cta-button';
-import Firebase from '../../firebase';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import Status from './status';
+import { firebase } from '../../firebase';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -33,25 +33,15 @@ class JoinContainer extends Component {
     this.state = {
       authUser: null,
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
-    this.firebase = new Firebase();
-
-    if (this.activeComponent) {
-      this.firebase.auth.onAuthStateChanged(
-        authUser =>
-          authUser
-            ? this.setState(() => ({ authUser }))
-            : this.setState(() => ({ authUser: null })),
-      );
-    }
-  }
-
-  componentWillUnmount() {
-    this.activeComponent = false;
+    firebase.auth.onAuthStateChanged(
+      authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
+    );
   }
 
   render() {
