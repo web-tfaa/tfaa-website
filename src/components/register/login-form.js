@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import { auth } from '../../firebase';
 import { emailRegex } from '../../utils/helpers';
+import { firebase } from '../../firebase';
 import { options } from '../../utils/typography';
 
 // Local Styles
@@ -65,6 +65,12 @@ class LoginForm extends Component {
     this.activeComponent = true;
   }
 
+  componentDidMount() {
+    // We need the 'window' to be defined
+    //  which is only once a component is mounted
+    this.auth = firebase.auth();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { onRegisterLogin } = this.props;
     const { isAuthenticated } = this.state;
@@ -99,17 +105,19 @@ class LoginForm extends Component {
         password,
       } = this.state;
 
-      auth
-        .doSignInWithEmailAndPassword(email, password)
-        .then(() => {
-          this.setState(() => ({
-            ...INITIAL_STATE,
-            isAuthenticated: true,
-          }));
-        })
-        .catch(err => {
-          this.setState({ error: err });
-        });
+      if (this.auth) {
+        this.auth
+          .doSignInWithEmailAndPassword(email, password)
+          .then(() => {
+            this.setState(() => ({
+              ...INITIAL_STATE,
+              isAuthenticated: true,
+            }));
+          })
+          .catch(err => {
+            this.setState({ error: err });
+          });
+      }
     }
   };
 

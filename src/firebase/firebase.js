@@ -18,9 +18,9 @@ const devConfig = {
   apiKey: process.env.GATSBY_FIREBASE_API_KEY,
   authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
+  messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
   projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
   storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
 };
 
 // const config = process.env.NODE_ENV === 'production'
@@ -28,14 +28,13 @@ const devConfig = {
 //   : devConfig;
 
 if (!firebase.apps.length) {
+  console.log('firebase.apps', firebase.apps.length, firebase.apps);
   firebase.initializeApp(devConfig);
 }
 // firebase.initializeApp(devConfig);
 
 // eslint-disable-next-line
 let db, auth;
-// eslint-disable-next-line
-// let auth;
 
 if (typeof window !== 'undefined') {
   db = firebase.database();
@@ -45,4 +44,4 @@ if (typeof window !== 'undefined') {
 // const auth = firebase.auth();
 // const db = firebase.firestore();
 
-export { auth, db };
+export { firebase };
