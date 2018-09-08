@@ -32,13 +32,17 @@ const devConfig = {
 // }
 firebase.initializeApp(devConfig);
 
-// eslint-disable import/no-mutable-exports
-let db;
-let auth;
+// eslint-disable-next-line
+// let db;
+// eslint-disable-next-line
+// let auth;
 
-if (typeof window !== 'undefined') {
-  db = firebase.database();
-  auth = firebase.auth();
-}
+// if (typeof window !== 'undefined') {
+  // db = firebase.database();
+  // auth = firebase.auth();
+// }
+
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 export { auth, db };

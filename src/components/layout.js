@@ -109,8 +109,6 @@ class DefaultLayout extends Component {
 
     const { authUser } = this.state;
 
-    // const path = location.pathname;
-
     const isAuthenticated = Boolean(authUser);
 
     const isHome = path === `/`;

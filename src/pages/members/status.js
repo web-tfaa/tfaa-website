@@ -53,7 +53,7 @@ const Status = props => {
             cursor: 'pointer',
           },
         }}
-        href="/members#"
+        href="/members"
         onClick={auth.doSignOut}>
         Sign out
       </a>

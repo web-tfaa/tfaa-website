@@ -26,15 +26,23 @@ class Members extends Component {
     this.state = {
       authUser: null,
     };
+
+    this.activeComponent = true;
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(
-      authUser =>
-        authUser
-          ? this.setState(() => ({ authUser }))
-          : this.setState(() => ({ authUser: null })),
-    );
+    if (this.activeComponent) {
+      firebase.auth.onAuthStateChanged(
+        authUser =>
+          authUser
+            ? this.setState(() => ({ authUser }))
+            : this.setState(() => ({ authUser: null })),
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    this.activeComponent = false;
   }
 
   render() {
