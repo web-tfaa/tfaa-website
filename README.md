@@ -1,19 +1,26 @@
 # TMAC
 
-This website was constructed for Mario Luna and the Texas Music Administrators Conference. Planning began in January 2018 with building starting in mid-February 2018.
+This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Administrators Conference. Planning began in January 2018 with building starting in mid-February 2018.
 
 ## Tools
 
--  GatsbyJS <img alt="Gatsby icon" src="https://www.gatsbyjs.org/monogram.svg" width="20">
+- GatsbyJS <img alt="Gatsby icon" src="https://www.gatsbyjs.org/monogram.svg" width="20">
 - React
 - Glamor
-- CMS (coming soon...)
+- Contentful (as CMS)
+- Cloudinary (as CDN)
+- Firebase for authentication
+- Firestore for data storage
+- Material-UI
 
 ## Inspiration
 
-Heavily inspired by the Gatsby documentation website.
+Heavily inspired by the Gatsby v1 documentation website.
 
 ## Running in development
-`gatsby develop`
 
-:musical_note: :trumpet: :saxophone: :stuck_out_tongue_winking_eye:
+1. Clone this repo
+2. Install dependencies → `yarn`
+3. Start the development server → `gatsby develop`
+
+:musical_note: :trumpet: :saxophone:
