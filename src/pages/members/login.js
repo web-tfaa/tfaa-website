@@ -6,11 +6,11 @@ import { Link, navigate } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
+import Firebase from '../../firebase';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
 import presets from '../../utils/presets';
-import { firebase } from '../../firebase';
 
 // Component Definition
 class Login extends Component {
@@ -24,14 +24,24 @@ class Login extends Component {
     this.state = {
       authUser: null,
     };
+
+    this.activeComponent = true;
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser =>
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null })),
-    );
+    this.firebase = new Firebase();
+
+    if (this.activeComponent) {
+      this.firebase.auth.onAuthStateChanged(authUser =>
+        authUser
+          ? this.setState(() => ({ authUser }))
+          : this.setState(() => ({ authUser: null })),
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    this.activeComponent = false;
   }
 
   handleRedirectToMembers = () => {
