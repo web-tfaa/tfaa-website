@@ -85,7 +85,7 @@ const MemberContent = props => {
       <h1>Member Dashboard</h1>
       <Cards>
         <Card>
-          <CardHeadline>Tasks for {memberEmail}</CardHeadline>
+          <CardHeadline>{`Tasks for ${memberEmail}`}</CardHeadline>
           <FuturaDiv>
             <CheckIcon css={checkIconStyles} />
             Registered for 2018-2019 school year
@@ -130,8 +130,8 @@ const MemberContent = props => {
 };
 
 MemberContent.propTypes = {
-  contentfulFileShareData: PropTypes.arrayOf(PropTypes.string),
-  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.string),
+  contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
+  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
   memberEmail: PropTypes.string,
 };;
 MemberContent.defaultProps = {

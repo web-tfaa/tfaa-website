@@ -41,7 +41,6 @@ export const doGetInvoiceId = (callback) =>
         // doc.data() will be undefined in this case
         console.log('no such document for invoice');
       } else {
-        console.log('document data for invoice →', doc.data());
         callback(doc.data().currentInvoiceId);
       }
     })
@@ -58,8 +57,6 @@ export const doUpdateInvoiceId = () =>
           // doc.data() will be undefined in this case
           console.log('no such document for invoice');
         } else {
-          console.log('document data for invoice →', doc.data());
-
           const newInvoiceId = doc.data().currentInvoiceId + 1;
           transaction.update(invoiceDocRef, { currentInvoiceId: newInvoiceId });
         }
@@ -88,7 +85,6 @@ export const doGetReceiptId = (callback) =>
         // doc.data() will be undefined in this case
         console.log('no such document for receipt');
       } else {
-        console.log('document data for receipt →', doc.data());
         callback(doc.data().currentReceiptId);
       }
     })
@@ -105,8 +101,6 @@ export const doUpdateReceiptId = () =>
           // doc.data() will be undefined in this case
           console.log('no such document for receipt');
         } else {
-          console.log('document data for receipt →', doc.data());
-
           const newReceiptId = doc.data().currentReceiptId + 1;
           transaction.update(receiptDocRef, { currentReceiptId: newReceiptId });
         }

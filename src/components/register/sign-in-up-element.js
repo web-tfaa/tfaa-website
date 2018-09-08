@@ -24,7 +24,7 @@ class SignInUpElement extends Component {
   handleClickSignIn = () => {
     const { onClickSignIn } = this.props;
 
-    Boolean(onClickSignIn) ? onClickSignIn() : navigate('/members/login');
+    return onClickSignIn ? onClickSignIn() : navigate('/members/login');
   };
 
   handleClickSignUp = () => {
