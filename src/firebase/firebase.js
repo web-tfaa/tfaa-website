@@ -30,7 +30,9 @@ const devConfig = {
 // if (!firebase.apps.length) {
 //   firebase.initializeApp(devConfig);
 // }
-firebase.initializeApp(devConfig);
+if (typeof window !== 'undefined') {
+  firebase.initializeApp(devConfig);
+}
 
 // eslint-disable-next-line
 // let db;
