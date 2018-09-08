@@ -42,7 +42,9 @@ firebase.initializeApp(devConfig);
   // auth = firebase.auth();
 // }
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+console.log('typeof winddddow', typeof window);
+
+const auth = firebase && firebase.auth();
+const db = firebase && firebase.firestore();
 
 export { auth, db };
