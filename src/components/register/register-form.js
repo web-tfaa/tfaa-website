@@ -9,16 +9,15 @@ import { navigate } from 'gatsby';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Internal Dependencies
-import { firebase } from '../../firebase';
 import { options } from '../../utils/typography';
 import {
   emailRegex,
   removeErrorKeys,
   zipCodeRegex,
 } from '../../utils/helpers';
-// import {
-//   doCreateEntry,
-// } from '../../firebase/db';
+import {
+  doCreateEntry,
+} from '../../firebase/db';
 
 // Local Styles
 const labelStyles = {
@@ -103,30 +102,9 @@ class RegisterForm extends Component {
     this.activeComponent = true;
   }
 
-  componentDidMount() {
-    // We need the 'window' to be defined
-    //  which is only once a component is mounted
-    this.db = firebase.database();
-  }
-
   componentWillUnmount() {
     this.activeComponent = false;
   }
-
-  doCreateEntry = (form, documentId, callback) => {
-    if (this.db) {
-      this.db.collection('registration_18-19')
-        .doc(documentId)
-        .set(form)
-        .then(() => {
-          console.log(`Registration for ${form.First_Name} ${form.Last_Name} was successful`);
-          callback(form);
-        })
-        .catch(err =>{
-          console.log(`Error adding registration for ${form.First_Name} ${form.Last_Name} document`, err);
-        });
-    }
-  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -146,7 +124,7 @@ class RegisterForm extends Component {
     // This will identify each row in the database and serve as the document name
     const documentId = `${form.First_Name}_${form.Last_Name}`;
 
-    this.doCreateEntry(form, documentId, this.handleUpdateCompletedStep)
+    doCreateEntry(form, documentId, this.handleUpdateCompletedStep)
 
     // Update the form data and advance the steps with the above callback function
   };
