@@ -11,6 +11,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
 // Internal Dependencies
+import CtaButton from '../masthead/cta-button';
 import FormHr from '../shared/form-hr';
 import Invoice from './invoice';
 import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
@@ -179,7 +180,7 @@ class RegisterPayment extends Component {
 
               <ReactToPrint
                 content={() => this.printReceipt}
-                trigger={() => <button type="button">Print Receipt</button>}
+                trigger={() => <CtaButton>Print Receipt</CtaButton>}
               />
               <div css={{ display: 'none' }}>
                 <Invoice

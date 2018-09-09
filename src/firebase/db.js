@@ -30,7 +30,6 @@ export const doUpdateEntry = (form, documentId) =>
       console.log(`Error updating payment info for ${form.First_Name} ${form.Last_Name} document`, err);
     });
 
-
 // Invoice actions
 const invoiceDocRef = db.collection('Document_ID').doc('invoice_18-19');
 
