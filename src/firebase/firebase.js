@@ -39,11 +39,14 @@ if (!firebase.apps.length) {
 let db, auth;
 
 if (typeof window !== 'undefined') {
-  db = firebase.database();
+  db = firebase.firestore();
   auth = firebase.auth();
 }
 
 // const auth = firebase.auth();
 // const db = firebase.firestore();
+
+
+console.log('2 firebase.apps', db);
 
 export { auth, db };

@@ -1,12 +1,13 @@
 // External Dependencies
 import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
+import AuthUserContext from '../session/AuthUserContext';
 import presets from '../../utils/presets';
-import { firebase } from '../../firebase';
+import { auth } from '../../firebase';
 import { rhythm, scale, options } from '../../utils/typography';
 
 const navItemStyles = {
@@ -48,127 +49,118 @@ NavItem.propTypes = {
 };
 
 // Component Definition
-class TopNav extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-  };
+const TopNav = (props) => {
+  const { isAuthenticated } = props;
 
-  componentDidMount() {
-    // We need the 'window' to be defined
-    //  which is only once a component is mounted
-
-    console.log('what even is firebase', firebase);
-
-    if (typeof window !== 'undefined') {
-      this.auth = firebase.auth();
-    }
-  }
-
-  render() {
-    const { isAuthenticated } = this.props;
-
-    console.log('this.auth in top nav', this.auth);
-
-    return (
+  return (
+    <div
+      role="navigation"
+      css={{
+        background: `${hex2rgba('#fbfafc', 0.95)}`,
+        display: 'flex',
+        flex: 1,
+        height: presets.headerHeight,
+        left: 0,
+        right: 0,
+        zIndex: `2`,
+        [presets.Tablet]: {
+          position: 'fixed',
+        },
+      }}>
       <div
-        role="navigation"
         css={{
-          background: `${hex2rgba('#fbfafc', 0.95)}`,
-          display: 'flex',
-          flex: 1,
-          height: presets.headerHeight,
-          left: 0,
-          right: 0,
-          zIndex: `2`,
-          [presets.Tablet]: {
-            position: 'fixed',
-          },
+          // maxWidth: rhythm(presets.maxWidth),
+          alignItems: `flex-end`,
+          borderBottom: '4px solid #2D456F',
+          boxShadow: '3px 0 5px #2D456F',
+          boxSizing: 'border-box',
+          display: `flex`,
+          fontFamily: options.headerFontFamily.join(`,`),
+          height: `100%`,
+          margin: `0 auto`,
+          paddingLeft: rhythm(3 / 4),
+          paddingRight: rhythm(3 / 4),
+          width: `100%`,
         }}>
-        <div
+        <NavItem
           css={{
-            // maxWidth: rhythm(presets.maxWidth),
-            alignItems: `flex-end`,
-            borderBottom: '4px solid #2D456F',
-            boxShadow: '3px 0 5px #2D456F',
-            boxSizing: 'border-box',
-            display: `flex`,
-            fontFamily: options.headerFontFamily.join(`,`),
-            height: `100%`,
-            margin: `0 auto`,
-            paddingLeft: rhythm(3 / 4),
-            paddingRight: rhythm(3 / 4),
-            width: `100%`,
-          }}>
-          <NavItem
+            '&:hover': {
+              opacity: 1,
+              textDecoration: 'none',
+            },
+          }}
+          linkTo="/">
+          <div
             css={{
-              '&:hover': {
-                opacity: 1,
-                textDecoration: 'none',
-              },
-            }}
-            linkTo="/">
+              alignItems: `center`,
+              color: `inherit`,
+              display: `flex`,
+              marginRight: rhythm(1 / 2),
+              textDecoration: `none`,
+            }}>
+            <img
+              alt="TMAC logo"
+              style={{ marginBottom: 0 }}
+              height="30px"
+              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+            />
             <div
               css={{
-                alignItems: `center`,
-                color: `inherit`,
-                display: `flex`,
-                marginRight: rhythm(1 / 2),
-                textDecoration: `none`,
+                fontSize: 24,
+                marginLeft: '0.8em',
+                textDecoration: 'none',
               }}>
-              <img
-                alt="TMAC logo"
-                style={{ marginBottom: 0 }}
-                height="30px"
-                src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
-              />
-              <div
-                css={{
-                  fontSize: 24,
-                  marginLeft: '0.8em',
-                  textDecoration: 'none',
-                }}>
-                TMAC
-              </div>
+              TMAC
             </div>
-          </NavItem>
-          <ul
-            css={{
-              display: `none`,
-              [presets.Tablet]: {
-                display: `flex`,
-                flexGrow: 1,
-                listStyle: `none`,
-                margin: 0,
-                maskImage: `linear-gradient(to right, transparent, white ${rhythm(
-                  1 / 8,
-                )}, white 98%, transparent)`,
-                overflowX: `auto`,
-                padding: 0,
-              },
-            }}>
-            <NavItem linkTo="/about/">About</NavItem>
-            <NavItem linkTo="/events/">Events</NavItem>
-            <NavItem linkTo="/resources/">Resources</NavItem>
-            <NavItem linkTo="/members/">Membership</NavItem>
-            <NavItem linkTo="/sponsors/">Sponsors</NavItem>
-            {isAuthenticated && (
-              <div
-                css={{
-                  float: 'right',
-                }}
-                onClick={this.auth ? this.auth.doSignOut : null}
-                role="button"
-                tabIndex={0}
-                onKeyUp={this.auth ? this.auth.doSignOut : null}
-              >
-                <NavItem linkTo="/">Sign Out</NavItem>
-              </div>
-            )}
-          </ul>
-        </div>
+          </div>
+        </NavItem>
+        <ul
+          css={{
+            display: `none`,
+            [presets.Tablet]: {
+              display: `flex`,
+              flexGrow: 1,
+              listStyle: `none`,
+              margin: 0,
+              maskImage: `linear-gradient(to right, transparent, white ${rhythm(
+                1 / 8,
+              )}, white 98%, transparent)`,
+              overflowX: `auto`,
+              padding: 0,
+            },
+          }}>
+          <NavItem linkTo="/about/">About</NavItem>
+          <NavItem linkTo="/events/">Events</NavItem>
+          <NavItem linkTo="/resources/">Resources</NavItem>
+          <NavItem linkTo="/members/">Membership</NavItem>
+          <NavItem linkTo="/sponsors/">Sponsors</NavItem>
+          {isAuthenticated && (
+            <div
+              css={{
+                float: 'right',
+              }}
+              onClick={auth.doSignOut}
+              role="button"
+              tabIndex={0}
+              onKeyUp={auth.doSignOut}
+            >
+              <NavItem linkTo="/">Sign Out</NavItem>
+            </div>
+          )}
+        </ul>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+TopNav.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
-export default TopNav;
+const TopNavWithContext = () => (
+  <AuthUserContext.Consumer>
+    {authUser => <TopNav isAuthenticated={!!authUser} />}
+  </AuthUserContext.Consumer>
+);
+
+
+export default TopNavWithContext;
