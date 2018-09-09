@@ -17,7 +17,14 @@ const stripeAnimation = css.keyframes({
 });
 
 // Component Definition
-const RegisterButton = ({ children, onClick, overrideCSS }) => (
+const RegisterButton = ({
+  buttonType,
+  children,
+  isDisabled,
+  onClick,
+  overrideCSS,
+}) => (
+  // eslint-disable-next-line
   <button
     css={{
       ...overrideCSS,
@@ -48,10 +55,10 @@ const RegisterButton = ({ children, onClick, overrideCSS }) => (
         }`,
         ':hover, &:focus': {
           backgroundSize: `30px 30px`,
-          backgroundColor: texasFlagBlue,
-          backgroundImage: `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
-          color: `#fff`,
-          animation: `${stripeAnimation} 2.8s linear infinite`,
+          backgroundColor: !isDisabled && texasFlagBlue,
+          backgroundImage: !isDisabled && `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
+          color: !isDisabled && `#fff`,
+          animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
         },
         ':focus': {
           outline: 0,
@@ -63,22 +70,27 @@ const RegisterButton = ({ children, onClick, overrideCSS }) => (
         },
       },
     }}
+    disabled={isDisabled}
     onClick={onClick}
-    type="button"
+    type={buttonType}
   >
     {children}
   </button>
 );
 
 RegisterButton.propTypes = {
+  buttonType: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+  isDisabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   overrideCSS: PropTypes.string,
 };
 RegisterButton.defaultProps = {
+  buttonType: 'button',
+  isDisabled: false,
   overrideCSS: '',
 };
 

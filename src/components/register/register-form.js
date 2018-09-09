@@ -9,6 +9,7 @@ import { navigate } from 'gatsby';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Internal Dependencies
+import RegisterButton from './register-button';
 import { options } from '../../utils/typography';
 import {
   emailRegex,
@@ -519,26 +520,18 @@ class RegisterForm extends Component {
               />
 
               {/* SUBMIT BUTTON */}
-              <div
-                css={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  transform: 'translateY(-24px)',
-                }}>
-                <button
-                  css={{
-                    marginTop: '2rem',
-                    padding: '8px 12px',
-                  }}
-                  disabled={!hasValidInput}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                transform: 'translateX(16px)',
+              }}>
+                <RegisterButton
+                  isDisabled={!hasValidInput}
                   onClick={this.handleClickSubmitButton}
-                  style={{
-                    color: `${!hasValidInput ? 'lightsteelblue' : 'inherit'}`,
-                  }}
-                  type="submit"
+                  buttonType="submit"
                 >
                   Continue to Step 3
-                </button>
+                </RegisterButton>
               </div>
             </form>
           )}
