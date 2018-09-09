@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
+import 'firebase/firestore';
 import 'firebase/auth';
 
 // https://firebase.google.com/docs/web/setup?authuser=0
@@ -31,17 +32,18 @@ if (!firebase.apps.length) {
   console.log('firebase.apps', firebase.apps.length, firebase.apps);
   firebase.initializeApp(devConfig);
 }
+
 // firebase.initializeApp(devConfig);
 
 // eslint-disable-next-line
 let db, auth;
 
-// if (typeof window !== 'undefined') {
-//   db = firebase.database();
-//   auth = firebase.auth();
-// }
+if (typeof window !== 'undefined') {
+  db = firebase.database();
+  auth = firebase.auth();
+}
 
 // const auth = firebase.auth();
 // const db = firebase.firestore();
 
-export { firebase };
+export { auth, db };

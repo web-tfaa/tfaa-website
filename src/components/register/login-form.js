@@ -6,7 +6,7 @@ import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import { emailRegex } from '../../utils/helpers';
-import { firebase } from '../../firebase';
+import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
 // Local Styles
@@ -66,11 +66,13 @@ class LoginForm extends Component {
   }
 
   componentDidMount() {
-    // We need the 'window' to be defined
-    //  which is only once a component is mounted
-    if (typeof window !== 'undefined') {
-      this.auth = firebase.auth();
-    }
+    // if (this.activeComponent) {
+      // We need the 'window' to be defined
+      //  which is only once a component is mounted
+      // if (typeof window !== 'undefined') {
+      //   this.auth = firebase.auth();
+      // }
+    // }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -107,8 +109,8 @@ class LoginForm extends Component {
         password,
       } = this.state;
 
-      if (this.auth) {
-        this.auth
+      if (typeof window !== 'undefined') {
+        auth
           .doSignInWithEmailAndPassword(email, password)
           .then(() => {
             this.setState(() => ({

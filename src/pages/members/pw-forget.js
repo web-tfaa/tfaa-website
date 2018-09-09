@@ -9,7 +9,7 @@ import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import presets, { colors } from '../../utils/presets';
-import { firebase } from '../../firebase';
+import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 import { emailRegex } from '../../utils/helpers';
 
@@ -47,9 +47,9 @@ class PasswordForgetForm extends Component {
   componentDidMount() {
     // We need the 'window' to be defined
     //  which is only once a component is mounted
-    if (typeof window !== 'undefined') {
-      this.auth = firebase.auth();
-    }
+    // if (typeof window !== 'undefined') {
+    //   this.auth = firebase.auth();
+    // }
   }
 
   onSubmit = event => {
@@ -57,23 +57,23 @@ class PasswordForgetForm extends Component {
 
     const { email } = this.state;
 
-    if (this.auth) {
-      this.auth
-        .doPasswordReset(email)
-        .then(() => {
-          this.setState(() => ({
-            ...INITIAL_STATE,
-            showSuccessMessage: true,
-          }));
+    // if (this.auth) {
+    auth
+      .doPasswordReset(email)
+      .then(() => {
+        this.setState(() => ({
+          ...INITIAL_STATE,
+          showSuccessMessage: true,
+        }));
 
-          setTimeout(this.handleRedirectToMembers, 7000);
-        })
-        .catch(error => {
-          this.setState({
-            error,
-          });
+        setTimeout(this.handleRedirectToMembers, 7000);
+      })
+      .catch(error => {
+        this.setState({
+          error,
         });
-    }
+      });
+    // }
   };
 
   handleRedirectToMembers = () => {
