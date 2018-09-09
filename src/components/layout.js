@@ -2,15 +2,16 @@
 import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 
 // Internal Dependencies
+import AuthUserContext from './session/AuthUserContext';
 import Footer from './footer';
 import MobileNav from './nav/mobile-nav';
 import SidebarBody from './shared/sidebar/sidebar-body';
 import TopNav from './nav/top-nav';
 import withAuthentication from './session/withAuthentication';
-import { firebase } from '../firebase';
+// import { auth } from '../firebase';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
@@ -37,8 +38,8 @@ import 'typeface-space-mono';
 
 // Local Variables
 const sidebarStyles = {
-  borderRight: `1px solid ${colors.ui.light}`,
   backgroundColor: colors.ui.whisper,
+  borderRight: `1px solid ${colors.ui.light}`,
   boxShadow: `inset 0 4px 5px 0 ${hex2rgba(
     colors.gatsby,
     presets.shadowKeyPenumbraOpacity,
@@ -52,10 +53,10 @@ const sidebarStyles = {
   display: `none`,
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
   overflowY: `auto`,
+  paddingBottom: rhythm(3.5),
   position: `fixed`,
   top: `calc(${presets.headerHeight} - 1px)`,
   width: rhythm(10),
-  paddingBottom: rhythm(3.5),
   WebkitOverflowScrolling: `touch`,
   '::-webkit-scrollbar': {
     height: `6px`,
@@ -75,156 +76,139 @@ const sidebarStyles = {
 };
 
 // Component Definition
-class DefaultLayout extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.array,
-    ]).isRequired,
-    location: PropTypes.shape({}).isRequired,
-  };
+const DefaultLayout = (props) => {
+  const {
+    children,
+    isAuthenticated,
+    location: {
+      pathname: path,
+    },
+  } = props;
 
-  constructor(props) {
-    super(props);
+  console.log('PROPS!', props);
 
-    this.state = {
-      authUser: null,
-    };
-  }
+  const isHome = path === `/`;
+  const isSponsors = path.slice(0, 9) === '/sponsors';
+  const isAbout = path.slice(0, 6) === '/about';
+  const isEvents = path.slice(0, 7) === '/events';
+  const isResources = path.slice(0, 10) === '/resources';
+  const isMembers = path.slice(0, 8) === '/members';
 
-  componentDidMount() {
-    if (typeof window !== 'undefined') {
-      this.auth = firebase.auth();
-    }
+  const hasSidebar =
+    isAbout || isEvents || isResources || (isAuthenticated && isMembers);
 
-    this.auth.onAuthStateChanged(authUser =>
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null })),
-    );
-  }
+  const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
 
-  render() {
-    const {
-      children,
-      location: {
-        pathname: path,
-      },
-    } = this.props;
-
-    const { authUser } = this.state;
-
-    const isAuthenticated = Boolean(authUser);
-
-    const isHome = path === `/`;
-    const isSponsors = path.slice(0, 9) === '/sponsors';
-    const isAbout = path.slice(0, 6) === '/about';
-    const isEvents = path.slice(0, 7) === '/events';
-    const isResources = path.slice(0, 10) === '/resources';
-    const isMembers = path.slice(0, 8) === '/members';
-
-    const hasSidebar =
-      isAbout || isEvents || isResources || (isAuthenticated && isMembers);
-
-    const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
-
-    return (
+  return (
+    <div
+      className={isHome ? 'is-homepage' : ''}
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+      <Helmet defaultTitle="Texas Music Administrators Conference">
+        <meta name="twitter:site" content="@TXMusicLeaders" />
+        <meta name="og:type" content="website" />
+        <meta name="og:site_name" content="TMAC" />
+        <html lang="en" amp />
+      </Helmet>
+      <TopNav />
       <div
-        className={isHome ? 'is-homepage' : ''}
+        className={hasSidebar ? `main-body has-sidebar` : `main-body`}
         css={{
           display: 'flex',
-          flexDirection: 'column',
-        }}>
-        <Helmet defaultTitle="Texas Music Administrators Conference">
-          <meta name="twitter:site" content="@TXMusicLeaders" />
-          <meta name="og:type" content="website" />
-          <meta name="og:site_name" content="TMAC" />
-          <html lang="en" amp />
-        </Helmet>
-        <TopNav isAuthenticated={isAuthenticated} />
-        <div
-          className={hasSidebar ? `main-body has-sidebar` : `main-body`}
-          css={{
-            display: 'flex',
-            flex: 1,
-            paddingTop: 0,
+          flex: 1,
+          paddingTop: 0,
+          minHeight: `calc(100vh - 4rem)`,
+          [presets.Tablet]: {
+            margin: isSponsors ? `0 auto` : '',
+            paddingTop: isHome ? 0 : presets.headerHeight,
+          },
+          [presets.Desktop]: {
             minHeight: `calc(100vh - 4rem)`,
+          },
+        }}>
+        {/* TODO Move this under about/index.js once Gatsby supports
+          multiple levels of layouts */}
+        <div
+          css={{
+            ...sidebarStyles,
             [presets.Tablet]: {
-              margin: isSponsors ? `0 auto` : '',
-              paddingTop: isHome ? 0 : presets.headerHeight,
-            },
-            [presets.Desktop]: {
-              minHeight: `calc(100vh - 4rem)`,
+              display: path.slice(0, 6) === `/about` ? `block` : `none`,
             },
           }}>
-          {/* TODO Move this under about/index.js once Gatsby supports
-            multiple levels of layouts */}
-          <div
-            css={{
-              ...sidebarStyles,
-              [presets.Tablet]: {
-                display: path.slice(0, 6) === `/about` ? `block` : `none`,
-              },
-            }}>
-            <SidebarBody yaml={aboutSidebar} />
-          </div>
-
-          {/* TODO Move this under events/index.js once Gatsby supports
-            multiple levels of layouts */}
-          <div
-            css={{
-              ...sidebarStyles,
-              [presets.Tablet]: {
-                display: path.slice(0, 7) === `/events` ? `block` : `none`,
-              },
-            }}>
-            <SidebarBody yaml={eventsSidebar} />
-          </div>
-
-          {/* TODO Move this under resources/index.js once Gatsby supports
-            multiple levels of layouts */}
-          <div
-            css={{
-              ...sidebarStyles,
-              [presets.Tablet]: {
-                display: path.slice(0, 10) === `/resources` ? `block` : `none`,
-              },
-            }}>
-            <SidebarBody yaml={resourcesSidebar} />
-          </div>
-
-          {/* TODO Move this under members/index.js once Gatsby supports
-            multiple levels of layouts */}
-          {isAuthenticated && (
-            <div
-              css={{
-                ...sidebarStyles,
-                [presets.Tablet]: {
-                  display: path.slice(0, 8) === `/members` ? `block` : `none`,
-                },
-              }}>
-              <SidebarBody yaml={membersSidebar} />
-            </div>
-          )}
-
-          {/* Main container */}
-          <div
-            css={{
-              [presets.Tablet]: {
-                paddingLeft: leftPadding(10),
-              },
-              [presets.Desktop]: {
-                paddingLeft: leftPadding(12),
-              },
-            }}>
-            {children}
-          </div>
+          <SidebarBody yaml={aboutSidebar} />
         </div>
-        <MobileNav />
-        <Footer />
-      </div>
-    );
-  }
-}
 
-export default withAuthentication(DefaultLayout);
+        {/* TODO Move this under events/index.js once Gatsby supports
+          multiple levels of layouts */}
+        <div
+          css={{
+            ...sidebarStyles,
+            [presets.Tablet]: {
+              display: path.slice(0, 7) === `/events` ? `block` : `none`,
+            },
+          }}>
+          <SidebarBody yaml={eventsSidebar} />
+        </div>
+
+        {/* TODO Move this under resources/index.js once Gatsby supports
+          multiple levels of layouts */}
+        <div
+          css={{
+            ...sidebarStyles,
+            [presets.Tablet]: {
+              display: path.slice(0, 10) === `/resources` ? `block` : `none`,
+            },
+          }}>
+          <SidebarBody yaml={resourcesSidebar} />
+        </div>
+
+        {/* TODO Move this under members/index.js once Gatsby supports
+          multiple levels of layouts */}
+        {isAuthenticated && (
+          <div
+            css={{
+              ...sidebarStyles,
+              [presets.Tablet]: {
+                display: path.slice(0, 8) === `/members` ? `block` : `none`,
+              },
+            }}>
+            <SidebarBody yaml={membersSidebar} />
+          </div>
+        )}
+
+        {/* Main container */}
+        <div
+          css={{
+            [presets.Tablet]: {
+              paddingLeft: leftPadding(10),
+            },
+            [presets.Desktop]: {
+              paddingLeft: leftPadding(12),
+            },
+          }}>
+          {children}
+        </div>
+      </div>
+      <MobileNav />
+      <Footer />
+    </div>
+  );
+};
+DefaultLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.array,
+  ]).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
+
+const DefaultLayoutWithContext = (props) => (
+  <AuthUserContext.Consumer>
+    {authUser => <DefaultLayout {...props} isAuthenticated={!!authUser} />}
+  </AuthUserContext.Consumer>
+);
+
+export default withAuthentication(DefaultLayoutWithContext);
