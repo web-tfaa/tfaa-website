@@ -70,7 +70,6 @@ Status.defaultProps = {
   authUser: null,
 };
 
-
 const StatusWithContext = (props) => (
   <AuthUserContext.Consumer>
     {authUser => <Status {...props} authUser={authUser} />}

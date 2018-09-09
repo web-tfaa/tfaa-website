@@ -1,100 +1,76 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 // Internal Dependencies
+import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
 import presets from '../../utils/presets';
 import Status from './status';
-import { firebase } from '../../firebase';
 
 // Component Definition
-class Members extends Component {
-  static propTypes = {
-    data: PropTypes.shape({}).isRequired,
-    location: PropTypes.shape({}).isRequired,
-  };
+const Members = (props) => {
+  const {
+    authUser,
+    data,
+    location,
+  } = props;
 
-  constructor(props) {
-    super(props);
+  const isAuthenticated = Boolean(authUser);
 
-    this.state = {
-      authUser: null,
-    };
+  return (
+    <Layout location={location}>
+      <div
+        css={{
+          paddingLeft: 0,
+          width: `0 auto`,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+        <Status />
+        <Container>
+          <Helmet>
+            <title>TMAC | Members</title>
+          </Helmet>
+          {isAuthenticated ? (
+            <MemberContent
+              memberEmail={authUser.email}
+              contentfulFileShareData={
+                data.allContentfulFileShare.edges
+              }
+              contentfulFileShareDescriptionData={
+                data.allContentfulFileShareDescriptionTextNode
+                  .edges
+              }
+            />
+          ) : <NonMemberContent />}
+        </Container>
+      </div>
+    </Layout>
+  );
+};
+Members.propTypes = {
+  authUser: PropTypes.shape({}),
+  data: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
+Members.defaultProps = {
+  authUser: null,
+};
 
-    this.activeComponent = true;
-  }
+const MembersWithContext = (props) => (
+  <AuthUserContext.Consumer>
+    {authUser => <Members {...props} authUser={authUser} />}
+  </AuthUserContext.Consumer>
+);
 
-  componentDidMount() {
-    if (this.activeComponent) {
-      if (typeof window !== 'undefined') {
-        this.auth = firebase.auth();
-      }
-
-      this.auth.onAuthStateChanged(
-        authUser =>
-          authUser
-            ? this.setState(() => ({ authUser }))
-            : this.setState(() => ({ authUser: null })),
-      );
-    }
-  }
-
-  componentWillUnmount() {
-    this.activeComponent = false;
-  }
-
-  render() {
-    const {
-      data,
-      location,
-    } = this.props;
-    const { authUser } = this.state;
-
-    const isAuthenticated = Boolean(authUser);
-
-    return (
-      <Layout location={location}>
-        <div
-          css={{
-            paddingLeft: 0,
-            width: `0 auto`,
-            [presets.Tablet]: {
-              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-            },
-          }}>
-          <Status authUser={authUser} />
-          <Container>
-            <Helmet>
-              <title>TMAC | Members</title>
-            </Helmet>
-            {isAuthenticated ? (
-              <MemberContent
-                memberEmail={authUser.email}
-                contentfulFileShareData={
-                  data.allContentfulFileShare.edges
-                }
-                contentfulFileShareDescriptionData={
-                  data.allContentfulFileShareDescriptionTextNode
-                    .edges
-                }
-              />
-            ) : (
-              <NonMemberContent />
-            )}
-          </Container>
-        </div>
-      </Layout>
-    );
-  }
-}
-
-export default Members;
+export default MembersWithContext;
 
 export const pageQuery = graphql`
   query MemberContent {

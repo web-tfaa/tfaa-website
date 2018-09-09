@@ -11,7 +11,6 @@ import MobileNav from './nav/mobile-nav';
 import SidebarBody from './shared/sidebar/sidebar-body';
 import TopNav from './nav/top-nav';
 import withAuthentication from './session/withAuthentication';
-// import { auth } from '../firebase';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
