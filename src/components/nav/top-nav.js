@@ -156,9 +156,9 @@ TopNav.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const TopNavWithContext = () => (
+const TopNavWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <TopNav isAuthenticated={!!authUser} />}
+    {authUser => <TopNav {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 
