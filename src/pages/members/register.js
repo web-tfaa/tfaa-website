@@ -33,7 +33,7 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      activeStep: 0,
+      activeStep: 2,
       form: {},
       // Possible completed steps are [0, 1, 2]
       completedSteps: [],

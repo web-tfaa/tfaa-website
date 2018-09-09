@@ -3,7 +3,6 @@ import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'glamor';
-import { Link } from 'gatsby';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -11,7 +10,6 @@ import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Variables
 const texasFlagBlue = '#002868';
-const texasFlagRed = '#BF0A30';
 
 const stripeAnimation = css.keyframes({
   '0%': { backgroundPosition: `0 0` },
@@ -19,13 +17,13 @@ const stripeAnimation = css.keyframes({
 });
 
 // Component Definition
-const CtaButton = ({ to, overrideCSS, children }) => (
-  <Link
+const RegisterButton = ({ children, onClick, overrideCSS }) => (
+  <button
     css={{
       ...overrideCSS,
       ...scale(1 / 5),
       display: `inline-block`,
-      border: `1px solid ${texasFlagRed}`,
+      border: `1px solid ${texasFlagBlue}`,
       fontFamily: options.headerFontFamily.join(`,`),
       padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       borderRadius: presets.radius,
@@ -38,9 +36,9 @@ const CtaButton = ({ to, overrideCSS, children }) => (
       },
       // Increase specificity
       '&&': {
-        border: `1px solid ${texasFlagRed}`,
+        border: `1px solid ${texasFlagBlue}`,
         boxShadow: `none`,
-        color: texasFlagRed,
+        color: texasFlagBlue,
         fontWeight: `normal`,
         backgroundColor: `transparent`,
         backgroundSize: `30px 30px`,
@@ -50,7 +48,7 @@ const CtaButton = ({ to, overrideCSS, children }) => (
         }`,
         ':hover, &:focus': {
           backgroundSize: `30px 30px`,
-          backgroundColor: texasFlagRed,
+          backgroundColor: texasFlagBlue,
           backgroundImage: `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
           color: `#fff`,
           animation: `${stripeAnimation} 2.8s linear infinite`,
@@ -65,21 +63,23 @@ const CtaButton = ({ to, overrideCSS, children }) => (
         },
       },
     }}
-    to={to}>
+    onClick={onClick}
+    type="button"
+  >
     {children}
-  </Link>
+  </button>
 );
 
-CtaButton.propTypes = {
+RegisterButton.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+  onClick: PropTypes.func.isRequired,
   overrideCSS: PropTypes.string,
-  to: PropTypes.string,
 };
-CtaButton.defaultProps = {
+RegisterButton.defaultProps = {
   overrideCSS: '',
-  to: null,
 };
-export default CtaButton;
+
+export default RegisterButton;
