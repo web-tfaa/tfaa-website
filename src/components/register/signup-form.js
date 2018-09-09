@@ -262,6 +262,18 @@ class SignUpForm extends Component {
         </div>
         <div css={baseErrorStyles}>{registerError}</div>
 
+        {error && (
+          <div
+            css={{
+              color: 'red',
+              fontFamily: options.headerFontFamily.join(`,`),
+              fontWeight: 500,
+              margin: '16px 0',
+            }}>
+            {error.message}
+          </div>
+        )}
+
         {/* SUBMIT BUTTON */}
         <div
           css={{
@@ -278,17 +290,6 @@ class SignUpForm extends Component {
           </button>
         </div>
 
-        {error && (
-          <div
-            css={{
-              color: 'red',
-              fontFamily: options.headerFontFamily.join(`,`),
-              fontWeight: 500,
-              margin: '16px 0',
-            }}>
-            {error.message}
-          </div>
-        )}
       </form>
     );
   }

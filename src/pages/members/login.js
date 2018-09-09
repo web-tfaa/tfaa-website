@@ -5,62 +5,33 @@ import React, { Component } from 'react';
 import { Link, navigate } from 'gatsby';
 
 // Internal Dependencies
+import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
 import presets from '../../utils/presets';
-import { firebase } from '../../firebase';
 
 // Component Definition
 class Login extends Component {
   static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
     location: PropTypes.shape({}).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      authUser: null,
-    };
-
-    this.activeComponent = true;
-  }
-
-  componentDidMount() {
-    if (this.activeComponent) {
-      if (typeof window !== 'undefined') {
-        this.auth = firebase.auth();
-      }
-
-      this.auth.onAuthStateChanged(authUser =>
-        authUser
-          ? this.setState(() => ({ authUser }))
-          : this.setState(() => ({ authUser: null })),
-      );
-    }
-  }
-
-  componentWillUnmount() {
-    this.activeComponent = false;
-  }
 
   handleRedirectToMembers = () => {
     navigate('/members/login');
   };
 
   render() {
-    const { location } = this.props;
-    const { authUser } = this.state;
+    const {
+      isAuthenticated,
+      location,
+    } = this.props;
 
-    const isAuthenticated = Boolean(authUser);
-
-    if (isAuthenticated) {
-      return this.handleRedirectToMembers;
-    }
-
-    return (
+    return isAuthenticated
+      ? this.handleRedirectToMembers
+      : (
       <Layout location={location}>
         <div
           css={{
@@ -96,4 +67,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const LoginWithContext = (props) => (
+  <AuthUserContext.Consumer>
+    {authUser => <Login {...props} isAuthenticated={!!authUser} />}
+  </AuthUserContext.Consumer>
+);
+
+export default LoginWithContext;

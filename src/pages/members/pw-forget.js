@@ -44,20 +44,10 @@ class PasswordForgetForm extends Component {
     };
   }
 
-  componentDidMount() {
-    // We need the 'window' to be defined
-    //  which is only once a component is mounted
-    // if (typeof window !== 'undefined') {
-    //   this.auth = firebase.auth();
-    // }
-  }
-
   onSubmit = event => {
     event.preventDefault();
 
     const { email } = this.state;
-
-    // if (this.auth) {
     auth
       .doPasswordReset(email)
       .then(() => {
@@ -73,7 +63,6 @@ class PasswordForgetForm extends Component {
           error,
         });
       });
-    // }
   };
 
   handleRedirectToMembers = () => {
