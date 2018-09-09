@@ -36,10 +36,10 @@ if (!firebase.apps.length) {
 // eslint-disable-next-line
 let db, auth;
 
-if (typeof window !== 'undefined') {
-  db = firebase.database();
-  auth = firebase.auth();
-}
+// if (typeof window !== 'undefined') {
+//   db = firebase.database();
+//   auth = firebase.auth();
+// }
 
 // const auth = firebase.auth();
 // const db = firebase.firestore();
