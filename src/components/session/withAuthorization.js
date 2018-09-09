@@ -3,9 +3,8 @@
 import React from 'react';
 import { navigate } from "gatsby";
 
-import AuthUserContext from '../Session/AuthUserContext';
+import AuthUserContext from './session/AuthUserContext';
 import { firebase } from '../../firebase';
-import * as routes from '../../constants/routes';
 
 const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
@@ -13,7 +12,7 @@ const withAuthorization = condition => Component => {
       if (typeof window !== 'undefined') {
         firebase.auth.onAuthStateChanged(authUser => {
           if (!condition(authUser)) {
-            navigate(routes.SIGN_IN);
+            navigate('/members');
           }
         });
       }

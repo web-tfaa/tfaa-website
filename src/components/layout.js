@@ -9,6 +9,7 @@ import Footer from './footer';
 import MobileNav from './nav/mobile-nav';
 import SidebarBody from './shared/sidebar/sidebar-body';
 import TopNav from './nav/top-nav';
+import withAuthentication from './session/withAuthentication';
 import { firebase } from '../firebase';
 
 // Sidebar data
@@ -226,4 +227,4 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+export default withAuthentication(DefaultLayout);
