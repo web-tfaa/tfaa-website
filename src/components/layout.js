@@ -84,8 +84,6 @@ const DefaultLayout = (props) => {
     },
   } = props;
 
-  console.log('PROPS!', props);
-
   const isHome = path === `/`;
   const isSponsors = path.slice(0, 9) === '/sponsors';
   const isAbout = path.slice(0, 6) === '/about';

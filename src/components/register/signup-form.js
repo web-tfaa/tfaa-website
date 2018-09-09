@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
+import AuthUserContext from '../session/AuthUserContext';
 import { emailRegex } from '../../utils/helpers';
-import { firebase } from '../../firebase';
+import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
 // Local Styles
@@ -49,6 +50,7 @@ const INITIAL_STATE = {
 // Component Definition
 class SignUpForm extends Component {
   static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
     onRegisterSignUp: PropTypes.func,
   };
 
@@ -66,19 +68,13 @@ class SignUpForm extends Component {
     this.activeComponent = true;
   }
 
-  componentDidMount() {
-    // We need the 'window' to be defined
-    //  which is only once a component is mounted
-    if (typeof window !== 'undefined') {
-      this.auth = firebase.auth();
-    }
-  }
+  componentDidUpdate(prevProps) {
+    const {
+      isAuthenticated,
+      onRegisterSignUp,
+    } = this.props;
 
-  componentDidUpdate(prevProps, prevState) {
-    const { onRegisterSignUp } = this.props;
-    const { isAuthenticated } = this.state;
-
-    if (isAuthenticated !== prevState.isAuthenticated) {
+    if (isAuthenticated !== prevProps.isAuthenticated) {
       return onRegisterSignUp
         ? onRegisterSignUp()
         : navigate('/members');
@@ -108,19 +104,17 @@ class SignUpForm extends Component {
         passwordOne,
       } = this.state;
 
-      if (this.auth) {
-        this.auth
-          .doCreateUserWithEmailAndPassword(email, passwordOne)
-          .then(() => {
-            this.setState(() => ({
-              ...INITIAL_STATE,
-              isAuthenticated: true,
-            }));
-          })
-          .catch(err => {
-            this.setState({ error: err });
+      auth
+        .doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then(() => {
+          this.setState(() => ({
+            ...INITIAL_STATE,
+            isAuthenticated: true,
+          }));
+        })
+        .catch(err => {
+          this.setState({ error: err });
           });
-      }
     }
   };
 
@@ -300,4 +294,10 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+const SignUpFormWithContext = (props) => (
+  <AuthUserContext.Consumer>
+    {authUser => <SignUpForm {...props} isAuthenticated={!!authUser} />}
+  </AuthUserContext.Consumer>
+);
+
+export default SignUpFormWithContext;

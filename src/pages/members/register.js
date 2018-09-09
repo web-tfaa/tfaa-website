@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Internal Dependencies
+import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
@@ -16,7 +17,6 @@ import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
-import { firebase } from '../../firebase';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -25,6 +25,7 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 // Component Definition
 class Register extends Component {
   static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
     location: PropTypes.shape({}).isRequired,
   };
 
@@ -33,27 +34,12 @@ class Register extends Component {
 
     this.state = {
       activeStep: 0,
-      authUser: null,
       form: {},
       // Possible completed steps are [0, 1, 2]
       completedSteps: [],
     };
 
     this.activeComponent = true;
-  }
-
-  componentDidMount() {
-    if (this.activeComponent) {
-      if (typeof window !== 'undefined') {
-        this.auth = firebase.auth();
-      }
-
-      this.auth.onAuthStateChanged(authUser =>
-        authUser
-          ? this.setState(() => ({ authUser }))
-          : this.setState(() => ({ authUser: null })),
-      );
-    }
   }
 
   componentWillUnmount() {
@@ -122,14 +108,16 @@ class Register extends Component {
   };
 
   render() {
-    const { location } = this.props;
+    const {
+      isAuthenticated,
+      location,
+    } = this.props;
+
     const {
       activeStep,
-      authUser,
       completedSteps,
     } = this.state;
 
-    const isAuthenticated = Boolean(authUser);
     const hasCompletedAllSteps = completedSteps.length >= 3;
 
     /* Children change depending on which step is active */
@@ -143,7 +131,7 @@ class Register extends Component {
               paddingLeft: !isAuthenticated ? '1.5rem' : 0,
             },
           }}>
-          <Status authUser={authUser} />
+          <Status />
           <Container>
             <Helmet>
               <title>TMAC | Register</title>
@@ -183,4 +171,10 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const RegisterWithContext = (props) => (
+  <AuthUserContext.Consumer>
+    {authUser => <Register {...props} isAuthenticated={!!authUser} />}
+  </AuthUserContext.Consumer>
+);
+
+export default RegisterWithContext;
