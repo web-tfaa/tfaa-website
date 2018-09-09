@@ -92,7 +92,11 @@ class DefaultLayout extends Component {
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser =>
+    if (typeof window !== 'undefined') {
+      this.auth = firebase.auth();
+    }
+
+    this.auth.onAuthStateChanged(authUser =>
       authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null })),

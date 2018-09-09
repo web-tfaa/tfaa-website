@@ -56,6 +56,9 @@ class TopNav extends Component {
   componentDidMount() {
     // We need the 'window' to be defined
     //  which is only once a component is mounted
+
+    console.log('what even is firebase', firebase);
+
     if (typeof window !== 'undefined') {
       this.auth = firebase.auth();
     }

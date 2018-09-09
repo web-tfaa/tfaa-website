@@ -32,7 +32,11 @@ class Members extends Component {
 
   componentDidMount() {
     if (this.activeComponent) {
-      firebase.auth.onAuthStateChanged(
+      if (typeof window !== 'undefined') {
+        this.auth = firebase.auth();
+      }
+
+      this.auth.onAuthStateChanged(
         authUser =>
           authUser
             ? this.setState(() => ({ authUser }))
