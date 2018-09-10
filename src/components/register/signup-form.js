@@ -297,7 +297,7 @@ class SignUpForm extends Component {
 
 const SignUpFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {fire => <SignUpForm {...props} isAuthenticated={!!fire.authUser} />}
+    {authUser => <SignUpForm {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

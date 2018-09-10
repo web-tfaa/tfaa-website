@@ -114,10 +114,9 @@ JoinContainer.propTypes = {
   location: PropTypes.shape({}).isRequired,
 };
 
-
 const JoinContainerWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {fire => <JoinContainer {...props} isAuthenticated={!!fire.authUser} />}
+    {authUser => <JoinContainer {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

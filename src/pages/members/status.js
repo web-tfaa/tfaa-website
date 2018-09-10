@@ -72,7 +72,7 @@ Status.defaultProps = {
 
 const StatusWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {fire => <Status {...props} authUser={fire.authUser} />}
+    {authUser => <Status {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
 );
 

@@ -173,7 +173,7 @@ class Register extends Component {
 
 const RegisterWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {fire => <Register {...props} isAuthenticated={!!fire.authUser} />}
+    {authUser => <Register {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

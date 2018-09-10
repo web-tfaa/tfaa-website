@@ -158,9 +158,7 @@ TopNav.propTypes = {
 
 const TopNavWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {fire => {
-      console.log('what is F I R E 🔥', fire);
-      return <TopNav {...props} isAuthenticated={!!fire.authUser} />}}
+    {authUser => <TopNav {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

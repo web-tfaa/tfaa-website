@@ -29,8 +29,8 @@ const devConfig = {
 //   : devConfig;
 
 if (!firebase.apps.length) {
-  console.log('firebase.apps', firebase.apps.length, firebase.apps);
   firebase.initializeApp(devConfig);
+  console.log('firebase.apps', firebase.apps.length, firebase.apps);
 }
 
 // firebase.initializeApp(devConfig);
