@@ -128,7 +128,7 @@ const Invoice = (props) => {
         margin: '12px 48px',
         textAlign: 'center',
       }}>
-        The Texas Music Administrators Conference is a registered 501(c)(3) orgaization supporting
+        The Texas Music Administrators Conference is an organization supporting
         music educators, music administrators, and Texas schools in the quest to deliver music
         and arts education to all students.
       </footer>
