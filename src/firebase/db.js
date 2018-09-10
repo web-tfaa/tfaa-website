@@ -31,8 +31,6 @@ export const doUpdateEntry = (form, documentId) =>
     });
 
 // Invoice actions
-const invoiceDocRef = db.collection('Document_ID').doc('invoice_18-19');
-
 export const doGetInvoiceId = (callback) =>
   db.collection('Document_ID')
     .doc('invoice_18-19')
@@ -49,8 +47,10 @@ export const doGetInvoiceId = (callback) =>
       console.log('Error getting document for invoice:', err);
     });
 
-export const doUpdateInvoiceId = () =>
-  db.runTransaction((transaction) =>
+export const doUpdateInvoiceId = () => {
+  const invoiceDocRef = db.collection('Document_ID').doc('invoice_18-19');
+
+  return db.runTransaction((transaction) =>
     transaction
       .get(invoiceDocRef)
       .then((doc) => {
@@ -72,11 +72,10 @@ export const doUpdateInvoiceId = () =>
     .catch((err) => {
       console.log('transaction failed', err);
     });
+  };
 
 
 // Receipt actions
-const receiptDocRef = db.collection('Document_ID').doc('receipt_18-19');
-
 export const doGetReceiptId = (callback) =>
   db.collection('Document_ID')
     .doc('receipt_18-19')
@@ -93,8 +92,10 @@ export const doGetReceiptId = (callback) =>
       console.log('Error getting document for receipt:', err);
     });
 
-export const doUpdateReceiptId = () =>
-  db.runTransaction((transaction) =>
+export const doUpdateReceiptId = () => {
+  const receiptDocRef = db.collection('Document_ID').doc('receipt_18-19');
+
+  return db.runTransaction((transaction) =>
     transaction
       .get(receiptDocRef)
       .then((doc) => {
@@ -116,3 +117,4 @@ export const doUpdateReceiptId = () =>
     .catch((err) => {
       console.log('transaction failed', err);
     });
+  };

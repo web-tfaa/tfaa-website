@@ -204,7 +204,7 @@ DefaultLayout.propTypes = {
 
 const DefaultLayoutWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <DefaultLayout {...props} isAuthenticated={!!authUser} />}
+    {fire => <DefaultLayout {...props} isAuthenticated={!!fire.authUser} />}
   </AuthUserContext.Consumer>
 );
 

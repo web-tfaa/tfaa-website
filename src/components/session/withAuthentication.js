@@ -11,25 +11,40 @@ const withAuthentication = Component =>
       super(props);
 
       this.state = {
-        authUser: null,
+        fire: {
+          authUser: null,
+          data: null,
+        },
       };
     }
 
     componentDidMount() {
       if (typeof window !== 'undefined') {
         firebase.auth.onAuthStateChanged(authUser => {
-          authUser
-            ? this.setState(() => ({ authUser }))
-            : this.setState(() => ({ authUser: null }));
+          return authUser
+            ? this.setState(() => ({
+              fire: {
+                authUser,
+                data: firebase.firestore,
+              },
+            }))
+            : this.setState(() => ({
+              fire: {
+                authUser: null,
+                data: null,
+              },
+            }));
         });
       }
     }
 
     render() {
-      const { authUser } = this.state;
+      const { fire } = this.state;
+
+      console.log('fireeeee', fire);
 
       return (
-        <AuthUserContext.Provider value={authUser}>
+        <AuthUserContext.Provider value={fire}>
           <Component {...this.props} />
         </AuthUserContext.Provider>
       );

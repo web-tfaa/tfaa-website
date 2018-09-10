@@ -69,7 +69,7 @@ class Login extends Component {
 
 const LoginWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <Login {...props} isAuthenticated={!!authUser} />}
+    {fire => <Login {...props} isAuthenticated={Boolean(fire.authUser)} />}
   </AuthUserContext.Consumer>
 );
 

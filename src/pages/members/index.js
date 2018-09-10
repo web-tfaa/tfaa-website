@@ -66,7 +66,9 @@ Members.defaultProps = {
 
 const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <Members {...props} authUser={authUser} />}
+    {fire => {
+      console.log('argghh, fire', fire);
+      return <Members {...props} authUser={fire.authUser} />}}
   </AuthUserContext.Consumer>
 );
 
