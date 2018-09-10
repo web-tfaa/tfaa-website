@@ -23,10 +23,9 @@ import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Component Definition
-class Register extends Component {
+class RegisterContent extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    location: PropTypes.shape({}).isRequired,
   };
 
   constructor(props) {
@@ -40,6 +39,20 @@ class Register extends Component {
     };
 
     this.activeComponent = true;
+  }
+
+  componentDidMount() {
+    const {
+      isAuthenticated,
+    } = this.props;
+
+    const {
+      activeStep,
+    } = this.state;
+
+    if (activeStep === 0 && isAuthenticated) {
+      this.setState({ activeStep: 1 });
+    }
   }
 
   componentWillUnmount() {
@@ -110,7 +123,6 @@ class Register extends Component {
   render() {
     const {
       isAuthenticated,
-      location,
     } = this.props;
 
     const {
@@ -122,59 +134,64 @@ class Register extends Component {
 
     /* Children change depending on which step is active */
     return (
-      <Layout location={location}>
+      <div
+        css={{
+          paddingLeft: 0,
+          width: `0 auto`,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+        <Status />
+        <Container>
+          <Helmet>
+            <title>TMAC | Register</title>
+          </Helmet>
+
+          <RegisterStepper
+            isAuthenticated={isAuthenticated}
+            activeStep={activeStep}
+          />
+
+          {this.getCurrentStepContent(isAuthenticated)}
+
+          {!hasCompletedAllSteps && <div style={{ marginTop: '1.5rem' }}>
+            * Registration is not complete until payment is received.
+          </div>}
+        </Container>
+
         <div
           css={{
-            paddingLeft: 0,
-            width: `0 auto`,
+            display: `block`,
             [presets.Tablet]: {
-              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+              display: `none`,
             },
           }}>
-          <Status />
-          <Container>
-            <Helmet>
-              <title>TMAC | Register</title>
-            </Helmet>
-
-            <RegisterStepper
-              isAuthenticated={isAuthenticated}
-              activeStep={activeStep}
-            />
-
-            {this.getCurrentStepContent(isAuthenticated)}
-
-            {!hasCompletedAllSteps && <div style={{ marginTop: '1.5rem' }}>
-              * Registration is not complete until payment is received.
-            </div>}
-          </Container>
-
-          <div
+          <hr
             css={{
-              display: `block`,
-              [presets.Tablet]: {
-                display: `none`,
-              },
-            }}>
-            <hr
-              css={{
-                border: 0,
-                height: 2,
-                marginTop: 10,
-              }}
-            />
-            <SidebarBody inline yaml={membersSidebar} />
-          </div>
+              border: 0,
+              height: 2,
+              marginTop: 10,
+            }}
+          />
+          <SidebarBody inline yaml={membersSidebar} />
         </div>
-      </Layout>
+      </div>
     );
   }
 }
 
+const Register = (props) => (
+  // eslint-disable-next-line
+  <Layout location={props.location}>
+    <RegisterWithContext {...props} />
+  </Layout>
+);
+
 const RegisterWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <Register {...props} isAuthenticated={!!authUser} />}
+    {authUser => <RegisterContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 
-export default RegisterWithContext;
+export default Register;

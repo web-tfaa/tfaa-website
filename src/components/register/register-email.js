@@ -29,6 +29,21 @@ class RegisterEmail extends Component {
     this.activeComponent = true;
   }
 
+  // componentDidUpdate(prevProps) {
+  //   const {
+  //     isAuthenticated,
+  //     onCompleteStep,
+  //   } = this.props;
+  //
+  //   const {
+  //     hasCompletedRegisterEmail,
+  //   } = this.state;
+  //
+  //   if (hasCompletedRegisterEmail && prevProps.isAuthenticated !== isAuthenticated) {
+  //     setTimeout(() => onCompleteStep(0), 3500);
+  //   }
+  // }
+
   componentWillUnmount() {
     this.activeComponent = false;
   }

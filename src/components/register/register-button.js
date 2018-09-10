@@ -85,12 +85,13 @@ RegisterButton.propTypes = {
     PropTypes.string,
   ]).isRequired,
   isDisabled: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   overrideCSS: PropTypes.string,
 };
 RegisterButton.defaultProps = {
   buttonType: 'button',
   isDisabled: false,
+  onClick: null,
   overrideCSS: '',
 };
 

@@ -32,8 +32,8 @@ import '../fonts/Webfonts/futurapt_demi_macroman/stylesheet.css';
 import '../fonts/Webfonts/futurapt_demiitalic_macroman/stylesheet.css';
 
 // Other fonts
-import 'typeface-spectral';
 import 'typeface-space-mono';
+import 'typeface-spectral';
 
 // Local Variables
 const sidebarStyles = {
@@ -102,7 +102,8 @@ const DefaultLayout = (props) => {
       css={{
         display: 'flex',
         flexDirection: 'column',
-      }}>
+      }}
+    >
       <Helmet defaultTitle="Texas Music Administrators Conference">
         <meta name="twitter:site" content="@TXMusicLeaders" />
         <meta name="og:type" content="website" />
