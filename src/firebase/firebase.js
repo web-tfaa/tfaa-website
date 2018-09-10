@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-// import 'firebase/database';
 import 'firebase/firestore';
 import 'firebase/auth';
 
@@ -30,10 +29,7 @@ const devConfig = {
 
 if (!firebase.apps.length) {
   firebase.initializeApp(devConfig);
-  console.log('firebase.apps', firebase.apps.length, firebase.apps);
 }
-
-// firebase.initializeApp(devConfig);
 
 // eslint-disable-next-line
 let db, auth;
@@ -42,11 +38,5 @@ if (typeof window !== 'undefined') {
   db = firebase.firestore();
   auth = firebase.auth();
 }
-
-// const auth = firebase.auth();
-// const db = firebase.firestore();
-
-
-console.log('2 firebase.apps', db);
 
 export { auth, db };

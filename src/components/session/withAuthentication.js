@@ -12,7 +12,6 @@ const withAuthentication = Component =>
 
       this.state = {
         authUser: null,
-        // fire: null,
       };
     }
 
@@ -27,14 +26,11 @@ const withAuthentication = Component =>
               authUser: null,
             })),
         );
-
-        // this.setState({ fire: firebase.firestore })
       }
     }
 
     render() {
       const { authUser } = this.state;
-      console.log('fireeeee', this.state);
 
       return (
         <AuthUserContext.Provider value={authUser}>

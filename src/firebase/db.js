@@ -1,7 +1,5 @@
 import { db } from './firebase';
 
-console.log('db in db.js', db && db.collection);
-
 // User API
 export const doCreateEntry = (form, documentId, callback) =>
   db.collection('registration_18-19')
@@ -73,7 +71,6 @@ export const doUpdateInvoiceId = () => {
       console.log('transaction failed', err);
     });
   };
-
 
 // Receipt actions
 export const doGetReceiptId = (callback) =>
