@@ -73,6 +73,8 @@ const RegisterButton = ({
     disabled={isDisabled}
     onClick={onClick}
     type={buttonType}
+    role="button"
+    tabIndex={0}
   >
     {children}
   </button>

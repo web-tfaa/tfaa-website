@@ -232,6 +232,7 @@ class RegisterPayment extends Component {
                   /> */}
                   <PaypalButtonWrapper
                     amount={this.getCurrentAmount()}
+                    item_name="TMAC Registration"
                     onSuccessfulPayment={this.handleUpdateCompletedStep}
                   />
                 </RadioGroup>

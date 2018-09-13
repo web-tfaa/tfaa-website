@@ -47,7 +47,6 @@ class PaypalButtonWrapper extends Component {
       amount,
     } = this.props;
 
-
     return (
       <div>
         <PaypalButton
