@@ -47,28 +47,28 @@ const baseErrorStyles = {
 const INITIAL_STATE = {
   honeypot: '',
   isAuthenticated: false,
-  First_Name: '',
-  First_NameError: '',
-  Last_Name: '',
-  Last_NameError: '',
+  FirstName: '',
+  FirstNameError: '',
+  LastName: '',
+  LastNameError: '',
   Title: '',
   TitleError: '',
   District: '',
   DistrictError: '',
-  Address_1: '',
-  Address_1Error: '',
+  Address1: '',
+  Address1Error: '',
   // Address2 is not required, so cannot have an error
-  Address_2: '',
+  Address2: '',
   City: '',
   CityError: '',
-  Zip_Code: '',
-  Zip_CodeError: '',
+  ZipCode: '',
+  ZipCodeError: '',
   Email: '',
   EmailError: '',
-  Office_Phone: '',
-  Office_PhoneError: '',
-  Cell_Phone: '',
-  Cell_PhoneError: '',
+  OfficePhone: '',
+  OfficePhoneError: '',
+  CellPhone: '',
+  CellPhoneError: '',
 };
 
 // Local Functions
@@ -167,7 +167,7 @@ class RegisterForm extends Component {
 
   handleUpdateErrors = (name, value) => {
     if (name === 'Email') this.handleUpdateEmailError(value);
-    else if (name === 'Zip_Code') this.handleUpdateZipCodeError(value);
+    else if (name === 'ZipCode') this.handleUpdateZipCodeError(value);
     else this.handleUpdateInputError(name, value);
   };
 
@@ -193,15 +193,15 @@ class RegisterForm extends Component {
     if (this.activeComponent) {
       if (!value) {
         this.setState({
-          Zip_CodeError: 'ZIP Code is required',
+          ZipCodeError: 'ZIP Code is required',
         });
       } else if (value && zipCodeRegex.test(value)) {
         this.setState({
-          Zip_CodeError: '',
+          ZipCodeError: '',
         });
       } else if (value && !zipCodeRegex.test(value)) {
         this.setState({
-          Zip_CodeError: 'Use a valid ZIP Code',
+          ZipCodeError: 'Use a valid ZIP Code',
         });
       }
     }
@@ -210,29 +210,29 @@ class RegisterForm extends Component {
   handleUpdateInputError = (name, value) => {
     if (this.activeComponent) {
       const {
-        First_Name,
-        Last_Name,
+        FirstName,
+        LastName,
         Title,
         District,
-        Address_1,
+        Address1,
         City,
-        Office_Phone,
-        Cell_Phone,
+        OfficePhone,
+        CellPhone,
       } = this.state;
 
       switch (name) {
-        case 'First_Name':
-          if (!First_Name && value) {
-            this.setState({ First_NameError: '' });
-          } else if (First_Name && !value) {
-            this.setState({ First_NameError: 'First Name is required' });
+        case 'FirstName':
+          if (!FirstName && value) {
+            this.setState({ FirstNameError: '' });
+          } else if (FirstName && !value) {
+            this.setState({ FirstNameError: 'First Name is required' });
           }
           break;
-        case 'Last_Name':
-          if (!Last_Name && value) {
-            this.setState({ Last_NameError: '' });
-          } else if (Last_Name && !value) {
-            this.setState({ Last_NameError: 'Last Name is required' });
+        case 'LastName':
+          if (!LastName && value) {
+            this.setState({ LastNameError: '' });
+          } else if (LastName && !value) {
+            this.setState({ LastNameError: 'Last Name is required' });
           }
           break;
         case 'Title':
@@ -249,11 +249,11 @@ class RegisterForm extends Component {
             this.setState({ DistrictError: 'District is required' });
           }
           break;
-        case 'Address_1':
-          if (!Address_1 && value) {
-            this.setState({ Address_1Error: '' });
-          } else if (Address_1 && !value) {
-            this.setState({ Address_1Error: 'Address 1 is required' });
+        case 'Address1':
+          if (!Address1 && value) {
+            this.setState({ Address1Error: '' });
+          } else if (Address1 && !value) {
+            this.setState({ Address1Error: 'Address 1 is required' });
           }
           break;
         case 'City':
@@ -263,18 +263,18 @@ class RegisterForm extends Component {
             this.setState({ CityError: 'City is required' });
           }
           break;
-        case 'Office_Phone':
-          if (!Office_Phone && value) {
-            this.setState({ Office_PhoneError: '' });
-          } else if (Office_Phone && !value) {
-            this.setState({ Office_PhoneError: 'Office Phone is required' });
+        case 'OfficePhone':
+          if (!OfficePhone && value) {
+            this.setState({ OfficePhoneError: '' });
+          } else if (OfficePhone && !value) {
+            this.setState({ OfficePhoneError: 'Office Phone is required' });
           }
           break;
-        case 'Cell_Phone':
-          if (!Cell_Phone && value) {
-            this.setState({ Cell_PhoneError: '' });
-          } else if (Cell_Phone && !value) {
-            this.setState({ Cell_PhoneError: 'Cell Phone is required' });
+        case 'CellPhone':
+          if (!CellPhone && value) {
+            this.setState({ CellPhoneError: '' });
+          } else if (CellPhone && !value) {
+            this.setState({ CellPhoneError: 'Cell Phone is required' });
           }
           break;
         default:
@@ -290,45 +290,45 @@ class RegisterForm extends Component {
 
   render() {
     const {
-      Address_1,
-      Address_1Error,
-      Address_2,
-      Cell_Phone,
-      Cell_PhoneError,
+      Address1,
+      Address1Error,
+      Address2,
+      CellPhone,
+      CellPhoneError,
       City,
       CityError,
       District,
       DistrictError,
       Email,
       EmailError,
-      First_Name,
-      First_NameError,
+      FirstName,
+      FirstNameError,
       hasCompletedRegisterInfoForm,
       honeypot,
       isAuthenticated,
-      Last_Name,
-      Last_NameError,
-      Office_Phone,
-      Office_PhoneError,
+      LastName,
+      LastNameError,
+      OfficePhone,
+      OfficePhoneError,
       Title,
       TitleError,
-      Zip_Code,
-      Zip_CodeError,
+      ZipCode,
+      ZipCodeError,
     } = this.state;
 
     if (isAuthenticated) navigate('/members');
 
     const hasInput =
-      First_Name !== '' &&
-      Last_Name !== '' &&
+      FirstName !== '' &&
+      LastName !== '' &&
       Title !== '' &&
       District !== '' &&
-      Address_1 !== '' &&
+      Address1 !== '' &&
       City !== '' &&
-      Zip_Code !== '' &&
+      ZipCode !== '' &&
       Email !== '' &&
-      Office_Phone !== '' &&
-      Cell_Phone !== '';
+      OfficePhone !== '' &&
+      CellPhone !== '';
 
     const hasValidInput = hasInput && this.validateHuman(honeypot);
 
@@ -351,31 +351,31 @@ class RegisterForm extends Component {
           : (
             <form onSubmit={this.handleSubmit}>
               {/* FIRST NAME */}
-              <label css={labelStyles} htmlFor="First_Name">
+              <label css={labelStyles} htmlFor="FirstName">
                 First Name
                 <input
                   css={inputStyles}
-                  name="First_Name"
+                  name="FirstName"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Sally"
                   type="text"
-                  value={First_Name}
+                  value={FirstName}
                 />
               </label>
-              <div css={baseErrorStyles}>{First_NameError}</div>
+              <div css={baseErrorStyles}>{FirstNameError}</div>
 
               {/* LAST NAME */}
-              <label css={labelStyles} htmlFor="Last_Name">
+              <label css={labelStyles} htmlFor="LastName">
                 Last Name
                 <input
                   css={inputStyles}
-                  name="Last_Name"
+                  name="LastName"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Drumm"
-                  value={Last_Name}
+                  value={LastName}
                 />
               </label>
-              <div css={baseErrorStyles}>{Last_NameError}</div>
+              <div css={baseErrorStyles}>{LastNameError}</div>
 
               {/* TITLE */}
               <label css={labelStyles} htmlFor="Title">
@@ -404,27 +404,27 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{DistrictError}</div>
 
               {/* ADDRESS 1 */}
-              <label css={labelStyles} htmlFor="Address_1">
+              <label css={labelStyles} htmlFor="Address1">
                 Address 1
                 <input
                   css={inputStyles}
-                  name="Address_1"
+                  name="Address1"
                   onChange={this.handleUpdate}
                   placeholder="e.g. 123 Main St."
-                  value={Address_1}
+                  value={Address1}
                 />
               </label>
-              <div css={baseErrorStyles}>{Address_1Error}</div>
+              <div css={baseErrorStyles}>{Address1Error}</div>
 
               {/* ADDRESS 2 */}
-              <label css={labelStyles} htmlFor="Address_2">
+              <label css={labelStyles} htmlFor="Address2">
                 Address 2
                 <input
                   css={inputStyles}
-                  name="Address_2"
+                  name="Address2"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Suite 19"
-                  value={Address_2}
+                  value={Address2}
                 />
               </label>
 
@@ -442,17 +442,17 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{CityError}</div>
 
               {/* ZIP */}
-              <label css={labelStyles} htmlFor="Zip_Code">
+              <label css={labelStyles} htmlFor="ZipCode">
                 ZIP Code
                 <input
                   css={inputStyles}
-                  name="Zip_Code"
+                  name="ZipCode"
                   onChange={this.handleUpdate}
                   placeholder="e.g. 75150"
-                  value={Zip_Code}
+                  value={ZipCode}
                 />
               </label>
-              <div css={baseErrorStyles}>{Zip_CodeError}</div>
+              <div css={baseErrorStyles}>{ZipCodeError}</div>
 
               {/* EMAIL */}
               <label css={labelStyles} htmlFor="Email">
@@ -468,30 +468,30 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{EmailError}</div>
 
               {/* OFFICE PHONE */}
-              <label css={labelStyles} htmlFor="Office_Phone">
+              <label css={labelStyles} htmlFor="OfficePhone">
                 Office Phone
                 <input
                   css={inputStyles}
-                  name="Office_Phone"
+                  name="OfficePhone"
                   onChange={this.handleUpdate}
                   placeholder="e.g. (512) 555-1919"
-                  value={formatPhone(Office_Phone)}
+                  value={formatPhone(OfficePhone)}
                 />
               </label>
-              <div css={baseErrorStyles}>{Office_PhoneError}</div>
+              <div css={baseErrorStyles}>{OfficePhoneError}</div>
 
               {/* CELL PHONE */}
-              <label css={labelStyles} htmlFor="Cell_Phone">
+              <label css={labelStyles} htmlFor="CellPhone">
                 Cell Phone
                 <input
                   css={inputStyles}
-                  name="Cell_Phone"
+                  name="CellPhone"
                   onChange={this.handleUpdate}
                   placeholder="e.g. (512) 555-1919"
-                  value={formatPhone(Cell_Phone)}
+                  value={formatPhone(CellPhone)}
                 />
               </label>
-              <div css={baseErrorStyles}>{Cell_PhoneError}</div>
+              <div css={baseErrorStyles}>{CellPhoneError}</div>
 
               {/* Hidden input to help curtail spam */}
               <input
