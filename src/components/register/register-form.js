@@ -61,6 +61,8 @@ const INITIAL_STATE = {
   Address2: '',
   City: '',
   CityError: '',
+  State: '',
+  StateError: '',
   ZipCode: '',
   ZipCodeError: '',
   Email: '',
@@ -69,6 +71,9 @@ const INITIAL_STATE = {
   OfficePhoneError: '',
   CellPhone: '',
   CellPhoneError: '',
+  NewToTMAC: true,
+  PaymentOption: '',
+  AmountPaid: 0,
 };
 
 // Local Functions
