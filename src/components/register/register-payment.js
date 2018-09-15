@@ -111,7 +111,29 @@ class RegisterPayment extends Component {
 
   handleIncrementInvoiceId = () => {
     // Called when unmounting the component if no purchase made
-    return doUpdateInvoiceId();
+    const {
+      form,
+    } = this.props;
+
+    const {
+      paymentDetails,
+      value,
+    } = this.state;
+
+    const isActive = value === 'active';
+
+    const documentId = `${form.FirstName}_${form.LastName}`;
+
+    const updatedForm = {
+      ...paymentDetails,
+      level: isActive ? 'Active' : 'Retired',
+      amount: 0,
+    }
+
+    return Promise.all([
+      doUpdateEntry(updatedForm, documentId),
+      doUpdateInvoiceId(),
+    ]);
   };
 
   handleIncrementReceiptId = () => {
