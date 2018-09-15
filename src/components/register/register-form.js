@@ -72,6 +72,7 @@ const INITIAL_STATE = {
   CellPhone: '',
   CellPhoneError: '',
   NewToTMAC: true,
+  MemberType: '',
   PaymentOption: '',
   AmountPaid: 0,
 };
