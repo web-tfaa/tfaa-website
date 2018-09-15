@@ -36,6 +36,12 @@ let db, auth;
 
 if (typeof window !== 'undefined') {
   db = firebase.firestore();
+
+  // Timestamp modification
+  const { settings } = db;
+  settings.timestampsInSnapshots = true;
+  db.settings = settings;
+
   auth = firebase.auth();
 }
 

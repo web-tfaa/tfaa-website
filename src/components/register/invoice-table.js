@@ -71,7 +71,7 @@ const InvoiceTable = (props) => {
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">
-              TMAC {isActive ? 'Active' : 'Retired'} registration fee for <strong>{form.First_Name} {form.Last_Name}</strong>
+              TMAC {isActive ? 'Active' : 'Retired'} registration fee for <strong>{form.FirstName} {form.LastName}</strong>
               <br />
               for the 2018-2019 school year.
             </CustomTableCell>

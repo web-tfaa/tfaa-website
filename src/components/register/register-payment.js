@@ -96,7 +96,7 @@ class RegisterPayment extends Component {
 
       const isActive = value === 'active';
 
-      const documentId = `${form.First_Name}_${form.Last_Name}`;
+      const documentId = `${form.FirstName}_${form.LastName}`;
 
       const updatedForm = {
         ...paymentDetails,
@@ -171,7 +171,7 @@ class RegisterPayment extends Component {
             <Fragment>
               <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
               <p>{isActive ? 'Active' : 'Retired'} Member - {isActive ? '$50.00' : '$30.00'}</p>
-              <p>{form.First_Name} {form.Last_Name}, {form.District}</p>
+              <p>{form.FirstName} {form.LastName}, {form.District}</p>
 
               <h3 css={{ marginTop: 48 }}>Thank you for joining TMAC for this school year!</h3>
               <FormHr />
@@ -232,7 +232,6 @@ class RegisterPayment extends Component {
                   /> */}
                   <PaypalButtonWrapper
                     amount={this.getCurrentAmount()}
-                    item_name="TMAC Registration"
                     onSuccessfulPayment={this.handleUpdateCompletedStep}
                   />
                 </RadioGroup>

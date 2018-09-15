@@ -224,6 +224,7 @@ class RegisterForm extends Component {
         District,
         Address1,
         City,
+        State,
         OfficePhone,
         CellPhone,
       } = this.state;
@@ -269,6 +270,13 @@ class RegisterForm extends Component {
             this.setState({ CityError: '' });
           } else if (City && !value) {
             this.setState({ CityError: 'City is required' });
+          }
+          break;
+        case 'State':
+          if (!City && value) {
+            this.setState({ StateError: '' });
+          } else if (State && !value) {
+            this.setState({ StateError: 'State is required' });
           }
           break;
         case 'OfficePhone':
@@ -318,6 +326,8 @@ class RegisterForm extends Component {
       LastNameError,
       OfficePhone,
       OfficePhoneError,
+      State,
+      StateError,
       Title,
       TitleError,
       ZipCode,
@@ -448,6 +458,19 @@ class RegisterForm extends Component {
                 />
               </label>
               <div css={baseErrorStyles}>{CityError}</div>
+
+              {/* STATE */}
+              <label css={labelStyles} htmlFor="State">
+                State
+                <input
+                  css={inputStyles}
+                  name="State"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. TX"
+                  value={State}
+                />
+              </label>
+              <div css={baseErrorStyles}>{StateError}</div>
 
               {/* ZIP */}
               <label css={labelStyles} htmlFor="ZipCode">
