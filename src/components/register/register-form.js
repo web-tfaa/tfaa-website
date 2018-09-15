@@ -69,8 +69,6 @@ const INITIAL_STATE = {
   Office_PhoneError: '',
   Cell_Phone: '',
   Cell_PhoneError: '',
-  // OfficeFax is not required, so cannot have an error
-  Office_Fax: '',
 };
 
 // Local Functions
@@ -149,8 +147,7 @@ class RegisterForm extends Component {
   handleUpdate = event => {
     if (this.activeComponent) {
       if (
-        event.target.name.endsWith('Phone') ||
-        event.target.name.endsWith('Fax')
+        event.target.name.endsWith('Phone')
       ) {
         this.setState(
           {
@@ -311,7 +308,6 @@ class RegisterForm extends Component {
       isAuthenticated,
       Last_Name,
       Last_NameError,
-      Office_Fax,
       Office_Phone,
       Office_PhoneError,
       Title,
@@ -496,18 +492,6 @@ class RegisterForm extends Component {
                 />
               </label>
               <div css={baseErrorStyles}>{Cell_PhoneError}</div>
-
-              {/* OFFICE FAX */}
-              <label css={labelStyles} htmlFor="Office_Fax">
-                Office Fax
-                <input
-                  css={inputStyles}
-                  name="Office_Fax"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. (512) 555-1919"
-                  value={formatPhone(Office_Fax)}
-                />
-              </label>
 
               {/* Hidden input to help curtail spam */}
               <input
