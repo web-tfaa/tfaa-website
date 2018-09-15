@@ -6,11 +6,11 @@ export const doCreateEntry = (form, documentId, callback) =>
     .doc(documentId)
     .set(form)
     .then(() => {
-      console.log(`Registration for ${form.FirstName} ${form.LastName} was successful`, form);
+      console.log(`Registration for ${documentId} was successful`, form);
       callback(form);
     })
     .catch(err =>{
-      console.log(`Error adding registration for ${form.FirstName} ${form.LastName} document`, err);
+      console.log(`Error adding registration for ${documentId} document`, err);
     });
 
 export const doUpdateEntry = (form, documentId) =>
@@ -22,10 +22,10 @@ export const doUpdateEntry = (form, documentId) =>
       AmountPaid: form.amount,
     })
     .then(() => {
-      console.log(`Updating payment info for ${form.FirstName} ${form.LastName} was successful`);
+      console.log(`Updating payment info for ${documentId} was successful`);
     })
     .catch(err =>{
-      console.log(`Error updating payment info for ${form.FirstName} ${form.LastName} document`, err);
+      console.log(`Error updating payment info for ${documentId} document`, err);
     });
 
 // Invoice actions
