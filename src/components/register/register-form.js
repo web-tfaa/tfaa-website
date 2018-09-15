@@ -125,6 +125,8 @@ class RegisterForm extends Component {
     delete form.honeypot;
     delete form.hasCompletedRegisterInfoForm;
 
+    form.NewToTMAC = form.NewToTMAC ? 'Yes' : 'No';
+
     // This will identify each row in the database and serve as the document name
     const documentId = `${form.FirstName}_${form.LastName}`;
 
