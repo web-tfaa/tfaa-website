@@ -7,6 +7,10 @@ import { navigate } from 'gatsby';
 
 // Material-UI Dependencies
 import CircularProgress from '@material-ui/core/CircularProgress';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 // Internal Dependencies
 import RegisterButton from './register-button';
@@ -102,6 +106,7 @@ class RegisterForm extends Component {
     this.state = {
       ...INITIAL_STATE,
       hasCompletedRegisterInfoForm: false,
+      radioValue: 'yes',
     };
 
     this.activeComponent = true;
@@ -126,7 +131,8 @@ class RegisterForm extends Component {
     delete form.honeypot;
     delete form.hasCompletedRegisterInfoForm;
 
-    form.NewToTMAC = form.NewToTMAC ? 'Yes' : 'No';
+    form.NewToTMAC = form.radioValue;
+    delete form.radioValue;
 
     // This will identify each row in the database and serve as the document name
     const documentId = `${form.FirstName}_${form.LastName}`;
@@ -299,6 +305,10 @@ class RegisterForm extends Component {
     }
   };
 
+  handleChangeNewToTMAC = (event) => {
+    this.setState({ radioValue: event.target.value });
+  };
+
   validateHuman = data => {
     if (data) return false;
     return true;
@@ -326,6 +336,7 @@ class RegisterForm extends Component {
       LastNameError,
       OfficePhone,
       OfficePhoneError,
+      radioValue,
       State,
       StateError,
       Title,
@@ -523,6 +534,23 @@ class RegisterForm extends Component {
                 />
               </label>
               <div css={baseErrorStyles}>{CellPhoneError}</div>
+
+              {/* NEW TO TMAC */}
+
+              <FormControl component="fieldset">
+                <label css={labelStyles} htmlFor="NewToTMAC">
+                  New To TMAC
+                  <RadioGroup
+                    aria-label="NewToTMAC"
+                    name="NewToTMAC"
+                    value={radioValue}
+                    onChange={this.handleChangeNewToTMAC}
+                  >
+                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                  </RadioGroup>
+                </label>
+              </FormControl>
 
               {/* Hidden input to help curtail spam */}
               <input

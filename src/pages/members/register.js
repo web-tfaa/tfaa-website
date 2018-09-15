@@ -108,8 +108,6 @@ class RegisterContent extends Component {
       form,
     } = this.state;
 
-    console.log('updated form → ', updatedForm);
-
     if (this.activeComponent) {
       this.setState({
         activeStep: activeStep + 1,
@@ -131,8 +129,6 @@ class RegisterContent extends Component {
       activeStep,
       completedSteps,
     } = this.state;
-
-    console.log("FROM", this.state.form);
 
     const hasCompletedAllSteps = completedSteps.length >= 3;
 
