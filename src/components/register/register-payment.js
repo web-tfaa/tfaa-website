@@ -96,7 +96,7 @@ class RegisterPayment extends Component {
 
       const isActive = value === 'active';
 
-      const documentId = `${form.FirstName}_${form.LastName}`;
+      const documentId = form.userId;
 
       const updatedForm = {
         ...paymentDetails,
@@ -122,7 +122,7 @@ class RegisterPayment extends Component {
 
     const isActive = value === 'active';
 
-    const documentId = `${form.FirstName}_${form.LastName}`;
+    const documentId = form.userId;
 
     const updatedForm = {
       ...paymentDetails,

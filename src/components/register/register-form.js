@@ -13,6 +13,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
 // Internal Dependencies
+import AuthUserContext from '../session/AuthUserContext';
 import RegisterButton from './register-button';
 import { options } from '../../utils/typography';
 import {
@@ -97,6 +98,7 @@ const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
 // Component Definition
 class RegisterForm extends Component {
   static propTypes = {
+    authUser: PropTypes.shape({}).isRequired,
     onCompleteStep: PropTypes.func.isRequired,
   };
 
@@ -106,7 +108,9 @@ class RegisterForm extends Component {
     this.state = {
       ...INITIAL_STATE,
       hasCompletedRegisterInfoForm: false,
-      radioValue: 'yes',
+      radioValue: 'Yes',
+      // eslint-disable-next-line
+      userId: props.authUser.uid,
     };
 
     this.activeComponent = true;
@@ -135,7 +139,7 @@ class RegisterForm extends Component {
     delete form.radioValue;
 
     // This will identify each row in the database and serve as the document name
-    const documentId = `${form.FirstName}_${form.LastName}`;
+    const documentId = form.userId;
 
     doCreateEntry(form, documentId, this.handleUpdateCompletedStep)
 
@@ -315,6 +319,7 @@ class RegisterForm extends Component {
   };
 
   render() {
+    console.log('ththth', this.state);
     const {
       Address1,
       Address1Error,
@@ -538,6 +543,7 @@ class RegisterForm extends Component {
               {/* NEW TO TMAC */}
 
               <FormControl component="fieldset">
+                {/* eslint-disable-next-line */}
                 <label css={labelStyles} htmlFor="NewToTMAC">
                   New To TMAC
                   <RadioGroup
@@ -583,4 +589,10 @@ class RegisterForm extends Component {
   }
 }
 
-export default RegisterForm;
+const RegisterFormWithContext = (props) => (
+  <AuthUserContext.Consumer>
+    {authUser => <RegisterForm {...props} authUser={authUser} />}
+  </AuthUserContext.Consumer>
+);
+
+export default RegisterFormWithContext;
