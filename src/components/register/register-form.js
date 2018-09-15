@@ -121,7 +121,7 @@ class RegisterForm extends Component {
     delete form.hasCompletedRegisterInfoForm;
 
     // This will identify each row in the database and serve as the document name
-    const documentId = `${form.First_Name}_${form.Last_Name}`;
+    const documentId = `${form.FirstName}_${form.LastName}`;
 
     doCreateEntry(form, documentId, this.handleUpdateCompletedStep)
 
