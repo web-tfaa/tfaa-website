@@ -22,9 +22,6 @@ import resourcesSidebar from '../pages/resources/resources-links.yml';
 import { rhythm } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
 
-// from Gatsby www project
-import '../css/prism-coy.css';
-
 // Import Futura PT typeface
 import '../fonts/Webfonts/futurapt_book_macroman/stylesheet.css';
 import '../fonts/Webfonts/futurapt_bookitalic_macroman/stylesheet.css';
@@ -32,8 +29,8 @@ import '../fonts/Webfonts/futurapt_demi_macroman/stylesheet.css';
 import '../fonts/Webfonts/futurapt_demiitalic_macroman/stylesheet.css';
 
 // Other fonts
-import 'typeface-space-mono';
 import 'typeface-spectral';
+import 'typeface-space-mono';
 
 // Local Variables
 const sidebarStyles = {

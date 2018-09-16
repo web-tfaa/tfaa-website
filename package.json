@@ -30,7 +30,7 @@
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
     "firebase": "^5.5.0",
-    "gatsby": "next",
+    "gatsby": "^2.0.0-rc.13",
     "gatsby-cli": "next",
     "gatsby-image": "next",
     "gatsby-plugin-canonical-urls": "next",
