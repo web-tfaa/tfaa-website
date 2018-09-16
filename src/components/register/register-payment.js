@@ -101,7 +101,7 @@ class RegisterPayment extends Component {
       const updatedForm = {
         ...paymentDetails,
         level: isActive ? 'Active' : 'Retired',
-        amount: isActive ? 50.00 : 30.00,
+        amount: isActive ? '$50.00' : '$30.00',
       }
 
       onCompleteStep(2, updatedForm);

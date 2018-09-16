@@ -138,6 +138,10 @@ class RegisterForm extends Component {
     form.NewToTMAC = form.radioValue;
     delete form.radioValue;
 
+    // Send phone values in formatted
+    form.OfficePhone = formatPhone(form.OfficePhone);
+    form.CellPhone = formatPhone(form.CellPhone);
+
     // This will identify each row in the database and serve as the document name
     const documentId = form.userId;
 
