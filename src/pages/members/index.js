@@ -14,7 +14,7 @@ import presets from '../../utils/presets';
 import Status from './status';
 
 // Component Definition
-class Members extends Component {
+class MembersContent extends Component {
   static propTypes = {
     authUser: PropTypes.shape({}),
     data: PropTypes.shape({}).isRequired,
@@ -34,7 +34,7 @@ class Members extends Component {
 
     console.log('authUser', authUser);
 
-    const isAuthenticated = !!authUser;
+    const isAuthenticated = Boolean(authUser);
 
     return (
       <Layout location={location}>
@@ -70,13 +70,22 @@ class Members extends Component {
   }
 }
 
+const Members = (props) => (
+  // eslint-disable-next-line
+  <Layout location={props.location}>
+    <MembersWithContext {...props} />
+  </Layout>
+  );
+
 const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <Members {...props} authUser={authUser} />}
+    {authUser => {
+      console.log('authUser in consumer', authUser);
+      return <MembersContent {...props} authUser={authUser} />}}
   </AuthUserContext.Consumer>
 );
 
-export default MembersWithContext;
+export default Members;
 
 export const pageQuery = graphql`
   query MemberContent {
