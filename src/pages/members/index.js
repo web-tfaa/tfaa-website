@@ -1,7 +1,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 // Internal Dependencies
@@ -14,61 +14,56 @@ import presets from '../../utils/presets';
 import Status from './status';
 
 // Component Definition
-class MembersContent extends Component {
-  static propTypes = {
-    authUser: PropTypes.shape({}),
-    data: PropTypes.shape({}).isRequired,
-    location: PropTypes.shape({}).isRequired,
-  };
+const MembersContent = (props) => {
+  const {
+    authUser,
+    data,
+    location,
+  } = props;
 
-  static defaultProps = {
-    authUser: null,
-  };
+  const isAuthenticated = Boolean(authUser);
 
-  render() {
-    const {
-      authUser,
-      data,
-      location,
-    } = this.props;
+  return (
+    <Layout location={location}>
+      <div
+        css={{
+          paddingLeft: 0,
+          width: `0 auto`,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+        <Status />
+        <Container>
+          <Helmet>
+            <title>TMAC | Members</title>
+          </Helmet>
+          {isAuthenticated ? (
+            <MemberContent
+              memberEmail={authUser.email}
+              contentfulFileShareData={
+                data.allContentfulFileShare.edges
+              }
+              contentfulFileShareDescriptionData={
+                data.allContentfulFileShareDescriptionTextNode
+                  .edges
+              }
+            />
+          ) : <NonMemberContent />}
+        </Container>
+      </div>
+    </Layout>
+  );
+};
+MembersContent.propTypes = {
+  authUser: PropTypes.shape({}),
+  data: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
 
-    console.log('authUser', authUser);
-
-    const isAuthenticated = Boolean(authUser);
-
-    return (
-      <Layout location={location}>
-        <div
-          css={{
-            paddingLeft: 0,
-            width: `0 auto`,
-            [presets.Tablet]: {
-              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-            },
-          }}>
-          <Status />
-          <Container>
-            <Helmet>
-              <title>TMAC | Members</title>
-            </Helmet>
-            {isAuthenticated ? (
-              <MemberContent
-                memberEmail={authUser.email}
-                contentfulFileShareData={
-                  data.allContentfulFileShare.edges
-                }
-                contentfulFileShareDescriptionData={
-                  data.allContentfulFileShareDescriptionTextNode
-                    .edges
-                }
-              />
-            ) : <NonMemberContent />}
-          </Container>
-        </div>
-      </Layout>
-    );
-  }
-}
+MembersContent.defaultProps = {
+  authUser: null,
+};
 
 const Members = (props) => (
   // eslint-disable-next-line
@@ -79,9 +74,7 @@ const Members = (props) => (
 
 const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => {
-      console.log('authUser in consumer', authUser);
-      return <MembersContent {...props} authUser={authUser} />}}
+    {authUser => <MembersContent {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
 );
 

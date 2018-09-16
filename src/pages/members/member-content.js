@@ -80,21 +80,27 @@ const MemberContent = props => {
     memberEmail,
   } = props;
 
+  const memberTaskCard = (
+    <Card>
+      <CardHeadline>{`Tasks for ${memberEmail}`}</CardHeadline>
+      <FuturaDiv>
+        <CheckIcon css={checkIconStyles} />
+        Registered for 2018-2019 school year
+      </FuturaDiv>
+      <FuturaDiv>
+        <ClearIcon css={clearIconStyles} />
+        Paid 2018-2019 membership dues
+      </FuturaDiv>
+    </Card>
+  );
+
   return (
     <div>
       <h1>Member Dashboard</h1>
       <Cards>
-        <Card>
-          <CardHeadline>{`Tasks for ${memberEmail}`}</CardHeadline>
-          <FuturaDiv>
-            <CheckIcon css={checkIconStyles} />
-            Registered for 2018-2019 school year
-          </FuturaDiv>
-          <FuturaDiv>
-            <ClearIcon css={clearIconStyles} />
-            Paid 2018-2019 membership dues
-          </FuturaDiv>
-        </Card>
+
+        {memberTaskCard}
+
         {contentfulFileShareData &&
           contentfulFileShareData.map((edge, index) => (
             <MemberFileShareCard
