@@ -319,7 +319,6 @@ class RegisterForm extends Component {
   };
 
   render() {
-    console.log('ththth', this.state);
     const {
       Address1,
       Address1Error,

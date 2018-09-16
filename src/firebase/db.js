@@ -6,7 +6,7 @@ export const doCreateEntry = (form, documentId, callback) =>
     .doc(documentId)
     .set(form)
     .then(() => {
-      console.log(`Registration for ${documentId} was successful`, form);
+      console.log(`Registration for ${documentId} was successful`);
       callback(form);
     })
     .catch(err =>{
@@ -17,7 +17,7 @@ export const doUpdateEntry = (form, documentId) =>
   db.collection('registration_18-19')
     .doc(documentId)
     .update({
-      PaymentOption: form.paymentId ? 'paypal' : 'invoiced',
+      PaymentOption: form.paymentId ? 'Paypal' : 'Invoiced',
       MemberType: form.level,
       AmountPaid: form.amount,
     })
