@@ -18,41 +18,38 @@ const MembersContent = (props) => {
   const {
     authUser,
     data,
-    location,
   } = props;
 
   const isAuthenticated = Boolean(authUser);
 
   return (
-    <Layout location={location}>
-      <div
-        css={{
-          paddingLeft: 0,
-          width: `0 auto`,
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}>
-        <Status />
-        <Container>
-          <Helmet>
-            <title>TMAC | Members</title>
-          </Helmet>
-          {isAuthenticated ? (
-            <MemberContent
-              memberEmail={authUser.email}
-              contentfulFileShareData={
-                data.allContentfulFileShare.edges
-              }
-              contentfulFileShareDescriptionData={
-                data.allContentfulFileShareDescriptionTextNode
-                  .edges
-              }
-            />
-          ) : <NonMemberContent />}
-        </Container>
-      </div>
-    </Layout>
+    <div
+      css={{
+        paddingLeft: 0,
+        width: `0 auto`,
+        [presets.Tablet]: {
+          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+        },
+      }}>
+      <Status />
+      <Container>
+        <Helmet>
+          <title>TMAC | Members</title>
+        </Helmet>
+        {isAuthenticated ? (
+          <MemberContent
+            memberEmail={authUser.email}
+            contentfulFileShareData={
+              data.allContentfulFileShare.edges
+            }
+            contentfulFileShareDescriptionData={
+              data.allContentfulFileShareDescriptionTextNode
+                .edges
+            }
+          />
+        ) : <NonMemberContent />}
+      </Container>
+    </div>
   );
 };
 MembersContent.propTypes = {
