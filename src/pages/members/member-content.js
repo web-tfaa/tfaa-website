@@ -1,7 +1,7 @@
 // External Dependencies
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import CheckIcon from 'react-icons/lib/md/check';
 import ClearIcon from 'react-icons/lib/md/clear';
 
@@ -12,6 +12,7 @@ import Cards from '../../components/shared/cards';
 import FuturaDiv from '../../components/shared/futura-div';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
+import { db } from '../../firebase';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -73,76 +74,103 @@ MemberFileShareCard.propTypes = {
 };
 
 // Component Definition
-const MemberContent = props => {
-  const {
-    contentfulFileShareData,
-    contentfulFileShareDescriptionData,
-    memberEmail,
-  } = props;
+class MemberContent extends Component {
+  static propTypes = {
+    contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
+    contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
+    memberEmail: PropTypes.string,
+  };
 
-  const memberTaskCard = (
-    <Card>
-      <CardHeadline>{`Tasks for ${memberEmail}`}</CardHeadline>
-      <FuturaDiv>
-        <CheckIcon css={checkIconStyles} />
-        Registered for 2018-2019 school year
-      </FuturaDiv>
-      <FuturaDiv>
-        <ClearIcon css={clearIconStyles} />
-        Paid 2018-2019 membership dues
-      </FuturaDiv>
-    </Card>
-  );
+  static defaultProps = {
+    contentfulFileShareData: null,
+    contentfulFileShareDescriptionData: null,
+  };
 
-  return (
-    <div>
-      <h1>Member Dashboard</h1>
-      <Cards>
+  constructor(props) {
+    super(props);
 
-        {memberTaskCard}
+    this.state = {
+      userData: db.doGetUsers(),
+    };
+  }
 
-        {contentfulFileShareData &&
-          contentfulFileShareData.map((edge, index) => (
-            <MemberFileShareCard
-              key={edge.node.id}
-              node={edge.node}
-              description={
-                contentfulFileShareDescriptionData
-                  ? contentfulFileShareDescriptionData[index].node.description
-                  : null
-              }
-            />
-          ))}
-      </Cards>
+  // componentDidMount() {
+  //   this.setState({
+  //     userData: ,
+  //   });
+  // }
 
-      <div
-        css={{
-          display: `block`,
-          [presets.Tablet]: {
-            display: `none`,
-          },
-        }}>
-        <hr
+  componentDidUpdate(prevProps, prevState) {
+    console.log('prev', prevState.userData, this.state.userData);
+  }
+
+  render() {
+    const {
+      contentfulFileShareData,
+      contentfulFileShareDescriptionData,
+      memberEmail,
+    } = this.props;
+
+    const {
+      userData,
+    } = this.state;
+
+    console.log('userData', userData);
+
+    const memberTaskCard = (
+      <Card>
+        <CardHeadline>{`Tasks for ${memberEmail}`}</CardHeadline>
+        <FuturaDiv>
+          <CheckIcon css={checkIconStyles} />
+          Registered for 2018-2019 school year
+        </FuturaDiv>
+        <FuturaDiv>
+          <ClearIcon css={clearIconStyles} />
+          Paid 2018-2019 membership dues
+        </FuturaDiv>
+      </Card>
+    );
+
+    return (
+      <div>
+        <h1>Member Dashboard</h1>
+        <Cards>
+
+          {memberTaskCard}
+
+          {contentfulFileShareData &&
+            contentfulFileShareData.map((edge, index) => (
+              <MemberFileShareCard
+                key={edge.node.id}
+                node={edge.node}
+                description={
+                  contentfulFileShareDescriptionData
+                    ? contentfulFileShareDescriptionData[index].node.description
+                    : null
+                }
+              />
+            ))}
+        </Cards>
+
+        <div
           css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }}
-        />
-        <SidebarBody inline yaml={membersSidebar} />
+            display: `block`,
+            [presets.Tablet]: {
+              display: `none`,
+            },
+          }}>
+          <hr
+            css={{
+              border: 0,
+              height: 2,
+              marginTop: 10,
+            }}
+          />
+          <SidebarBody inline yaml={membersSidebar} />
+        </div>
       </div>
-    </div>
-  );
-};
-
-MemberContent.propTypes = {
-  contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
-  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
-  memberEmail: PropTypes.string,
-};;
-MemberContent.defaultProps = {
-  contentfulFileShareData: null,
-  contentfulFileShareDescriptionData: null,
-};;
+    );
+  }
+}
 
 export default MemberContent;

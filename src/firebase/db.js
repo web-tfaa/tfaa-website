@@ -28,6 +28,22 @@ export const doUpdateEntry = (form, documentId) =>
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
 
+export const doGetUsers = () => {
+  const userList = [];
+  return db.collection('registration_18-19')
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log('this here →', doc.id, ' => ', doc.data());
+        userList.push(doc.data());
+      });
+      return userList;
+    })
+    .catch((error) => {
+        console.log('Error getting user docs: ', error);
+    });
+  };
+
 // Invoice actions
 export const doGetInvoiceId = (callback) =>
   db.collection('Document_ID')
