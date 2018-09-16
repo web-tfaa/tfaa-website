@@ -42,7 +42,6 @@
     "gatsby-source-contentful": "next",
     "gatsby-transformer-sharp": "next",
     "glamor": "^2.20.40",
-    "googleapis": "^33.0.0",
     "gray-percentage": "^2.0.0",
     "hex2rgba": "0.0.1",
     "jss": "^9.8.7",
@@ -64,7 +63,7 @@
     "typography-theme-twin-peaks": "^0.15.11"
   },
   "engines": {
-    "node": "^8.11.4",
+    "node": "^8.12.0",
     "npm": "^6.2.0"
   },
   "devDependencies": {
