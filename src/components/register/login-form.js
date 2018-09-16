@@ -65,16 +65,6 @@ class LoginForm extends Component {
     this.activeComponent = true;
   }
 
-  componentDidMount() {
-    // if (this.activeComponent) {
-      // We need the 'window' to be defined
-      //  which is only once a component is mounted
-      // if (typeof window !== 'undefined') {
-      //   this.auth = firebase.auth();
-      // }
-    // }
-  }
-
   componentDidUpdate(prevProps, prevState) {
     const { onRegisterLogin } = this.props;
     const { isAuthenticated } = this.state;
