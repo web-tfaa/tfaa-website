@@ -1,7 +1,7 @@
 // External Dependencies
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 
 // Internal Dependencies
@@ -12,55 +12,85 @@ import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
 import presets from '../../utils/presets';
 import Status from './status';
+import { doGetUsers } from '../../firebase/db';
 
 // Component Definition
-const MembersContent = (props) => {
-  const {
-    authUser,
-    data,
-  } = props;
+class MembersContent extends Component {
+  static propTypes = {
+    authUser: PropTypes.shape({}),
+    data: PropTypes.shape({}).isRequired,
+    location: PropTypes.shape({}).isRequired,
+  };
 
-  const isAuthenticated = Boolean(authUser);
+  static defaultProps = {
+    authUser: null,
+  };
 
-  return (
-    <div
-      css={{
-        paddingLeft: 0,
-        width: `0 auto`,
-        [presets.Tablet]: {
-          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-        },
-      }}>
-      <Status />
-      <Container>
-        <Helmet>
-          <title>TMAC | Members</title>
-        </Helmet>
-        {isAuthenticated ? (
-          <MemberContent
-            memberEmail={authUser.email}
-            contentfulFileShareData={
-              data.allContentfulFileShare.edges
-            }
-            contentfulFileShareDescriptionData={
-              data.allContentfulFileShareDescriptionTextNode
-                .edges
-            }
-          />
-        ) : <NonMemberContent />}
-      </Container>
-    </div>
-  );
-};
-MembersContent.propTypes = {
-  authUser: PropTypes.shape({}),
-  data: PropTypes.shape({}).isRequired,
-  location: PropTypes.shape({}).isRequired,
-};
+  constructor(props) {
+    super(props);
 
-MembersContent.defaultProps = {
-  authUser: null,
-};
+    this.state = {
+      userData: [],
+    };
+  }
+
+  componentDidMount() {
+    const userList = [];
+
+    doGetUsers(userList, this.handleUpdateUserList);
+  }
+
+  handleUpdateUserList = (userList) => {
+    this.setState({ userData: userList });
+  };
+
+  render() {
+    const {
+      authUser,
+      data,
+    } = this.props;
+
+    const {
+      userData,
+    } = this.state;
+
+    const isAuthenticated = Boolean(authUser);
+
+    return (
+      <div
+        css={{
+          paddingLeft: 0,
+          width: `0 auto`,
+          [presets.Tablet]: {
+            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+          },
+        }}>
+        <Status />
+        <Container>
+          <Helmet>
+            <title>TMAC | Members</title>
+          </Helmet>
+          {isAuthenticated
+            ? (
+              <MemberContent
+                contentfulFileShareData={
+                  data.allContentfulFileShare.edges
+                }
+                contentfulFileShareDescriptionData={
+                  data.allContentfulFileShareDescriptionTextNode
+                    .edges
+                }
+                memberEmail={authUser.email}
+                userData={userData}
+                userId={authUser.uid}
+              />
+            )
+            : <NonMemberContent />}
+        </Container>
+      </div>
+    );
+  }
+}
 
 const Members = (props) => (
   // eslint-disable-next-line

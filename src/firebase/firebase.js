@@ -35,12 +35,13 @@ if (!firebase.apps.length) {
 let db, auth;
 
 if (typeof window !== 'undefined') {
+  // Initialize Cloud Firestore through Firebase
   db = firebase.firestore();
 
-  // Timestamp modification
-  const { settings } = db;
-  settings.timestampsInSnapshots = true;
-  db.settings = settings;
+  // Disable deprecated features
+  db.settings({
+    timestampsInSnapshots: true
+  });
 
   auth = firebase.auth();
 }

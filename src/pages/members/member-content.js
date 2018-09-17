@@ -1,9 +1,9 @@
 // External Dependencies
+import CheckIcon from 'react-icons/lib/md/check';
+import ClearIcon from 'react-icons/lib/md/clear';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import CheckIcon from 'react-icons/lib/md/check';
-import ClearIcon from 'react-icons/lib/md/clear';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -12,11 +12,10 @@ import Cards from '../../components/shared/cards';
 import FuturaDiv from '../../components/shared/futura-div';
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
-import { db } from '../../firebase';
 
 // Sidebar Data
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
+import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
 const futuraStyles = {
@@ -28,8 +27,8 @@ const futuraStyles = {
 const memberFileShareCardStyles = { marginTop: '1rem' };
 
 const taskIconStyles = {
-  marginRight: 8,
   height: 24,
+  marginRight: 8,
   width: 24,
 };
 
@@ -44,6 +43,17 @@ const clearIconStyles = {
 };
 
 // Local Components
+const MemberInfoDiv = ({ children }) => (
+  <div
+    css={{
+      lineHeight: '1.6',
+      marginBottom: '0.5rem',
+      marginLeft: '1rem',
+    }}>
+    {children}
+  </div>
+);
+
 const FuturaAnchor = ({ children, href }) => (
   <a href={href} css={futuraStyles}>
     {children}
@@ -69,8 +79,8 @@ const MemberFileShareCard = ({ node, description }) => {
   );
 };
 MemberFileShareCard.propTypes = {
-  node: PropTypes.shape({}).isRequired,
   description: PropTypes.string.isRequired,
+  node: PropTypes.shape({}).isRequired,
 };
 
 // Component Definition
@@ -79,29 +89,74 @@ class MemberContent extends Component {
     contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
     contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
     memberEmail: PropTypes.string,
+    userData: PropTypes.arrayOf(PropTypes.shape({})),
+    userId: PropTypes.string,
   };
 
   static defaultProps = {
     contentfulFileShareData: null,
     contentfulFileShareDescriptionData: null,
+    userData: [],
+    userId: null,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      userData: db.doGetUsers(),
+      currentUser: null,
+      isInvoice: true,
+      isRegistered: false,
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     userData: ,
-  //   });
-  // }
+  componentDidMount() {
+    const {
+      userData,
+      userId,
+    } = this.props;
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('prev', prevState.userData, this.state.userData);
+    // Find if the current user is among the registerd users
+    if (Object.keys(userData).includes(userId)) {
+      this.handleUpdateRegisteredUser();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      userData,
+      userId,
+    } = this.props;
+
+    const {
+      isRegistered,
+    } = this.state;
+
+    if ((prevProps.userData.length !== userId.length) && !isRegistered) {
+      // Find if the current user is among the registered users
+      if (Object.keys(userData).includes(userId)) {
+        this.handleUpdateRegisteredUser();
+
+        const indexOfUser = Object.keys(userData).indexOf(userId);
+
+        const valuesOnly = Object.values(userData);
+
+        this.handleUpdateUserModel(valuesOnly[indexOfUser]);
+      }
+    }
+  }
+
+  handleUpdateRegisteredUser = () => {
+    this.setState({ isRegistered: true });
+  }
+
+  handleUpdateUserModel = (data) => {
+    this.setState({ currentUser: data });
+  }
+
+  handleUpdateIsInvoice = () => {
+    // Update to false when a user has a Paypal record
+    this.setState({ isInvoice: false });
   }
 
   render() {
@@ -112,32 +167,77 @@ class MemberContent extends Component {
     } = this.props;
 
     const {
-      userData,
+      currentUser,
+      isInvoice,
+      isRegistered,
     } = this.state;
 
-    console.log('userData', userData);
+    const registeredIcon = isRegistered
+      ? <CheckIcon css={checkIconStyles} />
+      : <ClearIcon css={clearIconStyles} />;
+
+    const memberInfoCard = currentUser && (
+      <Card>
+        <CardHeadline>{`Info for: ${memberEmail}`}</CardHeadline>
+        <div css={{ margin: '2rem 0px' }}>
+          <MemberInfoDiv>
+            {currentUser.FirstName} {currentUser.LastName}
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            {currentUser.Title}, {currentUser.District}
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            {currentUser.MemberType} member
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            {currentUser.Address1}
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            {currentUser.Address2}
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            Office Phone {currentUser.OfficePhone}
+          </MemberInfoDiv>
+          <MemberInfoDiv>
+            Cell Phone {currentUser.CellPhone}
+          </MemberInfoDiv>
+        </div>
+        <FuturaDiv>
+          Need to update any information?<br />
+          Send an email over to the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+        </FuturaDiv>
+      </Card>
+    );
 
     const memberTaskCard = (
       <Card>
-        <CardHeadline>{`Tasks for ${memberEmail}`}</CardHeadline>
+        <CardHeadline>{`Tasks for: ${memberEmail}`}</CardHeadline>
         <FuturaDiv>
-          <CheckIcon css={checkIconStyles} />
+          {registeredIcon}
           Registered for 2018-2019 school year
         </FuturaDiv>
-        <FuturaDiv>
-          <ClearIcon css={clearIconStyles} />
-          Paid 2018-2019 membership dues
-        </FuturaDiv>
+        {isInvoice && <FuturaDiv>
+          If you need to pay via invoice please send{' '}
+          payment to the TMAC Treasurer as indicated on your invoice.
+        </FuturaDiv>}
       </Card>
     );
 
     return (
       <div>
-        <h1>Member Dashboard</h1>
+        <h2>Member Dashboard</h2>
         <Cards>
+          {memberInfoCard}
 
           {memberTaskCard}
+        </Cards>
 
+        <h2>For Members</h2>
+
+        <Cards>
           {contentfulFileShareData &&
             contentfulFileShareData.map((edge, index) => (
               <MemberFileShareCard

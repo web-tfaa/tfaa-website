@@ -28,17 +28,21 @@ export const doUpdateEntry = (form, documentId) =>
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
 
-export const doGetUsers = () =>
-  db.collection('registration_18-19')
+export const doGetUsers = (userList, callback) => {
+  const updatedUserList = userList;
+  return db.collection('registration_18-19')
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log('this here →', doc.id, ' => ', doc.data());
+        // console.log('this here →', doc.id, ' => ', doc.data());
+        updatedUserList[doc.id] = doc.data();
       });
+      return callback(updatedUserList);
     })
     .catch((error) => {
         console.log('Error getting user docs: ', error);
     });
+};
 
 // Invoice actions
 export const doGetInvoiceId = (callback) =>

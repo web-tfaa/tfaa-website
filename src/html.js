@@ -7,22 +7,30 @@ import React from 'react';
 // Internal Dependencies
 import colors from './utils/colors';
 
-// eslint-disable-next-line
-// let stylesStr;
-// if (process.env.NODE_ENV === `production`) {
-//   try {
-//     stylesStr = require(`!raw-loader!../publicstyles.css`);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 // Component Definition
 export default class HTML extends React.Component {
   render() {
     return (
       <html {...this.props.htmlAttributes}>
         <head>
+          <link
+            rel="preload"
+            href="/static/ftn45-webfont.c2439033.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/static/spectral-latin-400.d9fdfd34.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/static/ftn65-webfont.0ddc10d2.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
           {this.props.headComponents}
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
