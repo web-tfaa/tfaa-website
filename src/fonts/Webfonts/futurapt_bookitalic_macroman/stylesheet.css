@@ -24,6 +24,7 @@
 
 @font-face {
     font-family: 'Futura PT';
+    font-display: swap;
     src: url('ftn46-webfont.eot');
     src: url("ftn46-webfont.woff2") format("woff2"),
       url("ftn46-webfont.woff") format("woff"),
