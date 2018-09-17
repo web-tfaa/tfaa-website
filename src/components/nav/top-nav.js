@@ -10,6 +10,7 @@ import presets from '../../utils/presets';
 import { auth } from '../../firebase';
 import { rhythm, scale, options } from '../../utils/typography';
 
+// Local Variables
 const navItemStyles = {
   ...scale(-1 / 3),
   boxSizing: `border-box`,
@@ -27,6 +28,9 @@ const navItemStyles = {
     opacity: 0.8,
     textDecoration: 'underline',
   },
+  active: {
+    fontWeight: 600,
+  },
 };
 
 const NavItem = ({ linkTo, children }) => (
@@ -35,7 +39,15 @@ const NavItem = ({ linkTo, children }) => (
       display: `inline-block`,
       margin: 0,
     }}>
-    <Link to={linkTo} css={navItemStyles}>
+    <Link
+      css={navItemStyles}
+      getProps={({isPartiallyCurrent}) =>
+        isPartiallyCurrent && children !== 'TMAC' && children !== 'Sign Out'
+          ? { style: navItemStyles.active }
+          : {}
+      }
+      to={linkTo}
+    >
       {children}
     </Link>
   </li>
@@ -69,7 +81,6 @@ const TopNav = (props) => {
       }}>
       <div
         css={{
-          // maxWidth: rhythm(presets.maxWidth),
           alignItems: `flex-end`,
           borderBottom: '4px solid #2D456F',
           boxShadow: '3px 0 5px #2D456F',
