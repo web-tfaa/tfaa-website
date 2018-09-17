@@ -1,6 +1,5 @@
 // External Dependencies
 import Typography from 'typography';
-import CodePlugin from 'typography-plugin-code';
 
 // Internal Dependencies
 import {
@@ -47,7 +46,6 @@ const _options = {
   bodyColor: colors.gray.copy,
   blockMarginBottom: 0.75,
   scaleRatio: 2,
-  plugins: [new CodePlugin()],
   overrideStyles: ({ rhythm, scale }, options) => {
     return {
       'h1,h2,h4,h5,h6': {
