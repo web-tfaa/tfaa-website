@@ -43,16 +43,16 @@ const FeaturedStat = ({ children }) => (
       },
     }}>
     <Stat color={queueMusicIconColor} icon={QueueMusic}>
-      <div>{ageOfTmac} Years Serving Our Students</div>
+      <div>Since 1983 TMAC Serves</div>
     </Stat>
     <Stat color={locationCityIconColor} icon={LocationCity}>
-      <div>Serving {numberOfDistricts.toLocaleString()} School Districts</div>
+      <div>{numberOfDistricts.toLocaleString()} School Districts</div>
     </Stat>
     <Stat color={schoolIconColor} icon={School}>
-      <div>Serving Over {numberOfSchools.toLocaleString()} Schools</div>
+      <div>Over {numberOfSchools.toLocaleString()} Schools</div>
     </Stat>
     <Stat color={faceIconColor} icon={Face}>
-      <div>Serving 5+ Million Students</div>
+      <div>5+ Million Students</div>
     </Stat>
   </div>
 );
