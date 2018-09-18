@@ -27,7 +27,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://www.gatsbyjs.org`,
+        siteUrl: `https://www.texasmusicadmin.com`,
       },
     },
     `gatsby-plugin-react-helmet`,
