@@ -6,7 +6,7 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     title: `TMAC`,
-    siteUrl: `https://www.texasmusicadministrators.com`,
+    siteUrl: `https://www.texasmusicadmin.com`,
     description: `Website for the Texas Music Administrators Conference`,
   },
   plugins: [
