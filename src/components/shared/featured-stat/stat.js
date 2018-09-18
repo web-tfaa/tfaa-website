@@ -1,4 +1,5 @@
 // External Dependencies
+import hex2rgba from 'hex2rgba';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,29 +12,35 @@ import { vP, vPHd, vPVHd } from '../../../utils/gutters';
 const propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string.isRequired,
-  icon: PropTypes.func.isRequired,
+  icon: PropTypes.func,
+  title: PropTypes.string,
+};
+const defaultProps = {
+  icon: null,
+  title: '',
 };
 
 // Component Definition
 const Stat = props => {
-  const { children, color, icon: Icon } = props;
+  const { children, color, icon: Icon, title } = props;
 
   return (
     <div
       css={{
+        alignItems: 'center',
         background: 'white',
         border: `3px solid ${color}`,
+        borderRadius: presets.radiusLg,
         boxSizing: `border-box`,
         display: `flex`,
         flexDirection: 'column',
+        fontSize: title ? 24 : 16,
+        fontWeight: title ? 600 : 'inherit',
         justifyContent: 'flex-start',
-        alignItems: 'center',
-        transform: `translateZ(0)`,
-        borderRadius: presets.radiusLg,
-        fontSize: 15,
-        width: `60%`,
         marginBottom: 16,
         paddingBottom: 16,
+        transform: `translateZ(0)`,
+        width: `60%`,
         [presets.Tablet]: {
           flex: `0 0 15%`,
           width: `90%`,
@@ -65,9 +72,9 @@ const Stat = props => {
         }}>
         <div
           css={{
-            marginBottom: 16,
+            marginBottom: title ? 0 : 16,
           }}>
-          <Icon fill={color} width="48px" height="48px" />
+          {Icon ? <Icon fill={color} width="48px" height="48px" /> : null}
         </div>
         {children}
       </div>
@@ -76,4 +83,5 @@ const Stat = props => {
 };
 
 Stat.propTypes = propTypes;
+Stat.defaultProps = defaultProps;
 export default Stat;

@@ -1,16 +1,14 @@
 // External Dependencies
 import React from 'react';
-import differenceInYears from 'date-fns/difference_in_years';
-
-// Internal Dependencies
-import presets, { colors } from '../../../utils/presets';
-import Stat from './stat';
 
 // Icons
 import Face from 'react-icons/lib/md/face';
 import LocationCity from 'react-icons/lib/md/location-city';
-import QueueMusic from 'react-icons/lib/md/queue-music';
 import School from 'react-icons/lib/md/school';
+
+// Internal Dependencies
+import presets, { colors } from '../../../utils/presets';
+import Stat from './stat';
 
 // Icon colors
 const queueMusicIconColor = '#3598db';
@@ -21,10 +19,6 @@ const faceIconColor = '#b96af7';
 // Local Variables
 const numberOfDistricts = 1246;
 const numberOfSchools = 3000;
-const ageOfTmac = differenceInYears(
-  new Date(),
-  new Date('Tue Feb 15 1983 00:00:00 GMT-0600 (CST)'),
-);
 
 // Component Definition
 const FeaturedStat = ({ children }) => (
@@ -42,8 +36,8 @@ const FeaturedStat = ({ children }) => (
         marginBottom: 0,
       },
     }}>
-    <Stat color={queueMusicIconColor} icon={QueueMusic}>
-      <div>Since 1983 TMAC Serves</div>
+    <Stat color={queueMusicIconColor} title>
+      <div>Since 1983 TMAC Serves:</div>
     </Stat>
     <Stat color={locationCityIconColor} icon={LocationCity}>
       <div>{numberOfDistricts.toLocaleString()} School Districts</div>
