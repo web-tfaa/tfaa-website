@@ -24,7 +24,7 @@ const FallRetreat = ({ location }) => (
       <title>TMAC | Fall Retreat</title>
     </Helmet>
     <Container>
-      <h1>2017 TMAC Fall Retreat</h1>
+      <h1>2018 TMAC Fall Retreat &amp; Conference</h1>
 
       <section>
         <h4>Who</h4>
@@ -33,12 +33,13 @@ const FallRetreat = ({ location }) => (
           good standing (registered and paid). There is no separate conference
           registration process.
         </p>
+        <p css={indentStyles}>Preconference Tea and /Golf Tournament (Details to Come)</p>
       </section>
 
       <section>
         <h4>When</h4>
         <p css={indentStyles}>
-          Wednesday, November 15 (6:30 PM) — Friday, November 17, 2017 (noon)
+          November 14-16, 2018
         </p>
       </section>
 
@@ -67,6 +68,14 @@ const FallRetreat = ({ location }) => (
             Phone: <a href="tel:+15124418900">(512) 441-7900</a>
             <br />
             Fax: (512) 441-7899
+          </p>
+          <p>
+            <a
+              href="https://book.passkey.com/event/49544338/owner/44666/home"
+              rel="noopener noreferrer"
+              target="_blank">
+              Hotel Info
+            </a>
           </p>
         </div>
       </section>
