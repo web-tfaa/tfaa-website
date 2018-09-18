@@ -2,6 +2,7 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -69,10 +70,10 @@ const Home = (props) => {
               supervision of music activities in your district, we encourage you
               to become a member of TMAC. We will be hosting a Summer Round Table
               session during the summer TBA/TCDA/TODA conferences in San Antonio
-              on Friday, July 27, 2018 - everyone is invited to attend! Our Fall
-              Conference, for TMAC members only, will be held November 17-19, 2018
+              in July 2018 - everyone is invited to attend! Our Fall
+              Conference, for TMAC members only, will be held November 14-16, 2018
               in Austin, Texas. If you would like more information on registering
-              for the Fall Conference, please contact a TMAC Officer.
+              for the Fall Conference, please <Link to="/events/fall-retreat/">visit the event page</Link>.
             </FuturaParagraph>
 
             <FuturaParagraph>
