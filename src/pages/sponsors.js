@@ -9,8 +9,7 @@ import Layout from '../components/layout';
 // Internal Dependencies
 import Container from '../components/shared/container';
 import SponsorCard from '../components/shared/sponsor-card';
-import { sponsors201718 as sponsorData } from '../components/sponsors/sponsor-data';
-
+import { sponsors201819 as sponsorData } from '../components/sponsors/sponsor-data';
 
 // Component Definition
 const Sponsors = (props) => {

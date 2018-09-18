@@ -60,7 +60,7 @@ export const sponsors201718 = {
   ],
 };
 
-export const sponsors2018_2019 = {
+export const sponsors201819 = {
   champion: [],
   gold: [],
   silver: [],
