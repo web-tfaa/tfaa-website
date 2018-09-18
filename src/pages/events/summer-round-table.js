@@ -24,10 +24,10 @@ const SummerRoundTable = ({ location }) => (
       <title>TMAC | Summer Round Table</title>
     </Helmet>
     <Container>
-      <h1>2017 Summer Convention Round Table</h1>
+      <h1>2018 Summer Convention Round Table</h1>
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>Friday, July 21, 2017</p>
+        <p css={indentStyles}>Friday, July 22, 2018</p>
       </section>
 
       <section>
