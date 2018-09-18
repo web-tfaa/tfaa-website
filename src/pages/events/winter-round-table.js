@@ -21,20 +21,21 @@ const indentStyles = {
 const WinterRoundTable = ({ location }) => (
   <Layout location={location}>
     <Helmet>
-      <title>TMAC | Summer Round Table</title>
+      <title>TMAC | Winter Round Table</title>
     </Helmet>
     <Container>
-      <h1>2017 Summer Convention Round Table</h1>
+      <h1>2019 Winter Convention Round Table</h1>
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>Wednesday, February 14, 2018</p>
+        <p css={indentStyles}>Wednesday, February 13, 2019</p>
         <p css={indentStyles}>12:00-5:00 PM</p>
       </section>
 
       <section>
         <h4>Where</h4>
         <div css={indentStyles}>
-          <a
+          <p>Details coming soon!</p>
+          {/* <a
             href="http://www.marriott.com/hotels/travel/satdt-san-antonio-marriott-riverwalk/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
             rel="noopener noreferrer"
             target="_blank">
@@ -50,7 +51,7 @@ const WinterRoundTable = ({ location }) => (
               <br />
               San Antonio, TX 78205
             </a>
-          </p>
+          </p> */}
         </div>
       </section>
 

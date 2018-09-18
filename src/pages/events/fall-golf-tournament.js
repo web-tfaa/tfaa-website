@@ -24,17 +24,13 @@ const FallGolfTournament = ({ location }) => (
       <title>TMAC | Fall Golf Tournament</title>
     </Helmet>
     <Container>
-      <h1>2017 Fall Golf Tournament</h1>
+      <h1>2018 Fall Golf Tournament</h1>
 
       <section>
         <p>
           The 5th annual Texas Music Administrators Conference Golf Tournament
           is scheduled in conjunction with our Fall Retreat on Wednesday,
-          November 17th. If you are interested in participating, please
-          communicate directly with{' '}
-          <a href="mailto:David_Jennison@roundrockisd.org">David Jennison</a>,
-          Assistant Director of Instrumental Music, Round Rock I.S.D., to
-          reserve your spot.
+          November 14th. If you are interested in participating, details will be{' '} coming soon.
         </p>
       </section>
 
@@ -53,7 +49,7 @@ const FallGolfTournament = ({ location }) => (
 
       <section>
         <h4>When</h4>
-        <p css={indentStyles}>Wednesday, November 17th</p>
+        <p css={indentStyles}>Wednesday, November 14th</p>
         <ul css={{ marginLeft: 36 }}>
           <li>10:30 AM — Warm-up/Check-in</li>
           <li>11:00 AM — Lunch (provided by Conn-Selmer)</li>
@@ -64,7 +60,8 @@ const FallGolfTournament = ({ location }) => (
       <section>
         <h4>Where</h4>
         <div css={indentStyles}>
-          <p>
+          <p>Details available soon!</p>
+          {/* <p>
             <a
               href="http://www.austintexas.gov/department/jimmy-clay-course"
               rel="noopener noreferrer"
@@ -92,14 +89,17 @@ const FallGolfTournament = ({ location }) => (
           </p>
           <p>
             Phone: <a href="tel:+15124440999">(512) 444-0999</a>
-          </p>
+          </p> */}
         </div>
       </section>
 
       <section>
         <h4>Cost</h4>
-        <p css={indentStyles}>
+        {/* <p css={indentStyles}>
           $35 (due at the course) which includes green fee and cart
+        </p> */}
+        <p css={indentStyles}>
+          Details available soon!
         </p>
       </section>
 
