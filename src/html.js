@@ -62,6 +62,7 @@ export default class HTML extends React.Component {
             src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"
             defer
           />
+          <meta name="google-site-verification" content="zatUmTHTSD3gJPg0iwPub6EGhF5De-kqJHy826gYNh0" />
         </head>
         <body {...this.props.bodyAttributes}>
           <div
