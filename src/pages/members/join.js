@@ -3,6 +3,7 @@ import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -64,6 +65,7 @@ const JoinContainer = (props) => {
             <FuturaDiv>
               <span css={boldStyles}>3.</span> Pay dues online using PayPal (or mail invoice with  check via mail).
             </FuturaDiv>
+            <p>Note: Sponsors do <em>not</em> need to register here. Please head over to the <Link to="/sponsors">Sponsors page</Link> for more information.</p>
           </div>
 
           <div
