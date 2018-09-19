@@ -45,9 +45,26 @@ class RegisterPayment extends Component {
   }
 
   componentDidMount() {
+    const {
+      form,
+    } = this.props;
+
+    const {
+      paymentDetails,
+    } = this.state;
+
+    const updatedForm = {
+      ...paymentDetails,
+      level: 'Active',
+      amount: 0,
+    }
+
     if (this.activeComponent) {
+
       doGetInvoiceId(this.handleGetCurrentInvoiceId);
       doGetReceiptId(this.handleGetCurrentReceiptId);
+
+      return doUpdateEntry(updatedForm, form.userId);
     }
   }
 
@@ -80,8 +97,26 @@ class RegisterPayment extends Component {
   }
 
   handleChangeRadioSelection = event => {
+    const {
+      form,
+    } = this.props;
+
+    const {
+      paymentDetails,
+    } = this.state;
+
+    const isActive = event.target.value === 'active';
+
+    const updatedForm = {
+      ...paymentDetails,
+      level: isActive ? 'Active' : 'Retired',
+      amount: 0,
+    }
+
     if (this.activeComponent) {
       this.setState({ value: event.target.value });
+
+      return doUpdateEntry(updatedForm, form.userId)
     }
   };
 
