@@ -52,6 +52,7 @@ function stableSort(array, cmp) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
+
   return stabilizedThis.map(el => el[0]);
 }
 
@@ -86,36 +87,10 @@ class MemberListTable extends Component {
 
   state = {
     order: 'asc',
-    orderBy: 'lastname',
+    orderBy: 'LastName',
     page: 0,
     rowsPerPage: 5,
   };
-
-  handleBuildList = () => {
-    const {
-      classes,
-      data,
-    } = this.props;
-
-    const {
-      order,
-      orderBy,
-      page,
-      rowsPerPage,
-    } = this.state;
-
-    return stableSort(data, getSorting(order, orderBy))
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      .map((user, index) => (
-        // eslint-disable-next-line
-        <TableRow className={classes.row} key={`${user.FirstName}-${index}`}>
-          <CustomTableCell>{user.FirstName}</CustomTableCell>
-          <CustomTableCell>{user.LastName}</CustomTableCell>
-          <CustomTableCell>{user.District}</CustomTableCell>
-          <CustomTableCell>{user.Title}</CustomTableCell>
-        </TableRow>
-      ));
-  }
 
   handleChangePage = (event, page) => {
     this.setState({ page });
@@ -131,14 +106,16 @@ class MemberListTable extends Component {
       order,
     } = this.state;
 
-    const newOrderBy = property;
     let newOrder = 'desc';
 
     if (orderBy === property && order === 'desc') {
       newOrder = 'asc';
     }
 
-    this.setState({ order: newOrder, orderBy: newOrderBy });
+    this.setState({
+      order: newOrder,
+      orderBy: property,
+    });
   };
 
   render() {
@@ -164,7 +141,20 @@ class MemberListTable extends Component {
               onRequestSort={this.handleRequestSort}
             />
             <TableBody>
-              {this.handleBuildList()}
+              {stableSort(data, getSorting(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((user, index) => (
+                  <TableRow
+                    className={classes.row}
+                    // eslint-disable-next-line
+                    key={`${user.FirstName}-${index}`}
+                  >
+                    <CustomTableCell component="th" scope="row" padding="none">{user.FirstName}</CustomTableCell>
+                    <CustomTableCell>{user.LastName}</CustomTableCell>
+                    <CustomTableCell>{user.District}</CustomTableCell>
+                    <CustomTableCell>{user.Title}</CustomTableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </div>

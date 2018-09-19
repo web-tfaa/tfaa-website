@@ -12,10 +12,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
 const rows = [
-  { id: 'firstname', numeric: false, disablePadding: false, label: 'First Name' },
-  { id: 'lastname', numeric: false, disablePadding: false, label: 'Last Name' },
-  { id: 'district', numeric: false, disablePadding: false, label: 'District' },
-  { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
+  { id: 'FirstName', numeric: false, disablePadding: false, label: 'First Name' },
+  { id: 'LastName', numeric: false, disablePadding: false, label: 'Last Name' },
+  { id: 'District', numeric: false, disablePadding: false, label: 'District' },
+  { id: 'Title', numeric: false, disablePadding: false, label: 'Title' },
 ];
 
 // Local Components
