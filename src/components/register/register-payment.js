@@ -1,4 +1,5 @@
 // External Dependencies
+import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
@@ -23,6 +24,9 @@ import {
   doUpdateReceiptId,
 } from '../../firebase/db'
 
+// Local Variables
+const currentDate = format(new Date(), ['M/D/YYYY']);
+
 // Component Definition
 class RegisterPayment extends Component {
   static propTypes = {
@@ -35,9 +39,9 @@ class RegisterPayment extends Component {
 
     this.state = {
       hasCompletedPayment: false,
-      invoiceId: null,
+      invoiceId: 0,
       paymentDetails: {},
-      receiptId: null,
+      receiptId: 0,
       value: 'active',
     };
 
@@ -45,25 +49,35 @@ class RegisterPayment extends Component {
   }
 
   componentDidMount() {
+    if (this.activeComponent) {
+      doGetInvoiceId(this.handleGetCurrentInvoiceId);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     const {
       form,
     } = this.props;
 
     const {
+      invoiceId,
       paymentDetails,
+      receiptId,
+      value,
     } = this.state;
+
+    const isActive = value === 'active';
 
     const updatedForm = {
       ...paymentDetails,
-      level: 'Active',
       amount: 0,
-    }
+      invoiceId,
+      level: isActive ? 'Active' : 'Retired',
+      receiptId,
+    };
 
-    if (this.activeComponent) {
-
-      doGetInvoiceId(this.handleGetCurrentInvoiceId);
-      doGetReceiptId(this.handleGetCurrentReceiptId);
-
+    if ((prevState.invoiceId === 0 && invoiceId > 0)
+      || (prevState.receiptId === 0 && receiptId > 0)) {
       return doUpdateEntry(updatedForm, form.userId);
     }
   }
@@ -102,15 +116,19 @@ class RegisterPayment extends Component {
     } = this.props;
 
     const {
+      invoiceId,
       paymentDetails,
+      receiptId,
     } = this.state;
 
     const isActive = event.target.value === 'active';
 
     const updatedForm = {
       ...paymentDetails,
+      amount: isActive ? '$50.00' : '$30.00',
+      invoiceId,
       level: isActive ? 'Active' : 'Retired',
-      amount: 0,
+      receiptId,
     }
 
     if (this.activeComponent) {
@@ -128,7 +146,9 @@ class RegisterPayment extends Component {
       } = this.props;
 
       const {
+        invoiceId,
         paymentDetails,
+        receiptId,
         value,
       } = this.state;
 
@@ -138,8 +158,10 @@ class RegisterPayment extends Component {
 
       const updatedForm = {
         ...paymentDetails,
+        invoiceId,
         level: isActive ? 'Active' : 'Retired',
         amount: isActive ? '$50.00' : '$30.00',
+        receiptId,
       }
 
       onCompleteStep(2, updatedForm);
@@ -154,7 +176,9 @@ class RegisterPayment extends Component {
     } = this.props;
 
     const {
+      invoiceId,
       paymentDetails,
+      receiptId,
       value,
     } = this.state;
 
@@ -164,8 +188,10 @@ class RegisterPayment extends Component {
 
     const updatedForm = {
       ...paymentDetails,
+      invoiceId,
       level: isActive ? 'Active' : 'Retired',
       amount: 0,
+      receiptId,
     }
 
     return Promise.all([
@@ -181,11 +207,14 @@ class RegisterPayment extends Component {
 
   handleUpdateCompletedStep = (payment) => {
     if (this.activeComponent) {
+      doGetReceiptId(this.handleGetCurrentReceiptId);
+
       this.setState({
         hasCompletedPayment: true,
         paymentDetails: {
           payerId: payment.payerID,
           paymentId: payment.paymentID,
+          receiptDate: currentDate,
         }
       }, () => this.handleCompletePaymentStep());
     }
@@ -240,7 +269,7 @@ class RegisterPayment extends Component {
 
               <ReactToPrint
                 content={() => this.printReceipt}
-                trigger={() => <RegisterButton>Print Receipt</RegisterButton>}
+                trigger={() => <RegisterButton red>Print Receipt</RegisterButton>}
               />
               <div css={{ display: 'none' }}>
                 <Invoice
@@ -314,7 +343,7 @@ class RegisterPayment extends Component {
                 <ReactToPrint
                   content={() => this.printInvoice}
                   trigger={() => (
-                    <RegisterButton onClick={this.handleIncrementInvoiceId}>
+                    <RegisterButton red onClick={this.handleIncrementInvoiceId}>
                       Print Invoice
                     </RegisterButton>
                   )}

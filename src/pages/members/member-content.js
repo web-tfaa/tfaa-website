@@ -4,6 +4,7 @@ import ClearIcon from 'react-icons/lib/md/clear';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+// import ReactToPrint from 'react-to-print';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';

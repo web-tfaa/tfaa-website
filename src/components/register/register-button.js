@@ -10,6 +10,7 @@ import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Variables
 const texasFlagBlue = '#002868';
+const texasFlagRed = '#BF0A30';
 
 const stripeAnimation = css.keyframes({
   '0%': { backgroundPosition: `0 0` },
@@ -23,6 +24,7 @@ const RegisterButton = ({
   isDisabled,
   onClick,
   overrideCSS,
+  red,
 }) => (
   // eslint-disable-next-line
   <button
@@ -30,7 +32,7 @@ const RegisterButton = ({
       ...overrideCSS,
       ...scale(1 / 5),
       display: `inline-block`,
-      border: `1px solid ${texasFlagBlue}`,
+      border: `1px solid ${red ? texasFlagRed : texasFlagBlue}`,
       fontFamily: options.headerFontFamily.join(`,`),
       padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       borderRadius: presets.radius,
@@ -43,9 +45,9 @@ const RegisterButton = ({
       },
       // Increase specificity
       '&&': {
-        border: `1px solid ${texasFlagBlue}`,
+        border: `1px solid ${red ? texasFlagRed : texasFlagBlue}`,
         boxShadow: `none`,
-        color: texasFlagBlue,
+        color: red ? texasFlagRed : texasFlagBlue,
         fontWeight: `normal`,
         backgroundColor: `transparent`,
         backgroundSize: `30px 30px`,
@@ -55,14 +57,14 @@ const RegisterButton = ({
         }`,
         ':hover, &:focus': {
           backgroundSize: `30px 30px`,
-          backgroundColor: !isDisabled && texasFlagBlue,
+          backgroundColor: !isDisabled && red ? texasFlagRed : texasFlagBlue,
           backgroundImage: !isDisabled && `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
           color: !isDisabled && `#fff`,
           animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
         },
         ':focus': {
           outline: 0,
-          boxShadow: `0 0 0 0.2rem ${hex2rgba(texasFlagBlue, 0.25)}`,
+          boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : texasFlagBlue, 0.25)}`,
         },
         ':after': {
           content: ``,
@@ -89,12 +91,14 @@ RegisterButton.propTypes = {
   isDisabled: PropTypes.bool,
   onClick: PropTypes.func,
   overrideCSS: PropTypes.string,
+  red: PropTypes.bool,
 };
 RegisterButton.defaultProps = {
   buttonType: 'button',
   isDisabled: false,
   onClick: null,
   overrideCSS: '',
+  red: false,
 };
 
 export default RegisterButton;
