@@ -2,5 +2,7 @@
   items:
     - title: Member Content Home
       link: /members/
+    - title: Member List
+      link: /members/member-list/
     - title: Register for TMAC
       link: /members/join/

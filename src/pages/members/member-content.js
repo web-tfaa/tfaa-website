@@ -53,6 +53,12 @@ const MemberInfoDiv = ({ children }) => (
     {children}
   </div>
 );
+MemberInfoDiv.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]).isRequired,
+};
 
 const FuturaAnchor = ({ children, href }) => (
   <a href={href} css={futuraStyles}>
@@ -62,7 +68,7 @@ const FuturaAnchor = ({ children, href }) => (
 FuturaAnchor.propTypes = {
   children: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
-};;
+};
 
 const MemberFileShareCard = ({ node, description }) => {
   return (

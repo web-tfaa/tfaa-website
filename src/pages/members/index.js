@@ -97,7 +97,7 @@ const Members = (props) => (
   <Layout location={props.location}>
     <MembersWithContext {...props} />
   </Layout>
-  );
+);
 
 const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
