@@ -160,7 +160,7 @@ class MemberListTable extends Component {
         </div>
         <TablePagination
           component="div"
-          count={data.length}
+          count={data ? data.length : 0}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
