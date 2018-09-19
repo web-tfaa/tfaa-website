@@ -58,7 +58,10 @@ class RegisterPayment extends Component {
 
     return hasCompletedPayment
       ? this.handleIncrementReceiptId()
-      : this.handleIncrementInvoiceId();
+      : Promise.all([
+        this.handleIncrementInvoiceId(),
+        this.handleCompletePaymentStep(),
+      ]);
   }
 
   getCurrentAmount = () => {
