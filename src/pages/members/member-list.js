@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
+import MemberListTable from './member-table';
 import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
@@ -36,26 +37,14 @@ class MemberListContent extends Component {
     this.setState({ userData: userList });
   };
 
-  handleBuildList = () => {
-    const {
-      userData,
-    } = this.state;
-
-    return Object.values(userData).map((user, index) => (
-      // eslint-disable-next-line
-      <tr key={`${user.FirstName}-${index}`}>
-        <td>{user.FirstName}</td>
-        <td>{user.LastName}</td>
-        <td>{user.District}</td>
-        <td>{user.Title}</td>
-      </tr>
-    ));
-  }
-
   render() {
     const {
       isAuthenticated,
     } = this.props;
+
+    const {
+      userData,
+    } = this.state;
 
     if (!isAuthenticated) {
       return null;
@@ -76,17 +65,7 @@ class MemberListContent extends Component {
             <title>TMAC | Member List</title>
           </Helmet>
           <h2>Member list</h2>
-          <table>
-            <tbody>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>District</th>
-                <th>Title</th>
-              </tr>
-              {this.handleBuildList()}
-            </tbody>
-          </table>
+          <MemberListTable data={Object.values(userData)} />
         </Container>
       </div>
     );
