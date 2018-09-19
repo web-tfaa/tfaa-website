@@ -329,6 +329,19 @@ class RegisterPayment extends Component {
                     ref={(el) => { this.printInvoice = el; } }
                   />
                 </div>
+                <div css={{ marginTop: 24 }}>
+                  If your district requires the TMAC W-9 IRS Form, then{' '}
+                  you can download or print a copy below.
+                </div>
+                <div css={{ marginTop: 24 }}>
+                  <a
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
+                    Download W-9
+                  </a>
+                </div>
               </div>
             </div>
           </Fragment>
