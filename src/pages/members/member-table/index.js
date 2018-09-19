@@ -141,7 +141,7 @@ class MemberListTable extends Component {
               onRequestSort={this.handleRequestSort}
             />
             <TableBody>
-              {data.length > 0 && stableSort(data, getSorting(order, orderBy))
+              {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user, index) => (
                   <TableRow
