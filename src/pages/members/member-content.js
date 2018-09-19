@@ -229,6 +229,13 @@ class MemberContent extends Component {
           If you need to pay via invoice please send{' '}
           payment to the TMAC Treasurer as indicated on your invoice.
         </FuturaDiv>}
+        <FuturaDiv>
+          If your district requires the TMAC W-9 IRS Form, then{' '}
+          you can download that below.
+        </FuturaDiv>
+        <FuturaAnchor download href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
+          Download W-9
+        </FuturaAnchor>
       </Card>
     );
 
