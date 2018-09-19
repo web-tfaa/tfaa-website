@@ -231,7 +231,7 @@ class MemberContent extends Component {
         </FuturaDiv>}
         <FuturaDiv>
           If your district requires the TMAC W-9 IRS Form, then{' '}
-          you can download that below.
+          you can download or print a copy below.
         </FuturaDiv>
         <FuturaAnchor download href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
           Download W-9
