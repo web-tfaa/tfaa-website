@@ -175,20 +175,14 @@ class RegisterForm extends Component {
 
   handleUpdate = event => {
     if (this.activeComponent) {
-      if (
-        event.target.name.endsWith('Phone')
-      ) {
+      if (event.target.name.endsWith('Phone')) {
         this.setState(
-          {
-            [event.target.name]: stripPhone(event.target.value),
-          },
+          {[event.target.name]: stripPhone(event.target.value)},
           this.handleUpdateErrors(event.target.name, event.target.value),
         );
       } else
         this.setState(
-          {
-            [event.target.name]: event.target.value,
-          },
+          {[event.target.name]: event.target.value},
           this.handleUpdateErrors(event.target.name, event.target.value),
         );
       }
@@ -402,6 +396,7 @@ class RegisterForm extends Component {
                   name="FirstName"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Sally"
+                  required
                   type="text"
                   value={FirstName}
                 />
@@ -416,6 +411,8 @@ class RegisterForm extends Component {
                   name="LastName"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Drumm"
+                  required
+                  type="text"
                   value={LastName}
                 />
               </label>
@@ -429,6 +426,8 @@ class RegisterForm extends Component {
                   name="Title"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Director of Fine Arts"
+                  required
+                  type="text"
                   value={Title}
                 />
               </label>
@@ -442,6 +441,8 @@ class RegisterForm extends Component {
                   name="District"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Texas ISD"
+                  required
+                  type="text"
                   value={District}
                 />
               </label>
@@ -455,6 +456,8 @@ class RegisterForm extends Component {
                   name="Address1"
                   onChange={this.handleUpdate}
                   placeholder="e.g. 123 Main St."
+                  required
+                  type="text"
                   value={Address1}
                 />
               </label>
@@ -468,6 +471,7 @@ class RegisterForm extends Component {
                   name="Address2"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Suite 19"
+                  type="text"
                   value={Address2}
                 />
               </label>
@@ -480,6 +484,8 @@ class RegisterForm extends Component {
                   name="City"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Dallas"
+                  required
+                  type="text"
                   value={City}
                 />
               </label>
@@ -493,6 +499,8 @@ class RegisterForm extends Component {
                   name="State"
                   onChange={this.handleUpdate}
                   placeholder="e.g. TX"
+                  required
+                  type="text"
                   value={State}
                 />
               </label>
@@ -506,6 +514,8 @@ class RegisterForm extends Component {
                   name="ZipCode"
                   onChange={this.handleUpdate}
                   placeholder="e.g. 75150"
+                  required
+                  type="text"
                   value={ZipCode}
                 />
               </label>
@@ -519,6 +529,8 @@ class RegisterForm extends Component {
                   name="Email"
                   onChange={this.handleUpdate}
                   placeholder="e.g. music@austinisd.edu"
+                  required
+                  type="email"
                   value={Email}
                 />
               </label>
@@ -532,6 +544,8 @@ class RegisterForm extends Component {
                   name="OfficePhone"
                   onChange={this.handleUpdate}
                   placeholder="e.g. (512) 555-1919"
+                  required
+                  type="text"
                   value={formatPhone(OfficePhone)}
                 />
               </label>
@@ -545,6 +559,8 @@ class RegisterForm extends Component {
                   name="CellPhone"
                   onChange={this.handleUpdate}
                   placeholder="e.g. (512) 555-1919"
+                  required
+                  type="text"
                   value={formatPhone(CellPhone)}
                 />
               </label>

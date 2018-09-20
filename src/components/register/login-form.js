@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-// import { emailRegex } from '../../utils/helpers';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 

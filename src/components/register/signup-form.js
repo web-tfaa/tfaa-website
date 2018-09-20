@@ -6,7 +6,6 @@ import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
-import { emailRegex } from '../../utils/helpers';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
