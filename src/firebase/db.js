@@ -25,6 +25,7 @@ export const doUpdateEntry = (form, documentId) =>
       invoiceId: form.invoiceId,
       receiptId: form.receiptId,
       receiptDate: form.receiptDate || '',
+      invoiceDate: form.invoiceDate || '',
     })
     .then(() => {
       console.log(`Updating payment info for ${documentId} was successful`);

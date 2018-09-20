@@ -80,8 +80,8 @@ class Invoice extends Component {
 
           {!isInvoice && paymentDetails.payerId && (
             <Fragment>
-              <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>
-              <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>
+              {paymentDetails.payerId && <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>}
+              {paymentDetails.paymentId && <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>}
             </Fragment>
           )}
         </div>
