@@ -243,7 +243,37 @@ class MemberContent extends Component {
       </FuturaDiv>
     );
 
-    const isInvoiced = currentUser && currentUser.PaymentOption === 'Invoiced';
+    const receiptInfo = currentUser && (
+      <FuturaDiv>
+        <h5>Need a copy of your receipt?</h5>
+        Thank you for joining TMAC for this school year!
+        <div css={{ marginTop: 16 }}>
+          <ReactToPrint
+            content={() => this.printReceipt}
+            trigger={() => (
+              <RegisterButton red>
+                Print Receipt
+              </RegisterButton>
+            )}
+          />
+        </div>
+        <div css={{ display: 'none' }}>
+          <Invoice
+            amount={currentUser.AmountPaid}
+            form={currentUser}
+            receiptId={currentUser.receiptId}
+            isActive={currentUser.MemberType === 'Active'}
+            isInvoice={false}
+            ref={(el) => { this.printReceipt = el; } }
+          />
+        </div>
+      </FuturaDiv>
+    );
+
+    const isInvoiced = currentUser
+      && currentUser.PaymentOption.toLowerCase() === 'invoiced';
+    const isPaypal = currentUser
+      && currentUser.PaymentOption.toLowerCase() === 'paypal';
 
     const memberTaskCard = (
       <Card>
@@ -258,6 +288,7 @@ class MemberContent extends Component {
           </CtaButton>
         )}
         {isInvoiced && invoiceInfo}
+        {isPaypal && receiptInfo}
         {isRegistered && (
           <Fragment>
             <FuturaDiv>
