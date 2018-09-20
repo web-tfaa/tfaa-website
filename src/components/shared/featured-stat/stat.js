@@ -1,5 +1,4 @@
 // External Dependencies
-import hex2rgba from 'hex2rgba';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -13,7 +12,7 @@ const propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string.isRequired,
   icon: PropTypes.func,
-  title: PropTypes.string,
+  title: PropTypes.bool,
 };
 const defaultProps = {
   icon: null,
