@@ -71,10 +71,10 @@ class RegisterPayment extends Component {
     const updatedForm = {
       ...paymentDetails,
       amount: 0,
+      invoiceDate: currentDate,
       invoiceId,
       level: isActive ? 'Active' : 'Retired',
       receiptId,
-      invoiceDate: currentDate,
     };
 
     if ((prevState.invoiceId === 0 && invoiceId > 0)
@@ -127,10 +127,10 @@ class RegisterPayment extends Component {
     const updatedForm = {
       ...paymentDetails,
       amount: isActive ? '$50.00' : '$30.00',
+      invoiceDate: currentDate,
       invoiceId,
       level: isActive ? 'Active' : 'Retired',
       receiptId,
-      invoiceDate: currentDate,
     }
 
     if (this.activeComponent) {
@@ -160,11 +160,11 @@ class RegisterPayment extends Component {
 
       const updatedForm = {
         ...paymentDetails,
+        amount: isActive ? '$50.00' : '$30.00',
+        invoiceDate: currentDate,
         invoiceId,
         level: isActive ? 'Active' : 'Retired',
-        amount: isActive ? '$50.00' : '$30.00',
         receiptId,
-        invoiceDate: currentDate,
       }
 
       onCompleteStep(2, updatedForm);
@@ -191,11 +191,11 @@ class RegisterPayment extends Component {
 
     const updatedForm = {
       ...paymentDetails,
+      amount: 0,
+      invoiceDate: currentDate,
       invoiceId,
       level: isActive ? 'Active' : 'Retired',
-      amount: 0,
       receiptId,
-      invoiceDate: currentDate,
     }
 
     return Promise.all([

@@ -17,15 +17,15 @@ export const doUpdateEntry = (form, documentId) =>
   db.collection('registration_18-19')
     .doc(documentId)
     .update({
-      PaymentOption: form.paymentId ? 'Paypal' : 'Invoiced',
-      MemberType: form.level,
       AmountPaid: form.amount,
+      MemberType: form.level,
+      PaymentOption: form.paymentId ? 'Paypal' : 'Invoiced',
       PaypalPayerID: form.payerId || '',
       PaypalPaymentID: form.paymentId || '',
-      invoiceId: form.invoiceId,
-      receiptId: form.receiptId,
-      receiptDate: form.receiptDate || '',
       invoiceDate: form.invoiceDate || '',
+      invoiceId: form.invoiceId,
+      receiptDate: form.receiptDate || '',
+      receiptId: form.receiptId,
     })
     .then(() => {
       console.log(`Updating payment info for ${documentId} was successful`);
