@@ -1,10 +1,14 @@
 // External Dependencies
+import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
 import InvoiceTable from './invoice-table';
+
+// Local Variables
+const currentDate = format(new Date(), ['M/D/YYYY']);
 
 // Component Definition
 // eslint-disable-next-line
@@ -76,7 +80,7 @@ class Invoice extends Component {
               {isInvoice ? 'Invoice' : 'Receipt'}#:
             </strong>{' '}
             201819-00{isInvoice ? invoiceId : receiptId}</div>
-          <div><strong>Date:</strong> {isInvoice ? form.invoiceDate : form.receiptDate}</div>
+          <div><strong>Date:</strong> {(isInvoice ? form.invoiceDate : form.receiptDate) || currentDate}</div>
 
           {!isInvoice && paymentDetails.payerId && (
             <Fragment>

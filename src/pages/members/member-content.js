@@ -3,7 +3,7 @@ import CheckIcon from 'react-icons/lib/md/check';
 import ClearIcon from 'react-icons/lib/md/clear';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
 
 // Internal Dependencies
@@ -13,6 +13,7 @@ import Cards from '../../components/shared/cards';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
 import presets from '../../utils/presets';
+import CtaButton from '../../components/masthead/cta-button';
 import RegisterButton from '../../components/register/register-button';
 import { options } from '../../utils/typography';
 
@@ -214,6 +215,34 @@ class MemberContent extends Component {
       </Card>
     );
 
+    const invoiceInfo = currentUser && (
+      <FuturaDiv>
+        <h5>Need a copy of your invoice?</h5>
+        If you need to pay via invoice please send{' '}
+        payment to the TMAC Treasurer as indicated on your invoice.
+        <div css={{ marginTop: 16 }}>
+          <ReactToPrint
+            content={() => this.printInvoice}
+            trigger={() => (
+              <RegisterButton red>
+                Print Invoice
+              </RegisterButton>
+            )}
+          />
+        </div>
+        <div css={{ display: 'none' }}>
+          <Invoice
+            amount={currentUser.AmountPaid}
+            form={currentUser}
+            invoiceId={currentUser.invoiceId}
+            isActive={currentUser.MemberType === 'Active'}
+            isInvoice
+            ref={(el) => { this.printInvoice = el; } }
+          />
+        </div>
+      </FuturaDiv>
+    );
+
     const isInvoiced = currentUser && currentUser.PaymentOption === 'Invoiced';
 
     const memberTaskCard = (
@@ -223,42 +252,27 @@ class MemberContent extends Component {
           {registeredIcon}
           Registered for 2018-2019 school year
         </FuturaDiv>
-        {isInvoiced && <FuturaDiv>
-          <h5>Need a copy of your invoice?</h5>
-          If you need to pay via invoice please send{' '}
-          payment to the TMAC Treasurer as indicated on your invoice.
-          <div css={{ marginTop: 16 }}>
-            <ReactToPrint
-              content={() => this.printInvoice}
-              trigger={() => (
-                <RegisterButton red>
-                  Print Invoice
-                </RegisterButton>
-              )}
-            />
-          </div>
-          <div css={{ display: 'none' }}>
-            <Invoice
-              amount={currentUser.AmountPaid}
-              form={currentUser}
-              invoiceId={currentUser.invoiceId}
-              isActive={currentUser.MemberType === 'Active'}
-              isInvoice
-              ref={(el) => { this.printInvoice = el; } }
-            />
-          </div>
-        </FuturaDiv>}
-        <FuturaDiv>
-          If your district requires the IRS W-9 Form for TMAC, then{' '}
-          you can download or print a copy below.
-        </FuturaDiv>
-        <FuturaAnchor
-          download
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
-          Download W-9
-        </FuturaAnchor>
+        {!isRegistered && (
+          <CtaButton to="/members/join">
+            Join TMAC
+          </CtaButton>
+        )}
+        {isInvoiced && invoiceInfo}
+        {isRegistered && (
+          <Fragment>
+            <FuturaDiv>
+              If your district requires the IRS W-9 Form for TMAC, then{' '}
+              you can download or print a copy below.
+            </FuturaDiv>
+            <FuturaAnchor
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
+              Download W-9
+            </FuturaAnchor>
+          </Fragment>
+        )}
       </Card>
     );
 

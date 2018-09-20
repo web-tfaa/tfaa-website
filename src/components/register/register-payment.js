@@ -22,7 +22,7 @@ import {
   doUpdateEntry,
   doUpdateInvoiceId,
   doUpdateReceiptId,
-} from '../../firebase/db'
+} from '../../firebase/db';
 
 // Local Variables
 const currentDate = format(new Date(), ['M/D/YYYY']);
