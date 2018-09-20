@@ -231,7 +231,7 @@ class MemberContent extends Component {
             <ReactToPrint
               content={() => this.printInvoice}
               trigger={() => (
-                <RegisterButton red onClick={this.handleIncrementInvoiceId}>
+                <RegisterButton red>
                   Print Invoice
                 </RegisterButton>
               )}
