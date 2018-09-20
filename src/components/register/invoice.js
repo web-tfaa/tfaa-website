@@ -76,7 +76,7 @@ class Invoice extends Component {
               {isInvoice ? 'Invoice' : 'Receipt'}#:
             </strong>{' '}
             201819-00{isInvoice ? invoiceId : receiptId}</div>
-          <div><strong>Date:</strong> {form.receiptDate}</div>
+          <div><strong>Date:</strong> {isInvoice ? form.invoiceDate : form.receiptDate}</div>
 
           {!isInvoice && paymentDetails.payerId && (
             <Fragment>

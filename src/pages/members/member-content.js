@@ -4,14 +4,16 @@ import ClearIcon from 'react-icons/lib/md/clear';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-// import ReactToPrint from 'react-to-print';
+import ReactToPrint from 'react-to-print';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import FuturaDiv from '../../components/shared/futura-div';
+import Invoice from '../../components/register/invoice';
 import presets from '../../utils/presets';
+import RegisterButton from '../../components/register/register-button';
 import { options } from '../../utils/typography';
 
 // Sidebar Data
@@ -48,8 +50,8 @@ const MemberInfoDiv = ({ children }) => (
   <div
     css={{
       lineHeight: '1.6',
-      marginBottom: '0.5rem',
-      marginLeft: '1rem',
+      marginBottom: '0.4rem',
+      marginLeft: '1.1rem',
     }}>
     {children}
   </div>
@@ -112,7 +114,6 @@ class MemberContent extends Component {
 
     this.state = {
       currentUser: null,
-      isInvoice: true,
       isRegistered: false,
     };
   }
@@ -161,11 +162,6 @@ class MemberContent extends Component {
     this.setState({ currentUser: data });
   }
 
-  handleUpdateIsInvoice = () => {
-    // Update to false when a user has a Paypal record
-    this.setState({ isInvoice: false });
-  }
-
   render() {
     const {
       contentfulFileShareData,
@@ -175,7 +171,6 @@ class MemberContent extends Component {
 
     const {
       currentUser,
-      isInvoice,
       isRegistered,
     } = this.state;
 
@@ -194,7 +189,7 @@ class MemberContent extends Component {
             {currentUser.Title}, {currentUser.District}
           </MemberInfoDiv>
           <MemberInfoDiv>
-            {currentUser.MemberType} member
+            {currentUser.MemberType || 'Active'} member
           </MemberInfoDiv>
           <MemberInfoDiv>
             {currentUser.Address1}
@@ -206,18 +201,20 @@ class MemberContent extends Component {
             {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
           </MemberInfoDiv>
           <MemberInfoDiv>
-            Office Phone {currentUser.OfficePhone}
+            Office Phone: {currentUser.OfficePhone}
           </MemberInfoDiv>
           <MemberInfoDiv>
-            Cell Phone {currentUser.CellPhone}
+            Cell Phone: {currentUser.CellPhone}
           </MemberInfoDiv>
         </div>
         <FuturaDiv>
-          Need to update any information?<br />
+          <h5>Need to update any information?</h5>
           Send an email over to the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
         </FuturaDiv>
       </Card>
     );
+
+    const isInvoiced = currentUser && currentUser.PaymentOption === 'Invoiced';
 
     const memberTaskCard = (
       <Card>
@@ -226,12 +223,33 @@ class MemberContent extends Component {
           {registeredIcon}
           Registered for 2018-2019 school year
         </FuturaDiv>
-        {isInvoice && <FuturaDiv>
+        {isInvoiced && <FuturaDiv>
+          <h5>Need a copy of your invoice?</h5>
           If you need to pay via invoice please send{' '}
           payment to the TMAC Treasurer as indicated on your invoice.
+          <div css={{ marginTop: 16 }}>
+            <ReactToPrint
+              content={() => this.printInvoice}
+              trigger={() => (
+                <RegisterButton red onClick={this.handleIncrementInvoiceId}>
+                  Print Invoice
+                </RegisterButton>
+              )}
+            />
+          </div>
+          <div css={{ display: 'none' }}>
+            <Invoice
+              amount={currentUser.AmountPaid}
+              form={currentUser}
+              invoiceId={currentUser.invoiceId}
+              isActive={currentUser.MemberType === 'Active'}
+              isInvoice
+              ref={(el) => { this.printInvoice = el; } }
+            />
+          </div>
         </FuturaDiv>}
         <FuturaDiv>
-          If your district requires the TMAC W-9 IRS Form, then{' '}
+          If your district requires the IRS W-9 Form for TMAC, then{' '}
           you can download or print a copy below.
         </FuturaDiv>
         <FuturaAnchor
@@ -249,7 +267,6 @@ class MemberContent extends Component {
         <h2>Member Dashboard</h2>
         <Cards>
           {memberInfoCard}
-
           {memberTaskCard}
         </Cards>
 

@@ -12,10 +12,10 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
 // Internal Dependencies
-import RegisterButton from './register-button';
 import FormHr from '../shared/form-hr';
 import Invoice from './invoice';
 import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
+import RegisterButton from './register-button';
 import {
   doGetInvoiceId,
   doGetReceiptId,
@@ -363,7 +363,7 @@ class RegisterPayment extends Component {
                   />
                 </div>
                 <div css={{ marginTop: 24 }}>
-                  If your district requires the TMAC W-9 IRS Form, then{' '}
+                  If your district requires the IRS W-9 Form for TMAC, then{' '}
                   you can download or print a copy below.
                 </div>
                 <div css={{ marginTop: 24 }}>

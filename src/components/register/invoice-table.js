@@ -59,6 +59,10 @@ const InvoiceTable = (props) => {
     isInvoice,
   } = props;
 
+  // Work out the correct amount
+  const isString = typeof amount === 'string';
+  const updatedAmount = amount === 0 ? 50 : amount;
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -71,12 +75,12 @@ const InvoiceTable = (props) => {
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">
-              TMAC {isActive ? 'Active' : 'Retired'} registration fee for <strong>{form.FirstName} {form.LastName}</strong>
+              TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} registration fee for <strong>{form.FirstName} {form.LastName}</strong>
               <br />
               for the 2018-2019 school year.
             </CustomTableCell>
             <CustomTableCell numeric>
-              ${amount.toFixed(2).toLocaleString()}
+              {isString ? updatedAmount : `$${updatedAmount.toFixed(2).toLocaleString()}`}
             </CustomTableCell>
           </TableRow>
         </TableBody>
