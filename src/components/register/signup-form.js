@@ -132,28 +132,7 @@ class SignUpForm extends Component {
   };
 
   handleUpdateErrors = () => {
-    this.handleUpdateEmailError();
     this.handleUpdateRegisterPasswordError();
-  };
-
-  handleUpdateEmailError = () => {
-    if (this.activeComponent) {
-      const { email } = this.state;
-
-      if (!email) {
-        this.setState({
-          emailError: 'Email is required',
-        });
-      } else if (emailRegex.test(email)) {
-        this.setState({
-          emailError: '',
-        });
-      } else if (email && !emailRegex.test(email)) {
-        this.setState({
-          emailError: 'Use a valid email',
-        });
-      }
-    }
   };
 
   handleUpdateRegisterPasswordError = () => {
@@ -208,7 +187,7 @@ class SignUpForm extends Component {
             name="email"
             onChange={this.handleUpdate}
             placeholder="Email Address"
-            type="text"
+            type="email"
             value={email}
           />
         </label>
