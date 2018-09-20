@@ -78,7 +78,7 @@ const INITIAL_STATE = {
   CellPhoneError: '',
   NewToTMAC: true,
   MemberType: '',
-  PaymentOption: '',
+  PaymentOption: 'Invoiced',
   AmountPaid: 0,
   invoiceDate: '',
   invoiceId: 0,
@@ -134,8 +134,6 @@ class RegisterForm extends Component {
     event.preventDefault();
 
     const originalForm = this.state;
-
-    console.log('originalForm', originalForm);
 
     // The Google Sheet doesn't need these values
     const form = removeErrorKeys(originalForm);
