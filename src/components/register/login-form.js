@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import { emailRegex } from '../../utils/helpers';
+// import { emailRegex } from '../../utils/helpers';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
@@ -123,28 +123,7 @@ class LoginForm extends Component {
   };
 
   handleUpdateErrors = () => {
-    this.handleUpdateEmailError();
     this.handleUpdateLoginPasswordError();
-  };
-
-  handleUpdateEmailError = () => {
-    if (this.activeComponent) {
-      const { email } = this.state;
-
-      if (!email) {
-        this.setState({
-          emailError: 'Email is required',
-        });
-      } else if (emailRegex.test(email)) {
-        this.setState({
-          emailError: '',
-        });
-      } else if (email && !emailRegex.test(email)) {
-        this.setState({
-          emailError: 'Use a valid email',
-        });
-      }
-    }
   };
 
   handleUpdateLoginPasswordError = () => {
@@ -191,7 +170,7 @@ class LoginForm extends Component {
               name="email"
               onChange={this.handleUpdate}
               placeholder="Email Address"
-              type="text"
+              type="email"
               value={email}
             />
           </label>

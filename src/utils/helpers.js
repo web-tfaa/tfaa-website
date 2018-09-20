@@ -20,6 +20,7 @@ export const removeErrorKeys = form => {
 
 // To check for a valid email address
 export const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
+// export const emailRegex = ^(?:[0-9a-zA-Z\.!@#$%^&*+={}'/-]+@[a-zA-Z]{1}[a-zA-Z]+[/.][a-zA-Z]{2,4}|)$;
 
 // To check for a valid Email address
 export const zipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
