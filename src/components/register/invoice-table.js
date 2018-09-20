@@ -90,7 +90,10 @@ const InvoiceTable = (props) => {
 };
 
 InvoiceTable.propTypes = {
-  amount: PropTypes.number.isRequired,
+  amount: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
   classes: PropTypes.shape({}).isRequired,
   form: PropTypes.shape({}).isRequired,
   isInvoice: PropTypes.bool.isRequired,
