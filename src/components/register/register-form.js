@@ -80,6 +80,12 @@ const INITIAL_STATE = {
   MemberType: '',
   PaymentOption: '',
   AmountPaid: 0,
+  invoiceDate: '',
+  invoiceId: 0,
+  PaypalPayerID: '',
+  PaypalPaymentID: '',
+  receiptDate: '',
+  receiptId: 0,
 };
 
 // Local Functions
@@ -129,12 +135,15 @@ class RegisterForm extends Component {
 
     const originalForm = this.state;
 
+    console.log('originalForm', originalForm);
+
     // The Google Sheet doesn't need these values
     const form = removeErrorKeys(originalForm);
     delete form.isAuthenticated;
     delete form.honeypot;
     delete form.hasCompletedRegisterInfoForm;
 
+    // We set the new to TMAC value to what the radio button value was
     form.NewToTMAC = form.radioValue;
     delete form.radioValue;
 

@@ -14,7 +14,10 @@ const currentDate = format(new Date(), ['M/D/YYYY']);
 // eslint-disable-next-line
 class Invoice extends Component {
   static propTypes = {
-    amount: PropTypes.number.isRequired,
+    amount: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]).isRequired,
     form: PropTypes.shape({}).isRequired,
     invoiceId: PropTypes.number,
     isActive: PropTypes.bool.isRequired,

@@ -16,7 +16,7 @@ const propTypes = {
 };
 const defaultProps = {
   icon: null,
-  title: '',
+  title: false,
 };
 
 // Component Definition

@@ -61,7 +61,6 @@ class RegisterPayment extends Component {
 
     const {
       invoiceId,
-      paymentDetails,
       receiptId,
       value,
     } = this.state;
@@ -69,11 +68,9 @@ class RegisterPayment extends Component {
     const isActive = value === 'active';
 
     const updatedForm = {
-      ...paymentDetails,
-      amount: 0,
       invoiceDate: currentDate,
       invoiceId,
-      level: isActive ? 'Active' : 'Retired',
+      MemberType: isActive ? 'Active' : 'Retired',
       receiptId,
     };
 
@@ -118,20 +115,17 @@ class RegisterPayment extends Component {
 
     const {
       invoiceId,
-      paymentDetails,
       receiptId,
     } = this.state;
 
     const isActive = event.target.value === 'active';
 
     const updatedForm = {
-      ...paymentDetails,
-      amount: isActive ? '$50.00' : '$30.00',
       invoiceDate: currentDate,
       invoiceId,
-      level: isActive ? 'Active' : 'Retired',
+      MemberType: isActive ? 'Active' : 'Retired',
       receiptId,
-    }
+    };
 
     if (this.activeComponent) {
       this.setState({ value: event.target.value });
@@ -159,16 +153,18 @@ class RegisterPayment extends Component {
       const documentId = form.userId;
 
       const updatedForm = {
-        ...paymentDetails,
-        amount: isActive ? '$50.00' : '$30.00',
+        PaypalPayerID: paymentDetails.payerId,
+        PaypalPaymentID: paymentDetails.paymentId,
+        PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
+        AmountPaid: isActive ? '$50.00' : '$30.00',
         invoiceDate: currentDate,
         invoiceId,
-        level: isActive ? 'Active' : 'Retired',
+        MemberType: isActive ? 'Active' : 'Retired',
         receiptId,
-      }
+      };
 
-      onCompleteStep(2, updatedForm);
       doUpdateEntry(updatedForm, documentId);
+      onCompleteStep(2, updatedForm);
     }
   };
 
@@ -191,10 +187,9 @@ class RegisterPayment extends Component {
 
     const updatedForm = {
       ...paymentDetails,
-      amount: 0,
       invoiceDate: currentDate,
       invoiceId,
-      level: isActive ? 'Active' : 'Retired',
+      MemberType: isActive ? 'Active' : 'Retired',
       receiptId,
     }
 

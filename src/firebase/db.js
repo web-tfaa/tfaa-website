@@ -16,17 +16,7 @@ export const doCreateEntry = (form, documentId, callback) =>
 export const doUpdateEntry = (form, documentId) =>
   db.collection('registration_18-19')
     .doc(documentId)
-    .update({
-      AmountPaid: form.amount,
-      MemberType: form.level,
-      PaymentOption: form.paymentId ? 'Paypal' : 'Invoiced',
-      PaypalPayerID: form.payerId || '',
-      PaypalPaymentID: form.paymentId || '',
-      invoiceDate: form.invoiceDate || '',
-      invoiceId: form.invoiceId,
-      receiptDate: form.receiptDate || '',
-      receiptId: form.receiptId,
-    })
+    .update(form)
     .then(() => {
       console.log(`Updating payment info for ${documentId} was successful`);
     })
