@@ -153,6 +153,7 @@ class MemberListTable extends Component {
                     <CustomTableCell>{user.LastName}</CustomTableCell>
                     <CustomTableCell>{user.District}</CustomTableCell>
                     <CustomTableCell>{user.Title}</CustomTableCell>
+                    <CustomTableCell>{user.Email}</CustomTableCell>
                   </TableRow>
                 ))}
             </TableBody>

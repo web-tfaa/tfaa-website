@@ -16,6 +16,7 @@ const rows = [
   { id: 'LastName', numeric: false, disablePadding: false, label: 'Last Name' },
   { id: 'District', numeric: false, disablePadding: false, label: 'District' },
   { id: 'Title', numeric: false, disablePadding: false, label: 'Title' },
+  { id: 'Email', numeric: false, disablePadding: false, label: 'Email' },
 ];
 
 // Local Components

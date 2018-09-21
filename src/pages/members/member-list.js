@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
-import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
 import presets from '../../utils/presets';
@@ -56,17 +55,17 @@ class MemberListContent extends Component {
           paddingLeft: 0,
           width: `0 auto`,
           [presets.Tablet]: {
-            paddingLeft: '1.5rem',
+            paddingLeft: 0,
           },
         }}>
         <Status />
-        <Container>
           <Helmet>
             <title>TMAC | Member List</title>
           </Helmet>
-          <h2>Member list</h2>
-          <MemberListTable data={Object.values(userData)} />
-        </Container>
+          <div css={{ paddingLeft: 24 }}>
+            <h2>Member list</h2>
+            <MemberListTable data={Object.values(userData)} />
+          </div>
       </div>
     );
   }
