@@ -60,6 +60,17 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+function uglifyEmail(email) {
+  const index = email.indexOf('@');
+
+  // Remove it & insert -at- back in → Array.prototype.splice()
+  const uglyEmailArray = email.split('');
+
+  uglyEmailArray.splice(index, 1, '-at-');
+
+  return uglyEmailArray.join('');
+}
+
 // Local Components
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -153,7 +164,7 @@ class MemberListTable extends Component {
                     <CustomTableCell>{user.LastName}</CustomTableCell>
                     <CustomTableCell>{user.District}</CustomTableCell>
                     <CustomTableCell>{user.Title}</CustomTableCell>
-                    <CustomTableCell>{user.Email}</CustomTableCell>
+                    <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
                   </TableRow>
                 ))}
             </TableBody>
