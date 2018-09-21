@@ -18,6 +18,10 @@ const indentStyles = {
   marginLeft: 16,
 };
 
+const scheduleStyles = {
+  margin: '6px 0px 6px 24px',
+};
+
 // Component Definition
 const FallRetreat = ({ location }) => (
   <Layout location={location}>
@@ -49,22 +53,22 @@ const FallRetreat = ({ location }) => (
         <h4>Schedule</h4>
 
         <h5 css={indentStyles}>Wednesday</h5>
-        <p css={indentStyles}>11:00am - Golf tournament (details and specific times to come)</p>
-        <p css={indentStyles}>12:00pm - TMAC Alternate Tea</p>
-        <p css={indentStyles}>7:00pm - Reports from Partner Arts Organizations</p>
-        <p css={indentStyles}>8:00pm - Guest Speaker/Pre-Conference Session</p>
+        <p css={scheduleStyles}>11:00am - Golf tournament (details and specific times to come)</p>
+        <p css={scheduleStyles}>12:00pm - TMAC Alternate Tea</p>
+        <p css={scheduleStyles}>7:00pm - Reports from Partner Arts Organizations</p>
+        <p css={scheduleStyles}>8:00pm - Guest Speaker/Pre-Conference Session</p>
 
         <h5 css={indentStyles}>Thursday</h5>
-        <p css={indentStyles}>8:00am - Registration and Light Breakfast</p>
-        <p css={indentStyles}>8:30am - Conference Begins</p>
-        <p css={indentStyles}><em>Lunch is provided</em></p>
-        <p css={indentStyles}>5:00pm - Conference ends for day</p>
-        <p css={indentStyles}>6:00pm - Member reception sponsored by Music and Arts</p>
+        <p css={scheduleStyles}>8:00am - Registration and Light Breakfast</p>
+        <p css={scheduleStyles}>8:30am - Conference Begins</p>
+        <p css={scheduleStyles}><em>Lunch is provided</em></p>
+        <p css={scheduleStyles}>5:00pm - Conference ends for day</p>
+        <p css={scheduleStyles}>6:00pm - Member reception sponsored by Music and Arts</p>
 
         <h5 css={indentStyles}>Friday</h5>
-        <p css={indentStyles}>8:00am - Registration and Breakfast</p>
-        <p css={indentStyles}>8:30am - TMAC Business Meeting followed by round table topics.</p>
-        <p css={indentStyles}>12:00pm  - Conference ends</p>
+        <p css={scheduleStyles}>8:00am - Registration and Breakfast</p>
+        <p css={scheduleStyles}>8:30am - TMAC Business Meeting followed by round table topics.</p>
+        <p css={scheduleStyles}>12:00pm  - Conference ends</p>
       </section>
 
       <section>
