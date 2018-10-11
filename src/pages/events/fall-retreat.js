@@ -19,7 +19,7 @@ const indentStyles = {
 };
 
 const scheduleStyles = {
-  margin: '6px 0px 6px 24px',
+  margin: '6px 0px 6px 32px',
 };
 
 // Component Definition
@@ -40,6 +40,16 @@ const FallRetreat = ({ location }) => (
           visit the <Link to="/members">Members</Link> page.
         </p>
         <p css={indentStyles}>Preconference Tea and /Golf Tournament (Schedule below)</p>
+        <h5 css={indentStyles}>Alternate Tea details</h5>
+        <p css={scheduleStyles}>To register for "Alternate Tea" fill out{' '}
+          <a href="https://goo.gl/forms/oLVkhwuV0lhs8Okc2" target="_blank" rel="noopener noreferrer">this form.</a>
+        </p>
+        <p css={scheduleStyles}><em>Lunch is free - provided by <a href="https://www.westmusic.com/" target="_blank" rel="noopener noreferrer">West Music</a></em></p>
+        <ul css={scheduleStyles}>
+          Speakers to include:
+          <li css={scheduleStyles}>Dr. Mackie Spradley – Director of Enrichment Education and Programs, Texas Education Agency & NAfME President Elect</li>
+          <li css={scheduleStyles}>Ms. Julie Duty – Executive Director of United Sound, Inc.</li>
+        </ul>
       </section>
 
       <section>
@@ -55,6 +65,9 @@ const FallRetreat = ({ location }) => (
         <h5 css={indentStyles}>Wednesday</h5>
         <p css={scheduleStyles}>11:00am - Golf tournament (details and specific times to come)</p>
         <p css={scheduleStyles}>12:00pm - TMAC Alternate Tea</p>
+        <div css={{ paddingLeft: 16 }}>
+          <p css={scheduleStyles}><em>Lunch is free - provided by <a href="https://www.westmusic.com/" target="_blank" rel="noopener noreferrer">West Music</a></em></p>
+        </div>
         <p css={scheduleStyles}>7:00pm - Reports from Partner Arts Organizations</p>
         <p css={scheduleStyles}>8:00pm - Guest Speaker/Pre-Conference Session</p>
 
