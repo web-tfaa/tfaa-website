@@ -42,8 +42,14 @@ const FallRetreat = ({ location }) => (
         <p css={indentStyles}>Preconference Tea and /Golf Tournament (Schedule below)</p>
         <h5 css={indentStyles}>Alternate Tea details</h5>
         <p css={scheduleStyles}>To register for "Alternate Tea" fill out{' '}
-          <a href="https://goo.gl/forms/oLVkhwuV0lhs8Okc2" target="_blank" rel="noopener noreferrer">this form.</a>
+          <a
+            href="#"
+            onClick={() => window.open('https://goo.gl/forms/oLVkhwuV0lhs8Okc2', 'Alternate Tea Google Form', 'width=800,height=800,top=120,left=120')}
+          >this form.</a>
         </p>
+        {/* <div >
+          Open Form
+        </div> */}
         <p css={scheduleStyles}><em>Lunch is free - provided by <a href="https://www.westmusic.com/" target="_blank" rel="noopener noreferrer">West Music</a></em></p>
         <ul css={scheduleStyles}>
           Speakers to include:
