@@ -20,7 +20,8 @@
     "no-console": 1,
     "no-case-declarations": 0,
     "import/prefer-default-export": 0,
-    "import/no-unresolved": 0
+    "import/no-unresolved": 0,
+    "prettier/prettier": "error"
   },
   "settings": {
     "import/core-modules": ["react", "prop-types", "react-router-dom"]
