@@ -1,7 +1,7 @@
 {
   "name": "tmac-website",
   "description": "Website for the Texas Music Administrators Conference",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/m2mathew/tmac-website"
@@ -12,7 +12,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "lint": "eslint **/*.{js,jsx} --quiet"
+    "lint": "eslint '**/*.{js,jsx}'"
   },
   "browserslist": [
     "last 2 versions",
@@ -66,7 +66,7 @@
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^5.4.0",
+    "eslint": "^5.7.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-config-react": "^1.1.7",
