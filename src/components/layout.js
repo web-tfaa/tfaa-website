@@ -72,7 +72,7 @@ const sidebarStyles = {
 };
 
 // Component Definition
-const DefaultLayout = (props) => {
+const DefaultLayout = props => {
   const {
     children,
     isAuthenticated,
@@ -88,7 +88,8 @@ const DefaultLayout = (props) => {
   const isResources = path.slice(0, 10) === '/resources';
   const isMembers = path.slice(0, 8) === '/members';
 
-  const hasSidebar = isAbout || isEvents || isResources || (isAuthenticated && isMembers);
+  const hasSidebar = isAbout || isEvents || isResources ||
+    (isAuthenticated && isMembers) || (isAuthenticated && isSponsors);
 
   const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
 
@@ -98,8 +99,7 @@ const DefaultLayout = (props) => {
       css={{
         display: 'flex',
         flexDirection: 'column',
-      }}
-    >
+      }}>
       <Helmet defaultTitle="Texas Music Administrators Conference">
         <meta name="twitter:site" content="@TXMusicLeaders" />
         <meta name="og:type" content="website" />

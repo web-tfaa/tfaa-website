@@ -1,35 +1,37 @@
 // External Dependencies
+import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
-import Layout from '../components/layout';
-
-// Internal Dependencies
-import Container from '../components/shared/container';
-import SponsorCard from '../components/shared/sponsor-card';
-import { sponsors201819 as sponsorData } from '../components/sponsors/sponsor-data';
-// import { sponsors201718 as sponsorData } from '../components/sponsors/sponsor-data';
+import Container from '../../components/shared/container';
+import CtaButton from '../../components/masthead/cta-button';
+import Layout from '../../components/layout';
+import SponsorCard from '../../components/shared/sponsor-card';
+import { sponsors201819 as sponsorData } from '../../components/sponsors/sponsor-data';
 
 // Component Definition
-const Sponsors = (props) => {
-  const {
-    location,
-  } = props;
+const Sponsors = props => {
+  const { location } = props;
 
   return (
     <Layout location={location}>
-      <section
-        css={{
-          textAlign: 'center',
-        }}
-      >
+      <section>
         <Helmet>
           <title>TMAC | Sponsors</title>
         </Helmet>
-        <h1>Sponsors</h1>
         <Container>
+          <h1>Sponsors</h1>
+          <CtaButton to="/sponsors/sponsor-info">
+            <span css={{ verticalAlign: `middle` }}>Become a Sponsor</span>
+            <ArrowForwardIcon
+              css={{
+                verticalAlign: `baseline`,
+                marginLeft: `.6em`,
+              }}
+            />
+          </CtaButton>
           <div
             css={{
               display: 'flex',

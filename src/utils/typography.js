@@ -74,9 +74,7 @@ const _options = {
       blockquote: {
         paddingLeft: rhythm(options.blockMarginBottom),
         marginLeft: 0,
-        borderLeft: `${rhythm(options.blockMarginBottom / 4)} solid ${
-          colors.ui.light
-        }`,
+        borderLeft: `${rhythm(options.blockMarginBottom / 4)} solid ${colors.ui.light}`,
       },
       hr: {
         backgroundColor: colors.ui.lilac,
@@ -127,9 +125,7 @@ const _options = {
         marginLeft: `${rhythm(-options.blockMarginBottom)}`,
         paddingRight: rhythm(options.blockMarginBottom),
         paddingLeft: `${rhythm((options.blockMarginBottom / 5) * 4)}`,
-        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${
-          colors.a[3]
-        }`,
+        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${colors.a[3]}`,
         display: `block`,
       },
       '.gatsby-highlight::-webkit-scrollbar': {
@@ -164,9 +160,7 @@ const _options = {
       '.main-body a': {
         color: `inherit`,
         textDecoration: `none`,
-        transition: `all ${presets.animation.speedFast} ${
-          presets.animation.curveDefault
-        }`,
+        transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
         borderBottom: `1px solid ${colors.ui.bright}`,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
         fontFamily: options.headerFontFamily.join(`,`),
@@ -202,9 +196,7 @@ const _options = {
       '.main-body button': {
         color: `inherit`,
         textDecoration: `none`,
-        transition: `all ${presets.animation.speedFast} ${
-          presets.animation.curveDefault
-        }`,
+        transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
         borderBottom: `1px solid ${colors.ui.bright}`,
         borderRadius: 2,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
@@ -301,9 +293,7 @@ const _options = {
           marginLeft: `${rhythm(-options.blockMarginBottom * 1.5)}`,
           paddingRight: rhythm(options.blockMarginBottom * 1.5),
           paddingLeft: `${rhythm(((options.blockMarginBottom * 1.5) / 5) * 4)}`,
-          borderLeftWidth: `${rhythm(
-            ((options.blockMarginBottom * 1.5) / 5) * 1,
-          )}`,
+          borderLeftWidth: `${rhythm(((options.blockMarginBottom * 1.5) / 5) * 1)}`,
         },
       },
       [MIN_LARGER_DISPLAY_MEDIA_QUERY]: {
@@ -350,9 +340,4 @@ const _options = {
 const typography = new Typography(_options);
 const { rhythm, scale, options } = typography;
 
-export {
-  options,
-  rhythm,
-  scale,
-  typography as default,
-};
+export { options, rhythm, scale, typography as default };
