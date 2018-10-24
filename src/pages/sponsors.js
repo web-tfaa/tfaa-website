@@ -19,7 +19,11 @@ const Sponsors = (props) => {
 
   return (
     <Layout location={location}>
-      <section css={{ textAlign: 'center' }}>
+      <section
+        css={{
+          textAlign: 'center',
+        }}
+      >
         <Helmet>
           <title>TMAC | Sponsors</title>
         </Helmet>
@@ -29,7 +33,8 @@ const Sponsors = (props) => {
             css={{
               display: 'flex',
               flexDirection: 'column',
-            }}>
+            }}
+          >
             <SponsorCard
               max={2000}
               sponsorClass="Class Champion"
@@ -64,4 +69,4 @@ Sponsors.propTypes = {
   location: PropTypes.shape({}).isRequired,
 };
 
-export default Sponsors
+export default Sponsors;

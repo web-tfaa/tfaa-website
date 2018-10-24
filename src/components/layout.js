@@ -81,15 +81,14 @@ const DefaultLayout = (props) => {
     },
   } = props;
 
-  const isHome = path === `/`;
+  const isHome = path === '/';
   const isSponsors = path.slice(0, 9) === '/sponsors';
   const isAbout = path.slice(0, 6) === '/about';
   const isEvents = path.slice(0, 7) === '/events';
   const isResources = path.slice(0, 10) === '/resources';
   const isMembers = path.slice(0, 8) === '/members';
 
-  const hasSidebar =
-    isAbout || isEvents || isResources || (isAuthenticated && isMembers);
+  const hasSidebar = isAbout || isEvents || isResources || (isAuthenticated && isMembers);
 
   const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
 
@@ -109,20 +108,22 @@ const DefaultLayout = (props) => {
       </Helmet>
       <TopNav />
       <div
-        className={hasSidebar ? `main-body has-sidebar` : `main-body`}
+        className={hasSidebar ? 'main-body has-sidebar' : 'main-body'}
         css={{
+          backgroundColor: isSponsors && '#f5f5f5',
           display: 'flex',
           flex: 1,
           paddingTop: 0,
-          minHeight: `calc(100vh - 4rem)`,
+          minHeight: 'calc(100vh - 4rem)',
           [presets.Tablet]: {
-            margin: isSponsors ? `0 auto` : '',
+            margin: isSponsors ? '0 auto' : '',
             paddingTop: isHome ? 0 : presets.headerHeight,
           },
           [presets.Desktop]: {
-            minHeight: `calc(100vh - 4rem)`,
+            minHeight: 'calc(100vh - 4rem)',
           },
-        }}>
+        }}
+      >
         {/* TODO Move this under about/index.js once Gatsby supports
           multiple levels of layouts */}
         <div
@@ -131,7 +132,8 @@ const DefaultLayout = (props) => {
             [presets.Tablet]: {
               display: path.slice(0, 6) === `/about` ? `block` : `none`,
             },
-          }}>
+          }}
+        >
           <SidebarBody yaml={aboutSidebar} />
         </div>
 
@@ -143,7 +145,8 @@ const DefaultLayout = (props) => {
             [presets.Tablet]: {
               display: path.slice(0, 7) === `/events` ? `block` : `none`,
             },
-          }}>
+          }}
+        >
           <SidebarBody yaml={eventsSidebar} />
         </div>
 
@@ -155,7 +158,8 @@ const DefaultLayout = (props) => {
             [presets.Tablet]: {
               display: path.slice(0, 10) === `/resources` ? `block` : `none`,
             },
-          }}>
+          }}
+        >
           <SidebarBody yaml={resourcesSidebar} />
         </div>
 
@@ -168,7 +172,8 @@ const DefaultLayout = (props) => {
               [presets.Tablet]: {
                 display: path.slice(0, 8) === `/members` ? `block` : `none`,
               },
-            }}>
+            }}
+          >
             <SidebarBody yaml={membersSidebar} />
           </div>
         )}
@@ -182,7 +187,8 @@ const DefaultLayout = (props) => {
             [presets.Desktop]: {
               paddingLeft: leftPadding(12),
             },
-          }}>
+          }}
+        >
           {children}
         </div>
       </div>
@@ -200,7 +206,7 @@ DefaultLayout.propTypes = {
   location: PropTypes.shape({}).isRequired,
 };
 
-const DefaultLayoutWithContext = (props) => (
+const DefaultLayoutWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <DefaultLayout {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>

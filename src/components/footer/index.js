@@ -22,7 +22,7 @@ export default () => (
       boxSizing: 'border-box',
       display: 'flex',
       flex: 1,
-      fontFamily: options.headerFontFamily.join(`,`),
+      fontFamily: options.headerFontFamily.join('/'),
       fontSize: 12,
       justifyContent: 'space-between',
       padding: '1.25em',
@@ -33,11 +33,13 @@ export default () => (
         padding: '2em',
         position: 'static',
       },
-    }}>
+    }}
+  >
     <div
       css={{
         maxWidth: '60%',
-      }}>
+      }}
+    >
       &copy; 2016-
       {currentYear} |
       <a css={{ marginLeft: 5 }} href="http://www.texasmusicadministrators.com">
@@ -47,7 +49,8 @@ export default () => (
     <div
       css={{
         textAlign: 'right',
-      }}>
+      }}
+    >
       <div>
         Built by
         <a css={{ marginLeft: 5 }} href="http://www.drumsensei.com">

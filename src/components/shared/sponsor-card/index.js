@@ -1,10 +1,14 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
 
 // Local Variables
-const emptySponsorStyles = { maxWidth: '75%' };
+const sponsorInfoStyles = {
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+};
 
 // Component Definition
 class SponsorCard extends Component {
@@ -20,34 +24,17 @@ class SponsorCard extends Component {
     min: null,
   };
 
-  renderSponsors = sponsorData => {
-    const { sponsorClass } = this.props;
-
-    const sponsorList = sponsorData.map(sponsor => {
-      return (
-        <div key={sponsor.name}>
-          <a href={sponsor.link}>{sponsor.name}</a>
-        </div>
-      );
-    });
-
-    if (sponsorList.length < 1) {
-      return (
-        <div css={emptySponsorStyles}>
-          Sponsorship receives:
-Company Logo in TMAC November Conference and February Meeting Program
-Company Logo on TMAC website
-Deadline to register and pay is Nov 1
-Click here to register and pay
-
-          Please <Link to="/about/officers">contact any TMAC officer</Link>{' '}
-          about becoming a{' '}
-          <span css={{ fontWeight: '600' }}>{sponsorClass}</span> sponsor.
-        </div>
-      );
-    }
-    return sponsorList;
-  };
+  renderSponsors = sponsorData => sponsorData.map(sponsor => (
+    <div key={sponsor.name}>
+      <a
+        href={sponsor.link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {sponsor.name}
+      </a>
+    </div>
+  ));
 
   render() {
     const {
@@ -68,27 +55,43 @@ Click here to register and pay
           backgroundColor: 'white',
           borderRadius: 4,
           boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
-          display: 'flex',
-          flexDirection: 'column',
+          // display: 'flex',
+          // flexDirection: 'column',
           marginBottom: '1em',
           padding: '2em 3em',
-        }}>
-        <h3
+        }}
+      >
+        <h2
           css={{
             color: '#32456B',
             fontWeight: 600,
-          }}>
+          }}
+        >
           {sponsorClass}
-        </h3>
-        <h5
+        </h2>
+        <h4
           css={{
             color: '#32456B',
             marginTop: '1.25rem',
-          }}>
-          ($
-          {donationAmount} donation)
-        </h5>
+          }}
+        >
+          (${donationAmount} donation)
+        </h4>
+
         {this.renderSponsors(sponsorData)}
+
+        <hr css={{ color: 'blue', height: 3 }} />
+
+        <div css={sponsorInfoStyles}>
+          <h4 css={{ color: '#32456B' }}>Sponsorship receives:</h4>
+          <ul css={{ maxWidth: '60%', textAlign: 'justify' }}>
+            {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either Nov Conference or TMEA Meeting</li>}
+            <li>Company Logo in TMAC November Conference and February Meeting Program</li>
+            <li>Company Logo on TMAC website</li>
+          </ul>
+            Deadline to register and pay is Nov 1
+          <div css={{ fontWeight: '600', margin: '12px 0' }}>Registration Coming Soon!</div>
+        </div>
       </div>
     );
   }
