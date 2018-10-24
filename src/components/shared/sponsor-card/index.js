@@ -34,6 +34,12 @@ class SponsorCard extends Component {
     if (sponsorList.length < 1) {
       return (
         <div css={emptySponsorStyles}>
+          Sponsorship receives:
+Company Logo in TMAC November Conference and February Meeting Program
+Company Logo on TMAC website
+Deadline to register and pay is Nov 1
+Click here to register and pay
+
           Please <Link to="/about/officers">contact any TMAC officer</Link>{' '}
           about becoming a{' '}
           <span css={{ fontWeight: '600' }}>{sponsorClass}</span> sponsor.
@@ -44,7 +50,12 @@ class SponsorCard extends Component {
   };
 
   render() {
-    const { max, min, sponsorClass, sponsorData } = this.props;
+    const {
+      max,
+      min,
+      sponsorClass,
+      sponsorData,
+    } = this.props;
 
     const donationAmount = min
       ? `${min.toLocaleString()}-${max.toLocaleString()}`
