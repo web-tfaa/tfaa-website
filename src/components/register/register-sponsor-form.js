@@ -102,7 +102,7 @@ const formatPhone = (phone) => {
 const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
-class RegisterForm extends Component {
+class RegisterSponsorForm extends Component {
   static propTypes = {
     authUser: PropTypes.shape({}).isRequired,
     onCompleteStep: PropTypes.func.isRequired,
@@ -380,7 +380,7 @@ class RegisterForm extends Component {
                 margin: 32,
               }}
             >
-              <h2>Information Form Complete</h2>
+              <h2>Sponsor Information Form Complete</h2>
               <p css={{ marginBottom: 32 }}>Now loading step 3...</p>
               <CircularProgress size={64} thickness={4} />
             </div>
@@ -614,10 +614,10 @@ class RegisterForm extends Component {
   }
 }
 
-const RegisterFormWithContext = props => (
+const RegisterSponsorFormWithContext = props => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterForm {...props} authUser={authUser} />}
+    {authUser => <RegisterSponsorForm {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
 );
 
-export default RegisterFormWithContext;
+export default RegisterSponsorFormWithContext;

@@ -12,7 +12,7 @@ import SponsorCard from '../../components/shared/sponsor-card';
 import { sponsors201819 as sponsorData } from '../../components/sponsors/sponsor-data';
 
 // Component Definition
-const Sponsors = props => {
+const Sponsors = (props) => {
   const { location } = props;
 
   return (
@@ -24,11 +24,11 @@ const Sponsors = props => {
         <Container>
           <h1>Sponsors</h1>
           <CtaButton to="/sponsors/sponsor-info">
-            <span css={{ verticalAlign: `middle` }}>Become a Sponsor</span>
+            <span css={{ verticalAlign: 'middle' }}>Become a Sponsor</span>
             <ArrowForwardIcon
               css={{
-                verticalAlign: `baseline`,
-                marginLeft: `.6em`,
+                verticalAlign: 'baseline',
+                marginLeft: '.6em',
               }}
             />
           </CtaButton>

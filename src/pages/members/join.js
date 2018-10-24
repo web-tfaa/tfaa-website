@@ -34,11 +34,12 @@ const JoinContainer = (props) => {
       <div
         css={{
           paddingLeft: 0,
-          width: `0 auto`,
+          width: '0 auto',
           [presets.Tablet]: {
             paddingLeft: !isAuthenticated ? '1.5rem' : 0,
           },
-        }}>
+        }}
+      >
         <Status />
         <Container>
           <Helmet>
@@ -50,37 +51,55 @@ const JoinContainer = (props) => {
               display: 'flex',
               flexDirection: 'column',
               padding: 32,
-            }}>
+            }}
+          >
             <CardHeadline>Join TMAC</CardHeadline>
             <FuturaDiv>
               To join TMAC please complete these three steps:
             </FuturaDiv>
             <FuturaDiv>
-              <span css={boldStyles}>1.</span> Sign up for a TMAC website
-              login.
+              <span css={boldStyles}>
+                1.
+                {' '}
+              </span>
+              Sign up for a TMAC website login.
             </FuturaDiv>
             <FuturaDiv>
-              <span css={boldStyles}>2.</span> Complete the Registration Form.
+              <span css={boldStyles}>
+                2.
+                {' '}
+              </span>
+              Complete the Registration Form.
             </FuturaDiv>
             <FuturaDiv>
-              <span css={boldStyles}>3.</span> Pay dues online using PayPal (or mail invoice with  check via mail).
+              <span css={boldStyles}>
+                3.
+                {' '}
+              </span>
+              Pay dues online using PayPal (or mail invoice with  check via mail).
             </FuturaDiv>
-            <p>Note: Sponsors do <em>not</em> need to register here. Please head over to the <Link to="/sponsors">Sponsors page</Link> for more information.</p>
+            <p>
+              Note: Sponsors should register at the
+              {' '}
+              <Link to="/sponsors">Sponsors page</Link>
+              .
+            </p>
           </div>
 
           <div
             css={{
               display: 'flex',
               justifyContent: 'flex-end',
-            }}>
+            }}
+          >
             <CtaButton to="/members/register">
-              <span css={{ verticalAlign: `middle` }}>
+              <span css={{ verticalAlign: 'middle' }}>
                 Begin Registration
               </span>
               <ArrowForwardIcon
                 css={{
-                  verticalAlign: `baseline`,
-                  marginLeft: `.6em`,
+                  verticalAlign: 'baseline',
+                  marginLeft: '.6em',
                 }}
               />
             </CtaButton>
@@ -93,11 +112,12 @@ const JoinContainer = (props) => {
 
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,
@@ -116,7 +136,7 @@ JoinContainer.propTypes = {
   location: PropTypes.shape({}).isRequired,
 };
 
-const JoinContainerWithContext = (props) => (
+const JoinContainerWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <JoinContainer {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>

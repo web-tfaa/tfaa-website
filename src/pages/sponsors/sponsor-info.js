@@ -3,7 +3,6 @@ import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'gatsby';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -34,11 +33,12 @@ const SponsorInfo = (props) => {
       <div
         css={{
           paddingLeft: 0,
-          width: `0 auto`,
+          width: '0 auto',
           [presets.Tablet]: {
             paddingLeft: !isAuthenticated ? '1.5rem' : 0,
           },
-        }}>
+        }}
+      >
         <Status />
         <Container>
           <Helmet>
@@ -50,20 +50,33 @@ const SponsorInfo = (props) => {
               display: 'flex',
               flexDirection: 'column',
               padding: 32,
-            }}>
+            }}
+          >
             <CardHeadline>Sponsor TMAC</CardHeadline>
             <FuturaDiv>
               To become a TMAC sponsor please complete these three steps:
             </FuturaDiv>
             <FuturaDiv>
-              <span css={boldStyles}>1.</span> Sign up for a TMAC website
+              <span css={boldStyles}>
+                1.
+                {' '}
+              </span>
+                Sign up for a TMAC website
               login.
             </FuturaDiv>
             <FuturaDiv>
-              <span css={boldStyles}>2.</span> Complete the Sponsor Registration Form.
+              <span css={boldStyles}>
+                2.
+                {' '}
+              </span>
+              Complete the Sponsor Registration Form.
             </FuturaDiv>
             <FuturaDiv>
-              <span css={boldStyles}>3.</span> Pay online using PayPal (or mail invoice with check to the TMAC Treasurer).
+              <span css={boldStyles}>
+                3.
+                {' '}
+              </span>
+              Pay online using PayPal (or mail invoice with check to the TMAC Treasurer).
             </FuturaDiv>
           </div>
 
@@ -71,15 +84,16 @@ const SponsorInfo = (props) => {
             css={{
               display: 'flex',
               justifyContent: 'flex-end',
-            }}>
-            <CtaButton to="/members/register">
-              <span css={{ verticalAlign: `middle` }}>
+            }}
+          >
+            <CtaButton to="/sponsors/register">
+              <span css={{ verticalAlign: 'middle' }}>
                 Begin Sponsor Registration
               </span>
               <ArrowForwardIcon
                 css={{
-                  verticalAlign: `baseline`,
-                  marginLeft: `.6em`,
+                  verticalAlign: 'baseline',
+                  marginLeft: '.6em',
                 }}
               />
             </CtaButton>
@@ -92,11 +106,12 @@ const SponsorInfo = (props) => {
 
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

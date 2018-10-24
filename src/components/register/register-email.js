@@ -29,21 +29,6 @@ class RegisterEmail extends Component {
     this.activeComponent = true;
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const {
-  //     isAuthenticated,
-  //     onCompleteStep,
-  //   } = this.props;
-  //
-  //   const {
-  //     hasCompletedRegisterEmail,
-  //   } = this.state;
-  //
-  //   if (hasCompletedRegisterEmail && prevProps.isAuthenticated !== isAuthenticated) {
-  //     setTimeout(() => onCompleteStep(0), 3500);
-  //   }
-  // }
-
   componentWillUnmount() {
     this.activeComponent = false;
   }
@@ -90,17 +75,14 @@ class RegisterEmail extends Component {
           display: 'flex',
           flexDirection: 'column',
           margin: 32,
-        }}>
+        }}
+      >
         <h2>Login Successful</h2>
         <p css={{ marginBottom: 32 }}>Now loading step 2...</p>
         <CircularProgress size={64} thickness={4} />
       </div>
     ) : (
       <Fragment>
-        <p>
-          All members registering after 9/1/2018 will need to sign up for a new
-          login here to complete online registration.
-        </p>
         <FormHr />
         <SignUpForm onRegisterSignUp={this.handleUpdateCompletedStep} />
         <FormHr />
