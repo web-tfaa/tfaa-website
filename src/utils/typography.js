@@ -14,32 +14,32 @@ const texasFlagBlue = '#002868';
 
 const _options = {
   headerFontFamily: [
-    `Futura PT`,
-    `-apple-system`,
-    `BlinkMacSystemFont`,
-    `Segoe UI`,
-    `Roboto`,
-    `Oxygen`,
-    `Ubuntu`,
-    `Cantarell`,
-    `Fira Sans`,
-    `Droid Sans`,
-    `Helvetica Neue`,
-    `Arial`,
-    `sans-serif`,
+    'Futura PT',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
   ],
-  bodyFontFamily: [`Spectral`, `Georgia`, `Times New Roman`, `Times`, `serif`],
+  bodyFontFamily: ['Spectral', 'Georgia', 'Times New Roman', 'Times', 'serif'],
   monospaceFontFamily: [
-    `Space Mono`,
-    `SFMono-Regular`,
-    `Menlo`,
-    `Monaco`,
-    `Consolas`,
-    `Liberation Mono`,
-    `Courier New`,
-    `monospace`,
+    'Space Mono',
+    'SFMono-Regular',
+    'Menlo',
+    'Monaco',
+    'Consolas',
+    'Liberation Mono',
+    'Courier New',
+    'monospace',
   ],
-  baseFontSize: `18px`,
+  baseFontSize: '18px',
   baseLineHeight: 1.4,
   headerLineHeight: 1.075,
   headerColor: colors.gray.dark,
@@ -51,7 +51,7 @@ const _options = {
       'h1,h2,h4,h5,h6': {
         marginTop: rhythm(options.blockMarginBottom * 2),
         marginBottom: rhythm(options.blockMarginBottom),
-        letterSpacing: `-0.0075em`,
+        letterSpacing: '-0.0075em',
       },
       'ul, ol': {
         marginTop: rhythm(options.blockMarginBottom),
@@ -74,7 +74,9 @@ const _options = {
       blockquote: {
         paddingLeft: rhythm(options.blockMarginBottom),
         marginLeft: 0,
-        borderLeft: `${rhythm(options.blockMarginBottom / 4)} solid ${colors.ui.light}`,
+        borderLeft: `${rhythm(options.blockMarginBottom / 4)} solid ${
+          colors.ui.light
+        }`,
       },
       hr: {
         backgroundColor: colors.ui.lilac,
@@ -83,61 +85,63 @@ const _options = {
         // background: `hsla(23, 60%, 97%, 1)`,
         background: colors.a[0],
         fontFamily: options.monospaceFontFamily.join(`,`),
-        fontSize: `80%`,
+        fontSize: '80%',
         // Disable ligatures as they look funny w/ Space Mono as code.
-        fontVariant: `none`,
-        WebkitFontFeatureSettings: `"clig" 0, "calt" 0`,
-        fontFeatureSettings: `"clig" 0, "calt" 0`,
-        paddingTop: `0.1em`,
-        paddingBottom: `0.1em`,
+        fontVariant: 'none',
+        WebkitFontFeatureSettings: '"clig" 0, "calt" 0',
+        fontFeatureSettings: '"clig" 0, "calt" 0',
+        paddingTop: '0.1em',
+        paddingBottom: '0.1em',
       },
       '.gatsby-highlight': {
         // background: colors.a[0],
-        background: `#fdfaf6`,
+        background: '#fdfaf6',
         // boxShadow: `inset 0 0 0 1px ${colors.a[1]}`,
-        boxShadow: `inset 0 0 0 1px #faede5`,
+        boxShadow: 'inset 0 0 0 1px #faede5',
         borderRadius: `${presets.radius}px`,
         padding: rhythm(options.blockMarginBottom),
         marginBottom: rhythm(options.blockMarginBottom),
-        overflow: `auto`,
-        WebkitOverflowScrolling: `touch`,
-        position: `relative`,
+        overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        position: 'relative',
       },
       ".gatsby-highlight pre[class*='language-']": {
         padding: 0,
         marginTop: 0,
         marginBottom: 0,
-        backgroundColor: `transparent`,
+        backgroundColor: 'transparent',
         border: 0,
-        float: `left`,
-        minWidth: `100%`,
-        overflow: `initial`,
+        float: 'left',
+        minWidth: '100%',
+        overflow: 'initial',
       },
       '.gatsby-highlight pre code': {
-        display: `block`,
-        fontSize: `95%`,
+        display: 'block',
+        fontSize: '95%',
         lineHeight: options.baseLineHeight,
       },
       '.gatsby-highlight-code-line': {
         // background: colors.a[1],
-        background: `#faede5`,
+        background: '#faede5',
         marginRight: `${rhythm(-options.blockMarginBottom)}`,
         marginLeft: `${rhythm(-options.blockMarginBottom)}`,
         paddingRight: rhythm(options.blockMarginBottom),
         paddingLeft: `${rhythm((options.blockMarginBottom / 5) * 4)}`,
-        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${colors.a[3]}`,
-        display: `block`,
+        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${
+          colors.a[3]
+        }`,
+        display: 'block',
       },
       '.gatsby-highlight::-webkit-scrollbar': {
-        width: `6px`,
-        height: `6px`,
+        width: '6px',
+        height: '6px',
       },
       '.gatsby-highlight::-webkit-scrollbar-thumb': {
         background: colors.a[2],
       },
       '.gatsby-highlight::-webkit-scrollbar-track': {
         // background: colors.a[1],
-        background: `#faede5`,
+        background: '#faede5',
         borderRadius: `0 0 ${presets.radiusLg}px ${presets.radiusLg}px`,
       },
       // Target image captions. This is kind of a fragile selector...
@@ -146,62 +150,66 @@ const _options = {
         lineHeight: 1.3,
         paddingTop: rhythm(3 / 8),
         marginBottom: rhythm(options.blockMarginBottom * 2),
-        display: `block`,
-        textAlign: `center`,
-        fontStyle: `normal`,
+        display: 'block',
+        textAlign: 'center',
+        fontStyle: 'normal',
         color: colors.gray.calm,
-        position: `relative`,
+        position: 'relative',
       },
       '.gatsby-resp-image-link + em a': {
-        fontWeight: `normal`,
-        fontFamily: options.headerFontFamily.join(`,`),
+        fontWeight: 'normal',
+        fontFamily: options.headerFontFamily.join(','),
         color: texasFlagBlue,
       },
       '.main-body a': {
-        color: `inherit`,
-        textDecoration: `none`,
-        transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
+        color: 'inherit',
+        textDecoration: 'none',
+        transition: `all ${presets.animation.speedFast} ${
+          presets.animation.curveDefault
+        }`,
         borderBottom: `1px solid ${colors.ui.bright}`,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
         fontFamily: options.headerFontFamily.join(`,`),
-        fontWeight: `bold`,
+        fontWeight: 'bold',
       },
       '.post-body a': {
-        fontSize: `102%`,
+        fontSize: '102%',
         color: texasFlagBlue,
       },
       '.main-body a:hover': {
         background: colors.ui.bright,
       },
       '.main-body a.anchor': {
-        color: `inherit`,
+        color: 'inherit',
         fill: texasFlagBlue,
-        textDecoration: `none`,
-        borderBottom: `none`,
-        boxShadow: `none`,
+        textDecoration: 'none',
+        borderBottom: 'none',
+        boxShadow: 'none',
       },
       '.main-body a.anchor:hover': {
-        background: `none`,
+        background: 'none',
       },
       '.main-body a.gatsby-resp-image-link': {
-        boxShadow: `none`,
-        borderBottom: `transparent`,
+        boxShadow: 'none',
+        borderBottom: 'transparent',
         marginTop: rhythm(options.blockMarginBottom * 2),
         marginBottom: rhythm(options.blockMarginBottom * 2),
       },
       '.main-body a.gatsby-resp-image-link:hover': {
-        background: `none`,
-        boxShadow: `none`,
+        background: 'none',
+        boxShadow: 'none',
       },
       '.main-body button': {
-        color: `inherit`,
-        textDecoration: `none`,
-        transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
+        color: 'inherit',
+        textDecoration: 'none',
+        transition: `all ${presets.animation.speedFast} ${
+          presets.animation.curveDefault
+        }`,
         borderBottom: `1px solid ${colors.ui.bright}`,
         borderRadius: 2,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-        fontFamily: options.headerFontFamily.join(`,`),
-        fontWeight: `bold`,
+        fontFamily: options.headerFontFamily.join(','),
+        fontWeight: 'bold',
       },
       '.main-body button:hover': {
         background: colors.ui.bright,
@@ -211,14 +219,14 @@ const _options = {
         cursor: 'not-allowed',
       },
       '.main-body label': {
-        fontFamily: options.headerFontFamily.join(`,`),
+        fontFamily: options.headerFontFamily.join(','),
         fontWeight: 600,
         marginBottom: '0.25rem',
       },
       '.main-body input[type=text] input[type=password]': {
         border: `1.5px solid ${colors.ui.bright}`,
         borderRadius: 2,
-        fontFamily: options.headerFontFamily.join(`,`),
+        fontFamily: options.headerFontFamily.join(','),
         padding: '0.5rem',
       },
       '.main-body input:focus': {
@@ -242,7 +250,7 @@ const _options = {
       },
       '.gatsby-resp-image-link': {
         borderRadius: `${presets.radius}px`,
-        overflow: `hidden`,
+        overflow: 'hidden',
       },
       '@media (max-width:634px)': {
         '.gatsby-highlight, .gatsby-resp-image-link': {
@@ -252,7 +260,7 @@ const _options = {
         },
         '.gatsby-highlight': {
           // boxShadow: `inset 0 1px 0 0 ${colors.a[1]}, inset 0 -1px 0 0 ${colors.a[1]}`,
-          boxShadow: `inset 0 1px 0 0 #faede5, inset 0 -1px 0 0 #faede5`,
+          boxShadow: 'inset 0 1px 0 0 #faede5, inset 0 -1px 0 0 #faede5',
         },
       },
       [`${presets.Tablet} and (max-width:980px)`]: {
@@ -262,7 +270,7 @@ const _options = {
         },
       },
       video: {
-        width: `100%`,
+        width: '100%',
         marginBottom: rhythm(options.blockMarginBottom),
       },
       '.twitter-tweet-rendered': {
@@ -293,7 +301,9 @@ const _options = {
           marginLeft: `${rhythm(-options.blockMarginBottom * 1.5)}`,
           paddingRight: rhythm(options.blockMarginBottom * 1.5),
           paddingLeft: `${rhythm(((options.blockMarginBottom * 1.5) / 5) * 4)}`,
-          borderLeftWidth: `${rhythm(((options.blockMarginBottom * 1.5) / 5) * 1)}`,
+          borderLeftWidth: `${rhythm(
+            ((options.blockMarginBottom * 1.5) / 5) * 1,
+          )}`,
         },
       },
       [MIN_LARGER_DISPLAY_MEDIA_QUERY]: {
@@ -340,4 +350,9 @@ const _options = {
 const typography = new Typography(_options);
 const { rhythm, scale, options } = typography;
 
-export { options, rhythm, scale, typography as default };
+export {
+  options,
+  rhythm,
+  scale,
+  typography as default,
+};

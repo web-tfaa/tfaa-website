@@ -46,17 +46,17 @@ const sidebarStyles = {
     colors.lilac,
     presets.shadowKeyUmbraOpacity,
   )}`,
-  display: `none`,
+  display: 'none',
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
-  overflowY: `auto`,
+  overflowY: 'auto',
   paddingBottom: rhythm(3.5),
-  position: `fixed`,
+  position: 'fixed',
   top: `calc(${presets.headerHeight} - 1px)`,
   width: rhythm(10),
-  WebkitOverflowScrolling: `touch`,
+  WebkitOverflowScrolling: 'touch',
   '::-webkit-scrollbar': {
-    height: `6px`,
-    width: `6px`,
+    height: '6px',
+    width: '6px',
   },
   '::-webkit-scrollbar-thumb': {
     background: colors.ui.bright,
@@ -72,7 +72,7 @@ const sidebarStyles = {
 };
 
 // Component Definition
-const DefaultLayout = props => {
+const DefaultLayout = (props) => {
   const {
     children,
     isAuthenticated,
@@ -88,8 +88,8 @@ const DefaultLayout = props => {
   const isResources = path.slice(0, 10) === '/resources';
   const isMembers = path.slice(0, 8) === '/members';
 
-  const hasSidebar = isAbout || isEvents || isResources ||
-    (isAuthenticated && isMembers) || (isAuthenticated && isSponsors);
+  const hasSidebar = isAbout || isEvents || isResources
+    || (isAuthenticated && isMembers);
 
   const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
 
@@ -99,7 +99,8 @@ const DefaultLayout = props => {
       css={{
         display: 'flex',
         flexDirection: 'column',
-      }}>
+      }}
+    >
       <Helmet defaultTitle="Texas Music Administrators Conference">
         <meta name="twitter:site" content="@TXMusicLeaders" />
         <meta name="og:type" content="website" />
@@ -130,7 +131,7 @@ const DefaultLayout = props => {
           css={{
             ...sidebarStyles,
             [presets.Tablet]: {
-              display: path.slice(0, 6) === `/about` ? `block` : `none`,
+              display: path.slice(0, 6) === '/about' ? 'block' : 'none',
             },
           }}
         >
@@ -143,7 +144,7 @@ const DefaultLayout = props => {
           css={{
             ...sidebarStyles,
             [presets.Tablet]: {
-              display: path.slice(0, 7) === `/events` ? `block` : `none`,
+              display: path.slice(0, 7) === '/events' ? 'block' : 'none',
             },
           }}
         >
@@ -156,7 +157,7 @@ const DefaultLayout = props => {
           css={{
             ...sidebarStyles,
             [presets.Tablet]: {
-              display: path.slice(0, 10) === `/resources` ? `block` : `none`,
+              display: path.slice(0, 10) === '/resources' ? 'block' : 'none',
             },
           }}
         >
@@ -170,7 +171,7 @@ const DefaultLayout = props => {
             css={{
               ...sidebarStyles,
               [presets.Tablet]: {
-                display: path.slice(0, 8) === `/members` ? `block` : `none`,
+                display: path.slice(0, 8) === '/members' ? 'block' : 'none',
               },
             }}
           >
