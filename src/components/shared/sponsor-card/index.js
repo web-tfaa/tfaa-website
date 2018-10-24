@@ -25,7 +25,10 @@ class SponsorCard extends Component {
   };
 
   renderSponsors = sponsorData => sponsorData.map(sponsor => (
-    <div key={sponsor.name}>
+    <div
+      key={sponsor.name}
+      css={{ fontSize: 19, marginBottom: 6 }}
+    >
       <a
         href={sponsor.link}
         target="_blank"
@@ -80,10 +83,10 @@ class SponsorCard extends Component {
 
         {this.renderSponsors(sponsorData)}
 
-        <hr css={{ color: 'blue', height: 3 }} />
+        <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
 
         <div css={sponsorInfoStyles}>
-          <h4 css={{ color: '#32456B' }}>Sponsorship receives:</h4>
+          <h4 css={{ color: '#32456B', marginTop: 12 }}>Sponsorship receives:</h4>
           <ul css={{ maxWidth: '60%', textAlign: 'justify' }}>
             {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either Nov Conference or TMEA Meeting</li>}
             <li>Company Logo in TMAC November Conference and February Meeting Program</li>
