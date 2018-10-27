@@ -52,7 +52,6 @@ const insideInputStyles = {
   width: '100%',
 };
 
-
 const baseErrorStyles = {
   color: 'red',
   fontFamily: options.headerFontFamily.join(','),
@@ -85,7 +84,10 @@ const INITIAL_STATE = {
   ContactPhone: '',
   ContactPhoneError: '',
   FallRetreatIntent: true,
-  MemberType: '',
+  FallRetreatOtherAttendees: '',
+  SpringRoundTableIntent: true,
+  SpringRoundTableOtherAttendees: '',
+  SponsorLevel: '',
   PaymentOption: 'Invoiced',
   AmountPaid: 0,
   invoiceDate: '',
@@ -121,8 +123,9 @@ class RegisterSponsorForm extends Component {
 
     this.state = {
       ...INITIAL_STATE,
-      hasCompletedRegisterInfoForm: false,
-      radioValue: 'Yes',
+      hasCompletedRegisterSponsorForm: false,
+      radioValueFallRetreat: 'Yes',
+      radioValueSpringRoundTable: 'Yes',
       // eslint-disable-next-line
       userId: props.authUser.uid,
     };
@@ -147,11 +150,15 @@ class RegisterSponsorForm extends Component {
     const form = removeErrorKeys(originalForm);
     delete form.isAuthenticated;
     delete form.honeypot;
-    delete form.hasCompletedRegisterInfoForm;
+    delete form.hasCompletedRegisterSponsorForm;
 
-    // We set the new to TMAC value to what the radio button value was
-    form.FallRetreatIntent = form.radioValue;
-    delete form.radioValue;
+    // We set the "FallRetreatIntent" value to the radio button value
+    form.FallRetreatIntent = form.radioValueFallRetreat;
+    delete form.radioValueFallRetreat;
+
+    // We set the "SpringRoundTableIntent" value to the radio button value
+    form.SpringRoundTableIntent = form.radioValueSpringRoundTable;
+    delete form.radioValueSpringRoundTable;
 
     // Send phone values in formatted
     form.ContactPhone = formatPhone(form.ContactPhone);
@@ -175,7 +182,7 @@ class RegisterSponsorForm extends Component {
   handleUpdateCompletedStep = (form) => {
     if (this.activeComponent) {
       this.setState({
-        hasCompletedRegisterInfoForm: true,
+        hasCompletedRegisterSponsorForm: true,
       }, () => this.handleCompleteInfoStep(form));
     }
   }
@@ -305,7 +312,13 @@ class RegisterSponsorForm extends Component {
   };
 
   handleChangeFallRetreatIntent = (event) => {
-    this.setState({ radioValue: event.target.value });
+    console.log('radioValueFallRetreat', event.target.value);
+    this.setState({ radioValueFallRetreat: event.target.value });
+  };
+
+  handleChangeSpringRoundTableIntent = (event) => {
+    console.log('radioValueSpringRoundTable', event.target.value);
+    this.setState({ radioValueSpringRoundTable: event.target.value });
   };
 
   validateHuman = (data) => {
@@ -324,13 +337,15 @@ class RegisterSponsorForm extends Component {
       ContactPhoneError,
       Email,
       EmailError,
-      FallRetreatOtherAttendees,
-      hasCompletedRegisterInfoForm,
+      hasCompletedRegisterSponsorForm,
       honeypot,
       isAuthenticated,
       OrganizationContactName,
       OrganizationContactNameError,
-      radioValue,
+      radioValueFallRetreat,
+      FallRetreatOtherAttendees,
+      radioValueSpringRoundTable,
+      SpringRoundTableOtherAttendees,
       SponsorOrganization,
       SponsorOrganizationError,
       State,
@@ -363,7 +378,7 @@ class RegisterSponsorForm extends Component {
 
     return (
       <div className="login-form">
-        {hasCompletedRegisterInfoForm
+        {hasCompletedRegisterSponsorForm
           ? (
             <div
               css={{
@@ -539,13 +554,12 @@ class RegisterSponsorForm extends Component {
                   <RadioGroup
                     aria-label="FallRetreatIntent"
                     name="FallRetreatIntent"
-                    value={radioValue}
+                    value={radioValueFallRetreat}
                     onChange={this.handleChangeFallRetreatIntent}
                   >
                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                    {radioValue === 'Yes' && (
+                    {radioValueFallRetreat === 'Yes' && (
                       <div
-                        // css={{ margin: '0 24px 24px' }}
                         css={css({
                           animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
                           margin: '0 24px 24px',
@@ -559,9 +573,50 @@ class RegisterSponsorForm extends Component {
                             name="FallRetreatOtherAttendees"
                             onChange={this.handleUpdate}
                             placeholder="e.g. Aaron Copland, Leonard Bernstein"
-                            required
                             type="text"
                             value={FallRetreatOtherAttendees}
+                          />
+                        </label>
+                      </div>
+                    )}
+                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                    <FormControlLabel value="Uncertain" control={<Radio />} label="Uncertain" />
+                  </RadioGroup>
+                </label>
+              </FormControl>
+
+              <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+
+              {/* Spring Round Table Intent */}
+              <FormControl component="fieldset">
+                {/* eslint-disable-next-line */}
+                <label css={labelStyles} htmlFor="SpringRoundTableIntent">
+                  Will you (or another company representative) be present{' '}
+                  at the TMEA Round Table in San Antonio - February 13, 2019?
+                  <RadioGroup
+                    aria-label="SpringRoundTableIntent"
+                    name="SpringRoundTableIntent"
+                    value={radioValueSpringRoundTable}
+                    onChange={this.handleChangeSpringRoundTableIntent}
+                  >
+                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    {radioValueSpringRoundTable === 'Yes' && (
+                      <div
+                        css={css({
+                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                          margin: '0 24px 24px',
+                        })}
+                      >
+                        <label css={insideLabelStyles} htmlFor="SpringRoundTableOtherAttendees">
+                          Please list any other company representatives that will{' '}
+                          attend the event
+                          <input
+                            css={insideInputStyles}
+                            name="SpringRoundTableOtherAttendees"
+                            onChange={this.handleUpdate}
+                            placeholder="e.g. Aaron Copland, Leonard Bernstein"
+                            type="text"
+                            value={SpringRoundTableOtherAttendees}
                           />
                         </label>
                       </div>
@@ -585,8 +640,8 @@ class RegisterSponsorForm extends Component {
               {/* SUBMIT BUTTON */}
               <div style={{
                 display: 'flex',
-                justifyContent: 'center',
-                transform: 'translateX(16px)',
+                justifyContent: 'flex-end',
+                marginRight: 24,
               }}
               >
                 <RegisterButton
