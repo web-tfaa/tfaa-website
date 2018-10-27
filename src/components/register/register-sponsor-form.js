@@ -43,8 +43,9 @@ const insideLabelStyles = {
 const inputStyles = {
   display: 'block',
   fontSize: '1rem',
+  marginTop: 4,
+  minWidth: '75%',
   padding: '0.3rem',
-  minWidth: '60%',
 };
 
 const insideInputStyles = {
@@ -61,41 +62,43 @@ const baseErrorStyles = {
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
 const INITIAL_STATE = {
-  honeypot: '',
-  isAuthenticated: false,
-  SponsorOrganization: '',
-  SponsorOrganizationError: '',
-  OrganizationContactName: '',
-  OrganizationContactNameError: '',
-  Title: '',
-  TitleError: '',
+  AmountPaid: 0,
+  City: '',
+  CityError: '',
   ContactAddress1: '',
   ContactAddress1Error: '',
   // ContactAddress2 is not required, so cannot have an error
   ContactAddress2: '',
-  City: '',
-  CityError: '',
-  State: '',
-  StateError: '',
-  ZipCode: '',
-  ZipCodeError: '',
-  Email: '',
-  EmailError: '',
   ContactPhone: '',
   ContactPhoneError: '',
+  Email: '',
+  EmailError: '',
   FallRetreatIntent: true,
   FallRetreatOtherAttendees: '',
-  SpringRoundTableIntent: true,
-  SpringRoundTableOtherAttendees: '',
-  SponsorLevel: '',
-  PaymentOption: 'Invoiced',
-  AmountPaid: 0,
+  honeypot: '',
+  ImageUrl: '',
+  ImageUrlError: '',
   invoiceDate: '',
   invoiceId: 0,
+  isAuthenticated: false,
+  OrganizationContactName: '',
+  OrganizationContactNameError: '',
+  PaymentOption: 'Invoiced',
   PaypalPayerID: '',
   PaypalPaymentID: '',
   receiptDate: '',
   receiptId: 0,
+  SponsorLevel: '',
+  SponsorOrganization: '',
+  SponsorOrganizationError: '',
+  SpringRoundTableIntent: true,
+  SpringRoundTableOtherAttendees: '',
+  State: '',
+  StateError: '',
+  Title: '',
+  TitleError: '',
+  ZipCode: '',
+  ZipCodeError: '',
 };
 
 // Local Functions
@@ -246,13 +249,14 @@ class RegisterSponsorForm extends Component {
   handleUpdateInputError = (name, value) => {
     if (this.activeComponent) {
       const {
-        SponsorOrganization,
-        OrganizationContactName,
-        Title,
-        ContactAddress1,
         City,
-        State,
+        ContactAddress1,
         ContactPhone,
+        ImageUrl,
+        OrganizationContactName,
+        SponsorOrganization,
+        State,
+        Title,
       } = this.state;
 
       switch (name) {
@@ -263,11 +267,18 @@ class RegisterSponsorForm extends Component {
             this.setState({ SponsorOrganizationError: 'First Name is required' });
           }
           break;
+        case 'ImageUrl':
+          if (!ImageUrl && value) {
+            this.setState({ ImageUrlError: '' });
+          } else if (ImageUrl && !value) {
+            this.setState({ ImageUrlError: 'Image URL is required' });
+          }
+          break;
         case 'OrganizationContactName':
           if (!OrganizationContactName && value) {
             this.setState({ OrganizationContactNameError: '' });
           } else if (OrganizationContactName && !value) {
-            this.setState({ OrganizationContactNameError: 'Last Name is required' });
+            this.setState({ OrganizationContactNameError: 'Contact Name is required' });
           }
           break;
         case 'Title':
@@ -312,12 +323,10 @@ class RegisterSponsorForm extends Component {
   };
 
   handleChangeFallRetreatIntent = (event) => {
-    console.log('radioValueFallRetreat', event.target.value);
     this.setState({ radioValueFallRetreat: event.target.value });
   };
 
   handleChangeSpringRoundTableIntent = (event) => {
-    console.log('radioValueSpringRoundTable', event.target.value);
     this.setState({ radioValueSpringRoundTable: event.target.value });
   };
 
@@ -337,17 +346,19 @@ class RegisterSponsorForm extends Component {
       ContactPhoneError,
       Email,
       EmailError,
+      FallRetreatOtherAttendees,
       hasCompletedRegisterSponsorForm,
       honeypot,
+      ImageUrl,
+      ImageUrlError,
       isAuthenticated,
       OrganizationContactName,
       OrganizationContactNameError,
       radioValueFallRetreat,
-      FallRetreatOtherAttendees,
       radioValueSpringRoundTable,
-      SpringRoundTableOtherAttendees,
       SponsorOrganization,
       SponsorOrganizationError,
+      SpringRoundTableOtherAttendees,
       State,
       StateError,
       Title,
@@ -372,7 +383,7 @@ class RegisterSponsorForm extends Component {
     // Adds animation to the input that appears when selecting "Yes"
     //  radio button for event attendance
     const slideInTop = css.keyframes({
-      '0%': { transform: 'translateY(-10px)', opacity: 0 },
+      '0%': { transform: 'translateY(-20px)', opacity: 0 },
       '100%': { transform: 'translateY(0)', opacity: 1 },
     });
 
@@ -395,6 +406,7 @@ class RegisterSponsorForm extends Component {
           )
           : (
             <form onSubmit={this.handleSubmit}>
+
               {/* Sponsor Organization */}
               <label css={labelStyles} htmlFor="SponsorOrganization">
                 Sponsor Organization
@@ -409,6 +421,21 @@ class RegisterSponsorForm extends Component {
                 />
               </label>
               <div css={baseErrorStyles}>{SponsorOrganizationError}</div>
+
+              {/* Image Url */}
+              <label css={labelStyles} htmlFor="ImageUrl">
+                Organization&apos;s logo (provide the URL)
+                <input
+                  css={inputStyles}
+                  name="ImageUrl"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. https://www.tmea.org/templates/tmeamainsite/images/header_logo.png"
+                  required
+                  type="text"
+                  value={ImageUrl}
+                />
+              </label>
+              <div css={baseErrorStyles}>{ImageUrlError}</div>
 
               {/* Organization Contact Name */}
               <label css={labelStyles} htmlFor="OrganizationContactName">
@@ -614,7 +641,7 @@ class RegisterSponsorForm extends Component {
                             css={insideInputStyles}
                             name="SpringRoundTableOtherAttendees"
                             onChange={this.handleUpdate}
-                            placeholder="e.g. Aaron Copland, Leonard Bernstein"
+                            placeholder="e.g. Eric Whitacre, Lin-Manuel Miranda"
                             type="text"
                             value={SpringRoundTableOtherAttendees}
                           />

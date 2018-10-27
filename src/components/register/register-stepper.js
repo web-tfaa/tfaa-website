@@ -26,7 +26,7 @@ function getSteps(isAuthenticated = false) {
 }
 
 // Component Definition
-const RegisterStepper= (props) => {
+const RegisterStepper = (props) => {
   const {
     activeStep,
     isAuthenticated,
@@ -37,7 +37,7 @@ const RegisterStepper= (props) => {
   return (
     <div>
       <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map(label => {
+        {steps.map((label) => {
           return (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
