@@ -60,7 +60,7 @@ class SponsorCard extends Component {
       // '45%': { transform: 'translateX(-15px) rotate(-3.6deg)' },
       // '60%': { transform: 'translateX(9px) rotate(2.4deg)' },
       // '75%': { transform: 'translateX(-6px) rotate(-1.2deg)' },
-      '100%': { textShadow: '0 4px 3px rgba(0, 0, 0, 0.2)' },
+      '100%': { textShadow: '0 3px 3px rgba(0, 0, 0, 0.2)' },
     });
 
     // @keyframes text-shadow-drop-bottom {
