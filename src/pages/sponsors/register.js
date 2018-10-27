@@ -18,10 +18,6 @@ import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from '../members/status';
 
-// Sidebar Data
-// import membersSidebar from './members-links.yml';
-// import SidebarBody from '../../components/shared/sidebar/sidebar-body';
-
 // Component Definition
 class RegisterSponsorContent extends Component {
   static propTypes = {
@@ -37,6 +33,7 @@ class RegisterSponsorContent extends Component {
       // Possible completed steps are [0, 1, 2]
       completedSteps: [],
       form: {},
+      isViewingSponsors: false,
     };
 
     this.activeComponent = true;
@@ -54,13 +51,17 @@ class RegisterSponsorContent extends Component {
     if (activeStep === 0 && isAuthenticated) {
       this.setState({ activeStep: 1 });
     }
+
+    if (window && window.location.href.includes('sponsors')) {
+      this.setState({ isViewingSponsors: true });
+    }
   }
 
   componentWillUnmount() {
     this.activeComponent = false;
   }
 
-  getCurrentStepContent(isAuthenticated, isViewingSponsors) {
+  getCurrentStepContent(isAuthenticated) {
     const {
       location: {
         state: {
@@ -74,6 +75,7 @@ class RegisterSponsorContent extends Component {
     const {
       activeStep,
       form,
+      isViewingSponsors,
     } = this.state;
 
     const step1Content = (
@@ -144,11 +146,10 @@ class RegisterSponsorContent extends Component {
     const {
       activeStep,
       completedSteps,
+      isViewingSponsors,
     } = this.state;
 
     const hasCompletedAllSteps = completedSteps.length >= 3;
-
-    const isViewingSponsors = window && window.location.href.includes('sponsors');
 
     /* Children change depending on which step is active */
     return (
@@ -173,7 +174,7 @@ class RegisterSponsorContent extends Component {
             activeStep={activeStep}
           />
 
-          {this.getCurrentStepContent(isAuthenticated, isViewingSponsors)}
+          {this.getCurrentStepContent(isAuthenticated)}
 
           {!hasCompletedAllSteps && (
             <div style={{ marginTop: '1.5rem' }}>
@@ -181,24 +182,6 @@ class RegisterSponsorContent extends Component {
             </div>
           )}
         </Container>
-
-        {/* <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
-          <SidebarBody inline yaml={membersSidebar} />
-        </div> */}
       </div>
     );
   }
