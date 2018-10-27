@@ -3,6 +3,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { css } from 'glamor';
 import { navigate } from 'gatsby';
 
 // Material-UI Dependencies
@@ -34,12 +35,23 @@ const labelStyles = {
   textTransform: 'uppercase',
 };
 
+const insideLabelStyles = {
+  ...labelStyles,
+  width: '80%',
+};
+
 const inputStyles = {
   display: 'block',
   fontSize: '1rem',
   padding: '0.3rem',
   minWidth: '60%',
 };
+
+const insideInputStyles = {
+  ...inputStyles,
+  width: '100%',
+};
+
 
 const baseErrorStyles = {
   color: 'red',
@@ -342,6 +354,13 @@ class RegisterSponsorForm extends Component {
 
     const hasValidInput = hasInput && this.validateHuman(honeypot);
 
+    // Adds animation to the input that appears when selecting "Yes"
+    //  radio button for event attendance
+    const slideInTop = css.keyframes({
+      '0%': { transform: 'translateY(-10px)', opacity: 0 },
+      '100%': { transform: 'translateY(0)', opacity: 1 },
+    });
+
     return (
       <div className="login-form">
         {hasCompletedRegisterInfoForm
@@ -509,7 +528,9 @@ class RegisterSponsorForm extends Component {
               </label>
               <div css={baseErrorStyles}>{ContactPhoneError}</div>
 
-              {/* NEW TO TMAC */}
+              <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+
+              {/* Fall Retreat Intent */}
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
                 <label css={labelStyles} htmlFor="FallRetreatIntent">
@@ -523,12 +544,18 @@ class RegisterSponsorForm extends Component {
                   >
                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                     {radioValue === 'Yes' && (
-                      <div css={{ margin: '0 24px 24px' }}>
-                        <label css={labelStyles} htmlFor="FallRetreatOtherAttendees">
+                      <div
+                        // css={{ margin: '0 24px 24px' }}
+                        css={css({
+                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                          margin: '0 24px 24px',
+                        })}
+                      >
+                        <label css={insideLabelStyles} htmlFor="FallRetreatOtherAttendees">
                           Please list any other company representatives that will{' '}
                           attend the event
                           <input
-                            css={inputStyles}
+                            css={insideInputStyles}
                             name="FallRetreatOtherAttendees"
                             onChange={this.handleUpdate}
                             placeholder="e.g. Aaron Copland, Leonard Bernstein"
