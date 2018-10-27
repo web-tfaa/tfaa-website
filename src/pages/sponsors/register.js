@@ -66,7 +66,7 @@ class RegisterSponsorContent extends Component {
       location,
     } = this.props;
 
-    console.log('level clicked:', location && location.state.level);
+    console.log('level clicked:', location && location.state && location.state.level);
 
     const {
       activeStep,
@@ -92,7 +92,7 @@ class RegisterSponsorContent extends Component {
       <RegisterSponsorPayment
         form={form}
         isViewingSponsors={isViewingSponsors}
-        initialLevel={location ? location.state.level : 'Class Champion'}
+        initialLevel={location && location.state ? location.state.level : 'Class Champion'}
         onCompleteStep={this.handleCompleteStep}
       />
     );

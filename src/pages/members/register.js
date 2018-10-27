@@ -137,11 +137,12 @@ class RegisterContent extends Component {
       <div
         css={{
           paddingLeft: 0,
-          width: `0 auto`,
+          width: '0 auto',
           [presets.Tablet]: {
             paddingLeft: !isAuthenticated ? '1.5rem' : 0,
           },
-        }}>
+        }}
+      >
         <Status />
         <Container>
           <Helmet>
@@ -155,18 +156,21 @@ class RegisterContent extends Component {
 
           {this.getCurrentStepContent(isAuthenticated)}
 
-          {!hasCompletedAllSteps && <div style={{ marginTop: '1.5rem' }}>
-            * Registration is not complete until payment is received.
-          </div>}
+          {!hasCompletedAllSteps && (
+            <div style={{ marginTop: '1.5rem' }}>
+              * Registration is not complete until payment is received.
+            </div>
+          )}
         </Container>
 
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,
@@ -181,14 +185,14 @@ class RegisterContent extends Component {
   }
 }
 
-const Register = (props) => (
+const Register = props => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <RegisterWithContext {...props} />
   </Layout>
 );
 
-const RegisterWithContext = (props) => (
+const RegisterWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <RegisterContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
