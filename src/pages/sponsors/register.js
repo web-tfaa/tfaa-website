@@ -60,7 +60,7 @@ class RegisterSponsorContent extends Component {
     this.activeComponent = false;
   }
 
-  getCurrentStepContent(isAuthenticated) {
+  getCurrentStepContent(isAuthenticated, isViewingSponsors) {
     const {
       location: {
         state: {
@@ -75,8 +75,6 @@ class RegisterSponsorContent extends Component {
       activeStep,
       form,
     } = this.state;
-
-    const isViewingSponsors = window && window.location.href.includes('sponsors');
 
     const step1Content = (
       <RegisterEmail
@@ -150,6 +148,8 @@ class RegisterSponsorContent extends Component {
 
     const hasCompletedAllSteps = completedSteps.length >= 3;
 
+    const isViewingSponsors = window && window.location.href.includes('sponsors');
+
     /* Children change depending on which step is active */
     return (
       <div
@@ -169,10 +169,11 @@ class RegisterSponsorContent extends Component {
 
           <RegisterStepper
             isAuthenticated={isAuthenticated}
+            isViewingSponsors={isViewingSponsors}
             activeStep={activeStep}
           />
 
-          {this.getCurrentStepContent(isAuthenticated)}
+          {this.getCurrentStepContent(isAuthenticated, isViewingSponsors)}
 
           {!hasCompletedAllSteps && (
             <div style={{ marginTop: '1.5rem' }}>

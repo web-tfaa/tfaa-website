@@ -11,17 +11,20 @@ import Stepper from '@material-ui/core/Stepper';
 const propTypes = {
   activeStep: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  isViewingSponsors: PropTypes.bool.isRequired,
 };
 
 // Local Functions
-function getSteps(isAuthenticated = false) {
+function getSteps(isAuthenticated = false, isViewingSponsors = false) {
   return [
     // We show a different message if the user is already logged in
     isAuthenticated
       ? 'Login to the TMAC members area'
       : 'Sign up for TMAC website login',
     'Complete registration form',
-    'Pay TMAC dues',
+    isViewingSponsors
+      ? 'Choose Sponsorship level and make payment'
+      : 'Pay TMAC dues',
   ];
 }
 
@@ -30,9 +33,10 @@ const RegisterStepper = (props) => {
   const {
     activeStep,
     isAuthenticated,
+    isViewingSponsors,
   } = props;
 
-  const steps = getSteps(isAuthenticated);
+  const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
     <div>

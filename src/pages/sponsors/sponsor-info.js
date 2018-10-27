@@ -14,10 +14,6 @@ import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import Status from '../members/status';
 
-// Sidebar Data
-// import SidebarBody from '../../components/shared/sidebar/sidebar-body';
-// import membersSidebar from './members-links.yml';
-
 // Local Variables
 const boldStyles = { fontWeight: 600 };
 
@@ -118,7 +114,6 @@ const SponsorInfo = (props) => {
               marginTop: 10,
             }}
           />
-          {/* <SidebarBody inline yaml={membersSidebar} /> */}
         </div>
       </div>
     </Layout>
