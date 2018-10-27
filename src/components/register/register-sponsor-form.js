@@ -660,6 +660,7 @@ class RegisterSponsorForm extends Component {
                 id="honeypot"
                 name="honeypot"
                 onChange={this.handleUpdate}
+                tabIndex={0}
                 type="text"
                 value={honeypot}
               />
@@ -672,9 +673,10 @@ class RegisterSponsorForm extends Component {
               }}
               >
                 <RegisterButton
+                  buttonType="submit"
                   isDisabled={!hasValidInput}
                   onClick={this.handleClickSubmitButton}
-                  buttonType="submit"
+                  red
                 >
                   Continue to Step 3
                 </RegisterButton>
