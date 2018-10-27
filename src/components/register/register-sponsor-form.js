@@ -38,7 +38,7 @@ const inputStyles = {
   display: 'block',
   fontSize: '1rem',
   padding: '0.3rem',
-  minWidth: '70%',
+  minWidth: '60%',
 };
 
 const baseErrorStyles = {
@@ -52,18 +52,16 @@ const baseErrorStyles = {
 const INITIAL_STATE = {
   honeypot: '',
   isAuthenticated: false,
-  FirstName: '',
-  FirstNameError: '',
-  LastName: '',
-  LastNameError: '',
+  SponsorOrganization: '',
+  SponsorOrganizationError: '',
+  OrganizationContactName: '',
+  OrganizationContactNameError: '',
   Title: '',
   TitleError: '',
-  District: '',
-  DistrictError: '',
-  Address1: '',
-  Address1Error: '',
-  // Address2 is not required, so cannot have an error
-  Address2: '',
+  ContactAddress1: '',
+  ContactAddress1Error: '',
+  // ContactAddress2 is not required, so cannot have an error
+  ContactAddress2: '',
   City: '',
   CityError: '',
   State: '',
@@ -72,11 +70,9 @@ const INITIAL_STATE = {
   ZipCodeError: '',
   Email: '',
   EmailError: '',
-  OfficePhone: '',
-  OfficePhoneError: '',
-  CellPhone: '',
-  CellPhoneError: '',
-  NewToTMAC: true,
+  ContactPhone: '',
+  ContactPhoneError: '',
+  FallRetreatIntent: true,
   MemberType: '',
   PaymentOption: 'Invoiced',
   AmountPaid: 0,
@@ -142,12 +138,11 @@ class RegisterSponsorForm extends Component {
     delete form.hasCompletedRegisterInfoForm;
 
     // We set the new to TMAC value to what the radio button value was
-    form.NewToTMAC = form.radioValue;
+    form.FallRetreatIntent = form.radioValue;
     delete form.radioValue;
 
     // Send phone values in formatted
-    form.OfficePhone = formatPhone(form.OfficePhone);
-    form.CellPhone = formatPhone(form.CellPhone);
+    form.ContactPhone = formatPhone(form.ContactPhone);
 
     // This will identify each row in the database and serve as the document name
     const documentId = form.userId;
@@ -232,30 +227,28 @@ class RegisterSponsorForm extends Component {
   handleUpdateInputError = (name, value) => {
     if (this.activeComponent) {
       const {
-        FirstName,
-        LastName,
+        SponsorOrganization,
+        OrganizationContactName,
         Title,
-        District,
-        Address1,
+        ContactAddress1,
         City,
         State,
-        OfficePhone,
-        CellPhone,
+        ContactPhone,
       } = this.state;
 
       switch (name) {
-        case 'FirstName':
-          if (!FirstName && value) {
-            this.setState({ FirstNameError: '' });
-          } else if (FirstName && !value) {
-            this.setState({ FirstNameError: 'First Name is required' });
+        case 'SponsorOrganization':
+          if (!SponsorOrganization && value) {
+            this.setState({ SponsorOrganizationError: '' });
+          } else if (SponsorOrganization && !value) {
+            this.setState({ SponsorOrganizationError: 'First Name is required' });
           }
           break;
-        case 'LastName':
-          if (!LastName && value) {
-            this.setState({ LastNameError: '' });
-          } else if (LastName && !value) {
-            this.setState({ LastNameError: 'Last Name is required' });
+        case 'OrganizationContactName':
+          if (!OrganizationContactName && value) {
+            this.setState({ OrganizationContactNameError: '' });
+          } else if (OrganizationContactName && !value) {
+            this.setState({ OrganizationContactNameError: 'Last Name is required' });
           }
           break;
         case 'Title':
@@ -265,18 +258,11 @@ class RegisterSponsorForm extends Component {
             this.setState({ TitleError: 'Title is required' });
           }
           break;
-        case 'District':
-          if (!District && value) {
-            this.setState({ DistrictError: '' });
-          } else if (District && !value) {
-            this.setState({ DistrictError: 'District is required' });
-          }
-          break;
-        case 'Address1':
-          if (!Address1 && value) {
-            this.setState({ Address1Error: '' });
-          } else if (Address1 && !value) {
-            this.setState({ Address1Error: 'Address 1 is required' });
+        case 'ContactAddress1':
+          if (!ContactAddress1 && value) {
+            this.setState({ ContactAddress1Error: '' });
+          } else if (ContactAddress1 && !value) {
+            this.setState({ ContactAddress1Error: 'Contact Address 1 is required' });
           }
           break;
         case 'City':
@@ -293,18 +279,11 @@ class RegisterSponsorForm extends Component {
             this.setState({ StateError: 'State is required' });
           }
           break;
-        case 'OfficePhone':
-          if (!OfficePhone && value) {
-            this.setState({ OfficePhoneError: '' });
-          } else if (OfficePhone && !value) {
-            this.setState({ OfficePhoneError: 'Office Phone is required' });
-          }
-          break;
-        case 'CellPhone':
-          if (!CellPhone && value) {
-            this.setState({ CellPhoneError: '' });
-          } else if (CellPhone && !value) {
-            this.setState({ CellPhoneError: 'Cell Phone is required' });
+        case 'ContactPhone':
+          if (!ContactPhone && value) {
+            this.setState({ ContactPhoneError: '' });
+          } else if (ContactPhone && !value) {
+            this.setState({ ContactPhoneError: 'Contact Phone is required' });
           }
           break;
         default:
@@ -313,7 +292,7 @@ class RegisterSponsorForm extends Component {
     }
   };
 
-  handleChangeNewToTMAC = (event) => {
+  handleChangeFallRetreatIntent = (event) => {
     this.setState({ radioValue: event.target.value });
   };
 
@@ -324,27 +303,24 @@ class RegisterSponsorForm extends Component {
 
   render() {
     const {
-      Address1,
-      Address1Error,
-      Address2,
-      CellPhone,
-      CellPhoneError,
       City,
       CityError,
-      District,
-      DistrictError,
+      ContactAddress1,
+      ContactAddress1Error,
+      ContactAddress2,
+      ContactPhone,
+      ContactPhoneError,
       Email,
       EmailError,
-      FirstName,
-      FirstNameError,
+      FallRetreatOtherAttendees,
       hasCompletedRegisterInfoForm,
       honeypot,
       isAuthenticated,
-      LastName,
-      LastNameError,
-      OfficePhone,
-      OfficePhoneError,
+      OrganizationContactName,
+      OrganizationContactNameError,
       radioValue,
+      SponsorOrganization,
+      SponsorOrganizationError,
       State,
       StateError,
       Title,
@@ -355,16 +331,14 @@ class RegisterSponsorForm extends Component {
 
     if (isAuthenticated) navigate('/members');
 
-    const hasInput = FirstName !== ''
-      && LastName !== ''
+    const hasInput = SponsorOrganization !== ''
+      && OrganizationContactName !== ''
       && Title !== ''
-      && District !== ''
-      && Address1 !== ''
+      && ContactAddress1 !== ''
       && City !== ''
       && ZipCode !== ''
       && Email !== ''
-      && OfficePhone !== ''
-      && CellPhone !== '';
+      && ContactPhone !== '';
 
     const hasValidInput = hasInput && this.validateHuman(honeypot);
 
@@ -387,44 +361,44 @@ class RegisterSponsorForm extends Component {
           )
           : (
             <form onSubmit={this.handleSubmit}>
-              {/* FIRST NAME */}
-              <label css={labelStyles} htmlFor="FirstName">
-                First Name
+              {/* Sponsor Organization */}
+              <label css={labelStyles} htmlFor="SponsorOrganization">
+                Sponsor Organization
                 <input
                   css={inputStyles}
-                  name="FirstName"
+                  name="SponsorOrganization"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. Sally"
+                  placeholder="e.g. Presto Music"
                   required
                   type="text"
-                  value={FirstName}
+                  value={SponsorOrganization}
                 />
               </label>
-              <div css={baseErrorStyles}>{FirstNameError}</div>
+              <div css={baseErrorStyles}>{SponsorOrganizationError}</div>
 
-              {/* LAST NAME */}
-              <label css={labelStyles} htmlFor="LastName">
-                Last Name
+              {/* Organization Contact Name */}
+              <label css={labelStyles} htmlFor="OrganizationContactName">
+                Organization Contact Name
                 <input
                   css={inputStyles}
-                  name="LastName"
+                  name="OrganizationContactName"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. Drumm"
+                  placeholder="e.g. Dan Drum"
                   required
                   type="text"
-                  value={LastName}
+                  value={OrganizationContactName}
                 />
               </label>
-              <div css={baseErrorStyles}>{LastNameError}</div>
+              <div css={baseErrorStyles}>{OrganizationContactNameError}</div>
 
-              {/* TITLE */}
+              {/* Title */}
               <label css={labelStyles} htmlFor="Title">
                 Title
                 <input
                   css={inputStyles}
                   name="Title"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. Director of Fine Arts"
+                  placeholder="e.g. Director of Marketing"
                   required
                   type="text"
                   value={Title}
@@ -432,57 +406,42 @@ class RegisterSponsorForm extends Component {
               </label>
               <div css={baseErrorStyles}>{TitleError}</div>
 
-              {/* DISTRICT */}
-              <label css={labelStyles} htmlFor="District">
-                District
+              {/* Contact Address 1 */}
+              <label css={labelStyles} htmlFor="ContactAddress1">
+                Contact Address 1
                 <input
                   css={inputStyles}
-                  name="District"
+                  name="ContactAddress1"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. Texas ISD"
+                  placeholder="e.g. 1100 Congress Ave."
                   required
                   type="text"
-                  value={District}
+                  value={ContactAddress1}
                 />
               </label>
-              <div css={baseErrorStyles}>{DistrictError}</div>
+              <div css={baseErrorStyles}>{ContactAddress1Error}</div>
 
-              {/* ADDRESS 1 */}
-              <label css={labelStyles} htmlFor="Address1">
-                Address 1
+              {/* Contact Address 2 */}
+              <label css={labelStyles} htmlFor="ContactAddress2">
+                Contact Address 2
                 <input
                   css={inputStyles}
-                  name="Address1"
+                  name="ContactAddress2"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. 123 Main St."
-                  required
+                  placeholder="e.g. Suite 1845"
                   type="text"
-                  value={Address1}
-                />
-              </label>
-              <div css={baseErrorStyles}>{Address1Error}</div>
-
-              {/* ADDRESS 2 */}
-              <label css={labelStyles} htmlFor="Address2">
-                Address 2
-                <input
-                  css={inputStyles}
-                  name="Address2"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Suite 19"
-                  type="text"
-                  value={Address2}
+                  value={ContactAddress2}
                 />
               </label>
 
-              {/* CITY */}
+              {/* City */}
               <label css={labelStyles} htmlFor="City">
                 City
                 <input
                   css={inputStyles}
                   name="City"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. Dallas"
+                  placeholder="e.g. Austin"
                   required
                   type="text"
                   value={City}
@@ -490,7 +449,7 @@ class RegisterSponsorForm extends Component {
               </label>
               <div css={baseErrorStyles}>{CityError}</div>
 
-              {/* STATE */}
+              {/* State */}
               <label css={labelStyles} htmlFor="State">
                 State
                 <input
@@ -505,14 +464,14 @@ class RegisterSponsorForm extends Component {
               </label>
               <div css={baseErrorStyles}>{StateError}</div>
 
-              {/* ZIP */}
+              {/* ZIP Code */}
               <label css={labelStyles} htmlFor="ZipCode">
                 ZIP Code
                 <input
                   css={inputStyles}
                   name="ZipCode"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. 75150"
+                  placeholder="e.g. 78701"
                   required
                   type="text"
                   value={ZipCode}
@@ -520,14 +479,14 @@ class RegisterSponsorForm extends Component {
               </label>
               <div css={baseErrorStyles}>{ZipCodeError}</div>
 
-              {/* EMAIL */}
+              {/* Email */}
               <label css={labelStyles} htmlFor="Email">
                 Email
                 <input
                   css={inputStyles}
                   name="Email"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. music@austinisd.edu"
+                  placeholder="e.g. dan@presto.music"
                   required
                   type="email"
                   value={Email}
@@ -535,49 +494,53 @@ class RegisterSponsorForm extends Component {
               </label>
               <div css={baseErrorStyles}>{EmailError}</div>
 
-              {/* OFFICE PHONE */}
-              <label css={labelStyles} htmlFor="OfficePhone">
-                Office Phone
+              {/* Contact Phone */}
+              <label css={labelStyles} htmlFor="ContactPhone">
+                Contact Phone
                 <input
                   css={inputStyles}
-                  name="OfficePhone"
+                  name="ContactPhone"
                   onChange={this.handleUpdate}
-                  placeholder="e.g. (512) 555-1919"
+                  placeholder="e.g. (512) 555-1845"
                   required
                   type="text"
-                  value={formatPhone(OfficePhone)}
+                  value={formatPhone(ContactPhone)}
                 />
               </label>
-              <div css={baseErrorStyles}>{OfficePhoneError}</div>
-
-              {/* CELL PHONE */}
-              <label css={labelStyles} htmlFor="CellPhone">
-                Cell Phone
-                <input
-                  css={inputStyles}
-                  name="CellPhone"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. (512) 555-1919"
-                  required
-                  type="text"
-                  value={formatPhone(CellPhone)}
-                />
-              </label>
-              <div css={baseErrorStyles}>{CellPhoneError}</div>
+              <div css={baseErrorStyles}>{ContactPhoneError}</div>
 
               {/* NEW TO TMAC */}
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
-                <label css={labelStyles} htmlFor="NewToTMAC">
-                  New To TMAC
+                <label css={labelStyles} htmlFor="FallRetreatIntent">
+                  Will you (or another company representative) be present{' '}
+                  at the Fall Retreat in Austin - November 14-16, 2018?
                   <RadioGroup
-                    aria-label="NewToTMAC"
-                    name="NewToTMAC"
+                    aria-label="FallRetreatIntent"
+                    name="FallRetreatIntent"
                     value={radioValue}
-                    onChange={this.handleChangeNewToTMAC}
+                    onChange={this.handleChangeFallRetreatIntent}
                   >
                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    {radioValue === 'Yes' && (
+                      <div css={{ margin: '0 24px 24px' }}>
+                        <label css={labelStyles} htmlFor="FallRetreatOtherAttendees">
+                          Please list any other company representatives that will{' '}
+                          attend the event
+                          <input
+                            css={inputStyles}
+                            name="FallRetreatOtherAttendees"
+                            onChange={this.handleUpdate}
+                            placeholder="e.g. Aaron Copland, Leonard Bernstein"
+                            required
+                            type="text"
+                            value={FallRetreatOtherAttendees}
+                          />
+                        </label>
+                      </div>
+                    )}
                     <FormControlLabel value="No" control={<Radio />} label="No" />
+                    <FormControlLabel value="Uncertain" control={<Radio />} label="Uncertain" />
                   </RadioGroup>
                 </label>
               </FormControl>

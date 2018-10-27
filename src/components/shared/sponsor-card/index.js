@@ -55,22 +55,8 @@ class SponsorCard extends Component {
     // Let's add some animation to the titles of the sponsor levels!
     const textShadowDropBottom = css.keyframes({
       '0%': { textShadow: '0 0 0 rgba(0, 0, 0, 0)' },
-      // '15%': { transform: 'translateX(-20px) rotate(-5deg)' },
-      // '30%': { transform: 'translateX(15px) rotate(5deg)' },
-      // '45%': { transform: 'translateX(-15px) rotate(-3.6deg)' },
-      // '60%': { transform: 'translateX(9px) rotate(2.4deg)' },
-      // '75%': { transform: 'translateX(-6px) rotate(-1.2deg)' },
       '100%': { textShadow: '0 3px 3px rgba(0, 0, 0, 0.2)' },
     });
-
-    // @keyframes text-shadow-drop-bottom {
-    //   0% {
-    //     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    //   }
-    //   100% {
-    //     text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-    //   }
-    // }
 
     return (
       <div
@@ -79,8 +65,6 @@ class SponsorCard extends Component {
           backgroundColor: 'white',
           borderRadius: 4,
           boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
-          // display: 'flex',
-          // flexDirection: 'column',
           marginBottom: '1em',
           padding: '2em 3em',
         }}
