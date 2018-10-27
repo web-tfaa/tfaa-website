@@ -14,7 +14,7 @@ import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterInfo from '../../components/register/register-info';
-import RegisterPayment from '../../components/register/register-payment';
+import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from '../members/status';
 
@@ -66,7 +66,7 @@ class RegisterSponsorContent extends Component {
       location,
     } = this.props;
 
-    console.log('level clicked:', location.state.level);
+    console.log('level clicked:', location && location.state.level);
 
     const {
       activeStep,
@@ -89,10 +89,10 @@ class RegisterSponsorContent extends Component {
     );
 
     const step3Content = (
-      <RegisterPayment
+      <RegisterSponsorPayment
         form={form}
         isViewingSponsors={isViewingSponsors}
-        initialLevel={location.state.level}
+        initialLevel={location ? location.state.level : 'Class Champion'}
         onCompleteStep={this.handleCompleteStep}
       />
     );
