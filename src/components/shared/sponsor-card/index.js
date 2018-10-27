@@ -1,7 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-// import { Link } from 'gatsby';
+import { Link } from 'gatsby';
 
 // Local Variables
 const sponsorInfoStyles = {
@@ -93,7 +93,13 @@ class SponsorCard extends Component {
             <li>Company Logo on TMAC website</li>
           </ul>
             Deadline to register and pay is Nov 1
-          <div css={{ fontWeight: '600', margin: '12px 0' }}>Registration Coming Soon!</div>
+          <Link
+            css={{ fontWeight: '600', margin: '12px 0' }}
+            to="/sponsors/sponsor-info"
+            state={{ level: sponsorClass }}
+          >
+            Click here to register and pay
+          </Link>
         </div>
       </div>
     );

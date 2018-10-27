@@ -26,6 +26,7 @@ import Status from '../members/status';
 class RegisterSponsorContent extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    location: PropTypes.shape({}).isRequired,
   };
 
   constructor(props) {
@@ -61,6 +62,14 @@ class RegisterSponsorContent extends Component {
 
   getCurrentStepContent(isAuthenticated) {
     const {
+      location: {
+        state: {
+          level,
+        },
+      },
+    } = this.props;
+
+    const {
       activeStep,
       form,
     } = this.state;
@@ -85,6 +94,7 @@ class RegisterSponsorContent extends Component {
       <RegisterPayment
         form={form}
         isViewingSponsors={isViewingSponsors}
+        initialLevel={level}
         onCompleteStep={this.handleCompleteStep}
       />
     );

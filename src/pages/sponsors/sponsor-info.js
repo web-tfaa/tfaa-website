@@ -58,23 +58,19 @@ const SponsorInfo = (props) => {
             </FuturaDiv>
             <FuturaDiv>
               <span css={boldStyles}>
-                1.
-                {' '}
+                1.{' '}
               </span>
-                Sign up for a TMAC website
-              login.
+                Sign up for a TMAC website login.
             </FuturaDiv>
             <FuturaDiv>
               <span css={boldStyles}>
-                2.
-                {' '}
+                2.{' '}
               </span>
               Complete the Sponsor Registration Form.
             </FuturaDiv>
             <FuturaDiv>
               <span css={boldStyles}>
-                3.
-                {' '}
+                3.{' '}
               </span>
               Pay online using PayPal (or mail invoice with check to the TMAC Treasurer).
             </FuturaDiv>
@@ -86,7 +82,10 @@ const SponsorInfo = (props) => {
               justifyContent: 'flex-end',
             }}
           >
-            <CtaButton to="/sponsors/register">
+            <CtaButton
+              to="/sponsors/register"
+              state={{ level: location.state.level }}
+            >
               <span css={{ verticalAlign: 'middle' }}>
                 Begin Sponsor Registration
               </span>
