@@ -149,10 +149,13 @@ class RegisterForm extends Component {
     form.OfficePhone = formatPhone(form.OfficePhone);
     form.CellPhone = formatPhone(form.CellPhone);
 
+    // This will tell the database action where to put the new record
+    const collection = 'registration';
+
     // This will identify each row in the database and serve as the document name
     const documentId = form.userId;
 
-    doCreateEntry(form, documentId, this.handleUpdateCompletedStep);
+    doCreateEntry(form, collection, documentId, this.handleUpdateCompletedStep);
 
     // Update the form data and advance the steps with the above callback function
   };

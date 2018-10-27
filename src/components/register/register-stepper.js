@@ -11,7 +11,11 @@ import Stepper from '@material-ui/core/Stepper';
 const propTypes = {
   activeStep: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  isViewingSponsors: PropTypes.bool.isRequired,
+  isViewingSponsors: PropTypes.bool,
+};
+
+const defaultProps = {
+  isViewingSponsors: false,
 };
 
 // Local Functions
@@ -54,4 +58,5 @@ const RegisterStepper = (props) => {
 };
 
 RegisterStepper.propTypes = propTypes;
+RegisterStepper.defaultProps = defaultProps;
 export default RegisterStepper;

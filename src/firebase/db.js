@@ -1,8 +1,9 @@
+// eslint-disable implicit-arrow-linebreak
 import { db } from './firebase';
 
 // Create/Update user entry in Firestore
-export const doCreateEntry = (form, documentId, callback) =>
-  db.collection('registration_18-19')
+export const doCreateEntry = (form, collection, documentId, callback) =>
+  db.collection(`${collection}_18-19`)
     .doc(documentId)
     .set(form)
     .then(() => {
@@ -24,7 +25,7 @@ export const doUpdateEntry = (form, documentId) =>
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
 
-export const doGetUsers = (userList, callback) => {
+export const doGetUsers = (collection, userList, callback) => {
   const updatedUserList = userList;
   return db.collection('registration_18-19')
     .get()
