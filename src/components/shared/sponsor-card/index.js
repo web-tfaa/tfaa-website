@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
+import { css } from 'glamor';
 
 // Local Variables
 const sponsorInfoStyles = {
@@ -51,6 +52,26 @@ class SponsorCard extends Component {
       ? `${min.toLocaleString()}-${max.toLocaleString()}`
       : `${max.toLocaleString()}+`;
 
+    // Let's add some animation to the titles of the sponsor levels!
+    const textShadowDropBottom = css.keyframes({
+      '0%': { textShadow: '0 0 0 rgba(0, 0, 0, 0)' },
+      // '15%': { transform: 'translateX(-20px) rotate(-5deg)' },
+      // '30%': { transform: 'translateX(15px) rotate(5deg)' },
+      // '45%': { transform: 'translateX(-15px) rotate(-3.6deg)' },
+      // '60%': { transform: 'translateX(9px) rotate(2.4deg)' },
+      // '75%': { transform: 'translateX(-6px) rotate(-1.2deg)' },
+      '100%': { textShadow: '0 4px 3px rgba(0, 0, 0, 0.2)' },
+    });
+
+    // @keyframes text-shadow-drop-bottom {
+    //   0% {
+    //     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    //   }
+    //   100% {
+    //     text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    //   }
+    // }
+
     return (
       <div
         css={{
@@ -65,10 +86,9 @@ class SponsorCard extends Component {
         }}
       >
         <h2
-          css={{
-            color: '#32456B',
-            fontWeight: 600,
-          }}
+          css={css({
+            animation: `${textShadowDropBottom} 2s both`,
+          })}
         >
           {sponsorClass}
         </h2>
@@ -94,7 +114,11 @@ class SponsorCard extends Component {
           </ul>
             Deadline to register and pay is Nov 1
           <Link
-            css={{ fontWeight: '600', margin: '12px 0' }}
+            css={{
+              fontSize: 20,
+              fontWeight: '600',
+              margin: '24px 0',
+            }}
             to="/sponsors/sponsor-info"
             state={{ level: sponsorClass }}
           >

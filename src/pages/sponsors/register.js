@@ -69,6 +69,8 @@ class RegisterSponsorContent extends Component {
       },
     } = this.props;
 
+    console.log('level clicked:', level);
+
     const {
       activeStep,
       form,
