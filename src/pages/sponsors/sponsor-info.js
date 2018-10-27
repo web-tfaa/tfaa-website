@@ -80,7 +80,7 @@ const SponsorInfo = (props) => {
           >
             <CtaButton
               to="/sponsors/register"
-              state={{ level: location && location.state.level }}
+              state={{ level: location && location.state && location.state.level }}
             >
               <span css={{ verticalAlign: 'middle' }}>
                 Begin Sponsor Registration
