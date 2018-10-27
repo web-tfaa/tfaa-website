@@ -63,14 +63,10 @@ class RegisterSponsorContent extends Component {
 
   getCurrentStepContent(isAuthenticated) {
     const {
-      location: {
-        state: {
-          level,
-        },
-      },
+      location,
     } = this.props;
 
-    console.log('level clicked:', level);
+    console.log('level clicked:', location.state.level);
 
     const {
       activeStep,
@@ -96,7 +92,7 @@ class RegisterSponsorContent extends Component {
       <RegisterPayment
         form={form}
         isViewingSponsors={isViewingSponsors}
-        initialLevel={level}
+        initialLevel={location.state.level}
         onCompleteStep={this.handleCompleteStep}
       />
     );
