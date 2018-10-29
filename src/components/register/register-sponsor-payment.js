@@ -317,33 +317,25 @@ class RegisterSponsorPayment extends Component {
 
       switch (name) {
         case 'valueChampion':
-          // Champion value WAS empty, now non-empty
           if (valueChampion && value) {
-            console.log('1');
-            // Champion value was non-empty, still non-empty but outside of the required range
             if (numberValue < 2000) {
-              console.log('1a');
               this.setState({ valueChampionError: 'Class Champion Sponsorship is $2,000+' });
-
-            // We remove error if Champion value is non-empty and within the correct range
             } else if (numberValue >= 2000) {
-              console.log('1b');
               this.setState({ valueChampionError: '' });
             }
-
-          // Champion value WAS non-empty, now empty
           } else if (!valueChampion && !value) {
-            console.log('2');
             this.setState({ valueChampionError: 'Donation amount is required' });
           }
           break;
         case 'valueGold':
-          if (!valueGold && value) {
-            this.setState({ valueGoldError: '' });
-          } else if (valueGold && !value) {
+          if (valueGold && value) {
+            if ((numberValue < 1500 || numberValue > 1999)) {
+              this.setState({ valueGoldError: 'Gold Medal Sponsorship is $1,500-1,999' });
+            } else if (numberValue >= 1500 || numberValue <= 1999) {
+              this.setState({ valueGoldError: '' });
+            }
+          } else if (!valueGold && !value) {
             this.setState({ valueGoldError: 'Donation amount is required' });
-          } else if (valueGold && value && (numberValue < 1500 || numberValue > 1999)) {
-            this.setState({ valueGoldError: 'Gold Medal Sponsorship is $1,500-1,999' });
           }
           break;
         case 'valueSilver':
