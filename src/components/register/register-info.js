@@ -5,24 +5,35 @@ import React from 'react';
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
 import RegisterForm from './register-form';
+import RegisterSponsorForm from './register-sponsor-form';
 
 // Component Definition
 const RegisterInfo = (props) => {
   const {
+    isViewingSponsors,
     onCompleteStep,
   } = props;
 
   return (
     <section>
-      <h2>2. Register for TMAC</h2>
+      <h2>
+        2. Register for TMAC
+        {isViewingSponsors && ' Sponsorship'}
+      </h2>
       <FormHr />
-      <RegisterForm onCompleteStep={onCompleteStep} />
+      {isViewingSponsors
+        ? <RegisterSponsorForm onCompleteStep={onCompleteStep} />
+        : <RegisterForm onCompleteStep={onCompleteStep} />}
     </section>
   );
 };
 
 RegisterInfo.propTypes = {
+  isViewingSponsors: PropTypes.bool,
   onCompleteStep: PropTypes.func.isRequired,
+};
+RegisterInfo.defaultProps = {
+  isViewingSponsors: false,
 };
 
 export default RegisterInfo;

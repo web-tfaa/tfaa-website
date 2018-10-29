@@ -13,8 +13,8 @@ const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
 
 const stripeAnimation = css.keyframes({
-  '0%': { backgroundPosition: `0 0` },
-  '100%': { backgroundPosition: `30px 60px` },
+  '0%': { backgroundPosition: '0 0' },
+  '100%': { backgroundPosition: '30px 60px' },
 });
 
 // Component Definition
@@ -31,11 +31,11 @@ const RegisterButton = ({
     css={{
       ...overrideCSS,
       ...scale(1 / 5),
-      display: `inline-block`,
       border: `1px solid ${red ? texasFlagRed : texasFlagBlue}`,
-      fontFamily: options.headerFontFamily.join(`,`),
-      padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       borderRadius: presets.radius,
+      display: 'inline-block',
+      fontFamily: options.headerFontFamily.join(','),
+      padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       [presets.Tablet]: {
         ...scale(2 / 5),
         padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
@@ -45,38 +45,38 @@ const RegisterButton = ({
       },
       // Increase specificity
       '&&': {
+        backgroundColor: 'transparent',
+        backgroundSize: '30px 30px',
         border: `1px solid ${red ? texasFlagRed : texasFlagBlue}`,
-        boxShadow: `none`,
+        boxShadow: 'none',
         color: red ? texasFlagRed : texasFlagBlue,
-        fontWeight: `normal`,
-        backgroundColor: `transparent`,
-        backgroundSize: `30px 30px`,
+        fontWeight: 'normal',
         textDecoration: 'none',
         transition: `all ${presets.animation.speedDefault} ${
           presets.animation.curveDefault
         }`,
         ':hover, &:focus': {
-          backgroundSize: `30px 30px`,
-          backgroundColor: !isDisabled && red ? texasFlagRed : texasFlagBlue,
-          backgroundImage: !isDisabled && `linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)`,
-          color: !isDisabled && `#fff`,
           animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
+          backgroundColor: red ? texasFlagRed : texasFlagBlue,
+          backgroundImage: !isDisabled && 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
+          backgroundSize: '30px 30px',
+          color: !isDisabled ? '#fff' : hex2rgba('#fafafa', 0.4),
         },
         ':focus': {
           outline: 0,
           boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : texasFlagBlue, 0.25)}`,
         },
         ':after': {
-          content: ``,
-          display: `block`,
+          content: '',
+          display: 'block',
         },
       },
     }}
     disabled={isDisabled}
     onClick={onClick}
-    type={buttonType}
     role="button"
     tabIndex={0}
+    type={buttonType}
   >
     {children}
   </button>

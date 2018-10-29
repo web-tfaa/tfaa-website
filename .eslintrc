@@ -11,9 +11,11 @@
     "react/no-did-mount-set-state": 0,
     "react/prefer-stateless-function": 1,
     "react/jsx-uses-vars": [2],
+    "react/jsx-one-expression-per-line": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "no-underscore-dangle": 0,
     "arrow-body-style": 0,
+    "comma-dangle": 1,
     "no-shadow": 0,
     "consistent-return": 0,
     "no-nested-ternary": 0,
@@ -21,6 +23,7 @@
     "no-case-declarations": 0,
     "import/prefer-default-export": 0,
     "import/no-unresolved": 0,
+    "implicit-arrow-linebreak": 0
   },
   "settings": {
     "import/core-modules": ["react", "prop-types"]
@@ -28,6 +31,7 @@
   "globals": {
     "graphql": true
   },
+  "plugins": [],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2017,

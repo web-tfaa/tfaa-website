@@ -40,7 +40,7 @@ class MembersContent extends Component {
     doGetUsers(userList, this.handleUpdateUserList);
   }
 
-  handleUpdateUserList = (userList) => {
+  handleUpdateUserList = userList => {
     this.setState({ userData: userList });
   };
 
@@ -70,36 +70,34 @@ class MembersContent extends Component {
           <Helmet>
             <title>TMAC | Members</title>
           </Helmet>
-          {isAuthenticated
-            ? (
-              <MemberContent
-                contentfulFileShareData={
-                  data.allContentfulFileShare.edges
-                }
-                contentfulFileShareDescriptionData={
-                  data.allContentfulFileShareDescriptionTextNode
-                    .edges
-                }
-                memberEmail={authUser.email}
-                userData={userData}
-                userId={authUser.uid}
-              />
-            )
-            : <NonMemberContent />}
+          {isAuthenticated ? (
+            <MemberContent
+              contentfulFileShareData={
+                data.allContentfulFileShare.edges
+              }
+              contentfulFileShareDescriptionData={
+                data.allContentfulFileShareDescriptionTextNode.edges
+              }
+              memberEmail={authUser.email}
+              userData={userData}
+              userId={authUser.uid}
+            />
+          ) : <NonMemberContent />
+        }
         </Container>
       </div>
     );
   }
 }
 
-const Members = (props) => (
-  // eslint-disable-next-line
+const Members = props => (
+  // eslint-disapropsline
   <Layout location={props.location}>
     <MembersWithContext {...props} />
   </Layout>
 );
 
-const MembersWithContext = (props) => (
+const MembersWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <MembersContent {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>

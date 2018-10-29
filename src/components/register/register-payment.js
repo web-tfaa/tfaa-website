@@ -27,6 +27,9 @@ import {
 // Local Variables
 const currentDate = format(new Date(), ['M/D/YYYY']);
 
+// This will tell the database action where to put the new record
+const collection = 'registration';
+
 // Component Definition
 class RegisterPayment extends Component {
   static propTypes = {
@@ -76,7 +79,7 @@ class RegisterPayment extends Component {
 
     if ((prevState.invoiceId === 0 && invoiceId > 0)
       || (prevState.receiptId === 0 && receiptId > 0)) {
-      return doUpdateEntry(updatedForm, form.userId);
+      return doUpdateEntry(updatedForm, collection, form.userId);
     }
   }
 
@@ -108,7 +111,7 @@ class RegisterPayment extends Component {
     }
   }
 
-  handleChangeRadioSelection = event => {
+  handleChangeRadioSelection = (event) => {
     const {
       form,
     } = this.props;
@@ -130,7 +133,7 @@ class RegisterPayment extends Component {
     if (this.activeComponent) {
       this.setState({ value: event.target.value });
 
-      return doUpdateEntry(updatedForm, form.userId)
+      return doUpdateEntry(updatedForm, collection, form.userId);
     }
   };
 
@@ -163,7 +166,7 @@ class RegisterPayment extends Component {
         receiptId,
       };
 
-      doUpdateEntry(updatedForm, documentId);
+      doUpdateEntry(updatedForm, collection, documentId);
       onCompleteStep(2, updatedForm);
     }
   };
@@ -191,10 +194,10 @@ class RegisterPayment extends Component {
       invoiceId,
       MemberType: isActive ? 'Active' : 'Retired',
       receiptId,
-    }
+    };
 
     return Promise.all([
-      doUpdateEntry(updatedForm, documentId),
+      doUpdateEntry(updatedForm, collection, documentId),
       doUpdateInvoiceId(),
     ]);
   };
@@ -214,7 +217,7 @@ class RegisterPayment extends Component {
           payerId: payment.payerID,
           paymentId: payment.paymentID,
           receiptDate: currentDate,
-        }
+        },
       }, () => this.handleCompletePaymentStep());
     }
   };
@@ -278,102 +281,98 @@ class RegisterPayment extends Component {
                   isInvoice={false}
                   paymentDetails={paymentDetails}
                   receiptId={receiptId}
-                  ref={(el) => { this.printReceipt = el; } }
+                  ref={(el) => { this.printReceipt = el; }}
                 />
               </div>
             </Fragment>
           )
-        : (
-          <Fragment>
-            <div css={{ marginBottom: 48 }}>
-              <h3 css={{ marginBottom: 24 }}>
-                Pay now with Paypal
-              </h3>
+          : (
+            <Fragment>
+              <div css={{ marginBottom: 48 }}>
+                <h3 css={{ marginBottom: 24 }}>
+                  Pay now with Paypal
+                </h3>
 
-              <FormControl component="fieldset" style={{ marginLeft: 32 }}>
-                <FormLabel
-                  component="legend"
-                  style={{ marginBottom: 12 }}
-                >
-                  Choose your membership level below
-                </FormLabel>
-                <RadioGroup
-                  aria-label="TMAC membership levels"
-                  name="membershipLevels"
-                  onChange={this.handleChangeRadioSelection}
-                  value={value}
-                >
-                  <FormControlLabel
-                    control={<Radio color="primary" />}
-                    label="Active $50.00"
-                    value="active"
-                  />
-                  <FormControlLabel
-                    control={<Radio color="primary" />}
-                    label="Retired $30.00"
-                    value="retired"
-                  />
-                  {/* <FormControlLabel
-                    control={<Radio color="primary" />}
-                    label="Sponsor $0"
-                    value="sponsor"
-                  /> */}
-                  <PaypalButtonWrapper
-                    amount={this.getCurrentAmount()}
-                    onSuccessfulPayment={this.handleUpdateCompletedStep}
-                  />
-                </RadioGroup>
-              </FormControl>
-            </div>
+                <FormControl component="fieldset" style={{ marginLeft: 32 }}>
+                  <FormLabel
+                    component="legend"
+                    style={{ marginBottom: 12 }}
+                  >
+                    Choose your membership level below
+                  </FormLabel>
+                  <RadioGroup
+                    aria-label="TMAC membership levels"
+                    name="membershipLevels"
+                    onChange={this.handleChangeRadioSelection}
+                    value={value}
+                  >
+                    <FormControlLabel
+                      control={<Radio color="primary" />}
+                      label="Active $50.00"
+                      value="active"
+                    />
+                    <FormControlLabel
+                      control={<Radio color="primary" />}
+                      label="Retired $30.00"
+                      value="retired"
+                    />
+                    <PaypalButtonWrapper
+                      amount={this.getCurrentAmount()}
+                      onSuccessfulPayment={this.handleUpdateCompletedStep}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </div>
 
-            <div>
-              <h3>
-                Need to pay later?
-              </h3>
+              <div>
+                <h3>
+                  Need to pay later?
+                </h3>
 
-              <div css={{ marginLeft: 32, marginTop: 24 }}>
-                <div css={{ marginBottom: 24 }}>
-                  Follow these easy steps:
-                  <ol>
-                    <li>Click the button below to print an invoice.</li>
-                    <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
-                  </ol>
-                </div>
-                <ReactToPrint
-                  content={() => this.printInvoice}
-                  trigger={() => (
-                    <RegisterButton red onClick={this.handleIncrementInvoiceId}>
-                      Print Invoice
-                    </RegisterButton>
-                  )}
-                />
-                <div css={{ display: 'none' }}>
-                  <Invoice
-                    amount={this.getCurrentAmount()}
-                    form={form}
-                    invoiceId={invoiceId}
-                    isActive={value === 'active'}
-                    isInvoice
-                    ref={(el) => { this.printInvoice = el; } }
+                <div css={{ marginLeft: 32, marginTop: 24 }}>
+                  <div css={{ marginBottom: 24 }}>
+                    Follow these easy steps:
+                    <ol>
+                      <li>Click the button below to print an invoice.</li>
+                      <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
+                    </ol>
+                  </div>
+                  <ReactToPrint
+                    content={() => this.printInvoice}
+                    trigger={() => (
+                      <RegisterButton red onClick={this.handleIncrementInvoiceId}>
+                        Print Invoice
+                      </RegisterButton>
+                    )}
                   />
-                </div>
-                <div css={{ marginTop: 24 }}>
-                  If your district requires the IRS W-9 Form for TMAC, then{' '}
-                  you can download or print a copy below.
-                </div>
-                <div css={{ marginTop: 24 }}>
-                  <a
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
-                    Download W-9
-                  </a>
+                  <div css={{ display: 'none' }}>
+                    <Invoice
+                      amount={this.getCurrentAmount()}
+                      form={form}
+                      invoiceId={invoiceId}
+                      isActive={value === 'active'}
+                      isInvoice
+                      ref={(el) => { this.printInvoice = el; }}
+                    />
+                  </div>
+                  <div css={{ marginTop: 24 }}>
+                    If your district requires the IRS W-9 Form for TMAC, then{' '}
+                    you can download or print a copy below.
+                  </div>
+                  <div css={{ marginTop: 24 }}>
+                    <a
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf"
+                    >
+                      Download W-9
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Fragment>
-        )}
+            </Fragment>
+          )}
       </section>
     );
   }

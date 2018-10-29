@@ -1,32 +1,33 @@
 import { db } from './firebase';
+import { currentSchoolYearShort } from '../utils/helpers';
 
-// User API
-export const doCreateEntry = (form, documentId, callback) =>
-  db.collection('registration_18-19')
+// Create/Update user entry in Firestore
+export const doCreateEntry = (form, collection, documentId, callback) =>
+  db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .set(form)
     .then(() => {
       console.log(`Registration for ${documentId} was successful`);
       callback(form);
     })
-    .catch(err =>{
+    .catch((err) => {
       console.log(`Error adding registration for ${documentId} document`, err);
     });
 
-export const doUpdateEntry = (form, documentId) =>
-  db.collection('registration_18-19')
+export const doUpdateEntry = (form, collection, documentId) =>
+  db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
     .then(() => {
       console.log(`Updating payment info for ${documentId} was successful`);
     })
-    .catch(err =>{
+    .catch((err) => {
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
 
-export const doGetUsers = (userList, callback) => {
+export const doGetUsers = (collection, userList, callback) => {
   const updatedUserList = userList;
-  return db.collection('registration_18-19')
+  return db.collection(`${collection}_${currentSchoolYearShort}`)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -35,14 +36,14 @@ export const doGetUsers = (userList, callback) => {
       return callback(updatedUserList);
     })
     .catch((error) => {
-        console.log('Error getting user docs: ', error);
+      console.log('Error getting user docs: ', error);
     });
 };
 
 // Invoice actions
-export const doGetInvoiceId = (callback) =>
+export const doGetInvoiceId = callback =>
   db.collection('Document_ID')
-    .doc('invoice_18-19')
+    .doc(`invoice_${currentSchoolYearShort}`)
     .get()
     .then((doc) => {
       if (!doc.exists) {
@@ -57,9 +58,9 @@ export const doGetInvoiceId = (callback) =>
     });
 
 export const doUpdateInvoiceId = () => {
-  const invoiceDocRef = db.collection('Document_ID').doc('invoice_18-19');
+  const invoiceDocRef = db.collection('Document_ID').doc(`invoice_${currentSchoolYearShort}`);
 
-  return db.runTransaction((transaction) =>
+  return db.runTransaction(transaction =>
     transaction
       .get(invoiceDocRef)
       .then((doc) => {
@@ -73,20 +74,19 @@ export const doUpdateInvoiceId = () => {
       })
       .catch((err) => {
         console.log('Error getting document for invoice:', err);
-      }),
-    )
+      }))
     .then(() => {
       console.log('transaction successfully committed');
     })
     .catch((err) => {
       console.log('transaction failed', err);
     });
-  };
+};
 
 // Receipt actions
-export const doGetReceiptId = (callback) =>
+export const doGetReceiptId = callback =>
   db.collection('Document_ID')
-    .doc('receipt_18-19')
+    .doc(`receipt_${currentSchoolYearShort}`)
     .get()
     .then((doc) => {
       if (!doc.exists) {
@@ -101,9 +101,9 @@ export const doGetReceiptId = (callback) =>
     });
 
 export const doUpdateReceiptId = () => {
-  const receiptDocRef = db.collection('Document_ID').doc('receipt_18-19');
+  const receiptDocRef = db.collection('Document_ID').doc(`receipt_${currentSchoolYearShort}`);
 
-  return db.runTransaction((transaction) =>
+  return db.runTransaction(transaction =>
     transaction
       .get(receiptDocRef)
       .then((doc) => {
@@ -117,12 +117,11 @@ export const doUpdateReceiptId = () => {
       })
       .catch((err) => {
         console.log('Error getting document for receipt:', err);
-      }),
-    )
+      }))
     .then(() => {
       console.log('transaction successfully committed');
     })
     .catch((err) => {
       console.log('transaction failed', err);
     });
-  };
+};

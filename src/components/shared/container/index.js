@@ -11,9 +11,7 @@ import { rhythm, options } from '../../../utils/typography';
 export default ({ children, className, hasSideBar = true, css = {} }) => (
   <div
     css={{
-      maxWidth: hasSideBar
-        ? rhythm(presets.maxWidthWithSidebar)
-        : rhythm(presets.maxWidth),
+      maxWidth: hasSideBar ? rhythm(presets.maxWidthWithSidebar) : rhythm(presets.maxWidth),
       margin: `0 auto`,
       padding: `${rhythm(1.5)} ${rhythm(options.blockMarginBottom)}`,
       paddingBottom: rhythm(3.5),

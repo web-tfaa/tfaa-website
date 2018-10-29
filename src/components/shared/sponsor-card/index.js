@@ -1,7 +1,8 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-// import { Link } from 'gatsby';
+import { Link } from 'gatsby';
+import { css } from 'glamor';
 
 // Local Variables
 const sponsorInfoStyles = {
@@ -51,6 +52,12 @@ class SponsorCard extends Component {
       ? `${min.toLocaleString()}-${max.toLocaleString()}`
       : `${max.toLocaleString()}+`;
 
+    // Let's add some animation to the titles of the sponsor levels!
+    const textShadowDropBottom = css.keyframes({
+      '0%': { textShadow: '0 0 0 rgba(0, 0, 0, 0)' },
+      '100%': { textShadow: '0 3px 3px rgba(0, 0, 0, 0.2)' },
+    });
+
     return (
       <div
         css={{
@@ -58,17 +65,14 @@ class SponsorCard extends Component {
           backgroundColor: 'white',
           borderRadius: 4,
           boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
-          // display: 'flex',
-          // flexDirection: 'column',
           marginBottom: '1em',
           padding: '2em 3em',
         }}
       >
         <h2
-          css={{
-            color: '#32456B',
-            fontWeight: 600,
-          }}
+          css={css({
+            animation: `${textShadowDropBottom} 2s both`,
+          })}
         >
           {sponsorClass}
         </h2>
@@ -93,7 +97,17 @@ class SponsorCard extends Component {
             <li>Company Logo on TMAC website</li>
           </ul>
             Deadline to register and pay is Nov 1
-          <div css={{ fontWeight: '600', margin: '12px 0' }}>Registration Coming Soon!</div>
+          <Link
+            css={{
+              fontSize: 20,
+              fontWeight: '600',
+              margin: '24px 0',
+            }}
+            to="/sponsors/sponsor-info"
+            state={{ level: sponsorClass }}
+          >
+            Click here to register and pay
+          </Link>
         </div>
       </div>
     );

@@ -14,18 +14,15 @@ import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterInfo from '../../components/register/register-info';
-import RegisterPayment from '../../components/register/register-payment';
+import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
-import Status from './status';
-
-// Sidebar Data
-import membersSidebar from './members-links.yml';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import Status from '../members/status';
 
 // Component Definition
-class RegisterContent extends Component {
+class RegisterSponsorContent extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    location: PropTypes.shape({}).isRequired,
   };
 
   constructor(props) {
@@ -33,9 +30,10 @@ class RegisterContent extends Component {
 
     this.state = {
       activeStep: 0,
-      form: {},
       // Possible completed steps are [0, 1, 2]
       completedSteps: [],
+      form: {},
+      isViewingSponsors: false,
     };
 
     this.activeComponent = true;
@@ -53,6 +51,10 @@ class RegisterContent extends Component {
     if (activeStep === 0 && isAuthenticated) {
       this.setState({ activeStep: 1 });
     }
+
+    if (window && window.location.href.includes('sponsors')) {
+      this.setState({ isViewingSponsors: true });
+    }
   }
 
   componentWillUnmount() {
@@ -61,8 +63,15 @@ class RegisterContent extends Component {
 
   getCurrentStepContent(isAuthenticated) {
     const {
+      location,
+    } = this.props;
+
+    console.log('level clicked:', location && location.state && location.state.level);
+
+    const {
       activeStep,
       form,
+      isViewingSponsors,
     } = this.state;
 
     const step1Content = (
@@ -73,12 +82,17 @@ class RegisterContent extends Component {
     );
 
     const step2Content = (
-      <RegisterInfo onCompleteStep={this.handleCompleteStep} />
+      <RegisterInfo
+        isViewingSponsors={isViewingSponsors}
+        onCompleteStep={this.handleCompleteStep}
+      />
     );
 
     const step3Content = (
-      <RegisterPayment
+      <RegisterSponsorPayment
         form={form}
+        isViewingSponsors={isViewingSponsors}
+        initialLevel={location && location.state ? location.state.level : 'Class Champion'}
         onCompleteStep={this.handleCompleteStep}
       />
     );
@@ -128,6 +142,7 @@ class RegisterContent extends Component {
     const {
       activeStep,
       completedSteps,
+      isViewingSponsors,
     } = this.state;
 
     const hasCompletedAllSteps = completedSteps.length >= 3;
@@ -146,11 +161,12 @@ class RegisterContent extends Component {
         <Status />
         <Container>
           <Helmet>
-            <title>TMAC | Register</title>
+            <title>TMAC | Register Sponsor</title>
           </Helmet>
 
           <RegisterStepper
             isAuthenticated={isAuthenticated}
+            isViewingSponsors={isViewingSponsors}
             activeStep={activeStep}
           />
 
@@ -158,44 +174,26 @@ class RegisterContent extends Component {
 
           {!hasCompletedAllSteps && (
             <div style={{ marginTop: '1.5rem' }}>
-              * Registration is not complete until payment is received.
+              * Sponsor Registration is not complete until payment is received.
             </div>
           )}
         </Container>
-
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
-          <SidebarBody inline yaml={membersSidebar} />
-        </div>
       </div>
     );
   }
 }
 
-const Register = props => (
+const RegisterSponsor = props => (
   // eslint-disable-next-line
   <Layout location={props.location}>
-    <RegisterWithContext {...props} />
+    <RegisterSponsorWithContext {...props} />
   </Layout>
 );
 
-const RegisterWithContext = props => (
+const RegisterSponsorWithContext = props => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterContent {...props} isAuthenticated={!!authUser} />}
+    {authUser => <RegisterSponsorContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 
-export default Register;
+export default RegisterSponsor;
