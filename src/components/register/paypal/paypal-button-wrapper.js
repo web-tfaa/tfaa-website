@@ -17,12 +17,22 @@ const ENV = process.env.NODE_ENV === 'production'
   ? 'production'
   : 'sandbox';
 
+const errorText = 'There was an issue using PayPal. Please try clicking the "Pay with PayPal" button again or print an invoice to send to the TMAC Treasurer.';
+
 // Component Definition
 class PaypalButtonWrapper extends Component {
   static propTypes = {
     amount: PropTypes.number.isRequired,
     onSuccessfulPayment: PropTypes.func.isRequired,
   };
+
+  constructor() {
+    super();
+
+    this.state = {
+      paymentError: '',
+    };
+  }
 
   handleSuccess = (payment) => {
     const {
@@ -31,21 +41,27 @@ class PaypalButtonWrapper extends Component {
 
     console.log('Successful payment!', payment);
 
-    onSuccessfulPayment(payment)
+    onSuccessfulPayment(payment);
   };
 
   handleError = (error) => {
     console.log('Erroneous payment OR failed to load script!', error);
+    this.setState({ paymentError: errorText });
   };
 
   handleCancel = (data) => {
     console.log('Cancelled payment!', data);
+    this.setState({ paymentError: errorText });
   };
 
   render() {
     const {
       amount,
     } = this.props;
+
+    const {
+      paymentError,
+    } = this.state;
 
     return (
       <div>
@@ -59,6 +75,20 @@ class PaypalButtonWrapper extends Component {
           onError={this.handleError}
           onCancel={this.handleCancel}
         />
+        {paymentError && (
+          <div
+            css={{
+              background: '#fafafa',
+              border: '1px solid red',
+              borderRadius: 5,
+              maxWidth: '75%',
+              padding: 8,
+              color: 'red',
+            }}
+          >
+            {paymentError}
+          </div>
+        )}
       </div>
     );
   }

@@ -29,8 +29,11 @@ const RegisterInfo = (props) => {
 };
 
 RegisterInfo.propTypes = {
-  isViewingSponsors: PropTypes.bool.isRequired,
+  isViewingSponsors: PropTypes.bool,
   onCompleteStep: PropTypes.func.isRequired,
+};
+RegisterInfo.defaultProps = {
+  isViewingSponsors: false,
 };
 
 export default RegisterInfo;

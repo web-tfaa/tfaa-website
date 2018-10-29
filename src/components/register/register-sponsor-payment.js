@@ -266,7 +266,7 @@ class RegisterSponsorPayment extends Component {
   };
 
   handleIncrementReceiptId = () => {
-    // Called when unmounting the component when user completed the purchase
+    // Called when unmounting the component after user completed the purchase
     return doUpdateReceiptId();
   };
 
