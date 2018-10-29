@@ -133,7 +133,7 @@ class RegisterPayment extends Component {
     if (this.activeComponent) {
       this.setState({ value: event.target.value });
 
-      return doUpdateEntry(updatedForm, form.userId);
+      return doUpdateEntry(updatedForm, collection, form.userId);
     }
   };
 

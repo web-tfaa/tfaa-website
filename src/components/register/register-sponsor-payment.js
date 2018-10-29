@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
+import { css } from 'glamor';
 
 // Material-UI Dependencies
 import FormControl from '@material-ui/core/FormControl';
@@ -23,10 +24,43 @@ import {
   doUpdateInvoiceId,
   doUpdateReceiptId,
 } from '../../firebase/db';
+import { options } from '../../utils/typography';
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const currentDate = format(new Date(), ['M/D/YYYY']);
+
+const labelStyles = {
+  display: 'block',
+  fontSize: '90%',
+  letterSpacing: '0.1rem',
+  marginTop: 16,
+  textTransform: 'uppercase',
+  width: '80%',
+};
+
+const inputStyles = {
+  display: 'block',
+  fontSize: '1rem',
+  marginTop: 4,
+  minWidth: '75%',
+  padding: '0.3rem',
+  width: '100%',
+};
+
+const baseErrorStyles = {
+  color: 'red',
+  fontFamily: options.headerFontFamily.join(','),
+  marginLeft: 26,
+  transform: 'translateY(-20px)',
+};
+
+// Adds animation to the input that appears when selecting "Yes"
+//  radio button for event attendance
+const slideInTop = css.keyframes({
+  '0%': { transform: 'translateY(-20px)', opacity: 0 },
+  '100%': { transform: 'translateY(0)', opacity: 1 },
+});
 
 // This will tell the database action where to put the new record
 const collection = 'sponsor';
@@ -43,11 +77,21 @@ class RegisterSponsorPayment extends Component {
     super(props);
 
     this.state = {
+      // This is used to send the final donation amount to the db
+      donationAmount: 0,
       hasCompletedPayment: false,
       invoiceId: 0,
       paymentDetails: {},
       receiptId: 0,
       value: props.initialLevel,
+      valueBronze: 500.00,
+      valueBronzeError: '',
+      valueChampion: 2000.00,
+      valueChampionError: '',
+      valueGold: 1500.00,
+      valueGoldError: '',
+      valueSilver: 1000.00,
+      valueSilverError: '',
     };
 
     this.activeComponent = true;
@@ -143,6 +187,7 @@ class RegisterSponsorPayment extends Component {
       } = this.props;
 
       const {
+        donationAmount,
         invoiceId,
         paymentDetails,
         receiptId,
@@ -152,10 +197,10 @@ class RegisterSponsorPayment extends Component {
       const documentId = form.userId;
 
       const updatedForm = {
+        AmountDonated: donationAmount,
         PaypalPayerID: paymentDetails.payerId,
         PaypalPaymentID: paymentDetails.paymentId,
         PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
-        AmountDonated: '1000',
         invoiceDate: currentDate,
         invoiceId,
         receiptId,
@@ -230,6 +275,101 @@ class RegisterSponsorPayment extends Component {
     }
   };
 
+  handleUpdate = (event) => {
+    if (this.activeComponent) {
+      const {
+        name,
+        value,
+      } = event.target;
+
+      console.log('handleUpdate', name, value);
+
+      this.setState({
+        // We check for empty value and cast it to a string to avoid setting to NaN
+        [name]: !value ? '' : parseInt(value, 10),
+      }, () => this.handleUpdateInputError(name, value));
+    }
+  };
+
+  handleUpdateInputError = (name, value) => {
+    if (this.activeComponent) {
+      // These values are the PREVIOUS state
+      // We have to compare against the incoming "value"
+      const {
+        valueBronze,
+        valueChampion,
+        valueGold,
+        valueSilver,
+      } = this.state;
+
+      const numberValue = !value ? 0 : parseInt(value, 10);
+
+      // console.log('name.value', valueBronze, name, value);
+      console.log({
+        name,
+        value,
+        numberValue,
+        valueBronze,
+        valueChampion,
+        valueGold,
+        valueSilver,
+      });
+
+      switch (name) {
+        case 'valueChampion':
+          // Champion value WAS empty, now non-empty
+          if (valueChampion && value) {
+            console.log('1');
+            // Champion value was non-empty, still non-empty but outside of the required range
+            if (numberValue < 2000) {
+              console.log('1a');
+              this.setState({ valueChampionError: 'Class Champion Sponsorship is $2,000+' });
+
+            // We remove error if Champion value is non-empty and within the correct range
+            } else if (numberValue >= 2000) {
+              console.log('1b');
+              this.setState({ valueChampionError: '' });
+            }
+
+          // Champion value WAS non-empty, now empty
+          } else if (!valueChampion && !value) {
+            console.log('2');
+            this.setState({ valueChampionError: 'Donation amount is required' });
+          }
+          break;
+        case 'valueGold':
+          if (!valueGold && value) {
+            this.setState({ valueGoldError: '' });
+          } else if (valueGold && !value) {
+            this.setState({ valueGoldError: 'Donation amount is required' });
+          } else if (valueGold && value && (numberValue < 1500 || numberValue > 1999)) {
+            this.setState({ valueGoldError: 'Gold Medal Sponsorship is $1,500-1,999' });
+          }
+          break;
+        case 'valueSilver':
+          if (!valueSilver && value) {
+            this.setState({ valueSilverError: '' });
+          } else if (valueSilver && !value) {
+            this.setState({ valueSilverError: 'Donation amount is required' });
+          } else if (valueSilver && value && (numberValue < 1000 || numberValue > 1499)) {
+            this.setState({ valueSilverError: 'Silver Medal Sponsorship is $1,000-1,499' });
+          }
+          break;
+        case 'valueBronze':
+          if (!valueBronze && value) {
+            this.setState({ valueBronzeError: '' });
+          } else if (valueBronze && !value) {
+            this.setState({ valueBronzeError: 'Donation amount is required' });
+          } else if (valueBronze && value && (numberValue < 500 || numberValue > 999)) {
+            this.setState({ valueBronzeError: 'Bronze Medal Sponsorship is $500-999' });
+          }
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   render() {
     const {
       form,
@@ -241,7 +381,17 @@ class RegisterSponsorPayment extends Component {
       paymentDetails,
       receiptId,
       value,
+      valueBronze,
+      valueBronzeError,
+      valueChampion,
+      valueChampionError,
+      valueGold,
+      valueGoldError,
+      valueSilver,
+      valueSilverError,
     } = this.state;
+
+    console.log('STATE', this.state);
 
     return (
       <section>
@@ -290,34 +440,149 @@ class RegisterSponsorPayment extends Component {
                     component="legend"
                     style={{ marginBottom: 12 }}
                   >
-                    Choose your membership level below
+                    Choose your sponsorship level below
                   </FormLabel>
                   <RadioGroup
-                    aria-label="TMAC membership levels"
-                    name="membershipLevels"
+                    aria-label="TMAC sponsorship levels"
+                    name="sponsorshipLevels"
                     onChange={this.handleChangeRadioSelection}
                     value={value}
                   >
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Class Champion $2,000+"
+                      label="Class Champion — $2,000+"
                       value="Class Champion"
                     />
+                    {value === 'Class Champion' && [
+                      <div
+                        key="classChampInput"
+                        css={css({
+                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                          marginLeft: 24,
+                        })}
+                      >
+                        <label css={labelStyles} htmlFor="valueChampion">
+                          Donation Amount
+                          <input
+                            css={inputStyles}
+                            min="2000"
+                            name="valueChampion"
+                            onChange={this.handleUpdate}
+                            placeholder=""
+                            type="number"
+                            value={valueChampion}
+                          />
+                        </label>
+                      </div>,
+                      <div
+                        css={baseErrorStyles}
+                        key="classChampInputError"
+                      >
+                        {valueChampionError}
+                      </div>,
+                    ]}
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Gold Medal $1,500-1,999"
+                      label="Gold Medal — $1,500-1,999"
                       value="Gold Medal"
                     />
+                    {value === 'Gold Medal' && [
+                      <div
+                        key="goldInput"
+                        css={css({
+                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                          marginLeft: 24,
+                        })}
+                      >
+                        <label css={labelStyles} htmlFor="valueGold">
+                          Donation Amount
+                          <input
+                            css={inputStyles}
+                            min="1500"
+                            max="1999"
+                            name="valueGold"
+                            onChange={this.handleUpdate}
+                            placeholder=""
+                            type="number"
+                            value={valueGold}
+                          />
+                        </label>
+                      </div>,
+                      <div
+                        css={baseErrorStyles}
+                        key="goldInputError"
+                      >
+                        {valueGoldError}
+                      </div>,
+                    ]}
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Silver Medal $1,000-1,499"
+                      label="Silver Medal — $1,000-1,499"
                       value="Silver Medal"
                     />
+                    {value === 'Silver Medal' && [
+                      <div
+                        key="silverInput"
+                        css={css({
+                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                          marginLeft: 24,
+                        })}
+                      >
+                        <label css={labelStyles} htmlFor="valueSilver">
+                          Donation Amount
+                          <input
+                            css={inputStyles}
+                            min="1000"
+                            max="1499"
+                            name="valueSilver"
+                            onChange={this.handleUpdate}
+                            placeholder=""
+                            type="number"
+                            value={valueSilver}
+                          />
+                        </label>
+                      </div>,
+                      <div
+                        css={baseErrorStyles}
+                        key="silverInputError"
+                      >
+                        {valueSilverError}
+                      </div>,
+                    ]}
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Bronze Medal $500-999"
+                      label="Bronze Medal — $500-999"
                       value="Bronze Medal"
                     />
+                    {value === 'Bronze Medal' && [
+                      <div
+                        key="bronzeInput"
+                        css={css({
+                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                          marginLeft: 24,
+                        })}
+                      >
+                        <label css={labelStyles} htmlFor="valueBronze">
+                          Donation Amount
+                          <input
+                            css={inputStyles}
+                            min="500"
+                            max="999"
+                            name="valueBronze"
+                            onChange={this.handleUpdate}
+                            placeholder=""
+                            type="number"
+                            value={valueBronze}
+                          />
+                        </label>
+                      </div>,
+                      <div
+                        css={baseErrorStyles}
+                        key="bronzeInputError"
+                      >
+                        {valueBronzeError}
+                      </div>,
+                    ]}
                     <PaypalButtonWrapper
                       amount={this.getCurrentAmount()}
                       onSuccessfulPayment={this.handleUpdateCompletedStep}
