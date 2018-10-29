@@ -1,13 +1,10 @@
 // External Dependencies
 import React from 'react';
-import format from 'date-fns/format';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
-
-// Local Variables
-const currentYear = format(new Date(), ['YYYY']);
+import { currentYearLong } from '../../utils/helpers';
 
 // Component Definition
 export default () => (
@@ -40,9 +37,8 @@ export default () => (
         maxWidth: '60%',
       }}
     >
-      &copy; 2016-
-      {currentYear} |
-      <a css={{ marginLeft: 5 }} href="http://www.texasmusicadministrators.com">
+      &copy; 2016-{currentYearLong} |
+      <a css={{ marginLeft: 5 }} href="https://www.texasmusicadmin.com/">
         Texas Music Administrators Conference
       </a>
     </div>

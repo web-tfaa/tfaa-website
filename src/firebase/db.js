@@ -1,9 +1,9 @@
-// eslint-disable implicit-arrow-linebreak
 import { db } from './firebase';
+import { currentSchoolYearShort } from '../utils/helpers';
 
 // Create/Update user entry in Firestore
 export const doCreateEntry = (form, collection, documentId, callback) =>
-  db.collection(`${collection}_18-19`)
+  db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .set(form)
     .then(() => {
@@ -14,8 +14,8 @@ export const doCreateEntry = (form, collection, documentId, callback) =>
       console.log(`Error adding registration for ${documentId} document`, err);
     });
 
-export const doUpdateEntry = (form, documentId) =>
-  db.collection('registration_18-19')
+export const doUpdateEntry = (form, collection, documentId) =>
+  db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
     .then(() => {
@@ -27,7 +27,7 @@ export const doUpdateEntry = (form, documentId) =>
 
 export const doGetUsers = (collection, userList, callback) => {
   const updatedUserList = userList;
-  return db.collection('registration_18-19')
+  return db.collection(`${collection}_${currentSchoolYearShort}`)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -41,9 +41,9 @@ export const doGetUsers = (collection, userList, callback) => {
 };
 
 // Invoice actions
-export const doGetInvoiceId = (callback) =>
+export const doGetInvoiceId = callback =>
   db.collection('Document_ID')
-    .doc('invoice_18-19')
+    .doc(`invoice_${currentSchoolYearShort}`)
     .get()
     .then((doc) => {
       if (!doc.exists) {
@@ -58,7 +58,7 @@ export const doGetInvoiceId = (callback) =>
     });
 
 export const doUpdateInvoiceId = () => {
-  const invoiceDocRef = db.collection('Document_ID').doc('invoice_18-19');
+  const invoiceDocRef = db.collection('Document_ID').doc(`invoice_${currentSchoolYearShort}`);
 
   return db.runTransaction(transaction =>
     transaction
@@ -86,7 +86,7 @@ export const doUpdateInvoiceId = () => {
 // Receipt actions
 export const doGetReceiptId = callback =>
   db.collection('Document_ID')
-    .doc('receipt_18-19')
+    .doc(`receipt_${currentSchoolYearShort}`)
     .get()
     .then((doc) => {
       if (!doc.exists) {
@@ -101,7 +101,7 @@ export const doGetReceiptId = callback =>
     });
 
 export const doUpdateReceiptId = () => {
-  const receiptDocRef = db.collection('Document_ID').doc('receipt_18-19');
+  const receiptDocRef = db.collection('Document_ID').doc(`receipt_${currentSchoolYearShort}`);
 
   return db.runTransaction(transaction =>
     transaction

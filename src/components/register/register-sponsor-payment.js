@@ -23,9 +23,13 @@ import {
   doUpdateInvoiceId,
   doUpdateReceiptId,
 } from '../../firebase/db';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const currentDate = format(new Date(), ['M/D/YYYY']);
+
+// This will tell the database action where to put the new record
+const collection = 'sponsor';
 
 // Component Definition
 class RegisterSponsorPayment extends Component {
@@ -76,7 +80,7 @@ class RegisterSponsorPayment extends Component {
 
     if ((prevState.invoiceId === 0 && invoiceId > 0)
       || (prevState.receiptId === 0 && receiptId > 0)) {
-      return doUpdateEntry(updatedForm, form.userId);
+      return doUpdateEntry(updatedForm, collection, form.userId);
     }
   }
 
@@ -130,7 +134,7 @@ class RegisterSponsorPayment extends Component {
     if (this.activeComponent) {
       this.setState({ value: event.target.value });
 
-      return doUpdateEntry(updatedForm, form.userId);
+      return doUpdateEntry(updatedForm, collection, form.userId);
     }
   };
 
@@ -163,7 +167,7 @@ class RegisterSponsorPayment extends Component {
         receiptId,
       };
 
-      doUpdateEntry(updatedForm, documentId);
+      doUpdateEntry(updatedForm, collection, documentId);
       onCompleteStep(2, updatedForm);
     }
   };
@@ -194,7 +198,7 @@ class RegisterSponsorPayment extends Component {
     };
 
     return Promise.all([
-      doUpdateEntry(updatedForm, documentId),
+      doUpdateEntry(updatedForm, collection, documentId),
       doUpdateInvoiceId(),
     ]);
   };
@@ -261,7 +265,9 @@ class RegisterSponsorPayment extends Component {
               <p>{isActive ? 'Active' : 'Retired'} Member - {isActive ? '$50.00' : '$30.00'}</p>
               <p>{form.FirstName} {form.LastName}, {form.District}</p>
 
-              <h3 css={{ marginTop: 48 }}>Thank you for joining TMAC for this school year!</h3>
+              <h3 css={{ marginTop: 48 }}>
+                Thank you for sponsoring TMAC for the {currentSchoolYearLong} school year!
+              </h3>
               <FormHr />
 
               <p>Please click below to print a copy of your receipt.</p>
@@ -305,19 +311,24 @@ class RegisterSponsorPayment extends Component {
                   >
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Active $50.00"
-                      value="active"
+                      label="Class Champion $2,000+"
+                      value="classChampion"
                     />
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Retired $30.00"
-                      value="retired"
+                      label="Gold Medal $1,500-1,999"
+                      value="gold"
                     />
-                    {/* <FormControlLabel
+                    <FormControlLabel
                       control={<Radio color="primary" />}
-                      label="Sponsor $0"
-                      value="sponsor"
-                    /> */}
+                      label="Silver Medal $1,000-1,499"
+                      value="silver"
+                    />
+                    <FormControlLabel
+                      control={<Radio color="primary" />}
+                      label="Bronze Medal $500-999"
+                      value="bronze"
+                    />
                     <PaypalButtonWrapper
                       amount={this.getCurrentAmount()}
                       onSuccessfulPayment={this.handleUpdateCompletedStep}
@@ -336,7 +347,10 @@ class RegisterSponsorPayment extends Component {
                     Follow these easy steps:
                     <ol>
                       <li>Click the button below to print an invoice.</li>
-                      <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
+                      <li>
+                        Send the invoice and payment directly to the TMAC{' '}
+                        Treasurer as listed on the invoice.
+                      </li>
                     </ol>
                   </div>
                   <ReactToPrint
@@ -358,8 +372,8 @@ class RegisterSponsorPayment extends Component {
                     />
                   </div>
                   <div css={{ marginTop: 24 }}>
-                    If your district requires the IRS W-9 Form for TMAC, then{' '}
-                    you can download or print a copy below.
+                    If your organization requires the IRS W-9 Form for TMAC, then{' '}
+                    download or print a copy below.
                   </div>
                   <div css={{ marginTop: 24 }}>
                     <a
