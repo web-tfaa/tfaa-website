@@ -11,6 +11,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 
+// Internal Dependencies
+import { currentSchoolYearLong } from '../../utils/helpers';
+
 // Local Variables
 const styles = theme => ({
   root: {
@@ -57,11 +60,26 @@ const InvoiceTable = (props) => {
     form,
     isActive,
     isInvoice,
+    sponsorLevel,
   } = props;
 
   // Work out the correct amount
   const isString = typeof amount === 'string';
   const updatedAmount = amount === 0 ? 50 : amount;
+
+  const sponsorInfo = (
+    <span>
+      TMAC {sponsorLevel} Sponsor donation amount{' '}
+      <br />for <strong>{form.SponsorOrganization}</strong>
+    </span>
+  );
+
+  const memberInfo = (
+    <span>
+      TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} registration fee{' '}
+      <br />for <strong>{form.FirstName} {form.LastName}</strong>
+    </span>
+  );
 
   return (
     <Paper className={classes.root}>
@@ -75,9 +93,9 @@ const InvoiceTable = (props) => {
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">
-              TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} registration fee for <strong>{form.FirstName} {form.LastName}</strong>
+              {sponsorLevel ? sponsorInfo : memberInfo}
               <br />
-              for the 2018-2019 school year.
+              for the {currentSchoolYearLong} school year.
             </CustomTableCell>
             <CustomTableCell numeric>
               {isString ? updatedAmount : `$${updatedAmount.toFixed(2).toLocaleString()}`}
@@ -97,7 +115,12 @@ InvoiceTable.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   form: PropTypes.shape({}).isRequired,
   isInvoice: PropTypes.bool.isRequired,
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool,
+  sponsorLevel: PropTypes.string,
+};
+InvoiceTable.defaultProps = {
+  isActive: false,
+  sponsorLevel: '',
 };
 
 export default withStyles(styles)(InvoiceTable);

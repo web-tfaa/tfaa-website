@@ -20,19 +20,22 @@ class Invoice extends Component {
     ]).isRequired,
     form: PropTypes.shape({}).isRequired,
     invoiceId: PropTypes.number,
-    isActive: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool,
     isInvoice: PropTypes.bool.isRequired,
     paymentDetails: PropTypes.shape({
       payerId: PropTypes.string,
       paymentId: PropTypes.string,
     }),
     receiptId: PropTypes.number,
+    sponsorLevel: PropTypes.string,
   };
 
   static defaultProps = {
     invoiceId: 1,
+    isActive: true,
     paymentDetails: {},
     receiptId: 1,
+    sponsorLevel: '',
   };
 
   render() {
@@ -44,6 +47,7 @@ class Invoice extends Component {
       isInvoice,
       paymentDetails,
       receiptId,
+      sponsorLevel,
     } = this.props;
 
     return (
@@ -58,7 +62,7 @@ class Invoice extends Component {
       >
         <header
           css={{
-            background: `linear-gradient(180deg, #B8CCE3, #EDF2F8)`,
+            background: 'linear-gradient(180deg, #B8CCE3, #EDF2F8)',
             height: 110,
             padding: 16,
           }}
@@ -70,25 +74,33 @@ class Invoice extends Component {
             style={{ position: 'absolute' }}
           />
           <h2 css={{ margin: 0, textAlign: 'right' }}>
-            {isInvoice ? 'INVOICE' : "RECEIPT"}
+            {isInvoice ? 'INVOICE' : 'RECEIPT'}
           </h2>
         </header>
         <FormHr red />
 
         <div css={{ fontSize: 14, margin: '0 32px' }}>
           <h3>Texas Music Administrators Conference</h3>
-          <p css={{ fontSize: 14 }}><em>&quot;...promoting and supporting music education&quot;</em></p>
+          <p css={{ fontSize: 14 }}>
+            <em>&quot;...promoting and supporting music education&quot;</em>
+          </p>
           <div>
             <strong>
               {isInvoice ? 'Invoice' : 'Receipt'}#:
             </strong>{' '}
-            201819-00{isInvoice ? invoiceId : receiptId}</div>
-          <div><strong>Date:</strong> {(isInvoice ? form.invoiceDate : form.receiptDate) || currentDate}</div>
+            201819-00{isInvoice ? invoiceId : receiptId}
+          </div>
+          <div>
+            <strong>Date:</strong>{' '}
+            {(isInvoice ? form.invoiceDate : form.receiptDate) || currentDate}
+          </div>
 
           {!isInvoice && paymentDetails.payerId && (
             <Fragment>
-              {paymentDetails.payerId && <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>}
-              {paymentDetails.paymentId && <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>}
+              {paymentDetails.payerId
+                && <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>}
+              {paymentDetails.paymentId
+                && <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>}
             </Fragment>
           )}
         </div>
@@ -99,7 +111,8 @@ class Invoice extends Component {
             fontSize: 14,
             justifyContent: 'space-around',
             margin: '0 32px',
-          }}>
+          }}
+          >
             <div>
               <h4>FROM</h4>
               <div css={{ marginBottom: 12 }}>
@@ -114,11 +127,11 @@ class Invoice extends Component {
               <div>Allen, TX 75002</div>
             </div>
 
-              <div>
-                <h4>TO</h4>
-                <div>{form.District}</div>
-                <div>Accounts Payable</div>
-              </div>
+            <div>
+              <h4>TO</h4>
+              <div>{form.District}</div>
+              <div>Accounts Payable</div>
+            </div>
           </div>
         )}
 
@@ -128,13 +141,21 @@ class Invoice extends Component {
           flexDirection: 'column',
           justifyContent: 'center',
           marginTop: 48,
-        }}>
-          <InvoiceTable amount={amount} form={form} isActive={isActive} isInvoice={isInvoice} />
+        }}
+        >
+          <InvoiceTable
+            amount={amount}
+            form={form}
+            isActive={isActive}
+            isInvoice={isInvoice}
+            sponsorLevel={sponsorLevel}
+          />
 
           <div css={{
             margin: '72px 32px',
             textAlign: 'center',
-           }}>
+          }}
+          >
             {isInvoice
               ? (
                 <span>
@@ -142,7 +163,7 @@ class Invoice extends Component {
                   <strong>Texas Music Administrators Conference (TMAC)</strong>
                 </span>
               ) : (
-                <strong>Thank you for joining TMAC for this school year!</strong>
+                <strong>Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for this school year!</strong>
               )}
           </div>
         </div>
@@ -151,7 +172,8 @@ class Invoice extends Component {
           fontSize: 12,
           margin: '12px 48px',
           textAlign: 'center',
-        }}>
+        }}
+        >
           The Texas Music Administrators Conference is an organization supporting
           music educators, music administrators, and Texas schools in the quest to deliver music
           and arts education to all students.

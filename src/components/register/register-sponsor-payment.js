@@ -35,6 +35,7 @@ const collection = 'sponsor';
 class RegisterSponsorPayment extends Component {
   static propTypes = {
     form: PropTypes.shape({}).isRequired,
+    initialLevel: PropTypes.string.isRequired,
     onCompleteStep: PropTypes.func.isRequired,
   };
 
@@ -46,7 +47,7 @@ class RegisterSponsorPayment extends Component {
       invoiceId: 0,
       paymentDetails: {},
       receiptId: 0,
-      value: 'active',
+      value: props.initialLevel,
     };
 
     this.activeComponent = true;
@@ -69,12 +70,10 @@ class RegisterSponsorPayment extends Component {
       value,
     } = this.state;
 
-    const isActive = value === 'active';
-
     const updatedForm = {
       invoiceDate: currentDate,
       invoiceId,
-      MemberType: isActive ? 'Active' : 'Retired',
+      SponsorLevel: value,
       receiptId,
     };
 
@@ -122,12 +121,10 @@ class RegisterSponsorPayment extends Component {
       receiptId,
     } = this.state;
 
-    const isActive = event.target.value === 'active';
-
     const updatedForm = {
       invoiceDate: currentDate,
       invoiceId,
-      MemberType: isActive ? 'Active' : 'Retired',
+      SponsorLevel: event.target.value,
       receiptId,
     };
 
@@ -149,10 +146,8 @@ class RegisterSponsorPayment extends Component {
         invoiceId,
         paymentDetails,
         receiptId,
-        value,
+        // value,
       } = this.state;
-
-      const isActive = value === 'active';
 
       const documentId = form.userId;
 
@@ -160,10 +155,9 @@ class RegisterSponsorPayment extends Component {
         PaypalPayerID: paymentDetails.payerId,
         PaypalPaymentID: paymentDetails.paymentId,
         PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
-        AmountPaid: isActive ? '$50.00' : '$30.00',
+        AmountDonated: '1000',
         invoiceDate: currentDate,
         invoiceId,
-        MemberType: isActive ? 'Active' : 'Retired',
         receiptId,
       };
 
@@ -182,10 +176,8 @@ class RegisterSponsorPayment extends Component {
       invoiceId,
       paymentDetails,
       receiptId,
-      value,
+      // value,
     } = this.state;
-
-    const isActive = value === 'active';
 
     const documentId = form.userId;
 
@@ -193,7 +185,6 @@ class RegisterSponsorPayment extends Component {
       ...paymentDetails,
       invoiceDate: currentDate,
       invoiceId,
-      MemberType: isActive ? 'Active' : 'Retired',
       receiptId,
     };
 
@@ -252,8 +243,6 @@ class RegisterSponsorPayment extends Component {
       value,
     } = this.state;
 
-    const isActive = value === 'active';
-
     return (
       <section>
         <h2>3. Choose Sponsorship level and Make payment</h2>
@@ -262,7 +251,7 @@ class RegisterSponsorPayment extends Component {
           ? (
             <Fragment>
               <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
-              <p>{isActive ? 'Active' : 'Retired'} Member - {isActive ? '$50.00' : '$30.00'}</p>
+              <p>{value} Sponsor - $1000</p>
               <p>{form.FirstName} {form.LastName}, {form.District}</p>
 
               <h3 css={{ marginTop: 48 }}>
@@ -280,11 +269,11 @@ class RegisterSponsorPayment extends Component {
                 <Invoice
                   amount={this.getCurrentAmount()}
                   form={form}
-                  isActive={value === 'active'}
                   isInvoice={false}
                   paymentDetails={paymentDetails}
                   receiptId={receiptId}
                   ref={(el) => { this.printReceipt = el; }}
+                  sponsorLevel={value}
                 />
               </div>
             </Fragment>
@@ -312,22 +301,22 @@ class RegisterSponsorPayment extends Component {
                     <FormControlLabel
                       control={<Radio color="primary" />}
                       label="Class Champion $2,000+"
-                      value="classChampion"
+                      value="Class Champion"
                     />
                     <FormControlLabel
                       control={<Radio color="primary" />}
                       label="Gold Medal $1,500-1,999"
-                      value="gold"
+                      value="Gold Medal"
                     />
                     <FormControlLabel
                       control={<Radio color="primary" />}
                       label="Silver Medal $1,000-1,499"
-                      value="silver"
+                      value="Silver Medal"
                     />
                     <FormControlLabel
                       control={<Radio color="primary" />}
                       label="Bronze Medal $500-999"
-                      value="bronze"
+                      value="Bronze Medal"
                     />
                     <PaypalButtonWrapper
                       amount={this.getCurrentAmount()}
@@ -366,9 +355,9 @@ class RegisterSponsorPayment extends Component {
                       amount={this.getCurrentAmount()}
                       form={form}
                       invoiceId={invoiceId}
-                      isActive={value === 'active'}
                       isInvoice
                       ref={(el) => { this.printInvoice = el; }}
+                      sponsorLevel={value}
                     />
                   </div>
                   <div css={{ marginTop: 24 }}>
