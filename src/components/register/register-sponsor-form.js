@@ -62,7 +62,7 @@ const baseErrorStyles = {
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
 const INITIAL_STATE = {
-  AmountPaid: 0,
+  AmountDonated: 0,
   City: '',
   CityError: '',
   ContactAddress1: '',

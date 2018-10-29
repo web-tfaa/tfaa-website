@@ -78,19 +78,19 @@ class RegisterSponsorPayment extends Component {
 
     this.state = {
       // This is used to send the final donation amount to the db
-      donationAmount: 0,
+      donationAmount: this.getInitialDonationAmount(props.initialLevel),
       hasCompletedPayment: false,
       invoiceId: 0,
       paymentDetails: {},
       receiptId: 0,
       value: props.initialLevel,
-      valueBronze: 500.00,
+      valueBronze: 500,
       valueBronzeError: '',
-      valueChampion: 2000.00,
+      valueChampion: 2000,
       valueChampionError: '',
-      valueGold: 1500.00,
+      valueGold: 1500,
       valueGoldError: '',
-      valueSilver: 1000.00,
+      valueSilver: 1000,
       valueSilverError: '',
     };
 
@@ -109,12 +109,14 @@ class RegisterSponsorPayment extends Component {
     } = this.props;
 
     const {
+      donationAmount,
       invoiceId,
       receiptId,
       value,
     } = this.state;
 
     const updatedForm = {
+      AmountDonated: donationAmount,
       invoiceDate: currentDate,
       invoiceId,
       SponsorLevel: value,
@@ -140,20 +142,40 @@ class RegisterSponsorPayment extends Component {
       ]);
   }
 
-  getCurrentAmount = () => {
+  getInitialDonationAmount = (level) => {
+    switch (level) {
+      case 'Class Champion':
+        return 2000;
+      case 'Gold Medal':
+        return 1500;
+      case 'Silver Medal':
+        return 1000;
+      case 'Bronze Medal':
+        return 500;
+      default: break;
+    }
+  };
+
+  getDonationAmount = (level) => {
     const {
-      value,
+      valueBronze,
+      valueChampion,
+      valueGold,
+      valueSilver,
     } = this.state;
 
-    switch (value) {
-      case 'active':
-        return 50;
-      case 'retired':
-        return 30;
-      default:
-        return 50;
+    switch (level) {
+      case 'Class Champion':
+        return valueChampion || 2000;
+      case 'Gold Medal':
+        return valueGold || 1500;
+      case 'Silver Medal':
+        return valueSilver || 1000;
+      case 'Bronze Medal':
+        return valueBronze || 500;
+      default: break;
     }
-  }
+  };
 
   handleChangeRadioSelection = (event) => {
     const {
@@ -166,6 +188,7 @@ class RegisterSponsorPayment extends Component {
     } = this.state;
 
     const updatedForm = {
+      AmountDonated: this.getDonationAmount(event.target.value),
       invoiceDate: currentDate,
       invoiceId,
       SponsorLevel: event.target.value,
@@ -173,7 +196,10 @@ class RegisterSponsorPayment extends Component {
     };
 
     if (this.activeComponent) {
-      this.setState({ value: event.target.value });
+      this.setState({
+        donationAmount: this.getDonationAmount(event.target.value),
+        value: event.target.value,
+      });
 
       return doUpdateEntry(updatedForm, collection, form.userId);
     }
@@ -282,8 +308,6 @@ class RegisterSponsorPayment extends Component {
         value,
       } = event.target;
 
-      console.log('handleUpdate', name, value);
-
       this.setState({
         // We check for empty value and cast it to a string to avoid setting to NaN
         [name]: !value ? '' : parseInt(value, 10),
@@ -293,8 +317,12 @@ class RegisterSponsorPayment extends Component {
 
   handleUpdateInputError = (name, value) => {
     if (this.activeComponent) {
+      const {
+        form,
+      } = this.props;
+
       // These values are the PREVIOUS state
-      // We have to compare against the incoming "value"
+      // We have to compare against the incoming "value", too
       const {
         valueBronze,
         valueChampion,
@@ -304,24 +332,17 @@ class RegisterSponsorPayment extends Component {
 
       const numberValue = !value ? 0 : parseInt(value, 10);
 
-      // console.log('name.value', valueBronze, name, value);
-      console.log({
-        name,
-        value,
-        numberValue,
-        valueBronze,
-        valueChampion,
-        valueGold,
-        valueSilver,
-      });
-
       switch (name) {
         case 'valueChampion':
           if (valueChampion && value) {
             if (numberValue < 2000) {
               this.setState({ valueChampionError: 'Class Champion Sponsorship is $2,000+' });
             } else if (numberValue >= 2000) {
-              this.setState({ valueChampionError: '' });
+              this.setState({
+                donationAmount: numberValue,
+                valueChampionError: '',
+              });
+              return doUpdateEntry({ AmountDonated: numberValue }, collection, form.userId);
             }
           } else if (!valueChampion && !value) {
             this.setState({ valueChampionError: 'Donation amount is required' });
@@ -332,28 +353,44 @@ class RegisterSponsorPayment extends Component {
             if ((numberValue < 1500 || numberValue > 1999)) {
               this.setState({ valueGoldError: 'Gold Medal Sponsorship is $1,500-1,999' });
             } else if (numberValue >= 1500 || numberValue <= 1999) {
-              this.setState({ valueGoldError: '' });
+              this.setState({
+                donationAmount: numberValue,
+                valueGoldError: '',
+              });
+              return doUpdateEntry({ AmountDonated: numberValue }, collection, form.userId);
             }
           } else if (!valueGold && !value) {
             this.setState({ valueGoldError: 'Donation amount is required' });
           }
           break;
         case 'valueSilver':
-          if (!valueSilver && value) {
-            this.setState({ valueSilverError: '' });
-          } else if (valueSilver && !value) {
+          if (valueSilver && value) {
+            if ((numberValue < 1000 || numberValue > 1499)) {
+              this.setState({ valueSilverError: 'Silver Medal Sponsorship is $1,000-1,499' });
+            } else if (numberValue >= 1000 || numberValue <= 1499) {
+              this.setState({
+                donationAmount: numberValue,
+                valueSilverError: '',
+              });
+              return doUpdateEntry({ AmountDonated: numberValue }, collection, form.userId);
+            }
+          } else if (!valueSilver && !value) {
             this.setState({ valueSilverError: 'Donation amount is required' });
-          } else if (valueSilver && value && (numberValue < 1000 || numberValue > 1499)) {
-            this.setState({ valueSilverError: 'Silver Medal Sponsorship is $1,000-1,499' });
           }
           break;
         case 'valueBronze':
-          if (!valueBronze && value) {
-            this.setState({ valueBronzeError: '' });
-          } else if (valueBronze && !value) {
+          if (valueBronze && value) {
+            if ((numberValue < 500 || numberValue > 999)) {
+              this.setState({ valueBronzeError: 'Bronze Medal Sponsorship is $500-999' });
+            } else if (numberValue >= 500 || numberValue <= 999) {
+              this.setState({
+                donationAmount: numberValue,
+                valueBronzeError: '',
+              });
+              return doUpdateEntry({ AmountDonated: numberValue }, collection, form.userId);
+            }
+          } else if (!valueBronze && !value) {
             this.setState({ valueBronzeError: 'Donation amount is required' });
-          } else if (valueBronze && value && (numberValue < 500 || numberValue > 999)) {
-            this.setState({ valueBronzeError: 'Bronze Medal Sponsorship is $500-999' });
           }
           break;
         default:
@@ -368,6 +405,7 @@ class RegisterSponsorPayment extends Component {
     } = this.props;
 
     const {
+      donationAmount,
       hasCompletedPayment,
       invoiceId,
       paymentDetails,
@@ -383,7 +421,7 @@ class RegisterSponsorPayment extends Component {
       valueSilverError,
     } = this.state;
 
-    console.log('STATE', this.state);
+    console.log('hello friend', donationAmount);
 
     return (
       <section>
@@ -394,7 +432,7 @@ class RegisterSponsorPayment extends Component {
             <Fragment>
               <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
               <p>{value} Sponsor - $1000</p>
-              <p>{form.FirstName} {form.LastName}, {form.District}</p>
+              <p>{form.OrganizationContactName}, {form.SponsorOrganization}</p>
 
               <h3 css={{ marginTop: 48 }}>
                 Thank you for sponsoring TMAC for the {currentSchoolYearLong} school year!
@@ -409,7 +447,7 @@ class RegisterSponsorPayment extends Component {
               />
               <div css={{ display: 'none' }}>
                 <Invoice
-                  amount={this.getCurrentAmount()}
+                  amount={donationAmount}
                   form={form}
                   isInvoice={false}
                   paymentDetails={paymentDetails}
@@ -576,7 +614,7 @@ class RegisterSponsorPayment extends Component {
                       </div>,
                     ]}
                     <PaypalButtonWrapper
-                      amount={this.getCurrentAmount()}
+                      amount={donationAmount}
                       onSuccessfulPayment={this.handleUpdateCompletedStep}
                     />
                   </RadioGroup>
@@ -609,7 +647,7 @@ class RegisterSponsorPayment extends Component {
                   />
                   <div css={{ display: 'none' }}>
                     <Invoice
-                      amount={this.getCurrentAmount()}
+                      amount={donationAmount}
                       form={form}
                       invoiceId={invoiceId}
                       isInvoice
