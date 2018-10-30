@@ -53,32 +53,33 @@ class MemberListContent extends Component {
       <div
         css={{
           paddingLeft: 0,
-          width: `0 auto`,
+          width: '0 auto',
           [presets.Tablet]: {
             paddingLeft: 0,
           },
-        }}>
+        }}
+      >
         <Status />
-          <Helmet>
-            <title>TMAC | Member List</title>
-          </Helmet>
-          <div css={{ paddingLeft: 24 }}>
-            <h2>Member list</h2>
-            <MemberListTable data={Object.values(userData)} />
-          </div>
+        <Helmet>
+          <title>TMAC | Member List</title>
+        </Helmet>
+        <div css={{ paddingLeft: 24 }}>
+          <h2>Member list</h2>
+          <MemberListTable data={Object.values(userData)} />
+        </div>
       </div>
     );
   }
 }
 
-const MemberList = (props) => (
+const MemberList = props => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <MemberListWithContext {...props} />
   </Layout>
 );
 
-const MemberListWithContext = (props) => (
+const MemberListWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <MemberListContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>

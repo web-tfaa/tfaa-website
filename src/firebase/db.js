@@ -25,6 +25,7 @@ export const doUpdateEntry = (form, collection, documentId) =>
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
 
+// Retrieves all registered members/sponsors for the current school year
 export const doGetUsers = (collection, userList, callback) => {
   const updatedUserList = userList;
   return db.collection(`${collection}_${currentSchoolYearShort}`)

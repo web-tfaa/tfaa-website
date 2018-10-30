@@ -83,6 +83,8 @@ const INITIAL_STATE = {
   isAuthenticated: false,
   OrganizationContactName: '',
   OrganizationContactNameError: '',
+  OrganizationWebsiteAddress: '',
+  OrganizationWebsiteAddressError: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
   PaypalPaymentID: '',
@@ -257,6 +259,7 @@ class RegisterSponsorForm extends Component {
         ContactPhone,
         ImageUrl,
         OrganizationContactName,
+        OrganizationWebsiteAddress,
         SponsorOrganization,
         State,
         Title,
@@ -267,7 +270,7 @@ class RegisterSponsorForm extends Component {
           if (!SponsorOrganization && value) {
             this.setState({ SponsorOrganizationError: '' });
           } else if (SponsorOrganization && !value) {
-            this.setState({ SponsorOrganizationError: 'First Name is required' });
+            this.setState({ SponsorOrganizationError: 'Organization Name is required' });
           }
           break;
         case 'ImageUrl':
@@ -282,6 +285,13 @@ class RegisterSponsorForm extends Component {
             this.setState({ OrganizationContactNameError: '' });
           } else if (OrganizationContactName && !value) {
             this.setState({ OrganizationContactNameError: 'Contact Name is required' });
+          }
+          break;
+        case 'OrganizationWebsiteAddress':
+          if (!OrganizationWebsiteAddress && value) {
+            this.setState({ OrganizationWebsiteAddressError: '' });
+          } else if (OrganizationWebsiteAddress && !value) {
+            this.setState({ OrganizationWebsiteAddressError: 'Website Address is required' });
           }
           break;
         case 'Title':
@@ -357,6 +367,8 @@ class RegisterSponsorForm extends Component {
       isAuthenticated,
       OrganizationContactName,
       OrganizationContactNameError,
+      OrganizationWebsiteAddress,
+      OrganizationWebsiteAddressError,
       radioValueFallRetreat,
       radioValueSpringRoundTable,
       SponsorOrganization,
@@ -424,6 +436,21 @@ class RegisterSponsorForm extends Component {
                 />
               </label>
               <div css={baseErrorStyles}>{SponsorOrganizationError}</div>
+
+              {/* Organization Website Address */}
+              <label css={labelStyles} htmlFor="OrganizationWebsiteAddress">
+                Organization&apos;s Website Address (provide the URL)
+                <input
+                  css={inputStyles}
+                  name="OrganizationWebsiteAddress"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. https://www.tmea.org"
+                  required
+                  type="text"
+                  value={OrganizationWebsiteAddress}
+                />
+              </label>
+              <div css={baseErrorStyles}>{OrganizationWebsiteAddressError}</div>
 
               {/* Image Url */}
               <label css={labelStyles} htmlFor="ImageUrl">

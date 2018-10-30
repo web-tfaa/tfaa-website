@@ -11,6 +11,12 @@ const sponsorInfoStyles = {
   flexDirection: 'column',
 };
 
+// Let's add some animation to the titles of the sponsor levels!
+const textShadowDropBottom = css.keyframes({
+  '0%': { textShadow: '0 0 0 rgba(0, 0, 0, 0)' },
+  '100%': { textShadow: '0 3px 3px rgba(0, 0, 0, 0.2)' },
+});
+
 // Component Definition
 class SponsorCard extends Component {
   static propTypes = {
@@ -52,12 +58,6 @@ class SponsorCard extends Component {
       ? `${min.toLocaleString()}-${max.toLocaleString()}`
       : `${max.toLocaleString()}+`;
 
-    // Let's add some animation to the titles of the sponsor levels!
-    const textShadowDropBottom = css.keyframes({
-      '0%': { textShadow: '0 0 0 rgba(0, 0, 0, 0)' },
-      '100%': { textShadow: '0 3px 3px rgba(0, 0, 0, 0.2)' },
-    });
-
     return (
       <div
         css={{
@@ -93,7 +93,7 @@ class SponsorCard extends Component {
           <h4 css={{ color: '#32456B', marginTop: 12 }}>Sponsorship receives:</h4>
           <ul css={{ maxWidth: '60%', textAlign: 'justify' }}>
             {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
-            <li>Company Logo in Programs for TMAC November Conference and TMEA Meeting</li>
+            <li>Company Logo in programs for TMAC November Conference and TMEA Meeting</li>
             <li>Company Logo on TMAC website</li>
           </ul>
           <div css={{ maxWidth: '75%', marginBottom: 16 }}>

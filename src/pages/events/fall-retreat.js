@@ -41,11 +41,13 @@ const FallRetreat = ({ location }) => (
         </p>
         <p css={indentStyles}>Preconference Tea and /Golf Tournament (Schedule below)</p>
         <h5 css={indentStyles}>Alternate Tea details</h5>
-        <p css={scheduleStyles}>To register for "Alternate Tea" fill out{' '}
+        <p css={scheduleStyles}>To register for &quot;Alternate Tea&quot; fill out{' '}
           <a
             href="#"
             onClick={() => window.open('https://goo.gl/forms/oLVkhwuV0lhs8Okc2', 'Alternate Tea Google Form', 'width=800,height=800,top=120,left=120')}
-          >this form.</a>
+          >
+            this form.
+          </a>
         </p>
         {/* <div >
           Open Form
@@ -97,7 +99,8 @@ const FallRetreat = ({ location }) => (
             <a
               href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"
               rel="noopener noreferrer"
-              target="_blank">
+              target="_blank"
+            >
               Austin Airport Marriott South
             </a>
           </p>
@@ -105,7 +108,8 @@ const FallRetreat = ({ location }) => (
             <a
               href="https://www.google.com/maps/place/4415+S+IH+35+Frontage+Rd,+Austin,+TX+78744/@30.2109504,-97.755463,17z/data=!3m1!4b1!4m5!3m4!1s0x8644b49cb7935da1:0x5a86d0320722c79b!8m2!3d30.2109504!4d-97.7532743"
               rel="noopener noreferrer"
-              target="_blank">
+              target="_blank"
+            >
               4415 South IH-35
               <br />
               Austin, Texas 78744
@@ -116,23 +120,25 @@ const FallRetreat = ({ location }) => (
             <br />
             Fax: (512) 441-7899
           </p>
-          <p>
+          <p css={{ fontSize: 24, color: 'darkred' }}>
             <a
               href="https://book.passkey.com/event/49544338/owner/44666/home"
               rel="noopener noreferrer"
-              target="_blank">
-              Hotel Info
+              target="_blank"
+            >
+              For Hotel reservations click here
             </a>
           </p>
         </div>
       </section>
       <div
         css={{
-          display: `block`,
+          display: 'block',
           [presets.Tablet]: {
-            display: `none`,
+            display: 'none',
           },
-        }}>
+        }}
+      >
         <hr
           css={{
             border: 0,
