@@ -36,15 +36,30 @@ class SponsorCard extends Component {
     sponsorData.length > 0 && sponsorData.map(sponsor => (
       <div
         key={sponsor.SponsorOrganization}
-        css={{ fontSize: 19, marginBottom: 6 }}
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          fontSize: '1.25rem',
+          height: 128,
+          justifyContent: 'center',
+          marginBottom: 6,
+        }}
       >
         <a
+          css={{ marginBottom: 16 }}
           href={sponsor.OrganizationWebsiteAddress}
           target="_blank"
           rel="noopener noreferrer"
         >
           {sponsor.SponsorOrganization}
         </a>
+        <img
+          alt={`Logo for ${sponsor.SponsorOrganization}`}
+          css={{ marginBottom: 0 }}
+          height="64px"
+          src={sponsor.ImageUrl}
+        />
       </div>
     ));
 
@@ -86,6 +101,8 @@ class SponsorCard extends Component {
         >
           (${donationAmount} donation)
         </h4>
+
+        <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
 
         {this.renderSponsors(sponsorData)}
 
