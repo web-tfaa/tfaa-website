@@ -54,7 +54,7 @@ const About = ({ data, location }) => (
           <li>Summer Convention</li>
           <li>Fall Retreat</li>
           <li>Fall Golf Tournament</li>
-          <li>Winter Meetings</li>
+          <li>TMEA Round Table</li>
           <li>Job Fair / Job Fair Rules</li>
         </ul>
       </section>
@@ -83,11 +83,12 @@ const About = ({ data, location }) => (
       {/* Mobile sidebar */}
       <div
         css={{
-          display: `block`,
+          display: 'block',
           [presets.Tablet]: {
-            display: `none`,
+            display: 'none',
           },
-        }}>
+        }}
+      >
         <hr
           css={{
             border: 0,

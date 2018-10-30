@@ -46,7 +46,7 @@ const Events = ({ data, location }) => (
         </p>
       </section>
       <section>
-        <h4>Winter Round Table</h4>
+        <h4>TMEA Round Table</h4>
         <p>
           Round Table Meeting at the{' '}
           <a href="https://www.tmea.org/">Texas Music Educators Association</a>{' '}
@@ -62,11 +62,12 @@ const Events = ({ data, location }) => (
       </section>
       <div
         css={{
-          display: `block`,
+          display: 'block',
           [presets.Tablet]: {
-            display: `none`,
+            display: 'none',
           },
-        }}>
+        }}
+      >
         <hr
           css={{
             border: 0,

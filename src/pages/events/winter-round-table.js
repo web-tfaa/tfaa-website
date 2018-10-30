@@ -18,7 +18,7 @@ const indentStyles = {
 };
 
 // Component Definition
-const WinterRoundTable = ({ location }) => (
+const TmeaRoundTable = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | TMEA Round Table</title>
@@ -86,11 +86,11 @@ const WinterRoundTable = ({ location }) => (
   </Layout>
 );
 
-WinterRoundTable.propTypes = {
+TmeaRoundTable.propTypes = {
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]).isRequired,
 };
 
-export default WinterRoundTable;
+export default TmeaRoundTable;
