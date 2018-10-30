@@ -23,28 +23,30 @@ class SponsorCard extends Component {
     max: PropTypes.number,
     min: PropTypes.number,
     sponsorClass: PropTypes.string.isRequired,
-    sponsorData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    sponsorData: PropTypes.arrayOf(PropTypes.shape({})),
   };
 
   static defaultProps = {
     max: null,
     min: null,
+    sponsorData: [],
   };
 
-  renderSponsors = sponsorData => sponsorData.map(sponsor => (
-    <div
-      key={sponsor.name}
-      css={{ fontSize: 19, marginBottom: 6 }}
-    >
-      <a
-        href={sponsor.link}
-        target="_blank"
-        rel="noopener noreferrer"
+  renderSponsors = sponsorData =>
+    sponsorData.length > 0 && sponsorData.map(sponsor => (
+      <div
+        key={sponsor.SponsorOrganization}
+        css={{ fontSize: 19, marginBottom: 6 }}
       >
-        {sponsor.name}
-      </a>
-    </div>
-  ));
+        <a
+          href={sponsor.OrganizationWebsiteAddress}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {sponsor.SponsorOrganization}
+        </a>
+      </div>
+    ));
 
   render() {
     const {

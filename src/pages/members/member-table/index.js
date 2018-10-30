@@ -107,7 +107,7 @@ class MemberListTable extends Component {
     this.setState({ page });
   };
 
-  handleChangeRowsPerPage = event => {
+  handleChangeRowsPerPage = (event) => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
@@ -183,7 +183,7 @@ class MemberListTable extends Component {
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
-       />
+        />
       </Paper>
     );
   }
