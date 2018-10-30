@@ -21,7 +21,7 @@ const indentStyles = {
 const WinterRoundTable = ({ location }) => (
   <Layout location={location}>
     <Helmet>
-      <title>TMAC | Winter Round Table</title>
+      <title>TMAC | TMEA Round Table</title>
     </Helmet>
     <Container>
       <h1>2019 Winter Convention Round Table</h1>
@@ -67,11 +67,12 @@ const WinterRoundTable = ({ location }) => (
       </section>
       <div
         css={{
-          display: `block`,
+          display: 'block',
           [presets.Tablet]: {
-            display: `none`,
+            display: 'none',
           },
-        }}>
+        }}
+      >
         <hr
           css={{
             border: 0,

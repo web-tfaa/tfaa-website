@@ -96,7 +96,14 @@ class SponsorCard extends Component {
             <li>Company Logo in TMAC November Conference and February Meeting Program</li>
             <li>Company Logo on TMAC website</li>
           </ul>
-            Deadline to register and pay is Nov 1
+          <div css={{ maxWidth: '75%', marginBottom: 16 }}>
+            Deadline for recogntion at{' '}
+            <span css={{ fontWeight: 600 }}>Fall Conference</span> is Wednesday, November 7th.
+          </div>
+          <div css={{ maxWidth: '75%' }}>{' '}
+            Sponsors registering after November 7th will be recogized at the{' '}
+            <span css={{ fontWeight: 600 }}>TMEA Round Table</span>.
+          </div>
           <Link
             css={{
               fontSize: 20,
