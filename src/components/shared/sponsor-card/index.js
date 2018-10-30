@@ -102,7 +102,7 @@ class SponsorCard extends Component {
           (${donationAmount} donation)
         </h4>
 
-        <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+        {sponsorData.length > 0 && <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />}
 
         {this.renderSponsors(sponsorData)}
 
