@@ -92,8 +92,8 @@ class SponsorCard extends Component {
         <div css={sponsorInfoStyles}>
           <h4 css={{ color: '#32456B', marginTop: 12 }}>Sponsorship receives:</h4>
           <ul css={{ maxWidth: '60%', textAlign: 'justify' }}>
-            {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either Nov Conference or TMEA Meeting</li>}
-            <li>Company Logo in TMAC November Conference and February Meeting Program</li>
+            {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
+            <li>Company Logo in Programs for TMAC November Conference and TMEA Meeting</li>
             <li>Company Logo on TMAC website</li>
           </ul>
           <div css={{ maxWidth: '75%', marginBottom: 16 }}>

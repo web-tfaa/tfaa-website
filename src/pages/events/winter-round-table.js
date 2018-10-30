@@ -24,7 +24,7 @@ const WinterRoundTable = ({ location }) => (
       <title>TMAC | TMEA Round Table</title>
     </Helmet>
     <Container>
-      <h1>2019 Winter Convention Round Table</h1>
+      <h1>2019 TMEA Convention Round Table</h1>
       <section>
         <h4>When</h4>
         <p css={indentStyles}>Wednesday, February 13, 2019</p>
