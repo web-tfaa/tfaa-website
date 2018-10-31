@@ -274,8 +274,14 @@ class RegisterSponsorForm extends Component {
           }
           break;
         case 'ImageUrl':
-          if (!ImageUrl && value) {
-            this.setState({ ImageUrlError: '' });
+          if (ImageUrl && value) {
+            if (value.startsWith('http')) {
+              this.setState({ ImageUrlError: '' });
+            }
+          } else if (!ImageUrl && value) {
+            if (!value.startsWith('http')) {
+              this.setState({ ImageUrlError: 'Image URL should begin with "http"' });
+            }
           } else if (ImageUrl && !value) {
             this.setState({ ImageUrlError: 'Image URL is required' });
           }
@@ -288,8 +294,14 @@ class RegisterSponsorForm extends Component {
           }
           break;
         case 'OrganizationWebsiteAddress':
-          if (!OrganizationWebsiteAddress && value) {
-            this.setState({ OrganizationWebsiteAddressError: '' });
+          if (OrganizationWebsiteAddress && value) {
+            if (value.startsWith('http')) {
+              this.setState({ OrganizationWebsiteAddressError: '' });
+            }
+          } else if (!OrganizationWebsiteAddress && value) {
+            if (!value.startsWith('http')) {
+              this.setState({ OrganizationWebsiteAddressError: 'Website address should begin with "http"' });
+            }
           } else if (OrganizationWebsiteAddress && !value) {
             this.setState({ OrganizationWebsiteAddressError: 'Website Address is required' });
           }
