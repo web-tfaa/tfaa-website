@@ -41,25 +41,27 @@ class SponsorCard extends Component {
           display: 'flex',
           flexDirection: 'column',
           fontSize: '1.25rem',
-          height: 128,
+          height: sponsor.ImageUrl.startsWith('http') ? 128 : 48,
           justifyContent: 'center',
           marginBottom: 6,
         }}
       >
         <a
           css={{ marginBottom: 16 }}
-          href={sponsor.OrganizationWebsiteAddress}
+          href={sponsor.OrganizationWebsiteAddress.startsWith('http') ? sponsor.OrganizationWebsiteAddress : `http://${sponsor.OrganizationWebsiteAddress}`}
           target="_blank"
           rel="noopener noreferrer"
         >
           {sponsor.SponsorOrganization}
         </a>
-        <img
-          alt={`Logo for ${sponsor.SponsorOrganization}`}
-          css={{ marginBottom: 0 }}
-          height="64px"
-          src={sponsor.ImageUrl}
-        />
+        {sponsor.ImageUrl.startsWith('http') && (
+          <img
+            alt={`Logo for ${sponsor.SponsorOrganization}`}
+            css={{ marginBottom: 0 }}
+            height="64px"
+            src={sponsor.ImageUrl}
+          />
+        )}
       </div>
     ));
 
