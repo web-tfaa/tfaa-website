@@ -91,7 +91,7 @@ const Officers = ({ location }) => (
           <Card>
             <Avatar
               alt="vice-president picture"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131021/Lester.jpg"
+              src="https://res.cloudinary.com/drumsensei/image/upload/v1542201956/jay-lester-avatar_soe2zw.jpg"
             />
             <CardHeadline>Vice-President</CardHeadline>
             <FuturaParagraph>

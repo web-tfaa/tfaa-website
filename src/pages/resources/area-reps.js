@@ -77,7 +77,7 @@ const AreaReps = ({ location }) => (
               alt="DFW area representative"
               src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Turner.jpg"
             />
-            <CardHeadline>DFW Area</CardHeadline>
+            <CardHeadline>North Texas</CardHeadline>
             <FuturaParagraph>
               <a href="mailto:jeffrey.turner@allenisd.org">Jeff Turner</a>
             </FuturaParagraph>
@@ -86,24 +86,24 @@ const AreaReps = ({ location }) => (
           <Card>
             <Avatar
               alt="Central TX area representative"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523154886/lisa-roebuck.jpg"
+              src="https://res.cloudinary.com/drumsensei/image/upload/v1542202104/peter-warshaw-avatar_g0haep.jpg"
             />
             <CardHeadline>Central Texas</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:lisa_roebuck@roundrockisd.org">Lisa Roebuck</a>
+              <a href="mailto:Peter.Warshaw@leanderisd.org">Peter Warshaw</a>
             </FuturaParagraph>
-            <FuturaParagraph>Round Rock ISD</FuturaParagraph>
+            <FuturaParagraph>Leander ISD</FuturaParagraph>
           </Card>
           <Card>
             <Avatar
               alt="South TX area representative"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523158252/manny-gamez.jpg"
+              src="https://res.cloudinary.com/drumsensei/image/upload/v1542202286/manuel-rodriguez-avatar_tt5pr1.jpg"
             />
             <CardHeadline>South Texas</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:manuel.gamez@pfisd.net">Manny Gamez</a>
+              <a href="mailto:">Manuel Rodriguez</a>
             </FuturaParagraph>
-            <FuturaParagraph>Mission CISD</FuturaParagraph>
+            <FuturaParagraph>Valley View ISD</FuturaParagraph>
           </Card>
           <Card>
             <Avatar
@@ -119,15 +119,15 @@ const AreaReps = ({ location }) => (
           <Card>
             <Avatar
               alt="West TX area representative"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523157441/christopher-anderson.jpg"
+              src="https://res.cloudinary.com/drumsensei/image/upload/v1542201956/jay-lester-avatar_soe2zw.jpg"
             />
             <CardHeadline>West Texas</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:canderson60@lubbockisd.org">
-                Christopher Anderson
+              <a href="mailto:jon.lester@abileneisd.org">
+                Jay Lester
               </a>
             </FuturaParagraph>
-            <FuturaParagraph>Lubbock ISD</FuturaParagraph>
+            <FuturaParagraph>Abilene ISD</FuturaParagraph>
           </Card>
         </Cards>
       </div>
