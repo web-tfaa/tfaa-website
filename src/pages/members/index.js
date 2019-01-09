@@ -10,8 +10,8 @@ import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
-import presets from '../../utils/presets';
 import Status from './status';
+import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 
 // Component Definition
@@ -40,7 +40,7 @@ class MembersContent extends Component {
     doGetUsers(userList, this.handleUpdateUserList);
   }
 
-  handleUpdateUserList = userList => {
+  handleUpdateUserList = (userList) => {
     this.setState({ userData: userList });
   };
 
@@ -60,7 +60,7 @@ class MembersContent extends Component {
       <div
         css={{
           paddingLeft: 0,
-          width: `0 auto`,
+          width: '0 auto',
           [presets.Tablet]: {
             paddingLeft: !isAuthenticated ? '1.5rem' : 0,
           },

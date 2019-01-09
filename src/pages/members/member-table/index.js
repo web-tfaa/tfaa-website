@@ -145,45 +145,50 @@ class MemberListTable extends Component {
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
-          <Table className={classes.table}>
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={this.handleRequestSort}
-            />
-            <TableBody>
-              {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user, index) => (
-                  <TableRow
-                    className={classes.row}
-                    // eslint-disable-next-line
-                    key={`${user.FirstName}-${index}`}
-                  >
-                    <CustomTableCell component="th" scope="row" padding="none">{user.FirstName}</CustomTableCell>
-                    <CustomTableCell>{user.LastName}</CustomTableCell>
-                    <CustomTableCell>{user.District}</CustomTableCell>
-                    <CustomTableCell>{user.Title}</CustomTableCell>
-                    <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
+          {data && data.length > 0
+            ? (
+              <Table className={classes.table}>
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={this.handleRequestSort}
+                />
+                <TableBody>
+                  {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((user, index) => (
+                      <TableRow
+                        className={classes.row}
+                        // eslint-disable-next-line
+                        key={`${user.FirstName}-${index}`}
+                      >
+                        <CustomTableCell component="th" scope="row" padding="none">{user.FirstName}</CustomTableCell>
+                        <CustomTableCell>{user.LastName}</CustomTableCell>
+                        <CustomTableCell>{user.District}</CustomTableCell>
+                        <CustomTableCell>{user.Title}</CustomTableCell>
+                        <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            ) : <div css={{ padding: 32 }}>No members for the current school year</div>}
         </div>
-        <TablePagination
-          component="div"
-          count={data ? data.length : 0}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-          onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        />
+        {data && data.length > 5 && (
+          <TablePagination
+            component="div"
+            count={data ? data.length : 0}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            backIconButtonProps={{
+              'aria-label': 'Previous Page',
+            }}
+            nextIconButtonProps={{
+              'aria-label': 'Next Page',
+            }}
+            onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
     );
   }
