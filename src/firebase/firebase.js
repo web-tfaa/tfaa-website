@@ -40,7 +40,7 @@ if (typeof window !== 'undefined') {
 
   // Disable deprecated features
   db.settings({
-    timestampsInSnapshots: true
+    timestampsInSnapshots: true,
   });
 
   auth = firebase.auth();
