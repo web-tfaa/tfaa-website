@@ -18,7 +18,7 @@ exports.createPages = ({ graphql }) => {
             }
           }
         }
-      `).then(result => {
+      `).then((result) => {
         if (result.errors) {
           reject(result.errors);
         }
