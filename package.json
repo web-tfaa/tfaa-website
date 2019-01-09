@@ -28,7 +28,7 @@
     "core-js": "^2.5.7",
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
-    "firebase": "^5.5.0",
+    "firebase": "^5.7.2",
     "gatsby": "^2.0.22",
     "gatsby-cli": "^2.4.3",
     "gatsby-image": "2.0.14",
