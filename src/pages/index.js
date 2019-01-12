@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
+import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -13,6 +14,16 @@ import FuturaParagraph from '../components/shared/futura-paragraph';
 import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead';
+import withRoot from './withRoot';
+
+// Local Variables
+const styles = theme => ({
+  root: {
+    color: 'green',
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit * 20,
+  },
+});
 
 // const BlogPost = ({node}) => {
 //   return (
@@ -35,7 +46,10 @@ import MastheadContent from '../components/masthead';
 
 // Component Definition
 const Home = (props) => {
-  const { location } = props;
+  const {
+    classes,
+    location,
+  } = props;
 
   return (
     <Layout location={location}>
@@ -43,13 +57,7 @@ const Home = (props) => {
         <title>TMAC | Home</title>
       </Helmet>
       <MastheadBg />
-      <div
-        css={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}>
+      <div className={classes.root}>
         <MastheadContent />
 
         <Cards>
@@ -93,9 +101,10 @@ const Home = (props) => {
 };
 
 Home.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
 };
-export default Home;
+export default withRoot(withStyles(styles)(Home));
 
 // export const pageQuery = graphql`
 //   query pageQuery {
