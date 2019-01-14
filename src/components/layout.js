@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import AuthUserContext from './session/AuthUserContext';
@@ -34,6 +35,19 @@ import 'typeface-spectral';
 import 'typeface-space-mono';
 
 // Local Variables
+const propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
+
+const styles = {
+};
+
+
 const sidebarStyles = {
   backgroundColor: colors.ui.whisper,
   borderRight: `1px solid ${colors.ui.light}`,
@@ -199,14 +213,8 @@ const DefaultLayout = (props) => {
     </div>
   );
 };
-DefaultLayout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.array,
-  ]).isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  location: PropTypes.shape({}).isRequired,
-};
+
+DefaultLayout.propTypes = propTypes;
 
 const DefaultLayoutWithContext = props => (
   <AuthUserContext.Consumer>
@@ -214,4 +222,4 @@ const DefaultLayoutWithContext = props => (
   </AuthUserContext.Consumer>
 );
 
-export default withRoot(withAuthentication(DefaultLayoutWithContext));
+export default withRoot(withStyles(styles)(withAuthentication(DefaultLayoutWithContext)));
