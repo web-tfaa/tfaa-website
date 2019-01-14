@@ -11,7 +11,7 @@ import MobileNav from './nav/mobile-nav';
 import SidebarBody from './shared/sidebar/sidebar-body';
 import TopNav from './nav/top-nav';
 import withAuthentication from './session/withAuthentication';
-import withRoot from '../utils/withRoot';
+// import withRoot from '../utils/withRoot';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';
@@ -217,4 +217,4 @@ const DefaultLayoutWithContext = props => (
   </AuthUserContext.Consumer>
 );
 
-export default withRoot(withAuthentication(DefaultLayoutWithContext));
+export default withAuthentication(DefaultLayoutWithContext);
