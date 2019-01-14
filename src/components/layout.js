@@ -11,7 +11,7 @@ import MobileNav from './nav/mobile-nav';
 import SidebarBody from './shared/sidebar/sidebar-body';
 import TopNav from './nav/top-nav';
 import withAuthentication from './session/withAuthentication';
-import withRoot from '../pages/withRoot';
+import withRoot from '../utils/withRoot';
 
 // Sidebar data
 import aboutSidebar from '../pages/about/about-links.yml';

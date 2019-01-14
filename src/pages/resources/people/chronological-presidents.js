@@ -11,9 +11,9 @@ import { pastPresidents } from '../../../components/resources/resources-constant
 
 // Sidebar data
 import Layout from '../../../components/layout';
+import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
 import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
-import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
 import { options } from '../../../utils/typography';
 
 // Local Variables
@@ -25,7 +25,7 @@ const rootStyles = {
 };
 
 const tableContainerStyles = {
-  fontFamily: options.headerFontFamily.join(`,`),
+  fontFamily: options.headerFontFamily.join(','),
   lineHeight: '1.6',
 };
 
@@ -74,11 +74,12 @@ class ChronologicalAdmin extends Component {
             {/* Mobile sidebar */}
             <div
               css={{
-                display: `block`,
+                display: 'block',
                 [presets.Tablet]: {
-                  display: `none`,
+                  display: 'none',
                 },
-              }}>
+              }}
+            >
               <hr
                 css={{
                   border: 0,
