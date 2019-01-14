@@ -37,7 +37,7 @@ class MembersContent extends Component {
   componentDidMount() {
     const userList = [];
 
-    doGetUsers(userList, this.handleUpdateUserList);
+    doGetUsers('registration', userList, this.handleUpdateUserList);
   }
 
   handleUpdateUserList = (userList) => {
