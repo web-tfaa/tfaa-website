@@ -210,7 +210,13 @@ class MemberContent extends Component {
         </div>
         <FuturaDiv>
           <h5>Need to update any information?</h5>
-          Send an email over to the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+          <span
+            css={{
+              marginLeft: '1.1rem',
+            }}
+          >
+            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+          </span>
         </FuturaDiv>
       </Card>
     );
