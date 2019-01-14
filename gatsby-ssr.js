@@ -2,15 +2,24 @@
 
 const React = require('react');
 const { renderToString } = require('react-dom/server');
-const JssProvider = require('react-jss/lib/JssProvider').default;
+const { JssProvider } = require('react-jss');
 const getPageContext = require('./src/pages/getPageContext').default;
 
-function replaceRenderer({ bodyComponent, replaceBodyHTMLString, setHeadComponents }) {
+function replaceRenderer({
+  bodyComponent,
+  replaceBodyHTMLString,
+  setHeadComponents,
+}) {
   // Get the context of the page to collected side effects.
-  const muiPageContext = getPageContext();
+  const pageContext = getPageContext();
 
   const bodyHTML = renderToString(
-    <JssProvider registry={muiPageContext.sheetsRegistry}>{bodyComponent}</JssProvider>,
+    <JssProvider
+      generateClassName={pageContext.generateClassName}
+      registry={pageContext.sheetsRegistry}
+    >
+      {bodyComponent}
+    </JssProvider>,
   );
 
   replaceBodyHTMLString(bodyHTML);
@@ -19,7 +28,9 @@ function replaceRenderer({ bodyComponent, replaceBodyHTMLString, setHeadComponen
       type="text/css"
       id="jss-server-side"
       key="jss-server-side"
-      dangerouslySetInnerHTML={{ __html: muiPageContext.sheetsRegistry.toString() }}
+      dangerouslySetInnerHTML={{
+        __html: pageContext.sheetsRegistry.toString(),
+      }}
     />,
   ]);
 }

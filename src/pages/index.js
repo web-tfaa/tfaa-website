@@ -14,7 +14,6 @@ import FuturaParagraph from '../components/shared/futura-paragraph';
 import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead';
-import withRoot from './withRoot';
 
 // Local Variables
 const styles = theme => ({
@@ -104,7 +103,7 @@ Home.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
 };
-export default withRoot(withStyles(styles)(Home));
+export default withStyles(styles)(Home);
 
 // export const pageQuery = graphql`
 //   query pageQuery {
