@@ -1,10 +1,16 @@
 // External Dependencies
-import CheckIcon from 'react-icons/lib/md/check';
-import ClearIcon from 'react-icons/lib/md/clear';
+// import CheckIcon from 'react-icons/lib/md/check';
+import CheckIcon from '@material-ui/icons/Check';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  green,
+  red,
+} from '@material-ui/core/colors';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -22,29 +28,36 @@ import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
+const styles = {
+  registered: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+};
+
 const futuraStyles = {
-  fontFamily: options.headerFontFamily.join(`,`),
+  fontFamily: options.headerFontFamily.join(','),
   lineHeight: '1.6',
   marginBottom: '1rem',
 };
 
 const memberFileShareCardStyles = { marginTop: '1rem' };
 
-const taskIconStyles = {
-  height: 24,
-  marginRight: 8,
-  width: 24,
-};
+// const taskIconStyles = {
+//   height: 24,
+//   marginRight: 8,
+//   width: 24,
+// };
 
-const checkIconStyles = {
-  ...taskIconStyles,
-  color: 'green',
-};
+// const checkIconStyles = {
+//   ...taskIconStyles,
+//   color: 'green',
+// };
 
-const clearIconStyles = {
-  ...taskIconStyles,
-  color: 'red',
-};
+// const clearIconStyles = {
+//   ...taskIconStyles,
+//   color: 'red',
+// };
 
 // Local Components
 const MemberInfoDiv = ({ children }) => (
@@ -53,7 +66,8 @@ const MemberInfoDiv = ({ children }) => (
       lineHeight: '1.6',
       marginBottom: '0.4rem',
       marginLeft: '1.1rem',
-    }}>
+    }}
+  >
     {children}
   </div>
 );
@@ -81,7 +95,9 @@ const MemberFileShareCard = ({ node, description }) => {
       <h5 css={memberFileShareCardStyles}>
         {format(node.date, ['MMMM DD YYYY'])}
       </h5>
-      <FuturaDiv>{description}</FuturaDiv>
+      <FuturaDiv>
+        {description}
+      </FuturaDiv>
       <FuturaAnchor download href={node.link}>
         Download
       </FuturaAnchor>
@@ -96,6 +112,9 @@ MemberFileShareCard.propTypes = {
 // Component Definition
 class MemberContent extends Component {
   static propTypes = {
+    classes: PropTypes.shape({
+      root: PropTypes.string.isRequired,
+    }).isRequired,
     contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
     contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
     memberEmail: PropTypes.string,
@@ -165,6 +184,7 @@ class MemberContent extends Component {
 
   render() {
     const {
+      classes,
       contentfulFileShareData,
       contentfulFileShareDescriptionData,
       memberEmail,
@@ -176,8 +196,8 @@ class MemberContent extends Component {
     } = this.state;
 
     const registeredIcon = isRegistered
-      ? <CheckIcon css={checkIconStyles} />
-      : <ClearIcon css={clearIconStyles} />;
+      ? <CheckIcon nativeColor={green[700]} />
+      : <AnnouncementIcon nativeColor={red[500]} />;
 
     const memberInfoCard = currentUser && (
       <Card>
@@ -284,10 +304,14 @@ class MemberContent extends Component {
     const memberTaskCard = (
       <Card>
         <CardHeadline>{`Tasks for: ${memberEmail}`}</CardHeadline>
-        <FuturaDiv>
-          {registeredIcon}
-          Registered for 2018-2019 school year
-        </FuturaDiv>
+        <FuturaDiv
+          render={() => (
+            <div>
+              {registeredIcon}
+              Registered for 2018-2019 school year
+            </div>
+          )}
+        />
         {!isRegistered && (
           <CtaButton to="/members/join">
             Join TMAC
@@ -324,8 +348,8 @@ class MemberContent extends Component {
         <h2>For Members</h2>
 
         <Cards>
-          {contentfulFileShareData &&
-            contentfulFileShareData.map((edge, index) => (
+          {contentfulFileShareData
+            && contentfulFileShareData.map((edge, index) => (
               <MemberFileShareCard
                 key={edge.node.id}
                 node={edge.node}
@@ -340,11 +364,12 @@ class MemberContent extends Component {
 
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,
@@ -359,4 +384,4 @@ class MemberContent extends Component {
   }
 }
 
-export default MemberContent;
+export default withStyles(styles)(MemberContent);

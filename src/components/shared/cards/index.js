@@ -1,7 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import injectSheet from 'react-jss';
+import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
 const propTypes = {
@@ -37,4 +37,4 @@ const Cards = ({
 
 Cards.propTypes = propTypes;
 
-export default injectSheet(styles)(Cards);
+export default withStyles(styles)(Cards);
