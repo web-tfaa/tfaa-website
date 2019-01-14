@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import AuthUserContext from './session/AuthUserContext';
@@ -43,10 +42,6 @@ const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
 };
-
-const styles = {
-};
-
 
 const sidebarStyles = {
   backgroundColor: colors.ui.whisper,
@@ -222,4 +217,4 @@ const DefaultLayoutWithContext = props => (
   </AuthUserContext.Consumer>
 );
 
-export default withRoot(withStyles(styles)(withAuthentication(DefaultLayoutWithContext)));
+export default withRoot(withAuthentication(DefaultLayoutWithContext));
