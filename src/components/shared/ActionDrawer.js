@@ -21,21 +21,21 @@ const defaultProps = {
   show: false,
 };
 
-const styles = theme => ({
+const styles = {
   content: {
-    backgroundColor: theme.palette.grey['50'],
-    borderLeft: `solid 1px ${theme.palette.grey['300']}`,
-    height: '100%',
-    paddingRight: 2,
-    position: 'absolute',
-    top: 0,
-    whiteSpace: 'nowrap',
+    // backgroundColor: theme.palette.grey['50'],
+    // borderLeft: `solid 1px ${theme.palette.grey['300']}`,
+    // height: '100%',
+    // paddingRight: 2,
+    // position: 'absolute',
+    // top: 0,
+    // whiteSpace: 'nowrap',
   },
   root: {
     position: 'relative',
     width: 0,
   },
-});
+};
 
 // Component Definition
 const ActionDrawer = ({
