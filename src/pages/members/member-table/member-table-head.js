@@ -12,11 +12,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
 const rows = [
-  { id: 'FirstName', numeric: false, disablePadding: false, label: 'First Name' },
-  { id: 'LastName', numeric: false, disablePadding: false, label: 'Last Name' },
-  { id: 'District', numeric: false, disablePadding: false, label: 'District' },
-  { id: 'Title', numeric: false, disablePadding: false, label: 'Title' },
-  { id: 'Email', numeric: false, disablePadding: false, label: 'Email' },
+  { id: 'FirstName', disablePadding: false, label: 'First Name' },
+  { id: 'LastName', disablePadding: false, label: 'Last Name' },
+  { id: 'District', disablePadding: false, label: 'District' },
+  { id: 'Title', disablePadding: false, label: 'Title' },
+  { id: 'Email', disablePadding: false, label: 'Email' },
+  { id: 'Actions', disablePadding: false, label: 'Actions' },
 ];
 
 // Local Components
@@ -39,7 +40,7 @@ const CustomTableCell = withStyles(theme => ({
 
 // Component Definition
 class EnhancedTableHead extends Component {
-  createSortHandler = property => event => {
+  createSortHandler = property => (event) => {
     const {
       onRequestSort,
     } = this.props;
@@ -56,18 +57,17 @@ class EnhancedTableHead extends Component {
     return (
       <TableHead>
         <TableRow>
-          {rows.map(row => {
+          {rows.map((row) => {
             return (
               <CustomTableCell
                 key={row.id}
-                numeric={false}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
-                  title="Sort"
-                  placement="bottom-start"
                   enterDelay={300}
+                  placement="bottom-start"
+                  title="Sort"
                 >
                   <TableSortLabel
                     active={orderBy === row.id}

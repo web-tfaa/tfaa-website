@@ -18,9 +18,8 @@ import MastheadContent from '../components/masthead';
 // Local Variables
 const styles = theme => ({
   root: {
-    color: 'green',
-    textAlign: 'center',
     paddingTop: theme.spacing.unit * 20,
+    textAlign: 'center',
   },
 });
 

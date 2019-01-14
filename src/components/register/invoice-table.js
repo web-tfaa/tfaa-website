@@ -97,7 +97,7 @@ const InvoiceTable = (props) => {
               <br />
               for the {currentSchoolYearLong} school year.
             </CustomTableCell>
-            <CustomTableCell numeric>
+            <CustomTableCell align="right">
               {isString ? updatedAmount : `$${updatedAmount.toFixed(2).toLocaleString()}`}
             </CustomTableCell>
           </TableRow>

@@ -9,9 +9,13 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import InfoOutline from 'react-icons/lib/md/info-outline';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
+import ActionDrawer from '../../../components/shared/ActionDrawer';
 import EnhancedTableHead from './member-table-head';
 
 // Local Variables
@@ -31,6 +35,10 @@ const styles = theme => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
+  },
+  pagerIconButton: {
+    height: 24,
+    width: 24,
   },
 });
 
@@ -142,6 +150,18 @@ class MemberListTable extends Component {
       rowsPerPage,
     } = this.state;
 
+    const actionElements = (
+      <ActionDrawer show>
+        <Tooltip title="Print Invoice">
+          <IconButton
+            onClick={() => console.log('clicked print invoice')}
+          >
+            <InfoOutline />
+          </IconButton>
+        </Tooltip>
+      </ActionDrawer>
+    );
+
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
@@ -167,6 +187,7 @@ class MemberListTable extends Component {
                         <CustomTableCell>{user.District}</CustomTableCell>
                         <CustomTableCell>{user.Title}</CustomTableCell>
                         <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
+                        {actionElements}
                       </TableRow>
                     ))}
                 </TableBody>
@@ -181,6 +202,7 @@ class MemberListTable extends Component {
             page={page}
             backIconButtonProps={{
               'aria-label': 'Previous Page',
+              disabled: page === 0,
             }}
             nextIconButtonProps={{
               'aria-label': 'Next Page',
