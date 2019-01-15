@@ -104,9 +104,7 @@ MemberFileShareCard.propTypes = {
 // Component Definition
 class MemberContent extends Component {
   static propTypes = {
-    classes: PropTypes.shape({
-      root: PropTypes.string.isRequired,
-    }).isRequired,
+    authUser: PropTypes.shape({}),
     contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
     contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
     memberEmail: PropTypes.string,
@@ -115,6 +113,7 @@ class MemberContent extends Component {
   };
 
   static defaultProps = {
+    authUser: null,
     contentfulFileShareData: null,
     contentfulFileShareDescriptionData: null,
     userData: [],
@@ -152,8 +151,6 @@ class MemberContent extends Component {
       isRegistered,
     } = this.state;
 
-    console.log('updated');
-
     if ((prevProps.userData.length !== userId.length) && !isRegistered) {
       // Find if the current user is among the registered users
       if (Object.keys(userData).includes(userId)) {
@@ -178,18 +175,16 @@ class MemberContent extends Component {
 
   render() {
     const {
+      authUser,
       contentfulFileShareData,
       contentfulFileShareDescriptionData,
       memberEmail,
-      userData,
     } = this.props;
 
     const {
       currentUser,
       isRegistered,
     } = this.state;
-
-    console.log('currentUser:', currentUser);
 
     const registeredIcon = isRegistered
       ? <CheckIcon nativeColor={green[700]} />
@@ -318,8 +313,8 @@ class MemberContent extends Component {
         {isRegistered && (
           <Fragment>
             <FuturaDiv>
-              If your district requires the IRS W-9 Form for TMAC, then{' '}
-              you can download or print a copy below.
+              If your district requires the IRS W-9 Form for TMAC,{' '}
+              download or print a copy below.
             </FuturaDiv>
             <FuturaAnchor
               download
@@ -333,13 +328,11 @@ class MemberContent extends Component {
       </Card>
     );
 
-    console.log('userData in MemberContent:', userData);
-
-    const isAdmin = currentUser && [
+    const isAdmin = authUser && [
       'jeff_turner@allenisd.org',
       'm2mathew@me.com',
       'mike@drumsensei.com',
-    ].includes(currentUser.Email);
+    ].includes(authUser.email);
 
     return (
       <div>

@@ -9,7 +9,11 @@ const propTypes = {
     PropTypes.string,
     PropTypes.array,
     PropTypes.shape({}),
-  ]).isRequired,
+  ]),
+};
+
+const defaultProps = {
+  children: null,
 };
 
 // Component Definition
@@ -26,5 +30,6 @@ const FuturaDiv = ({ children }) => (
 );
 
 FuturaDiv.propTypes = propTypes;
+FuturaDiv.defaultProps = defaultProps;
 
 export default FuturaDiv;

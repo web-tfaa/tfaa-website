@@ -73,6 +73,7 @@ class MembersContent extends Component {
           </Helmet>
           {isAuthenticated ? (
             <MemberContent
+              authUser={authUser}
               contentfulFileShareData={
                 data.allContentfulFileShare.edges
               }
@@ -100,7 +101,9 @@ const Members = props => (
 
 const MembersWithContext = props => (
   <AuthUserContext.Consumer>
-    {authUser => <MembersContent {...props} authUser={authUser} />}
+    {(authUser) => {
+      return <MembersContent {...props} authUser={authUser} />;
+    }}
   </AuthUserContext.Consumer>
 );
 
