@@ -218,7 +218,11 @@ class MemberListTable extends Component {
                         <CustomTableCell>{user.District}</CustomTableCell>
                         <CustomTableCell>{user.Title}</CustomTableCell>
                         <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
-                        <CustomTableCell>{this.getActionElements(user && user.PaymentOption)}</CustomTableCell>
+                        {isAdmin && (
+                          <CustomTableCell>
+                            {this.getActionElements(user && user.PaymentOption)}
+                          </CustomTableCell>
+                        )}
                       </TableRow>
                     ))}
                 </TableBody>
