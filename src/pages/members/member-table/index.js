@@ -114,7 +114,7 @@ class MemberListTable extends Component {
     });
   };
 
-  getActionElements = (paymentOption) => {
+  getActionElements = (user) => {
     const actionElements = [];
 
     const receiptElement = (
@@ -124,10 +124,6 @@ class MemberListTable extends Component {
       >
         <IconButton
           onClick={() => console.log('clicked print receipt')}
-          style={{
-            height: 32,
-            width: 32,
-          }}
         >
           <Receipt />
         </IconButton>
@@ -141,19 +137,15 @@ class MemberListTable extends Component {
       >
         <IconButton
           onClick={() => console.log('clicked print invoice')}
-          style={{
-            height: 32,
-            width: 32,
-          }}
         >
           <Print />
         </IconButton>
       </Tooltip>
     );
 
-    if (paymentOption.toLowerCase() === 'paypal') {
+    if (user && user.PaymentOption.toLowerCase() === 'paypal') {
       actionElements.push(receiptElement);
-    } else {
+    } else if (user && user.PaymentOption.toLowerCase() === 'invoiced') {
       actionElements.push(invoiceElement);
     }
 
@@ -220,7 +212,7 @@ class MemberListTable extends Component {
                         <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
                         {isAdmin && (
                           <CustomTableCell>
-                            {this.getActionElements(user && user.PaymentOption)}
+                            {this.getActionElements(user)}
                           </CustomTableCell>
                         )}
                       </TableRow>
