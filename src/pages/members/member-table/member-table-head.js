@@ -61,7 +61,7 @@ class EnhancedTableHead extends Component {
       orderBy,
     } = this.props;
 
-    if (isAdmin) {
+    if (isAdmin && rows.length === 5) {
       rows.push(
         { id: 'Actions', disablePadding: false, label: 'Actions' },
       );

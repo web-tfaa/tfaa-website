@@ -94,7 +94,9 @@ class MemberListContent extends Component {
               <Card>
                 <CardContent>
                   <Typography variant="h6" component="h6">Admin View</Typography>
-                  Hover over any row to print the member&apos;s invoice or receipt
+                  <Typography>
+                    You can print any member&apos;s invoice or receipt from each row.
+                  </Typography>
                 </CardContent>
               </Card>
             </div>
