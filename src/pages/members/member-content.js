@@ -6,7 +6,6 @@ import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
-import { withStyles } from '@material-ui/core/styles';
 import {
   green,
   red,
@@ -28,13 +27,6 @@ import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
-const styles = {
-  registered: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-};
-
 const futuraStyles = {
   fontFamily: options.headerFontFamily.join(','),
   lineHeight: '1.6',
@@ -184,7 +176,6 @@ class MemberContent extends Component {
 
   render() {
     const {
-      classes,
       contentfulFileShareData,
       contentfulFileShareDescriptionData,
       memberEmail,
@@ -194,6 +185,8 @@ class MemberContent extends Component {
       currentUser,
       isRegistered,
     } = this.state;
+
+    console.log('currentUser:', currentUser);
 
     const registeredIcon = isRegistered
       ? <CheckIcon nativeColor={green[700]} />
@@ -263,7 +256,7 @@ class MemberContent extends Component {
             invoiceId={currentUser.invoiceId}
             isActive={currentUser.MemberType === 'Active'}
             isInvoice
-            ref={(el) => { this.printInvoice = el; } }
+            ref={(el) => { this.printInvoice = el; }}
           />
         </div>
       </FuturaDiv>
@@ -290,7 +283,7 @@ class MemberContent extends Component {
             receiptId={currentUser.receiptId}
             isActive={currentUser.MemberType === 'Active'}
             isInvoice={false}
-            ref={(el) => { this.printReceipt = el; } }
+            ref={(el) => { this.printReceipt = el; }}
           />
         </div>
       </FuturaDiv>
@@ -337,9 +330,15 @@ class MemberContent extends Component {
       </Card>
     );
 
+    const isAdmin = [
+      'jeff_turner@allenisd.org',
+      'm2mathew@me.com',
+      'mike@drumsensei.com',
+    ].includes(currentUser.Email);
+
     return (
       <div>
-        <h2>Member Dashboard</h2>
+        <h2>{`${isAdmin && 'Admin '}Member Dashboard`}</h2>
         <Cards>
           {memberInfoCard}
           {memberTaskCard}
@@ -384,4 +383,4 @@ class MemberContent extends Component {
   }
 }
 
-export default withStyles(styles)(MemberContent);
+export default MemberContent;

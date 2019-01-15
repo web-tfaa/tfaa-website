@@ -64,7 +64,8 @@ class MembersContent extends Component {
           [presets.Tablet]: {
             paddingLeft: !isAuthenticated ? '1.5rem' : 0,
           },
-        }}>
+        }}
+      >
         <Status />
         <Container>
           <Helmet>
