@@ -114,21 +114,10 @@ class MemberListTable extends Component {
     });
   };
 
-  render() {
-    const {
-      // classes,
-      data,
-      isAdmin,
-    } = this.props;
+  getActionElements = (paymentOption) => {
+    const actionElements = [];
 
-    const {
-      order,
-      orderBy,
-      page,
-      rowsPerPage,
-    } = this.state;
-
-    const actionElements = [
+    const receiptElement = (
       <Tooltip
         key="print-receipt"
         title="Print Receipt"
@@ -142,7 +131,10 @@ class MemberListTable extends Component {
         >
           <Receipt />
         </IconButton>
-      </Tooltip>,
+      </Tooltip>
+    );
+
+    const invoiceElement = (
       <Tooltip
         key="print-invoice"
         title="Print Invoice"
@@ -150,15 +142,37 @@ class MemberListTable extends Component {
         <IconButton
           onClick={() => console.log('clicked print invoice')}
           style={{
-            marginLeft: 16,
             height: 32,
             width: 32,
           }}
         >
           <Print />
         </IconButton>
-      </Tooltip>,
-    ];
+      </Tooltip>
+    );
+
+    if (paymentOption.toLowerCase() === 'paypal') {
+      actionElements.push(receiptElement);
+    } else {
+      actionElements.push(invoiceElement);
+    }
+
+    return actionElements;
+  };
+
+  render() {
+    const {
+      // classes,
+      data,
+      isAdmin,
+    } = this.props;
+
+    const {
+      order,
+      orderBy,
+      page,
+      rowsPerPage,
+    } = this.state;
 
     return (
       <Paper
@@ -204,7 +218,7 @@ class MemberListTable extends Component {
                         <CustomTableCell>{user.District}</CustomTableCell>
                         <CustomTableCell>{user.Title}</CustomTableCell>
                         <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
-                        <CustomTableCell>{actionElements}</CustomTableCell>
+                        <CustomTableCell>{this.getActionElements(user && user.PaymentOption)}</CustomTableCell>
                       </TableRow>
                     ))}
                 </TableBody>
