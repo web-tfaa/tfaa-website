@@ -61,7 +61,7 @@ const sidebarStyles = {
   paddingBottom: rhythm(3.5),
   position: 'fixed',
   top: `calc(${presets.headerHeight} - 1px)`,
-  width: rhythm(10),
+  width: rhythm(8),
   WebkitOverflowScrolling: 'touch',
   '::-webkit-scrollbar': {
     height: '6px',
@@ -76,7 +76,7 @@ const sidebarStyles = {
   [presets.Desktop]: {
     padding: rhythm(1),
     paddingBottom: rhythm(3.5),
-    width: rhythm(12),
+    width: rhythm(10),
   },
 };
 
