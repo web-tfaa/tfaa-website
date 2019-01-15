@@ -161,7 +161,7 @@ class MemberContent extends Component {
 
         const valuesOnly = Object.values(userData);
 
-        this.handleUpdateUserModel(valuesOnly[indexOfUser]);
+        this.handleUpdateUser(valuesOnly[indexOfUser]);
       }
     }
   }
@@ -170,7 +170,7 @@ class MemberContent extends Component {
     this.setState({ isRegistered: true });
   }
 
-  handleUpdateUserModel = (data) => {
+  handleUpdateUser = (data) => {
     this.setState({ currentUser: data });
   }
 
@@ -338,7 +338,7 @@ class MemberContent extends Component {
 
     return (
       <div>
-        <h2>{`${isAdmin && 'Admin '}Member Dashboard`}</h2>
+        <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
         <Cards>
           {memberInfoCard}
           {memberTaskCard}
