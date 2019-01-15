@@ -330,7 +330,7 @@ class MemberContent extends Component {
       </Card>
     );
 
-    const isAdmin = [
+    const isAdmin = currentUser && [
       'jeff_turner@allenisd.org',
       'm2mathew@me.com',
       'mike@drumsensei.com',
