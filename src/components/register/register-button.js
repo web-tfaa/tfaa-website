@@ -1,7 +1,7 @@
 // External Dependencies
-import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
+import hex2rgba from 'hex2rgba';
 import { css } from 'glamor';
 
 // Internal Dependencies
@@ -63,8 +63,8 @@ const RegisterButton = ({
           color: !isDisabled ? '#fff' : hex2rgba('#fafafa', 0.4),
         },
         ':focus': {
-          outline: 0,
           boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : texasFlagBlue, 0.25)}`,
+          outline: 0,
         },
         ':after': {
           content: '',

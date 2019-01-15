@@ -31,7 +31,8 @@ const NonMemberContent = () => {
       <div
         css={{
           paddingBottom: '1.5rem',
-        }}>
+        }}
+      >
         <CardHeadline>Membership</CardHeadline>
         <div css={contentStyles}>
           Our members promote and support music education and music educators
@@ -41,11 +42,11 @@ const NonMemberContent = () => {
           music.
         </div>
         <CtaButton to="/members/join">
-          <span css={{ verticalAlign: `middle` }}>Join TMAC</span>
+          <span css={{ verticalAlign: 'middle' }}>Join TMAC</span>
           <ArrowForwardIcon
             css={{
-              verticalAlign: `baseline`,
-              marginLeft: `.6em`,
+              verticalAlign: 'baseline',
+              marginLeft: '0.6em',
             }}
           />
         </CtaButton>

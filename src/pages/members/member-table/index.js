@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Material-UI Dependencies
+import IconButton from '@material-ui/core/IconButton';
+import InfoOutline from 'react-icons/lib/md/info-outline';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import InfoOutline from 'react-icons/lib/md/info-outline';
 import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
@@ -121,8 +121,8 @@ class MemberListTable extends Component {
 
   handleRequestSort = (event, property) => {
     const {
-      orderBy,
       order,
+      orderBy,
     } = this.state;
 
     let newOrder = 'desc';
@@ -169,9 +169,9 @@ class MemberListTable extends Component {
             ? (
               <Table className={classes.table}>
                 <EnhancedTableHead
+                  onRequestSort={this.handleRequestSort}
                   order={order}
                   orderBy={orderBy}
-                  onRequestSort={this.handleRequestSort}
                 />
                 <TableBody>
                   {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
@@ -196,19 +196,19 @@ class MemberListTable extends Component {
         </div>
         {data && data.length > 5 && (
           <TablePagination
-            component="div"
-            count={data ? data.length : 0}
-            rowsPerPage={rowsPerPage}
-            page={page}
             backIconButtonProps={{
               'aria-label': 'Previous Page',
               disabled: page === 0,
             }}
+            component="div"
+            count={data ? data.length : 0}
             nextIconButtonProps={{
               'aria-label': 'Next Page',
             }}
             onChangePage={this.handleChangePage}
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            page={page}
+            rowsPerPage={rowsPerPage}
           />
         )}
       </Paper>

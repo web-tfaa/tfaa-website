@@ -152,6 +152,8 @@ class MemberContent extends Component {
       isRegistered,
     } = this.state;
 
+    console.log('updated');
+
     if ((prevProps.userData.length !== userId.length) && !isRegistered) {
       // Find if the current user is among the registered users
       if (Object.keys(userData).includes(userId)) {
@@ -179,6 +181,7 @@ class MemberContent extends Component {
       contentfulFileShareData,
       contentfulFileShareDescriptionData,
       memberEmail,
+      userData,
     } = this.props;
 
     const {
@@ -329,6 +332,8 @@ class MemberContent extends Component {
         )}
       </Card>
     );
+
+    console.log('userData in MemberContent:', userData);
 
     const isAdmin = currentUser && [
       'jeff_turner@allenisd.org',

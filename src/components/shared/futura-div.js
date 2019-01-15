@@ -3,6 +3,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { options } from '../../utils/typography';
 
+// Local Variables
+const propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.shape({}),
+  ]).isRequired,
+};
+
 // Component Definition
 const FuturaDiv = ({ children }) => (
   <div
@@ -16,11 +25,6 @@ const FuturaDiv = ({ children }) => (
   </div>
 );
 
-FuturaDiv.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.shape({}),
-  ]).isRequired,
-}
+FuturaDiv.propTypes = propTypes;
+
 export default FuturaDiv;
