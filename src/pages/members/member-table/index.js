@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Material-UI Dependencies
+import Receipt from '@material-ui/icons/Receipt';
+import Print from '@material-ui/icons/Print';
 import IconButton from '@material-ui/core/IconButton';
-import InfoOutline from 'react-icons/lib/md/info-outline';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,32 +16,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
-import ActionDrawer from '../../../components/shared/ActionDrawer';
 import MemberTableHead from './member-table-head';
-
-// Local Variables
-const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 3,
-    width: '100%',
-  },
-  table: {
-    marginBottom: 0,
-    minWidth: 200,
-  },
-  tableWrapper: {
-    overflowX: 'auto',
-  },
-  row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-  pagerIconButton: {
-    height: 24,
-    width: 24,
-  },
-});
 
 // Local Functions
 function desc(a, b, orderBy) {
@@ -100,7 +76,7 @@ const CustomTableCell = withStyles(theme => ({
 // Component Definition
 class MemberListTable extends Component {
   static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
+    // classes: PropTypes.shape({}).isRequired,
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     isAdmin: PropTypes.bool.isRequired,
   };
@@ -140,7 +116,7 @@ class MemberListTable extends Component {
 
   render() {
     const {
-      classes,
+      // classes,
       data,
       isAdmin,
     } = this.props;
@@ -152,24 +128,58 @@ class MemberListTable extends Component {
       rowsPerPage,
     } = this.state;
 
-    const actionElements = isAdmin && (
-      <ActionDrawer show>
-        <Tooltip title="Print Invoice">
-          <IconButton
-            onClick={() => console.log('clicked print invoice')}
-          >
-            <InfoOutline />
-          </IconButton>
-        </Tooltip>
-      </ActionDrawer>
-    );
+    const actionElements = [
+      <Tooltip
+        key="print-receipt"
+        title="Print Receipt"
+      >
+        <IconButton
+          onClick={() => console.log('clicked print receipt')}
+          style={{
+            height: 32,
+            width: 32,
+          }}
+        >
+          <Receipt />
+        </IconButton>
+      </Tooltip>,
+      <Tooltip
+        key="print-invoice"
+        title="Print Invoice"
+      >
+        <IconButton
+          onClick={() => console.log('clicked print invoice')}
+          style={{
+            marginLeft: 16,
+            height: 32,
+            width: 32,
+          }}
+        >
+          <Print />
+        </IconButton>
+      </Tooltip>,
+    ];
 
     return (
-      <Paper className={classes.root}>
-        <div className={classes.tableWrapper}>
+      <Paper
+        css={{
+          marginTop: 24,
+          width: '100%',
+        }}
+      >
+        <div
+          css={{
+            overflowX: 'auto',
+          }}
+        >
           {data && data.length > 0
             ? (
-              <Table className={classes.table}>
+              <Table
+                css={{
+                  marginBottom: 0,
+                  minWidth: 200,
+                }}
+              >
                 <MemberTableHead
                   isAdmin={isAdmin}
                   onRequestSort={this.handleRequestSort}
@@ -181,7 +191,11 @@ class MemberListTable extends Component {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((user, index) => (
                       <TableRow
-                        className={classes.row}
+                        css={{
+                          '&:nth-of-type(odd)': {
+                            backgroundColor: 'rgba(0, 0, 0, 0,.87)',
+                          },
+                        }}
                         // eslint-disable-next-line
                         key={`${user.FirstName}-${index}`}
                       >
@@ -190,7 +204,7 @@ class MemberListTable extends Component {
                         <CustomTableCell>{user.District}</CustomTableCell>
                         <CustomTableCell>{user.Title}</CustomTableCell>
                         <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
-                        {actionElements}
+                        <CustomTableCell>{actionElements}</CustomTableCell>
                       </TableRow>
                     ))}
                 </TableBody>
@@ -219,4 +233,4 @@ class MemberListTable extends Component {
   }
 }
 
-export default withStyles(styles)(MemberListTable);
+export default MemberListTable;
