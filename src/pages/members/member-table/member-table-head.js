@@ -11,13 +11,19 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
+const propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.string.isRequired,
+  orderBy: PropTypes.string.isRequired,
+};
+
 const rows = [
-  { id: 'FirstName', disablePadding: false, label: 'First Name' },
+  { id: 'FirstName', disablePadding: true, label: 'First Name' },
   { id: 'LastName', disablePadding: false, label: 'Last Name' },
   { id: 'District', disablePadding: false, label: 'District' },
   { id: 'Title', disablePadding: false, label: 'Title' },
   { id: 'Email', disablePadding: false, label: 'Email' },
-  { id: 'Actions', disablePadding: false, label: 'Actions' },
 ];
 
 // Local Components
@@ -50,9 +56,16 @@ class EnhancedTableHead extends Component {
 
   render() {
     const {
+      isAdmin,
       order,
       orderBy,
     } = this.props;
+
+    if (isAdmin) {
+      rows.push(
+        { id: 'Actions', disablePadding: false, label: 'Actions' },
+      );
+    }
 
     return (
       <TableHead>
@@ -86,10 +99,6 @@ class EnhancedTableHead extends Component {
   }
 }
 
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-};
+EnhancedTableHead.propTypes = propTypes;
 
 export default EnhancedTableHead;

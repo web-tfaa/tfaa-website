@@ -15,7 +15,7 @@ import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 
 // Component Definition
-class MembersContent extends Component {
+class MembersHome extends Component {
   static propTypes = {
     authUser: PropTypes.shape({}),
     data: PropTypes.shape({}).isRequired,
@@ -102,7 +102,7 @@ const Members = props => (
 const MembersWithContext = props => (
   <AuthUserContext.Consumer>
     {(authUser) => {
-      return <MembersContent {...props} authUser={authUser} />;
+      return <MembersHome {...props} authUser={authUser} />;
     }}
   </AuthUserContext.Consumer>
 );

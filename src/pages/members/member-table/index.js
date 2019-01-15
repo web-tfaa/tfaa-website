@@ -16,7 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import ActionDrawer from '../../../components/shared/ActionDrawer';
-import EnhancedTableHead from './member-table-head';
+import MemberTableHead from './member-table-head';
 
 // Local Variables
 const styles = theme => ({
@@ -102,6 +102,7 @@ class MemberListTable extends Component {
   static propTypes = {
     classes: PropTypes.shape({}).isRequired,
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    isAdmin: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -141,6 +142,7 @@ class MemberListTable extends Component {
     const {
       classes,
       data,
+      isAdmin,
     } = this.props;
 
     const {
@@ -150,7 +152,7 @@ class MemberListTable extends Component {
       rowsPerPage,
     } = this.state;
 
-    const actionElements = (
+    const actionElements = isAdmin && (
       <ActionDrawer show>
         <Tooltip title="Print Invoice">
           <IconButton
@@ -168,7 +170,8 @@ class MemberListTable extends Component {
           {data && data.length > 0
             ? (
               <Table className={classes.table}>
-                <EnhancedTableHead
+                <MemberTableHead
+                  isAdmin={isAdmin}
                   onRequestSort={this.handleRequestSort}
                   order={order}
                   orderBy={orderBy}

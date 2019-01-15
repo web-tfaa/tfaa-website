@@ -87,7 +87,7 @@ const InvoiceTable = (props) => {
         <TableHead>
           <TableRow>
             <CustomTableCell>Description</CustomTableCell>
-            <CustomTableCell numeric>Total{!isInvoice && ' Paid'}</CustomTableCell>
+            <CustomTableCell align="right">Total{!isInvoice && ' Paid'}</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
