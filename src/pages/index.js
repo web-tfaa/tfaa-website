@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
-import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -16,12 +15,9 @@ import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead';
 
 // Local Variables
-const styles = theme => ({
-  root: {
-    paddingTop: theme.spacing.unit * 20,
-    textAlign: 'center',
-  },
-});
+const propTypes = {
+  location: PropTypes.shape({}).isRequired,
+};
 
 // const BlogPost = ({node}) => {
 //   return (
@@ -45,7 +41,6 @@ const styles = theme => ({
 // Component Definition
 const Home = (props) => {
   const {
-    classes,
     location,
   } = props;
 
@@ -55,7 +50,14 @@ const Home = (props) => {
         <title>TMAC | Home</title>
       </Helmet>
       <MastheadBg />
-      <div className={classes.root}>
+      <div
+        css={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
         <MastheadContent />
 
         <Cards>
@@ -98,11 +100,9 @@ const Home = (props) => {
   );
 };
 
-Home.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
-  location: PropTypes.shape({}).isRequired,
-};
-export default withStyles(styles)(Home);
+Home.propTypes = propTypes;
+
+export default Home;
 
 // export const pageQuery = graphql`
 //   query pageQuery {
