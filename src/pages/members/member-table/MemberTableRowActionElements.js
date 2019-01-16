@@ -17,7 +17,11 @@ import Invoice from '../../../components/register/invoice';
 class MemberListTable extends Component {
   static propTypes = {
     // classes: PropTypes.shape({}).isRequired,
-    user: PropTypes.shape({}).isRequired,
+    user: PropTypes.shape({}),
+  };
+
+  static defaultProps = {
+    user: null,
   };
 
   render() {
@@ -27,61 +31,65 @@ class MemberListTable extends Component {
     } = this.props;
 
     const actionElements = [];
+    let receiptElement;
+    let invoiceElement;
 
-    const receiptElement = (
-      <>
-        <ReactToPrint
-          content={() => this.printReceipt}
-          key="print-receipt"
-          trigger={() => (
-            <Tooltip
-              title="Print Receipt"
-            >
-              <IconButton>
-                <Receipt />
-              </IconButton>
-            </Tooltip>
-          )}
-        />
-        <div css={{ display: 'none' }}>
-          <Invoice
-            amount={user.AmountPaid}
-            form={user}
-            isActive={user.MemberType === 'Active'}
-            isInvoice={false}
-            receiptId={user.receiptId}
-            ref={(el) => { this.printReceipt = el; }}
+    if (user) {
+      receiptElement = (
+        <>
+          <ReactToPrint
+            content={() => this.printReceipt}
+            key="print-receipt"
+            trigger={() => (
+              <Tooltip
+                title="Print Receipt"
+              >
+                <IconButton>
+                  <Receipt />
+                </IconButton>
+              </Tooltip>
+            )}
           />
-        </div>
-      </>
-    );
+          <div css={{ display: 'none' }}>
+            <Invoice
+              amount={user.AmountPaid}
+              form={user}
+              isActive={user.MemberType === 'Active'}
+              isInvoice={false}
+              receiptId={user.receiptId}
+              ref={(el) => { this.printReceipt = el; }}
+            />
+          </div>
+        </>
+      );
 
-    const invoiceElement = (
-      <>
-        <ReactToPrint
-          content={() => this.printInvoice}
-          key="print-invoice"
-          trigger={() => (
-            <Tooltip
-              title="Print Invoice"
-            >
-              <IconButton>
-                <Print />
-              </IconButton>
-            </Tooltip>
-          )}
-        />
-        <div css={{ display: 'none' }}>
-          <Invoice
-            amount={user.AmountPaid}
-            form={user}
-            invoiceId={user.invoiceId}
-            isActive={user.MemberType === 'Active'}
-            isInvoice
+      invoiceElement = (
+        <>
+          <ReactToPrint
+            content={() => this.printInvoice}
+            key="print-invoice"
+            trigger={() => (
+              <Tooltip
+                title="Print Invoice"
+              >
+                <IconButton>
+                  <Print />
+                </IconButton>
+              </Tooltip>
+            )}
           />
-        </div>
-      </>
-    );
+          <div css={{ display: 'none' }}>
+            <Invoice
+              amount={user.AmountPaid}
+              form={user}
+              invoiceId={user.invoiceId}
+              isActive={user.MemberType === 'Active'}
+              isInvoice
+            />
+          </div>
+        </>
+      );
+    }
 
     if (user && user.PaymentOption.toLowerCase() === 'paypal') {
       actionElements.push(receiptElement);
