@@ -278,9 +278,9 @@ class MemberContent extends Component {
           <Invoice
             amount={currentUser.AmountPaid}
             form={currentUser}
-            receiptId={currentUser.receiptId}
             isActive={currentUser.MemberType === 'Active'}
             isInvoice={false}
+            receiptId={currentUser.receiptId}
             ref={(el) => { this.printReceipt = el; }}
           />
         </div>

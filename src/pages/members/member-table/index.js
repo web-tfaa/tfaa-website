@@ -3,20 +3,37 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // Material-UI Dependencies
-import Receipt from '@material-ui/icons/Receipt';
-import Print from '@material-ui/icons/Print';
-import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import MemberTableHead from './member-table-head';
+import MemberTableRowActionElements from './MemberTableRowActionElements';
+
+// Local Variables
+const styles = {
+  overflowWrapper: {
+    overflowX: 'auto',
+  },
+  paper: {
+    marginTop: 24,
+    width: '100%',
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: 'rgba(0, 0, 0, 0,.87)',
+    },
+  },
+  table: {
+    marginBottom: 0,
+    minWidth: 200,
+  },
+};
 
 // Local Functions
 function desc(a, b, orderBy) {
@@ -76,7 +93,7 @@ const CustomTableCell = withStyles(theme => ({
 // Component Definition
 class MemberListTable extends Component {
   static propTypes = {
-    // classes: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({}).isRequired,
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     isAdmin: PropTypes.bool.isRequired,
   };
@@ -114,47 +131,9 @@ class MemberListTable extends Component {
     });
   };
 
-  getActionElements = (user) => {
-    const actionElements = [];
-
-    const receiptElement = (
-      <Tooltip
-        key="print-receipt"
-        title="Print Receipt"
-      >
-        <IconButton
-          onClick={() => console.log('clicked print receipt')}
-        >
-          <Receipt />
-        </IconButton>
-      </Tooltip>
-    );
-
-    const invoiceElement = (
-      <Tooltip
-        key="print-invoice"
-        title="Print Invoice"
-      >
-        <IconButton
-          onClick={() => console.log('clicked print invoice')}
-        >
-          <Print />
-        </IconButton>
-      </Tooltip>
-    );
-
-    if (user && user.PaymentOption.toLowerCase() === 'paypal') {
-      actionElements.push(receiptElement);
-    } else if (user && user.PaymentOption.toLowerCase() === 'invoiced') {
-      actionElements.push(invoiceElement);
-    }
-
-    return actionElements;
-  };
-
   render() {
     const {
-      // classes,
+      classes,
       data,
       isAdmin,
     } = this.props;
@@ -167,25 +146,11 @@ class MemberListTable extends Component {
     } = this.state;
 
     return (
-      <Paper
-        css={{
-          marginTop: 24,
-          width: '100%',
-        }}
-      >
-        <div
-          css={{
-            overflowX: 'auto',
-          }}
-        >
+      <Paper className={classes.paper}>
+        <div className={classes.overflowWrapper}>
           {data && data.length > 0
             ? (
-              <Table
-                css={{
-                  marginBottom: 0,
-                  minWidth: 200,
-                }}
-              >
+              <Table className={classes.table}>
                 <MemberTableHead
                   isAdmin={isAdmin}
                   onRequestSort={this.handleRequestSort}
@@ -197,11 +162,7 @@ class MemberListTable extends Component {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((user, index) => (
                       <TableRow
-                        css={{
-                          '&:nth-of-type(odd)': {
-                            backgroundColor: 'rgba(0, 0, 0, 0,.87)',
-                          },
-                        }}
+                        className={classes.row}
                         // eslint-disable-next-line
                         key={`${user.FirstName}-${index}`}
                       >
@@ -212,7 +173,9 @@ class MemberListTable extends Component {
                         <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
                         {isAdmin && (
                           <CustomTableCell>
-                            {this.getActionElements(user)}
+                            <MemberTableRowActionElements
+                              user={user}
+                            />
                           </CustomTableCell>
                         )}
                       </TableRow>
@@ -243,4 +206,4 @@ class MemberListTable extends Component {
   }
 }
 
-export default MemberListTable;
+export default withStyles(styles)(MemberListTable);

@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -14,9 +15,32 @@ import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
 
+// Local Variables
+const styles = (theme) => {
+  console.log('what is theme?', theme);
+
+  return {
+    adminCard: {
+      borderLeft: `4px solid ${theme.palette.primary.dark}`,
+      maxWidth: '60%',
+    },
+    paddingContainer: {
+      paddingLeft: 24,
+    },
+    root: {
+      paddingLeft: 0,
+      width: '0 auto',
+      [presets.Tablet]: {
+        paddingLeft: 0,
+      },
+    },
+  };
+};
+
 // Component Definition
 class MemberListContent extends Component {
   static propTypes = {
+    classes: PropTypes.shape({}).isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     location: PropTypes.shape({}).isRequired,
     userEmail: PropTypes.string,
@@ -46,6 +70,7 @@ class MemberListContent extends Component {
 
   render() {
     const {
+      classes,
       isAuthenticated,
       userEmail,
     } = this.props;
@@ -65,42 +90,27 @@ class MemberListContent extends Component {
     ].includes(userEmail);
 
     return (
-      <div
-        css={{
-          paddingLeft: 0,
-          width: '0 auto',
-          [presets.Tablet]: {
-            paddingLeft: 0,
-          },
-        }}
-      >
+      <div className={classes.root}>
         <Status />
         <Helmet>
           <title>TMAC | Member List</title>
         </Helmet>
-        <div css={{ paddingLeft: 24 }}>
+        <div className={classes.paddingContainer}>
           <h2>Member list</h2>
+          {isAdmin && (
+            <Card className={classes.adminCard}>
+              <CardContent>
+                <Typography variant="h6" component="h6">Admin View</Typography>
+                <Typography variant="body2">
+                  You can print any member&apos;s invoice or receipt from each row.
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
           <MemberListTable
             data={Object.values(userData)}
             isAdmin={isAdmin}
           />
-          {isAdmin && (
-            <div
-              css={{
-                background: '#EDF2F8',
-                marginTop: 24,
-              }}
-            >
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" component="h6">Admin View</Typography>
-                  <Typography>
-                    You can print any member&apos;s invoice or receipt from each row.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </div>
-          )}
         </div>
       </div>
     );
@@ -126,4 +136,4 @@ const MemberListWithContext = props => (
   </AuthUserContext.Consumer>
 );
 
-export default MemberList;
+export default withStyles(styles)(MemberList);
