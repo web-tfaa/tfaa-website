@@ -12,27 +12,36 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
-import EnhancedTableHead from './member-table-head';
+import MemberTableHead from './member-table-head';
+import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Variables
-const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 3,
+const styles = {
+  cell: {
+    '&:first-child': {
+      paddingLeft: 24,
+    },
+  },
+  empty: {
+    padding: 32,
+  },
+  overflowWrapper: {
+    overflowX: 'auto',
+  },
+  paper: {
+    marginTop: 24,
     width: '100%',
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: 'rgba(0, 0, 0, 0,.87)',
+    },
   },
   table: {
     marginBottom: 0,
     minWidth: 200,
   },
-  tableWrapper: {
-    overflowX: 'auto',
-  },
-  row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-});
+};
 
 // Local Functions
 function desc(a, b, orderBy) {
@@ -71,29 +80,12 @@ function uglifyEmail(email) {
   return uglyEmailArray.join('');
 }
 
-// Local Components
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: '#EDF2F8',
-    color: theme.palette.common.black,
-    fontWeight: 600,
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-  body: {
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-}))(TableCell);
-
-
 // Component Definition
 class MemberListTable extends Component {
   static propTypes = {
     classes: PropTypes.shape({}).isRequired,
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    isAdmin: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -113,8 +105,8 @@ class MemberListTable extends Component {
 
   handleRequestSort = (event, property) => {
     const {
-      orderBy,
       order,
+      orderBy,
     } = this.state;
 
     let newOrder = 'desc';
@@ -133,6 +125,7 @@ class MemberListTable extends Component {
     const {
       classes,
       data,
+      isAdmin,
     } = this.props;
 
     const {
@@ -143,50 +136,89 @@ class MemberListTable extends Component {
     } = this.state;
 
     return (
-      <Paper className={classes.root}>
-        <div className={classes.tableWrapper}>
+      <Paper className={classes.paper}>
+        <div className={classes.overflowWrapper}>
           {data && data.length > 0
             ? (
               <Table className={classes.table}>
-                <EnhancedTableHead
+                <MemberTableHead
+                  isAdmin={isAdmin}
+                  onRequestSort={this.handleRequestSort}
                   order={order}
                   orderBy={orderBy}
-                  onRequestSort={this.handleRequestSort}
                 />
                 <TableBody>
                   {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((user, index) => (
-                      <TableRow
-                        className={classes.row}
-                        // eslint-disable-next-line
-                        key={`${user.FirstName}-${index}`}
-                      >
-                        <CustomTableCell component="th" scope="row" padding="none">{user.FirstName}</CustomTableCell>
-                        <CustomTableCell>{user.LastName}</CustomTableCell>
-                        <CustomTableCell>{user.District}</CustomTableCell>
-                        <CustomTableCell>{user.Title}</CustomTableCell>
-                        <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
-                      </TableRow>
-                    ))}
+                    .map((user) => {
+                      console.log('user', user);
+                      return (
+                        <TableRow
+                          className={classes.row}
+                          key={user.userId}
+                        >
+                          <TableCell
+                            className={classes.cell}
+                            component="th"
+                            key={user.FirstName}
+                            padding="none"
+                            scope="row"
+                          >
+                            {user.FirstName}
+                          </TableCell>
+                          <TableCell
+                            className={classes.cell}
+                            key={user.LastName}
+                          >
+                            {user.LastName}
+                          </TableCell>
+                          <TableCell
+                            className={classes.cell}
+                            key={user.District}
+                          >
+                            {user.District}
+                          </TableCell>
+                          <TableCell
+                            className={classes.cell}
+                            key={user.Title}
+                          >
+                            {user.Title}
+                          </TableCell>
+                          <TableCell
+                            className={classes.cell}
+                            key={user.Email}
+                          >
+                            {uglifyEmail(user.Email)}
+                          </TableCell>
+                          {isAdmin && (
+                            <TableCell className={classes.cell}>
+                              <MemberTableRowActionElements
+                                user={user}
+                              />
+                            </TableCell>
+                          )}
+                        </TableRow>
+                      );
+                    })}
                 </TableBody>
               </Table>
-            ) : <div css={{ padding: 32 }}>No members for the current school year</div>}
+            ) : <div className={classes.empty}>No members for the current school year</div>}
         </div>
         {data && data.length > 5 && (
           <TablePagination
-            component="div"
-            count={data ? data.length : 0}
-            rowsPerPage={rowsPerPage}
-            page={page}
             backIconButtonProps={{
               'aria-label': 'Previous Page',
+              disabled: page === 0,
             }}
+            component="div"
+            count={data ? data.length : 0}
             nextIconButtonProps={{
               'aria-label': 'Next Page',
             }}
             onChangePage={this.handleChangePage}
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            page={page}
+            rowsPerPage={rowsPerPage}
           />
         )}
       </Paper>

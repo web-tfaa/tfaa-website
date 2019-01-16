@@ -31,7 +31,7 @@ const inputStyles = {
 
 const baseErrorStyles = {
   color: 'red',
-  fontFamily: options.headerFontFamily.join(`,`),
+  fontFamily: options.headerFontFamily.join(','),
   marginTop: '0.5rem',
 };
 
@@ -79,14 +79,14 @@ class LoginForm extends Component {
     this.activeComponent = false;
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
   };
 
-  handleUpdate = event => {
+  handleUpdate = (event) => {
     if (this.activeComponent) {
       this.setState({
-          [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value,
       }, this.handleUpdateErrors);
     }
   };
@@ -107,7 +107,7 @@ class LoginForm extends Component {
               isAuthenticated: true,
             }));
           })
-          .catch(err => {
+          .catch((err) => {
             this.setState({ error: err });
           });
       }
@@ -176,9 +176,10 @@ class LoginForm extends Component {
           <div
             css={{
               color: 'red',
-              fontFamily: options.headerFontFamily.join(`,`),
+              fontFamily: options.headerFontFamily.join(','),
               marginTop: 16,
-            }}>
+            }}
+          >
             {emailError}
           </div>
           <div
@@ -186,7 +187,8 @@ class LoginForm extends Component {
               alignItems: 'center',
               display: 'flex',
               marginBottom: 16,
-            }}>
+            }}
+          >
             <label css={bottomLabelStyles} htmlFor="password">
               Password
               <input
@@ -216,12 +218,14 @@ class LoginForm extends Component {
             css={{
               display: 'flex',
               justifyContent: 'flex-end',
-            }}>
+            }}
+          >
             <button
               css={{ marginTop: '1rem', padding: '8px 12px' }}
               disabled={isLoginInvalid}
               onClick={this.handleClickSubmitButton}
-              type="submit">
+              type="submit"
+            >
               Sign In
             </button>
           </div>
@@ -230,10 +234,11 @@ class LoginForm extends Component {
             <div
               css={{
                 color: 'red',
-                fontFamily: options.headerFontFamily.join(`,`),
+                fontFamily: options.headerFontFamily.join(','),
                 fontWeight: 500,
                 margin: '16px 0',
-              }}>
+              }}
+            >
               {error.message}
             </div>
           )}

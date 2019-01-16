@@ -14,6 +14,11 @@ import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 import MastheadContent from '../components/masthead';
 
+// Local Variables
+const propTypes = {
+  location: PropTypes.shape({}).isRequired,
+};
+
 // const BlogPost = ({node}) => {
 //   return (
 //     <div style={{
@@ -35,7 +40,9 @@ import MastheadContent from '../components/masthead';
 
 // Component Definition
 const Home = (props) => {
-  const { location } = props;
+  const {
+    location,
+  } = props;
 
   return (
     <Layout location={location}>
@@ -49,7 +56,8 @@ const Home = (props) => {
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
-        }}>
+        }}
+      >
         <MastheadContent />
 
         <Cards>
@@ -92,9 +100,8 @@ const Home = (props) => {
   );
 };
 
-Home.propTypes = {
-  location: PropTypes.shape({}).isRequired,
-};
+Home.propTypes = propTypes;
+
 export default Home;
 
 // export const pageQuery = graphql`

@@ -59,4 +59,5 @@ const RegisterStepper = (props) => {
 
 RegisterStepper.propTypes = propTypes;
 RegisterStepper.defaultProps = defaultProps;
+
 export default RegisterStepper;

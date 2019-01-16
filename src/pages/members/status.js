@@ -13,8 +13,8 @@ import { options } from '../../utils/typography';
 const statusRootStyles = {
   background: colors.status,
   fontSize: '87.5%',
-  width: `0 auto`,
   padding: '0.5rem',
+  width: '0 auto',
 };
 
 const statusTextStyles = {
@@ -40,22 +40,23 @@ const Status = (props) => {
       &nbsp;
       <a
         css={{
-          color: `inherit`,
-          textDecoration: `none`,
+          color: 'inherit',
+          textDecoration: 'none',
           transition: `all ${presets.animation.speedFast} ${
             presets.animation.curveDefault
           }`,
           borderBottom: `1px solid ${colors.ui.bright}`,
           boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-          fontFamily: options.headerFontFamily.join(`,`),
-          fontWeight: `bold`,
+          fontFamily: options.headerFontFamily.join(','),
+          fontWeight: 'bold',
           '&:hover': {
             background: colors.ui.bright,
             cursor: 'pointer',
           },
         }}
         href="/members"
-        onClick={auth.doSignOut}>
+        onClick={auth.doSignOut}
+      >
         Sign out
       </a>
     </p>
@@ -70,7 +71,7 @@ Status.defaultProps = {
   authUser: null,
 };
 
-const StatusWithContext = (props) => (
+const StatusWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <Status {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>

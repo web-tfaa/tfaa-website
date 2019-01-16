@@ -21,36 +21,38 @@ import { rhythm, options } from '../../utils/typography';
 const PhilosophyCard = ({ children }) => (
   <div
     css={{
-      boxSizing: `border-box`,
-      display: `flex`,
-      transform: `translateZ(0)`,
+      boxSizing: 'border-box',
+      display: 'flex',
+      transform: 'translateZ(0)',
       [presets.Tablet]: {
         boxShadow: `0 1px 0 0 ${colors.ui.light}`,
         '&:nth-child(5),&:nth-child(6)': {
-          boxShadow: `none`,
+          boxShadow: 'none',
         },
         '&:nth-child(2n)': {
           borderLeft: `1px solid ${colors.ui.light}`,
         },
       },
       [presets.Hd]: {
-        flex: `0 0 90%`,
-        maxWidth: `90%`,
         borderLeft: `1px solid ${colors.ui.light}`,
+        flex: '0 0 100%',
+        maxWidth: '100%',
         '&:nth-child(4)': {
-          boxShadow: `none`,
+          boxShadow: 'none',
         },
         '&:nth-child(3n+1)': {
           borderLeft: 0,
         },
       },
-    }}>
+    }}
+  >
     <div
       css={{
         padding: rhythm(presets.gutters.default / 2),
         paddingBottom: 0,
-        transform: `translateZ(0)`,
-      }}>
+        transform: 'translateZ(0)',
+      }}
+    >
       {children}
     </div>
   </div>
@@ -89,7 +91,8 @@ const Philosophy = ({ location }) => (
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-      }}>
+      }}
+    >
       <Container>
         <h1 css={{ marginTop: '1rem' }}>Statements of Philosophy</h1>
         <Cards>
@@ -192,11 +195,12 @@ const Philosophy = ({ location }) => (
         {/* Mobile sidebar */}
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

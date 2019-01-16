@@ -3,10 +3,10 @@ import Typography from 'typography';
 
 // Internal Dependencies
 import {
-  MOBILE_MEDIA_QUERY,
-  TABLET_MEDIA_QUERY,
   MIN_DEFAULT_MEDIA_QUERY,
   MIN_LARGER_DISPLAY_MEDIA_QUERY,
+  MOBILE_MEDIA_QUERY,
+  TABLET_MEDIA_QUERY,
 } from 'typography-breakpoint-constants';
 import presets, { colors } from './presets';
 
@@ -348,7 +348,11 @@ const _options = {
 };
 
 const typography = new Typography(_options);
-const { rhythm, scale, options } = typography;
+const {
+  options,
+  rhythm,
+  scale,
+} = typography;
 
 export {
   options,

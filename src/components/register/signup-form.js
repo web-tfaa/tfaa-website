@@ -31,7 +31,7 @@ const inputStyles = {
 
 const baseErrorStyles = {
   color: 'red',
-  fontFamily: options.headerFontFamily.join(`,`),
+  fontFamily: options.headerFontFamily.join(','),
   marginTop: '0.5rem',
 };
 
@@ -84,11 +84,11 @@ class SignUpForm extends Component {
     this.activeComponent = false;
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
   };
 
-  handleUpdate = event => {
+  handleUpdate = (event) => {
     if (this.activeComponent) {
       this.setState({
         [event.target.name]: event.target.value,
@@ -111,9 +111,9 @@ class SignUpForm extends Component {
             isAuthenticated: true,
           }));
         })
-        .catch(err => {
+        .catch((err) => {
           this.setState({ error: err });
-          });
+        });
     }
   };
 
@@ -149,9 +149,9 @@ class SignUpForm extends Component {
           registerError: 'Passwords should match',
         });
       } else if (
-        hasInput &&
-        passwordOne === passwordTwo &&
-        passwordOne.length < 8
+        hasInput
+          && passwordOne === passwordTwo
+          && passwordOne.length < 8
       ) {
         this.setState({
           registerError: 'Password must be at least 8 characters long',
@@ -196,7 +196,8 @@ class SignUpForm extends Component {
             alignItems: 'center',
             display: 'flex',
             marginBottom: 16,
-          }}>
+          }}
+        >
           <label css={bottomLabelStyles} htmlFor="passwordOne">
             Password
             <input
@@ -224,7 +225,8 @@ class SignUpForm extends Component {
             alignItems: 'center',
             display: 'flex',
             marginBottom: 16,
-          }}>
+          }}
+        >
           <label css={bottomLabelStyles} htmlFor="passwordTwo">
             Confirm Password
             <input
@@ -244,10 +246,11 @@ class SignUpForm extends Component {
           <div
             css={{
               color: 'red',
-              fontFamily: options.headerFontFamily.join(`,`),
+              fontFamily: options.headerFontFamily.join(','),
               fontWeight: 500,
               margin: '16px 0',
-            }}>
+            }}
+          >
             {error.message}
           </div>
         )}
@@ -258,12 +261,14 @@ class SignUpForm extends Component {
             display: 'flex',
             justifyContent: 'flex-end',
             maxWidth: '70%',
-          }}>
+          }}
+        >
           <button
             css={{ marginTop: '1rem', padding: '8px 12px' }}
             disabled={isInvalid}
             onClick={this.handleClickSignUpButton}
-            type="submit">
+            type="submit"
+          >
             Sign Up
           </button>
         </div>
@@ -273,7 +278,7 @@ class SignUpForm extends Component {
   }
 }
 
-const SignUpFormWithContext = (props) => (
+const SignUpFormWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <SignUpForm {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>

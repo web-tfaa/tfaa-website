@@ -15,7 +15,7 @@ import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 
 // Component Definition
-class MembersContent extends Component {
+class MembersHome extends Component {
   static propTypes = {
     authUser: PropTypes.shape({}),
     data: PropTypes.shape({}).isRequired,
@@ -37,7 +37,7 @@ class MembersContent extends Component {
   componentDidMount() {
     const userList = [];
 
-    doGetUsers(userList, this.handleUpdateUserList);
+    doGetUsers('registration', userList, this.handleUpdateUserList);
   }
 
   handleUpdateUserList = (userList) => {
@@ -64,7 +64,8 @@ class MembersContent extends Component {
           [presets.Tablet]: {
             paddingLeft: !isAuthenticated ? '1.5rem' : 0,
           },
-        }}>
+        }}
+      >
         <Status />
         <Container>
           <Helmet>
@@ -72,6 +73,7 @@ class MembersContent extends Component {
           </Helmet>
           {isAuthenticated ? (
             <MemberContent
+              authUser={authUser}
               contentfulFileShareData={
                 data.allContentfulFileShare.edges
               }
@@ -99,7 +101,9 @@ const Members = props => (
 
 const MembersWithContext = props => (
   <AuthUserContext.Consumer>
-    {authUser => <MembersContent {...props} authUser={authUser} />}
+    {(authUser) => {
+      return <MembersHome {...props} authUser={authUser} />;
+    }}
   </AuthUserContext.Consumer>
 );
 

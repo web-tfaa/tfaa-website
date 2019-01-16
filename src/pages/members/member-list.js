@@ -1,7 +1,11 @@
 // External Dependencies
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -11,11 +15,35 @@ import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
 
+// Local Variables
+const styles = theme => ({
+  adminCard: {
+    borderLeft: `4px solid ${theme.palette.primary.dark}`,
+    maxWidth: '60%',
+  },
+  paddingContainer: {
+    paddingLeft: 24,
+  },
+  root: {
+    paddingLeft: 0,
+    width: '0 auto',
+    [presets.Tablet]: {
+      paddingLeft: 0,
+    },
+  },
+});
+
 // Component Definition
 class MemberListContent extends Component {
   static propTypes = {
+    classes: PropTypes.shape({}).isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     location: PropTypes.shape({}).isRequired,
+    userEmail: PropTypes.string,
+  };
+
+  static defaultProps = {
+    userEmail: '',
   };
 
   constructor(props) {
@@ -38,7 +66,9 @@ class MemberListContent extends Component {
 
   render() {
     const {
+      classes,
       isAuthenticated,
+      userEmail,
     } = this.props;
 
     const {
@@ -49,23 +79,36 @@ class MemberListContent extends Component {
       return null;
     }
 
+    const isAdmin = userEmail && [
+      'jeff_turner@allenisd.org',
+      'm2mathew@me.com',
+      'mike@drumsensei.com',
+    ].includes(userEmail);
+
+    console.log('1111', Object.values(userData));
+
     return (
-      <div
-        css={{
-          paddingLeft: 0,
-          width: '0 auto',
-          [presets.Tablet]: {
-            paddingLeft: 0,
-          },
-        }}
-      >
+      <div className={classes.root}>
         <Status />
         <Helmet>
           <title>TMAC | Member List</title>
         </Helmet>
-        <div css={{ paddingLeft: 24 }}>
+        <div className={classes.paddingContainer}>
           <h2>Member list</h2>
-          <MemberListTable data={Object.values(userData)} />
+          {isAdmin && (
+            <Card className={classes.adminCard}>
+              <CardContent>
+                <Typography variant="h6" component="h6">Admin View</Typography>
+                <Typography variant="body2">
+                  You can print any member&apos;s invoice or receipt from each row.
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
+          <MemberListTable
+            data={Object.values(userData)}
+            isAdmin={isAdmin}
+          />
         </div>
       </div>
     );
@@ -81,8 +124,14 @@ const MemberList = props => (
 
 const MemberListWithContext = props => (
   <AuthUserContext.Consumer>
-    {authUser => <MemberListContent {...props} isAuthenticated={!!authUser} />}
+    {authUser => (
+      <MemberListContent
+        {...props}
+        userEmail={authUser ? authUser.email : ''}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 
-export default MemberList;
+export default withStyles(styles)(MemberList);

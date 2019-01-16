@@ -25,7 +25,7 @@ const rootStyles = {
 };
 
 const tableContainerStyles = {
-  fontFamily: options.headerFontFamily.join(`,`),
+  fontFamily: options.headerFontFamily.join(','),
   lineHeight: '1.6',
 };
 
@@ -74,11 +74,12 @@ class ChronologicalAdmin extends Component {
             </div>
             <div
               css={{
-                display: `block`,
+                display: 'block',
                 [presets.Tablet]: {
-                  display: `none`,
+                  display: 'none',
                 },
-              }}>
+              }}
+            >
               <hr
                 css={{
                   border: 0,

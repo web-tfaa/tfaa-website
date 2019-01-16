@@ -138,9 +138,6 @@ class RegisterContent extends Component {
         css={{
           paddingLeft: 0,
           width: '0 auto',
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
         }}
       >
         <Status />

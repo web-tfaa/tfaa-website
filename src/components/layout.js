@@ -33,6 +33,15 @@ import 'typeface-spectral';
 import 'typeface-space-mono';
 
 // Local Variables
+const propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.element,
+  ]).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
+
 const sidebarStyles = {
   backgroundColor: colors.ui.whisper,
   borderRight: `1px solid ${colors.ui.light}`,
@@ -52,7 +61,7 @@ const sidebarStyles = {
   paddingBottom: rhythm(3.5),
   position: 'fixed',
   top: `calc(${presets.headerHeight} - 1px)`,
-  width: rhythm(10),
+  width: rhythm(8),
   WebkitOverflowScrolling: 'touch',
   '::-webkit-scrollbar': {
     height: '6px',
@@ -67,7 +76,7 @@ const sidebarStyles = {
   [presets.Desktop]: {
     padding: rhythm(1),
     paddingBottom: rhythm(3.5),
-    width: rhythm(12),
+    width: rhythm(10),
   },
 };
 
@@ -183,10 +192,10 @@ const DefaultLayout = (props) => {
         <div
           css={{
             [presets.Tablet]: {
-              paddingLeft: leftPadding(10),
+              paddingLeft: leftPadding(8),
             },
             [presets.Desktop]: {
-              paddingLeft: leftPadding(12),
+              paddingLeft: leftPadding(10),
             },
           }}
         >
@@ -198,14 +207,8 @@ const DefaultLayout = (props) => {
     </div>
   );
 };
-DefaultLayout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.array,
-  ]).isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  location: PropTypes.shape({}).isRequired,
-};
+
+DefaultLayout.propTypes = propTypes;
 
 const DefaultLayoutWithContext = props => (
   <AuthUserContext.Consumer>

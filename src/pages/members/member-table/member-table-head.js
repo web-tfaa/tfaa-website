@@ -11,12 +11,19 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
+const propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.string.isRequired,
+  orderBy: PropTypes.string.isRequired,
+};
+
 const rows = [
-  { id: 'FirstName', numeric: false, disablePadding: false, label: 'First Name' },
-  { id: 'LastName', numeric: false, disablePadding: false, label: 'Last Name' },
-  { id: 'District', numeric: false, disablePadding: false, label: 'District' },
-  { id: 'Title', numeric: false, disablePadding: false, label: 'Title' },
-  { id: 'Email', numeric: false, disablePadding: false, label: 'Email' },
+  { id: 'FirstName', disablePadding: true, label: 'First Name' },
+  { id: 'LastName', disablePadding: false, label: 'Last Name' },
+  { id: 'District', disablePadding: false, label: 'District' },
+  { id: 'Title', disablePadding: false, label: 'Title' },
+  { id: 'Email', disablePadding: false, label: 'Email' },
 ];
 
 // Local Components
@@ -39,7 +46,7 @@ const CustomTableCell = withStyles(theme => ({
 
 // Component Definition
 class EnhancedTableHead extends Component {
-  createSortHandler = property => event => {
+  createSortHandler = property => (event) => {
     const {
       onRequestSort,
     } = this.props;
@@ -49,25 +56,32 @@ class EnhancedTableHead extends Component {
 
   render() {
     const {
+      isAdmin,
       order,
       orderBy,
     } = this.props;
 
+    if (isAdmin && rows.length === 5) {
+      rows.push(
+        { id: 'Actions', disablePadding: false, label: 'Actions' },
+      );
+    }
+
     return (
       <TableHead>
-        <TableRow>
-          {rows.map(row => {
+        <TableRow key="table-head">
+          {rows.map((row) => {
+            // console.log('what be row?', row);
             return (
               <CustomTableCell
-                key={row.id}
-                numeric={false}
+                key={`${row.id}=${row.label}`}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
-                  title="Sort"
-                  placement="bottom-start"
                   enterDelay={300}
+                  placement="bottom-start"
+                  title="Sort"
                 >
                   <TableSortLabel
                     active={orderBy === row.id}
@@ -79,17 +93,13 @@ class EnhancedTableHead extends Component {
                 </Tooltip>
               </CustomTableCell>
             );
-          }, this)}
+          })}
         </TableRow>
       </TableHead>
     );
   }
 }
 
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-};
+EnhancedTableHead.propTypes = propTypes;
 
 export default EnhancedTableHead;

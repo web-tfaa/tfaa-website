@@ -1,10 +1,15 @@
 // External Dependencies
-import CheckIcon from 'react-icons/lib/md/check';
-import ClearIcon from 'react-icons/lib/md/clear';
+// import CheckIcon from 'react-icons/lib/md/check';
+import CheckIcon from '@material-ui/icons/Check';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ReactToPrint from 'react-to-print';
+import {
+  green,
+  red,
+} from '@material-ui/core/colors';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -23,28 +28,28 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
 const futuraStyles = {
-  fontFamily: options.headerFontFamily.join(`,`),
+  fontFamily: options.headerFontFamily.join(','),
   lineHeight: '1.6',
   marginBottom: '1rem',
 };
 
 const memberFileShareCardStyles = { marginTop: '1rem' };
 
-const taskIconStyles = {
-  height: 24,
-  marginRight: 8,
-  width: 24,
-};
+// const taskIconStyles = {
+//   height: 24,
+//   marginRight: 8,
+//   width: 24,
+// };
 
-const checkIconStyles = {
-  ...taskIconStyles,
-  color: 'green',
-};
+// const checkIconStyles = {
+//   ...taskIconStyles,
+//   color: 'green',
+// };
 
-const clearIconStyles = {
-  ...taskIconStyles,
-  color: 'red',
-};
+// const clearIconStyles = {
+//   ...taskIconStyles,
+//   color: 'red',
+// };
 
 // Local Components
 const MemberInfoDiv = ({ children }) => (
@@ -53,7 +58,8 @@ const MemberInfoDiv = ({ children }) => (
       lineHeight: '1.6',
       marginBottom: '0.4rem',
       marginLeft: '1.1rem',
-    }}>
+    }}
+  >
     {children}
   </div>
 );
@@ -81,7 +87,9 @@ const MemberFileShareCard = ({ node, description }) => {
       <h5 css={memberFileShareCardStyles}>
         {format(node.date, ['MMMM DD YYYY'])}
       </h5>
-      <FuturaDiv>{description}</FuturaDiv>
+      <FuturaDiv>
+        {description}
+      </FuturaDiv>
       <FuturaAnchor download href={node.link}>
         Download
       </FuturaAnchor>
@@ -96,6 +104,7 @@ MemberFileShareCard.propTypes = {
 // Component Definition
 class MemberContent extends Component {
   static propTypes = {
+    authUser: PropTypes.shape({}),
     contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
     contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
     memberEmail: PropTypes.string,
@@ -104,6 +113,7 @@ class MemberContent extends Component {
   };
 
   static defaultProps = {
+    authUser: null,
     contentfulFileShareData: null,
     contentfulFileShareDescriptionData: null,
     userData: [],
@@ -150,7 +160,7 @@ class MemberContent extends Component {
 
         const valuesOnly = Object.values(userData);
 
-        this.handleUpdateUserModel(valuesOnly[indexOfUser]);
+        this.handleUpdateUser(valuesOnly[indexOfUser]);
       }
     }
   }
@@ -159,12 +169,13 @@ class MemberContent extends Component {
     this.setState({ isRegistered: true });
   }
 
-  handleUpdateUserModel = (data) => {
+  handleUpdateUser = (data) => {
     this.setState({ currentUser: data });
   }
 
   render() {
     const {
+      authUser,
       contentfulFileShareData,
       contentfulFileShareDescriptionData,
       memberEmail,
@@ -176,8 +187,8 @@ class MemberContent extends Component {
     } = this.state;
 
     const registeredIcon = isRegistered
-      ? <CheckIcon css={checkIconStyles} />
-      : <ClearIcon css={clearIconStyles} />;
+      ? <CheckIcon nativeColor={green[700]} />
+      : <AnnouncementIcon nativeColor={red[500]} />;
 
     const memberInfoCard = currentUser && (
       <Card>
@@ -210,7 +221,13 @@ class MemberContent extends Component {
         </div>
         <FuturaDiv>
           <h5>Need to update any information?</h5>
-          Send an email over to the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+          <span
+            css={{
+              marginLeft: '1.1rem',
+            }}
+          >
+            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+          </span>
         </FuturaDiv>
       </Card>
     );
@@ -237,7 +254,7 @@ class MemberContent extends Component {
             invoiceId={currentUser.invoiceId}
             isActive={currentUser.MemberType === 'Active'}
             isInvoice
-            ref={(el) => { this.printInvoice = el; } }
+            ref={(el) => { this.printInvoice = el; }}
           />
         </div>
       </FuturaDiv>
@@ -261,10 +278,10 @@ class MemberContent extends Component {
           <Invoice
             amount={currentUser.AmountPaid}
             form={currentUser}
-            receiptId={currentUser.receiptId}
             isActive={currentUser.MemberType === 'Active'}
             isInvoice={false}
-            ref={(el) => { this.printReceipt = el; } }
+            receiptId={currentUser.receiptId}
+            ref={(el) => { this.printReceipt = el; }}
           />
         </div>
       </FuturaDiv>
@@ -272,16 +289,21 @@ class MemberContent extends Component {
 
     const isInvoiced = currentUser
       && currentUser.PaymentOption.toLowerCase() === 'invoiced';
+
     const isPaypal = currentUser
       && currentUser.PaymentOption.toLowerCase() === 'paypal';
 
     const memberTaskCard = (
       <Card>
         <CardHeadline>{`Tasks for: ${memberEmail}`}</CardHeadline>
-        <FuturaDiv>
-          {registeredIcon}
-          Registered for 2018-2019 school year
-        </FuturaDiv>
+        <FuturaDiv
+          render={() => (
+            <div>
+              {registeredIcon}
+              Registered for 2018-2019 school year
+            </div>
+          )}
+        />
         {!isRegistered && (
           <CtaButton to="/members/join">
             Join TMAC
@@ -292,8 +314,8 @@ class MemberContent extends Component {
         {isRegistered && (
           <Fragment>
             <FuturaDiv>
-              If your district requires the IRS W-9 Form for TMAC, then{' '}
-              you can download or print a copy below.
+              If your district requires the IRS W-9 Form for TMAC,{' '}
+              download or print a copy below.
             </FuturaDiv>
             <FuturaAnchor
               download
@@ -307,9 +329,19 @@ class MemberContent extends Component {
       </Card>
     );
 
+    const isAdmin = authUser && [
+      'patricia.h.moreno@austinisd.org',
+      'jon.lester@abileneisd.org',
+      'jeffrey.turner@allenisd.org',
+      'jim.egger@mcallenisd.net',
+      'johnjanda@tomballisd.net',
+      'm2mathew@me.com',
+      'mike@drumsensei.com',
+    ].includes(authUser.email);
+
     return (
       <div>
-        <h2>Member Dashboard</h2>
+        <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
         <Cards>
           {memberInfoCard}
           {memberTaskCard}
@@ -318,8 +350,8 @@ class MemberContent extends Component {
         <h2>For Members</h2>
 
         <Cards>
-          {contentfulFileShareData &&
-            contentfulFileShareData.map((edge, index) => (
+          {contentfulFileShareData
+            && contentfulFileShareData.map((edge, index) => (
               <MemberFileShareCard
                 key={edge.node.id}
                 node={edge.node}
@@ -334,11 +366,12 @@ class MemberContent extends Component {
 
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

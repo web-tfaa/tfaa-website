@@ -87,7 +87,7 @@ const InvoiceTable = (props) => {
         <TableHead>
           <TableRow>
             <CustomTableCell>Description</CustomTableCell>
-            <CustomTableCell numeric>Total{!isInvoice && ' Paid'}</CustomTableCell>
+            <CustomTableCell align="right">Total{!isInvoice && ' Paid'}</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -97,7 +97,7 @@ const InvoiceTable = (props) => {
               <br />
               for the {currentSchoolYearLong} school year.
             </CustomTableCell>
-            <CustomTableCell numeric>
+            <CustomTableCell align="right">
               {isString ? updatedAmount : `$${updatedAmount.toFixed(2).toLocaleString()}`}
             </CustomTableCell>
           </TableRow>

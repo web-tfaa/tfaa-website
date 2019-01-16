@@ -59,11 +59,12 @@ class Payment extends Component {
         <div
           css={{
             paddingLeft: 0,
-            width: `0 auto`,
+            width: '0 auto',
             [presets.Tablet]: {
               paddingLeft: !isAuthenticated ? '1.5rem' : 0,
             },
-          }}>
+          }}
+        >
           <Status authUser={authUser} />
           <Container>
             <Helmet>
@@ -83,11 +84,12 @@ class Payment extends Component {
 
           <div
             css={{
-              display: `block`,
+              display: 'block',
               [presets.Tablet]: {
-                display: `none`,
+                display: 'none',
               },
-            }}>
+            }}
+          >
             <hr
               css={{
                 border: 0,
