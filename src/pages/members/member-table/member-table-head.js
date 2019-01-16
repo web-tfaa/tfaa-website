@@ -69,11 +69,12 @@ class EnhancedTableHead extends Component {
 
     return (
       <TableHead>
-        <TableRow>
+        <TableRow key="table-head">
           {rows.map((row) => {
+            console.log('what be row?', row);
             return (
               <CustomTableCell
-                key={row.id}
+                key={`${row.id}=${row.label}`}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
@@ -92,7 +93,7 @@ class EnhancedTableHead extends Component {
                 </Tooltip>
               </CustomTableCell>
             );
-          }, this)}
+          })}
         </TableRow>
       </TableHead>
     );

@@ -16,26 +16,22 @@ import Status from './status';
 import { doGetUsers } from '../../firebase/db';
 
 // Local Variables
-const styles = (theme) => {
-  console.log('what is theme?', theme);
-
-  return {
-    adminCard: {
-      borderLeft: `4px solid ${theme.palette.primary.dark}`,
-      maxWidth: '60%',
-    },
-    paddingContainer: {
-      paddingLeft: 24,
-    },
-    root: {
+const styles = theme => ({
+  adminCard: {
+    borderLeft: `4px solid ${theme.palette.primary.dark}`,
+    maxWidth: '60%',
+  },
+  paddingContainer: {
+    paddingLeft: 24,
+  },
+  root: {
+    paddingLeft: 0,
+    width: '0 auto',
+    [presets.Tablet]: {
       paddingLeft: 0,
-      width: '0 auto',
-      [presets.Tablet]: {
-        paddingLeft: 0,
-      },
     },
-  };
-};
+  },
+});
 
 // Component Definition
 class MemberListContent extends Component {

@@ -17,6 +17,14 @@ import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Variables
 const styles = {
+  cell: {
+    '&:first-child': {
+      paddingLeft: 24,
+    },
+  },
+  empty: {
+    padding: 32,
+  },
   overflowWrapper: {
     overflowX: 'auto',
   },
@@ -71,24 +79,6 @@ function uglifyEmail(email) {
 
   return uglyEmailArray.join('');
 }
-
-// Local Components
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: '#EDF2F8',
-    color: theme.palette.common.black,
-    fontWeight: 600,
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-  body: {
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-}))(TableCell);
-
 
 // Component Definition
 class MemberListTable extends Component {
@@ -160,29 +150,56 @@ class MemberListTable extends Component {
                 <TableBody>
                   {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((user, index) => (
+                    .map(user => (
                       <TableRow
                         className={classes.row}
-                        // eslint-disable-next-line
-                        key={`${user.FirstName}-${index}`}
+                        key={user.userId}
                       >
-                        <CustomTableCell component="th" scope="row" padding="none">{user.FirstName}</CustomTableCell>
-                        <CustomTableCell>{user.LastName}</CustomTableCell>
-                        <CustomTableCell>{user.District}</CustomTableCell>
-                        <CustomTableCell>{user.Title}</CustomTableCell>
-                        <CustomTableCell>{uglifyEmail(user.Email)}</CustomTableCell>
+                        <TableCell
+                          className={classes.cell}
+                          component="th"
+                          key={user.FirstName}
+                          padding="none"
+                          scope="row"
+                        >
+                          {user.FirstName}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.LastName}
+                        >
+                          {user.LastName}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.District}
+                        >
+                          {user.District}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.Title}
+                        >
+                          {user.Title}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.Email}
+                        >
+                          {uglifyEmail(user.Email)}
+                        </TableCell>
                         {isAdmin && (
-                          <CustomTableCell>
+                          <TableCell className={classes.cell}>
                             <MemberTableRowActionElements
                               user={user}
                             />
-                          </CustomTableCell>
+                          </TableCell>
                         )}
                       </TableRow>
                     ))}
                 </TableBody>
               </Table>
-            ) : <div css={{ padding: 32 }}>No members for the current school year</div>}
+            ) : <div className={classes.empty}>No members for the current school year</div>}
         </div>
         {data && data.length > 5 && (
           <TablePagination

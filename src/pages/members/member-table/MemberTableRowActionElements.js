@@ -4,11 +4,10 @@ import React, { Component } from 'react';
 import ReactToPrint from 'react-to-print';
 
 // Material-UI Dependencies
-import Receipt from '@material-ui/icons/Receipt';
-import Print from '@material-ui/icons/Print';
 import IconButton from '@material-ui/core/IconButton';
+import Print from '@material-ui/icons/Print';
+import Receipt from '@material-ui/icons/Receipt';
 import Tooltip from '@material-ui/core/Tooltip';
-// import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import Invoice from '../../../components/register/invoice';
@@ -16,7 +15,6 @@ import Invoice from '../../../components/register/invoice';
 // Component Definition
 class MemberListTable extends Component {
   static propTypes = {
-    // classes: PropTypes.shape({}).isRequired,
     user: PropTypes.shape({}),
   };
 
@@ -26,7 +24,6 @@ class MemberListTable extends Component {
 
   render() {
     const {
-      // classes,
       user,
     } = this.props;
 
@@ -36,10 +33,9 @@ class MemberListTable extends Component {
 
     if (user) {
       receiptElement = (
-        <>
+        <div key={`print-receipt-${user.userId}`}>
           <ReactToPrint
             content={() => this.printReceipt}
-            key="print-receipt"
             trigger={() => (
               <Tooltip
                 title="Print Receipt"
@@ -60,14 +56,13 @@ class MemberListTable extends Component {
               ref={(el) => { this.printReceipt = el; }}
             />
           </div>
-        </>
+        </div>
       );
 
       invoiceElement = (
-        <>
+        <div key={`print-invoice-${user.userId}`}>
           <ReactToPrint
             content={() => this.printInvoice}
-            key="print-invoice"
             trigger={() => (
               <Tooltip
                 title="Print Invoice"
@@ -82,12 +77,13 @@ class MemberListTable extends Component {
             <Invoice
               amount={user.AmountPaid}
               form={user}
-              invoiceId={user.invoiceId}
+              invoiceId={user.invoiceId || 1}
               isActive={user.MemberType === 'Active'}
               isInvoice
+              ref={(el) => { this.printInvoice = el; }}
             />
           </div>
-        </>
+        </div>
       );
     }
 
