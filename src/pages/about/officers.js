@@ -39,7 +39,8 @@ const Avatar = ({ alt, src }) => (
         height: 160,
         width: 160,
       },
-    }}>
+    }}
+  >
     <img
       alt={alt}
       css={{
@@ -71,7 +72,8 @@ const Officers = ({ location }) => (
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
-        }}>
+        }}
+      >
         <Cards>
           <Card>
             <Avatar
@@ -108,7 +110,7 @@ const Officers = ({ location }) => (
             />
             <CardHeadline>Treasurer</CardHeadline>
             <FuturaParagraph>
-              <a href="mailto:jeff_turner@allenisd.org">Jeff Turner</a>
+              <a href="mailto:jeffrey.turner@allenisd.org">Jeff Turner</a>
             </FuturaParagraph>
             <FuturaParagraph>Director of Fine Arts, Allen ISD</FuturaParagraph>
           </Card>
@@ -142,11 +144,12 @@ const Officers = ({ location }) => (
         {/* Mobile sidebar */}
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

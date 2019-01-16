@@ -330,7 +330,11 @@ class MemberContent extends Component {
     );
 
     const isAdmin = authUser && [
-      'jeff_turner@allenisd.org',
+      'patricia.h.moreno@austinisd.org',
+      'jon.lester@abileneisd.org',
+      'jeffrey.turner@allenisd.org',
+      'jim.egger@mcallenisd.net',
+      'johnjanda@tomballisd.net',
       'm2mathew@me.com',
       'mike@drumsensei.com',
     ].includes(authUser.email);
