@@ -7,8 +7,6 @@ import { navigate } from 'gatsby';
 import presets, { colors } from '../../utils/presets';
 import { options } from '../../utils/typography';
 
-// Local Variables
-
 // Component Definition
 class SignInUpElement extends Component {
   static propTypes = {
@@ -60,7 +58,8 @@ class SignInUpElement extends Component {
               ? this.handleClickSignUp
               : onClickSignIn || this.handleClickSignIn
           }
-          role="button">
+          role="button"
+        >
           {`Sign ${viewSignUp ? 'Up' : 'In'}!`}
         </span>
       </div>

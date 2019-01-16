@@ -32,42 +32,44 @@ class Login extends Component {
     return isAuthenticated
       ? this.handleRedirectToMembers
       : (
-      <Layout location={location}>
-        <div
-          css={{
-            paddingLeft: 0,
-            [presets.Tablet]: {
-              paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-            },
-          }}>
-          <Container className="login">
-            <Helmet>
-              <title>TMAC | Log In</title>
-            </Helmet>
-            <h2
-              css={{
-                margin: '1rem 0',
-              }}>
-              Login
-            </h2>
+        <Layout location={location}>
+          <div
+            css={{
+              paddingLeft: 0,
+              [presets.Tablet]: {
+                paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+              },
+            }}
+          >
+            <Container className="login">
+              <Helmet>
+                <title>TMAC | Log In</title>
+              </Helmet>
+              <h2
+                css={{
+                  margin: '1rem 0',
+                }}
+              >
+                Login
+              </h2>
 
-            <FormHr />
+              <FormHr />
 
-            <LoginForm />
+              <LoginForm />
 
-            <FormHr />
+              <FormHr />
 
-            <p>
-              <Link to="/members/pw-forget">Forgot Password?</Link>
-            </p>
-          </Container>
-        </div>
-      </Layout>
-    );
+              <p>
+                <Link to="/members/pw-forget">Forgot Password?</Link>
+              </p>
+            </Container>
+          </div>
+        </Layout>
+      );
   }
 }
 
-const LoginWithContext = (props) => (
+const LoginWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <Login {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>

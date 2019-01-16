@@ -44,7 +44,7 @@ class PasswordForgetForm extends Component {
     };
   }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     event.preventDefault();
 
     const { email } = this.state;
@@ -58,7 +58,7 @@ class PasswordForgetForm extends Component {
 
         setTimeout(this.handleRedirectToMembers, 7000);
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           error,
         });
@@ -90,7 +90,8 @@ class PasswordForgetForm extends Component {
             [presets.Tablet]: {
               paddingLeft: '1.5rem',
             },
-          }}>
+          }}
+        >
           <Container className="password-forget">
             <Helmet>
               <title>TMAC | Forgot Password</title>
@@ -98,7 +99,8 @@ class PasswordForgetForm extends Component {
             <h2
               css={{
                 margin: '1rem 0',
-              }}>
+              }}
+            >
               Password Reset
             </h2>
 
@@ -112,7 +114,8 @@ class PasswordForgetForm extends Component {
                   fontWeight: 500,
                   marginBottom: 16,
                   padding: '0.5rem',
-                }}>
+                }}
+              >
                 Check your email to reset your password!
               </div>
             )}
@@ -120,7 +123,7 @@ class PasswordForgetForm extends Component {
               <input
                 css={{
                   display: 'block',
-                  fontFamily: options.headerFontFamily.join(`,`),
+                  fontFamily: options.headerFontFamily.join(','),
                   fontSize: '1rem',
                   marginBottom: 24,
                   padding: '0.2rem',
@@ -142,10 +145,11 @@ class PasswordForgetForm extends Component {
                 <div
                   css={{
                     color: 'red',
+                    fontFamily: options.headerFontFamily.join(','),
                     fontWeight: 500,
-                    fontFamily: options.headerFontFamily.join(`,`),
                     margin: '16px 0',
-                  }}>
+                  }}
+                >
                   {error.message}
                 </div>
               )}

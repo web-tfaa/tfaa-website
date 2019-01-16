@@ -8,8 +8,8 @@ import { Link } from 'gatsby';
 import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import SignupForm from '../../components/register/signup-form';
+import presets from '../../utils/presets';
 
 // Component Definition
 const SignUp = ({ location }) => {

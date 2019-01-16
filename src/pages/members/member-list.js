@@ -85,6 +85,8 @@ class MemberListContent extends Component {
       'mike@drumsensei.com',
     ].includes(userEmail);
 
+    console.log('1111', Object.values(userData));
+
     return (
       <div className={classes.root}>
         <Status />

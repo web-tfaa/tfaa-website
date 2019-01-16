@@ -421,8 +421,6 @@ class RegisterSponsorPayment extends Component {
       valueSilverError,
     } = this.state;
 
-    console.log('hello friend', donationAmount);
-
     return (
       <section>
         <h2>3. Choose Sponsorship level and Make payment</h2>
@@ -528,8 +526,8 @@ class RegisterSponsorPayment extends Component {
                           Donation Amount
                           <input
                             css={inputStyles}
-                            min="1500"
                             max="1999"
+                            min="1500"
                             name="valueGold"
                             onChange={this.handleUpdate}
                             placeholder=""

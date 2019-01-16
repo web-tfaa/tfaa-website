@@ -174,7 +174,7 @@ class RegisterForm extends Component {
         hasCompletedRegisterInfoForm: true,
       }, () => this.handleCompleteInfoStep(form));
     }
-  }
+  };
 
   handleUpdate = (event) => {
     if (this.activeComponent) {
@@ -340,20 +340,20 @@ class RegisterForm extends Component {
       EmailError,
       FirstName,
       FirstNameError,
-      hasCompletedRegisterInfoForm,
-      honeypot,
-      isAuthenticated,
       LastName,
       LastNameError,
       OfficePhone,
       OfficePhoneError,
-      radioValue,
       State,
       StateError,
       Title,
       TitleError,
       ZipCode,
       ZipCodeError,
+      hasCompletedRegisterInfoForm,
+      honeypot,
+      isAuthenticated,
+      radioValue,
     } = this.state;
 
     if (isAuthenticated) navigate('/members');
@@ -576,8 +576,8 @@ class RegisterForm extends Component {
                   <RadioGroup
                     aria-label="NewToTMAC"
                     name="NewToTMAC"
-                    value={radioValue}
                     onChange={this.handleChangeNewToTMAC}
+                    value={radioValue}
                   >
                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
@@ -603,9 +603,9 @@ class RegisterForm extends Component {
               }}
               >
                 <RegisterButton
+                  buttonType="submit"
                   isDisabled={!hasValidInput}
                   onClick={this.handleClickSubmitButton}
-                  buttonType="submit"
                 >
                   Continue to Step 3
                 </RegisterButton>
