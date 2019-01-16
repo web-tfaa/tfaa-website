@@ -192,10 +192,10 @@ const DefaultLayout = (props) => {
         <div
           css={{
             [presets.Tablet]: {
-              paddingLeft: leftPadding(10),
+              paddingLeft: leftPadding(8),
             },
             [presets.Desktop]: {
-              paddingLeft: leftPadding(12),
+              paddingLeft: leftPadding(10),
             },
           }}
         >

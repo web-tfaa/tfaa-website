@@ -289,6 +289,7 @@ class MemberContent extends Component {
 
     const isInvoiced = currentUser
       && currentUser.PaymentOption.toLowerCase() === 'invoiced';
+
     const isPaypal = currentUser
       && currentUser.PaymentOption.toLowerCase() === 'paypal';
 

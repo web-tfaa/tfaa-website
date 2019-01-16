@@ -71,7 +71,7 @@ class EnhancedTableHead extends Component {
       <TableHead>
         <TableRow key="table-head">
           {rows.map((row) => {
-            console.log('what be row?', row);
+            // console.log('what be row?', row);
             return (
               <CustomTableCell
                 key={`${row.id}=${row.label}`}
