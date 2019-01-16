@@ -35,9 +35,6 @@ const JoinContainer = (props) => {
         css={{
           paddingLeft: 0,
           width: '0 auto',
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
         }}
       >
         <Status />
@@ -76,7 +73,7 @@ const JoinContainer = (props) => {
                 3.
                 {' '}
               </span>
-              Pay dues online using PayPal (or mail invoice with  check via mail).
+              Pay dues online using PayPal (or mail invoice with check via mail).
             </FuturaDiv>
             <p>
               Note: Sponsors should register at the
