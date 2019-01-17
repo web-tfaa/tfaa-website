@@ -339,6 +339,8 @@ class MemberContent extends Component {
       'mike@drumsensei.com',
     ].includes(authUser.email);
 
+    console.log('is Admin user?', isAdmin, authUser.email);
+
     return (
       <div>
         <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
