@@ -150,56 +150,53 @@ class MemberListTable extends Component {
                 <TableBody>
                   {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((user) => {
-                      console.log('user', user);
-                      return (
-                        <TableRow
-                          className={classes.row}
-                          key={user.userId}
+                    .map(user => (
+                      <TableRow
+                        className={classes.row}
+                        key={user.userId}
+                      >
+                        <TableCell
+                          className={classes.cell}
+                          component="th"
+                          key={user.FirstName}
+                          padding="none"
+                          scope="row"
                         >
-                          <TableCell
-                            className={classes.cell}
-                            component="th"
-                            key={user.FirstName}
-                            padding="none"
-                            scope="row"
-                          >
-                            {user.FirstName}
+                          {user.FirstName}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.LastName}
+                        >
+                          {user.LastName}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.District}
+                        >
+                          {user.District}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.Title}
+                        >
+                          {user.Title}
+                        </TableCell>
+                        <TableCell
+                          className={classes.cell}
+                          key={user.Email}
+                        >
+                          {uglifyEmail(user.Email)}
+                        </TableCell>
+                        {isAdmin && (
+                          <TableCell className={classes.cell}>
+                            <MemberTableRowActionElements
+                              user={user}
+                            />
                           </TableCell>
-                          <TableCell
-                            className={classes.cell}
-                            key={user.LastName}
-                          >
-                            {user.LastName}
-                          </TableCell>
-                          <TableCell
-                            className={classes.cell}
-                            key={user.District}
-                          >
-                            {user.District}
-                          </TableCell>
-                          <TableCell
-                            className={classes.cell}
-                            key={user.Title}
-                          >
-                            {user.Title}
-                          </TableCell>
-                          <TableCell
-                            className={classes.cell}
-                            key={user.Email}
-                          >
-                            {uglifyEmail(user.Email)}
-                          </TableCell>
-                          {isAdmin && (
-                            <TableCell className={classes.cell}>
-                              <MemberTableRowActionElements
-                                user={user}
-                              />
-                            </TableCell>
-                          )}
-                        </TableRow>
-                      );
-                    })}
+                        )}
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             ) : <div className={classes.empty}>No members for the current school year</div>}
