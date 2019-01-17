@@ -339,7 +339,7 @@ class MemberContent extends Component {
       'mike@drumsensei.com',
     ].includes(authUser.email);
 
-    console.log('is Admin user?', isAdmin, authUser.email);
+    console.log('is Admin user?', isAdmin, authUser ? authUser.email : 'no user yet');
 
     return (
       <div>
