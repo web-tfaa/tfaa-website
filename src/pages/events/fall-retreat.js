@@ -1,76 +1,103 @@
 // External Dependencies
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'gatsby';
+import Typography from '@material-ui/core/Typography';
+// import { Link } from 'gatsby';
+import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import presets from '../../utils/presets';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
+const styles = theme => ({
+  adminCard: {
+    borderLeft: `4px solid ${theme.palette.secondary.dark}`,
+    maxWidth: '75%',
+  },
+});
+
 const indentStyles = {
   marginLeft: 16,
 };
 
-const scheduleStyles = {
-  margin: '6px 0px 6px 32px',
-};
+// const scheduleStyles = {
+//   margin: '6px 0px 6px 32px',
+// };
 
 // Component Definition
-const FallRetreat = ({ location }) => (
+const FallRetreat = ({
+  classes,
+  location,
+}) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Fall Retreat</title>
     </Helmet>
     <Container>
-      <h1>2018 TMAC Fall Retreat &amp; Conference</h1>
+      <h1>2019 TMAC Fall Retreat &amp; Conference</h1>
 
       <section>
         <h4>Who</h4>
         <p css={indentStyles}>
           The TMAC Fall Retreat is open to all current TMAC members who are in
           good standing (registered and paid). There is no separate conference
-          registration process. If you need to register for this year, then please{' '}
-          visit the <Link to="/members">Members</Link> page.
+          registration process.
+          {/* {'If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.'} */}
         </p>
-        <p css={indentStyles}>Preconference Tea and /Golf Tournament (Schedule below)</p>
-        <h5 css={indentStyles}>Alternate Tea details</h5>
-        <p css={scheduleStyles}>To register for &quot;Alternate Tea&quot; fill out{' '}
-          <a
+
+        <p css={indentStyles}>
+          <Card className={classes.adminCard}>
+            <CardContent>
+              <Typography variant="h6" component="h6">Membership</Typography>
+              <Typography variant="body2">
+                Membership registration for the 2019-2020 academic year will open on July 1, 2019.
+              </Typography>
+            </CardContent>
+          </Card>
+        </p>
+
+        {/* <p css={indentStyles}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
+        {/* <h5 css={indentStyles}>Alternate Tea details</h5> */}
+        {/* <p css={scheduleStyles}>To register for &quot;Alternate Tea&quot; fill out{' '} */}
+          {/* <a
             href="#"
             onClick={() => window.open('https://goo.gl/forms/oLVkhwuV0lhs8Okc2', 'Alternate Tea Google Form', 'width=800,height=800,top=120,left=120')}
           >
             this form.
           </a>
-        </p>
+        </p> */}
         {/* <div >
           Open Form
         </div> */}
-        <p css={scheduleStyles}><em>Lunch is free - provided by <a href="https://www.westmusic.com/" target="_blank" rel="noopener noreferrer">West Music</a></em></p>
+        {/* <p css={scheduleStyles}><em>Lunch is free - provided by <a href="https://www.westmusic.com/" target="_blank" rel="noopener noreferrer">West Music</a></em></p>
         <ul css={scheduleStyles}>
           Speakers to include:
           <li css={scheduleStyles}>Dr. Mackie Spradley – Director of Enrichment Education and Programs, Texas Education Agency & NAfME President Elect</li>
           <li css={scheduleStyles}>Ms. Julie Duty – Executive Director of United Sound, Inc.</li>
-        </ul>
+        </ul> */}
       </section>
 
       <section>
         <h4>When</h4>
         <p css={indentStyles}>
-          November 14-16, 2018
+          November 20-22, 2019
         </p>
       </section>
 
       <section>
-        <h4>Schedule</h4>
+        <h4>Schedule Available Summer 2019</h4>
+        {/* <h4>Schedule</h4> */}
 
-        <h5 css={indentStyles}>Wednesday</h5>
+        {/* <h5 css={indentStyles}>Wednesday</h5>
         <p css={scheduleStyles}>11:00am - Golf tournament (details and specific times to come)</p>
         <p css={scheduleStyles}>12:00pm - TMAC Alternate Tea</p>
         <div css={{ paddingLeft: 16 }}>
@@ -89,7 +116,7 @@ const FallRetreat = ({ location }) => (
         <h5 css={indentStyles}>Friday</h5>
         <p css={scheduleStyles}>8:00am - Registration and Breakfast</p>
         <p css={scheduleStyles}>8:30am - TMAC Business Meeting followed by round table topics.</p>
-        <p css={scheduleStyles}>12:00pm  - Conference ends</p>
+        <p css={scheduleStyles}>12:00pm  - Conference ends</p> */}
       </section>
 
       <section>
@@ -153,10 +180,11 @@ const FallRetreat = ({ location }) => (
 );
 
 FallRetreat.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]).isRequired,
 };
 
-export default FallRetreat;
+export default withStyles(styles)(FallRetreat);
