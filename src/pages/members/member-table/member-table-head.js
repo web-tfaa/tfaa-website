@@ -70,30 +70,27 @@ class EnhancedTableHead extends Component {
     return (
       <TableHead>
         <TableRow key="table-head">
-          {rows.map((row) => {
-            // console.log('what be row?', row);
-            return (
-              <CustomTableCell
-                key={`${row.id}=${row.label}`}
-                padding={row.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === row.id ? order : false}
+          {rows.map(row => (
+            <CustomTableCell
+              key={`${row.id}=${row.label}`}
+              padding={row.disablePadding ? 'none' : 'default'}
+              sortDirection={orderBy === row.id ? order : false}
+            >
+              <Tooltip
+                enterDelay={300}
+                placement="bottom-start"
+                title="Sort"
               >
-                <Tooltip
-                  enterDelay={300}
-                  placement="bottom-start"
-                  title="Sort"
+                <TableSortLabel
+                  active={orderBy === row.id}
+                  direction={order}
+                  onClick={this.createSortHandler(row.id)}
                 >
-                  <TableSortLabel
-                    active={orderBy === row.id}
-                    direction={order}
-                    onClick={this.createSortHandler(row.id)}
-                  >
-                    {row.label}
-                  </TableSortLabel>
-                </Tooltip>
-              </CustomTableCell>
-            );
-          })}
+                  {row.label}
+                </TableSortLabel>
+              </Tooltip>
+            </CustomTableCell>
+          ))}
         </TableRow>
       </TableHead>
     );
