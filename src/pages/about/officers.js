@@ -2,6 +2,10 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {
+  StaticQuery,
+  graphql,
+} from 'gatsby';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -21,16 +25,16 @@ import aboutSidebar from './about-links.yml';
 const Avatar = ({ alt, src }) => (
   <div
     css={{
-      position: 'relative',
-      display: 'flex',
       alignItems: 'baseline',
-      justifyContent: 'center',
-      flexShrink: 0,
       borderRadius: '50%',
-      overflow: 'hidden',
-      width: 120,
+      display: 'flex',
+      flexShrink: 0,
       height: 120,
+      justifyContent: 'center',
       marginBottom: 16,
+      overflow: 'hidden',
+      position: 'relative',
+      width: 120,
       [presets.Phablet]: {
         height: 140,
         width: 140,
@@ -44,9 +48,9 @@ const Avatar = ({ alt, src }) => (
     <img
       alt={alt}
       css={{
-        width: '100%',
         height: '100%',
         textAlign: 'center',
+        width: '100%',
         // Handle non-square image. The property isn't supported by IE11.
         // objectFit: 'cover',
       }}
@@ -60,115 +64,185 @@ Avatar.propTypes = {
 };
 
 // Component Definition
-const Officers = ({ location }) => (
-  <Layout location={location}>
-    <Container>
-      <Helmet>
-        <title>TMAC | Officers</title>
-      </Helmet>
-      <div
-        css={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Cards>
-          <Card>
-            <Avatar
-              alt="president picture"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Moreno.jpg"
-            />
-            <CardHeadline>President</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:patricia.h.moreno@austinisd.org">
-                Patricia Moreno
-              </a>
-            </FuturaParagraph>
-            <FuturaParagraph>
-              Coordinator of Fine Arts, Austin ISD
-            </FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="vice-president picture"
-              src="https://res.cloudinary.com/drumsensei/image/upload/v1542201956/jay-lester-avatar_soe2zw.jpg"
-            />
-            <CardHeadline>Vice-President</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:jon.lester@abileneisd.org">Jay Lester</a>
-            </FuturaParagraph>
-            <FuturaParagraph>
-              Executive Director of Fine Arts, Abilene ISD
-            </FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="treasurer picture"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Turner.jpg"
-            />
-            <CardHeadline>Treasurer</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:jeffrey.turner@allenisd.org">Jeff Turner</a>
-            </FuturaParagraph>
-            <FuturaParagraph>Director of Fine Arts, Allen ISD</FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="secretary picture"
-              src="https://res.cloudinary.com/tmac/image/upload/v1532300879/jim-egger.jpg"
-            />
-            <CardHeadline>Secretary</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:jim.egger@mcallenisd.net">Jim Egger</a>
-            </FuturaParagraph>
-            <FuturaParagraph>
-              Director of Fine Arts, McAllen ISD
-            </FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="past-president picture"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Janda.jpg"
-            />
-            <CardHeadline>Past-President</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:johnjanda@tomballisd.net">JD Janda</a>
-            </FuturaParagraph>
-            <FuturaParagraph>
-              Director of Fine Arts, Tomball ISD
-            </FuturaParagraph>
-          </Card>
-        </Cards>
-        {/* Mobile sidebar */}
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
-          <SidebarBody inline yaml={aboutSidebar} />
-        </div>
-      </div>
-    </Container>
-  </Layout>
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query officerPageQuery {
+        allContentfulOfficer(
+          filter: {
+            node_locale: { eq: "en-US" }
+          }
+        ) {
+          edges {
+            node {
+              title
+              name
+              email
+              schoolDistrict
+              districtTitle
+              linkToPicture
+            }
+          }
+        }
+      }`}
+    render={data => <Officers data={data.allContentfulOfficer.edges} {...props} />}
+  />
 );
 
+
+const Officers = ({
+  data,
+  location,
+}) => {
+  console.log('data in officers page →', data);
+
+  const president = data.find(o => o.node.title === 'President').node;
+  const vicePresident = data.find(o => o.node.title === 'Vice-President').node;
+  const treasurer = data.find(o => o.node.title === 'Treasurer').node;
+  const secretary = data.find(o => o.node.title === 'Secretary').node;
+  const pastPresident = data.find(o => o.node.title === 'Past-President').node;
+
+  return (
+    <Layout location={location}>
+      <Container>
+        <Helmet>
+          <title>TMAC | Officers</title>
+        </Helmet>
+        <h2>TMAC Officers</h2>
+        <div
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Cards>
+            <Card>
+              <Avatar
+                alt="president picture"
+                src={president.linkToPicture}
+              />
+              <CardHeadline>President</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${president.email}`}>
+                  {president.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {president.districtTitle}, {president.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="vice-president picture"
+                src={vicePresident.linkToPicture}
+              />
+              <CardHeadline>Vice-President</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${vicePresident.email}`}>
+                  {vicePresident.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {vicePresident.districtTitle}, {vicePresident.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="treasurer picture"
+                src={treasurer.linkToPicture}
+              />
+              <CardHeadline>Treasurer</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${treasurer.email}`}>
+                  {treasurer.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {treasurer.districtTitle}, {treasurer.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="secretary picture"
+                src={secretary.linkToPicture}
+              />
+              <CardHeadline>Secretary</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${secretary.email}`}>
+                  {secretary.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {secretary.districtTitle}, {secretary.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="past-president picture"
+                src={pastPresident.linkToPicture}
+              />
+              <CardHeadline>Past-President</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${pastPresident.email}`}>
+                  {pastPresident.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {pastPresident.districtTitle}, {pastPresident.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+          </Cards>
+          {/* Mobile sidebar */}
+          <div
+            css={{
+              display: 'block',
+              [presets.Tablet]: {
+                display: 'none',
+              },
+            }}
+          >
+            <hr
+              css={{
+                border: 0,
+                height: 2,
+                marginTop: 10,
+              }}
+            />
+            <SidebarBody inline yaml={aboutSidebar} />
+          </div>
+        </div>
+      </Container>
+    </Layout>
+  );
+};
+
 Officers.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   location: PropTypes.oneOfType([
-    PropTypes.string,
     PropTypes.object,
+    PropTypes.string,
   ]).isRequired,
 };
 
-export default Officers;
+// export const pageQuery = graphql`
+//   query officerPageQuery {
+//     allContentfulOfficer {
+//     edges {
+//       node {
+//         id
+//         title
+//         name
+//         email
+//         schoolDistrict
+//         districtTitle
+//         linkToPicture
+//       }
+//     }
+//   }
+// }`;
