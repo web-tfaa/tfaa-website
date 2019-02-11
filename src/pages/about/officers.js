@@ -89,7 +89,6 @@ export default props => (
   />
 );
 
-
 const Officers = ({
   data,
   location,
@@ -229,20 +228,3 @@ Officers.propTypes = {
     PropTypes.string,
   ]).isRequired,
 };
-
-// export const pageQuery = graphql`
-//   query officerPageQuery {
-//     allContentfulOfficer {
-//     edges {
-//       node {
-//         id
-//         title
-//         name
-//         email
-//         schoolDistrict
-//         districtTitle
-//         linkToPicture
-//       }
-//     }
-//   }
-// }`;
