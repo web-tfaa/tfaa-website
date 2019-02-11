@@ -46,11 +46,7 @@ const Home = (props) => {
     location,
   } = props;
 
-  console.log('data on home page', data);
-
   const presidentInfo = data.allContentfulOfficer.edges.find(o => o.node.title === 'President').node;
-
-  console.log('presidentInfo', presidentInfo);
 
   return (
     <Layout location={location}>

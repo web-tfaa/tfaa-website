@@ -91,8 +91,6 @@ const AreaReps = ({
   data,
   location,
 }) => {
-  console.log('data in area reps page →', data);
-
   const north = data.find(o => o.node.title === 'North Texas').node;
   const central = data.find(o => o.node.title === 'Central Texas').node;
   const south = data.find(o => o.node.title === 'South Texas').node;

@@ -93,8 +93,6 @@ const Officers = ({
   data,
   location,
 }) => {
-  console.log('data in officers page →', data);
-
   const president = data.find(o => o.node.title === 'President').node;
   const vicePresident = data.find(o => o.node.title === 'Vice-President').node;
   const treasurer = data.find(o => o.node.title === 'Treasurer').node;
