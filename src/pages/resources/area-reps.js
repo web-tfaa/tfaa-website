@@ -2,6 +2,10 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {
+  StaticQuery,
+  graphql,
+} from 'gatsby';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -10,8 +14,8 @@ import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import presets from '../../utils/presets';
 
 // Sidebar data
 import resourcesSidebar from './resources-links.yml';
@@ -20,16 +24,16 @@ import resourcesSidebar from './resources-links.yml';
 const Avatar = ({ alt, src }) => (
   <div
     css={{
-      position: 'relative',
-      display: 'flex',
       alignItems: 'baseline',
-      justifyContent: 'center',
-      flexShrink: 0,
       borderRadius: '50%',
-      overflow: 'hidden',
-      width: 120,
+      display: 'flex',
+      flexShrink: 0,
       height: 120,
+      justifyContent: 'center',
       marginBottom: 16,
+      overflow: 'hidden',
+      position: 'relative',
+      width: 120,
       [presets.Phablet]: {
         height: 140,
         width: 140,
@@ -38,12 +42,13 @@ const Avatar = ({ alt, src }) => (
         height: 160,
         width: 160,
       },
-    }}>
+    }}
+  >
     <img
       css={{
-        width: '100%',
         height: '100%',
         textAlign: 'center',
+        width: '100%',
         // Handle non-square image. The property isn't supported by IE11.
         // objectFit: 'cover',
       }}
@@ -58,104 +63,162 @@ Avatar.propTypes = {
 };
 
 // Component Definition
-const AreaReps = ({ location }) => (
-  <Layout location={location}>
-    <Container>
-      <Helmet>
-        <title>TMAC | Area Reps</title>
-      </Helmet>
-      <div
-        css={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}>
-        <Cards>
-          <Card>
-            <Avatar
-              alt="DFW area representative"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Turner.jpg"
-            />
-            <CardHeadline>North Texas</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:jeffrey.turner@allenisd.org">Jeff Turner</a>
-            </FuturaParagraph>
-            <FuturaParagraph>Allen ISD</FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="Central TX area representative"
-              src="https://res.cloudinary.com/drumsensei/image/upload/v1542202104/peter-warshaw-avatar_g0haep.jpg"
-            />
-            <CardHeadline>Central Texas</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:Peter.Warshaw@leanderisd.org">Peter Warshaw</a>
-            </FuturaParagraph>
-            <FuturaParagraph>Leander ISD</FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="South TX area representative"
-              src="https://res.cloudinary.com/drumsensei/image/upload/v1542202286/manuel-rodriguez-avatar_tt5pr1.jpg"
-            />
-            <CardHeadline>South Texas</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:">Manuel Rodriguez</a>
-            </FuturaParagraph>
-            <FuturaParagraph>Valley View ISD</FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="Greater Houston area representative"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523157293/monte-mast-square.jpg"
-            />
-            <CardHeadline>Greater Houston</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:mmast@kleinisd.net">Monte Mast</a>
-            </FuturaParagraph>
-            <FuturaParagraph>Klein ISD</FuturaParagraph>
-          </Card>
-          <Card>
-            <Avatar
-              alt="West TX area representative"
-              src="https://res.cloudinary.com/drumsensei/image/upload/v1542201956/jay-lester-avatar_soe2zw.jpg"
-            />
-            <CardHeadline>West Texas</CardHeadline>
-            <FuturaParagraph>
-              <a href="mailto:jon.lester@abileneisd.org">
-                Jay Lester
-              </a>
-            </FuturaParagraph>
-            <FuturaParagraph>Abilene ISD</FuturaParagraph>
-          </Card>
-        </Cards>
-      </div>
-      <div
-        css={{
-          display: `block`,
-          [presets.Tablet]: {
-            display: `none`,
-          },
-        }}>
-        <hr
-          css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }}
-        />
-        <SidebarBody inline yaml={resourcesSidebar} />
-      </div>
-    </Container>
-  </Layout>
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query areaRepsPageQuery {
+        allContentfulAreaReps(
+          filter: {
+            node_locale: { eq: "en-US" }
+          }
+        ) {
+          edges {
+            node {
+              title
+              name
+              email
+              schoolDistrict
+              linkToPicture
+            }
+          }
+        }
+      }`}
+    render={data => <AreaReps data={data.allContentfulAreaReps.edges} {...props} />}
+  />
 );
 
-AreaReps.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]).isRequired,
+const AreaReps = ({
+  data,
+  location,
+}) => {
+  const north = data.find(o => o.node.title === 'North Texas').node;
+  const central = data.find(o => o.node.title === 'Central Texas').node;
+  const south = data.find(o => o.node.title === 'South Texas').node;
+  const houston = data.find(o => o.node.title === 'Greater Houston').node;
+  const west = data.find(o => o.node.title === 'West Texas').node;
+
+  return (
+    <Layout location={location}>
+      <Container>
+        <Helmet>
+          <title>TMAC | Area Reps</title>
+        </Helmet>
+        <div
+          css={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Cards>
+            <Card>
+              <Avatar
+                alt="North Texas area representative"
+                src={north.linkToPicture}
+              />
+              <CardHeadline>North Texas</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${north.email}`}>
+                  {north.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {north.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="Central Texas area representative"
+                src={central.linkToPicture}
+              />
+              <CardHeadline>Central Texas</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${central.email}`}>
+                  {central.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {central.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="South Texas area representative"
+                src={south.linkToPicture}
+              />
+              <CardHeadline>South Texas</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${south.email}`}>
+                  {south.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {south.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="Greater Houston area representative"
+                src={houston.linkToPicture}
+              />
+              <CardHeadline>Greater Houston</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${houston.email}`}>
+                  {houston.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {houston.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="West Texas area representative"
+                src={west.linkToPicture}
+              />
+              <CardHeadline>West Texas</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${west.email}`}>
+                  {west.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {west.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+          </Cards>
+        </div>
+        <div
+          css={{
+            display: 'block',
+            [presets.Tablet]: {
+              display: 'none',
+            },
+          }}
+        >
+          <hr
+            css={{
+              border: 0,
+              height: 2,
+              marginTop: 10,
+            }}
+          />
+          <SidebarBody inline yaml={resourcesSidebar} />
+        </div>
+      </Container>
+    </Layout>
+  );
 };
 
-export default AreaReps;
+AreaReps.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  location: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+};

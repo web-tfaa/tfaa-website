@@ -16,6 +16,7 @@ import MastheadContent from '../components/masthead';
 
 // Local Variables
 const propTypes = {
+  data: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
 };
 
@@ -41,8 +42,11 @@ const propTypes = {
 // Component Definition
 const Home = (props) => {
   const {
+    data,
     location,
   } = props;
+
+  const presidentInfo = data.allContentfulOfficer.edges.find(o => o.node.title === 'President').node;
 
   return (
     <Layout location={location}>
@@ -78,14 +82,14 @@ const Home = (props) => {
               supervision of music activities in your district, we encourage you
               to become a member of TMAC. We will be hosting a Summer Round Table
               session during the summer TBA/TCDA/TODA conferences in San Antonio
-              in July 2018 - everyone is invited to attend! Our Fall
-              Conference, for TMAC members only, will be held November 14-16, 2018
+              in July 2019 - everyone is invited to attend! Our Fall
+              Conference, for TMAC members only, will be held November 20-22, 2019
               in Austin, Texas. If you would like more information on registering
               for the Fall Conference, please <Link to="/events/fall-retreat/">visit the event page</Link>.
             </FuturaParagraph>
 
             <FuturaParagraph>
-              <a href="mailto:patricia.h.moreno@austinisd.org">Patricia Moreno</a>
+              <a href="mailto:patricia.h.moreno@austinisd.org">{presidentInfo.name}</a>
               , President
               <br />
               Texas Music Administrators Conference
@@ -104,34 +108,22 @@ Home.propTypes = propTypes;
 
 export default Home;
 
-// export const pageQuery = graphql`
-//   query pageQuery {
-//     allContentfulBlog(
-//       filter: {
-//         node_locale: { eq: "en-US" }
-//       },
-//       sort: {
-//         fields: [createdAt], order: DESC
-//       }
-//     ) {
-//       edges {
-//         node {
-//           id
-//           title
-//           slug
-//           createdAt(formatString: "MMMM DD, YYYY")
-//           featuredImage {
-//             resolutions(width: 300) {
-//               ...GatsbyContentfulResolutions
-//             }
-//           }
-//           content {
-//             childMarkdownRemark {
-//               excerpt
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  query pageQuery {
+    allContentfulOfficer(
+      filter: {
+        node_locale: { eq: "en-US" }
+      }
+    ) {
+      edges {
+        node {
+          title
+          name
+          email
+          schoolDistrict
+          districtTitle
+          linkToPicture
+        }
+      }
+  }
+}`;
