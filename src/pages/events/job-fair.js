@@ -25,7 +25,7 @@ const indentStyles = {
 export default props => (
   <StaticQuery
     query={graphql`
-      query {
+      query jobFairPageQuery {
         allContentfulOfficer(
           filter: {
             node_locale: { eq: "en-US" }
