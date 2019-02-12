@@ -6,8 +6,8 @@ import React from 'react';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import presets from '../../utils/presets';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
@@ -36,7 +36,8 @@ const SummerRoundTable = ({ location }) => (
           <a
             href="http://www.sahbgcc.com/"
             rel="noopener noreferrer"
-            target="_blank">
+            target="_blank"
+          >
             Henry B. Gonzalez Convention Center
           </a>
           ,&nbsp; CC210 (tentative room assignment)
@@ -44,7 +45,8 @@ const SummerRoundTable = ({ location }) => (
             <a
               href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
               rel="noopener noreferrer"
-              target="_blank">
+              target="_blank"
+            >
               900 E. Market St
               <br />
               San Antonio, TX 78205
@@ -78,11 +80,12 @@ const SummerRoundTable = ({ location }) => (
       </section>
       <div
         css={{
-          display: `block`,
+          display: 'block',
           [presets.Tablet]: {
-            display: `none`,
+            display: 'none',
           },
-        }}>
+        }}
+      >
         <hr
           css={{
             border: 0,
