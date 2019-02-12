@@ -42,7 +42,6 @@ export default props => (
         allContentfulEvent(
           filter: {
             node_locale: { eq: "en-US" }
-            titleOfEvent: { eq: "TMAC Job Fair"}
           }
         )  {
           edges {
@@ -62,7 +61,7 @@ const JobFair = ({
   data,
   location,
 }) => {
-  const jobFair = data.allContentfulEvent.edges[0].node;
+  const jobFair = data.allContentfulEvent.edges.find(e => e.node.titleOfEvent.includes('Job Fair')).node;
   const president = data.allContentfulOfficer.edges[0].node;
 
   return (
