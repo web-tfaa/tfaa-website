@@ -25,25 +25,36 @@ const indentStyles = {
 export default props => (
   <StaticQuery
     query={graphql`
-      query jobFairPageQuery {
+      query {
         allContentfulOfficer(
           filter: {
             node_locale: { eq: "en-US" }
+            title: { eq: "President" }
           }
         ) {
           edges {
             node {
-              title
               name
               email
-              schoolDistrict
-              districtTitle
-              linkToPicture
+            }
+          }
+        }
+        allContentfulEvent(
+          filter: {
+            node_locale: { eq: "en-US" }
+            titleOfEvent: { eq: "TMAC Job Fair"}
+          }
+        )  {
+          edges {
+            node {
+              titleOfEvent
+              dateOfEvent
+              timeOfEvent
             }
           }
         }
       }`}
-    render={data => <JobFair data={data.allContentfulOfficer.edges} {...props} />}
+    render={data => <JobFair data={data} {...props} />}
   />
 );
 
@@ -51,14 +62,16 @@ const JobFair = ({
   data,
   location,
 }) => {
-  const president = data.find(o => o.node.title === 'President').node;
+  const jobFair = data.allContentfulEvent.edges[0].node;
+  const president = data.allContentfulOfficer.edges[0].node;
+
   return (
     <Layout location={location}>
       <Container>
         <Helmet>
           <title>TMAC | Job Fair</title>
         </Helmet>
-        <h1>TMAC Job Fair</h1>
+        <h1>{jobFair.titleOfEvent}</h1>
 
         <section>
           <h4>Who</h4>
@@ -79,9 +92,9 @@ const JobFair = ({
         <section>
           <h4>When</h4>
           <p css={indentStyles}>
-            Friday, February 15, 2019
+            {jobFair.dateOfEvent}
             <br />
-            6:00-8:00 PM
+            {jobFair.timeOfEvent}
           </p>
         </section>
 
@@ -141,7 +154,9 @@ const JobFair = ({
 };
 
 JobFair.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  data: PropTypes.shape(
+    PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  ).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
