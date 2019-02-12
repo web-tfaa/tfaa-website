@@ -7,7 +7,8 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 // import { Link } from 'gatsby';
 import { withStyles } from '@material-ui/core/styles';
-StaticQuery,
+import {
+  StaticQuery,
   graphql,
 } from 'gatsby';
 
@@ -40,7 +41,7 @@ const indentStyles = {
 export default props => (
   <StaticQuery
     query={graphql`
-      query summerRoundTablePageQuery {
+      query fallRetreatPageQuery {
         allContentfulEvent(
           filter: {
             node_locale: { eq: "en-US" }
@@ -54,7 +55,9 @@ export default props => (
           }
         }
       }`}
-    render={data => <FallRetreat data={data.allContentfulEvent.edges} {...props} />}
+    render={data => (
+      withStyles(styles)(<FallRetreat data={data.allContentfulEvent.edges} {...props} />)
+    )}
   />
 );
 
@@ -96,7 +99,7 @@ const FallRetreat = ({
           {/* <p css={indentStyles}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
           {/* <h5 css={indentStyles}>Alternate Tea details</h5> */}
           {/* <p css={scheduleStyles}>To register for &quot;Alternate Tea&quot; fill out{' '} */}
-            {/* <a
+          {/* <a
               href="#"
               onClick={() => window.open('https://goo.gl/forms/oLVkhwuV0lhs8Okc2', 'Alternate Tea Google Form', 'width=800,height=800,top=120,left=120')}
             >
@@ -217,4 +220,4 @@ FallRetreat.propTypes = {
   ]).isRequired,
 };
 
-export default withStyles(styles)(FallRetreat);
+// export default withStyles(styles)(FallRetreat);
