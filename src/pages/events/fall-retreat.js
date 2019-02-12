@@ -38,7 +38,7 @@ const indentStyles = {
 // };
 
 // Component Definition
-export default props => (
+export default withStyles(styles)(props => (
   <StaticQuery
     query={graphql`
       query fallRetreatPageQuery {
@@ -55,11 +55,9 @@ export default props => (
           }
         }
       }`}
-    render={data => (
-      withStyles(styles)(<FallRetreat data={data.allContentfulEvent.edges} {...props} />)
-    )}
+    render={data => <FallRetreat data={data.allContentfulEvent.edges} {...props} />}
   />
-);
+));
 
 const FallRetreat = ({
   classes,
@@ -85,7 +83,7 @@ const FallRetreat = ({
             {/* {'If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.'} */}
           </p>
 
-          <p css={indentStyles}>
+          <div css={indentStyles}>
             <Card className={classes.adminCard}>
               <CardContent>
                 <Typography variant="h6" component="h6">Membership</Typography>
@@ -94,7 +92,7 @@ const FallRetreat = ({
                 </Typography>
               </CardContent>
             </Card>
-          </p>
+          </div>
 
           {/* <p css={indentStyles}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
           {/* <h5 css={indentStyles}>Alternate Tea details</h5> */}
