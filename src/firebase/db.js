@@ -15,7 +15,7 @@ export const doCreateEntry = (form, collection, documentId, callback) =>
     });
 
 export const doUpdateEntry = (form, collection, documentId) =>
-  db.collection(`${collection}_${currentSchoolYearShort}`)
+  !console.log(form) && db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
     .then(() => {
@@ -51,7 +51,6 @@ export const doGetInvoiceId = callback =>
         // doc.data() will be undefined in this case
         console.log('no such document for invoice');
       } else {
-        console.log('what is the invoice id now?', doc.data().currentInvoiceId);
         callback(doc.data().currentInvoiceId);
       }
     })

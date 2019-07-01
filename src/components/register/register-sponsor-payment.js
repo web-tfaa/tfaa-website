@@ -76,6 +76,8 @@ class RegisterSponsorPayment extends Component {
   constructor(props) {
     super(props);
 
+    console.log('initialLevel', props.initialLevel);
+
     this.state = {
       // This is used to send the final donation amount to the db
       donationAmount: this.getInitialDonationAmount(props.initialLevel),
@@ -125,6 +127,7 @@ class RegisterSponsorPayment extends Component {
 
     if ((prevState.invoiceId === 0 && invoiceId > 0)
       || (prevState.receiptId === 0 && receiptId > 0)) {
+      console.log('0');
       return doUpdateEntry(updatedForm, collection, form.userId);
     }
   }
@@ -201,6 +204,7 @@ class RegisterSponsorPayment extends Component {
         value: event.target.value,
       });
 
+      console.log('1');
       return doUpdateEntry(updatedForm, collection, form.userId);
     }
   };
@@ -220,6 +224,8 @@ class RegisterSponsorPayment extends Component {
         // value,
       } = this.state;
 
+      console.log('handleCompletePaymentStep : donationAmount : ', donationAmount);
+
       const documentId = form.userId;
 
       const updatedForm = {
@@ -232,6 +238,7 @@ class RegisterSponsorPayment extends Component {
         receiptId,
       };
 
+      console.log('2');
       doUpdateEntry(updatedForm, collection, documentId);
       onCompleteStep(2, updatedForm);
     }
@@ -260,7 +267,7 @@ class RegisterSponsorPayment extends Component {
     };
 
     return Promise.all([
-      doUpdateEntry(updatedForm, collection, documentId),
+      !console.log('3') && doUpdateEntry(updatedForm, collection, documentId),
       doUpdateInvoiceId(),
     ]);
   };
@@ -307,6 +314,8 @@ class RegisterSponsorPayment extends Component {
         name,
         value,
       } = event.target;
+
+      console.log('handleUpdate : event : ', parseInt(value, 10));
 
       this.setState({
         // We check for empty value and cast it to a string to avoid setting to NaN

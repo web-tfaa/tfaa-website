@@ -200,6 +200,7 @@ class RegisterSponsorForm extends Component {
           [event.target.name]: stripPhone(event.target.value),
         }, this.handleUpdateErrors(event.target.name, event.target.value));
       } else {
+        console.log('handleUpdate : form', event.target);
         this.setState({
           [event.target.name]: event.target.value,
         }, this.handleUpdateErrors(event.target.name, event.target.value));
