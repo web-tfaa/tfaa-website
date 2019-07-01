@@ -38,7 +38,7 @@ export const currentYearLong = format(new Date(), ['YYYY']);
 export const currentYearShort = format(new Date(), ['YY']);
 
 // Is the current date after July 1st of the current year?
-const isTodayAfterJulyFirst = isAfter(new Date(), new Date(currentYearLong, 6, 1));
+const isTodayAfterJulyFirst = isAfter(new Date(), new Date(currentYearLong, 5, 30));
 
 export const currentSchoolYearShort = isTodayAfterJulyFirst
   ? `${currentYearShort}-${Number(currentYearShort) + 1}`

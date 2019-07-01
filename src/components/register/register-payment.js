@@ -23,6 +23,7 @@ import {
   doUpdateInvoiceId,
   doUpdateReceiptId,
 } from '../../firebase/db';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const currentDate = format(new Date(), ['M/D/YYYY']);
@@ -264,7 +265,7 @@ class RegisterPayment extends Component {
               <p>{isActive ? 'Active' : 'Retired'} Member - {isActive ? '$50.00' : '$30.00'}</p>
               <p>{form.FirstName} {form.LastName}, {form.District}</p>
 
-              <h3 css={{ marginTop: 48 }}>Thank you for joining TMAC for this school year!</h3>
+              <h3 css={{ marginTop: 48 }}>Thank you for joining TMAC for the {currentSchoolYearLong} school year!</h3>
               <FormHr />
 
               <p>Please click below to print a copy of your receipt.</p>
