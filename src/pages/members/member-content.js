@@ -21,6 +21,7 @@ import presets from '../../utils/presets';
 import CtaButton from '../../components/masthead/cta-button';
 import RegisterButton from '../../components/register/register-button';
 import { options } from '../../utils/typography';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -263,7 +264,7 @@ class MemberContent extends Component {
     const receiptInfo = currentUser && (
       <FuturaDiv>
         <h5>Need a copy of your receipt?</h5>
-        Thank you for joining TMAC for this school year!
+        Thank you for joining TMAC for the {currentSchoolYearLong} school year!
         <div css={{ marginTop: 16 }}>
           <ReactToPrint
             content={() => this.printReceipt}
@@ -321,7 +322,8 @@ class MemberContent extends Component {
               download
               target="_blank"
               rel="noopener noreferrer"
-              href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf">
+              href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf"
+            >
               Download W-9
             </FuturaAnchor>
           </Fragment>
