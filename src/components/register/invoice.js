@@ -6,6 +6,9 @@ import React, { Component, Fragment } from 'react';
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
 import InvoiceTable from './invoice-table';
+import {
+  currentSchoolYearLong,
+} from '../../utils/helpers';
 
 // Local Variables
 const currentDate = format(new Date(), ['M/D/YYYY']);
@@ -88,7 +91,7 @@ class Invoice extends Component {
             <strong>
               {isInvoice ? 'Invoice' : 'Receipt'}#:
             </strong>{' '}
-            201819-00{isInvoice ? invoiceId : receiptId}
+            {currentSchoolYearLong}_{isInvoice ? invoiceId : receiptId}
           </div>
           <div>
             <strong>Date:</strong>{' '}
@@ -163,7 +166,7 @@ class Invoice extends Component {
                   <strong>Texas Music Administrators Conference (TMAC)</strong>
                 </span>
               ) : (
-                <strong>Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for this school year!</strong>
+                <strong>Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for thie {currentSchoolYearLong} school year!</strong>
               )}
           </div>
         </div>

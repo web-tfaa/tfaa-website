@@ -70,6 +70,9 @@ function getSorting(order, orderBy) {
 }
 
 function uglifyEmail(email) {
+  if (!email) {
+    return '';
+  }
   const index = email.indexOf('@');
 
   // Remove it & insert -at- back in → Array.prototype.splice()

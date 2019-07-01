@@ -164,7 +164,7 @@ class RegisterForm extends Component {
     if (this.activeComponent) {
       const { onCompleteStep } = this.props;
 
-      setTimeout(() => onCompleteStep(0, form), 4000);
+      setTimeout(() => onCompleteStep(0, form), 2500);
     }
   };
 
