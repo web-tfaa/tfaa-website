@@ -87,9 +87,9 @@ class MemberListTable extends Component {
       );
     }
 
-    if (user && user.PaymentOption.toLowerCase() === 'paypal') {
+    if (user && user.PaymentOption && user.PaymentOption.toLowerCase() === 'paypal') {
       actionElements.push(receiptElement);
-    } else if (user && user.PaymentOption.toLowerCase() === 'invoiced') {
+    } else if (user && user.PaymentOption && user.PaymentOption.toLowerCase() === 'invoiced') {
       actionElements.push(invoiceElement);
     }
 
