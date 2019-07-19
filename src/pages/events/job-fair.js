@@ -72,7 +72,7 @@ const JobFair = ({
         </Helmet>
         <h1>{jobFair.titleOfEvent}</h1>
 
-        <section>
+        {/* <section>
           <h4>Who</h4>
           <p css={indentStyles}>
             *District representatives must be TMAC members to participate in the
@@ -86,18 +86,19 @@ const JobFair = ({
             </a>
             )
           </p>
-        </section>
+        </section> */}
 
         <section>
           <h4>When</h4>
           <p css={indentStyles}>
-            {jobFair.dateOfEvent}
+            {/* {jobFair.dateOfEvent}
             <br />
-            {jobFair.timeOfEvent}
+            {jobFair.timeOfEvent} */}
+            There will be no Job Fair for the 2020 Convention.
           </p>
         </section>
 
-        <section>
+        {/* <section>
           <h4>Where</h4>
           <div css={indentStyles}>
             <a
@@ -120,7 +121,7 @@ const JobFair = ({
               </a>
             </p>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <h4>Contact</h4>
