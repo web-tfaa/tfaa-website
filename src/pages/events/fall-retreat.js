@@ -83,7 +83,8 @@ const FallRetreat = ({
             {/* {'If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.'} */}
           </p>
 
-          <div css={indentStyles}>
+          {/* This "alert" should show the Fall Retreat is in past but we are in the current school year still */}
+          {/* <div css={indentStyles}>
             <Card className={classes.adminCard}>
               <CardContent>
                 <Typography variant="h6" component="h6">Membership</Typography>
@@ -92,7 +93,7 @@ const FallRetreat = ({
                 </Typography>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 
           {/* <p css={indentStyles}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
           {/* <h5 css={indentStyles}>Alternate Tea details</h5> */}
@@ -123,7 +124,7 @@ const FallRetreat = ({
         </section>
 
         <section>
-          <h4>Schedule Available Summer 2019</h4>
+          <h4>Schedule available mid Fall 2019</h4>
           {/* <h4>Schedule</h4> */}
 
           {/* <h5 css={indentStyles}>Wednesday</h5>
@@ -178,7 +179,7 @@ const FallRetreat = ({
             </p>
             <p css={{ fontSize: 24, color: 'darkred' }}>
               <a
-                href="https://book.passkey.com/event/49544338/owner/44666/home"
+                href="https://book.passkey.com/gt/217253496?gtid=d218eb06a20083949c49ae5aef9b0a47"
                 rel="noopener noreferrer"
                 target="_blank"
               >
