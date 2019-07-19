@@ -41,7 +41,7 @@ class SponsorCard extends Component {
           display: 'flex',
           flexDirection: 'column',
           fontSize: '1.25rem',
-          height: sponsor.ImageUrl.startsWith('http') ? 128 : 48,
+          height: 48,
           justifyContent: 'center',
           marginBottom: 6,
         }}
@@ -54,14 +54,6 @@ class SponsorCard extends Component {
         >
           {sponsor.SponsorOrganization}
         </a>
-        {sponsor.ImageUrl.startsWith('http') && (
-          <img
-            alt={`Logo for ${sponsor.SponsorOrganization}`}
-            css={{ marginBottom: 0 }}
-            height="64px"
-            src={sponsor.ImageUrl}
-          />
-        )}
       </div>
     ));
 
