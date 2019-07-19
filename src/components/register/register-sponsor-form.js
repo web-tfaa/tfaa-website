@@ -76,8 +76,6 @@ const INITIAL_STATE = {
   FallRetreatIntent: true,
   FallRetreatOtherAttendees: '',
   honeypot: '',
-  ImageUrl: '',
-  ImageUrlError: '',
   invoiceDate: '',
   invoiceId: 0,
   isAuthenticated: false,
@@ -273,19 +271,6 @@ class RegisterSponsorForm extends Component {
             this.setState({ SponsorOrganizationError: 'Organization Name is required' });
           }
           break;
-        case 'ImageUrl':
-          if (ImageUrl && value) {
-            if (value.startsWith('http')) {
-              this.setState({ ImageUrlError: '' });
-            }
-          } else if (!ImageUrl && value) {
-            if (!value.startsWith('http')) {
-              this.setState({ ImageUrlError: 'Image URL should begin with "http"' });
-            }
-          } else if (ImageUrl && !value) {
-            this.setState({ ImageUrlError: 'Image URL is required' });
-          }
-          break;
         case 'OrganizationContactName':
           if (!OrganizationContactName && value) {
             this.setState({ OrganizationContactNameError: '' });
@@ -372,8 +357,6 @@ class RegisterSponsorForm extends Component {
       Email,
       EmailError,
       FallRetreatOtherAttendees,
-      ImageUrl,
-      ImageUrlError,
       OrganizationContactName,
       OrganizationContactNameError,
       OrganizationWebsiteAddress,
@@ -463,21 +446,6 @@ class RegisterSponsorForm extends Component {
                 />
               </label>
               <div css={baseErrorStyles}>{OrganizationWebsiteAddressError}</div>
-
-              {/* Image Url */}
-              <label css={labelStyles} htmlFor="ImageUrl">
-                Organization&apos;s logo (provide the URL)
-                <input
-                  css={inputStyles}
-                  name="ImageUrl"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. https://www.tmea.org/templates/tmeamainsite/images/header_logo.png"
-                  required
-                  type="text"
-                  value={ImageUrl}
-                />
-              </label>
-              <div css={baseErrorStyles}>{ImageUrlError}</div>
 
               {/* Organization Contact Name */}
               <label css={labelStyles} htmlFor="OrganizationContactName">
