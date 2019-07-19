@@ -50,25 +50,32 @@ const SummerRoundTable = ({
 }) => {
   const summerRoundTable = data.find(e => e.node.titleOfEvent.includes('Summer Convention')).node;
 
+  const {
+    dateOfEvent,
+    timeOfEvent,
+    titleOfEvent,
+  } = summerRoundTable;
+
   return (
     <Layout location={location}>
       <Helmet>
         <title>TMAC | Summer Round Table</title>
       </Helmet>
       <Container>
-        <h1>{summerRoundTable.titleOfEvent}</h1>
+        <h1>{titleOfEvent}</h1>
         <section>
           <h4>When</h4>
           <p css={indentStyles}>
-            {summerRoundTable.dateOfEvent}
+            {dateOfEvent}
             <br />
-            {summerRoundTable.timeOfEvent}
+            {timeOfEvent}
           </p>
         </section>
 
         <section>
           <h4>Where</h4>
           <div css={indentStyles}>
+            <div>Room CC210</div>
             <a
               href="http://www.sahbgcc.com/"
               rel="noopener noreferrer"
@@ -76,7 +83,6 @@ const SummerRoundTable = ({
             >
               Henry B. Gonzalez Convention Center
             </a>
-            ,&nbsp; CC210 (tentative room assignment)
             <p>
               <a
                 href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"

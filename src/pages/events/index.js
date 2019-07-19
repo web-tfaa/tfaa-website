@@ -22,7 +22,7 @@ const Events = ({ data, location }) => (
     <Container>
       <h1>{data.site.siteMetadata.title} Events</h1>
       <section>
-        <h4>Summer Round Table</h4>
+        <h4>Summer Round Table <span style={{ color: 'cadetblue', fontSize: '1rem' }}>(updated)</span></h4>
         <p>
           Held in conjunction with the&nbsp;
           <a href="http://www.texasbandmasters.org/">
