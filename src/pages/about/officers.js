@@ -85,7 +85,7 @@ export default props => (
           }
         }
       }`}
-    render={data => <Officers data={data.allContentfulOfficer.edges} {...props} />}
+    render={data => !console.log('early : data : ', data) && <Officers data={data.allContentfulOfficer.edges} {...props} />}
   />
 );
 
@@ -93,6 +93,7 @@ const Officers = ({
   data,
   location,
 }) => {
+  console.log('Officers : data :', data);
   const president = data.find(o => o.node.title === 'President').node;
   const vicePresident = data.find(o => o.node.title === 'Vice-President').node;
   const treasurer = data.find(o => o.node.title === 'Treasurer').node;
