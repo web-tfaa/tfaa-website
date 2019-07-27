@@ -1,5 +1,5 @@
 // External Dependencies
-import { ArrowForwardIcon } from 'react-icons/md';
+import { MdArrowForward as ArrowForwardIcon } from 'react-icons/md';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';

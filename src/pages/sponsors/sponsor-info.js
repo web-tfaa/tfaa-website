@@ -2,7 +2,7 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ArrowForwardIcon } from 'react-icons/md';
+import { MdArrowForward as ArrowForwardIcon } from 'react-icons/md';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';

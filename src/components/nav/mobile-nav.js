@@ -5,10 +5,10 @@ import { Link } from 'gatsby';
 
 // Icons
 import {
-  CardGiftCard,
-  FolderOpen,
-  InfoOutline,
-  PersonOutline,
+  MdCardGiftcard as CardGiftCard,
+  MdFolderOpen as FolderOpen,
+  MdInfoOutline as InfoOutline,
+  MdPersonOutline as PersonOutline,
 } from 'react-icons/md';
 
 // Internal Dependencies

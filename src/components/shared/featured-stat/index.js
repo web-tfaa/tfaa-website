@@ -6,7 +6,7 @@ import {
   Face,
   LocationCity,
   School,
-} from 'react-icons/lib/md';
+} from 'react-icons/md';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
