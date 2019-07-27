@@ -86,4 +86,5 @@ CtaButton.defaultProps = {
   overrideCSS: '',
   to: null,
 };
+
 export default CtaButton;
