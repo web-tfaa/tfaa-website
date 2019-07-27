@@ -1,7 +1,7 @@
 // External Dependencies
-import { MdRemoveRedEye } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
@@ -202,7 +202,7 @@ class LoginForm extends Component {
               />
             </label>
             <div css={{ margin: '30px 0 0 12px' }}>
-              <MdRemoveRedEye
+              <RemoveRedEye
                 css={{
                   height: 20,
                   width: 20,

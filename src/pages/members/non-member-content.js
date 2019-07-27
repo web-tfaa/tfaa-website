@@ -1,6 +1,6 @@
 // External Dependencies
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import React, { Fragment } from 'react';
-import { MdArrowForward as ArrowForwardIcon } from 'react-icons/md';
 import { Link } from 'gatsby';
 
 // Internal Dependencies

@@ -1,8 +1,8 @@
 // External Dependencies
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { MdArrowForward as ArrowForwardIcon } from 'react-icons/md';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -119,6 +119,7 @@ const SponsorInfo = (props) => {
     </Layout>
   );
 };
+
 SponsorInfo.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
