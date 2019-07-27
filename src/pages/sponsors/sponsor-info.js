@@ -1,10 +1,10 @@
 // External Dependencies
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
+import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
@@ -85,12 +85,7 @@ const SponsorInfo = (props) => {
               <span css={{ verticalAlign: 'middle' }}>
                 Begin Sponsor Registration
               </span>
-              <ArrowForwardIcon
-                css={{
-                  verticalAlign: 'baseline',
-                  marginLeft: '.6em',
-                }}
-              />
+              <ArrowForwardIcon />
             </CtaButton>
           </div>
 
@@ -122,7 +117,9 @@ const SponsorInfo = (props) => {
 
 SponsorInfo.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  location: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({}),
+  }).isRequired,
 };
 
 const SponsorInfoWithContext = props => (

@@ -1,10 +1,10 @@
 // External Dependencies
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import hex2rgba from 'hex2rgba';
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+// import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
+import ArrowForwardIcon from '../shared/ArrowForwardIcon';
 import CtaButton from './cta-button';
 import presets from '../../utils/presets';
 import { rhythm, scale } from '../../utils/typography';
@@ -13,18 +13,18 @@ import {
 } from '../../utils/gutters';
 
 // Local Variables
-const useStyles = makeStyles({
-  icon: {
-    transform: 'translateY(8px)',
-    marginLeft: '0.5em',
-  },
-});
+// const useStyles = makeStyles({
+//   icon: {
+//     transform: 'translateY(8px)',
+//     marginLeft: '0.5em',
+//   },
+// });
 
 const texasFlagBlue = '#002868';
 
 // Component Definition
-const Masthead = (props) => {
-  const classes = useStyles(props);
+const Masthead = () => {
+  // const classes = useStyles(props);
   return (
     <div
       className="masthead-content"
@@ -117,7 +117,7 @@ const Masthead = (props) => {
         </div>
         <CtaButton to="/about/">
           <span css={{ verticalAlign: 'middle' }}>Learn More</span>
-          <ArrowForwardIcon className={classes.icon} />
+          <ArrowForwardIcon />
         </CtaButton>
       </div>
     </div>

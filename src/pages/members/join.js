@@ -1,11 +1,12 @@
 // External Dependencies
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
+// import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
+import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
@@ -19,7 +20,14 @@ import Status from './status';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import membersSidebar from './members-links.yml';
 
-// Local Variables
+// // Local Variables
+// const useStyles = makeStyles({
+//   icon: {
+//     transform: 'translateY(8px)',
+//     marginLeft: '0.5em',
+//   },
+// });
+
 const boldStyles = { fontWeight: 600 };
 
 // Component Definition
@@ -28,6 +36,7 @@ const JoinContainer = (props) => {
     // isAuthenticated,
     location,
   } = props;
+  // const classes = useStyles(props);
 
   return (
     <Layout location={location}>
@@ -93,12 +102,7 @@ const JoinContainer = (props) => {
               <span css={{ verticalAlign: 'middle' }}>
                 Begin Registration
               </span>
-              <ArrowForwardIcon
-                css={{
-                  verticalAlign: 'baseline',
-                  marginLeft: '.6em',
-                }}
-              />
+              <ArrowForwardIcon />
             </CtaButton>
           </div>
 
