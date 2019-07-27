@@ -24,5 +24,5 @@ export const useOfficerData = () => {
       }
     `,
   );
-  return allContentfulOfficer.edges;
+  return allContentfulOfficer;
 };

@@ -11,10 +11,8 @@ import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
-import useOfficerData from '../../utils/hooks';
-
-// Helpers
 import presets from '../../utils/presets';
+import { useOfficerData } from '../../utils/hooks/useOfficerData';
 
 // Sidebar data
 import aboutSidebar from './about-links.yml';
@@ -61,20 +59,14 @@ Avatar.propTypes = {
 };
 
 // Component Definition
-const Officers = ({
-  data,
-  location,
-}) => {
-  const { node } = useOfficerData();
+const Officers = ({ location }) => {
+  const { edges } = useOfficerData();
 
-  console.log('node : ', node);
-
-  console.log('Officers : data :', data);
-  // const president = data.find(o => o.node.title === 'President').node;
-  // const vicePresident = data.find(o => o.node.title === 'Vice-President').node;
-  // const treasurer = data.find(o => o.node.title === 'Treasurer').node;
-  // const secretary = data.find(o => o.node.title === 'Secretary').node;
-  // const pastPresident = data.find(o => o.node.title === 'Past-President').node;
+  const president = edges.find(o => o.node.title === 'President').node;
+  const vicePresident = edges.find(o => o.node.title === 'Vice-President').node;
+  const treasurer = edges.find(o => o.node.title === 'Treasurer').node;
+  const secretary = edges.find(o => o.node.title === 'Secretary').node;
+  const pastPresident = edges.find(o => o.node.title === 'Past-President').node;
 
   return (
     <Layout location={location}>
@@ -197,7 +189,6 @@ const Officers = ({
 };
 
 Officers.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
