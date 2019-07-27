@@ -11,7 +11,7 @@ import { vP, vPHd, vPVHd } from '../../../utils/gutters';
 const propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string.isRequired,
-  icon: PropTypes.func,
+  icon: PropTypes.shape({}),
   title: PropTypes.bool,
 };
 const defaultProps = {

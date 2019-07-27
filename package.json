@@ -51,7 +51,6 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-helmet": "^5.2.1",
-    "react-icons": "^3.7.0",
     "react-jss": "^8.1.0",
     "react-to-print": "^2.0.0-alpha-3",
     "react-typography": "^1.0.0-alpha.4",

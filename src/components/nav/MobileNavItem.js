@@ -47,7 +47,7 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
 MobileNavItem.propTypes = {
   linkTo: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  icon: PropTypes.func.isRequired,
+  icon: PropTypes.shape({}).isRequired,
 };
 
 export default MobileNavItem;
