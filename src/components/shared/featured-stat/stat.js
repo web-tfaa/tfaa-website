@@ -20,8 +20,13 @@ const defaultProps = {
 };
 
 // Component Definition
-const Stat = props => {
-  const { children, color, icon: Icon, title } = props;
+const Stat = (props) => {
+  const {
+    children,
+    color,
+    icon: Icon,
+    title,
+  } = props;
 
   return (
     <div
@@ -30,31 +35,32 @@ const Stat = props => {
         background: 'white',
         border: `3px solid ${color}`,
         borderRadius: presets.radiusLg,
-        boxSizing: `border-box`,
-        display: `flex`,
+        boxSizing: 'border-box',
+        display: 'flex',
         flexDirection: 'column',
         fontSize: title ? 24 : 16,
         fontWeight: title ? 600 : 'inherit',
         justifyContent: 'flex-start',
         marginBottom: 16,
         paddingBottom: 16,
-        transform: `translateZ(0)`,
-        width: `60%`,
+        transform: 'translateZ(0)',
+        width: '60%',
         [presets.Tablet]: {
-          flex: `0 0 15%`,
-          width: `90%`,
-          boxShadow: `1px 3px 5px 0 #aaa`,
+          flex: '0 0 15%',
+          width: '90%',
+          boxShadow: '1px 3px 5px 0 #aaa',
         },
         [presets.Hd]: {
-          flex: `0 0 15%`,
-          width: `15%`,
+          flex: '0 0 15%',
+          width: '15%',
         },
-      }}>
+      }}
+    >
       <div
         css={{
           padding: rhythm(presets.gutters.default / 2),
           paddingBottom: 0,
-          transform: `translateZ(0)`,
+          transform: 'translateZ(0)',
           [presets.Mobile]: {
             padding: vP,
             paddingBottom: 0,
@@ -68,12 +74,14 @@ const Stat = props => {
           [presets.VVHd]: {
             padding: vPVHd,
           },
-        }}>
+        }}
+      >
         <div
           css={{
             marginBottom: title ? 0 : 16,
-          }}>
-          {Icon ? <Icon fill={color} width="48px" height="48px" /> : null}
+          }}
+        >
+          {Icon ? <Icon htmlColor={color} width="3em" height="3em" /> : null}
         </div>
         {children}
       </div>
@@ -83,4 +91,5 @@ const Stat = props => {
 
 Stat.propTypes = propTypes;
 Stat.defaultProps = defaultProps;
+
 export default Stat;

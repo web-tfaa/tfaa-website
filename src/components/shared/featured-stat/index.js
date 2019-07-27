@@ -1,12 +1,8 @@
 // External Dependencies
 import React from 'react';
-
-// Icons
-import {
-  Face,
-  LocationCity,
-  School,
-} from 'react-icons/md';
+import Face from '@material-ui/icons/Face';
+import LocationCity from '@material-ui/icons/LocationCity';
+import School from '@material-ui/icons/School';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
@@ -39,16 +35,28 @@ const FeaturedStat = ({ children }) => (
       },
     }}
   >
-    <Stat color={queueMusicIconColor} title>
+    <Stat
+      color={queueMusicIconColor}
+      title
+    >
       <div>Since 1983 TMAC Serves:</div>
     </Stat>
-    <Stat color={locationCityIconColor} icon={LocationCity}>
+    <Stat
+      color={locationCityIconColor}
+      icon={LocationCity}
+    >
       <div>{numberOfDistricts.toLocaleString()} School Districts</div>
     </Stat>
-    <Stat color={schoolIconColor} icon={School}>
+    <Stat
+      color={schoolIconColor}
+      icon={School}
+    >
       <div>Over {numberOfSchools.toLocaleString()} Schools</div>
     </Stat>
-    <Stat color={faceIconColor} icon={Face}>
+    <Stat
+      color={faceIconColor}
+      icon={Face}
+    >
       <div>5+ Million Students</div>
     </Stat>
   </div>
