@@ -178,8 +178,14 @@ class SignUpForm extends Component {
     const isInvalid = !hasInput || registerError || emailError;
 
     return (
-      <form key="signup-form" onSubmit={this.handleSubmit}>
-        <label css={labelStyles} htmlFor="email">
+      <form
+        key="signup-form"
+        onSubmit={this.handleSubmit}
+      >
+        <label
+          css={labelStyles}
+          htmlFor="email"
+        >
           Email Address
           <input
             css={inputStyles}
@@ -198,7 +204,10 @@ class SignUpForm extends Component {
             marginBottom: 16,
           }}
         >
-          <label css={bottomLabelStyles} htmlFor="passwordOne">
+          <label
+            css={bottomLabelStyles}
+            htmlFor="passwordOne"
+          >
             Password
             <input
               css={inputStyles}
@@ -211,7 +220,7 @@ class SignUpForm extends Component {
             />
           </label>
           <div css={{ margin: '27px 0 0 12px' }}>
-            <RemoveRedEyeIcon onClick={this.togglePasswordInput} />
+            <RemoveRedEyeIcon onClick={this.toggleRegisterPasswordInput} />
           </div>
         </div>
         <div
@@ -221,7 +230,10 @@ class SignUpForm extends Component {
             marginBottom: 16,
           }}
         >
-          <label css={bottomLabelStyles} htmlFor="passwordTwo">
+          <label
+            css={bottomLabelStyles}
+            htmlFor="passwordTwo"
+          >
             Confirm Password
             <input
               css={inputStyles}

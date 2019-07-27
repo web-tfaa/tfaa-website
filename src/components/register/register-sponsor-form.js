@@ -256,7 +256,6 @@ class RegisterSponsorForm extends Component {
         City,
         ContactAddress1,
         ContactPhone,
-        ImageUrl,
         OrganizationContactName,
         OrganizationWebsiteAddress,
         SponsorOrganization,
@@ -419,7 +418,10 @@ class RegisterSponsorForm extends Component {
             <form onSubmit={this.handleSubmit}>
 
               {/* Sponsor Organization */}
-              <label css={labelStyles} htmlFor="SponsorOrganization">
+              <label
+                css={labelStyles}
+                htmlFor="SponsorOrganization"
+              >
                 Sponsor Organization
                 <input
                   css={inputStyles}
@@ -434,7 +436,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{SponsorOrganizationError}</div>
 
               {/* Organization Website Address */}
-              <label css={labelStyles} htmlFor="OrganizationWebsiteAddress">
+              <label
+                css={labelStyles}
+                htmlFor="OrganizationWebsiteAddress"
+              >
                 Organization&apos;s Website Address (provide the URL)
                 <input
                   css={inputStyles}
@@ -449,7 +454,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{OrganizationWebsiteAddressError}</div>
 
               {/* Organization Contact Name */}
-              <label css={labelStyles} htmlFor="OrganizationContactName">
+              <label
+                css={labelStyles}
+                htmlFor="OrganizationContactName"
+              >
                 Organization Contact Name
                 <input
                   css={inputStyles}
@@ -464,7 +472,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{OrganizationContactNameError}</div>
 
               {/* Title */}
-              <label css={labelStyles} htmlFor="Title">
+              <label
+                css={labelStyles}
+                htmlFor="Title"
+              >
                 Title
                 <input
                   css={inputStyles}
@@ -479,7 +490,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{TitleError}</div>
 
               {/* Contact Address 1 */}
-              <label css={labelStyles} htmlFor="ContactAddress1">
+              <label
+                css={labelStyles}
+                htmlFor="ContactAddress1"
+              >
                 Contact Address 1
                 <input
                   css={inputStyles}
@@ -494,7 +508,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{ContactAddress1Error}</div>
 
               {/* Contact Address 2 */}
-              <label css={labelStyles} htmlFor="ContactAddress2">
+              <label
+                css={labelStyles}
+                htmlFor="ContactAddress2"
+              >
                 Contact Address 2
                 <input
                   css={inputStyles}
@@ -507,7 +524,10 @@ class RegisterSponsorForm extends Component {
               </label>
 
               {/* City */}
-              <label css={labelStyles} htmlFor="City">
+              <label
+                css={labelStyles}
+                htmlFor="City"
+              >
                 City
                 <input
                   css={inputStyles}
@@ -522,7 +542,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{CityError}</div>
 
               {/* State */}
-              <label css={labelStyles} htmlFor="State">
+              <label
+                css={labelStyles}
+                htmlFor="State"
+              >
                 State
                 <input
                   css={inputStyles}
@@ -537,7 +560,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{StateError}</div>
 
               {/* ZIP Code */}
-              <label css={labelStyles} htmlFor="ZipCode">
+              <label
+                css={labelStyles}
+                htmlFor="ZipCode"
+              >
                 ZIP Code
                 <input
                   css={inputStyles}
@@ -552,7 +578,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{ZipCodeError}</div>
 
               {/* Email */}
-              <label css={labelStyles} htmlFor="Email">
+              <label
+                css={labelStyles}
+                htmlFor="Email"
+              >
                 Email
                 <input
                   css={inputStyles}
@@ -567,7 +596,10 @@ class RegisterSponsorForm extends Component {
               <div css={baseErrorStyles}>{EmailError}</div>
 
               {/* Contact Phone */}
-              <label css={labelStyles} htmlFor="ContactPhone">
+              <label
+                css={labelStyles}
+                htmlFor="ContactPhone"
+              >
                 Contact Phone
                 <input
                   css={inputStyles}
@@ -586,7 +618,10 @@ class RegisterSponsorForm extends Component {
               {/* Fall Retreat Intent */}
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
-                <label css={labelStyles} htmlFor="FallRetreatIntent">
+                <label
+                  css={labelStyles}
+                  htmlFor="FallRetreatIntent"
+                >
                   Will you (or another company representative) be present{' '}
                   at the Fall Retreat in Austin - November 14-16, 2018?
                   <RadioGroup
@@ -595,7 +630,11 @@ class RegisterSponsorForm extends Component {
                     value={radioValueFallRetreat}
                     onChange={this.handleChangeFallRetreatIntent}
                   >
-                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Yes"
+                      value="Yes"
+                    />
                     {radioValueFallRetreat === 'Yes' && (
                       <div
                         css={css({
@@ -603,7 +642,10 @@ class RegisterSponsorForm extends Component {
                           margin: '0 24px 24px',
                         })}
                       >
-                        <label css={insideLabelStyles} htmlFor="FallRetreatOtherAttendees">
+                        <label
+                          css={insideLabelStyles}
+                          htmlFor="FallRetreatOtherAttendees"
+                        >
                           Please list any other company representatives that will{' '}
                           attend the event
                           <input
@@ -617,8 +659,16 @@ class RegisterSponsorForm extends Component {
                         </label>
                       </div>
                     )}
-                    <FormControlLabel value="No" control={<Radio />} label="No" />
-                    <FormControlLabel value="Uncertain" control={<Radio />} label="Uncertain" />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="No"
+                      value="No"
+                    />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Uncertain"
+                      value="Uncertain"
+                    />
                   </RadioGroup>
                 </label>
               </FormControl>
@@ -628,7 +678,10 @@ class RegisterSponsorForm extends Component {
               {/* Spring Round Table Intent */}
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
-                <label css={labelStyles} htmlFor="SpringRoundTableIntent">
+                <label
+                  css={labelStyles}
+                  htmlFor="SpringRoundTableIntent"
+                >
                   Will you (or another company representative) be present{' '}
                   at the TMEA Round Table in San Antonio - February 13, 2019?
                   <RadioGroup
@@ -637,7 +690,11 @@ class RegisterSponsorForm extends Component {
                     value={radioValueSpringRoundTable}
                     onChange={this.handleChangeSpringRoundTableIntent}
                   >
-                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Yes"
+                      value="Yes"
+                    />
                     {radioValueSpringRoundTable === 'Yes' && (
                       <div
                         css={css({
@@ -645,7 +702,10 @@ class RegisterSponsorForm extends Component {
                           margin: '0 24px 24px',
                         })}
                       >
-                        <label css={insideLabelStyles} htmlFor="SpringRoundTableOtherAttendees">
+                        <label
+                          css={insideLabelStyles}
+                          htmlFor="SpringRoundTableOtherAttendees"
+                        >
                           Please list any other company representatives that will{' '}
                           attend the event
                           <input
@@ -659,8 +719,16 @@ class RegisterSponsorForm extends Component {
                         </label>
                       </div>
                     )}
-                    <FormControlLabel value="No" control={<Radio />} label="No" />
-                    <FormControlLabel value="Uncertain" control={<Radio />} label="Uncertain" />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="No"
+                      value="No"
+                    />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Uncertain"
+                      value="Uncertain"
+                    />
                   </RadioGroup>
                 </label>
               </FormControl>
