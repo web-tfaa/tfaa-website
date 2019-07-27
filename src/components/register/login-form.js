@@ -1,10 +1,10 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
+import RemoveRedEyeIcon from '../shared/RemoveRedEyeIcon';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
@@ -202,13 +202,7 @@ class LoginForm extends Component {
               />
             </label>
             <div css={{ margin: '30px 0 0 12px' }}>
-              <RemoveRedEye
-                css={{
-                  height: 20,
-                  width: 20,
-                }}
-                onClick={this.togglePasswordInput}
-              />
+              <RemoveRedEyeIcon onClick={this.togglePasswordInput} />
             </div>
           </div>
           <div css={baseErrorStyles}>{passwordError}</div>
