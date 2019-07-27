@@ -1,5 +1,5 @@
 // External Dependencies
-import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import hex2rgba from 'hex2rgba';
 import React from 'react';
 
@@ -7,7 +7,9 @@ import React from 'react';
 import CtaButton from './cta-button';
 import presets from '../../utils/presets';
 import { rhythm, scale } from '../../utils/typography';
-import { vP, vPHd, vPVHd, vPVVHd } from '../../utils/gutters';
+import {
+  vP, vPHd, vPVHd, vPVVHd,
+} from '../../utils/gutters';
 
 // Local Variables
 const texasFlagBlue = '#002868';
@@ -17,12 +19,12 @@ const MastheadContent = () => (
   <div
     className="masthead-content"
     css={{
-      display: `flex`,
+      display: 'flex',
       padding: vP,
       paddingTop: rhythm(1),
       paddingBottom: rhythm(1),
-      flexGrow: `0`,
-      flexShrink: `1`,
+      flexGrow: '0',
+      flexShrink: '1',
       [presets.Mobile]: {
         paddingBottom: rhythm(2),
       },
@@ -47,7 +49,8 @@ const MastheadContent = () => (
       [presets.VVHd]: {
         paddingLeft: vPVVHd,
       },
-    }}>
+    }}
+  >
     <div>
       <h1
         css={{
@@ -55,7 +58,7 @@ const MastheadContent = () => (
           color: texasFlagBlue,
           lineHeight: 1.2,
           margin: 0,
-          marginBottom: `0.5em`,
+          marginBottom: '0.5em',
           padding: 0,
           width: rhythm(10),
           // fontSize: `calc(12px + 2vh + 2vw)`,
@@ -82,7 +85,8 @@ const MastheadContent = () => (
             fontSize: scale(1.6).fontSize,
             width: rhythm(18),
           },
-        }}>
+        }}
+      >
         Texas Music Administrators Conference
       </h1>
       <div
@@ -97,15 +101,16 @@ const MastheadContent = () => (
             display: 'block',
             width: rhythm(12),
           },
-        }}>
+        }}
+      >
         Supporting Music Education in Texas
       </div>
       <CtaButton to="/about/">
-        <span css={{ verticalAlign: `middle` }}>Learn More</span>
+        <span css={{ verticalAlign: 'middle' }}>Learn More</span>
         <ArrowForwardIcon
           css={{
-            verticalAlign: `baseline`,
-            marginLeft: `.6em`,
+            verticalAlign: 'baseline',
+            marginLeft: '.6em',
           }}
         />
       </CtaButton>

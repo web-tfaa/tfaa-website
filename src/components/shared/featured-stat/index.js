@@ -2,9 +2,11 @@
 import React from 'react';
 
 // Icons
-import Face from 'react-icons/lib/md/face';
-import LocationCity from 'react-icons/lib/md/location-city';
-import School from 'react-icons/lib/md/school';
+import {
+  Face,
+  LocationCity,
+  School,
+} from 'react-icons/lib/md';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
@@ -26,7 +28,7 @@ const FeaturedStat = ({ children }) => (
     css={{
       backgroundColor: `${colors.ui.light}`,
       display: 'flex',
-      flex: `1 1 100%`,
+      flex: '1 1 100%',
       flexWrap: 'wrap',
       justifyContent: 'space-around',
       marginBottom: 68,
@@ -35,7 +37,8 @@ const FeaturedStat = ({ children }) => (
       [presets.Tablet]: {
         marginBottom: 0,
       },
-    }}>
+    }}
+  >
     <Stat color={queueMusicIconColor} title>
       <div>Since 1983 TMAC Serves:</div>
     </Stat>

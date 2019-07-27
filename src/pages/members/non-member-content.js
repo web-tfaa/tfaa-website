@@ -1,6 +1,6 @@
 // External Dependencies
-import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import React, { Fragment } from 'react';
+import { ArrowForwardIcon } from 'react-icons/md';
 import { Link } from 'gatsby';
 
 // Internal Dependencies

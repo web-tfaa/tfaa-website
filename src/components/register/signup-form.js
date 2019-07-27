@@ -1,5 +1,5 @@
 // External Dependencies
-import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
+import { MdRemoveRedEye } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';

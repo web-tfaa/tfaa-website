@@ -1,5 +1,5 @@
 // External Dependencies
-import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
+import { ArrowForwardIcon } from 'react-icons/md';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -25,7 +25,7 @@ const boldStyles = { fontWeight: 600 };
 // Component Definition
 const JoinContainer = (props) => {
   const {
-    isAuthenticated,
+    // isAuthenticated,
     location,
   } = props;
 
@@ -129,7 +129,7 @@ const JoinContainer = (props) => {
   );
 };
 JoinContainer.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
+  // isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
 };
 
