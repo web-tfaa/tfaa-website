@@ -7,7 +7,7 @@ export const doCreateEntry = (form, collection, documentId, callback) =>
     .doc(documentId)
     .set(form)
     .then(() => {
-      console.log(`Registration for ${documentId} was successful`);
+      console.log(`Registration for ${documentId} in ${currentSchoolYearShort} was successful`);
       callback(form);
     })
     .catch((err) => {
@@ -19,7 +19,7 @@ export const doUpdateEntry = (form, collection, documentId) =>
     .doc(documentId)
     .update(form)
     .then(() => {
-      console.log(`Updating payment info for ${documentId} was successful`);
+      console.log(`Updating payment info for ${documentId} in ${currentSchoolYearShort} was successful`);
     })
     .catch((err) => {
       console.log(`Error updating payment info for ${documentId} document`, err);
