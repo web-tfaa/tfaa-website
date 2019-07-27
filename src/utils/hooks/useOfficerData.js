@@ -1,3 +1,4 @@
+// External Dependencies
 import { useStaticQuery, graphql } from 'gatsby';
 
 // Hook Definition
