@@ -11555,7 +11555,7 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-to-print@^2.0.0-alpha-3:
+react-to-print@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.2.1.tgz#838eba2aada37413e093bc1824c4f67e0077eaee"
   integrity sha512-txQ+teHYqxeDKsxzGhGAIp2s5KoTKry/AekkCUmDdXvHlYP2dpDNNtdosz/zmme/k6VTrfKFPRS3ekSSUiMRPA==
