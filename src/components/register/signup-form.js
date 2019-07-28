@@ -1,11 +1,11 @@
 // External Dependencies
-import MdRemoveRedEye from 'react-icons/lib/md/remove-red-eye';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
+import RemoveRedEyeIcon from '../shared/RemoveRedEyeIcon';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
@@ -63,7 +63,9 @@ class SignUpForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+  }
 
+  componentDidMount() {
     this.activeComponent = true;
   }
 
@@ -108,11 +110,10 @@ class SignUpForm extends Component {
         .then(() => {
           this.setState(() => ({
             ...INITIAL_STATE,
-            isAuthenticated: true,
           }));
         })
-        .catch((err) => {
-          this.setState({ error: err });
+        .catch((error) => {
+          this.setState({ error });
         });
     }
   };
@@ -178,8 +179,14 @@ class SignUpForm extends Component {
     const isInvalid = !hasInput || registerError || emailError;
 
     return (
-      <form key="signup-form" onSubmit={this.handleSubmit}>
-        <label css={labelStyles} htmlFor="email">
+      <form
+        key="signup-form"
+        onSubmit={this.handleSubmit}
+      >
+        <label
+          css={labelStyles}
+          htmlFor="email"
+        >
           Email Address
           <input
             css={inputStyles}
@@ -198,7 +205,10 @@ class SignUpForm extends Component {
             marginBottom: 16,
           }}
         >
-          <label css={bottomLabelStyles} htmlFor="passwordOne">
+          <label
+            css={bottomLabelStyles}
+            htmlFor="passwordOne"
+          >
             Password
             <input
               css={inputStyles}
@@ -211,13 +221,7 @@ class SignUpForm extends Component {
             />
           </label>
           <div css={{ margin: '27px 0 0 12px' }}>
-            <MdRemoveRedEye
-              css={{
-                height: 20,
-                width: 20,
-              }}
-              onClick={this.toggleRegisterPasswordInput}
-            />
+            <RemoveRedEyeIcon onClick={this.toggleRegisterPasswordInput} />
           </div>
         </div>
         <div
@@ -227,7 +231,10 @@ class SignUpForm extends Component {
             marginBottom: 16,
           }}
         >
-          <label css={bottomLabelStyles} htmlFor="passwordTwo">
+          <label
+            css={bottomLabelStyles}
+            htmlFor="passwordTwo"
+          >
             Confirm Password
             <input
               css={inputStyles}

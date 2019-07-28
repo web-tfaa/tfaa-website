@@ -1,33 +1,30 @@
 // External Dependencies
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+// import Card from '@material-ui/core/Card';
+// import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 // import { Link } from 'gatsby';
-import { withStyles } from '@material-ui/core/styles';
-import {
-  StaticQuery,
-  graphql,
-} from 'gatsby';
+// import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
+import { useEventData } from '../../utils/hooks/useEventData';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const styles = theme => ({
-  adminCard: {
-    borderLeft: `4px solid ${theme.palette.secondary.dark}`,
-    maxWidth: '75%',
-  },
-});
+// const styles = theme => ({
+//   adminCard: {
+//     borderLeft: `4px solid ${theme.palette.secondary.dark}`,
+//     maxWidth: '75%',
+//   },
+// });
 
 const indentStyles = {
   marginLeft: 16,
@@ -38,33 +35,13 @@ const indentStyles = {
 // };
 
 // Component Definition
-export default withStyles(styles)(props => (
-  <StaticQuery
-    query={graphql`
-      query fallRetreatPageQuery {
-        allContentfulEvent(
-          filter: {
-            node_locale: { eq: "en-US" }
-          }
-        )  {
-          edges {
-            node {
-              titleOfEvent
-              dateOfEvent
-            }
-          }
-        }
-      }`}
-    render={data => <FallRetreat data={data.allContentfulEvent.edges} {...props} />}
-  />
-));
-
 const FallRetreat = ({
-  classes,
-  data,
+  // classes,
   location,
 }) => {
-  const fallRetreat = data.find(e => e.node.titleOfEvent.includes('Fall Retreat')).node;
+  const { edges } = useEventData();
+
+  const fallRetreat = edges.find(e => e.node.titleOfEvent.includes('Fall Retreat')).node;
 
   return (
     <Layout location={location}>
@@ -211,12 +188,11 @@ const FallRetreat = ({
 };
 
 FallRetreat.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  // classes: PropTypes.shape({}).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]).isRequired,
 };
 
-// export default withStyles(styles)(FallRetreat);
+export default FallRetreat;

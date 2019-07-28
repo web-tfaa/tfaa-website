@@ -11,12 +11,12 @@ import React, { Component } from 'react';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterInfo from '../../components/register/register-info';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
+import presets from '../../utils/presets';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -37,11 +37,11 @@ class RegisterContent extends Component {
       // Possible completed steps are [0, 1, 2]
       completedSteps: [],
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
+    this.activeComponent = true;
+
     const {
       isAuthenticated,
     } = this.props;
@@ -101,17 +101,20 @@ class RegisterContent extends Component {
     return currentStepContent;
   }
 
-  handleCompleteStep = (step, updatedForm) => {
+  handleCompleteStep = (step, updatedForm = {}) => {
     const {
       activeStep,
       completedSteps,
       form,
     } = this.state;
 
+    console.log('steps - completedSteps :', step, completedSteps);
+    console.log('RegisterContent : handleCompleteStep : updatedForm :', updatedForm);
+
     if (this.activeComponent) {
       this.setState({
         activeStep: activeStep + 1,
-        completedSteps: [...completedSteps, ...step],
+        completedSteps: [...completedSteps, step],
         form: {
           ...form,
           ...updatedForm,

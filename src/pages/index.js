@@ -2,7 +2,11 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'gatsby';
+import {
+  graphql,
+  Link,
+} from 'gatsby';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -19,6 +23,15 @@ const propTypes = {
   data: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
 };
+
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+});
 
 // const BlogPost = ({node}) => {
 //   return (
@@ -45,6 +58,7 @@ const Home = (props) => {
     data,
     location,
   } = props;
+  const classes = useStyles(props);
 
   const presidentInfo = data.allContentfulOfficer.edges.find(o => o.node.title === 'President').node;
 
@@ -54,16 +68,8 @@ const Home = (props) => {
         <title>TMAC | Home</title>
       </Helmet>
       <MastheadBg />
-      <div
-        css={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-        }}
-      >
+      <div className={classes.root}>
         <MastheadContent />
-
         <Cards>
           <Card>
             <CardHeadline>Message from the President</CardHeadline>
@@ -87,7 +93,6 @@ const Home = (props) => {
               in Austin, Texas. If you would like more information on registering
               for the Fall Conference, please <Link to="/events/fall-retreat/">visit the event page</Link>.
             </FuturaParagraph>
-
             <FuturaParagraph>
               <a href="mailto:patricia.h.moreno@austinisd.org">{presidentInfo.name}</a>
               , President
@@ -96,9 +101,9 @@ const Home = (props) => {
             </FuturaParagraph>
           </Card>
         </Cards>
-
         <FeaturedStat />
-        {/* {props.data.allContentfulBlog.edges.map((edge) => <BlogPost key={edge.node.id} node={edge.node} />)} */}
+        {/* {props.data.allContentfulBlog.edges.map((edge) =>
+          <BlogPost key={edge.node.id} node={edge.node} />)} */}
       </div>
     </Layout>
   );

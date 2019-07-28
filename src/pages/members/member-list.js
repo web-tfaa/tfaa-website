@@ -1,5 +1,5 @@
 // External Dependencies
-import Card from '@material-ui/core/Card';
+import MuiCard from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
@@ -98,14 +98,14 @@ class MemberListContent extends Component {
         <div className={classes.paddingContainer}>
           <h2>Member list</h2>
           {isAdmin && (
-            <Card className={classes.adminCard}>
+            <MuiCard className={classes.adminCard}>
               <CardContent>
                 <Typography variant="h6" component="h6">Admin View</Typography>
                 <Typography variant="body2">
                   You can print any member&apos;s invoice or receipt from each row.
                 </Typography>
               </CardContent>
-            </Card>
+            </MuiCard>
           )}
           <MemberListTable
             data={Object.values(userData)}

@@ -2,16 +2,13 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StaticQuery,
-  graphql,
-} from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
+import { useEventData } from '../../utils/hooks/useEventData';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
@@ -22,33 +19,10 @@ const indentStyles = {
 };
 
 // Component Definition
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query summerRoundTablePageQuery {
-        allContentfulEvent(
-          filter: {
-            node_locale: { eq: "en-US" }
-          }
-        )  {
-          edges {
-            node {
-              titleOfEvent
-              dateOfEvent
-              timeOfEvent
-            }
-          }
-        }
-      }`}
-    render={data => <SummerRoundTable data={data.allContentfulEvent.edges} {...props} />}
-  />
-);
+const SummerRoundTable = ({ location }) => {
+  const { edges } = useEventData();
 
-const SummerRoundTable = ({
-  data,
-  location,
-}) => {
-  const summerRoundTable = data.find(e => e.node.titleOfEvent.includes('Summer Convention')).node;
+  const summerRoundTable = edges.find(e => e.node.titleOfEvent.includes('Summer Convention')).node;
 
   const {
     dateOfEvent,
@@ -143,9 +117,10 @@ const SummerRoundTable = ({
 };
 
 SummerRoundTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]).isRequired,
 };
+
+export default SummerRoundTable;

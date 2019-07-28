@@ -2,10 +2,6 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StaticQuery,
-  graphql,
-} from 'gatsby';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -15,9 +11,8 @@ import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
-
-// Helpers
 import presets from '../../utils/presets';
+import { useOfficerData } from '../../utils/hooks/useOfficerData';
 
 // Sidebar data
 import aboutSidebar from './about-links.yml';
@@ -64,40 +59,14 @@ Avatar.propTypes = {
 };
 
 // Component Definition
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query officerPageQuery {
-        allContentfulOfficer(
-          filter: {
-            node_locale: { eq: "en-US" }
-          }
-        ) {
-          edges {
-            node {
-              title
-              name
-              email
-              schoolDistrict
-              districtTitle
-              linkToPicture
-            }
-          }
-        }
-      }`}
-    render={data => <Officers data={data.allContentfulOfficer.edges} {...props} />}
-  />
-);
+const Officers = ({ location }) => {
+  const { edges } = useOfficerData();
 
-const Officers = ({
-  data,
-  location,
-}) => {
-  const president = data.find(o => o.node.title === 'President').node;
-  const vicePresident = data.find(o => o.node.title === 'Vice-President').node;
-  const treasurer = data.find(o => o.node.title === 'Treasurer').node;
-  const secretary = data.find(o => o.node.title === 'Secretary').node;
-  const pastPresident = data.find(o => o.node.title === 'Past-President').node;
+  const president = edges.find(o => o.node.title === 'President').node;
+  const vicePresident = edges.find(o => o.node.title === 'Vice-President').node;
+  const treasurer = edges.find(o => o.node.title === 'Treasurer').node;
+  const secretary = edges.find(o => o.node.title === 'Secretary').node;
+  const pastPresident = edges.find(o => o.node.title === 'Past-President').node;
 
   return (
     <Layout location={location}>
@@ -220,9 +189,10 @@ const Officers = ({
 };
 
 Officers.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
   ]).isRequired,
 };
+
+export default Officers;

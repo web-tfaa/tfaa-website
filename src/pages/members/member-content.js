@@ -1,5 +1,4 @@
 // External Dependencies
-// import CheckIcon from 'react-icons/lib/md/check';
 import CheckIcon from '@material-ui/icons/Check';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import format from 'date-fns/format';
@@ -135,6 +134,8 @@ class MemberContent extends Component {
       userData,
       userId,
     } = this.props;
+
+    console.log('MemberContent : cDM : userId', userId);
 
     // Find if the current user is among the registerd users
     if (Object.keys(userData).includes(userId)) {

@@ -1,7 +1,7 @@
 // External Dependencies
-import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
+import hex2rgba from 'hex2rgba';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
@@ -13,17 +13,17 @@ import { rhythm, scale, options } from '../../utils/typography';
 // Local Variables
 const navItemStyles = {
   ...scale(-1 / 3),
-  boxSizing: `border-box`,
-  color: `inherit`,
-  display: `inline-block`,
-  letterSpacing: `0.03em`,
+  boxSizing: 'border-box',
+  color: 'inherit',
+  display: 'inline-block',
+  letterSpacing: '0.03em',
   lineHeight: `calc(${presets.headerHeight} - 6px)`,
   padding: `6px ${rhythm(1 / 2)} 0`,
-  position: `relative`,
-  textDecoration: `none`,
-  textTransform: `uppercase`,
+  position: 'relative',
+  textDecoration: 'none',
+  textTransform: 'uppercase',
   top: 0,
-  transition: `color .15s ease-out`,
+  transition: 'color .15s ease-out',
   '&:hover': {
     opacity: 0.8,
     textDecoration: 'underline',
@@ -36,15 +36,16 @@ const navItemStyles = {
 const NavItem = ({ linkTo, children }) => (
   <li
     css={{
-      display: `inline-block`,
+      display: 'inline-block',
       margin: 0,
-    }}>
+    }}
+  >
     <Link
       css={navItemStyles}
-      getProps={({isPartiallyCurrent}) =>
-        isPartiallyCurrent && children !== 'TMAC' && children !== 'Sign Out'
+      getProps={({ isPartiallyCurrent }) =>
+        (isPartiallyCurrent && children !== 'TMAC' && children !== 'Sign Out'
           ? { style: navItemStyles.active }
-          : {}
+          : {})
       }
       to={linkTo}
     >
@@ -74,25 +75,27 @@ const TopNav = (props) => {
         height: presets.headerHeight,
         left: 0,
         right: 0,
-        zIndex: `2`,
+        zIndex: '2',
         [presets.Tablet]: {
           position: 'fixed',
         },
-      }}>
+      }}
+    >
       <div
         css={{
-          alignItems: `flex-end`,
+          alignItems: 'flex-end',
           borderBottom: '4px solid #2D456F',
           boxShadow: '3px 0 5px #2D456F',
           boxSizing: 'border-box',
-          display: `flex`,
-          fontFamily: options.headerFontFamily.join(`,`),
-          height: `100%`,
-          margin: `0 auto`,
+          display: 'flex',
+          fontFamily: options.headerFontFamily.join(','),
+          height: '100%',
+          margin: '0 auto',
           paddingLeft: rhythm(3 / 4),
           paddingRight: rhythm(3 / 4),
-          width: `100%`,
-        }}>
+          width: '100%',
+        }}
+      >
         <NavItem
           css={{
             '&:hover': {
@@ -100,46 +103,50 @@ const TopNav = (props) => {
               textDecoration: 'none',
             },
           }}
-          linkTo="/">
+          linkTo="/"
+        >
           <div
             css={{
-              alignItems: `center`,
-              color: `inherit`,
-              display: `flex`,
+              alignItems: 'center',
+              color: 'inherit',
+              display: 'flex',
               marginRight: rhythm(1 / 2),
-              textDecoration: `none`,
-            }}>
+              textDecoration: 'none',
+            }}
+          >
             <img
               alt="TMAC logo"
-              style={{ marginBottom: 0 }}
               height="30px"
               src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+              style={{ marginBottom: 0 }}
             />
             <div
               css={{
                 fontSize: 24,
                 marginLeft: '0.8em',
                 textDecoration: 'none',
-              }}>
+              }}
+            >
               TMAC
             </div>
           </div>
         </NavItem>
         <ul
           css={{
-            display: `none`,
+            display: 'none',
             [presets.Tablet]: {
-              display: `flex`,
+              display: 'flex',
               flexGrow: 1,
-              listStyle: `none`,
+              listStyle: 'none',
               margin: 0,
               maskImage: `linear-gradient(to right, transparent, white ${rhythm(
                 1 / 8,
               )}, white 98%, transparent)`,
-              overflowX: `auto`,
+              overflowX: 'auto',
               padding: 0,
             },
-          }}>
+          }}
+        >
           <NavItem linkTo="/about/">About</NavItem>
           <NavItem linkTo="/events/">Events</NavItem>
           <NavItem linkTo="/resources/">Resources</NavItem>
@@ -151,9 +158,9 @@ const TopNav = (props) => {
                 float: 'right',
               }}
               onClick={auth.doSignOut}
+              onKeyUp={auth.doSignOut}
               role="button"
               tabIndex={0}
-              onKeyUp={auth.doSignOut}
             >
               <NavItem linkTo="/">Sign Out</NavItem>
             </div>
@@ -167,7 +174,7 @@ TopNav.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const TopNavWithContext = (props) => (
+const TopNavWithContext = props => (
   <AuthUserContext.Consumer>
     {authUser => <TopNav {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>

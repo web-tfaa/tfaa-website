@@ -1,7 +1,3 @@
-/*
-  Main container for the Registration process
-*/
-
 // External Dependencies
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
@@ -11,12 +7,12 @@ import React, { Component } from 'react';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterInfo from '../../components/register/register-info';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from '../members/status';
+import presets from '../../utils/presets';
 
 // Component Definition
 class RegisterSponsorContent extends Component {
@@ -35,11 +31,11 @@ class RegisterSponsorContent extends Component {
       form: {},
       isViewingSponsors: false,
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
+    this.activeComponent = true;
+
     const {
       isAuthenticated,
     } = this.props;
@@ -49,11 +45,30 @@ class RegisterSponsorContent extends Component {
     } = this.state;
 
     if (activeStep === 0 && isAuthenticated) {
+      console.log('cDM : changing active step to 1');
       this.setState({ activeStep: 1 });
     }
 
     if (window && window.location.href.includes('sponsors')) {
+      console.log('setting isViewingSponsors to true');
       this.setState({ isViewingSponsors: true });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      isAuthenticated,
+    } = this.props;
+
+    const {
+      activeStep,
+    } = this.state;
+
+    if (prevState.activeStep !== 0 && activeStep === 0
+      && !prevProps.isAuthenticated && isAuthenticated) {
+      console.log('cDU : changing active step to 1');
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ activeStep: 1 });
     }
   }
 
@@ -62,6 +77,7 @@ class RegisterSponsorContent extends Component {
   }
 
   getCurrentStepContent(isAuthenticated) {
+    console.log('getCurrentStepContent : isAuthenticated', isAuthenticated);
     const {
       location,
     } = this.props;
@@ -121,9 +137,10 @@ class RegisterSponsorContent extends Component {
     } = this.state;
 
     if (this.activeComponent) {
+      console.log('RegisterSponsorContent : handleCompleteStep : active component');
       this.setState({
         activeStep: activeStep + 1,
-        completedSteps: [...completedSteps, ...step],
+        completedSteps: [...completedSteps, step],
         form: {
           ...form,
           ...updatedForm,

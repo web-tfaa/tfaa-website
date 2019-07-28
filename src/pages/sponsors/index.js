@@ -64,7 +64,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -76,7 +75,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -88,7 +86,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -100,7 +97,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -126,11 +122,7 @@ class Sponsors extends Component {
 
     return (
       <Layout location={location}>
-        <section
-          css={{
-            textAlign: 'center',
-          }}
-        >
+        <section css={{ textAlign: 'center' }}>
           <Helmet>
             <title>TMAC | Sponsors</title>
           </Helmet>

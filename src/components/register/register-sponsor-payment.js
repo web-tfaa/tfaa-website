@@ -1,16 +1,14 @@
 // External Dependencies
-import format from 'date-fns/format';
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import ReactToPrint from 'react-to-print';
-import { css } from 'glamor';
-
-// Material-UI Dependencies
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
+import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import React, { Component, Fragment } from 'react';
+import ReactToPrint from 'react-to-print';
+import format from 'date-fns/format';
+import { css } from 'glamor';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -52,7 +50,6 @@ const baseErrorStyles = {
   color: 'red',
   fontFamily: options.headerFontFamily.join(','),
   marginLeft: 26,
-  transform: 'translateY(-20px)',
 };
 
 // Adds animation to the input that appears when selecting "Yes"
@@ -76,6 +73,8 @@ class RegisterSponsorPayment extends Component {
   constructor(props) {
     super(props);
 
+    console.log('initialLevel', props.initialLevel);
+
     this.state = {
       // This is used to send the final donation amount to the db
       donationAmount: this.getInitialDonationAmount(props.initialLevel),
@@ -93,11 +92,11 @@ class RegisterSponsorPayment extends Component {
       valueSilver: 1000,
       valueSilverError: '',
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
+    this.activeComponent = true;
+
     if (this.activeComponent) {
       doGetInvoiceId(this.handleGetCurrentInvoiceId);
     }
@@ -125,6 +124,7 @@ class RegisterSponsorPayment extends Component {
 
     if ((prevState.invoiceId === 0 && invoiceId > 0)
       || (prevState.receiptId === 0 && receiptId > 0)) {
+      console.log('0');
       return doUpdateEntry(updatedForm, collection, form.userId);
     }
   }
@@ -201,6 +201,7 @@ class RegisterSponsorPayment extends Component {
         value: event.target.value,
       });
 
+      console.log('1');
       return doUpdateEntry(updatedForm, collection, form.userId);
     }
   };
@@ -220,6 +221,8 @@ class RegisterSponsorPayment extends Component {
         // value,
       } = this.state;
 
+      console.log('handleCompletePaymentStep : donationAmount : ', donationAmount);
+
       const documentId = form.userId;
 
       const updatedForm = {
@@ -232,6 +235,7 @@ class RegisterSponsorPayment extends Component {
         receiptId,
       };
 
+      console.log('2');
       doUpdateEntry(updatedForm, collection, documentId);
       onCompleteStep(2, updatedForm);
     }
@@ -260,7 +264,7 @@ class RegisterSponsorPayment extends Component {
     };
 
     return Promise.all([
-      doUpdateEntry(updatedForm, collection, documentId),
+      !console.log('3') && doUpdateEntry(updatedForm, collection, documentId),
       doUpdateInvoiceId(),
     ]);
   };
@@ -307,6 +311,8 @@ class RegisterSponsorPayment extends Component {
         name,
         value,
       } = event.target;
+
+      console.log('handleUpdate : event : ', parseInt(value, 10));
 
       this.setState({
         // We check for empty value and cast it to a string to avoid setting to NaN

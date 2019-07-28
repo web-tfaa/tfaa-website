@@ -1,9 +1,7 @@
 // External Dependencies
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-// Material-UI Dependencies
-import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

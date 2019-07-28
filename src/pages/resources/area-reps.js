@@ -2,10 +2,6 @@
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StaticQuery,
-  graphql,
-} from 'gatsby';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -16,6 +12,7 @@ import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
+import { useAreaRepsData } from '../../utils/hooks/useAreaRepsData';
 
 // Sidebar data
 import resourcesSidebar from './resources-links.yml';
@@ -63,39 +60,14 @@ Avatar.propTypes = {
 };
 
 // Component Definition
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query areaRepsPageQuery {
-        allContentfulAreaReps(
-          filter: {
-            node_locale: { eq: "en-US" }
-          }
-        ) {
-          edges {
-            node {
-              title
-              name
-              email
-              schoolDistrict
-              linkToPicture
-            }
-          }
-        }
-      }`}
-    render={data => <AreaReps data={data.allContentfulAreaReps.edges} {...props} />}
-  />
-);
+const AreaReps = ({ location }) => {
+  const { edges } = useAreaRepsData();
 
-const AreaReps = ({
-  data,
-  location,
-}) => {
-  const north = data.find(o => o.node.title === 'North Texas').node;
-  const central = data.find(o => o.node.title === 'Central Texas').node;
-  const south = data.find(o => o.node.title === 'South Texas').node;
-  const houston = data.find(o => o.node.title === 'Greater Houston').node;
-  const west = data.find(o => o.node.title === 'West Texas').node;
+  const north = edges.find(o => o.node.title === 'North Texas').node;
+  const central = edges.find(o => o.node.title === 'Central Texas').node;
+  const south = edges.find(o => o.node.title === 'South Texas').node;
+  const houston = edges.find(o => o.node.title === 'Greater Houston').node;
+  const west = edges.find(o => o.node.title === 'West Texas').node;
 
   return (
     <Layout location={location}>
@@ -216,9 +188,10 @@ const AreaReps = ({
 };
 
 AreaReps.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
   ]).isRequired,
 };
+
+export default AreaReps;

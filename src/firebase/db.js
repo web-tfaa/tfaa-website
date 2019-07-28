@@ -2,31 +2,36 @@ import { db } from './firebase';
 import { currentSchoolYearShort } from '../utils/helpers';
 
 // Create/Update user entry in Firestore
-export const doCreateEntry = (form, collection, documentId, callback) =>
+export const doCreateEntry = (form, collection, documentId, callback) => {
+  console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
   db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .set(form)
     .then(() => {
-      console.log(`Registration for ${documentId} was successful`);
+      console.log(`Registration for ${documentId} in ${currentSchoolYearShort} was successful`);
       callback(form);
     })
     .catch((err) => {
       console.log(`Error adding registration for ${documentId} document`, err);
     });
+};
 
-export const doUpdateEntry = (form, collection, documentId) =>
-  db.collection(`${collection}_${currentSchoolYearShort}`)
+export const doUpdateEntry = (form, collection, documentId) => {
+  console.log('doUpdateEntry : updating...', `${collection}_${currentSchoolYearShort}`);
+  return db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
     .then(() => {
-      console.log(`Updating payment info for ${documentId} was successful`);
+      console.log(`Updating payment info for ${documentId} in ${currentSchoolYearShort} was successful`);
     })
     .catch((err) => {
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
+};
 
 // Retrieves all registered members/sponsors for the current school year
 export const doGetUsers = (collection, userList, callback) => {
+  console.log('doGetUsers : getting...', `${collection}_${currentSchoolYearShort}`);
   const updatedUserList = userList;
   return db.collection(`${collection}_${currentSchoolYearShort}`)
     .get()
@@ -51,7 +56,6 @@ export const doGetInvoiceId = callback =>
         // doc.data() will be undefined in this case
         console.log('no such document for invoice');
       } else {
-        console.log('what is the invoice id now?', doc.data().currentInvoiceId);
         callback(doc.data().currentInvoiceId);
       }
     })

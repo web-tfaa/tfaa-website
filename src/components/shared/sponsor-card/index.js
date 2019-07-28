@@ -111,10 +111,10 @@ class SponsorCard extends Component {
           </ul>
           <div css={{ maxWidth: '75%', marginBottom: 16 }}>
             Deadline for recogntion at{' '}
-            <span css={{ fontWeight: 600 }}>Fall Conference</span> is Wednesday, November 7th.
+            <span css={{ fontWeight: 600 }}>Fall Conference</span> is Wednesday, November 6th.
           </div>
           <div css={{ maxWidth: '75%' }}>{' '}
-            Sponsors registering after November 7th will be recogized at the{' '}
+            Sponsors registering after November 6th will be recogized at the{' '}
             <span css={{ fontWeight: 600 }}>TMEA Round Table</span>.
           </div>
           <Link

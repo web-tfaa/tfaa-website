@@ -1,9 +1,9 @@
 // External Dependencies
-import ArrowForwardIcon from 'react-icons/lib/md/arrow-forward';
 import React, { Fragment } from 'react';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
+import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
@@ -43,12 +43,7 @@ const NonMemberContent = () => {
         </div>
         <CtaButton to="/members/join">
           <span css={{ verticalAlign: 'middle' }}>Join TMAC</span>
-          <ArrowForwardIcon
-            css={{
-              verticalAlign: 'baseline',
-              marginLeft: '0.6em',
-            }}
-          />
+          <ArrowForwardIcon />
         </CtaButton>
       </div>
 
