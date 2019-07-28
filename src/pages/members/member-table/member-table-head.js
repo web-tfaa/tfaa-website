@@ -1,8 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-// Material-UI Dependencies
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -12,11 +10,18 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
 const propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   isAdmin: PropTypes.bool.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
 };
+
+const styles = ({
+  active: {
+    fontWeight: 700,
+  },
+});
 
 const rows = [
   { id: 'FirstName', disablePadding: true, label: 'First Name' },
@@ -31,7 +36,7 @@ const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: '#EDF2F8',
     color: theme.palette.common.black,
-    fontWeight: 600,
+    fontWeight: 500,
     '&:first-child': {
       paddingLeft: 24,
     },
@@ -56,6 +61,7 @@ class EnhancedTableHead extends Component {
 
   render() {
     const {
+      classes,
       isAdmin,
       order,
       orderBy,
@@ -83,7 +89,9 @@ class EnhancedTableHead extends Component {
               >
                 <TableSortLabel
                   active={orderBy === row.id}
+                  classes={{ active: classes.active }}
                   direction={order}
+                  disabled={row.id === 'Actions'}
                   onClick={this.createSortHandler(row.id)}
                 >
                   {row.label}
@@ -99,4 +107,4 @@ class EnhancedTableHead extends Component {
 
 EnhancedTableHead.propTypes = propTypes;
 
-export default EnhancedTableHead;
+export default withStyles(styles)(EnhancedTableHead);
