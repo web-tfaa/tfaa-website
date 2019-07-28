@@ -60,7 +60,9 @@ class LoginForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+  }
 
+  componentDidMount() {
     this.activeComponent = true;
   }
 

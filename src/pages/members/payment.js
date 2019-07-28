@@ -26,21 +26,21 @@ class Payment extends Component {
     this.state = {
       authUser: null,
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
+    this.activeComponent = true;
+
     if (this.activeComponent) {
       if (typeof window !== 'undefined') {
         this.auth = firebase.auth();
       }
 
+      // eslint-disable-next-line no-confusing-arrow
       this.auth.onAuthStateChanged(authUser =>
         authUser
           ? this.setState(() => ({ authUser }))
-          : this.setState(() => ({ authUser: null })),
-      );
+          : this.setState(() => ({ authUser: null })));
     }
   }
 

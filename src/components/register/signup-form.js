@@ -63,7 +63,9 @@ class SignUpForm extends Component {
     this.state = {
       ...INITIAL_STATE,
     };
+  }
 
+  componentDidMount() {
     this.activeComponent = true;
   }
 
@@ -108,11 +110,10 @@ class SignUpForm extends Component {
         .then(() => {
           this.setState(() => ({
             ...INITIAL_STATE,
-            // isAuthenticated: true,
           }));
         })
-        .catch((err) => {
-          this.setState({ error: err });
+        .catch((error) => {
+          this.setState({ error });
         });
     }
   };

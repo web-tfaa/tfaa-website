@@ -48,11 +48,11 @@ class RegisterPayment extends Component {
       receiptId: 0,
       value: 'active',
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
+    this.activeComponent = true;
+
     if (this.activeComponent) {
       doGetInvoiceId(this.handleGetCurrentInvoiceId);
     }

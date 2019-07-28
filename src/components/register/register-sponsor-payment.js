@@ -1,16 +1,14 @@
 // External Dependencies
-import format from 'date-fns/format';
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
-import ReactToPrint from 'react-to-print';
-import { css } from 'glamor';
-
-// Material-UI Dependencies
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
+import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import React, { Component, Fragment } from 'react';
+import ReactToPrint from 'react-to-print';
+import format from 'date-fns/format';
+import { css } from 'glamor';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -95,11 +93,11 @@ class RegisterSponsorPayment extends Component {
       valueSilver: 1000,
       valueSilverError: '',
     };
-
-    this.activeComponent = true;
   }
 
   componentDidMount() {
+    this.activeComponent = true;
+
     if (this.activeComponent) {
       doGetInvoiceId(this.handleGetCurrentInvoiceId);
     }
