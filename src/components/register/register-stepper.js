@@ -1,8 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-
-// Material-UI Dependencies
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
