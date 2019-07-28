@@ -1,20 +1,18 @@
 /* eslint-disable camelcase */
 
 // External Dependencies
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import PropTypes from 'prop-types';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { Component } from 'react';
 import { css } from 'glamor';
 import { navigate } from 'gatsby';
 
-// Material-UI Dependencies
-import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
+import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
 import { options } from '../../utils/typography';
 import {
@@ -401,18 +399,10 @@ class RegisterSponsorForm extends Component {
       <div className="login-form">
         {hasCompletedRegisterSponsorForm
           ? (
-            <div
-              css={{
-                alignItems: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                margin: 32,
-              }}
-            >
-              <h2>Sponsor Information Form Complete</h2>
-              <p css={{ marginBottom: 32 }}>Now loading step 3...</p>
-              <CircularProgress size={64} thickness={4} />
-            </div>
+            <LoadingContainer
+              step={3}
+              title="Sponsor Information Form Complete"
+            />
           )
           : (
             <form onSubmit={this.handleSubmit}>

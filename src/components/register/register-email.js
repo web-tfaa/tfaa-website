@@ -1,11 +1,11 @@
 // External Dependencies
-import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
 import LoginForm from './login-form';
+import LoadingContainer from '../shared/LoadingContainer';
 import SignInUpElement from './sign-in-up-element';
 import SignUpForm from './signup-form';
 
@@ -69,18 +69,10 @@ class RegisterEmail extends Component {
     } = this.state;
 
     const childrenElements = isAuthenticated && hasCompletedRegisterEmail ? (
-      <div
-        css={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          margin: 32,
-        }}
-      >
-        <h2>Login Successful</h2>
-        <p css={{ marginBottom: 32 }}>Now loading step 2...</p>
-        <CircularProgress size={64} thickness={4} />
-      </div>
+      <LoadingContainer
+        step={2}
+        title="Login Successful"
+      />
     ) : (
       <Fragment>
         <FormHr />
