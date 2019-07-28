@@ -34,20 +34,16 @@ const MobileNavItem = ({ linkTo, label, icon: Icon }) => (
     >
       <Icon htmlColor={texasFlagBlue} height="0.5em" width="0.5em" />
     </div>
-    <div
-      css={{
-        marginTop: 8,
-      }}
-    >
+    <div css={{ marginTop: 8 }}>
       {label}
     </div>
   </Link>
 );
 
 MobileNavItem.propTypes = {
-  linkTo: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   icon: PropTypes.shape({}).isRequired,
+  label: PropTypes.string.isRequired,
+  linkTo: PropTypes.string.isRequired,
 };
 
 export default MobileNavItem;

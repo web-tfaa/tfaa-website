@@ -1,7 +1,7 @@
 // External Dependencies
-import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
+import hex2rgba from 'hex2rgba';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
@@ -116,9 +116,9 @@ const TopNav = (props) => {
           >
             <img
               alt="TMAC logo"
-              style={{ marginBottom: 0 }}
               height="30px"
               src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+              style={{ marginBottom: 0 }}
             />
             <div
               css={{
@@ -158,9 +158,9 @@ const TopNav = (props) => {
                 float: 'right',
               }}
               onClick={auth.doSignOut}
+              onKeyUp={auth.doSignOut}
               role="button"
               tabIndex={0}
-              onKeyUp={auth.doSignOut}
             >
               <NavItem linkTo="/">Sign Out</NavItem>
             </div>
