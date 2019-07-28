@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     width: '80%',
     marginLeft: 32,
     marginRight: 32,
-    marginTop: theme.spacing.unit(3),
+    marginTop: theme.spacing(3),
     overflowX: 'auto',
   },
   table: {
