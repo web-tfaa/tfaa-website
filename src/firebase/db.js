@@ -2,7 +2,9 @@ import { db } from './firebase';
 import { currentSchoolYearShort } from '../utils/helpers';
 
 // Create/Update user entry in Firestore
-export const doCreateEntry = (form, collection, documentId, callback) =>
+export const doCreateEntry = (form, collection, documentId, callback) => {
+  console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
+  console.log('doCreateEntry : form', form);
   db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .set(form)
@@ -13,9 +15,12 @@ export const doCreateEntry = (form, collection, documentId, callback) =>
     .catch((err) => {
       console.log(`Error adding registration for ${documentId} document`, err);
     });
+};
 
-export const doUpdateEntry = (form, collection, documentId) =>
-  !console.log(form) && db.collection(`${collection}_${currentSchoolYearShort}`)
+export const doUpdateEntry = (form, collection, documentId) => {
+  console.log('doUpdateEntry : updating...', `${collection}_${currentSchoolYearShort}`);
+  console.log('doUpdateEntry : form', form);
+  return db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
     .then(() => {
@@ -24,14 +29,17 @@ export const doUpdateEntry = (form, collection, documentId) =>
     .catch((err) => {
       console.log(`Error updating payment info for ${documentId} document`, err);
     });
+};
 
 // Retrieves all registered members/sponsors for the current school year
 export const doGetUsers = (collection, userList, callback) => {
+  console.log('doGetUsers : getting...', `${collection}_${currentSchoolYearShort}`);
   const updatedUserList = userList;
   return db.collection(`${collection}_${currentSchoolYearShort}`)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        console.log('doc', doc.data());
         updatedUserList[doc.id] = doc.data();
       });
       return callback(updatedUserList);

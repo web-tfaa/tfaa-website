@@ -27,8 +27,8 @@ const styles = {
     transform: 'translateZ(0)',
     paddingBottom: 16,
     [presets.Tablet]: {
-      flex: '0 0 50%',
-      maxWidth: '50%',
+      flex: '1 0 50%',
+      maxWidth: '80%',
       boxShadow: `0 1px 0 0 ${colors.ui.light}`,
       '&:nth-child(5),&:nth-child(6)': {
         boxShadow: 'none',
@@ -38,8 +38,8 @@ const styles = {
       },
     },
     [presets.Hd]: {
-      flex: '0 0 100%',
-      maxWidth: '100%',
+      flex: '1 0 100%',
+      maxWidth: '90%',
       borderLeft: `1px solid ${colors.ui.light}`,
       '&:nth-child(4)': {
         boxShadow: 'none',

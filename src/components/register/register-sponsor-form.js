@@ -130,11 +130,15 @@ class RegisterSponsorForm extends Component {
       // eslint-disable-next-line
       userId: props.authUser.uid,
     };
+  }
 
+  componentDidMount() {
+    console.log('RegisterSponsorForm : cDM');
     this.activeComponent = true;
   }
 
   componentWillUnmount() {
+    console.log('RegisterSponsorForm : cWU');
     this.activeComponent = false;
   }
 

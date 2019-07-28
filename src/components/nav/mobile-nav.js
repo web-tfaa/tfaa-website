@@ -1,9 +1,9 @@
 // External Dependencies
-import React from 'react';
 import CardGiftCard from '@material-ui/icons/CardGiftCard';
 import FolderOpen from '@material-ui/icons/FolderOpen';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
 import PersonOutlined from '@material-ui/icons/PersonOutlined';
+import React from 'react';
 
 // Internal Dependencies
 import MobileNavItem from './MobileNavItem';

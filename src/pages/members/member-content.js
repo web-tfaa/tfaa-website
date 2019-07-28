@@ -135,6 +135,8 @@ class MemberContent extends Component {
       userId,
     } = this.props;
 
+    console.log('MemberContent : cDM : userId', userId);
+
     // Find if the current user is among the registerd users
     if (Object.keys(userData).includes(userId)) {
       this.handleUpdateRegisteredUser();

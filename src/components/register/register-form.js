@@ -116,11 +116,15 @@ class RegisterForm extends Component {
       // eslint-disable-next-line
       userId: props.authUser.uid,
     };
+  }
 
+  componentDidMount() {
+    console.log('RegisterForm : cDM');
     this.activeComponent = true;
   }
 
   componentWillUnmount() {
+    console.log('RegisterForm : cWU');
     this.activeComponent = false;
   }
 
@@ -381,7 +385,10 @@ class RegisterForm extends Component {
           : (
             <form onSubmit={this.handleSubmit}>
               {/* FIRST NAME */}
-              <label css={labelStyles} htmlFor="FirstName">
+              <label
+                css={labelStyles}
+                htmlFor="FirstName"
+              >
                 First Name
                 <input
                   css={inputStyles}
@@ -396,7 +403,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{FirstNameError}</div>
 
               {/* LAST NAME */}
-              <label css={labelStyles} htmlFor="LastName">
+              <label
+                css={labelStyles}
+                htmlFor="LastName"
+              >
                 Last Name
                 <input
                   css={inputStyles}
@@ -411,7 +421,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{LastNameError}</div>
 
               {/* TITLE */}
-              <label css={labelStyles} htmlFor="Title">
+              <label
+                css={labelStyles}
+                htmlFor="Title"
+              >
                 Title
                 <input
                   css={inputStyles}
@@ -426,7 +439,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{TitleError}</div>
 
               {/* DISTRICT */}
-              <label css={labelStyles} htmlFor="District">
+              <label
+                css={labelStyles}
+                htmlFor="District"
+              >
                 District
                 <input
                   css={inputStyles}
@@ -441,7 +457,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{DistrictError}</div>
 
               {/* ADDRESS 1 */}
-              <label css={labelStyles} htmlFor="Address1">
+              <label
+                css={labelStyles}
+                htmlFor="Address1"
+              >
                 Address 1
                 <input
                   css={inputStyles}
@@ -456,7 +475,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{Address1Error}</div>
 
               {/* ADDRESS 2 */}
-              <label css={labelStyles} htmlFor="Address2">
+              <label
+                css={labelStyles}
+                htmlFor="Address2"
+              >
                 Address 2
                 <input
                   css={inputStyles}
@@ -469,7 +491,10 @@ class RegisterForm extends Component {
               </label>
 
               {/* CITY */}
-              <label css={labelStyles} htmlFor="City">
+              <label
+                css={labelStyles}
+                htmlFor="City"
+              >
                 City
                 <input
                   css={inputStyles}
@@ -484,7 +509,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{CityError}</div>
 
               {/* STATE */}
-              <label css={labelStyles} htmlFor="State">
+              <label
+                css={labelStyles}
+                htmlFor="State"
+              >
                 State
                 <input
                   css={inputStyles}
@@ -499,7 +527,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{StateError}</div>
 
               {/* ZIP */}
-              <label css={labelStyles} htmlFor="ZipCode">
+              <label
+                css={labelStyles}
+                htmlFor="ZipCode"
+              >
                 ZIP Code
                 <input
                   css={inputStyles}
@@ -514,7 +545,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{ZipCodeError}</div>
 
               {/* EMAIL */}
-              <label css={labelStyles} htmlFor="Email">
+              <label
+                css={labelStyles}
+                htmlFor="Email"
+              >
                 Email
                 <input
                   css={inputStyles}
@@ -529,7 +563,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{EmailError}</div>
 
               {/* OFFICE PHONE */}
-              <label css={labelStyles} htmlFor="OfficePhone">
+              <label
+                css={labelStyles}
+                htmlFor="OfficePhone"
+              >
                 Office Phone
                 <input
                   css={inputStyles}
@@ -544,7 +581,10 @@ class RegisterForm extends Component {
               <div css={baseErrorStyles}>{OfficePhoneError}</div>
 
               {/* CELL PHONE */}
-              <label css={labelStyles} htmlFor="CellPhone">
+              <label
+                css={labelStyles}
+                htmlFor="CellPhone"
+              >
                 Cell Phone
                 <input
                   css={inputStyles}
@@ -561,7 +601,10 @@ class RegisterForm extends Component {
               {/* NEW TO TMAC */}
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
-                <label css={labelStyles} htmlFor="NewToTMAC">
+                <label
+                  css={labelStyles}
+                  htmlFor="NewToTMAC"
+                >
                   New To TMAC
                   <RadioGroup
                     aria-label="NewToTMAC"
@@ -569,8 +612,16 @@ class RegisterForm extends Component {
                     onChange={this.handleChangeNewToTMAC}
                     value={radioValue}
                   >
-                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Yes"
+                      value="Yes"
+                    />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="No"
+                      value="No"
+                    />
                   </RadioGroup>
                 </label>
               </FormControl>
