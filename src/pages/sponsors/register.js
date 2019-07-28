@@ -140,7 +140,7 @@ class RegisterSponsorContent extends Component {
       console.log('RegisterSponsorContent : handleCompleteStep : active component');
       this.setState({
         activeStep: activeStep + 1,
-        completedSteps: [...completedSteps, ...step],
+        completedSteps: [...completedSteps, step],
         form: {
           ...form,
           ...updatedForm,

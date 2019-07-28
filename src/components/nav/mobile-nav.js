@@ -1,8 +1,8 @@
 // External Dependencies
-import CardGiftCard from '@material-ui/icons/CardGiftCard';
-import FolderOpen from '@material-ui/icons/FolderOpen';
-import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import PersonOutlined from '@material-ui/icons/PersonOutlined';
+import CardGiftCardIcon from '@material-ui/icons/CardGiftCard';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import React from 'react';
 
 // Internal Dependencies
@@ -31,10 +31,10 @@ const MobileNav = () => (
       },
     }}
   >
-    <MobileNavItem linkTo="/about/" label="About" icon={InfoOutlined} />
-    <MobileNavItem linkTo="/resources/" label="Resources" icon={FolderOpen} />
-    <MobileNavItem linkTo="/members/" label="Members" icon={PersonOutlined} />
-    <MobileNavItem linkTo="/sponsors/" label="Sponsors" icon={CardGiftCard} />
+    <MobileNavItem linkTo="/about/" label="About" icon={InfoOutlinedIcon} />
+    <MobileNavItem linkTo="/resources/" label="Resources" icon={FolderOpenIcon} />
+    <MobileNavItem linkTo="/members/" label="Members" icon={PersonOutlinedIcon} />
+    <MobileNavItem linkTo="/sponsors/" label="Sponsors" icon={CardGiftCardIcon} />
   </div>
 );
 
