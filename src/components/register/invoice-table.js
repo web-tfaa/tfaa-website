@@ -1,21 +1,19 @@
 // External Dependencies
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-// Material-UI Dependencies
-import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
+import CustomTableCell from '../shared/CustomTableCell';
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '80%',
     marginLeft: 32,
@@ -32,36 +30,18 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
-});
-
-// Local Components
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: '#EDF2F8',
-    color: theme.palette.common.black,
-    fontWeight: 600,
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-  body: {
-    fontSize: 14,
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-}))(TableCell);
+}));
 
 // Component Definition
 const InvoiceTable = (props) => {
   const {
     amount,
-    classes,
     form,
     isActive,
     isInvoice,
     sponsorLevel,
   } = props;
+  const classes = useStyles(props);
 
   // Work out the correct amount
   const isString = typeof amount === 'string';
@@ -112,7 +92,6 @@ InvoiceTable.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  classes: PropTypes.shape({}).isRequired,
   form: PropTypes.shape({}).isRequired,
   isInvoice: PropTypes.bool.isRequired,
   isActive: PropTypes.bool,
@@ -123,4 +102,4 @@ InvoiceTable.defaultProps = {
   sponsorLevel: '',
 };
 
-export default withStyles(styles)(InvoiceTable);
+export default InvoiceTable;

@@ -58,13 +58,12 @@ class Sponsors extends Component {
     Object.values(initialSponsorData).forEach((sponsor) => {
       switch (sponsor.SponsorLevel) {
         case 'Class Champion':
-          this.setState(state => ({
+          this.setState(state => !console.log('state....', state) && ({
             championData: [
               ...state.championData,
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -76,7 +75,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -88,7 +86,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));
@@ -100,7 +97,6 @@ class Sponsors extends Component {
               {
                 SponsorOrganization: sponsor.SponsorOrganization,
                 OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-                ImageUrl: sponsor.ImageUrl,
               },
             ],
           }));

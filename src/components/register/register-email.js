@@ -1,15 +1,13 @@
 // External Dependencies
+import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 
-// Material-UI Dependencies
-import CircularProgress from '@material-ui/core/CircularProgress';
-
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
-import SignUpForm from './signup-form';
 import LoginForm from './login-form';
 import SignInUpElement from './sign-in-up-element';
+import SignUpForm from './signup-form';
 
 // Component Definition
 class RegisterEmail extends Component {
@@ -25,7 +23,9 @@ class RegisterEmail extends Component {
       hasCompletedRegisterEmail: false,
       viewingSignUp: true,
     };
+  }
 
+  componentDidMount() {
     this.activeComponent = true;
   }
 
@@ -39,7 +39,7 @@ class RegisterEmail extends Component {
       const { hasCompletedRegisterEmail } = this.state;
 
       if (hasCompletedRegisterEmail) {
-        setTimeout(() => onCompleteStep(0), 3500);
+        setTimeout(() => onCompleteStep(0), 1000);
       }
     }
   };
@@ -56,7 +56,7 @@ class RegisterEmail extends Component {
     if (this.activeComponent) {
       this.setState({
         hasCompletedRegisterEmail: true,
-      }, () => this.handleCompleteEmailStep());
+      }, this.handleCompleteEmailStep);
     }
   }
 
