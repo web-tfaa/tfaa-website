@@ -76,6 +76,7 @@ const MemberListTable = (props) => {
       </Fragment>
     );
   }
+  return null;
 };
 
 MemberListTable.propTypes = propTypes;
