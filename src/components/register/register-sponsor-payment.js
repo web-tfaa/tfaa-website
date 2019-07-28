@@ -50,7 +50,6 @@ const baseErrorStyles = {
   color: 'red',
   fontFamily: options.headerFontFamily.join(','),
   marginLeft: 26,
-  transform: 'translateY(-20px)',
 };
 
 // Adds animation to the input that appears when selecting "Yes"

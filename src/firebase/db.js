@@ -4,7 +4,6 @@ import { currentSchoolYearShort } from '../utils/helpers';
 // Create/Update user entry in Firestore
 export const doCreateEntry = (form, collection, documentId, callback) => {
   console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
-  console.log('doCreateEntry : form', form);
   db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .set(form)
@@ -19,7 +18,6 @@ export const doCreateEntry = (form, collection, documentId, callback) => {
 
 export const doUpdateEntry = (form, collection, documentId) => {
   console.log('doUpdateEntry : updating...', `${collection}_${currentSchoolYearShort}`);
-  console.log('doUpdateEntry : form', form);
   return db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
@@ -39,7 +37,6 @@ export const doGetUsers = (collection, userList, callback) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log('doc', doc.data());
         updatedUserList[doc.id] = doc.data();
       });
       return callback(updatedUserList);

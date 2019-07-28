@@ -133,12 +133,10 @@ class RegisterSponsorForm extends Component {
   }
 
   componentDidMount() {
-    console.log('RegisterSponsorForm : cDM');
     this.activeComponent = true;
   }
 
   componentWillUnmount() {
-    console.log('RegisterSponsorForm : cWU');
     this.activeComponent = false;
   }
 
@@ -202,7 +200,6 @@ class RegisterSponsorForm extends Component {
           [event.target.name]: stripPhone(event.target.value),
         }, this.handleUpdateErrors(event.target.name, event.target.value));
       } else {
-        console.log('handleUpdate : form', event.target);
         this.setState({
           [event.target.name]: event.target.value,
         }, this.handleUpdateErrors(event.target.name, event.target.value));

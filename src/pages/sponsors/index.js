@@ -58,7 +58,7 @@ class Sponsors extends Component {
     Object.values(initialSponsorData).forEach((sponsor) => {
       switch (sponsor.SponsorLevel) {
         case 'Class Champion':
-          this.setState(state => !console.log('state....', state) && ({
+          this.setState(state => ({
             championData: [
               ...state.championData,
               {
@@ -122,11 +122,7 @@ class Sponsors extends Component {
 
     return (
       <Layout location={location}>
-        <section
-          css={{
-            textAlign: 'center',
-          }}
-        >
+        <section css={{ textAlign: 'center' }}>
           <Helmet>
             <title>TMAC | Sponsors</title>
           </Helmet>
