@@ -1,6 +1,6 @@
 // External Dependencies
 // import CardGiftCardIcon from '@material-ui/icons/CardGiftCard';
-import CardGiftCardIcon from '@material-ui/icons/Voicemail';
+import GradeIcon from '@material-ui/icons/Grade';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
@@ -35,7 +35,7 @@ const MobileNav = () => (
     <MobileNavItem linkTo="/about/" label="About" icon={InfoOutlinedIcon} />
     <MobileNavItem linkTo="/resources/" label="Resources" icon={FolderOpenIcon} />
     <MobileNavItem linkTo="/members/" label="Members" icon={PersonOutlinedIcon} />
-    <MobileNavItem linkTo="/sponsors/" label="Sponsors" icon={CardGiftCardIcon} />
+    <MobileNavItem linkTo="/sponsors/" label="Sponsors" icon={GradeIcon} />
   </div>
 );
 
