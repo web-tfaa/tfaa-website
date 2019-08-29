@@ -10,7 +10,6 @@ import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
-import CardHeadline from '../components/shared/cards/card-headline';
 import Cards from '../components/shared/cards';
 import FeaturedStat from '../components/shared/featured-stat';
 import FuturaParagraph from '../components/shared/futura-paragraph';
@@ -60,8 +59,6 @@ const Home = (props) => {
   } = props;
   const classes = useStyles(props);
 
-  const presidentInfo = data.allContentfulOfficer.edges.find(o => o.node.title === 'President').node;
-
   return (
     <Layout location={location}>
       <Helmet>
@@ -72,7 +69,6 @@ const Home = (props) => {
         <MastheadContent />
         <Cards>
           <Card>
-            <CardHeadline>Message from the President</CardHeadline>
             <FuturaParagraph>
               Greetings from the Texas Music Administrators Conference! The Texas
               Music Administrators Conference (TMAC) is an organization of
@@ -86,18 +82,7 @@ const Home = (props) => {
               If you are a music/fine arts administrator, an aspiring
               administrator, or if you are responsible for the organizing or
               supervision of music activities in your district, we encourage you
-              to become a member of TMAC. We will be hosting a Summer Round Table
-              session during the summer TBA/TCDA/TODA conferences in San Antonio
-              in July 2019 - everyone is invited to attend! Our Fall
-              Conference, for TMAC members only, will be held November 20-22, 2019
-              in Austin, Texas. If you would like more information on registering
-              for the Fall Conference, please <Link to="/events/fall-retreat/">visit the event page</Link>.
-            </FuturaParagraph>
-            <FuturaParagraph>
-              <a href="mailto:patricia.h.moreno@austinisd.org">{presidentInfo.name}</a>
-              , President
-              <br />
-              Texas Music Administrators Conference
+              to become a member of TMAC. We meet as a group three times per year and everyone is invited to attend.  We just ask that you first register to be a member of TMAC.  We meet in July in San Antonio during the summer TBA/TODA/TCDA conference, in November in Austin, and in February as part of the TMEA All-State Music Conference. If you would like more information regarding any of these events, please <Link to="/events/fall-retreat/">visit the event page</Link>.
             </FuturaParagraph>
           </Card>
         </Cards>

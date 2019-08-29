@@ -7,6 +7,7 @@ import {
 const baseTheme = createMuiTheme({
   typography: {
     fontFamily: ['Spectral', 'Georgia', 'Times New Roman', 'Times', 'serif'].join(','),
+    fontSize: 16,
   },
 });
 

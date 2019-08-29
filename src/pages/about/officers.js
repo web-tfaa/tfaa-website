@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
+import Avatar from '../../components/shared/Avatar';
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
@@ -17,54 +18,13 @@ import { useOfficerData } from '../../utils/hooks/useOfficerData';
 // Sidebar data
 import aboutSidebar from './about-links.yml';
 
-const Avatar = ({ alt, src }) => (
-  <div
-    css={{
-      alignItems: 'baseline',
-      borderRadius: '50%',
-      display: 'flex',
-      flexShrink: 0,
-      height: 120,
-      justifyContent: 'center',
-      marginBottom: 16,
-      overflow: 'hidden',
-      position: 'relative',
-      width: 120,
-      [presets.Phablet]: {
-        height: 140,
-        width: 140,
-      },
-      [presets.Tablet]: {
-        height: 160,
-        width: 160,
-      },
-    }}
-  >
-    <img
-      alt={alt}
-      css={{
-        height: '100%',
-        textAlign: 'center',
-        width: '100%',
-        // Handle non-square image. The property isn't supported by IE11.
-        // objectFit: 'cover',
-      }}
-      src={src}
-    />
-  </div>
-);
-Avatar.propTypes = {
-  alt: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-};
-
 // Component Definition
 const Officers = ({ location }) => {
   const { edges } = useOfficerData();
 
   const president = edges.find(o => o.node.title === 'President').node;
   const vicePresident = edges.find(o => o.node.title === 'Vice-President').node;
-  const treasurer = edges.find(o => o.node.title === 'Treasurer').node;
+  const executiveSecretary = edges.find(o => o.node.title === 'Executive Secretary').node;
   const secretary = edges.find(o => o.node.title === 'Secretary').node;
   const pastPresident = edges.find(o => o.node.title === 'Past-President').node;
 
@@ -118,22 +78,6 @@ const Officers = ({ location }) => {
 
             <Card>
               <Avatar
-                alt="treasurer picture"
-                src={treasurer.linkToPicture}
-              />
-              <CardHeadline>Treasurer</CardHeadline>
-              <FuturaParagraph>
-                <a href={`mailto:${treasurer.email}`}>
-                  {treasurer.name}
-                </a>
-              </FuturaParagraph>
-              <FuturaParagraph>
-                {treasurer.districtTitle}, {treasurer.schoolDistrict}
-              </FuturaParagraph>
-            </Card>
-
-            <Card>
-              <Avatar
                 alt="secretary picture"
                 src={secretary.linkToPicture}
               />
@@ -161,6 +105,22 @@ const Officers = ({ location }) => {
               </FuturaParagraph>
               <FuturaParagraph>
                 {pastPresident.districtTitle}, {pastPresident.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="treasurer picture"
+                src={executiveSecretary.linkToPicture}
+              />
+              <CardHeadline>Executive Secretary</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${executiveSecretary.email}`}>
+                  {executiveSecretary.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {executiveSecretary.districtTitle}, {executiveSecretary.schoolDistrict}
               </FuturaParagraph>
             </Card>
           </Cards>
