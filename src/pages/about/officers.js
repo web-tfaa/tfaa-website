@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
+import Avatar from '../../components/shared/Avatar';
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
@@ -16,47 +17,6 @@ import { useOfficerData } from '../../utils/hooks/useOfficerData';
 
 // Sidebar data
 import aboutSidebar from './about-links.yml';
-
-const Avatar = ({ alt, src }) => (
-  <div
-    css={{
-      alignItems: 'baseline',
-      borderRadius: '50%',
-      display: 'flex',
-      flexShrink: 0,
-      height: 120,
-      justifyContent: 'center',
-      marginBottom: 16,
-      overflow: 'hidden',
-      position: 'relative',
-      width: 120,
-      [presets.Phablet]: {
-        height: 140,
-        width: 140,
-      },
-      [presets.Tablet]: {
-        height: 160,
-        width: 160,
-      },
-    }}
-  >
-    <img
-      alt={alt}
-      css={{
-        height: '100%',
-        textAlign: 'center',
-        width: '100%',
-        // Handle non-square image. The property isn't supported by IE11.
-        // objectFit: 'cover',
-      }}
-      src={src}
-    />
-  </div>
-);
-Avatar.propTypes = {
-  alt: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-};
 
 // Component Definition
 const Officers = ({ location }) => {
