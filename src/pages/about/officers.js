@@ -64,7 +64,7 @@ const Officers = ({ location }) => {
 
   const president = edges.find(o => o.node.title === 'President').node;
   const vicePresident = edges.find(o => o.node.title === 'Vice-President').node;
-  const treasurer = edges.find(o => o.node.title === 'Treasurer').node;
+  const executiveSecretary = edges.find(o => o.node.title === 'Executive Secretary').node;
   const secretary = edges.find(o => o.node.title === 'Secretary').node;
   const pastPresident = edges.find(o => o.node.title === 'Past-President').node;
 
@@ -118,22 +118,6 @@ const Officers = ({ location }) => {
 
             <Card>
               <Avatar
-                alt="treasurer picture"
-                src={treasurer.linkToPicture}
-              />
-              <CardHeadline>Treasurer</CardHeadline>
-              <FuturaParagraph>
-                <a href={`mailto:${treasurer.email}`}>
-                  {treasurer.name}
-                </a>
-              </FuturaParagraph>
-              <FuturaParagraph>
-                {treasurer.districtTitle}, {treasurer.schoolDistrict}
-              </FuturaParagraph>
-            </Card>
-
-            <Card>
-              <Avatar
                 alt="secretary picture"
                 src={secretary.linkToPicture}
               />
@@ -161,6 +145,22 @@ const Officers = ({ location }) => {
               </FuturaParagraph>
               <FuturaParagraph>
                 {pastPresident.districtTitle}, {pastPresident.schoolDistrict}
+              </FuturaParagraph>
+            </Card>
+
+            <Card>
+              <Avatar
+                alt="treasurer picture"
+                src={executiveSecretary.linkToPicture}
+              />
+              <CardHeadline>Executive Secretary</CardHeadline>
+              <FuturaParagraph>
+                <a href={`mailto:${executiveSecretary.email}`}>
+                  {executiveSecretary.name}
+                </a>
+              </FuturaParagraph>
+              <FuturaParagraph>
+                {executiveSecretary.districtTitle}, {executiveSecretary.schoolDistrict}
               </FuturaParagraph>
             </Card>
           </Cards>
