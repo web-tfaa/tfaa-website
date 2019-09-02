@@ -1,4 +1,5 @@
 // External Dependencies
+import Card from '@material-ui/core/Card';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
@@ -19,6 +20,13 @@ const defaultProps = {
 };
 
 const useStyles = makeStyles({
+  card: {
+    background: 'aliceblue',
+    fontSize: '0.9rem',
+    marginBottom: '1rem',
+    maxWidth: '90%',
+    padding: '0 1rem',
+  },
   deadlineText: {
     marginBottom: 16,
     maxWidth: '75%',
@@ -31,7 +39,7 @@ const useStyles = makeStyles({
     marginTop: 32,
   },
   list: {
-    maxWidth: '60%',
+    // maxWidth: '60%',
     textAlign: 'justify',
   },
   payLink: {
@@ -123,18 +131,20 @@ const SponsorCard = (props) => {
       <hr className={classes.divider} />
 
       <div className={classes.sponsorInfo}>
-        <h4 className={classes.titleFour}>Sponsorship receives:</h4>
-        <ul className={classes.list}>
-          {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
-          <li>Company name in programs for TMAC November Conference and TMEA Meeting</li>
-          <li>Company name on TMAC website</li>
-        </ul>
+        <Card className={classes.card} elevation={2}>
+          <h5 className={classes.titleFour}>Sponsorship receives:</h5>
+          <ul className={classes.list}>
+            {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
+            <li>Company name in programs for TMAC November Conference and TMEA Meeting</li>
+            <li>Company name on TMAC website</li>
+          </ul>
+        </Card>
         <div className={classes.deadlineText}>
           Deadline for recogntion at{' '}
           <span className={classes.strongText}>Fall Conference</span> is Wednesday, November 6th.
         </div>
         <div className={classes.deadlineTextBottom}>{' '}
-          Sponsors registering after November 6th will be recogized at the{' '}
+          Sponsors registering after November 6th will be recognized at the{' '}
           <span className={classes.strongText}>TMEA Round Table</span>.
         </div>
         <Link
