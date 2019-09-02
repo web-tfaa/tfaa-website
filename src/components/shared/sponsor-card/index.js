@@ -1,53 +1,99 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
-import { css } from 'glamor';
+import { makeStyles } from '@material-ui/styles';
 
 // Local Variables
-const sponsorInfoStyles = {
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
+const propTypes = {
+  max: PropTypes.number,
+  min: PropTypes.number,
+  sponsorClass: PropTypes.string.isRequired,
+  sponsorData: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-// Let's add some animation to the titles of the sponsor levels!
-const textShadowDropBottom = css.keyframes({
-  '0%': { textShadow: '0 0 0 rgba(0, 0, 0, 0)' },
-  '100%': { textShadow: '0 3px 3px rgba(0, 0, 0, 0.2)' },
+const defaultProps = {
+  max: null,
+  min: null,
+  sponsorData: [],
+};
+
+const useStyles = makeStyles({
+  deadlineText: {
+    marginBottom: 16,
+    maxWidth: '75%',
+  },
+  deadlineTextBottom: {
+    maxWidth: '75%',
+  },
+  divider: {
+    height: 3,
+    marginTop: 32,
+  },
+  list: {
+    maxWidth: '60%',
+    textAlign: 'justify',
+  },
+  payLink: {
+    fontSize: 20,
+    fontWeight: '600',
+    margin: '24px 0',
+  },
+  root: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
+    marginBottom: '1em',
+    padding: '2em 3em',
+  },
+  sponsorInfo: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  sponsorLink: {
+    margin: '0 8px',
+  },
+  sponsorLinktText: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: '1.25rem',
+    height: 48,
+    justifyContent: 'center',
+    marginBottom: 6,
+  },
+  strongText: {
+    fontWeight: 600,
+  },
+  titleFour: {
+    color: TITLE_BLUE,
+    marginTop: '1.25rem',
+  },
 });
 
+const TITLE_BLUE = '#32456B';
+
 // Component Definition
-class SponsorCard extends Component {
-  static propTypes = {
-    max: PropTypes.number,
-    min: PropTypes.number,
-    sponsorClass: PropTypes.string.isRequired,
-    sponsorData: PropTypes.arrayOf(PropTypes.shape({})),
-  };
+const SponsorCard = (props) => {
+  const {
+    max,
+    min,
+    sponsorClass,
+    sponsorData,
+  } = props;
 
-  static defaultProps = {
-    max: null,
-    min: null,
-    sponsorData: [],
-  };
+  const classes = useStyles(props);
 
-  renderSponsors = sponsorData =>
+  const renderSponsors = sponsorData =>
     sponsorData.length > 0 && sponsorData.map(sponsor => (
       <div
+        className={classes.sponsorLinktText}
         key={sponsor.SponsorOrganization}
-        css={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          fontSize: '1.25rem',
-          height: 48,
-          justifyContent: 'center',
-          marginBottom: 6,
-        }}
       >
         <a
-          css={{ marginBottom: 16 }}
+          className={classes.sponsorLink}
           href={sponsor.OrganizationWebsiteAddress.startsWith('http') ? sponsor.OrganizationWebsiteAddress : `http://${sponsor.OrganizationWebsiteAddress}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -57,81 +103,53 @@ class SponsorCard extends Component {
       </div>
     ));
 
-  render() {
-    const {
-      max,
-      min,
-      sponsorClass,
-      sponsorData,
-    } = this.props;
+  const donationAmount = min
+    ? `${min.toLocaleString()}-${max.toLocaleString()}`
+    : `${max.toLocaleString()}+`;
 
-    const donationAmount = min
-      ? `${min.toLocaleString()}-${max.toLocaleString()}`
-      : `${max.toLocaleString()}+`;
+  return (
+    <div className={classes.root}>
+      <h2>
+        {sponsorClass}
+      </h2>
+      <h4 className={classes.titleFour}>
+        (${donationAmount} donation)
+      </h4>
 
-    return (
-      <div
-        css={{
-          alignItems: 'center',
-          backgroundColor: 'white',
-          borderRadius: 4,
-          boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
-          marginBottom: '1em',
-          padding: '2em 3em',
-        }}
-      >
-        <h2
-          css={css({
-            animation: `${textShadowDropBottom} 2s both`,
-          })}
-        >
-          {sponsorClass}
-        </h2>
-        <h4
-          css={{
-            color: '#32456B',
-            marginTop: '1.25rem',
-          }}
-        >
-          (${donationAmount} donation)
-        </h4>
+      {sponsorData.length > 0 && <hr className={classes.divider} />}
 
-        {sponsorData.length > 0 && <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />}
+      {renderSponsors(sponsorData)}
 
-        {this.renderSponsors(sponsorData)}
+      <hr className={classes.divider} />
 
-        <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
-
-        <div css={sponsorInfoStyles}>
-          <h4 css={{ color: '#32456B', marginTop: 12 }}>Sponsorship receives:</h4>
-          <ul css={{ maxWidth: '60%', textAlign: 'justify' }}>
-            {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
-            <li>Company Logo in programs for TMAC November Conference and TMEA Meeting</li>
-            <li>Company Logo on TMAC website</li>
-          </ul>
-          <div css={{ maxWidth: '75%', marginBottom: 16 }}>
-            Deadline for recogntion at{' '}
-            <span css={{ fontWeight: 600 }}>Fall Conference</span> is Wednesday, November 6th.
-          </div>
-          <div css={{ maxWidth: '75%' }}>{' '}
-            Sponsors registering after November 6th will be recogized at the{' '}
-            <span css={{ fontWeight: 600 }}>TMEA Round Table</span>.
-          </div>
-          <Link
-            css={{
-              fontSize: 20,
-              fontWeight: '600',
-              margin: '24px 0',
-            }}
-            to="/sponsors/sponsor-info"
-            state={{ level: sponsorClass }}
-          >
-            Click here to register and pay
-          </Link>
+      <div className={classes.sponsorInfo}>
+        <h4 className={classes.titleFour}>Sponsorship receives:</h4>
+        <ul className={classes.list}>
+          {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
+          <li>Company name in programs for TMAC November Conference and TMEA Meeting</li>
+          <li>Company name on TMAC website</li>
+        </ul>
+        <div className={classes.deadlineText}>
+          Deadline for recogntion at{' '}
+          <span className={classes.strongText}>Fall Conference</span> is Wednesday, November 6th.
         </div>
+        <div className={classes.deadlineTextBottom}>{' '}
+          Sponsors registering after November 6th will be recogized at the{' '}
+          <span className={classes.strongText}>TMEA Round Table</span>.
+        </div>
+        <Link
+          className={classes.payLink}
+          state={{ level: sponsorClass }}
+          to="/sponsors/sponsor-info"
+        >
+          Click here to register and pay
+        </Link>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+SponsorCard.propTypes = propTypes;
+SponsorCard.defaultProps = defaultProps;
 
 export default SponsorCard;
