@@ -25,7 +25,7 @@ const AreaReps = ({ location }) => {
   const north = edges.find(o => o.node.title === 'North Texas').node;
   const central = edges.find(o => o.node.title === 'Central Texas').node;
   const south = edges.find(o => o.node.title === 'South Texas').node;
-  const houston = edges.find(o => o.node.title === 'Greater Houston').node;
+  const southeast = edges.find(o => o.node.title === 'Southeast Texas').node;
   const west = edges.find(o => o.node.title === 'West Texas').node;
 
   return (
@@ -93,17 +93,17 @@ const AreaReps = ({ location }) => {
 
             <Card>
               <Avatar
-                alt="Greater Houston area representative"
-                src={houston.linkToPicture}
+                alt="Southeast Texas area representative"
+                src={southeast.linkToPicture}
               />
-              <CardHeadline>Greater Houston</CardHeadline>
+              <CardHeadline>Southeast Texas</CardHeadline>
               <FuturaParagraph>
-                <a href={`mailto:${houston.email}`}>
-                  {houston.name}
+                <a href={`mailto:${southeast.email}`}>
+                  {southeast.name}
                 </a>
               </FuturaParagraph>
               <FuturaParagraph>
-                {houston.schoolDistrict}
+                {southeast.schoolDistrict}
               </FuturaParagraph>
             </Card>
 
