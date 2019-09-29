@@ -22,6 +22,6 @@ Heavily inspired by the Gatsby v1 documentation website.
 
 1. Clone this repo
 2. Install dependencies → `yarn`
-3. Start the development server → `gatsby develop`
+3. Start the development server → `yarn develop`
 
 :musical_note: :trumpet: :saxophone:
