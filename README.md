@@ -11,6 +11,7 @@ This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Ad
 - Cloudinary (as CDN)
 - Firebase for authentication
 - Firestore for data storage
+- Google Scripts to sync with Firebase data
 - Material-UI
 
 ## Inspiration
