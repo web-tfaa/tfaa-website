@@ -56,7 +56,7 @@ class RegisterButton extends Component {
         css={{
           ...overrideCSS,
           ...scale(1 / 5),
-          border: `1px solid ${red ? texasFlagRed : texasFlagBlue}`,
+          border: `1px solid ${red ? texasFlagRed : 'green'}`,
           borderRadius: presets.radius,
           display: 'inline-block',
           fontFamily: options.headerFontFamily.join(','),
@@ -72,9 +72,9 @@ class RegisterButton extends Component {
           '&&': {
             backgroundColor: 'transparent',
             backgroundSize: '30px 30px',
-            border: `1px solid ${red ? texasFlagRed : texasFlagBlue}`,
+            border: `2px solid ${(red || isDisabled) ? texasFlagRed : 'green'}`,
             boxShadow: 'none',
-            color: red ? texasFlagRed : texasFlagBlue,
+            color: red ? texasFlagRed : 'green',
             fontWeight: 'normal',
             textDecoration: 'none',
             transition: `all ${presets.animation.speedDefault} ${
@@ -82,13 +82,14 @@ class RegisterButton extends Component {
             }`,
             ':hover, &:focus': {
               animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
-              backgroundColor: red ? texasFlagRed : texasFlagBlue,
+              backgroundColor: (red || isDisabled) ? texasFlagRed : 'green',
               backgroundImage: !isDisabled && 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
               backgroundSize: '30px 30px',
               color: !isDisabled ? '#fff' : hex2rgba('#fafafa', 0.4),
+              cursor: 'pointer',
             },
             ':focus': {
-              boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : texasFlagBlue, 0.25)}`,
+              boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : '00ff00', 0.25)}`,
               outline: 0,
             },
             ':after': {

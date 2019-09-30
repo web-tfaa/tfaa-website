@@ -1,18 +1,23 @@
 /* eslint-disable camelcase */
 
 // External Dependencies
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { Component } from 'react';
+import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 import { navigate } from 'gatsby';
+import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
-import RegisterButton from './register-button';
 import LoadingContainer from '../shared/LoadingContainer';
+import RegisterButton from './register-button';
 import { options } from '../../utils/typography';
 import {
   emailRegex,
@@ -23,7 +28,54 @@ import {
   doCreateEntry,
 } from '../../firebase/db';
 
-// Local Styles
+// Local Variables
+const styles = theme => ({
+  adminCard: {
+    alignSelf: 'flex-start',
+    borderLeft: `4px solid ${theme.palette.error.main}`,
+    marginBottom: 16,
+    maxWidth: '80%',
+  },
+  cityStateContainer: {
+    display: 'flex',
+  },
+  error: {
+    color: 'red',
+    fontFamily: options.bodyFontFamily.join(','),
+    fontWeight: 500,
+    marginTop: '0.4rem',
+    textTransform: 'initial',
+  },
+  input: {
+    display: 'block',
+    fontSize: '1rem',
+    minWidth: '70%',
+    padding: '0.3rem',
+  },
+  label: {
+    display: 'block',
+    fontSize: '90%',
+    letterSpacing: '0.05rem',
+    marginTop: 16,
+    textTransform: 'uppercase',
+  },
+  radioButtonLabel: {
+    display: 'block',
+    fontSize: '90%',
+    letterSpacing: '0.05rem',
+    marginTop: '0.3rem',
+    marginBottom: 0,
+    textTransform: 'uppercase',
+  },
+  stateContainer: {
+    marginLeft: 12,
+    width: '40%',
+  },
+  stateInput: {
+    width: '80%',
+  },
+});
+
 const labelStyles = {
   display: 'block',
   fontSize: '90%',
@@ -89,8 +141,12 @@ const INITIAL_STATE = {
 // Local Functions
 const formatPhone = (phone) => {
   let cleanPhone = phone;
-  if (cleanPhone.startsWith('1')) cleanPhone = cleanPhone.slice(1);
-  if (cleanPhone.length !== 10) return phone;
+  if (cleanPhone.startsWith('1')) {
+    cleanPhone = cleanPhone.slice(1);
+  }
+  if (cleanPhone.length !== 10) {
+    return phone;
+  }
   return `(${cleanPhone.substr(0, 3)}) ${cleanPhone.substr(
     3,
     3,
@@ -103,6 +159,7 @@ const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
 class RegisterForm extends Component {
   static propTypes = {
     authUser: PropTypes.shape({}).isRequired,
+    classes: PropTypes.shape({}).isRequired,
     onCompleteStep: PropTypes.func.isRequired,
   };
 
@@ -119,12 +176,10 @@ class RegisterForm extends Component {
   }
 
   componentDidMount() {
-    console.log('RegisterForm : cDM');
     this.activeComponent = true;
   }
 
   componentWillUnmount() {
-    console.log('RegisterForm : cWU');
     this.activeComponent = false;
   }
 
@@ -166,7 +221,7 @@ class RegisterForm extends Component {
     if (this.activeComponent) {
       const { onCompleteStep } = this.props;
 
-      setTimeout(() => onCompleteStep(0, form), 2500);
+      setTimeout(() => onCompleteStep(0, form), 2200);
     }
   };
 
@@ -193,9 +248,11 @@ class RegisterForm extends Component {
   };
 
   handleUpdateErrors = (name, value) => {
-    if (name === 'Email') this.handleUpdateEmailError(value);
-    else if (name === 'ZipCode') this.handleUpdateZipCodeError(value);
-    else this.handleUpdateInputError(name, value);
+    if (name === 'Email') {
+      this.handleUpdateEmailError(value);
+    } else if (name === 'ZipCode') {
+      this.handleUpdateZipCodeError(value);
+    } else this.handleUpdateInputError(name, value);
   };
 
   handleUpdateEmailError = (value) => {
@@ -292,7 +349,7 @@ class RegisterForm extends Component {
           }
           break;
         case 'State':
-          if (!City && value) {
+          if (!State && value) {
             this.setState({ StateError: '' });
           } else if (State && !value) {
             this.setState({ StateError: 'State is required' });
@@ -323,11 +380,14 @@ class RegisterForm extends Component {
   };
 
   validateHuman = (data) => {
-    if (data) return false;
+    if (data) {
+      return false;
+    }
     return true;
   };
 
   render() {
+    const { classes } = this.props;
     const {
       Address1,
       Address1Error,
@@ -358,7 +418,9 @@ class RegisterForm extends Component {
       radioValue,
     } = this.state;
 
-    if (isAuthenticated) navigate('/members');
+    if (isAuthenticated) {
+      navigate('/members');
+    }
 
     const hasInput = FirstName !== ''
       && LastName !== ''
@@ -386,12 +448,12 @@ class RegisterForm extends Component {
             <form onSubmit={this.handleSubmit}>
               {/* FIRST NAME */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="FirstName"
               >
-                First Name
+                First Name*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="FirstName"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Sally"
@@ -404,12 +466,12 @@ class RegisterForm extends Component {
 
               {/* LAST NAME */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="LastName"
               >
-                Last Name
+                Last Name*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="LastName"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Drumm"
@@ -422,12 +484,12 @@ class RegisterForm extends Component {
 
               {/* TITLE */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="Title"
               >
-                Title
+                Title*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="Title"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Director of Fine Arts"
@@ -440,12 +502,12 @@ class RegisterForm extends Component {
 
               {/* DISTRICT */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="District"
               >
-                District
+                District*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="District"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Texas ISD"
@@ -458,12 +520,12 @@ class RegisterForm extends Component {
 
               {/* ADDRESS 1 */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="Address1"
               >
-                Address 1
+                Address 1*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="Address1"
                   onChange={this.handleUpdate}
                   placeholder="e.g. 123 Main St."
@@ -476,12 +538,12 @@ class RegisterForm extends Component {
 
               {/* ADDRESS 2 */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="Address2"
               >
                 Address 2
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="Address2"
                   onChange={this.handleUpdate}
                   placeholder="e.g. Suite 19"
@@ -490,50 +552,52 @@ class RegisterForm extends Component {
                 />
               </label>
 
-              {/* CITY */}
-              <label
-                css={labelStyles}
-                htmlFor="City"
-              >
-                City
-                <input
-                  css={inputStyles}
-                  name="City"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Dallas"
-                  required
-                  type="text"
-                  value={City}
-                />
-              </label>
-              <div css={baseErrorStyles}>{CityError}</div>
+              <div className={classes.cityStateContainer}>
+                {/* CITY */}
+                <label
+                  className={classes.label}
+                  htmlFor="City"
+                >
+                  City*
+                  <input
+                    className={classes.input}
+                    name="City"
+                    onChange={this.handleUpdate}
+                    placeholder="e.g. Dallas"
+                    required
+                    type="text"
+                    value={City}
+                  />
+                  <div className={classes.error}>{CityError}</div>
+                </label>
 
-              {/* STATE */}
-              <label
-                css={labelStyles}
-                htmlFor="State"
-              >
-                State
-                <input
-                  css={inputStyles}
-                  name="State"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. TX"
-                  required
-                  type="text"
-                  value={State}
-                />
-              </label>
-              <div css={baseErrorStyles}>{StateError}</div>
+                {/* STATE */}
+                <label
+                  className={clsx(classes.label, classes.stateContainer)}
+                  htmlFor="State"
+                >
+                  State*
+                  <input
+                    className={clsx(classes.input, classes.stateInput)}
+                    name="State"
+                    onChange={this.handleUpdate}
+                    placeholder="e.g. TX"
+                    required
+                    type="text"
+                    value={State}
+                  />
+                  <div className={classes.error}>{StateError}</div>
+                </label>
+              </div>
 
               {/* ZIP */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="ZipCode"
               >
-                ZIP Code
+                ZIP Code*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="ZipCode"
                   onChange={this.handleUpdate}
                   placeholder="e.g. 75150"
@@ -546,12 +610,12 @@ class RegisterForm extends Component {
 
               {/* EMAIL */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="Email"
               >
-                Email
+                Email*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="Email"
                   onChange={this.handleUpdate}
                   placeholder="e.g. music@austinisd.edu"
@@ -564,12 +628,12 @@ class RegisterForm extends Component {
 
               {/* OFFICE PHONE */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="OfficePhone"
               >
-                Office Phone
+                Office Phone*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="OfficePhone"
                   onChange={this.handleUpdate}
                   placeholder="e.g. (512) 555-1919"
@@ -582,12 +646,12 @@ class RegisterForm extends Component {
 
               {/* CELL PHONE */}
               <label
-                css={labelStyles}
+                className={classes.label}
                 htmlFor="CellPhone"
               >
-                Cell Phone
+                Cell Phone*
                 <input
-                  css={inputStyles}
+                  className={classes.input}
                   name="CellPhone"
                   onChange={this.handleUpdate}
                   placeholder="e.g. (512) 555-1919"
@@ -602,10 +666,10 @@ class RegisterForm extends Component {
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
                 <label
-                  css={labelStyles}
+                  className={classes.radioButtonLabel}
                   htmlFor="NewToTMAC"
                 >
-                  New To TMAC
+                  New To TMAC*
                   <RadioGroup
                     aria-label="NewToTMAC"
                     name="NewToTMAC"
@@ -639,10 +703,20 @@ class RegisterForm extends Component {
               {/* SUBMIT BUTTON */}
               <div style={{
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
-                transform: 'translateX(16px)',
+                alignItems: 'center',
               }}
               >
+                {!hasValidInput && (
+                  <Card className={classes.adminCard}>
+                    <CardContent>
+                      <Typography variant="body2">
+                        Please make sure all required fields above are completed.
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                )}
                 <RegisterButton
                   buttonType="submit"
                   isDisabled={!hasValidInput}
@@ -664,4 +738,4 @@ const RegisterFormWithContext = props => (
   </AuthUserContext.Consumer>
 );
 
-export default RegisterFormWithContext;
+export default withStyles(styles)(RegisterFormWithContext);

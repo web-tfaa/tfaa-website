@@ -1,8 +1,8 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
 
 // Local Variables
 const propTypes = {
