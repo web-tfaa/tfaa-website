@@ -11,6 +11,7 @@ import { rhythm, scale, options } from '../../utils/typography';
 // Local Variables
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
+const green500 = '#4caf50';
 
 const stripeAnimation = css.keyframes({
   '0%': { backgroundPosition: '0 0' },
@@ -56,7 +57,7 @@ class RegisterButton extends Component {
         css={{
           ...overrideCSS,
           ...scale(1 / 5),
-          border: `1px solid ${red ? texasFlagRed : 'green'}`,
+          border: `1px solid ${red ? texasFlagRed : green500}`,
           borderRadius: presets.radius,
           display: 'inline-block',
           fontFamily: options.headerFontFamily.join(','),
@@ -72,9 +73,9 @@ class RegisterButton extends Component {
           '&&': {
             backgroundColor: 'transparent',
             backgroundSize: '30px 30px',
-            border: `2px solid ${(red || isDisabled) ? texasFlagRed : 'green'}`,
+            border: `2px solid ${(red || isDisabled) ? texasFlagRed : green500}`,
             boxShadow: 'none',
-            color: red ? texasFlagRed : 'green',
+            color: red ? texasFlagRed : green500,
             fontWeight: 'normal',
             textDecoration: 'none',
             transition: `all ${presets.animation.speedDefault} ${
@@ -82,14 +83,14 @@ class RegisterButton extends Component {
             }`,
             ':hover, &:focus': {
               animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
-              backgroundColor: (red || isDisabled) ? texasFlagRed : 'green',
+              backgroundColor: (red || isDisabled) ? texasFlagRed : green500,
               backgroundImage: !isDisabled && 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
               backgroundSize: '30px 30px',
               color: !isDisabled ? '#fff' : hex2rgba('#fafafa', 0.4),
               cursor: 'pointer',
             },
             ':focus': {
-              boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : '00ff00', 0.25)}`,
+              boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : green500, 0.25)}`,
               outline: 0,
             },
             ':after': {

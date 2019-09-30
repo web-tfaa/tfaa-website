@@ -226,7 +226,7 @@ class MemberContent extends Component {
               marginLeft: '1.1rem',
             }}
           >
-            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
           </span>
         </FuturaDiv>
       </Card>

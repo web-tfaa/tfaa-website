@@ -36,6 +36,9 @@ const styles = theme => ({
     marginBottom: 16,
     maxWidth: '80%',
   },
+  cityContainer: {
+    marginBottom: 0,
+  },
   cityStateContainer: {
     display: 'flex',
   },
@@ -69,6 +72,7 @@ const styles = theme => ({
   },
   stateContainer: {
     marginLeft: 12,
+    marginBottom: 0,
     width: '40%',
   },
   stateInput: {
@@ -555,7 +559,7 @@ class RegisterForm extends Component {
               <div className={classes.cityStateContainer}>
                 {/* CITY */}
                 <label
-                  className={classes.label}
+                  className={clsx(classes.label, classes.cityContainer)}
                   htmlFor="City"
                 >
                   City*
