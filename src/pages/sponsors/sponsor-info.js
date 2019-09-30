@@ -79,6 +79,7 @@ const SponsorInfo = (props) => {
             }}
           >
             <CtaButton
+              isGreen
               to="/sponsors/register"
               state={{ level: location && location.state && location.state.level }}
             >
