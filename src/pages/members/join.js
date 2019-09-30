@@ -98,7 +98,10 @@ const JoinContainer = (props) => {
               justifyContent: 'flex-end',
             }}
           >
-            <CtaButton to="/members/register">
+            <CtaButton
+              isGreen
+              to="/members/register"
+            >
               <span css={{ verticalAlign: 'middle' }}>
                 Begin Registration
               </span>

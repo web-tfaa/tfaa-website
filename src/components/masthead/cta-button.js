@@ -12,6 +12,7 @@ import { rhythm, scale, options } from '../../utils/typography';
 // Local Variables
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
+const green500 = '#4caf50';
 
 const stripeAnimation = css.keyframes({
   '0%': { backgroundPosition: '0 0' },
@@ -20,14 +21,18 @@ const stripeAnimation = css.keyframes({
 
 // Component Definition
 const CtaButton = ({
-  to, overrideCSS, children, ...other
+  children,
+  isGreen,
+  overrideCSS,
+  to,
+  ...other
 }) => (
   <Link
     css={{
       ...overrideCSS,
       ...scale(1 / 5),
       display: 'inline-block',
-      border: `1px solid ${texasFlagRed}`,
+      border: `1px solid ${isGreen ? green500 : texasFlagRed}`,
       fontFamily: options.headerFontFamily.join(','),
       padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       borderRadius: presets.radius,
@@ -40,9 +45,9 @@ const CtaButton = ({
       },
       // Increase specificity
       '&&': {
-        border: `1px solid ${texasFlagRed}`,
+        border: `2px solid ${isGreen ? green500 : texasFlagRed}`,
         boxShadow: 'none',
-        color: texasFlagRed,
+        color: isGreen ? green500 : texasFlagRed,
         fontWeight: 'normal',
         backgroundColor: 'transparent',
         backgroundSize: '30px 30px',
@@ -52,14 +57,14 @@ const CtaButton = ({
         }`,
         ':hover, &:focus': {
           backgroundSize: '30px 30px',
-          backgroundColor: texasFlagRed,
+          backgroundColor: isGreen ? green500 : texasFlagRed,
           backgroundImage: 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
           color: '#fff',
           animation: `${stripeAnimation} 2.8s linear infinite`,
         },
         ':focus': {
           outline: 0,
-          boxShadow: `0 0 0 0.2rem ${hex2rgba(texasFlagBlue, 0.25)}`,
+          boxShadow: `0 0 0 0.2rem ${hex2rgba(isGreen ? green500 : texasFlagBlue, 0.25)}`,
         },
         ':after': {
           content: '',
@@ -79,10 +84,12 @@ CtaButton.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
+  isGreen: PropTypes.bool,
   overrideCSS: PropTypes.string,
   to: PropTypes.string,
 };
 CtaButton.defaultProps = {
+  isGreen: false,
   overrideCSS: '',
   to: null,
 };

@@ -1,4 +1,5 @@
 // External Dependencies
+import Card from '@material-ui/core/Card';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Step from '@material-ui/core/Step';
@@ -41,8 +42,11 @@ const RegisterStepper = (props) => {
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
-    <div>
-      <Stepper activeStep={activeStep} alternativeLabel>
+    <Card>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+      >
         {steps.map((label) => {
           return (
             <Step key={label}>
@@ -51,7 +55,7 @@ const RegisterStepper = (props) => {
           );
         })}
       </Stepper>
-    </div>
+    </Card>
   );
 };
 
