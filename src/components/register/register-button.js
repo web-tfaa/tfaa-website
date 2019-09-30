@@ -87,7 +87,7 @@ class RegisterButton extends Component {
               backgroundImage: !isDisabled && 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
               backgroundSize: '30px 30px',
               color: !isDisabled ? '#fff' : hex2rgba('#fafafa', 0.4),
-              cursor: 'pointer',
+              cursor: !isDisabled ? 'pointer' : 'not-allowed',
             },
             ':focus': {
               boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : green500, 0.25)}`,
