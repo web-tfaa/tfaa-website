@@ -108,9 +108,6 @@ class RegisterContent extends Component {
       form,
     } = this.state;
 
-    console.log('steps - completedSteps :', step, completedSteps);
-    console.log('RegisterContent : handleCompleteStep : updatedForm :', updatedForm);
-
     if (this.activeComponent) {
       this.setState({
         activeStep: activeStep + 1,

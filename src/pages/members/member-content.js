@@ -135,8 +135,6 @@ class MemberContent extends Component {
       userId,
     } = this.props;
 
-    console.log('MemberContent : cDM : userId', userId);
-
     // Find if the current user is among the registerd users
     if (Object.keys(userData).includes(userId)) {
       this.handleUpdateRegisteredUser();
@@ -228,7 +226,7 @@ class MemberContent extends Component {
               marginLeft: '1.1rem',
             }}
           >
-            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Treasurer</a>.
+            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
           </span>
         </FuturaDiv>
       </Card>
@@ -302,7 +300,7 @@ class MemberContent extends Component {
           render={() => (
             <div>
               {registeredIcon}
-              Registered for 2018-2019 school year
+              Register for {currentSchoolYearLong} school year
             </div>
           )}
         />
@@ -333,11 +331,11 @@ class MemberContent extends Component {
     );
 
     const isAdmin = authUser && [
-      'patricia.h.moreno@austinisd.org',
       'jon.lester@abileneisd.org',
-      'jeffrey.turner@allenisd.org',
       'jim.egger@mcallenisd.net',
-      'johnjanda@tomballisd.net',
+      'jclark@springisd.org',
+      'patricia.h.moreno@austinisd.org',
+      'jeffrey.turner@allenisd.org',
       'm2mathew@me.com',
       'mike@drumsensei.com',
     ].includes(authUser.email);
