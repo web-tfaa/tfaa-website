@@ -1,10 +1,7 @@
 // External Dependencies
-import MuiCard from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies

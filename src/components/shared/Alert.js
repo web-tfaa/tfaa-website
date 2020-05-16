@@ -18,16 +18,22 @@ const WARNING = 'warning';
 
 const propTypes = {
   bodyText: PropTypes.string.isRequired,
+  fullWidth: PropTypes.bool,
+  rootClasses: PropTypes.string,
   title: PropTypes.string,
   type: PropTypes.oneOf([INFO, WARNING]).isRequired,
 };
 
 const defaultProps = {
+  rootClasses: '',
   title: '',
 };
 
 const useStyles = makeStyles((theme) => ({
   content: {
+    '&:last-child': {
+      paddingBottom: theme.spacing(2),
+    },
     display: 'flex',
   },
   icon: {
@@ -49,7 +55,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Component Definition
-const Alert = ({ bodyText, title, type }) => {
+const Alert = ({
+  bodyText,
+  fullWidth,
+  rootClasses,
+  title,
+  type,
+}) => {
   const theme = useTheme();
   const classes = useStyles();
 
@@ -73,10 +85,12 @@ const Alert = ({ bodyText, title, type }) => {
   return (
     <MuiCard
       className={clsx(
-        classes.root,
+        !fullWidth && classes.root,
         type === INFO && classes.info,
         type === WARNING && classes.warning,
+        rootClasses,
       )}
+      fullWidth
     >
       <CardContent className={classes.content}>
         {iconElement}

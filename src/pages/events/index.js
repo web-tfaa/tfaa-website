@@ -6,6 +6,7 @@ import { graphql } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
+import Alert from '../../components/shared/Alert';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
@@ -15,7 +16,11 @@ import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  alert: {
+    marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+  },
   mobileHr: {
     border: 0,
     height: 2,
@@ -25,7 +30,7 @@ const useStyles = makeStyles({
     color: 'cadetblue',
     fontSize: '1rem',
   },
-});
+}));
 
 // Component Definition
 const Events = ({ data, location }) => {
@@ -40,8 +45,18 @@ const Events = ({ data, location }) => {
         <h1>{data.site.siteMetadata.title} Events</h1>
         <section>
           <h4>
-            Summer Round Table <span className={classes.updatedLabel}>(updated)</span>
+            Summer Round Table
+            {/* <span className={classes.updatedLabel}>(updated)</span> */}
           </h4>
+          <Alert
+            bodyText={`
+              As state conventions will be held virtually, there will be no TMAC
+              Summer Round Table for 2020.
+            `}
+            fullWidth
+            rootClasses={classes.alert}
+            type="warning"
+          />
           <p>
             Held in conjunction with the&nbsp;
             <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
