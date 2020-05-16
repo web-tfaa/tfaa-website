@@ -41,7 +41,7 @@ const FallRetreat = ({
 }) => {
   const { edges } = useEventData();
 
-  const fallRetreat = edges.find(e => e.node.titleOfEvent.includes('Fall Retreat')).node;
+  const fallRetreat = edges.find((e) => e.node.titleOfEvent.includes('Fall Retreat')).node;
 
   return (
     <Layout location={location}>
@@ -101,7 +101,7 @@ const FallRetreat = ({
         </section>
 
         <section>
-          <h4>Schedule available mid Fall 2019</h4>
+          <h4>Schedule available mid Fall</h4>
           {/* <h4>Schedule</h4> */}
 
           {/* <h5 css={indentStyles}>Wednesday</h5>
