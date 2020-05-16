@@ -157,7 +157,7 @@ const _options = {
         fontFamily: options.headerFontFamily.join(','),
         color: texasFlagBlue,
       },
-      '.main-body a:not(.hotel-link)': {
+      '.main-body a': {
         color: 'inherit',
         textDecoration: 'none',
         transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
