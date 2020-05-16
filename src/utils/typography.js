@@ -74,9 +74,7 @@ const _options = {
       blockquote: {
         paddingLeft: rhythm(options.blockMarginBottom),
         marginLeft: 0,
-        borderLeft: `${rhythm(options.blockMarginBottom / 4)} solid ${
-          colors.ui.light
-        }`,
+        borderLeft: `${rhythm(options.blockMarginBottom / 4)} solid ${colors.ui.light}`,
       },
       hr: {
         backgroundColor: colors.ui.lilac,
@@ -84,7 +82,7 @@ const _options = {
       'tt,code': {
         // background: `hsla(23, 60%, 97%, 1)`,
         background: colors.a[0],
-        fontFamily: options.monospaceFontFamily.join(`,`),
+        fontFamily: options.monospaceFontFamily.join(','),
         fontSize: '80%',
         // Disable ligatures as they look funny w/ Space Mono as code.
         fontVariant: 'none',
@@ -127,9 +125,7 @@ const _options = {
         marginLeft: `${rhythm(-options.blockMarginBottom)}`,
         paddingRight: rhythm(options.blockMarginBottom),
         paddingLeft: `${rhythm((options.blockMarginBottom / 5) * 4)}`,
-        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${
-          colors.a[3]
-        }`,
+        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${colors.a[3]}`,
         display: 'block',
       },
       '.gatsby-highlight::-webkit-scrollbar': {
@@ -161,16 +157,19 @@ const _options = {
         fontFamily: options.headerFontFamily.join(','),
         color: texasFlagBlue,
       },
-      '.main-body a': {
+      '.main-body a:not(.hotel-link)': {
         color: 'inherit',
         textDecoration: 'none',
-        transition: `all ${presets.animation.speedFast} ${
-          presets.animation.curveDefault
-        }`,
+        transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
         borderBottom: `1px solid ${colors.ui.bright}`,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-        fontFamily: options.headerFontFamily.join(`,`),
+        fontFamily: options.headerFontFamily.join(','),
         fontWeight: 'bold',
+      },
+      '.main-body .hotel-link': {
+        fontFamily: options.headerFontFamily.join(','),
+        // color: 'inherit',
+        // background: 'inherit',
       },
       '.post-body a': {
         fontSize: '102%',
@@ -178,6 +177,9 @@ const _options = {
       },
       '.main-body a:hover': {
         background: colors.ui.bright,
+      },
+      '.main-body .hotel-link:hover': {
+        background: 'rgba(128, 222, 234, 0.5)',
       },
       '.main-body a.anchor': {
         color: 'inherit',
@@ -202,9 +204,7 @@ const _options = {
       '.main-body button': {
         color: 'inherit',
         textDecoration: 'none',
-        transition: `all ${presets.animation.speedFast} ${
-          presets.animation.curveDefault
-        }`,
+        transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
         borderBottom: `1px solid ${colors.ui.bright}`,
         borderRadius: 2,
         boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
@@ -301,9 +301,7 @@ const _options = {
           marginLeft: `${rhythm(-options.blockMarginBottom * 1.5)}`,
           paddingRight: rhythm(options.blockMarginBottom * 1.5),
           paddingLeft: `${rhythm(((options.blockMarginBottom * 1.5) / 5) * 4)}`,
-          borderLeftWidth: `${rhythm(
-            ((options.blockMarginBottom * 1.5) / 5) * 1,
-          )}`,
+          borderLeftWidth: `${rhythm(((options.blockMarginBottom * 1.5) / 5) * 1)}`,
         },
       },
       [MIN_LARGER_DISPLAY_MEDIA_QUERY]: {
@@ -341,7 +339,8 @@ const _options = {
       // https://github.com/comfusion/after-dark/
       // @see https://github.com/comfusion/after-dark/blob/8fdbe2f480ac40315cf0e01cece785d2b5c4b0c3/layouts/partials/critical-theme.css#L36-L39
       ".gatsby-resp-image-link + em a[href*='//']:after": {
-        content: `" " url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%23744C9E'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E")`,
+        content:
+          "\" \" url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%23744C9E'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E\")",
       },
     };
   },

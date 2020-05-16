@@ -1,5 +1,5 @@
 // External Dependencies
-import { amber, lightBlue } from '@material-ui/core/colors';
+import { amber, cyan, lightBlue } from '@material-ui/core/colors';
 import {
   createMuiTheme,
   responsiveFontSizes,
@@ -11,15 +11,12 @@ const baseTheme = createMuiTheme({
       info: lightBlue['500'],
       warning: amber['700'],
     },
+    events: {
+      hotelCta: cyan['200'],
+    },
   },
   typography: {
-    fontFamily: [
-      'Spectral',
-      'Georgia',
-      'Times New Roman',
-      'Times',
-      'serif',
-    ].join(','),
+    fontFamily: ['Spectral', 'Georgia', 'Times New Roman', 'Times', 'serif'].join(','),
     fontSize: 16,
   },
 });

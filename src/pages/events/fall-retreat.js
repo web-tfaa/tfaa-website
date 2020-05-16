@@ -1,12 +1,13 @@
 // External Dependencies
+import Button from '@material-ui/core/Button';
 // import Card from '@material-ui/core/Card';
 // import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 // import { Link } from 'gatsby';
-// import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -19,26 +20,25 @@ import { useEventData } from '../../utils/hooks/useEventData';
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-// const styles = theme => ({
-//   adminCard: {
-//     borderLeft: `4px solid ${theme.palette.secondary.dark}`,
-//     maxWidth: '75%',
-//   },
-// });
-
-const indentStyles = {
-  marginLeft: 16,
-};
+const useStyles = makeStyles((theme) => ({
+  hotelButton: {
+    backgroundColor: theme.palette.events.hotelCta,
+    color: theme.palette.getContrastText(theme.palette.events.hotelCta),
+    fontWeight: 600,
+  },
+  text: {
+    marginLeft: theme.spacing(2),
+  },
+}));
 
 // const scheduleStyles = {
 //   margin: '6px 0px 6px 32px',
 // };
 
 // Component Definition
-const FallRetreat = ({
-  // classes,
-  location,
-}) => {
+const FallRetreat = ({ location }) => {
+  const classes = useStyles();
+
   const { edges } = useEventData();
 
   const fallRetreat = edges.find((e) => e.node.titleOfEvent.includes('Fall Retreat')).node;
@@ -53,15 +53,14 @@ const FallRetreat = ({
 
         <section>
           <h4>Who</h4>
-          <p css={indentStyles}>
-            The TMAC Fall Retreat is open to all current TMAC members who are in
-            good standing (registered and paid). There is no separate conference
-            registration process.
+          <p className={classes.text}>
+            The TMAC Fall Retreat is open to all current TMAC members who are in good standing
+            (registered and paid). There is no separate conference registration process.
             {/* {'If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.'} */}
           </p>
 
           {/* This "alert" should show the Fall Retreat is in past but we are in the current school year still */}
-          {/* <div css={indentStyles}>
+          {/* <div className={classes.text}>
             <Card className={classes.adminCard}>
               <CardContent>
                 <Typography variant="h6" component="h6">Membership</Typography>
@@ -72,8 +71,8 @@ const FallRetreat = ({
             </Card>
           </div> */}
 
-          {/* <p css={indentStyles}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
-          {/* <h5 css={indentStyles}>Alternate Tea details</h5> */}
+          {/* <p className={classes.text}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
+          {/* <h5 className={classes.text}>Alternate Tea details</h5> */}
           {/* <p css={scheduleStyles}>To register for &quot;Alternate Tea&quot; fill out{' '} */}
           {/* <a
               href="#"
@@ -95,16 +94,14 @@ const FallRetreat = ({
 
         <section>
           <h4>When</h4>
-          <p css={indentStyles}>
-            {fallRetreat.dateOfEvent}
-          </p>
+          <p className={classes.text}>{fallRetreat.dateOfEvent}</p>
         </section>
 
         <section>
           <h4>Schedule available mid Fall</h4>
           {/* <h4>Schedule</h4> */}
 
-          {/* <h5 css={indentStyles}>Wednesday</h5>
+          {/* <h5 className={classes.text}>Wednesday</h5>
           <p css={scheduleStyles}>11:00am - Golf tournament (details and specific times to come)</p>
           <p css={scheduleStyles}>12:00pm - TMAC Alternate Tea</p>
           <div css={{ paddingLeft: 16 }}>
@@ -113,14 +110,14 @@ const FallRetreat = ({
           <p css={scheduleStyles}>7:00pm - Reports from Partner Arts Organizations</p>
           <p css={scheduleStyles}>8:00pm - Guest Speaker/Pre-Conference Session</p>
 
-          <h5 css={indentStyles}>Thursday</h5>
+          <h5 className={classes.text}>Thursday</h5>
           <p css={scheduleStyles}>8:00am - Registration and Light Breakfast</p>
           <p css={scheduleStyles}>8:30am - Conference Begins</p>
           <p css={scheduleStyles}><em>Lunch is provided</em></p>
           <p css={scheduleStyles}>5:00pm - Conference ends for day</p>
           <p css={scheduleStyles}>6:00pm - Member reception sponsored by Music and Arts</p>
 
-          <h5 css={indentStyles}>Friday</h5>
+          <h5 className={classes.text}>Friday</h5>
           <p css={scheduleStyles}>8:00am - Registration and Breakfast</p>
           <p css={scheduleStyles}>8:30am - TMAC Business Meeting followed by round table topics.</p>
           <p css={scheduleStyles}>12:00pm  - Conference ends</p> */}
@@ -128,14 +125,14 @@ const FallRetreat = ({
 
         <section>
           <h4>Where</h4>
-          <div css={indentStyles}>
+          <div className={classes.text}>
             <p>
               <a
                 href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Austin Airport Marriott South
+                Austin Marriott South
               </a>
             </p>
             <p>
@@ -154,15 +151,18 @@ const FallRetreat = ({
               <br />
               Fax: (512) 441-7899
             </p>
-            <p css={{ fontSize: 24, color: 'darkred' }}>
-              <a
-                href="https://book.passkey.com/gt/217253496?gtid=d218eb06a20083949c49ae5aef9b0a47"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                For Hotel reservations click here
-              </a>
-            </p>
+            <Button
+              className="hotel-link"
+              classes={{ root: classes.hotelButton }}
+              color="primary"
+              href="https://www.marriott.com/events/start.mi?id=1576170005303&key=GRP"
+              rel="noopener noreferrer"
+              size="large"
+              target="_blank"
+              variant="contained"
+            >
+              For Hotel reservations click here
+            </Button>
           </div>
         </section>
         <div
@@ -188,7 +188,6 @@ const FallRetreat = ({
 };
 
 FallRetreat.propTypes = {
-  // classes: PropTypes.shape({}).isRequired,
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
