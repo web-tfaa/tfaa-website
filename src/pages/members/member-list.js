@@ -80,11 +80,11 @@ class MemberListContent extends Component {
     }
 
     const isAdmin = userEmail && [
-      'patricia.h.moreno@austinisd.org',
+      'dinah.menger@fwisd.org',
+      'jclark@springisd.org',
       'jon.lester@abileneisd.org',
       'jeffrey.turner@allenisd.org',
       'jim.egger@mcallenisd.net',
-      'johnjanda@tomballisd.net',
       'm2mathew@me.com',
       'mike@drumsensei.com',
     ].includes(userEmail);
