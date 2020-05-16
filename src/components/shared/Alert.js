@@ -90,7 +90,6 @@ const Alert = ({
         type === WARNING && classes.warning,
         rootClasses,
       )}
-      fullWidth
     >
       <CardContent className={classes.content}>
         {iconElement}
