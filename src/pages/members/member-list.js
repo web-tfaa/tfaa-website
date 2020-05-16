@@ -14,12 +14,24 @@ import MemberListTable from './member-table';
 import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
+import Alert from '../../components/shared/Alert';
 
 // Local Variables
+const propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({}).isRequired,
+  userEmail: PropTypes.string,
+};
+
+const defaultProps = {
+  userEmail: '',
+};
+
 const styles = (theme) => ({
   adminCard: {
-    borderLeft: `4px solid ${theme.palette.primary.dark}`,
-    maxWidth: '60%',
+    borderLeft: `4px solid ${theme.palette.alert.info}`,
+    maxWidth: '75%',
   },
   paddingContainer: {
     paddingLeft: 24,
@@ -35,17 +47,6 @@ const styles = (theme) => ({
 
 // Component Definition
 class MemberListContent extends Component {
-  static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-    location: PropTypes.shape({}).isRequired,
-    userEmail: PropTypes.string,
-  };
-
-  static defaultProps = {
-    userEmail: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -98,14 +99,13 @@ class MemberListContent extends Component {
         <div className={classes.paddingContainer}>
           <h2>Member list</h2>
           {isAdmin && (
-            <MuiCard className={classes.adminCard}>
-              <CardContent>
-                <Typography variant="h6" component="h6">Admin View</Typography>
-                <Typography variant="body2">
-                  You can print any member&apos;s invoice or receipt from each row.
-                </Typography>
-              </CardContent>
-            </MuiCard>
+            <Alert
+              bodyText={`
+                You can print any member's invoice or receipt from each row.
+              `}
+              title="Admin View"
+              type="info"
+            />
           )}
           <MemberListTable
             data={Object.values(userData)}
@@ -116,6 +116,9 @@ class MemberListContent extends Component {
     );
   }
 }
+
+MemberListContent.propTypes = propTypes;
+MemberListContent.defaultProps = defaultProps;
 
 const MemberList = (props) => (
   // eslint-disable-next-line
