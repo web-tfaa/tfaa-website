@@ -1,10 +1,7 @@
 // External Dependencies
-import MuiCard from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
@@ -14,12 +11,24 @@ import MemberListTable from './member-table';
 import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
+import Alert from '../../components/shared/Alert';
 
 // Local Variables
-const styles = theme => ({
+const propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({}).isRequired,
+  userEmail: PropTypes.string,
+};
+
+const defaultProps = {
+  userEmail: '',
+};
+
+const styles = (theme) => ({
   adminCard: {
-    borderLeft: `4px solid ${theme.palette.primary.dark}`,
-    maxWidth: '60%',
+    borderLeft: `4px solid ${theme.palette.alert.info}`,
+    maxWidth: '75%',
   },
   paddingContainer: {
     paddingLeft: 24,
@@ -35,17 +44,6 @@ const styles = theme => ({
 
 // Component Definition
 class MemberListContent extends Component {
-  static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-    location: PropTypes.shape({}).isRequired,
-    userEmail: PropTypes.string,
-  };
-
-  static defaultProps = {
-    userEmail: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -80,11 +78,11 @@ class MemberListContent extends Component {
     }
 
     const isAdmin = userEmail && [
-      'patricia.h.moreno@austinisd.org',
+      'dinah.menger@fwisd.org',
+      'jclark@springisd.org',
       'jon.lester@abileneisd.org',
       'jeffrey.turner@allenisd.org',
       'jim.egger@mcallenisd.net',
-      'johnjanda@tomballisd.net',
       'm2mathew@me.com',
       'mike@drumsensei.com',
     ].includes(userEmail);
@@ -98,14 +96,13 @@ class MemberListContent extends Component {
         <div className={classes.paddingContainer}>
           <h2>Member list</h2>
           {isAdmin && (
-            <MuiCard className={classes.adminCard}>
-              <CardContent>
-                <Typography variant="h6" component="h6">Admin View</Typography>
-                <Typography variant="body2">
-                  You can print any member&apos;s invoice or receipt from each row.
-                </Typography>
-              </CardContent>
-            </MuiCard>
+            <Alert
+              bodyText={`
+                You can print any member's invoice or receipt from each row.
+              `}
+              title="Admin View"
+              type="info"
+            />
           )}
           <MemberListTable
             data={Object.values(userData)}
@@ -117,16 +114,19 @@ class MemberListContent extends Component {
   }
 }
 
-const MemberList = props => (
+MemberListContent.propTypes = propTypes;
+MemberListContent.defaultProps = defaultProps;
+
+const MemberList = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <MemberListWithContext {...props} />
   </Layout>
 );
 
-const MemberListWithContext = props => (
+const MemberListWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => (
+    {(authUser) => (
       <MemberListContent
         {...props}
         userEmail={authUser ? authUser.email : ''}
