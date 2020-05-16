@@ -80,13 +80,6 @@ const Events = ({ data, location }) => {
             <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
           </p>
         </section>
-        <section>
-          <h4>Job Fair</h4>
-          <p>
-            District representatives must be TMAC members to participate in the TMAC/TMEA job fair
-            (see Job Fair Rules)
-          </p>
-        </section>
 
         {/* Mobile sidebar */}
         <div
