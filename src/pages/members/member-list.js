@@ -16,7 +16,7 @@ import Status from './status';
 import { doGetUsers } from '../../firebase/db';
 
 // Local Variables
-const styles = theme => ({
+const styles = (theme) => ({
   adminCard: {
     borderLeft: `4px solid ${theme.palette.primary.dark}`,
     maxWidth: '60%',
@@ -117,16 +117,16 @@ class MemberListContent extends Component {
   }
 }
 
-const MemberList = props => (
+const MemberList = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <MemberListWithContext {...props} />
   </Layout>
 );
 
-const MemberListWithContext = props => (
+const MemberListWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => (
+    {(authUser) => (
       <MemberListContent
         {...props}
         userEmail={authUser ? authUser.email : ''}

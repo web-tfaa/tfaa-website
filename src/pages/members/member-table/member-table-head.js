@@ -1,23 +1,22 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/styles';
 
 // Local Variables
 const propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   isAdmin: PropTypes.bool.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
 };
 
-const styles = ({
+const useStyles = makeStyles({
   active: {
     fontWeight: 700,
   },
@@ -32,7 +31,7 @@ const rows = [
 ];
 
 // Local Components
-const CustomTableCell = withStyles(theme => ({
+const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#EDF2F8',
     color: theme.palette.common.black,
@@ -50,61 +49,55 @@ const CustomTableCell = withStyles(theme => ({
 }))(TableCell);
 
 // Component Definition
-class EnhancedTableHead extends Component {
-  createSortHandler = property => (event) => {
-    const {
-      onRequestSort,
-    } = this.props;
+const MemberTableHead = ({
+  isAdmin,
+  onRequestSort,
+  order,
+  orderBy,
+}) => {
+  const classes = useStyles();
 
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
-  render() {
-    const {
-      classes,
-      isAdmin,
-      order,
-      orderBy,
-    } = this.props;
-
-    if (isAdmin && rows.length === 5) {
-      rows.push(
-        { id: 'Actions', disablePadding: false, label: 'Actions' },
-      );
-    }
-
-    return (
-      <TableHead>
-        <TableRow key="table-head">
-          {rows.map(row => (
-            <CustomTableCell
-              key={`${row.id}=${row.label}`}
-              padding={row.disablePadding ? 'none' : 'default'}
-              sortDirection={orderBy === row.id ? order : false}
-            >
-              <Tooltip
-                enterDelay={300}
-                placement="bottom-start"
-                title="Sort"
-              >
-                <TableSortLabel
-                  active={orderBy === row.id}
-                  classes={{ active: classes.active }}
-                  direction={order}
-                  disabled={row.id === 'Actions'}
-                  onClick={this.createSortHandler(row.id)}
-                >
-                  {row.label}
-                </TableSortLabel>
-              </Tooltip>
-            </CustomTableCell>
-          ))}
-        </TableRow>
-      </TableHead>
+  if (isAdmin && rows.length === 5) {
+    rows.push(
+      { id: 'Actions', disablePadding: false, label: 'Actions' },
     );
   }
-}
 
-EnhancedTableHead.propTypes = propTypes;
+  return (
+    <TableHead>
+      <TableRow key="table-head">
+        {rows.map((row) => (
+          <StyledTableCell
+            key={`${row.id}=${row.label}`}
+            padding={row.disablePadding ? 'none' : 'default'}
+            sortDirection={orderBy === row.id ? order : false}
+          >
+            <Tooltip
+              enterDelay={300}
+              placement="bottom-start"
+              title="Sort"
+            >
+              <TableSortLabel
+                active={orderBy === row.id}
+                classes={{ active: classes.active }}
+                direction={order}
+                disabled={row.id === 'Actions'}
+                onClick={createSortHandler(row.id)}
+              >
+                {row.label}
+              </TableSortLabel>
+            </Tooltip>
+          </StyledTableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+};
 
-export default withStyles(styles)(EnhancedTableHead);
+MemberTableHead.propTypes = propTypes;
+
+export default MemberTableHead;
