@@ -55,7 +55,6 @@ const About = ({ data, location }) => (
           <li>Fall Retreat</li>
           <li>Fall Golf Tournament</li>
           <li>TMEA Round Table</li>
-          <li>Job Fair / Job Fair Rules</li>
         </ul>
       </section>
       <section>
