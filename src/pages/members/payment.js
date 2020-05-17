@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -37,7 +37,7 @@ class Payment extends Component {
       }
 
       // eslint-disable-next-line no-confusing-arrow
-      this.auth.onAuthStateChanged(authUser =>
+      this.auth.onAuthStateChanged((authUser) =>
         authUser
           ? this.setState(() => ({ authUser }))
           : this.setState(() => ({ authUser: null })));

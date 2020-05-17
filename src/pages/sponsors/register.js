@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -64,8 +64,7 @@ class RegisterSponsorContent extends Component {
 
     if (prevState.activeStep !== 0 && activeStep === 0
       && !prevProps.isAuthenticated && isAuthenticated) {
-
-        // eslint-disable-next-line react/no-did-update-set-state
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ activeStep: 1 });
     }
   }
@@ -194,16 +193,16 @@ class RegisterSponsorContent extends Component {
   }
 }
 
-const RegisterSponsor = props => (
+const RegisterSponsor = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <RegisterSponsorWithContext {...props} />
   </Layout>
 );
 
-const RegisterSponsorWithContext = props => (
+const RegisterSponsorWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterSponsorContent {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <RegisterSponsorContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

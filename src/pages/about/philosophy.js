@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -64,9 +64,10 @@ PhilosophyCard.propTypes = {
 const FuturaDiv = ({ children }) => (
   <div
     css={{
-      fontFamily: options.headerFontFamily.join(`,`),
+      fontFamily: options.headerFontFamily.join(','),
       lineHeight: '1.6',
-    }}>
+    }}
+  >
     {children}
   </div>
 );
@@ -75,7 +76,7 @@ FuturaDiv.propTypes = {
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({}),
-    ])
+    ]),
   ).isRequired,
 };
 

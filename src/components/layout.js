@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -100,7 +100,7 @@ const DefaultLayout = (props) => {
   const hasSidebar = isAbout || isEvents || isResources
     || (isAuthenticated && isMembers);
 
-  const leftPadding = rhythmSize => (hasSidebar ? rhythm(rhythmSize) : 0);
+  const leftPadding = (rhythmSize) => (hasSidebar ? rhythm(rhythmSize) : 0);
 
   return (
     <div
@@ -210,9 +210,9 @@ const DefaultLayout = (props) => {
 
 DefaultLayout.propTypes = propTypes;
 
-const DefaultLayoutWithContext = props => (
+const DefaultLayoutWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <DefaultLayout {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <DefaultLayout {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

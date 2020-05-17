@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
@@ -21,7 +21,8 @@ const SignUp = ({ location }) => {
           [presets.Tablet]: {
             paddingLeft: '1.5rem',
           },
-        }}>
+        }}
+      >
         <Container className="sign-up">
           <Helmet>
             <title>TMAC | Sign Up</title>

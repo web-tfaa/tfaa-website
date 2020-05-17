@@ -3,7 +3,7 @@
 */
 
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -182,16 +182,16 @@ class RegisterContent extends Component {
   }
 }
 
-const Register = props => (
+const Register = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <RegisterWithContext {...props} />
   </Layout>
 );
 
-const RegisterWithContext = props => (
+const RegisterWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterContent {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <RegisterContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 
