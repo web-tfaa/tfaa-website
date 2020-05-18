@@ -138,7 +138,7 @@ const Philosophy = ({ location }) => (
                   Deborah Kidwell, Orchestra Representative
                 </li>
                 <li css={{ marginBottom: 0 }}>
-                  Buzzy” Green, Band Representativ
+                  "Buzzy” Green, Band Representative
                 </li>
                 <li css={{ marginBottom: 0 }}>
                   David McCullar, Vocal Representative

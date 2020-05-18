@@ -1,7 +1,7 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 // Internal Dependencies
 import CardHeadline from '../../../components/shared/cards/card-headline';
