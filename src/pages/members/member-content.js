@@ -326,7 +326,7 @@ class MemberContent extends Component {
           {memberTaskCard}
         </Cards>
 
-        <h2>For Members</h2>
+        {/* <h2>For Members</h2>
 
         <Cards>
           {contentfulFileShareData
@@ -341,7 +341,7 @@ class MemberContent extends Component {
                 }
               />
             ))}
-        </Cards>
+        </Cards> */}
 
         <div
           css={{
