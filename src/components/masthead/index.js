@@ -116,7 +116,7 @@ const Masthead = () => {
           Supporting Music Education in Texas
         </div>
         <CtaButton to="/about/">
-          <span css={{ verticalAlign: 'middle' }}>Learn More</span>
+          <span>Learn More</span>
           <ArrowForwardIcon />
         </CtaButton>
       </div>

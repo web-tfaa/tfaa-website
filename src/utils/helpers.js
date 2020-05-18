@@ -26,24 +26,23 @@ export const removeErrorKeys = (form) => {
 
 // To check for a valid email address
 export const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-// export const emailRegex = ^(?:[0-9a-zA-Z\.!@#$%^&*+={}'/-]+@[a
-// -zA-Z]{1}[a-zA-Z]+[/.][a-zA-Z]{2,4}|)$;
 
 // To check for a valid Email address
 export const zipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Current Year - four-digit string
 export const currentYearLong = format(new Date(), ['YYYY']);
+
 // Current Year - two-digit string
 export const currentYearShort = format(new Date(), ['YY']);
 
 // Is the current date after July 1st of the current year?
-const isTodayAfterJulyFirst = isAfter(new Date(), new Date(currentYearLong, 5, 30));
+const isTodayAfterMarch31st = isAfter(new Date(), new Date(currentYearLong, 2, 31));
 
-export const currentSchoolYearShort = isTodayAfterJulyFirst
+export const currentSchoolYearShort = isTodayAfterMarch31st
   ? `${currentYearShort}-${Number(currentYearShort) + 1}`
   : `${Number(currentYearShort) - 1}-${currentYearShort}`;
 
-export const currentSchoolYearLong = isTodayAfterJulyFirst
+export const currentSchoolYearLong = isTodayAfterMarch31st
   ? `${currentYearLong}-${Number(currentYearLong) + 1}`
   : `${Number(currentYearLong) - 1}-${currentYearLong}`;

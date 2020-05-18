@@ -110,7 +110,7 @@ const formatPhone = (phone) => {
   )}-${cleanPhone.substr(6, 4)}`;
 };
 
-const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
+const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
 class RegisterSponsorForm extends Component {
@@ -758,9 +758,9 @@ class RegisterSponsorForm extends Component {
   }
 }
 
-const RegisterSponsorFormWithContext = props => (
+const RegisterSponsorFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterSponsorForm {...props} authUser={authUser} />}
+    {(authUser) => <RegisterSponsorForm {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
 );
 

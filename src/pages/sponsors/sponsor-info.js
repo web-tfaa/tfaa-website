@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -56,7 +56,7 @@ const SponsorInfo = (props) => {
               <span css={boldStyles}>
                 1.{' '}
               </span>
-                Sign up for a TMAC website login.
+              Sign up for a TMAC website login.
             </FuturaDiv>
             <FuturaDiv>
               <span css={boldStyles}>
@@ -83,7 +83,7 @@ const SponsorInfo = (props) => {
               to="/sponsors/register"
               state={{ level: location && location.state && location.state.level }}
             >
-              <span css={{ verticalAlign: 'middle' }}>
+              <span>
                 Begin Sponsor Registration
               </span>
               <ArrowForwardIcon />
@@ -123,9 +123,9 @@ SponsorInfo.propTypes = {
   }).isRequired,
 };
 
-const SponsorInfoWithContext = props => (
+const SponsorInfoWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <SponsorInfo {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <SponsorInfo {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

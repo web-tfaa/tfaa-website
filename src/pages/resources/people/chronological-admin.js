@@ -1,7 +1,7 @@
 // External Dependencies
-import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
@@ -17,6 +17,10 @@ import resourcesSidebar from '../resources-links.yml';
 import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
+const propTypes = {
+  location: PropTypes.shape({}).isRequired,
+};
+
 const rootStyles = {
   display: 'flex',
   flexDirection: 'row',
@@ -31,12 +35,8 @@ const tableContainerStyles = {
 
 // Component Definition
 class ChronologicalAdmin extends Component {
-  static propTypes = {
-    location: PropTypes.shape({}).isRequired,
-  };
-
   renderTableRows = () =>
-    outstandingAdmin.map(admin => (
+    outstandingAdmin.map((admin) => (
       <tr key={`${admin.name}`}>
         <th>{admin.year}</th>
         <th>
@@ -95,5 +95,7 @@ class ChronologicalAdmin extends Component {
     );
   }
 }
+
+ChronologicalAdmin.propTypes = propTypes;
 
 export default ChronologicalAdmin;

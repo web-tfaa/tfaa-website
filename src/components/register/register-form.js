@@ -29,7 +29,7 @@ import {
 } from '../../firebase/db';
 
 // Local Variables
-const styles = theme => ({
+const styles = (theme) => ({
   adminCard: {
     alignSelf: 'flex-start',
     borderLeft: `4px solid ${theme.palette.error.main}`,
@@ -79,27 +79,6 @@ const styles = theme => ({
     width: '80%',
   },
 });
-
-const labelStyles = {
-  display: 'block',
-  fontSize: '90%',
-  letterSpacing: '0.1rem',
-  marginTop: 16,
-  textTransform: 'uppercase',
-};
-
-const inputStyles = {
-  display: 'block',
-  fontSize: '1rem',
-  padding: '0.3rem',
-  minWidth: '70%',
-};
-
-const baseErrorStyles = {
-  color: 'red',
-  fontFamily: options.headerFontFamily.join(','),
-  marginTop: '0.5rem',
-};
 
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
@@ -157,7 +136,7 @@ const formatPhone = (phone) => {
   )}-${cleanPhone.substr(6, 4)}`;
 };
 
-const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
+const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
 class RegisterForm extends Component {
@@ -441,304 +420,253 @@ class RegisterForm extends Component {
 
     return (
       <div className="login-form">
-        {hasCompletedRegisterInfoForm
-          ? (
-            <LoadingContainer
-              step={3}
-              title="Information Form Complete"
-            />
-          )
-          : (
-            <form onSubmit={this.handleSubmit}>
-              {/* FIRST NAME */}
-              <label
-                className={classes.label}
-                htmlFor="FirstName"
-              >
-                First Name*
-                <input
-                  className={classes.input}
-                  name="FirstName"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Sally"
-                  required
-                  type="text"
-                  value={FirstName}
-                />
-              </label>
-              <div css={baseErrorStyles}>{FirstNameError}</div>
-
-              {/* LAST NAME */}
-              <label
-                className={classes.label}
-                htmlFor="LastName"
-              >
-                Last Name*
-                <input
-                  className={classes.input}
-                  name="LastName"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Drumm"
-                  required
-                  type="text"
-                  value={LastName}
-                />
-              </label>
-              <div css={baseErrorStyles}>{LastNameError}</div>
-
-              {/* TITLE */}
-              <label
-                className={classes.label}
-                htmlFor="Title"
-              >
-                Title*
-                <input
-                  className={classes.input}
-                  name="Title"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Director of Fine Arts"
-                  required
-                  type="text"
-                  value={Title}
-                />
-              </label>
-              <div css={baseErrorStyles}>{TitleError}</div>
-
-              {/* DISTRICT */}
-              <label
-                className={classes.label}
-                htmlFor="District"
-              >
-                District*
-                <input
-                  className={classes.input}
-                  name="District"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Texas ISD"
-                  required
-                  type="text"
-                  value={District}
-                />
-              </label>
-              <div css={baseErrorStyles}>{DistrictError}</div>
-
-              {/* ADDRESS 1 */}
-              <label
-                className={classes.label}
-                htmlFor="Address1"
-              >
-                Address 1*
-                <input
-                  className={classes.input}
-                  name="Address1"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. 123 Main St."
-                  required
-                  type="text"
-                  value={Address1}
-                />
-              </label>
-              <div css={baseErrorStyles}>{Address1Error}</div>
-
-              {/* ADDRESS 2 */}
-              <label
-                className={classes.label}
-                htmlFor="Address2"
-              >
-                Address 2
-                <input
-                  className={classes.input}
-                  name="Address2"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Suite 19"
-                  type="text"
-                  value={Address2}
-                />
-              </label>
-
-              <div className={classes.cityStateContainer}>
-                {/* CITY */}
-                <label
-                  className={clsx(classes.label, classes.cityContainer)}
-                  htmlFor="City"
-                >
-                  City*
-                  <input
-                    className={classes.input}
-                    name="City"
-                    onChange={this.handleUpdate}
-                    placeholder="e.g. Dallas"
-                    required
-                    type="text"
-                    value={City}
-                  />
-                  <div className={classes.error}>{CityError}</div>
-                </label>
-
-                {/* STATE */}
-                <label
-                  className={clsx(classes.label, classes.stateContainer)}
-                  htmlFor="State"
-                >
-                  State*
-                  <input
-                    className={clsx(classes.input, classes.stateInput)}
-                    name="State"
-                    onChange={this.handleUpdate}
-                    placeholder="e.g. TX"
-                    required
-                    type="text"
-                    value={State}
-                  />
-                  <div className={classes.error}>{StateError}</div>
-                </label>
-              </div>
-
-              {/* ZIP */}
-              <label
-                className={classes.label}
-                htmlFor="ZipCode"
-              >
-                ZIP Code*
-                <input
-                  className={classes.input}
-                  name="ZipCode"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. 75150"
-                  required
-                  type="text"
-                  value={ZipCode}
-                />
-              </label>
-              <div css={baseErrorStyles}>{ZipCodeError}</div>
-
-              {/* EMAIL */}
-              <label
-                className={classes.label}
-                htmlFor="Email"
-              >
-                Email*
-                <input
-                  className={classes.input}
-                  name="Email"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. music@austinisd.edu"
-                  required
-                  type="email"
-                  value={Email}
-                />
-              </label>
-              <div css={baseErrorStyles}>{EmailError}</div>
-
-              {/* OFFICE PHONE */}
-              <label
-                className={classes.label}
-                htmlFor="OfficePhone"
-              >
-                Office Phone*
-                <input
-                  className={classes.input}
-                  name="OfficePhone"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. (512) 555-1919"
-                  required
-                  type="text"
-                  value={formatPhone(OfficePhone)}
-                />
-              </label>
-              <div css={baseErrorStyles}>{OfficePhoneError}</div>
-
-              {/* CELL PHONE */}
-              <label
-                className={classes.label}
-                htmlFor="CellPhone"
-              >
-                Cell Phone*
-                <input
-                  className={classes.input}
-                  name="CellPhone"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. (512) 555-1919"
-                  required
-                  type="text"
-                  value={formatPhone(CellPhone)}
-                />
-              </label>
-              <div css={baseErrorStyles}>{CellPhoneError}</div>
-
-              {/* NEW TO TMAC */}
-              <FormControl component="fieldset">
-                {/* eslint-disable-next-line */}
-                <label
-                  className={classes.radioButtonLabel}
-                  htmlFor="NewToTMAC"
-                >
-                  New To TMAC*
-                  <RadioGroup
-                    aria-label="NewToTMAC"
-                    name="NewToTMAC"
-                    onChange={this.handleChangeNewToTMAC}
-                    value={radioValue}
-                  >
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="Yes"
-                      value="Yes"
-                    />
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="No"
-                      value="No"
-                    />
-                  </RadioGroup>
-                </label>
-              </FormControl>
-
-              {/* Hidden input to help curtail spam */}
+        {hasCompletedRegisterInfoForm ? (
+          <LoadingContainer step={3} title="Information Form Complete" />
+        ) : (
+          <form onSubmit={this.handleSubmit}>
+            {/* FIRST NAME */}
+            <label className={classes.label} htmlFor="FirstName">
+              First Name*
               <input
-                css={{ opacity: 0, height: 1, width: 1 }}
-                id="honeypot"
-                name="honeypot"
+                className={classes.input}
+                name="FirstName"
                 onChange={this.handleUpdate}
+                placeholder="e.g. Sally"
+                required
                 type="text"
-                value={honeypot}
+                value={FirstName}
               />
+            </label>
+            <div className={classes.error}>{FirstNameError}</div>
 
-              {/* SUBMIT BUTTON */}
-              <div style={{
+            {/* LAST NAME */}
+            <label className={classes.label} htmlFor="LastName">
+              Last Name*
+              <input
+                className={classes.input}
+                name="LastName"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Drumm"
+                required
+                type="text"
+                value={LastName}
+              />
+            </label>
+            <div className={classes.error}>{LastNameError}</div>
+
+            {/* TITLE */}
+            <label className={classes.label} htmlFor="Title">
+              Title*
+              <input
+                className={classes.input}
+                name="Title"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Director of Fine Arts"
+                required
+                type="text"
+                value={Title}
+              />
+            </label>
+            <div className={classes.error}>{TitleError}</div>
+
+            {/* DISTRICT */}
+            <label className={classes.label} htmlFor="District">
+              District*
+              <input
+                className={classes.input}
+                name="District"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Texas ISD"
+                required
+                type="text"
+                value={District}
+              />
+            </label>
+            <div className={classes.error}>{DistrictError}</div>
+
+            {/* ADDRESS 1 */}
+            <label className={classes.label} htmlFor="Address1">
+              Address 1*
+              <input
+                className={classes.input}
+                name="Address1"
+                onChange={this.handleUpdate}
+                placeholder="e.g. 123 Main St."
+                required
+                type="text"
+                value={Address1}
+              />
+            </label>
+            <div className={classes.error}>{Address1Error}</div>
+
+            {/* ADDRESS 2 */}
+            <label className={classes.label} htmlFor="Address2">
+              Address 2
+              <input
+                className={classes.input}
+                name="Address2"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Suite 19"
+                type="text"
+                value={Address2}
+              />
+            </label>
+
+            <div className={classes.cityStateContainer}>
+              {/* CITY */}
+              <label className={clsx(classes.label, classes.cityContainer)} htmlFor="City">
+                City*
+                <input
+                  className={classes.input}
+                  name="City"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. Dallas"
+                  required
+                  type="text"
+                  value={City}
+                />
+                <div className={classes.error}>{CityError}</div>
+              </label>
+
+              {/* STATE */}
+              <label className={clsx(classes.label, classes.stateContainer)} htmlFor="State">
+                State*
+                <input
+                  className={clsx(classes.input, classes.stateInput)}
+                  name="State"
+                  onChange={this.handleUpdate}
+                  placeholder="e.g. TX"
+                  required
+                  type="text"
+                  value={State}
+                />
+                <div className={classes.error}>{StateError}</div>
+              </label>
+            </div>
+
+            {/* ZIP */}
+            <label className={classes.label} htmlFor="ZipCode">
+              ZIP Code*
+              <input
+                className={classes.input}
+                name="ZipCode"
+                onChange={this.handleUpdate}
+                placeholder="e.g. 75150"
+                required
+                type="text"
+                value={ZipCode}
+              />
+            </label>
+            <div className={classes.error}>{ZipCodeError}</div>
+
+            {/* EMAIL */}
+            <label className={classes.label} htmlFor="Email">
+              Email*
+              <input
+                className={classes.input}
+                name="Email"
+                onChange={this.handleUpdate}
+                placeholder="e.g. music@austinisd.edu"
+                required
+                type="email"
+                value={Email}
+              />
+            </label>
+            <div className={classes.error}>{EmailError}</div>
+
+            {/* OFFICE PHONE */}
+            <label className={classes.label} htmlFor="OfficePhone">
+              Office Phone*
+              <input
+                className={classes.input}
+                name="OfficePhone"
+                onChange={this.handleUpdate}
+                placeholder="e.g. (512) 555-1919"
+                required
+                type="text"
+                value={formatPhone(OfficePhone)}
+              />
+            </label>
+            <div className={classes.error}>{OfficePhoneError}</div>
+
+            {/* CELL PHONE */}
+            <label className={classes.label} htmlFor="CellPhone">
+              Cell Phone*
+              <input
+                className={classes.input}
+                name="CellPhone"
+                onChange={this.handleUpdate}
+                placeholder="e.g. (512) 555-1919"
+                required
+                type="text"
+                value={formatPhone(CellPhone)}
+              />
+            </label>
+            <div className={classes.error}>{CellPhoneError}</div>
+
+            {/* NEW TO TMAC */}
+            <FormControl component="fieldset">
+              {/* eslint-disable-next-line */}
+              <label className={classes.radioButtonLabel} htmlFor="NewToTMAC">
+                New To TMAC*
+                <RadioGroup
+                  aria-label="NewToTMAC"
+                  name="NewToTMAC"
+                  onChange={this.handleChangeNewToTMAC}
+                  value={radioValue}
+                >
+                  <FormControlLabel control={<Radio size="small" />} label="Yes" value="Yes" />
+                  <FormControlLabel control={<Radio size="small" />} label="No" value="No" />
+                </RadioGroup>
+              </label>
+            </FormControl>
+
+            {/* Hidden input to help curtail spam */}
+            <input
+              css={{ opacity: 0, height: 1, width: 1 }}
+              id="honeypot"
+              name="honeypot"
+              onChange={this.handleUpdate}
+              type="text"
+              value={honeypot}
+            />
+
+            {/* SUBMIT BUTTON */}
+            <div
+              style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
+            >
+              {!hasValidInput && (
+                <Card className={classes.adminCard}>
+                  <CardContent>
+                    <Typography variant="body2">
+                      Please make sure all required fields above are completed.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              )}
+              <RegisterButton
+                buttonType="submit"
+                isDisabled={!hasValidInput}
+                onClick={this.handleClickSubmitButton}
               >
-                {!hasValidInput && (
-                  <Card className={classes.adminCard}>
-                    <CardContent>
-                      <Typography variant="body2">
-                        Please make sure all required fields above are completed.
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                )}
-                <RegisterButton
-                  buttonType="submit"
-                  isDisabled={!hasValidInput}
-                  onClick={this.handleClickSubmitButton}
-                >
-                  Continue to Step 3
-                </RegisterButton>
-              </div>
-            </form>
-          )}
+                Continue to Step 3
+              </RegisterButton>
+            </div>
+          </form>
+        )}
       </div>
     );
   }
 }
 
-const RegisterFormWithContext = props => (
+const RegisterFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterForm {...props} authUser={authUser} />}
+    {(authUser) => <RegisterForm {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
 );
 

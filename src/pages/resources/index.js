@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -20,7 +20,8 @@ const ExternalLink = ({ children, to }) => (
     }}
     href={to}
     rel="noopener noreferrer"
-    target="_blank">
+    target="_blank"
+  >
     {children}
   </a>
 );
@@ -175,11 +176,12 @@ const Resources = ({ location }) => {
         </section>
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

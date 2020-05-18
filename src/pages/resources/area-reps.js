@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,11 +22,11 @@ import resourcesSidebar from './resources-links.yml';
 const AreaReps = ({ location }) => {
   const { edges } = useAreaRepsData();
 
-  const north = edges.find(o => o.node.title === 'North Texas').node;
-  const central = edges.find(o => o.node.title === 'Central Texas').node;
-  const south = edges.find(o => o.node.title === 'South Texas').node;
-  const southeast = edges.find(o => o.node.title === 'Southeast Texas').node;
-  const west = edges.find(o => o.node.title === 'West Texas').node;
+  const north = edges.find((o) => o.node.title === 'North Texas').node;
+  const central = edges.find((o) => o.node.title === 'Central Texas').node;
+  const south = edges.find((o) => o.node.title === 'South Texas').node;
+  const southeast = edges.find((o) => o.node.title === 'Southeast Texas').node;
+  const west = edges.find((o) => o.node.title === 'West Texas').node;
 
   return (
     <Layout location={location}>

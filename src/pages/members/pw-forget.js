@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { navigate } from 'gatsby';
@@ -129,11 +129,10 @@ class PasswordForgetForm extends Component {
                   padding: '0.2rem',
                   width: 288,
                 }}
-                onChange={event =>
+                onChange={(event) =>
                   this.setState(
                     updateByPropertyName('email', event.target.value),
-                  )
-                }
+                  )}
                 placeholder="Email Address"
                 type="text"
                 value={email}

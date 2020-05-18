@@ -1,7 +1,7 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 // Internal Dependencies
 import CardHeadline from '../../../components/shared/cards/card-headline';
@@ -31,31 +31,36 @@ const headingNameStyles = {
 };
 
 // Component Definition
-const PatriciaMoreno = ({ location }) => (
+const LisaRoebuck = ({ location }) => (
   <Layout location={location}>
     <Helmet>
-      <title>TMAC | Patricia Moreno</title>
+      <title>TMAC | Lisa Roebuck</title>
     </Helmet>
     <div css={rootStyles}>
       <Container>
         <img
-          alt="Patricia Moreno"
+          alt="Lisa Roebuck"
           css={imageStyles}
-          src="https://res.cloudinary.com/tmac/image/upload/v1523131020/Moreno.jpg"
+          src="https://res.cloudinary.com/tmac/image/upload/v1523154886/lisa-roebuck.jpg"
         />
-        <h2 css={headingNameStyles}>Patricia Moreno</h2>
-        <CardHeadline>TMAC Past President, 2018-2019</CardHeadline>
+        <h2 css={headingNameStyles}>Lisa Roebuck</h2>
+        <CardHeadline>2020 TMAC Outstanding Administrator</CardHeadline>
         <FuturaParagraph>
-          Patricia Moreno, M.M., currently serves as the AISD Instructional Coordinator of General Music and Choral Music, leading one hundred thirty music educators that instruct approximately forty thousand students in music and choral music classes. She taught general and choral music for seventeen years in Hays Consolidated ISD in Title I schools. She is the co-founder and Director of the Kodály Certification Program at Texas State University. She was also appointed by the State Board of Education to serve on the revised Texas Essential Knowledge and Skills (TEKS) committee; co-author of an article, “Fine Arts TEKS Revisions Complete” in TMEA’s Southwestern Musician, reviewer for Oxford University Press and presents workshops across the state.
+          Roebuck has served as a music educator for over 30 years, which includes previously
+          teaching music at the elementary and secondary levels. Throughout her career, some of her
+          points of pride include establishing and opening Round Rock ISD’s Arts Integration
+          Academies, which exposes students to a wide variety of arts strategies integrated into all
+          subjects, and implementing technology in fine arts classrooms districtwide.
         </FuturaParagraph>
         {/* Mobile sidebar */}
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,
@@ -70,11 +75,11 @@ const PatriciaMoreno = ({ location }) => (
   </Layout>
 );
 
-PatriciaMoreno.propTypes = {
+LisaRoebuck.propTypes = {
   location: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
   ]).isRequired,
 };
 
-export default PatriciaMoreno;
+export default LisaRoebuck;

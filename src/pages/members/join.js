@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
@@ -102,7 +102,7 @@ const JoinContainer = (props) => {
               isGreen
               to="/members/register"
             >
-              <span css={{ verticalAlign: 'middle' }}>
+              <span>
                 Begin Registration
               </span>
               <ArrowForwardIcon />
@@ -140,9 +140,9 @@ JoinContainer.propTypes = {
   location: PropTypes.shape({}).isRequired,
 };
 
-const JoinContainerWithContext = props => (
+const JoinContainerWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <JoinContainer {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <JoinContainer {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

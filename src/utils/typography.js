@@ -1,5 +1,6 @@
 // External Dependencies
 import Typography from 'typography';
+import { green, red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import {
@@ -215,6 +216,7 @@ const _options = {
         background: colors.ui.bright,
       },
       '.main-body button[disabled]': {
+        backgroundColor: red['50'],
         color: colors.gray.calm,
         cursor: 'not-allowed',
       },

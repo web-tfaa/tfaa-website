@@ -8,25 +8,20 @@ import RegisterForm from './register-form';
 import RegisterSponsorForm from './register-sponsor-form';
 
 // Component Definition
-const RegisterInfo = (props) => {
-  const {
-    isViewingSponsors,
-    onCompleteStep,
-  } = props;
-
-  return (
-    <section>
-      <h2>
-        2. Register for TMAC
-        {isViewingSponsors && ' Sponsorship'}
-      </h2>
-      <FormHr />
-      {isViewingSponsors
-        ? <RegisterSponsorForm onCompleteStep={onCompleteStep} />
-        : <RegisterForm onCompleteStep={onCompleteStep} />}
-    </section>
-  );
-};
+const RegisterInfo = ({ isViewingSponsors, onCompleteStep }) => (
+  <section>
+    <h2>
+      2. Register for TMAC
+      {isViewingSponsors && ' Sponsorship'}
+    </h2>
+    <FormHr />
+    {isViewingSponsors ? (
+      <RegisterSponsorForm onCompleteStep={onCompleteStep} />
+    ) : (
+      <RegisterForm onCompleteStep={onCompleteStep} />
+    )}
+  </section>
+);
 
 RegisterInfo.propTypes = {
   isViewingSponsors: PropTypes.bool,

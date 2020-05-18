@@ -1,10 +1,10 @@
 // External Dependencies
-import CheckIcon from '@material-ui/icons/Check';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
-import format from 'date-fns/format';
+import CheckIcon from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactToPrint from 'react-to-print';
+import format from 'date-fns/format';
 import {
   green,
   red,
@@ -14,11 +14,11 @@ import {
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
+import CtaButton from '../../components/masthead/cta-button';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
-import presets from '../../utils/presets';
-import CtaButton from '../../components/masthead/cta-button';
 import RegisterButton from '../../components/register/register-button';
+import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { currentSchoolYearLong } from '../../utils/helpers';
 
@@ -98,28 +98,15 @@ const MemberFileShareCard = ({ node, description }) => {
 };
 MemberFileShareCard.propTypes = {
   description: PropTypes.string.isRequired,
-  node: PropTypes.shape({}).isRequired,
+  node: PropTypes.shape({
+    title: PropTypes.string,
+    date: PropTypes.shape({}),
+    link: PropTypes.string,
+  }).isRequired,
 };
 
 // Component Definition
 class MemberContent extends Component {
-  static propTypes = {
-    authUser: PropTypes.shape({}),
-    contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
-    contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
-    memberEmail: PropTypes.string,
-    userData: PropTypes.arrayOf(PropTypes.shape({})),
-    userId: PropTypes.string,
-  };
-
-  static defaultProps = {
-    authUser: null,
-    contentfulFileShareData: null,
-    contentfulFileShareDescriptionData: null,
-    userData: [],
-    userId: null,
-  };
-
   constructor(props) {
     super(props);
 
@@ -176,8 +163,8 @@ class MemberContent extends Component {
   render() {
     const {
       authUser,
-      contentfulFileShareData,
-      contentfulFileShareDescriptionData,
+      // contentfulFileShareData,
+      // contentfulFileShareDescriptionData,
       memberEmail,
     } = this.props;
 
@@ -187,8 +174,8 @@ class MemberContent extends Component {
     } = this.state;
 
     const registeredIcon = isRegistered
-      ? <CheckIcon nativeColor={green[700]} />
-      : <AnnouncementIcon nativeColor={red[500]} />;
+      ? <CheckIcon htmlColor={green[700]} />
+      : <AnnouncementIcon htmlColor={red[500]} />;
 
     const memberInfoCard = currentUser && (
       <Card>
@@ -304,28 +291,23 @@ class MemberContent extends Component {
             </div>
           )}
         />
-        {!isRegistered && (
-          <CtaButton to="/members/join">
-            Join TMAC
-          </CtaButton>
-        )}
+        {!isRegistered && <CtaButton to="/members/join">Join TMAC</CtaButton>}
         {isInvoiced && invoiceInfo}
         {isPaypal && receiptInfo}
         {isRegistered && (
-          <Fragment>
+          <>
             <FuturaDiv>
-              If your district requires the IRS W-9 Form for TMAC,{' '}
-              download or print a copy below.
+              If your district requires the IRS W-9 Form for TMAC, download or print a copy below.
             </FuturaDiv>
             <FuturaAnchor
               download
               target="_blank"
               rel="noopener noreferrer"
-              href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf"
+              href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
             >
               Download W-9
             </FuturaAnchor>
-          </Fragment>
+          </>
         )}
       </Card>
     );
@@ -348,7 +330,7 @@ class MemberContent extends Component {
           {memberTaskCard}
         </Cards>
 
-        <h2>For Members</h2>
+        {/* <h2>For Members</h2>
 
         <Cards>
           {contentfulFileShareData
@@ -363,7 +345,7 @@ class MemberContent extends Component {
                 }
               />
             ))}
-        </Cards>
+        </Cards> */}
 
         <div
           css={{
@@ -386,5 +368,24 @@ class MemberContent extends Component {
     );
   }
 }
+
+MemberContent.propTypes = {
+  authUser: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }),
+  // contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
+  // contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
+  memberEmail: PropTypes.string,
+  userData: PropTypes.arrayOf(PropTypes.shape({})),
+  userId: PropTypes.string,
+};
+
+MemberContent.defaultProps = {
+  authUser: null,
+  // contentfulFileShareData: null,
+  // contentfulFileShareDescriptionData: null,
+  userData: [],
+  userId: null,
+};
 
 export default MemberContent;

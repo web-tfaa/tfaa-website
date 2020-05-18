@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -58,7 +58,7 @@ class Sponsors extends Component {
     Object.values(initialSponsorData).forEach((sponsor) => {
       switch (sponsor.SponsorLevel) {
         case 'Class Champion':
-          this.setState(state => ({
+          this.setState((state) => ({
             championData: [
               ...state.championData,
               {
@@ -69,7 +69,7 @@ class Sponsors extends Component {
           }));
           break;
         case 'Gold Medal':
-          this.setState(state => ({
+          this.setState((state) => ({
             goldData: [
               ...state.goldData,
               {
@@ -80,7 +80,7 @@ class Sponsors extends Component {
           }));
           break;
         case 'Silver Medal':
-          this.setState(state => ({
+          this.setState((state) => ({
             silverData: [
               ...state.silverData,
               {
@@ -91,7 +91,7 @@ class Sponsors extends Component {
           }));
           break;
         case 'Bronze Medal':
-          this.setState(state => ({
+          this.setState((state) => ({
             bronzeData: [
               ...state.bronzeData,
               {

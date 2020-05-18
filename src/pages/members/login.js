@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link, navigate } from 'gatsby';
@@ -69,9 +69,9 @@ class Login extends Component {
   }
 }
 
-const LoginWithContext = props => (
+const LoginWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <Login {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <Login {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

@@ -83,6 +83,10 @@ export const outstandingAdmin = [
     year: '2019',
     name: 'James Drew',
   },
+  {
+    year: '2020',
+    name: 'Lisa Roebuck',
+  },
 ];
 
 export const pastPresidents = [
@@ -201,5 +205,9 @@ export const pastPresidents = [
   {
     year: '2018-2019',
     name: 'Patricia Moreno',
+  },
+  {
+    year: '2019-2020',
+    name: 'Jay Lester',
   },
 ];
