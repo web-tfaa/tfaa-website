@@ -3,7 +3,7 @@ import { currentSchoolYearShort } from '../utils/helpers';
 
 // Create/Update user entry in Firestore
 export const doCreateEntry = (form, collection, documentId, callback) => {
-  console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
+  // console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
   db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .set(form)
@@ -17,7 +17,7 @@ export const doCreateEntry = (form, collection, documentId, callback) => {
 };
 
 export const doUpdateEntry = (form, collection, documentId) => {
-  console.log('doUpdateEntry : updating...', `${collection}_${currentSchoolYearShort}`);
+  // console.log('doUpdateEntry : updating...', `${collection}_${currentSchoolYearShort}`);
   return db.collection(`${collection}_${currentSchoolYearShort}`)
     .doc(documentId)
     .update(form)
@@ -31,7 +31,7 @@ export const doUpdateEntry = (form, collection, documentId) => {
 
 // Retrieves all registered members/sponsors for the current school year
 export const doGetUsers = (collection, userList, callback) => {
-  console.log('doGetUsers : getting...', `${collection}_${currentSchoolYearShort}`);
+  // console.log('doGetUsers : getting...', `${collection}_${currentSchoolYearShort}`);
   const updatedUserList = userList;
   return db.collection(`${collection}_${currentSchoolYearShort}`)
     .get()
@@ -47,7 +47,7 @@ export const doGetUsers = (collection, userList, callback) => {
 };
 
 // Invoice actions
-export const doGetInvoiceId = callback =>
+export const doGetInvoiceId = (callback) =>
   db.collection('Document_ID')
     .doc(`invoice_${currentSchoolYearShort}`)
     .get()
@@ -66,7 +66,7 @@ export const doGetInvoiceId = callback =>
 export const doUpdateInvoiceId = () => {
   const invoiceDocRef = db.collection('Document_ID').doc(`invoice_${currentSchoolYearShort}`);
 
-  return db.runTransaction(transaction =>
+  return db.runTransaction((transaction) =>
     transaction
       .get(invoiceDocRef)
       .then((doc) => {
@@ -90,7 +90,7 @@ export const doUpdateInvoiceId = () => {
 };
 
 // Receipt actions
-export const doGetReceiptId = callback =>
+export const doGetReceiptId = (callback) =>
   db.collection('Document_ID')
     .doc(`receipt_${currentSchoolYearShort}`)
     .get()
@@ -109,7 +109,7 @@ export const doGetReceiptId = callback =>
 export const doUpdateReceiptId = () => {
   const receiptDocRef = db.collection('Document_ID').doc(`receipt_${currentSchoolYearShort}`);
 
-  return db.runTransaction(transaction =>
+  return db.runTransaction((transaction) =>
     transaction
       .get(receiptDocRef)
       .then((doc) => {
