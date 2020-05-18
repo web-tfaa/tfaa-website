@@ -3,7 +3,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactToPrint from 'react-to-print';
 import {
   green,
@@ -103,23 +103,6 @@ MemberFileShareCard.propTypes = {
 
 // Component Definition
 class MemberContent extends Component {
-  static propTypes = {
-    authUser: PropTypes.shape({}),
-    contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
-    contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
-    memberEmail: PropTypes.string,
-    userData: PropTypes.arrayOf(PropTypes.shape({})),
-    userId: PropTypes.string,
-  };
-
-  static defaultProps = {
-    authUser: null,
-    contentfulFileShareData: null,
-    contentfulFileShareDescriptionData: null,
-    userData: [],
-    userId: null,
-  };
-
   constructor(props) {
     super(props);
 
@@ -304,28 +287,23 @@ class MemberContent extends Component {
             </div>
           )}
         />
-        {!isRegistered && (
-          <CtaButton to="/members/join">
-            Join TMAC
-          </CtaButton>
-        )}
+        {!isRegistered && <CtaButton to="/members/join">Join TMAC</CtaButton>}
         {isInvoiced && invoiceInfo}
         {isPaypal && receiptInfo}
         {isRegistered && (
-          <Fragment>
+          <>
             <FuturaDiv>
-              If your district requires the IRS W-9 Form for TMAC,{' '}
-              download or print a copy below.
+              If your district requires the IRS W-9 Form for TMAC, download or print a copy below.
             </FuturaDiv>
             <FuturaAnchor
               download
               target="_blank"
               rel="noopener noreferrer"
-              href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf"
+              href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
             >
               Download W-9
             </FuturaAnchor>
-          </Fragment>
+          </>
         )}
       </Card>
     );
@@ -386,5 +364,24 @@ class MemberContent extends Component {
     );
   }
 }
+
+MemberContent.propTypes = {
+  authUser: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }),
+  contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
+  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
+  memberEmail: PropTypes.string,
+  userData: PropTypes.arrayOf(PropTypes.shape({})),
+  userId: PropTypes.string,
+};
+
+MemberContent.defaultProps = {
+  authUser: null,
+  contentfulFileShareData: null,
+  contentfulFileShareDescriptionData: null,
+  userData: [],
+  userId: null,
+};
 
 export default MemberContent;
