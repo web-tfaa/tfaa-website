@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/styles';
@@ -15,20 +16,21 @@ import { currentSchoolYearLong } from '../../utils/helpers';
 // Local Variables
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '80%',
+    width: '75%',
     marginLeft: 32,
     marginRight: 32,
-    marginTop: theme.spacing(3),
-    overflowX: 'auto',
+    marginTop: theme.spacing(2),
   },
   table: {
     marginBottom: 0,
     minWidth: 200,
+    paddingRight: theme.spacing(1),
   },
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
+    paddingRight: theme.spacing(1),
   },
 }));
 
@@ -61,12 +63,14 @@ const InvoiceTable = ({
   );
 
   return (
-    <Paper className={classes.root}>
+    <TableContainer className={classes.root} component={Paper}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
             <CustomTableCell>Description</CustomTableCell>
-            <CustomTableCell align="right">Total{!isInvoice && ' Paid'}</CustomTableCell>
+            <CustomTableCell align="right">
+              Total{!isInvoice && ' Paid'}
+            </CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -82,7 +86,7 @@ const InvoiceTable = ({
           </TableRow>
         </TableBody>
       </Table>
-    </Paper>
+    </TableContainer>
   );
 };
 

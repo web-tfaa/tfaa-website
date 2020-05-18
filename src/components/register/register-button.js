@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import hex2rgba from 'hex2rgba';
 import { css } from 'glamor';
-import { green, red } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -19,7 +19,7 @@ const propTypes = {
   isDisabled: PropTypes.bool,
   onClick: PropTypes.func,
   overrideCSS: PropTypes.string,
-  red: PropTypes.bool,
+  isRed: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -27,7 +27,7 @@ const defaultProps = {
   isDisabled: false,
   onClick: null,
   overrideCSS: '',
-  red: false,
+  isRed: false,
 };
 
 // const texasFlagBlue = '#002868';
@@ -41,13 +41,13 @@ const stripeAnimation = css.keyframes({
 
 // Component Definition
 const RegisterButton = ({
-  buttonType, children, isDisabled, onClick, overrideCSS, red,
+  buttonType, children, isDisabled, onClick, overrideCSS, isRed,
 }) => (
   <button
     css={{
       ...overrideCSS,
       ...scale(1 / 5),
-      border: `1px solid ${red ? texasFlagRed : green500}`,
+      border: `1px solid ${isRed ? texasFlagRed : green500}`,
       borderRadius: presets.radius,
       display: 'inline-block',
       fontFamily: options.headerFontFamily.join(','),
@@ -61,18 +61,17 @@ const RegisterButton = ({
       },
       // Increase specificity
       '&&': {
-        backgroundColor: green['50'],
-        // backgroundColor: 'transparent',
+        backgroundColor: red['50'],
         backgroundSize: '30px 30px',
-        border: `2px solid ${red || isDisabled ? texasFlagRed : green500}`,
+        border: `2px solid ${isRed || isDisabled ? texasFlagRed : green500}`,
         boxShadow: 'none',
-        color: red ? texasFlagRed : green500,
+        color: isRed ? texasFlagRed : green500,
         fontWeight: 'normal',
         textDecoration: 'none',
         transition: `all ${presets.animation.speedDefault} ${presets.animation.curveDefault}`,
         ':hover, &:focus': {
           animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
-          backgroundColor: red || isDisabled ? texasFlagRed : green500,
+          backgroundColor: isRed || isDisabled ? texasFlagRed : green500,
           backgroundImage:
             !isDisabled
             && 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
@@ -81,7 +80,7 @@ const RegisterButton = ({
           cursor: !isDisabled ? 'pointer' : 'not-allowed',
         },
         ':focus': {
-          boxShadow: `0 0 0 0.2rem ${hex2rgba(red ? texasFlagRed : green500, 0.25)}`,
+          boxShadow: `0 0 0 0.2rem ${hex2rgba(isRed ? texasFlagRed : green500, 0.25)}`,
           outline: 0,
         },
         ':after': {

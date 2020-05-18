@@ -627,7 +627,7 @@ class RegisterSponsorPayment extends Component {
                 <ReactToPrint
                   content={() => this.printInvoice}
                   trigger={() => (
-                    <RegisterButton red onClick={this.handleIncrementInvoiceId}>
+                    <RegisterButton isRed onClick={this.handleIncrementInvoiceId}>
                       Print Invoice
                     </RegisterButton>
                   )}

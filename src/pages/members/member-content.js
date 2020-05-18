@@ -222,16 +222,12 @@ class MemberContent extends Component {
     const invoiceInfo = currentUser && (
       <FuturaDiv>
         <h5>Need a copy of your invoice?</h5>
-        If you need to pay via invoice please send{' '}
-        payment to the TMAC Treasurer as indicated on your invoice.
+        If you need to pay via invoice please send payment to the TMAC Treasurer as indicated on
+        your invoice.
         <div css={{ marginTop: 16 }}>
           <ReactToPrint
             content={() => this.printInvoice}
-            trigger={() => (
-              <RegisterButton red>
-                Print Invoice
-              </RegisterButton>
-            )}
+            trigger={() => <RegisterButton isRed>Print Invoice</RegisterButton>}
           />
         </div>
         <div css={{ display: 'none' }}>
@@ -241,7 +237,9 @@ class MemberContent extends Component {
             invoiceId={currentUser.invoiceId}
             isActive={currentUser.MemberType === 'Active'}
             isInvoice
-            ref={(el) => { this.printInvoice = el; }}
+            ref={(el) => {
+              this.printInvoice = el;
+            }}
           />
         </div>
       </FuturaDiv>
@@ -254,11 +252,7 @@ class MemberContent extends Component {
         <div css={{ marginTop: 16 }}>
           <ReactToPrint
             content={() => this.printReceipt}
-            trigger={() => (
-              <RegisterButton red>
-                Print Receipt
-              </RegisterButton>
-            )}
+            trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
           />
         </div>
         <div css={{ display: 'none' }}>
@@ -268,7 +262,9 @@ class MemberContent extends Component {
             isActive={currentUser.MemberType === 'Active'}
             isInvoice={false}
             receiptId={currentUser.receiptId}
-            ref={(el) => { this.printReceipt = el; }}
+            ref={(el) => {
+              this.printReceipt = el;
+            }}
           />
         </div>
       </FuturaDiv>
