@@ -1,6 +1,6 @@
 // External Dependencies
 import Typography from 'typography';
-import { green, red } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import {

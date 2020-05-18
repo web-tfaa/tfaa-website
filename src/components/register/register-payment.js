@@ -277,7 +277,7 @@ class RegisterPayment extends Component {
 
             <ReactToPrint
               content={() => this.printReceipt}
-              trigger={() => <RegisterButton red>Print Receipt</RegisterButton>}
+              trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
             />
             <div css={{ display: 'none' }}>
               <Invoice
@@ -340,7 +340,7 @@ class RegisterPayment extends Component {
                 <ReactToPrint
                   content={() => this.printInvoice}
                   trigger={() => (
-                    <RegisterButton red onClick={this.handleIncrementInvoiceId}>
+                    <RegisterButton isRed onClick={this.handleIncrementInvoiceId}>
                       Print Invoice
                     </RegisterButton>
                   )}

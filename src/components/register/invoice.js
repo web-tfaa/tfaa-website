@@ -143,7 +143,7 @@ class Invoice extends Component {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          marginTop: 48,
+          marginTop: 32,
         }}
         >
           <InvoiceTable
@@ -155,7 +155,7 @@ class Invoice extends Component {
           />
 
           <div css={{
-            margin: '72px 32px',
+            margin: '64px 32px',
             textAlign: 'center',
           }}
           >
