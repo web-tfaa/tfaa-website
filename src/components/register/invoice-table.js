@@ -13,7 +13,7 @@ import CustomTableCell from '../shared/CustomTableCell';
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '80%',
     marginLeft: 32,
@@ -33,15 +33,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // Component Definition
-const InvoiceTable = (props) => {
-  const {
-    amount,
-    form,
-    isActive,
-    isInvoice,
-    sponsorLevel,
-  } = props;
-  const classes = useStyles(props);
+const InvoiceTable = ({
+  amount,
+  form,
+  isActive,
+  isInvoice,
+  sponsorLevel,
+}) => {
+  const classes = useStyles();
 
   // Work out the correct amount
   const isString = typeof amount === 'string';

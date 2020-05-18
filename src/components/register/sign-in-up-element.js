@@ -39,15 +39,15 @@ class SignInUpElement extends Component {
         </div>
         <span
           css={{
-            color: `inherit`,
-            textDecoration: `none`,
+            color: 'inherit',
+            textDecoration: 'none',
             transition: `all ${presets.animation.speedFast} ${
               presets.animation.curveDefault
             }`,
             borderBottom: `1px solid ${colors.ui.bright}`,
             boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-            fontFamily: options.headerFontFamily.join(`,`),
-            fontWeight: `bold`,
+            fontFamily: options.headerFontFamily.join(','),
+            fontWeight: 'bold',
             '&:hover': {
               background: colors.ui.bright,
               cursor: 'pointer',
@@ -58,7 +58,13 @@ class SignInUpElement extends Component {
               ? this.handleClickSignUp
               : onClickSignIn || this.handleClickSignIn
           }
+          onKeyPress={
+            viewSignUp
+              ? this.handleClickSignUp
+              : onClickSignIn || this.handleClickSignIn
+          }
           role="button"
+          tabIndex={0}
         >
           {`Sign ${viewSignUp ? 'Up' : 'In'}!`}
         </span>

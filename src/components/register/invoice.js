@@ -1,7 +1,7 @@
 // External Dependencies
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -99,12 +99,12 @@ class Invoice extends Component {
           </div>
 
           {!isInvoice && paymentDetails.payerId && (
-            <Fragment>
+            <>
               {paymentDetails.payerId
                 && <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>}
               {paymentDetails.paymentId
                 && <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>}
-            </Fragment>
+            </>
           )}
         </div>
 

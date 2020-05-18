@@ -45,8 +45,7 @@ const NavItem = ({ linkTo, children }) => (
       getProps={({ isPartiallyCurrent }) =>
         (isPartiallyCurrent && children !== 'TMAC' && children !== 'Sign Out'
           ? { style: navItemStyles.active }
-          : {})
-      }
+          : {})}
       to={linkTo}
     >
       {children}
@@ -174,9 +173,9 @@ TopNav.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const TopNavWithContext = props => (
+const TopNavWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <TopNav {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <TopNav {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 
