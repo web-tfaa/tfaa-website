@@ -166,7 +166,7 @@ class Invoice extends Component {
                   <strong>Texas Music Administrators Conference (TMAC)</strong>
                 </span>
               ) : (
-                <strong>Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for thie {currentSchoolYearLong} school year!</strong>
+                <strong>Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for the {currentSchoolYearLong} school year!</strong>
               )}
           </div>
         </div>
