@@ -19,7 +19,7 @@ const numberOfDistricts = 1246;
 const numberOfSchools = 3000;
 
 // Component Definition
-const FeaturedStat = ({ children }) => (
+const FeaturedStat = () => (
   <div
     css={{
       backgroundColor: `${colors.ui.light}`,

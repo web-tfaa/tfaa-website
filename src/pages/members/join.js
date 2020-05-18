@@ -102,7 +102,7 @@ const JoinContainer = (props) => {
               isGreen
               to="/members/register"
             >
-              <span css={{ verticalAlign: 'middle' }}>
+              <span>
                 Begin Registration
               </span>
               <ArrowForwardIcon />

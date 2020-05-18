@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'glamor';
 import { Link } from 'gatsby';
+import { green, red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -21,11 +22,7 @@ const stripeAnimation = css.keyframes({
 
 // Component Definition
 const CtaButton = ({
-  children,
-  isGreen,
-  overrideCSS,
-  to,
-  ...other
+  children, isGreen, overrideCSS, to, ...other
 }) => (
   <Link
     css={{
@@ -35,7 +32,7 @@ const CtaButton = ({
       border: `1px solid ${isGreen ? green500 : texasFlagRed}`,
       fontFamily: options.headerFontFamily.join(','),
       padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
-      borderRadius: presets.radius,
+      borderRadius: presets.radiusLg,
       [presets.Tablet]: {
         ...scale(2 / 5),
         padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
@@ -45,20 +42,19 @@ const CtaButton = ({
       },
       // Increase specificity
       '&&': {
+        backgroundColor: isGreen ? green['50'] : red['50'],
         border: `2px solid ${isGreen ? green500 : texasFlagRed}`,
         boxShadow: 'none',
         color: isGreen ? green500 : texasFlagRed,
         fontWeight: 'normal',
-        backgroundColor: 'transparent',
         backgroundSize: '30px 30px',
         textDecoration: 'none',
-        transition: `all ${presets.animation.speedDefault} ${
-          presets.animation.curveDefault
-        }`,
+        transition: `all ${presets.animation.speedDefault} ${presets.animation.curveDefault}`,
         ':hover, &:focus': {
           backgroundSize: '30px 30px',
           backgroundColor: isGreen ? green500 : texasFlagRed,
-          backgroundImage: 'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
+          backgroundImage:
+            'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
           color: '#fff',
           animation: `${stripeAnimation} 2.8s linear infinite`,
         },

@@ -1,10 +1,10 @@
 // External Dependencies
-import CheckIcon from '@material-ui/icons/Check';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
-import format from 'date-fns/format';
+import CheckIcon from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ReactToPrint from 'react-to-print';
+import format from 'date-fns/format';
 import {
   green,
   red,
@@ -14,11 +14,11 @@ import {
 import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
+import CtaButton from '../../components/masthead/cta-button';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
-import presets from '../../utils/presets';
-import CtaButton from '../../components/masthead/cta-button';
 import RegisterButton from '../../components/register/register-button';
+import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 import { currentSchoolYearLong } from '../../utils/helpers';
 
@@ -98,7 +98,11 @@ const MemberFileShareCard = ({ node, description }) => {
 };
 MemberFileShareCard.propTypes = {
   description: PropTypes.string.isRequired,
-  node: PropTypes.shape({}).isRequired,
+  node: PropTypes.shape({
+    title: PropTypes.string,
+    date: PropTypes.shape({}),
+    link: PropTypes.string,
+  }).isRequired,
 };
 
 // Component Definition
@@ -159,8 +163,8 @@ class MemberContent extends Component {
   render() {
     const {
       authUser,
-      contentfulFileShareData,
-      contentfulFileShareDescriptionData,
+      // contentfulFileShareData,
+      // contentfulFileShareDescriptionData,
       memberEmail,
     } = this.props;
 
@@ -170,8 +174,8 @@ class MemberContent extends Component {
     } = this.state;
 
     const registeredIcon = isRegistered
-      ? <CheckIcon nativeColor={green[700]} />
-      : <AnnouncementIcon nativeColor={red[500]} />;
+      ? <CheckIcon htmlColor={green[700]} />
+      : <AnnouncementIcon htmlColor={red[500]} />;
 
     const memberInfoCard = currentUser && (
       <Card>
@@ -369,8 +373,8 @@ MemberContent.propTypes = {
   authUser: PropTypes.shape({
     email: PropTypes.string.isRequired,
   }),
-  contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
-  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
+  // contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
+  // contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
   memberEmail: PropTypes.string,
   userData: PropTypes.arrayOf(PropTypes.shape({})),
   userId: PropTypes.string,
@@ -378,8 +382,8 @@ MemberContent.propTypes = {
 
 MemberContent.defaultProps = {
   authUser: null,
-  contentfulFileShareData: null,
-  contentfulFileShareDescriptionData: null,
+  // contentfulFileShareData: null,
+  // contentfulFileShareDescriptionData: null,
   userData: [],
   userId: null,
 };

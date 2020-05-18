@@ -83,7 +83,7 @@ const SponsorInfo = (props) => {
               to="/sponsors/register"
               state={{ level: location && location.state && location.state.level }}
             >
-              <span css={{ verticalAlign: 'middle' }}>
+              <span>
                 Begin Sponsor Registration
               </span>
               <ArrowForwardIcon />
