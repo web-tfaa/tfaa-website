@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import hex2rgba from 'hex2rgba';
 import { css } from 'glamor';
-import { red } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -61,7 +61,7 @@ const RegisterButton = ({
       },
       // Increase specificity
       '&&': {
-        backgroundColor: red['50'],
+        backgroundColor: isRed ? red['50'] : green['50'],
         backgroundSize: '30px 30px',
         border: `2px solid ${isRed || isDisabled ? texasFlagRed : green500}`,
         boxShadow: 'none',
