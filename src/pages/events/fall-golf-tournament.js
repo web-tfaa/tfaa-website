@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,7 +22,7 @@ const indentStyles = {
 const FallGolfTournament = ({ location }) => {
   const { edges } = useEventData();
 
-  const fallGolfTourny = edges.find(e => e.node.titleOfEvent.includes('Fall Golf')).node;
+  const fallGolfTourny = edges.find((e) => e.node.titleOfEvent.includes('Fall Golf')).node;
 
   return (
     <Layout location={location}>
@@ -34,8 +34,8 @@ const FallGolfTournament = ({ location }) => {
 
         <section>
           <p>
-            The 5th annual Texas Music Administrators Conference Golf Tournament
-            is scheduled in conjunction with on Wednesday of our Fall Retreat. If you are interested in participating, details will be{' '} coming soon.
+            The 6th annual Texas Music Administrators Conference Golf Tournament
+            is scheduled in conjunction with on Wednesday of our Fall Retreat. If you are interested in participating, details will be coming soon.
           </p>
         </section>
 

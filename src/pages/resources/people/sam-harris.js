@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -95,11 +95,12 @@ const SamHarris = ({ location }) => (
         {/* Mobile sidebar */}
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

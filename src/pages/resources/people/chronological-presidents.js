@@ -1,7 +1,7 @@
 // External Dependencies
-import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
@@ -17,6 +17,10 @@ import resourcesSidebar from '../resources-links.yml';
 import { options } from '../../../utils/typography';
 
 // Local Variables
+const propTypes = {
+  location: PropTypes.shape({}).isRequired,
+};
+
 const rootStyles = {
   display: 'flex',
   flexDirection: 'row',
@@ -30,11 +34,7 @@ const tableContainerStyles = {
 };
 
 // Component Definition
-class ChronologicalAdmin extends Component {
-  static propTypes = {
-    location: PropTypes.shape({}).isRequired,
-  };
-
+class ChronologicalPresidents extends Component {
   renderTableRows = () =>
     pastPresidents.map((pres, index) => (
       // eslint-disable-next-line
@@ -96,4 +96,6 @@ class ChronologicalAdmin extends Component {
   }
 }
 
-export default ChronologicalAdmin;
+ChronologicalPresidents.propTypes = propTypes;
+
+export default ChronologicalPresidents;

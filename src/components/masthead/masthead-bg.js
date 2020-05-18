@@ -18,7 +18,7 @@ const texasFlagRed = '#BF0A30';
 const cover = {
   bottom: 0,
   left: 0,
-  position: `absolute`,
+  position: 'absolute',
   right: 0,
   top: 0,
 };
@@ -28,14 +28,15 @@ const MastheadBg = () => (
     className="masthead-bg"
     css={{
       ...cover,
-      overflow: `hidden`,
+      overflow: 'hidden',
       zIndex: -1,
-    }}>
+    }}
+  >
     <div
       className="masthead-bg-left-fill"
       css={{
         ...cover,
-        right: `auto`,
+        right: 'auto',
         width: vPOff,
         zIndex: -10,
         background: colors.ui.light,
@@ -67,9 +68,10 @@ const MastheadBg = () => (
         [presets.VVHd]: {
           left: vPVVHdOff,
         },
-        width: `100%`,
-        height: `100%`,
-      }}>
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <polygon fill={colors.ui.light} points="-5,-5 15,15 -5,15 " />
     </svg>
     <style>
@@ -115,18 +117,20 @@ const MastheadBg = () => (
       className="masthead-bg-right"
       css={{
         ...cover,
-        width: `calc(180% - + 4vh)`,
-        height: `100%`,
+        width: 'calc(180% - + 4vh)',
+        height: '100%',
         zIndex: -1,
-        top: `2%`,
+        top: '2%',
         // transition: `width 100ms linear`,
-      }}>
+      }}
+    >
       <svg
         x="-15%"
         y="-10%"
         style={{
-          overflow: `visible`,
-        }}>
+          overflow: 'visible',
+        }}
+      >
         <rect
           className="masthead-bg-right-light"
           width="10000%"

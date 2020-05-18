@@ -1,10 +1,18 @@
+// Internal Dependencies
 import { db } from './firebase';
 import { currentSchoolYearShort } from '../utils/helpers';
 
+// Local Variables
+const getFirebaseCollectionName = (collection) => `${collection}_${currentSchoolYearShort}`;
+
 // Create/Update user entry in Firestore
 export const doCreateEntry = (form, collection, documentId, callback) => {
+  const collectionName = getFirebaseCollectionName(collection);
+
   console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
-  db.collection(`${collection}_${currentSchoolYearShort}`)
+
+  return db
+    .collection(collectionName)
     .doc(documentId)
     .set(form)
     .then(() => {
@@ -17,12 +25,18 @@ export const doCreateEntry = (form, collection, documentId, callback) => {
 };
 
 export const doUpdateEntry = (form, collection, documentId) => {
-  console.log('doUpdateEntry : updating...', `${collection}_${currentSchoolYearShort}`);
-  return db.collection(`${collection}_${currentSchoolYearShort}`)
+  const collectionName = getFirebaseCollectionName(collection);
+
+  console.log('doUpdateEntry : updating...', collectionName);
+
+  return db
+    .collection(collectionName)
     .doc(documentId)
     .update(form)
     .then(() => {
-      console.log(`Updating payment info for ${documentId} in ${currentSchoolYearShort} was successful`);
+      console.log(
+        `Updating payment info for ${documentId} in ${currentSchoolYearShort} was successful`,
+      );
     })
     .catch((err) => {
       console.log(`Error updating payment info for ${documentId} document`, err);
@@ -31,9 +45,13 @@ export const doUpdateEntry = (form, collection, documentId) => {
 
 // Retrieves all registered members/sponsors for the current school year
 export const doGetUsers = (collection, userList, callback) => {
-  console.log('doGetUsers : getting...', `${collection}_${currentSchoolYearShort}`);
+  const collectionName = getFirebaseCollectionName(collection);
+
+  console.log('doGetUsers : getting...', collectionName);
+
   const updatedUserList = userList;
-  return db.collection(`${collection}_${currentSchoolYearShort}`)
+  return db
+    .collection(collectionName)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -47,8 +65,9 @@ export const doGetUsers = (collection, userList, callback) => {
 };
 
 // Invoice actions
-export const doGetInvoiceId = callback =>
-  db.collection('Document_ID')
+export const doGetInvoiceId = (callback) =>
+  db
+    .collection('Document_ID')
     .doc(`invoice_${currentSchoolYearShort}`)
     .get()
     .then((doc) => {
@@ -66,7 +85,7 @@ export const doGetInvoiceId = callback =>
 export const doUpdateInvoiceId = () => {
   const invoiceDocRef = db.collection('Document_ID').doc(`invoice_${currentSchoolYearShort}`);
 
-  return db.runTransaction(transaction =>
+  return db.runTransaction((transaction) =>
     transaction
       .get(invoiceDocRef)
       .then((doc) => {
@@ -90,8 +109,9 @@ export const doUpdateInvoiceId = () => {
 };
 
 // Receipt actions
-export const doGetReceiptId = callback =>
-  db.collection('Document_ID')
+export const doGetReceiptId = (callback) =>
+  db
+    .collection('Document_ID')
     .doc(`receipt_${currentSchoolYearShort}`)
     .get()
     .then((doc) => {
@@ -109,7 +129,7 @@ export const doGetReceiptId = callback =>
 export const doUpdateReceiptId = () => {
   const receiptDocRef = db.collection('Document_ID').doc(`receipt_${currentSchoolYearShort}`);
 
-  return db.runTransaction(transaction =>
+  return db.runTransaction((transaction) =>
     transaction
       .get(receiptDocRef)
       .then((doc) => {

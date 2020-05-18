@@ -1,20 +1,25 @@
 // External Dependencies
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import MemberTableHead from './member-table-head';
 import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Variables
-const styles = {
+const propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+};
+
+const useStyles = makeStyles({
   cell: {
     '&:first-child': {
       paddingLeft: 24,
@@ -39,7 +44,7 @@ const styles = {
     marginBottom: 0,
     minWidth: 200,
   },
-};
+});
 
 // Local Functions
 function desc(a, b, orderBy) {
@@ -60,7 +65,7 @@ function stableSort(array, cmp) {
     return a[1] - b[1];
   });
 
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 function getSorting(order, orderBy) {
@@ -82,146 +87,123 @@ function uglifyEmail(email) {
 }
 
 // Component Definition
-class MemberListTable extends Component {
-  static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-    data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    isAdmin: PropTypes.bool.isRequired,
-  };
+const MemberListTable = ({
+  data,
+  isAdmin,
+}) => {
+  const classes = useStyles();
 
-  state = {
-    order: 'asc',
-    orderBy: 'LastName',
-    page: 0,
-    rowsPerPage: 5,
-  };
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('LastName');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
+  function handleChangePage(event, newPage) {
+    setPage(newPage);
+  }
 
-  handleChangeRowsPerPage = (event) => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
+  function handleChangeRowsPerPage(event) {
+    setRowsPerPage(event.target.value);
+  }
 
-  handleRequestSort = (event, property) => {
-    const {
-      order,
-      orderBy,
-    } = this.state;
-
+  function handleRequestSort(event, property) {
     let newOrder = 'desc';
 
     if (orderBy === property && order === 'desc') {
       newOrder = 'asc';
     }
 
-    this.setState({
-      order: newOrder,
-      orderBy: property,
-    });
-  };
-
-  render() {
-    const {
-      classes,
-      data,
-      isAdmin,
-    } = this.props;
-
-    const {
-      order,
-      orderBy,
-      page,
-      rowsPerPage,
-    } = this.state;
-
-    return (
-      <Paper className={classes.paper}>
-        <div className={classes.overflowWrapper}>
-          {data && data.length > 0
-            ? (
-              <Table className={classes.table}>
-                <MemberTableHead
-                  isAdmin={isAdmin}
-                  onRequestSort={this.handleRequestSort}
-                  order={order}
-                  orderBy={orderBy}
-                />
-                <TableBody>
-                  {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(user => (
-                      <TableRow
-                        className={classes.row}
-                        key={user.userId}
-                      >
-                        <TableCell
-                          className={classes.cell}
-                          component="th"
-                          key={user.FirstName}
-                          padding="none"
-                          scope="row"
-                        >
-                          {user.FirstName}
-                        </TableCell>
-                        <TableCell
-                          className={classes.cell}
-                          key={user.LastName}
-                        >
-                          {user.LastName}
-                        </TableCell>
-                        <TableCell
-                          className={classes.cell}
-                          key={user.District}
-                        >
-                          {user.District}
-                        </TableCell>
-                        <TableCell
-                          className={classes.cell}
-                          key={user.Title}
-                        >
-                          {user.Title}
-                        </TableCell>
-                        <TableCell
-                          className={classes.cell}
-                          key={user.Email}
-                        >
-                          {uglifyEmail(user.Email)}
-                        </TableCell>
-                        {isAdmin && (
-                          <TableCell className={classes.cell}>
-                            <MemberTableRowActionElements
-                              user={user}
-                            />
-                          </TableCell>
-                        )}
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            ) : <div className={classes.empty}>No members for the current school year</div>}
-        </div>
-        {data && data.length > 5 && (
-          <TablePagination
-            backIconButtonProps={{
-              'aria-label': 'Previous Page',
-              disabled: page === 0,
-            }}
-            component="div"
-            count={data ? data.length : 0}
-            nextIconButtonProps={{
-              'aria-label': 'Next Page',
-            }}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-            page={page}
-            rowsPerPage={rowsPerPage}
-          />
-        )}
-      </Paper>
-    );
+    setOrder(newOrder);
+    setOrderBy(property);
   }
-}
 
-export default withStyles(styles)(MemberListTable);
+  return (
+    <Paper className={classes.paper}>
+      <div className={classes.overflowWrapper}>
+        {data && data.length > 0
+          ? (
+            <Table className={classes.table}>
+              <MemberTableHead
+                isAdmin={isAdmin}
+                onRequestSort={handleRequestSort}
+                order={order}
+                orderBy={orderBy}
+              />
+              <TableBody>
+                {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((user) => (
+                    <TableRow
+                      className={classes.row}
+                      key={user.userId}
+                    >
+                      <TableCell
+                        className={classes.cell}
+                        component="th"
+                        key={user.FirstName}
+                        padding="none"
+                        scope="row"
+                      >
+                        {user.FirstName}
+                      </TableCell>
+                      <TableCell
+                        className={classes.cell}
+                        key={user.LastName}
+                      >
+                        {user.LastName}
+                      </TableCell>
+                      <TableCell
+                        className={classes.cell}
+                        key={user.District}
+                      >
+                        {user.District}
+                      </TableCell>
+                      <TableCell
+                        className={classes.cell}
+                        key={user.Title}
+                      >
+                        {user.Title}
+                      </TableCell>
+                      <TableCell
+                        className={classes.cell}
+                        key={user.Email}
+                      >
+                        {uglifyEmail(user.Email)}
+                      </TableCell>
+                      {isAdmin && (
+                        <TableCell className={classes.cell}>
+                          <MemberTableRowActionElements
+                            user={user}
+                          />
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          ) : <div className={classes.empty}>No members for the current school year</div>}
+      </div>
+      {data && data.length > 5 && (
+        <TablePagination
+          backIconButtonProps={{
+            'aria-label': 'Previous Page',
+            disabled: page === 0,
+          }}
+          component="div"
+          count={data ? data.length : 0}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page',
+          }}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          page={page}
+          rowsPerPage={rowsPerPage}
+        />
+      )}
+    </Paper>
+  );
+};
+
+MemberListTable.propTypes = propTypes;
+
+export default MemberListTable;

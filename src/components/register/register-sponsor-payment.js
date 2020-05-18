@@ -5,7 +5,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
 import { css } from 'glamor';
@@ -431,252 +431,237 @@ class RegisterSponsorPayment extends Component {
       <section>
         <h2>3. Choose Sponsorship level and Make payment</h2>
         <FormHr />
-        {hasCompletedPayment
-          ? (
-            <Fragment>
-              <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
-              <p>{value} Sponsor - $1000</p>
-              <p>{form.OrganizationContactName}, {form.SponsorOrganization}</p>
+        {hasCompletedPayment ? (
+          <>
+            <h3 css={{ marginBottom: 24 }}>Successful Payment!</h3>
+            <p>{value} Sponsor - $1000</p>
+            <p>
+              {form.OrganizationContactName}, {form.SponsorOrganization}
+            </p>
 
-              <h3 css={{ marginTop: 48 }}>
-                Thank you for sponsoring TMAC for the {currentSchoolYearLong} school year!
-              </h3>
-              <FormHr />
+            <h3 css={{ marginTop: 48 }}>
+              Thank you for sponsoring TMAC for the {currentSchoolYearLong} school year!
+            </h3>
+            <FormHr />
 
-              <p>Please click below to print a copy of your receipt.</p>
+            <p>Please click below to print a copy of your receipt.</p>
 
-              <ReactToPrint
-                content={() => this.printReceipt}
-                trigger={() => <RegisterButton red>Print Receipt</RegisterButton>}
+            <ReactToPrint
+              content={() => this.printReceipt}
+              trigger={() => <RegisterButton red>Print Receipt</RegisterButton>}
+            />
+            <div css={{ display: 'none' }}>
+              <Invoice
+                amount={donationAmount}
+                form={form}
+                isInvoice={false}
+                paymentDetails={paymentDetails}
+                receiptId={receiptId}
+                ref={(el) => {
+                  this.printReceipt = el;
+                }}
+                sponsorLevel={value}
               />
-              <div css={{ display: 'none' }}>
-                <Invoice
-                  amount={donationAmount}
-                  form={form}
-                  isInvoice={false}
-                  paymentDetails={paymentDetails}
-                  receiptId={receiptId}
-                  ref={(el) => { this.printReceipt = el; }}
-                  sponsorLevel={value}
-                />
-              </div>
-            </Fragment>
-          )
-          : (
-            <Fragment>
-              <div css={{ marginBottom: 48 }}>
-                <h3 css={{ marginBottom: 24 }}>
-                  Pay now with Paypal
-                </h3>
+            </div>
+          </>
+        ) : (
+          <>
+            <div css={{ marginBottom: 48 }}>
+              <h3 css={{ marginBottom: 24 }}>Pay now with Paypal</h3>
 
-                <FormControl component="fieldset" style={{ marginLeft: 32 }}>
-                  <FormLabel
-                    component="legend"
-                    style={{ marginBottom: 12 }}
-                  >
-                    Choose your sponsorship level below
-                  </FormLabel>
-                  <RadioGroup
-                    aria-label="TMAC sponsorship levels"
-                    name="sponsorshipLevels"
-                    onChange={this.handleChangeRadioSelection}
-                    value={value}
-                  >
-                    <FormControlLabel
-                      control={<Radio color="primary" />}
-                      label="Class Champion — $2,000+"
-                      value="Class Champion"
-                    />
-                    {value === 'Class Champion' && [
-                      <div
-                        key="classChampInput"
-                        css={css({
-                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-                          marginLeft: 24,
-                        })}
-                      >
-                        <label css={labelStyles} htmlFor="valueChampion">
-                          Donation Amount
-                          <input
-                            css={inputStyles}
-                            min="2000"
-                            name="valueChampion"
-                            onChange={this.handleUpdate}
-                            placeholder=""
-                            type="number"
-                            value={valueChampion}
-                          />
-                        </label>
-                      </div>,
-                      <div
-                        css={baseErrorStyles}
-                        key="classChampInputError"
-                      >
-                        {valueChampionError}
-                      </div>,
-                    ]}
-                    <FormControlLabel
-                      control={<Radio color="primary" />}
-                      label="Gold Medal — $1,500-1,999"
-                      value="Gold Medal"
-                    />
-                    {value === 'Gold Medal' && [
-                      <div
-                        key="goldInput"
-                        css={css({
-                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-                          marginLeft: 24,
-                        })}
-                      >
-                        <label css={labelStyles} htmlFor="valueGold">
-                          Donation Amount
-                          <input
-                            css={inputStyles}
-                            max="1999"
-                            min="1500"
-                            name="valueGold"
-                            onChange={this.handleUpdate}
-                            placeholder=""
-                            type="number"
-                            value={valueGold}
-                          />
-                        </label>
-                      </div>,
-                      <div
-                        css={baseErrorStyles}
-                        key="goldInputError"
-                      >
-                        {valueGoldError}
-                      </div>,
-                    ]}
-                    <FormControlLabel
-                      control={<Radio color="primary" />}
-                      label="Silver Medal — $1,000-1,499"
-                      value="Silver Medal"
-                    />
-                    {value === 'Silver Medal' && [
-                      <div
-                        key="silverInput"
-                        css={css({
-                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-                          marginLeft: 24,
-                        })}
-                      >
-                        <label css={labelStyles} htmlFor="valueSilver">
-                          Donation Amount
-                          <input
-                            css={inputStyles}
-                            min="1000"
-                            max="1499"
-                            name="valueSilver"
-                            onChange={this.handleUpdate}
-                            placeholder=""
-                            type="number"
-                            value={valueSilver}
-                          />
-                        </label>
-                      </div>,
-                      <div
-                        css={baseErrorStyles}
-                        key="silverInputError"
-                      >
-                        {valueSilverError}
-                      </div>,
-                    ]}
-                    <FormControlLabel
-                      control={<Radio color="primary" />}
-                      label="Bronze Medal — $500-999"
-                      value="Bronze Medal"
-                    />
-                    {value === 'Bronze Medal' && [
-                      <div
-                        key="bronzeInput"
-                        css={css({
-                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-                          marginLeft: 24,
-                        })}
-                      >
-                        <label css={labelStyles} htmlFor="valueBronze">
-                          Donation Amount
-                          <input
-                            css={inputStyles}
-                            min="500"
-                            max="999"
-                            name="valueBronze"
-                            onChange={this.handleUpdate}
-                            placeholder=""
-                            type="number"
-                            value={valueBronze}
-                          />
-                        </label>
-                      </div>,
-                      <div
-                        css={baseErrorStyles}
-                        key="bronzeInputError"
-                      >
-                        {valueBronzeError}
-                      </div>,
-                    ]}
-                    <PaypalButtonWrapper
-                      amount={donationAmount}
-                      onSuccessfulPayment={this.handleUpdateCompletedStep}
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-
-              <div>
-                <h3>
-                  Need to pay later?
-                </h3>
-
-                <div css={{ marginLeft: 32, marginTop: 24 }}>
-                  <div css={{ marginBottom: 24 }}>
-                    Follow these easy steps:
-                    <ol>
-                      <li>Click the button below to print an invoice.</li>
-                      <li>
-                        Send the invoice and payment directly to the TMAC{' '}
-                        Treasurer as listed on the invoice.
-                      </li>
-                    </ol>
-                  </div>
-                  <ReactToPrint
-                    content={() => this.printInvoice}
-                    trigger={() => (
-                      <RegisterButton red onClick={this.handleIncrementInvoiceId}>
-                        Print Invoice
-                      </RegisterButton>
-                    )}
+              <FormControl component="fieldset" style={{ marginLeft: 32 }}>
+                <FormLabel component="legend" style={{ marginBottom: 12 }}>
+                  Choose your sponsorship level below
+                </FormLabel>
+                <RadioGroup
+                  aria-label="TMAC sponsorship levels"
+                  name="sponsorshipLevels"
+                  onChange={this.handleChangeRadioSelection}
+                  value={value}
+                >
+                  <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Class Champion — $2,000+"
+                    value="Class Champion"
                   />
-                  <div css={{ display: 'none' }}>
-                    <Invoice
-                      amount={donationAmount}
-                      form={form}
-                      invoiceId={invoiceId}
-                      isInvoice
-                      ref={(el) => { this.printInvoice = el; }}
-                      sponsorLevel={value}
-                    />
-                  </div>
-                  <div css={{ marginTop: 24 }}>
-                    If your organization requires the IRS W-9 Form for TMAC, then{' '}
-                    download or print a copy below.
-                  </div>
-                  <div css={{ marginTop: 24 }}>
-                    <a
-                      download
-                      href="https://res.cloudinary.com/tmac/image/upload/v1537391621/TMAC__W-9_Form_18-19.pdf"
-                      rel="noopener noreferrer"
-                      target="_blank"
+                  {value === 'Class Champion' && [
+                    <div
+                      key="classChampInput"
+                      css={css({
+                        animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                        marginLeft: 24,
+                      })}
                     >
-                      Download W-9
-                    </a>
-                  </div>
+                      <label css={labelStyles} htmlFor="valueChampion">
+                        Donation Amount
+                        <input
+                          css={inputStyles}
+                          min="2000"
+                          name="valueChampion"
+                          onChange={this.handleUpdate}
+                          placeholder=""
+                          type="number"
+                          value={valueChampion}
+                        />
+                      </label>
+                    </div>,
+                    <div css={baseErrorStyles} key="classChampInputError">
+                      {valueChampionError}
+                    </div>,
+                  ]}
+                  <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Gold Medal — $1,500-1,999"
+                    value="Gold Medal"
+                  />
+                  {value === 'Gold Medal' && [
+                    <div
+                      key="goldInput"
+                      css={css({
+                        animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                        marginLeft: 24,
+                      })}
+                    >
+                      <label css={labelStyles} htmlFor="valueGold">
+                        Donation Amount
+                        <input
+                          css={inputStyles}
+                          max="1999"
+                          min="1500"
+                          name="valueGold"
+                          onChange={this.handleUpdate}
+                          placeholder=""
+                          type="number"
+                          value={valueGold}
+                        />
+                      </label>
+                    </div>,
+                    <div css={baseErrorStyles} key="goldInputError">
+                      {valueGoldError}
+                    </div>,
+                  ]}
+                  <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Silver Medal — $1,000-1,499"
+                    value="Silver Medal"
+                  />
+                  {value === 'Silver Medal' && [
+                    <div
+                      key="silverInput"
+                      css={css({
+                        animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                        marginLeft: 24,
+                      })}
+                    >
+                      <label css={labelStyles} htmlFor="valueSilver">
+                        Donation Amount
+                        <input
+                          css={inputStyles}
+                          min="1000"
+                          max="1499"
+                          name="valueSilver"
+                          onChange={this.handleUpdate}
+                          placeholder=""
+                          type="number"
+                          value={valueSilver}
+                        />
+                      </label>
+                    </div>,
+                    <div css={baseErrorStyles} key="silverInputError">
+                      {valueSilverError}
+                    </div>,
+                  ]}
+                  <FormControlLabel
+                    control={<Radio color="primary" />}
+                    label="Bronze Medal — $500-999"
+                    value="Bronze Medal"
+                  />
+                  {value === 'Bronze Medal' && [
+                    <div
+                      key="bronzeInput"
+                      css={css({
+                        animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                        marginLeft: 24,
+                      })}
+                    >
+                      <label css={labelStyles} htmlFor="valueBronze">
+                        Donation Amount
+                        <input
+                          css={inputStyles}
+                          min="500"
+                          max="999"
+                          name="valueBronze"
+                          onChange={this.handleUpdate}
+                          placeholder=""
+                          type="number"
+                          value={valueBronze}
+                        />
+                      </label>
+                    </div>,
+                    <div css={baseErrorStyles} key="bronzeInputError">
+                      {valueBronzeError}
+                    </div>,
+                  ]}
+                  <PaypalButtonWrapper
+                    amount={donationAmount}
+                    onSuccessfulPayment={this.handleUpdateCompletedStep}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+            <div>
+              <h3>Need to pay later?</h3>
+
+              <div css={{ marginLeft: 32, marginTop: 24 }}>
+                <div css={{ marginBottom: 24 }}>
+                  Follow these easy steps:
+                  <ol>
+                    <li>Click the button below to print an invoice.</li>
+                    <li>
+                      Send the invoice and payment directly to the TMAC Treasurer as listed on the
+                      invoice.
+                    </li>
+                  </ol>
+                </div>
+                <ReactToPrint
+                  content={() => this.printInvoice}
+                  trigger={() => (
+                    <RegisterButton isRed onClick={this.handleIncrementInvoiceId}>
+                      Print Invoice
+                    </RegisterButton>
+                  )}
+                />
+                <div css={{ display: 'none' }}>
+                  <Invoice
+                    amount={donationAmount}
+                    form={form}
+                    invoiceId={invoiceId}
+                    isInvoice
+                    ref={(el) => {
+                      this.printInvoice = el;
+                    }}
+                    sponsorLevel={value}
+                  />
+                </div>
+                <div css={{ marginTop: 24 }}>
+                  If your organization requires the IRS W-9 Form for TMAC, then download or print a
+                  copy below.
+                </div>
+                <div css={{ marginTop: 24 }}>
+                  <a
+                    download
+                    href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Download W-9
+                  </a>
                 </div>
               </div>
-            </Fragment>
-          )}
+            </div>
+          </>
+        )}
       </section>
     );
   }

@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,11 +22,11 @@ import aboutSidebar from './about-links.yml';
 const Officers = ({ location }) => {
   const { edges } = useOfficerData();
 
-  const president = edges.find(o => o.node.title === 'President').node;
-  const vicePresident = edges.find(o => o.node.title === 'Vice-President').node;
-  const executiveSecretary = edges.find(o => o.node.title === 'Executive Secretary').node;
-  const secretary = edges.find(o => o.node.title === 'Secretary').node;
-  const pastPresident = edges.find(o => o.node.title === 'Past-President').node;
+  const president = edges.find((o) => o.node.title === 'President').node;
+  const vicePresident = edges.find((o) => o.node.title === 'Vice-President').node;
+  const executiveSecretary = edges.find((o) => o.node.title === 'Executive Secretary').node;
+  const secretary = edges.find((o) => o.node.title === 'Secretary').node;
+  const pastPresident = edges.find((o) => o.node.title === 'Past-President').node;
 
   return (
     <Layout location={location}>

@@ -1,7 +1,7 @@
 // External Dependencies
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -99,12 +99,12 @@ class Invoice extends Component {
           </div>
 
           {!isInvoice && paymentDetails.payerId && (
-            <Fragment>
+            <>
               {paymentDetails.payerId
                 && <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>}
               {paymentDetails.paymentId
                 && <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>}
-            </Fragment>
+            </>
           )}
         </div>
 
@@ -143,7 +143,7 @@ class Invoice extends Component {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          marginTop: 48,
+          marginTop: 32,
         }}
         >
           <InvoiceTable
@@ -155,7 +155,7 @@ class Invoice extends Component {
           />
 
           <div css={{
-            margin: '72px 32px',
+            margin: '64px 32px',
             textAlign: 'center',
           }}
           >

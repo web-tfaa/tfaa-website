@@ -110,7 +110,7 @@ const formatPhone = (phone) => {
   )}-${cleanPhone.substr(6, 4)}`;
 };
 
-const stripPhone = phone => phone.replace(/[^0-9]+/g, '');
+const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
 class RegisterSponsorForm extends Component {
@@ -398,369 +398,293 @@ class RegisterSponsorForm extends Component {
 
     return (
       <div className="login-form">
-        {hasCompletedRegisterSponsorForm
-          ? (
-            <LoadingContainer
-              step={3}
-              title="Sponsor Information Form Complete"
-            />
-          )
-          : (
-            <form onSubmit={this.handleSubmit}>
-
-              {/* Sponsor Organization */}
-              <label
-                css={labelStyles}
-                htmlFor="SponsorOrganization"
-              >
-                Sponsor Organization
-                <input
-                  css={inputStyles}
-                  name="SponsorOrganization"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Presto Music"
-                  required
-                  type="text"
-                  value={SponsorOrganization}
-                />
-              </label>
-              <div css={baseErrorStyles}>{SponsorOrganizationError}</div>
-
-              {/* Organization Website Address */}
-              <label
-                css={labelStyles}
-                htmlFor="OrganizationWebsiteAddress"
-              >
-                Organization&apos;s Website Address (provide the URL)
-                <input
-                  css={inputStyles}
-                  name="OrganizationWebsiteAddress"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. https://www.tmea.org"
-                  required
-                  type="text"
-                  value={OrganizationWebsiteAddress}
-                />
-              </label>
-              <div css={baseErrorStyles}>{OrganizationWebsiteAddressError}</div>
-
-              {/* Organization Contact Name */}
-              <label
-                css={labelStyles}
-                htmlFor="OrganizationContactName"
-              >
-                Organization Contact Name
-                <input
-                  css={inputStyles}
-                  name="OrganizationContactName"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Dan Drum"
-                  required
-                  type="text"
-                  value={OrganizationContactName}
-                />
-              </label>
-              <div css={baseErrorStyles}>{OrganizationContactNameError}</div>
-
-              {/* Title */}
-              <label
-                css={labelStyles}
-                htmlFor="Title"
-              >
-                Title
-                <input
-                  css={inputStyles}
-                  name="Title"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Director of Marketing"
-                  required
-                  type="text"
-                  value={Title}
-                />
-              </label>
-              <div css={baseErrorStyles}>{TitleError}</div>
-
-              {/* Contact Address 1 */}
-              <label
-                css={labelStyles}
-                htmlFor="ContactAddress1"
-              >
-                Contact Address 1
-                <input
-                  css={inputStyles}
-                  name="ContactAddress1"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. 1100 Congress Ave."
-                  required
-                  type="text"
-                  value={ContactAddress1}
-                />
-              </label>
-              <div css={baseErrorStyles}>{ContactAddress1Error}</div>
-
-              {/* Contact Address 2 */}
-              <label
-                css={labelStyles}
-                htmlFor="ContactAddress2"
-              >
-                Contact Address 2
-                <input
-                  css={inputStyles}
-                  name="ContactAddress2"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Suite 1845"
-                  type="text"
-                  value={ContactAddress2}
-                />
-              </label>
-
-              {/* City */}
-              <label
-                css={labelStyles}
-                htmlFor="City"
-              >
-                City
-                <input
-                  css={inputStyles}
-                  name="City"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. Austin"
-                  required
-                  type="text"
-                  value={City}
-                />
-              </label>
-              <div css={baseErrorStyles}>{CityError}</div>
-
-              {/* State */}
-              <label
-                css={labelStyles}
-                htmlFor="State"
-              >
-                State
-                <input
-                  css={inputStyles}
-                  name="State"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. TX"
-                  required
-                  type="text"
-                  value={State}
-                />
-              </label>
-              <div css={baseErrorStyles}>{StateError}</div>
-
-              {/* ZIP Code */}
-              <label
-                css={labelStyles}
-                htmlFor="ZipCode"
-              >
-                ZIP Code
-                <input
-                  css={inputStyles}
-                  name="ZipCode"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. 78701"
-                  required
-                  type="text"
-                  value={ZipCode}
-                />
-              </label>
-              <div css={baseErrorStyles}>{ZipCodeError}</div>
-
-              {/* Email */}
-              <label
-                css={labelStyles}
-                htmlFor="Email"
-              >
-                Email
-                <input
-                  css={inputStyles}
-                  name="Email"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. dan@presto.music"
-                  required
-                  type="email"
-                  value={Email}
-                />
-              </label>
-              <div css={baseErrorStyles}>{EmailError}</div>
-
-              {/* Contact Phone */}
-              <label
-                css={labelStyles}
-                htmlFor="ContactPhone"
-              >
-                Contact Phone
-                <input
-                  css={inputStyles}
-                  name="ContactPhone"
-                  onChange={this.handleUpdate}
-                  placeholder="e.g. (512) 555-1845"
-                  required
-                  type="text"
-                  value={formatPhone(ContactPhone)}
-                />
-              </label>
-              <div css={baseErrorStyles}>{ContactPhoneError}</div>
-
-              <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
-
-              {/* Fall Retreat Intent */}
-              <FormControl component="fieldset">
-                {/* eslint-disable-next-line */}
-                <label
-                  css={labelStyles}
-                  htmlFor="FallRetreatIntent"
-                >
-                  Will you (or another company representative) be present{' '}
-                  at the Fall Retreat in Austin - November 14-16, 2018?
-                  <RadioGroup
-                    aria-label="FallRetreatIntent"
-                    name="FallRetreatIntent"
-                    value={radioValueFallRetreat}
-                    onChange={this.handleChangeFallRetreatIntent}
-                  >
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="Yes"
-                      value="Yes"
-                    />
-                    {radioValueFallRetreat === 'Yes' && (
-                      <div
-                        css={css({
-                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-                          margin: '0 24px 24px',
-                        })}
-                      >
-                        <label
-                          css={insideLabelStyles}
-                          htmlFor="FallRetreatOtherAttendees"
-                        >
-                          Please list any other company representatives that will{' '}
-                          attend the event
-                          <input
-                            css={insideInputStyles}
-                            name="FallRetreatOtherAttendees"
-                            onChange={this.handleUpdate}
-                            placeholder="e.g. Aaron Copland, Leonard Bernstein"
-                            type="text"
-                            value={FallRetreatOtherAttendees}
-                          />
-                        </label>
-                      </div>
-                    )}
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="No"
-                      value="No"
-                    />
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="Uncertain"
-                      value="Uncertain"
-                    />
-                  </RadioGroup>
-                </label>
-              </FormControl>
-
-              <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
-
-              {/* Spring Round Table Intent */}
-              <FormControl component="fieldset">
-                {/* eslint-disable-next-line */}
-                <label
-                  css={labelStyles}
-                  htmlFor="SpringRoundTableIntent"
-                >
-                  Will you (or another company representative) be present{' '}
-                  at the TMEA Round Table in San Antonio - February 13, 2019?
-                  <RadioGroup
-                    aria-label="SpringRoundTableIntent"
-                    name="SpringRoundTableIntent"
-                    value={radioValueSpringRoundTable}
-                    onChange={this.handleChangeSpringRoundTableIntent}
-                  >
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="Yes"
-                      value="Yes"
-                    />
-                    {radioValueSpringRoundTable === 'Yes' && (
-                      <div
-                        css={css({
-                          animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
-                          margin: '0 24px 24px',
-                        })}
-                      >
-                        <label
-                          css={insideLabelStyles}
-                          htmlFor="SpringRoundTableOtherAttendees"
-                        >
-                          Please list any other company representatives that will{' '}
-                          attend the event
-                          <input
-                            css={insideInputStyles}
-                            name="SpringRoundTableOtherAttendees"
-                            onChange={this.handleUpdate}
-                            placeholder="e.g. Eric Whitacre, Lin-Manuel Miranda"
-                            type="text"
-                            value={SpringRoundTableOtherAttendees}
-                          />
-                        </label>
-                      </div>
-                    )}
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="No"
-                      value="No"
-                    />
-                    <FormControlLabel
-                      control={<Radio />}
-                      label="Uncertain"
-                      value="Uncertain"
-                    />
-                  </RadioGroup>
-                </label>
-              </FormControl>
-
-              {/* Hidden input to help curtail spam */}
+        {hasCompletedRegisterSponsorForm ? (
+          <LoadingContainer step={3} title="Sponsor Information Form Complete" />
+        ) : (
+          <form onSubmit={this.handleSubmit}>
+            {/* Sponsor Organization */}
+            <label css={labelStyles} htmlFor="SponsorOrganization">
+              Sponsor Organization
               <input
-                css={{ opacity: 0, height: 1, width: 1 }}
-                id="honeypot"
-                name="honeypot"
+                css={inputStyles}
+                name="SponsorOrganization"
                 onChange={this.handleUpdate}
-                tabIndex={0}
+                placeholder="e.g. Presto Music"
+                required
                 type="text"
-                value={honeypot}
+                value={SponsorOrganization}
               />
+            </label>
+            <div css={baseErrorStyles}>{SponsorOrganizationError}</div>
 
-              {/* SUBMIT BUTTON */}
-              <div style={{
+            {/* Organization Website Address */}
+            <label css={labelStyles} htmlFor="OrganizationWebsiteAddress">
+              Organization&apos;s Website Address (provide the URL)
+              <input
+                css={inputStyles}
+                name="OrganizationWebsiteAddress"
+                onChange={this.handleUpdate}
+                placeholder="e.g. https://www.tmea.org"
+                required
+                type="text"
+                value={OrganizationWebsiteAddress}
+              />
+            </label>
+            <div css={baseErrorStyles}>{OrganizationWebsiteAddressError}</div>
+
+            {/* Organization Contact Name */}
+            <label css={labelStyles} htmlFor="OrganizationContactName">
+              Organization Contact Name
+              <input
+                css={inputStyles}
+                name="OrganizationContactName"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Dan Drum"
+                required
+                type="text"
+                value={OrganizationContactName}
+              />
+            </label>
+            <div css={baseErrorStyles}>{OrganizationContactNameError}</div>
+
+            {/* Title */}
+            <label css={labelStyles} htmlFor="Title">
+              Title
+              <input
+                css={inputStyles}
+                name="Title"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Director of Marketing"
+                required
+                type="text"
+                value={Title}
+              />
+            </label>
+            <div css={baseErrorStyles}>{TitleError}</div>
+
+            {/* Contact Address 1 */}
+            <label css={labelStyles} htmlFor="ContactAddress1">
+              Contact Address 1
+              <input
+                css={inputStyles}
+                name="ContactAddress1"
+                onChange={this.handleUpdate}
+                placeholder="e.g. 1100 Congress Ave."
+                required
+                type="text"
+                value={ContactAddress1}
+              />
+            </label>
+            <div css={baseErrorStyles}>{ContactAddress1Error}</div>
+
+            {/* Contact Address 2 */}
+            <label css={labelStyles} htmlFor="ContactAddress2">
+              Contact Address 2
+              <input
+                css={inputStyles}
+                name="ContactAddress2"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Suite 1845"
+                type="text"
+                value={ContactAddress2}
+              />
+            </label>
+
+            {/* City */}
+            <label css={labelStyles} htmlFor="City">
+              City
+              <input
+                css={inputStyles}
+                name="City"
+                onChange={this.handleUpdate}
+                placeholder="e.g. Austin"
+                required
+                type="text"
+                value={City}
+              />
+            </label>
+            <div css={baseErrorStyles}>{CityError}</div>
+
+            {/* State */}
+            <label css={labelStyles} htmlFor="State">
+              State
+              <input
+                css={inputStyles}
+                name="State"
+                onChange={this.handleUpdate}
+                placeholder="e.g. TX"
+                required
+                type="text"
+                value={State}
+              />
+            </label>
+            <div css={baseErrorStyles}>{StateError}</div>
+
+            {/* ZIP Code */}
+            <label css={labelStyles} htmlFor="ZipCode">
+              ZIP Code
+              <input
+                css={inputStyles}
+                name="ZipCode"
+                onChange={this.handleUpdate}
+                placeholder="e.g. 78701"
+                required
+                type="text"
+                value={ZipCode}
+              />
+            </label>
+            <div css={baseErrorStyles}>{ZipCodeError}</div>
+
+            {/* Email */}
+            <label css={labelStyles} htmlFor="Email">
+              Email
+              <input
+                css={inputStyles}
+                name="Email"
+                onChange={this.handleUpdate}
+                placeholder="e.g. dan@presto.music"
+                required
+                type="email"
+                value={Email}
+              />
+            </label>
+            <div css={baseErrorStyles}>{EmailError}</div>
+
+            {/* Contact Phone */}
+            <label css={labelStyles} htmlFor="ContactPhone">
+              Contact Phone
+              <input
+                css={inputStyles}
+                name="ContactPhone"
+                onChange={this.handleUpdate}
+                placeholder="e.g. (512) 555-1845"
+                required
+                type="text"
+                value={formatPhone(ContactPhone)}
+              />
+            </label>
+            <div css={baseErrorStyles}>{ContactPhoneError}</div>
+
+            <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+
+            {/* Fall Retreat Intent */}
+            <FormControl component="fieldset">
+              {/* eslint-disable-next-line */}
+              <label css={labelStyles} htmlFor="FallRetreatIntent">
+                Will you (or another company representative) be present at the Fall Retreat in
+                Austin - November 14-16, 2018?
+                <RadioGroup
+                  aria-label="FallRetreatIntent"
+                  name="FallRetreatIntent"
+                  value={radioValueFallRetreat}
+                  onChange={this.handleChangeFallRetreatIntent}
+                >
+                  <FormControlLabel control={<Radio />} label="Yes" value="Yes" />
+                  {radioValueFallRetreat === 'Yes' && (
+                    <div
+                      css={css({
+                        animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                        margin: '0 24px 24px',
+                      })}
+                    >
+                      <label css={insideLabelStyles} htmlFor="FallRetreatOtherAttendees">
+                        Please list any other company representatives that will attend the event
+                        <input
+                          css={insideInputStyles}
+                          name="FallRetreatOtherAttendees"
+                          onChange={this.handleUpdate}
+                          placeholder="e.g. Aaron Copland, Leonard Bernstein"
+                          type="text"
+                          value={FallRetreatOtherAttendees}
+                        />
+                      </label>
+                    </div>
+                  )}
+                  <FormControlLabel control={<Radio />} label="No" value="No" />
+                  <FormControlLabel control={<Radio />} label="Uncertain" value="Uncertain" />
+                </RadioGroup>
+              </label>
+            </FormControl>
+
+            <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+
+            {/* Spring Round Table Intent */}
+            <FormControl component="fieldset">
+              {/* eslint-disable-next-line */}
+              <label css={labelStyles} htmlFor="SpringRoundTableIntent">
+                Will you (or another company representative) be present at the TMEA Round Table in
+                San Antonio - February 13, 2019?
+                <RadioGroup
+                  aria-label="SpringRoundTableIntent"
+                  name="SpringRoundTableIntent"
+                  value={radioValueSpringRoundTable}
+                  onChange={this.handleChangeSpringRoundTableIntent}
+                >
+                  <FormControlLabel control={<Radio />} label="Yes" value="Yes" />
+                  {radioValueSpringRoundTable === 'Yes' && (
+                    <div
+                      css={css({
+                        animation: `${slideInTop} 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
+                        margin: '0 24px 24px',
+                      })}
+                    >
+                      <label css={insideLabelStyles} htmlFor="SpringRoundTableOtherAttendees">
+                        Please list any other company representatives that will attend the event
+                        <input
+                          css={insideInputStyles}
+                          name="SpringRoundTableOtherAttendees"
+                          onChange={this.handleUpdate}
+                          placeholder="e.g. Eric Whitacre, Lin-Manuel Miranda"
+                          type="text"
+                          value={SpringRoundTableOtherAttendees}
+                        />
+                      </label>
+                    </div>
+                  )}
+                  <FormControlLabel control={<Radio />} label="No" value="No" />
+                  <FormControlLabel control={<Radio />} label="Uncertain" value="Uncertain" />
+                </RadioGroup>
+              </label>
+            </FormControl>
+
+            {/* Hidden input to help curtail spam */}
+            <input
+              css={{ opacity: 0, height: 1, width: 1 }}
+              id="honeypot"
+              name="honeypot"
+              onChange={this.handleUpdate}
+              tabIndex={0}
+              type="text"
+              value={honeypot}
+            />
+
+            {/* SUBMIT BUTTON */}
+            <div
+              style={{
                 display: 'flex',
                 justifyContent: 'flex-end',
                 marginRight: 24,
               }}
+            >
+              <RegisterButton
+                buttonType="submit"
+                isDisabled={!hasValidInput}
+                isRed
+                onClick={this.handleClickSubmitButton}
               >
-                <RegisterButton
-                  buttonType="submit"
-                  isDisabled={!hasValidInput}
-                  onClick={this.handleClickSubmitButton}
-                  red
-                >
-                  Continue to Step 3
-                </RegisterButton>
-              </div>
-            </form>
-          )}
+                Continue to Step 3
+              </RegisterButton>
+            </div>
+          </form>
+        )}
       </div>
     );
   }
 }
 
-const RegisterSponsorFormWithContext = props => (
+const RegisterSponsorFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterSponsorForm {...props} authUser={authUser} />}
+    {(authUser) => <RegisterSponsorForm {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
 );
 

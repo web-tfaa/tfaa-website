@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,7 +22,7 @@ const indentStyles = {
 const TmeaRoundTable = ({ location }) => {
   const { edges } = useEventData();
 
-  const tmeaRoundTable = edges.find(e => e.node.titleOfEvent.includes('TMEA')).node;
+  const tmeaRoundTable = edges.find((e) => e.node.titleOfEvent.includes('TMEA')).node;
 
   return (
     <Layout location={location}>

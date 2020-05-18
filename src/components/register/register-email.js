@@ -1,6 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -74,7 +74,7 @@ class RegisterEmail extends Component {
         title="Login Successful"
       />
     ) : (
-      <Fragment>
+      <>
         <FormHr />
         <SignUpForm onRegisterSignUp={this.handleUpdateCompletedStep} />
         <FormHr />
@@ -85,7 +85,7 @@ class RegisterEmail extends Component {
         {!viewingSignUp && (
           <LoginForm onRegisterLogin={this.handleUpdateCompletedStep} />
         )}
-      </Fragment>
+      </>
     );
 
     return (

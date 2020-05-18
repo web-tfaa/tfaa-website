@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { graphql } from 'gatsby';
@@ -85,22 +85,21 @@ class MembersHome extends Component {
               userData={userData}
               userId={authUser.uid}
             />
-          ) : <NonMemberContent />
-        }
+          ) : <NonMemberContent />}
         </Container>
       </div>
     );
   }
 }
 
-const Members = props => (
+const Members = (props) => (
   // eslint-disapropsline
   <Layout location={props.location}>
     <MembersWithContext {...props} />
   </Layout>
 );
 
-const MembersWithContext = props => (
+const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => {
       return <MembersHome {...props} authUser={authUser} />;

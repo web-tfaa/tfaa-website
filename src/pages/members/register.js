@@ -3,7 +3,7 @@
 */
 
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -22,12 +22,13 @@ import presets from '../../utils/presets';
 import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
+// Local Variables
+const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
 // Component Definition
 class RegisterContent extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -182,16 +183,18 @@ class RegisterContent extends Component {
   }
 }
 
-const Register = props => (
+RegisterContent.propTypes = propTypes;
+
+const Register = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
     <RegisterWithContext {...props} />
   </Layout>
 );
 
-const RegisterWithContext = props => (
+const RegisterWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <RegisterContent {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <RegisterContent {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 

@@ -8,7 +8,8 @@ export default () => (
       css={{
         display: 'inline-block',
         borderBottom: 'solid 1px',
-      }}>
+      }}
+    >
       History
     </h3>
     <div css={{ display: 'flex' }}>

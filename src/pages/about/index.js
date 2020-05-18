@@ -1,5 +1,5 @@
 // External Dependencies
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { graphql, Link } from 'gatsby';
@@ -55,7 +55,6 @@ const About = ({ data, location }) => (
           <li>Fall Retreat</li>
           <li>Fall Golf Tournament</li>
           <li>TMEA Round Table</li>
-          <li>Job Fair / Job Fair Rules</li>
         </ul>
       </section>
       <section>

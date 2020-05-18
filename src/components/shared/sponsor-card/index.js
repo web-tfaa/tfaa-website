@@ -19,6 +19,8 @@ const defaultProps = {
   sponsorData: [],
 };
 
+const TITLE_BLUE = '#32456B';
+
 const useStyles = makeStyles({
   card: {
     background: 'aliceblue',
@@ -81,30 +83,25 @@ const useStyles = makeStyles({
   },
 });
 
-const TITLE_BLUE = '#32456B';
-
 // Component Definition
-const SponsorCard = (props) => {
-  const {
-    max,
-    min,
-    sponsorClass,
-    sponsorData,
-  } = props;
+const SponsorCard = ({
+  max, min, sponsorClass, sponsorData,
+}) => {
+  const classes = useStyles();
 
-  const classes = useStyles(props);
-
-  const renderSponsors = sponsorData =>
-    sponsorData.length > 0 && sponsorData.map(sponsor => (
-      <div
-        className={classes.sponsorLinktText}
-        key={sponsor.SponsorOrganization}
-      >
+  const renderSponsors = (sponsorData) =>
+    sponsorData.length > 0
+    && sponsorData.map((sponsor) => (
+      <div className={classes.sponsorLinktText} key={sponsor.SponsorOrganization}>
         <a
           className={classes.sponsorLink}
-          href={sponsor.OrganizationWebsiteAddress.startsWith('http') ? sponsor.OrganizationWebsiteAddress : `http://${sponsor.OrganizationWebsiteAddress}`}
-          target="_blank"
+          href={
+            sponsor.OrganizationWebsiteAddress.startsWith('http')
+              ? sponsor.OrganizationWebsiteAddress
+              : `http://${sponsor.OrganizationWebsiteAddress}`
+          }
           rel="noopener noreferrer"
+          target="_blank"
         >
           {sponsor.SponsorOrganization}
         </a>
@@ -117,12 +114,8 @@ const SponsorCard = (props) => {
 
   return (
     <div className={classes.root}>
-      <h2>
-        {sponsorClass}
-      </h2>
-      <h4 className={classes.titleFour}>
-        (${donationAmount} donation)
-      </h4>
+      <h2>{sponsorClass}</h2>
+      <h4 className={classes.titleFour}>(${donationAmount} donation)</h4>
 
       {sponsorData.length > 0 && <hr className={classes.divider} />}
 
@@ -134,17 +127,23 @@ const SponsorCard = (props) => {
         <Card className={classes.card} elevation={2}>
           <h5 className={classes.titleFour}>Sponsorship receives:</h5>
           <ul className={classes.list}>
-            {sponsorClass === 'Class Champion' && <li>Up to 20 min presentation to TMAC membership at either November Conference or TMEA Meeting</li>}
+            {sponsorClass === 'Class Champion' && (
+              <li>
+                Up to 20 min presentation to TMAC membership at either November Conference or TMEA
+                Meeting
+              </li>
+            )}
             <li>Company name in programs for TMAC November Conference and TMEA Meeting</li>
             <li>Company name on TMAC website</li>
           </ul>
         </Card>
         <div className={classes.deadlineText}>
-          Deadline for recogntion at{' '}
-          <span className={classes.strongText}>Fall Conference</span> is Wednesday, November 6th.
+          Deadline for recogntion at <span className={classes.strongText}>Fall Conference</span> is
+          November 1st.
         </div>
-        <div className={classes.deadlineTextBottom}>{' '}
-          Sponsors registering after November 6th will be recognized at the{' '}
+        <div className={classes.deadlineTextBottom}>
+          {' '}
+          Sponsors registering after November 1st will be recognized at the{' '}
           <span className={classes.strongText}>TMEA Round Table</span>.
         </div>
         <Link

@@ -32,13 +32,11 @@ function getSteps(isAuthenticated = false, isViewingSponsors = false) {
 }
 
 // Component Definition
-const RegisterStepper = (props) => {
-  const {
-    activeStep,
-    isAuthenticated,
-    isViewingSponsors,
-  } = props;
-
+const RegisterStepper = ({
+  activeStep,
+  isAuthenticated,
+  isViewingSponsors,
+}) => {
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
