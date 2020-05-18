@@ -297,8 +297,6 @@ class MemberContent extends Component {
             </FuturaDiv>
             <FuturaAnchor
               download
-              target="_blank"
-              rel="noopener noreferrer"
               href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
             >
               Download W-9
