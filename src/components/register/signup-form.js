@@ -27,6 +27,11 @@ const useStyles = makeStyles({
   button: {
     fontFamily: 'Futura PT, Roboto',
   },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    maxWidth: '70%',
+  },
 });
 
 const labelStyles = {
@@ -83,6 +88,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
   const isMounted = useIsMounted();
 
   const [registerError, setRegisterError] = useState('');
+
   const [state, dispatchState] = useReducer(signupFormReducer, SIGNUP_FORM_REDUCER_INITIAL_STATE);
 
   const previousState = usePrevious(state);
@@ -106,7 +112,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
   }, [isAuthenticated, onRegisterSignUp]);
 
   const handleClickSignUpButton = () => {
-    if (isMounted) {
+    if (isMounted && typeof window !== 'undefined') {
       auth
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(() => {
@@ -154,7 +160,6 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
 
   useEffect(() => {
     if (isMounted && previousState !== state) {
-      console.log('nopeee');
       handleUpdateErrors();
     }
   }, [state]);
@@ -250,17 +255,10 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
       )}
 
       {/* SUBMIT BUTTON */}
-      <div
-        css={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          maxWidth: '70%',
-        }}
-      >
+      <div className={classes.buttonContainer}>
         <Button
           className={classes.button}
           color="primary"
-          // css={{ marginTop: '1rem', padding: '8px 12px' }}
           disabled={isInvalid}
           onClick={handleClickSignUpButton}
           type="submit"
