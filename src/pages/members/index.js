@@ -53,7 +53,6 @@ class MembersHome extends Component {
     const {
       userData,
     } = this.state;
-    console.log('MembersHome : render : userData : ', userData);
 
     const isAuthenticated = Boolean(authUser);
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import hex2rgba from 'hex2rgba';
 import { css } from 'glamor';
-import { red } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -30,7 +30,6 @@ const defaultProps = {
   isRed: false,
 };
 
-// const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
 const green500 = '#4caf50';
 
@@ -61,11 +60,11 @@ const RegisterButton = ({
       },
       // Increase specificity
       '&&': {
-        backgroundColor: red['50'],
+        backgroundColor: isRed || isDisabled ? red['50'] : green['50'],
         backgroundSize: '30px 30px',
         border: `2px solid ${isRed || isDisabled ? texasFlagRed : green500}`,
         boxShadow: 'none',
-        color: isRed ? texasFlagRed : green500,
+        color: isRed || isDisabled ? texasFlagRed : green500,
         fontWeight: 'normal',
         textDecoration: 'none',
         transition: `all ${presets.animation.speedDefault} ${presets.animation.curveDefault}`,

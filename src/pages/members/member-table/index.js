@@ -19,7 +19,7 @@ const propTypes = {
   isAdmin: PropTypes.bool.isRequired,
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   cell: {
     '&:first-child': {
       paddingLeft: 24,
@@ -35,6 +35,14 @@ const useStyles = makeStyles({
     marginTop: 24,
     width: '100%',
   },
+  pagerButton: {
+    backgroundColor: theme.palette.grey['300'],
+    color: theme.palette.grey['600'],
+    marginRight: theme.spacing(1),
+    '&:disabled': {
+      backgroundColor: theme.palette.action.disabled,
+    },
+  },
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: 'rgba(0, 0, 0, 0,.87)',
@@ -44,7 +52,7 @@ const useStyles = makeStyles({
     marginBottom: 0,
     minWidth: 200,
   },
-});
+}));
 
 // Local Functions
 function desc(a, b, orderBy) {
@@ -120,23 +128,21 @@ const MemberListTable = ({
   return (
     <Paper className={classes.paper}>
       <div className={classes.overflowWrapper}>
-        {data && data.length > 0
-          ? (
-            <Table className={classes.table}>
-              <MemberTableHead
-                isAdmin={isAdmin}
-                onRequestSort={handleRequestSort}
-                order={order}
-                orderBy={orderBy}
-              />
-              <TableBody>
-                {data && data.length > 0 && stableSort(data, getSorting(order, orderBy))
+        {data && data.length > 0 ? (
+          <Table className={classes.table}>
+            <MemberTableHead
+              isAdmin={isAdmin}
+              onRequestSort={handleRequestSort}
+              order={order}
+              orderBy={orderBy}
+            />
+            <TableBody>
+              {data
+                && data.length > 0
+                && stableSort(data, getSorting(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((user) => (
-                    <TableRow
-                      className={classes.row}
-                      key={user.userId}
-                    >
+                    <TableRow className={classes.row} key={user.userId}>
                       <TableCell
                         className={classes.cell}
                         component="th"
@@ -146,53 +152,47 @@ const MemberListTable = ({
                       >
                         {user.FirstName}
                       </TableCell>
-                      <TableCell
-                        className={classes.cell}
-                        key={user.LastName}
-                      >
+                      <TableCell className={classes.cell} key={user.LastName}>
                         {user.LastName}
                       </TableCell>
-                      <TableCell
-                        className={classes.cell}
-                        key={user.District}
-                      >
+                      <TableCell className={classes.cell} key={user.District}>
                         {user.District}
                       </TableCell>
-                      <TableCell
-                        className={classes.cell}
-                        key={user.Title}
-                      >
+                      <TableCell className={classes.cell} key={user.Title}>
                         {user.Title}
                       </TableCell>
-                      <TableCell
-                        className={classes.cell}
-                        key={user.Email}
-                      >
+                      <TableCell className={classes.cell} key={user.Email}>
                         {uglifyEmail(user.Email)}
                       </TableCell>
                       {isAdmin && (
                         <TableCell className={classes.cell}>
-                          <MemberTableRowActionElements
-                            user={user}
-                          />
+                          <MemberTableRowActionElements user={user} />
                         </TableCell>
                       )}
                     </TableRow>
                   ))}
-              </TableBody>
-            </Table>
-          ) : <div className={classes.empty}>No members for the current school year</div>}
+            </TableBody>
+          </Table>
+        ) : (
+          <div className={classes.empty}>No members for the current school year</div>
+        )}
       </div>
       {data && data.length > 5 && (
         <TablePagination
           backIconButtonProps={{
             'aria-label': 'Previous Page',
-            disabled: page === 0,
+            disabled: page === 1,
+            classes: { root: classes.pagerButton },
+            id: 'pager-button-left',
+            size: 'small',
           }}
           component="div"
           count={data ? data.length : 0}
           nextIconButtonProps={{
             'aria-label': 'Next Page',
+            classes: { root: classes.pagerButton },
+            id: 'pager-button-right',
+            size: 'small',
           }}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
