@@ -652,8 +652,6 @@ class RegisterSponsorPayment extends Component {
                   <a
                     download
                     href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
-                    rel="noopener noreferrer"
-                    target="_blank"
                   >
                     Download W-9
                   </a>

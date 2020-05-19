@@ -1,7 +1,7 @@
 // External Dependencies
 import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -12,7 +12,7 @@ import theme from '../../src/theme';
 export default function TopLayout(props) {
   const { children } = props;
   return (
-    <Fragment>
+    <>
       <Helmet>
         <meta
           name="viewport"
@@ -33,7 +33,7 @@ export default function TopLayout(props) {
         <CssBaseline />
         {children}
       </ThemeProvider>
-    </Fragment>
+    </>
   );
 }
 

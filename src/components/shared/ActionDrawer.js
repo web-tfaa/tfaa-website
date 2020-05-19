@@ -21,7 +21,7 @@ const defaultProps = {
   show: false,
 };
 
-const styles = theme => ({
+const styles = (theme) => ({
   content: {
     backgroundColor: theme.palette.grey['50'],
     borderLeft: `solid 1px ${theme.palette.grey['300']}`,

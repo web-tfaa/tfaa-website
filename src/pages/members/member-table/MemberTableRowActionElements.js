@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Invoice from '../../../components/register/invoice';
@@ -21,8 +22,17 @@ const defaultProps = {
   user: null,
 };
 
+const useStyles = makeStyles({
+  icon: {
+    height: 24,
+    width: 24,
+  },
+});
+
 // Component Definition
 const MemberTableRowActionElements = ({ user }) => {
+  const classes = useStyles();
+
   const componentRef = useRef();
 
   const hasReceipt = user && user.PaymentOption && user.PaymentOption.toLowerCase() === 'paypal';
@@ -35,7 +45,7 @@ const MemberTableRowActionElements = ({ user }) => {
           content={() => componentRef.current}
           trigger={() => (
             <IconButton aria-label="Print receipt">
-              <ReceiptIcon />
+              <ReceiptIcon className={classes.icon} />
             </IconButton>
           )}
         />
@@ -59,7 +69,7 @@ const MemberTableRowActionElements = ({ user }) => {
           content={() => componentRef.current}
           trigger={() => (
             <IconButton aria-label="Print invoice">
-              <PrintIcon />
+              <PrintIcon className={classes.icon} />
             </IconButton>
           )}
         />
