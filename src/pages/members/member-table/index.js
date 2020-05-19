@@ -176,7 +176,7 @@ const MemberListTable = ({
           <div className={classes.empty}>No members for the current school year</div>
         )}
       </div>
-      {data && data.length > 0 && (
+      {data && data.length > 5 && (
         <TablePagination
           backIconButtonProps={{
             'aria-label': 'Previous Page',
