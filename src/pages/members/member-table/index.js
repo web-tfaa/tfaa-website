@@ -36,9 +36,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   pagerButton: {
+    backgroundColor: theme.palette.grey['300'],
+    color: theme.palette.grey['600'],
     marginRight: theme.spacing(1),
     '&:disabled': {
-      // marginRight: theme.spacing(1),
       backgroundColor: theme.palette.action.disabled,
     },
   },
@@ -180,7 +181,7 @@ const MemberListTable = ({
         <TablePagination
           backIconButtonProps={{
             'aria-label': 'Previous Page',
-            disabled: page === 0,
+            disabled: page === 1,
             classes: { root: classes.pagerButton },
             id: 'pager-button-left',
             size: 'small',

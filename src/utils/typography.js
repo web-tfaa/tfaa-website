@@ -202,30 +202,6 @@ const _options = {
         background: 'none',
         boxShadow: 'none',
       },
-      // '.main-body button': {
-      //   color: 'inherit',
-      //   textDecoration: 'none',
-      //   transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
-      //   borderBottom: `1px solid ${colors.ui.bright}`,
-      //   borderRadius: 2,
-      //   boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-      //   fontFamily: options.headerFontFamily.join(','),
-      //   fontWeight: 'bold',
-      // },
-      // '.main-body button:hover': {
-      //   background: colors.ui.bright,
-      // },
-      // '.main-body button[disabled]': {
-      //   backgroundColor: red['50'],
-      //   color: colors.gray.calm,
-      //   cursor: 'not-allowed',
-      // },
-      '.main-body button[disabled]#pager-button-left #pager-button-right': {
-        // backgroundColor: red['50'],
-        backgroundColor: 'transparent',
-        // color: colors.gray.calm,
-        cursor: 'not-allowed',
-      },
       '.main-body label': {
         fontFamily: options.headerFontFamily.join(','),
         fontWeight: 600,
