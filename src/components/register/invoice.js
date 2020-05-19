@@ -17,19 +17,16 @@ const currentDate = format(new Date(), ['M/D/YYYY']);
 // eslint-disable-next-line
 class Invoice extends Component {
   static propTypes = {
-    amount: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]).isRequired,
+    amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     form: PropTypes.shape({}).isRequired,
-    invoiceId: PropTypes.number,
+    invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     isActive: PropTypes.bool,
     isInvoice: PropTypes.bool.isRequired,
     paymentDetails: PropTypes.shape({
       payerId: PropTypes.string,
       paymentId: PropTypes.string,
     }),
-    receiptId: PropTypes.number,
+    receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     sponsorLevel: PropTypes.string,
   };
 
@@ -76,9 +73,7 @@ class Invoice extends Component {
             src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
             style={{ position: 'absolute' }}
           />
-          <h2 css={{ margin: 0, textAlign: 'right' }}>
-            {isInvoice ? 'INVOICE' : 'RECEIPT'}
-          </h2>
+          <h2 css={{ margin: 0, textAlign: 'right' }}>{isInvoice ? 'INVOICE' : 'RECEIPT'}</h2>
         </header>
         <FormHr red />
 
@@ -88,10 +83,8 @@ class Invoice extends Component {
             <em>&quot;...promoting and supporting music education&quot;</em>
           </p>
           <div>
-            <strong>
-              {isInvoice ? 'Invoice' : 'Receipt'}#:
-            </strong>{' '}
-            {currentSchoolYearLong}_{isInvoice ? invoiceId : receiptId}
+            <strong>{isInvoice ? 'Invoice' : 'Receipt'}#:</strong> {currentSchoolYearLong}_
+            {isInvoice ? invoiceId : receiptId}
           </div>
           <div>
             <strong>Date:</strong>{' '}
@@ -100,29 +93,39 @@ class Invoice extends Component {
 
           {!isInvoice && paymentDetails.payerId && (
             <>
-              {paymentDetails.payerId
-                && <div><strong>PayPal PayerID:</strong> {paymentDetails.payerId}</div>}
-              {paymentDetails.paymentId
-                && <div><strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}</div>}
+              {paymentDetails.payerId && (
+                <div>
+                  <strong>PayPal PayerID:</strong> {paymentDetails.payerId}
+                </div>
+              )}
+              {paymentDetails.paymentId && (
+                <div>
+                  <strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}
+                </div>
+              )}
             </>
           )}
         </div>
 
         {isInvoice && (
-          <div css={{
-            display: 'flex',
-            fontSize: 14,
-            justifyContent: 'space-around',
-            margin: '0 32px',
-          }}
+          <div
+            css={{
+              display: 'flex',
+              fontSize: 14,
+              justifyContent: 'space-around',
+              margin: '0 32px',
+            }}
           >
             <div>
               <h4>FROM</h4>
               <div css={{ marginBottom: 12 }}>
-                Upon receipt of this invoice,<br />
+                Upon receipt of this invoice,
+                <br />
                 please kindly remit payment to:
               </div>
-              <div><strong>Texas Music Administrators Conference</strong></div>
+              <div>
+                <strong>Texas Music Administrators Conference</strong>
+              </div>
               <div>c/o Jeff Turner</div>
               <div>Allen ISD</div>
               <div>Fine Arts Dept.</div>
@@ -138,13 +141,14 @@ class Invoice extends Component {
           </div>
         )}
 
-        <div css={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          marginTop: 32,
-        }}
+        <div
+          css={{
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            marginTop: 32,
+          }}
         >
           <InvoiceTable
             amount={amount}
@@ -154,32 +158,37 @@ class Invoice extends Component {
             sponsorLevel={sponsorLevel}
           />
 
-          <div css={{
-            margin: '64px 32px',
-            textAlign: 'center',
-          }}
+          <div
+            css={{
+              margin: '64px 32px',
+              textAlign: 'center',
+            }}
           >
-            {isInvoice
-              ? (
-                <span>
-                  Make all checks payable to:<br />
-                  <strong>Texas Music Administrators Conference (TMAC)</strong>
-                </span>
-              ) : (
-                <strong>Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for the {currentSchoolYearLong} school year!</strong>
-              )}
+            {isInvoice ? (
+              <span>
+                Make all checks payable to:
+                <br />
+                <strong>Texas Music Administrators Conference (TMAC)</strong>
+              </span>
+            ) : (
+              <strong>
+                Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for the{' '}
+                {currentSchoolYearLong} school year!
+              </strong>
+            )}
           </div>
         </div>
 
-        <footer css={{
-          fontSize: 12,
-          margin: '12px 48px',
-          textAlign: 'center',
-        }}
+        <footer
+          css={{
+            fontSize: 12,
+            margin: '12px 48px',
+            textAlign: 'center',
+          }}
         >
-          The Texas Music Administrators Conference is an organization supporting
-          music educators, music administrators, and Texas schools in the quest to deliver music
-          and arts education to all students.
+          The Texas Music Administrators Conference is an organization supporting music educators,
+          music administrators, and Texas schools in the quest to deliver music and arts education
+          to all students.
         </footer>
       </section>
     );

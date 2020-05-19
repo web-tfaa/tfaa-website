@@ -1,15 +1,34 @@
 // External Dependencies
+import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { navigate } from 'gatsby';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
 import RemoveRedEyeIcon from '../shared/RemoveRedEyeIcon';
+import useIsMounted from '../../utils/hooks/useIsMounted';
+import usePrevious from '../../utils/hooks/usePrevious';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 
-// Local Styles
+// Local Variables
+const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  onRegisterSignUp: PropTypes.func,
+};
+
+const defaultProps = {
+  onRegisterSignUp: null,
+};
+
+const useStyles = makeStyles({
+  button: {
+    fontFamily: 'Futura PT, Roboto',
+  },
+});
+
 const labelStyles = {
   display: 'block',
   fontSize: '67.5%',
@@ -35,90 +54,76 @@ const baseErrorStyles = {
   marginTop: '0.5rem',
 };
 
-// Local Variables
-const INITIAL_STATE = {
+const SIGNUP_FORM_REDUCER_INITIAL_STATE = {
   email: '',
   emailError: '',
   error: '',
-  passwordError: '',
   passwordOne: '',
   passwordTwo: '',
-  registerError: null,
 };
 
+function signupFormReducer(state, { type, payload }) {
+  switch (type) {
+    case 'updateForm':
+      return {
+        ...state,
+        ...payload,
+      };
+    case 'clearForm':
+      return SIGNUP_FORM_REDUCER_INITIAL_STATE;
+    default:
+      return SIGNUP_FORM_REDUCER_INITIAL_STATE;
+  }
+}
+
 // Component Definition
-class SignUpForm extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    onRegisterSignUp: PropTypes.func,
-  };
+const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
+  const classes = useStyles();
 
-  static defaultProps = {
-    onRegisterSignUp: null,
-  };
+  const isMounted = useIsMounted();
 
-  constructor(props) {
-    super(props);
+  const [registerError, setRegisterError] = useState('');
+  const [state, dispatchState] = useReducer(signupFormReducer, SIGNUP_FORM_REDUCER_INITIAL_STATE);
 
-    this.state = {
-      ...INITIAL_STATE,
+  const previousState = usePrevious(state);
+
+  const {
+    email, emailError, error, passwordOne, passwordTwo,
+  } = state;
+
+  useEffect(() => {
+    return () => {
+      if (isMounted) {
+        dispatchState({ type: 'clearForm' });
+      }
     };
-  }
+  }, []);
 
-  componentDidMount() {
-    this.activeComponent = true;
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      isAuthenticated,
-      onRegisterSignUp,
-    } = this.props;
-
-    if (isAuthenticated !== prevProps.isAuthenticated) {
-      return onRegisterSignUp
-        ? onRegisterSignUp()
-        : navigate('/members');
+  useEffect(() => {
+    if (isAuthenticated) {
+      return onRegisterSignUp ? onRegisterSignUp() : navigate('/members');
     }
-  }
+  }, [isAuthenticated, onRegisterSignUp]);
 
-  componentWillUnmount() {
-    this.activeComponent = false;
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  handleUpdate = (event) => {
-    if (this.activeComponent) {
-      this.setState({
-        [event.target.name]: event.target.value,
-      }, this.handleUpdateErrors);
-    }
-  };
-
-  handleClickSignUpButton = () => {
-    if (this.activeComponent) {
-      const {
-        email,
-        passwordOne,
-      } = this.state;
-
+  const handleClickSignUpButton = () => {
+    if (isMounted) {
       auth
         .doCreateUserWithEmailAndPassword(email, passwordOne)
         .then(() => {
-          this.setState(() => ({
-            ...INITIAL_STATE,
-          }));
+          dispatchState({ type: 'clearForm' });
         })
         .catch((error) => {
-          this.setState({ error });
+          dispatchState({
+            type: 'updateForm',
+            payload: {
+              error,
+            },
+          });
         });
     }
   };
 
-  toggleRegisterPasswordInput = () => {
+  const toggleRegisterPasswordInput = () => {
     const passOne = document.getElementById('passwordOne');
     const passTwo = document.getElementById('passwordTwo');
 
@@ -131,163 +136,149 @@ class SignUpForm extends Component {
     }
   };
 
-  handleUpdateErrors = () => {
-    this.handleUpdateRegisterPasswordError();
-  };
-
-  handleUpdateRegisterPasswordError = () => {
-    if (this.activeComponent) {
-      const { passwordOne, passwordTwo } = this.state;
-
+  const handleUpdateErrors = () => {
+    if (isMounted) {
       const hasInput = passwordOne !== '' && passwordTwo !== '';
 
       if (!hasInput) {
-        this.setState({
-          registerError: '',
-        });
+        setRegisterError('');
       } else if (hasInput && passwordOne !== passwordTwo) {
-        this.setState({
-          registerError: 'Passwords should match',
-        });
-      } else if (
-        hasInput
-          && passwordOne === passwordTwo
-          && passwordOne.length < 8
-      ) {
-        this.setState({
-          registerError: 'Password must be at least 8 characters long',
-        });
+        setRegisterError('Passwords should match');
+      } else if (hasInput && passwordOne === passwordTwo && passwordOne.length < 8) {
+        setRegisterError('Password must be at least 8 characters long');
       } else if (hasInput && passwordOne === passwordTwo) {
-        this.setState({
-          registerError: '',
-        });
+        setRegisterError('');
       }
     }
   };
 
-  render() {
-    const {
-      email,
-      emailError,
-      error,
-      passwordOne,
-      passwordTwo,
-      registerError,
-    } = this.state;
+  useEffect(() => {
+    if (isMounted && previousState !== state) {
+      console.log('nopeee');
+      handleUpdateErrors();
+    }
+  }, [state]);
 
-    const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
-    const isInvalid = !hasInput || registerError || emailError;
+  const handleUpdate = (event) => {
+    if (isMounted) {
+      dispatchState({
+        type: 'updateForm',
+        payload: {
+          [event.target.name]: event.target.value,
+        },
+      });
+    }
+  };
 
-    return (
-      <form
-        key="signup-form"
-        onSubmit={this.handleSubmit}
+  const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
+  const isInvalid = !hasInput || Boolean(registerError || emailError);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  return (
+    <form key="signup-form" onSubmit={handleSubmit}>
+      <label css={labelStyles} htmlFor="email">
+        Email Address
+        <input
+          css={inputStyles}
+          name="email"
+          onChange={handleUpdate}
+          placeholder="Email Address"
+          type="email"
+          value={email}
+        />
+      </label>
+      <div css={baseErrorStyles}>{emailError}</div>
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          marginBottom: 16,
+        }}
       >
-        <label
-          css={labelStyles}
-          htmlFor="email"
-        >
-          Email Address
+        <label css={bottomLabelStyles} htmlFor="passwordOne">
+          Password
           <input
             css={inputStyles}
-            name="email"
-            onChange={this.handleUpdate}
-            placeholder="Email Address"
-            type="email"
-            value={email}
+            id="passwordOne"
+            name="passwordOne"
+            onChange={handleUpdate}
+            placeholder="Password"
+            type="password"
+            value={passwordOne}
           />
         </label>
-        <div css={baseErrorStyles}>{emailError}</div>
+        <div css={{ margin: '27px 0 0 12px' }}>
+          <RemoveRedEyeIcon onClick={toggleRegisterPasswordInput} />
+        </div>
+      </div>
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          marginBottom: 16,
+        }}
+      >
+        <label css={bottomLabelStyles} htmlFor="passwordTwo">
+          Confirm Password
+          <input
+            css={inputStyles}
+            id="passwordTwo"
+            name="passwordTwo"
+            onChange={handleUpdate}
+            placeholder="Confirm Password"
+            type="password"
+            value={passwordTwo}
+          />
+        </label>
+      </div>
+      <div css={baseErrorStyles}>{registerError}</div>
+
+      {error && (
         <div
           css={{
-            alignItems: 'center',
-            display: 'flex',
-            marginBottom: 16,
+            color: 'red',
+            fontFamily: options.headerFontFamily.join(','),
+            fontWeight: 500,
+            margin: '16px 0',
           }}
         >
-          <label
-            css={bottomLabelStyles}
-            htmlFor="passwordOne"
-          >
-            Password
-            <input
-              css={inputStyles}
-              id="passwordOne"
-              name="passwordOne"
-              onChange={this.handleUpdate}
-              placeholder="Password"
-              type="password"
-              value={passwordOne}
-            />
-          </label>
-          <div css={{ margin: '27px 0 0 12px' }}>
-            <RemoveRedEyeIcon onClick={this.toggleRegisterPasswordInput} />
-          </div>
+          {error.message}
         </div>
-        <div
-          css={{
-            alignItems: 'center',
-            display: 'flex',
-            marginBottom: 16,
-          }}
+      )}
+
+      {/* SUBMIT BUTTON */}
+      <div
+        css={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          maxWidth: '70%',
+        }}
+      >
+        <Button
+          className={classes.button}
+          color="primary"
+          // css={{ marginTop: '1rem', padding: '8px 12px' }}
+          disabled={isInvalid}
+          onClick={handleClickSignUpButton}
+          type="submit"
+          variant="contained"
         >
-          <label
-            css={bottomLabelStyles}
-            htmlFor="passwordTwo"
-          >
-            Confirm Password
-            <input
-              css={inputStyles}
-              id="passwordTwo"
-              name="passwordTwo"
-              onChange={this.handleUpdate}
-              placeholder="Confirm Password"
-              type="password"
-              value={passwordTwo}
-            />
-          </label>
-        </div>
-        <div css={baseErrorStyles}>{registerError}</div>
+          Sign Up
+        </Button>
+      </div>
+    </form>
+  );
+};
 
-        {error && (
-          <div
-            css={{
-              color: 'red',
-              fontFamily: options.headerFontFamily.join(','),
-              fontWeight: 500,
-              margin: '16px 0',
-            }}
-          >
-            {error.message}
-          </div>
-        )}
+SignUpForm.propTypes = propTypes;
+SignUpForm.defaultProps = defaultProps;
 
-        {/* SUBMIT BUTTON */}
-        <div
-          css={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            maxWidth: '70%',
-          }}
-        >
-          <button
-            css={{ marginTop: '1rem', padding: '8px 12px' }}
-            disabled={isInvalid}
-            onClick={this.handleClickSignUpButton}
-            type="submit"
-          >
-            Sign Up
-          </button>
-        </div>
-
-      </form>
-    );
-  }
-}
-
-const SignUpFormWithContext = props => (
+const SignUpFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <SignUpForm {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => <SignUpForm {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
 );
 
