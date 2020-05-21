@@ -41,16 +41,39 @@ const LisaRoebuck = ({ location }) => (
         <img
           alt="Lisa Roebuck"
           css={imageStyles}
-          src="https://res.cloudinary.com/tmac/image/upload/v1523154886/lisa-roebuck.jpg"
+          src="https://res.cloudinary.com/tmac/image/upload/v1590082444/lisa-roebuck.jpg"
         />
         <h2 css={headingNameStyles}>Lisa Roebuck</h2>
         <CardHeadline>2020 TMAC Outstanding Administrator</CardHeadline>
         <FuturaParagraph>
-          Roebuck has served as a music educator for over 30 years, which includes previously
-          teaching music at the elementary and secondary levels. Throughout her career, some of her
-          points of pride include establishing and opening Round Rock ISD’s Arts Integration
-          Academies, which exposes students to a wide variety of arts strategies integrated into all
-          subjects, and implementing technology in fine arts classrooms districtwide.
+          Lisa Weinheimer Roebuck currently serves Round Rock ISD as the Director of Fine Arts.
+          Round Rock ISD serves approximately 50,000 students that attend the district’s 55
+          campuses. The district offers numerous course selections for students in the areas of
+          dance, music, theatre and visual art and is extremely proud of their strong and vital fine
+          arts programs.
+        </FuturaParagraph>
+        <FuturaParagraph>
+          Lisa grew up in Fredericksburg, Texas. She holds a Bachelor of Music Education from the
+          University of Texas at Austin, a Kodály Music Certification from Texas State University
+          and a Masters in Educational Leadership from Lamar University. She taught general music at
+          the elementary level and choral music at the secondary level for 21 years. Lisa taught in
+          both public and private schools before entering the world of full time fine arts
+          administration in 2006. She presents professional development for other school districts
+          and educational service centers in the areas of elementary music, choir, fine arts
+          curriculum and program development.
+        </FuturaParagraph>
+        <FuturaParagraph>
+          Lisa has served as the Elementary Music Region 26 Chair for the Texas Music Educators
+          Association, and President of the Kodály Educators of Texas. She collaborated with
+          &qout;The Vision Committee for Curriculum and Assessments in the Arts&qout; for the Texas
+          Music Administration Conference/Texas Music Educators Association and was selected by the
+          State Board of Education and worked on the Fine Arts TEKS Revision Committee.
+        </FuturaParagraph>
+        <FuturaParagraph>
+          She is strongly committed to quality music and overall fine arts education in the state of
+          Texas. She strives to accomplish this goal by offering a high level of professional
+          development and supportive systems for the teachers who instruct the deserving and
+          talented students in the state
         </FuturaParagraph>
         {/* Mobile sidebar */}
         <div
