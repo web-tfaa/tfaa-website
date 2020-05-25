@@ -5,7 +5,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
-import format from 'date-fns/format';
 import {
   green,
   red,
@@ -16,27 +15,23 @@ import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import CtaButton from '../../components/masthead/cta-button';
+import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
 import RegisterButton from '../../components/register/register-button';
 import presets from '../../utils/presets';
-import { options } from '../../utils/typography';
 import { currentSchoolYearLong } from '../../utils/helpers';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
+
+// Local Dependencies
+// import MemberFileShareCard from './MemberFileShareCard';
+import MemberInfoBlock from './MemberInfoBlock';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
 // Local Variables
-const futuraStyles = {
-  fontFamily: options.headerFontFamily.join(','),
-  lineHeight: '1.6',
-  marginBottom: '1rem',
-};
-
-const memberFileShareCardStyles = { marginTop: '1rem' };
-
 // const taskIconStyles = {
 //   height: 24,
 //   marginRight: 8,
@@ -52,60 +47,6 @@ const memberFileShareCardStyles = { marginTop: '1rem' };
 //   ...taskIconStyles,
 //   color: 'red',
 // };
-
-// Local Components
-const MemberInfoDiv = ({ children }) => (
-  <div
-    css={{
-      lineHeight: '1.6',
-      marginBottom: '0.4rem',
-      marginLeft: '1.1rem',
-    }}
-  >
-    {children}
-  </div>
-);
-MemberInfoDiv.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-  ]).isRequired,
-};
-
-const FuturaAnchor = ({ children, href }) => (
-  <a href={href} css={futuraStyles}>
-    {children}
-  </a>
-);
-FuturaAnchor.propTypes = {
-  children: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-};
-
-const MemberFileShareCard = ({ node, description }) => {
-  return (
-    <Card>
-      <CardHeadline>{node.title}</CardHeadline>
-      <h5 css={memberFileShareCardStyles}>
-        {format(node.date, ['MMMM DD YYYY'])}
-      </h5>
-      <FuturaDiv>
-        {description}
-      </FuturaDiv>
-      <FuturaAnchor download href={node.link}>
-        Download
-      </FuturaAnchor>
-    </Card>
-  );
-};
-MemberFileShareCard.propTypes = {
-  description: PropTypes.string.isRequired,
-  node: PropTypes.shape({
-    title: PropTypes.string,
-    date: PropTypes.shape({}),
-    link: PropTypes.string,
-  }).isRequired,
-};
 
 const MEMBER_CONTENT_REDUCER_INITIAL_STATE = {
   currentUser: null,
@@ -207,20 +148,20 @@ const MemberContent = ({
     <Card>
       <CardHeadline>{`Info for: ${memberEmail}`}</CardHeadline>
       <div css={{ margin: '2rem 0px' }}>
-        <MemberInfoDiv>
+        <MemberInfoBlock>
           {currentUser.FirstName} {currentUser.LastName}
-        </MemberInfoDiv>
-        <MemberInfoDiv>
+        </MemberInfoBlock>
+        <MemberInfoBlock>
           {currentUser.Title}, {currentUser.District}
-        </MemberInfoDiv>
-        <MemberInfoDiv>{currentUser.MemberType || 'Active'} member</MemberInfoDiv>
-        <MemberInfoDiv>{currentUser.Address1}</MemberInfoDiv>
-        <MemberInfoDiv>{currentUser.Address2}</MemberInfoDiv>
-        <MemberInfoDiv>
+        </MemberInfoBlock>
+        <MemberInfoBlock>{currentUser.MemberType || 'Active'} member</MemberInfoBlock>
+        <MemberInfoBlock>{currentUser.Address1}</MemberInfoBlock>
+        <MemberInfoBlock>{currentUser.Address2}</MemberInfoBlock>
+        <MemberInfoBlock>
           {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
-        </MemberInfoDiv>
-        <MemberInfoDiv>Office Phone: {currentUser.OfficePhone}</MemberInfoDiv>
-        <MemberInfoDiv>Cell Phone: {currentUser.CellPhone}</MemberInfoDiv>
+        </MemberInfoBlock>
+        <MemberInfoBlock>Office Phone: {currentUser.OfficePhone}</MemberInfoBlock>
+        <MemberInfoBlock>Cell Phone: {currentUser.CellPhone}</MemberInfoBlock>
       </div>
       <FuturaDiv>
         <h5>Need to update any information?</h5>

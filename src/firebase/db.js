@@ -57,12 +57,6 @@ export const doGetUsers = (collection, userList, callback) => {
       querySnapshot.forEach((doc) => {
         updatedUserList[doc.id] = doc.data();
       });
-      // console.log(
-      //   'doGetUsers :: ',
-      //   updatedUserList,
-      //   Array.isArray(updatedUserList),
-      //   updatedUserList.length,
-      // );
       return callback(updatedUserList);
     })
     .catch((error) => {

@@ -113,7 +113,10 @@ MemberListContent.defaultProps = defaultProps;
 const MemberList = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
-    <MemberListWithContext {...props} />
+    <MemberListWithContext
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    />
   </Layout>
 );
 
@@ -121,6 +124,7 @@ const MemberListWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
       <MemberListContent
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         userEmail={authUser ? authUser.email : ''}
         isAuthenticated={!!authUser}

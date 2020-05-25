@@ -16,7 +16,10 @@ import { doGetUsers } from '../../firebase/db';
 
 // Local Variables
 const propTypes = {
-  authUser: PropTypes.shape({}),
+  authUser: PropTypes.shape({
+    email: PropTypes.string,
+    uid: PropTypes.string,
+  }),
   data: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
 };
@@ -39,16 +42,6 @@ const MembersHome = ({
       doGetUsers('registration', userList, setUserData);
     }
   }, [authUser]);
-
-  // componentDidMount() {
-  //   const userList = [];
-
-  //   // doGetUsers('registration', userList, this.handleUpdateUserList);
-  // }
-
-  // handleUpdateUserList = (userList) => {
-  //   this.setState({ userData: userList });
-  // };
 
   const isAuthenticated = Boolean(authUser);
 
@@ -91,17 +84,33 @@ const MembersHome = ({
 MembersHome.propTypes = propTypes;
 MembersHome.defaultProps = defaultProps;
 
-const Members = (props) => (
-  // eslint-disapropsline
-  <Layout location={props.location}>
-    <MembersWithContext {...props} />
-  </Layout>
-);
+const Members = (props) => {
+  const { location } = props;
+  return (
+    // eslint-disapropsline
+    <Layout location={location}>
+      <MembersWithContext
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
+    </Layout>
+  );
+};
+
+Members.propTypes = {
+  location: PropTypes.shape({}).isRequired,
+};
 
 const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => {
-      return <MembersHome {...props} authUser={authUser} />;
+      return (
+        <MembersHome
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...props}
+          authUser={authUser}
+        />
+      );
     }}
   </AuthUserContext.Consumer>
 );
