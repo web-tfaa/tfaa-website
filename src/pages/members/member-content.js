@@ -320,16 +320,7 @@ const MemberContent = ({
     </Card>
   );
 
-  const isAdmin = authUser
-    && [
-      'jon.lester@abileneisd.org',
-      'jim.egger@mcallenisd.net',
-      'jclark@springisd.org',
-      'patricia.h.moreno@austinisd.org',
-      'jeffrey.turner@allenisd.org',
-      'm2mathew@me.com',
-      'mike@drumsensei.com',
-    ].includes(authUser.email);
+  const isAdmin = authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email);
 
   return (
     <div>
