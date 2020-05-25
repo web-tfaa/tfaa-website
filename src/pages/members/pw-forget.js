@@ -14,6 +14,13 @@ import { options } from '../../utils/typography';
 import { emailRegex } from '../../utils/helpers';
 
 // Local Variables
+const propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
+};
+
 const texasFlagBlue = '#002868';
 
 const INITIAL_STATE = {
@@ -29,13 +36,6 @@ const updateByPropertyName = (propertyName, value) => () => ({
 
 // Component Definition
 class PasswordForgetForm extends Component {
-  static propTypes = {
-    location: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]).isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -159,5 +159,7 @@ class PasswordForgetForm extends Component {
     );
   }
 }
+
+PasswordForgetForm.propTypes = propTypes;
 
 export default PasswordForgetForm;
