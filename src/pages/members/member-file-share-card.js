@@ -30,12 +30,13 @@ const useStyles = makeStyles((theme) => ({
 const MemberFileShareCard = ({ node, description }) => {
   const classes = useStyles();
 
+  if (!node) {
+    return null;
+  }
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>
-      <h5 className={classes.cardTitle}>
-        {format(node.date, ['MMMM DD YYYY'])}
-      </h5>
+      <h5 className={classes.cardTitle}>{format(node.date, ['MMMM DD YYYY'])}</h5>
       <FuturaDiv>{description}</FuturaDiv>
       <FuturaAnchor download href={node.link}>
         Download
