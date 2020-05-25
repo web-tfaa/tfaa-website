@@ -6,7 +6,7 @@ import hex2rgba from 'hex2rgba';
 // Internal Dependencies
 import SidebarBody from './sidebar-body';
 import presets, { colors } from '../../../utils/presets';
-import { rhythm, scale } from '../../../utils/typography';
+import { rhythm } from '../../../utils/typography';
 
 // Local Variables
 const propTypes = {
@@ -27,16 +27,16 @@ const sidebarStyles = {
     presets.shadowKeyUmbraOpacity,
   )}`,
   width: rhythm(10),
-  display: `none`,
-  position: `fixed`,
+  display: 'none',
+  position: 'fixed',
   top: `calc(${presets.headerHeight} - 1px)`,
   paddingBottom: 96,
-  overflowY: `auto`,
+  overflowY: 'auto',
   height: `calc(100vh - ${presets.headerHeight} + 1px)`,
-  WebkitOverflowScrolling: `touch`,
+  WebkitOverflowScrolling: 'touch',
   '::-webkit-scrollbar': {
-    width: `6px`,
-    height: `6px`,
+    width: '6px',
+    height: '6px',
   },
   '::-webkit-scrollbar-thumb': {
     background: colors.ui.bright,
@@ -55,7 +55,7 @@ const sidebarStyles = {
 };
 
 // Component Definition
-const Sidebar = props => {
+const Sidebar = (props) => {
   const { sidebarYaml } = props;
 
   return (

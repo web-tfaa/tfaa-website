@@ -35,7 +35,10 @@ function withRoot(Component) {
           >
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <Component {...this.props} />
+            <Component
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...this.props}
+            />
           </MuiThemeProvider>
         </JssProvider>
       );
