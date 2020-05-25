@@ -95,7 +95,6 @@ const Members = (props) => {
     // eslint-disapropsline
     <Layout location={location}>
       <MembersWithContext
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
     </Layout>
@@ -111,7 +110,6 @@ const MembersWithContext = (props) => (
     {(authUser) => {
       return (
         <MembersHome
-          // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
           authUser={authUser}
         />

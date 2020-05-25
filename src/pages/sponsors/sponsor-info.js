@@ -129,7 +129,6 @@ const SponsorInfoWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
       <SponsorInfo
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         isAuthenticated={!!authUser}
       />

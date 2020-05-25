@@ -54,7 +54,7 @@ const Status = ({ authUser }) => {
     </Typography>
   ) : (
     <Typography className={classes.text}>
-      Logged in as {authUser.email}
+      Signed in as {authUser.email}
       <a className={classes.anchor} href="/members" onClick={auth.doSignOut}>
         Sign out
       </a>
@@ -70,7 +70,6 @@ const StatusWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
       <Status
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         authUser={authUser}
       />

@@ -11,16 +11,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import Card from '../../../components/shared/cards/card';
-import CardHeadline from '../../../components/shared/cards/card-headline';
-import FuturaDiv from '../../../components/shared/futura-div';
-import { doUpdateEmail } from '../../../firebase/auth';
-import {
-  emailRegex,
-} from '../../../utils/helpers';
+import Card from '../../components/shared/cards/card';
+import CardHeadline from '../../components/shared/cards/card-headline';
+import FuturaDiv from '../../components/shared/futura-div';
+import { doUpdateEmail } from '../../firebase/auth';
+import { emailRegex } from '../../utils/helpers';
 
 // Local Dependencies
-import MemberInfoBlock from '../member-info-block';
+import MemberInfoBlock from './member-info-block';
 
 // Local Variables
 const propTypes = {
@@ -37,9 +35,12 @@ const propTypes = {
     State: PropTypes.string,
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
-  }).isRequired,
-  memberEmail: PropTypes.string.isRequired,
+  }),
   setShouldRefetchUserList: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  currentUser: null,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
   emailContainer: {
     marginLeft: theme.spacing(2),
   },
+  subheader: {
+    marginTop: theme.spacing(3),
+  },
   textField: {
     width: '75%',
   },
@@ -57,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
 // Component Definition
 const MemberInfo = ({
   currentUser,
-  memberEmail,
   setShouldRefetchUserList,
 }) => {
   const classes = useStyles();
@@ -65,10 +68,6 @@ const MemberInfo = ({
   const [isChangeEmailDialogOpen, setIsChangeEmailDialogOpen] = useState(false);
   const [newEmailValue, setNewEmailValue] = useState('');
   const [newEmailError, setNewEmailError] = useState('');
-
-  if (!currentUser) {
-    return null;
-  }
 
   const handleOpenChangeEmailDialog = () => {
     setIsChangeEmailDialogOpen(true);
@@ -120,31 +119,35 @@ const MemberInfo = ({
   return (
     <>
       <Card>
-        <CardHeadline>{`Info for: ${memberEmail}`}</CardHeadline>
-        <div>
-          <MemberInfoBlock>
-            {currentUser.FirstName} {currentUser.LastName}
-          </MemberInfoBlock>
-          <MemberInfoBlock>
-            {currentUser.Title}, {currentUser.District}
-          </MemberInfoBlock>
-          <MemberInfoBlock>{currentUser.MemberType || 'Active'} member</MemberInfoBlock>
-          <MemberInfoBlock>{currentUser.Address1}</MemberInfoBlock>
-          <MemberInfoBlock>{currentUser.Address2}</MemberInfoBlock>
-          <MemberInfoBlock>
-            {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
-          </MemberInfoBlock>
-          <MemberInfoBlock>Office Phone: {currentUser.OfficePhone}</MemberInfoBlock>
-          <MemberInfoBlock>Cell Phone: {currentUser.CellPhone}</MemberInfoBlock>
-        </div>
+        <CardHeadline>Member Info</CardHeadline>
+        {currentUser && (
+          <>
+            <div>
+              <MemberInfoBlock>
+                {currentUser.FirstName} {currentUser.LastName}
+              </MemberInfoBlock>
+              <MemberInfoBlock>
+                {currentUser.Title}, {currentUser.District}
+              </MemberInfoBlock>
+              <MemberInfoBlock>{currentUser.MemberType || 'Active'} member</MemberInfoBlock>
+              <MemberInfoBlock>{currentUser.Address1}</MemberInfoBlock>
+              <MemberInfoBlock>{currentUser.Address2}</MemberInfoBlock>
+              <MemberInfoBlock>
+                {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
+              </MemberInfoBlock>
+              <MemberInfoBlock>Office Phone: {currentUser.OfficePhone}</MemberInfoBlock>
+              <MemberInfoBlock>Cell Phone: {currentUser.CellPhone}</MemberInfoBlock>
+            </div>
+            <FuturaDiv>
+              <h5 className={classes.subheader}>Need to update any information?</h5>
+              <span className={classes.emailContainer}>
+                Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
+              </span>
+            </FuturaDiv>
+          </>
+        )}
         <FuturaDiv>
-          <h5>Need to update any information?</h5>
-          <span className={classes.emailContainer}>
-            Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
-          </span>
-        </FuturaDiv>
-        <FuturaDiv>
-          <h5>Change email for TMAC website login</h5>
+          <h5 className={classes.subheader}>Change email for TMAC website login</h5>
           <Button
             color="primary"
             size="small"
@@ -192,5 +195,6 @@ const MemberInfo = ({
 };
 
 MemberInfo.propTypes = propTypes;
+MemberInfo.defaultProps = defaultProps;
 
 export default MemberInfo;

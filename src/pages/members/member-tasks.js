@@ -8,21 +8,21 @@ import { green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import Card from '../../../components/shared/cards/card';
-import CardHeadline from '../../../components/shared/cards/card-headline';
-import CtaButton from '../../../components/masthead/cta-button';
-import FuturaAnchor from '../../../components/shared/FuturaAnchor';
-import FuturaDiv from '../../../components/shared/futura-div';
-import Invoice from '../../../components/register/invoice';
-import RegisterButton from '../../../components/register/register-button';
-import { currentSchoolYearLong } from '../../../utils/helpers';
+import Card from '../../components/shared/cards/card';
+import CardHeadline from '../../components/shared/cards/card-headline';
+import CtaButton from '../../components/masthead/cta-button';
+import FuturaAnchor from '../../components/shared/FuturaAnchor';
+import FuturaDiv from '../../components/shared/futura-div';
+import Invoice from '../../components/register/invoice';
+import RegisterButton from '../../components/register/register-button';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const propTypes = {
   currentUser: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
-    AmountPaid: PropTypes.number,
+    AmountPaid: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     CellPhone: PropTypes.string,
     City: PropTypes.string,
     District: PropTypes.string,
@@ -34,14 +34,10 @@ const propTypes = {
     State: PropTypes.string,
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
-    invoiceId: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
+    invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     receiptId: PropTypes.number,
   }),
   isRegisteredForCurrentYear: PropTypes.bool.isRequired,
-  memberEmail: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -61,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
 const MemberTasks = ({
   currentUser,
   isRegisteredForCurrentYear,
-  memberEmail,
 }) => {
   const classes = useStyles();
 
@@ -128,7 +123,7 @@ const MemberTasks = ({
 
   return (
     <Card>
-      <CardHeadline>{`Tasks for: ${memberEmail}`}</CardHeadline>
+      <CardHeadline>{`Tasks for ${currentSchoolYearLong} school year`}</CardHeadline>
       <FuturaDiv
         render={() => (
           <div>

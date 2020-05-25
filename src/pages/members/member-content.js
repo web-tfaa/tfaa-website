@@ -2,8 +2,10 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
+import Alert from '../../components/shared/Alert';
 import Cards from '../../components/shared/cards';
 import presets from '../../utils/presets';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
@@ -38,6 +40,12 @@ const defaultProps = {
   currentMemberList: null,
   userId: null,
 };
+
+const useStyles = makeStyles((theme) => ({
+  alert: {
+    margin: theme.spacing(2),
+  },
+}));
 
 // const taskIconStyles = {
 //   height: 24,
@@ -89,6 +97,8 @@ const MemberContent = ({
   setShouldRefetchUserList,
   userId,
 }) => {
+  const classes = useStyles();
+
   const [state, dispatchState] = useReducer(
     memberContentReducer,
     MEMBER_CONTENT_REDUCER_INITIAL_STATE,
@@ -97,11 +107,6 @@ const MemberContent = ({
   const {
     currentUser, isLoadingUserData, isRegisteredForCurrentYear,
   } = state;
-
-  // console.log('userId', userId);
-  // console.log('state ..........', state);
-
-  // console.log('userList.length', userList.length, Array.isArray(userList));
 
   useEffect(() => {
     // Find if the current user is among the registerd users
@@ -149,18 +154,16 @@ const MemberContent = ({
   return (
     <div>
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
+      <Alert
+        bodyText={`Welcome ${memberEmail}`}
+        rootClasses={classes.alert}
+        type="info"
+      />
       <Cards>
-        {currentUser && (
-          <MemberInfo
-            currentUser={currentUser}
-            memberEmail={memberEmail}
-            setShouldRefetchUserList={setShouldRefetchUserList}
-          />
-        )}
+        <MemberInfo currentUser={currentUser} setShouldRefetchUserList={setShouldRefetchUserList} />
         <MemberTasks
           currentUser={currentUser}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
-          memberEmail={memberEmail}
         />
       </Cards>
 
