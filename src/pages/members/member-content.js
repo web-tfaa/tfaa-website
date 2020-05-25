@@ -27,6 +27,7 @@ const propTypes = {
   // contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
   currentMemberList: PropTypes.arrayOf(PropTypes.shape({})),
   memberEmail: PropTypes.string,
+  setShouldRefetchUserList: PropTypes.func.isRequired,
   userId: PropTypes.string,
 };
 
@@ -85,6 +86,7 @@ const MemberContent = ({
   // contentfulFileShareDescriptionData,
   currentMemberList,
   memberEmail,
+  setShouldRefetchUserList,
   userId,
 }) => {
   const [state, dispatchState] = useReducer(
@@ -152,6 +154,7 @@ const MemberContent = ({
           <MemberInfo
             currentUser={currentUser}
             memberEmail={memberEmail}
+            setShouldRefetchUserList={setShouldRefetchUserList}
           />
         )}
         <MemberTasks

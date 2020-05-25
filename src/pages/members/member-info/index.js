@@ -19,7 +19,6 @@ import {
   emailRegex,
 } from '../../../utils/helpers';
 
-
 // Local Dependencies
 import MemberInfoBlock from '../member-info-block';
 
@@ -40,6 +39,7 @@ const propTypes = {
     ZipCode: PropTypes.string,
   }).isRequired,
   memberEmail: PropTypes.string.isRequired,
+  setShouldRefetchUserList: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 const MemberInfo = ({
   currentUser,
   memberEmail,
+  setShouldRefetchUserList,
 }) => {
   const classes = useStyles();
 
@@ -93,6 +94,7 @@ const MemberInfo = ({
     if (!newEmailError) {
       doUpdateEmail(newEmailValue)
         .then(() => {
+          setShouldRefetchUserList(true);
           setIsChangeEmailDialogOpen(false);
           setNewEmailValue('');
           setNewEmailError('');
@@ -168,10 +170,7 @@ const MemberInfo = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={handleCloseChangeEmailDialog}
-            onKeyPress={handleCloseChangeEmailDialog}
-          >
+          <Button onClick={handleCloseChangeEmailDialog} onKeyPress={handleCloseChangeEmailDialog}>
             Cancel
           </Button>
           <Button

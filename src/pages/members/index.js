@@ -34,14 +34,18 @@ const MembersHome = ({
   // data,
 }) => {
   const [userData, setUserData] = useState(null);
+  const [shouldRefetchUserList, setShouldRefetchUserList] = useState(false);
 
   useEffect(() => {
     const userList = [];
 
-    if (authUser) {
+    if (authUser || shouldRefetchUserList) {
       doGetUsers('registration', userList, setUserData);
+      if (shouldRefetchUserList) {
+        setShouldRefetchUserList(false);
+      }
     }
-  }, [authUser]);
+  }, [authUser, shouldRefetchUserList, setShouldRefetchUserList]);
 
   const isAuthenticated = Boolean(authUser);
 
@@ -71,6 +75,7 @@ const MembersHome = ({
             // }
             currentMemberList={userData}
             memberEmail={authUser.email}
+            setShouldRefetchUserList={setShouldRefetchUserList}
             userId={authUser.uid}
           />
         ) : (
