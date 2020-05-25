@@ -7,13 +7,12 @@ import Sidebar from '../sidebar';
 
 // Local Variables
 const propTypes = {
-  children: PropTypes.node.isRequired,
   sidebarYaml: PropTypes.shape().isRequired,
 };
 
 // Component Definition
 const PageContainer = (props) => {
-  const { children, sidebarYaml } = props;
+  const { sidebarYaml } = props;
 
   return (
     <div>
@@ -23,4 +22,5 @@ const PageContainer = (props) => {
 };
 
 PageContainer.propTypes = propTypes;
+
 export default Sidebar;
