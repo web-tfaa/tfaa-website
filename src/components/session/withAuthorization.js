@@ -1,16 +1,16 @@
 // https://github.com/taming-the-state-in-react/gatsby-firebase-authentication/blob/master/src/components/Session/withAuthorization.js
 
 import React from 'react';
-import { navigate } from "gatsby";
+import { navigate } from 'gatsby';
 
 import AuthUserContext from './session/AuthUserContext';
 import { firebase } from '../../firebase';
 
-const withAuthorization = condition => Component => {
+const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
       if (typeof window !== 'undefined') {
-        firebase.auth.onAuthStateChanged(authUser => {
+        firebase.auth.onAuthStateChanged((authUser) => {
           if (!condition(authUser)) {
             navigate('/members');
           }
@@ -21,7 +21,7 @@ const withAuthorization = condition => Component => {
     render() {
       return (
         <AuthUserContext.Consumer>
-          {authUser => (authUser ? <Component {...this.props} /> : null)}
+          {(authUser) => (authUser ? <Component {...this.props} /> : null)}
         </AuthUserContext.Consumer>
       );
     }

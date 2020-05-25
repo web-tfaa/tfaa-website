@@ -172,7 +172,7 @@ const LoginForm = ({ onRegisterLogin }) => {
   };
 
   const hasLoginInput = password !== '' && email !== '';
-  const isLoginInvalid = !hasLoginInput || emailError;
+  const isLoginInvalid = !hasLoginInput || Boolean(emailError);
 
   const handleSubmit = (event) => {
     event.preventDefault();

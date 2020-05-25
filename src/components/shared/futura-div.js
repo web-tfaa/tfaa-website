@@ -21,7 +21,6 @@ const FuturaDiv = ({ children }) => (
   <div
     css={{
       fontFamily: options.headerFontFamily.join(','),
-      lineHeight: '1.6',
       marginBottom: '1rem',
     }}
   >

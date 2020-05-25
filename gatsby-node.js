@@ -33,7 +33,7 @@ exports.createPages = ({ graphql }) => {
         //   });
         // });
         // return;
-      })
+      }),
     );
   });
 };

@@ -23,7 +23,8 @@
     "no-case-declarations": 0,
     "import/prefer-default-export": 0,
     "import/no-unresolved": 0,
-    "implicit-arrow-linebreak": 0
+    "implicit-arrow-linebreak": 0,
+    "react/jsx-props-no-spreading": 0
   },
   "settings": {
     "import/core-modules": ["react", "prop-types"]

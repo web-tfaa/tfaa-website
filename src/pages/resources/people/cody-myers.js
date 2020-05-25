@@ -98,11 +98,12 @@ const CodyMyers = ({ location }) => (
         {/* Mobile sidebar */}
         <div
           css={{
-            display: `block`,
+            display: 'block',
             [presets.Tablet]: {
-              display: `none`,
+              display: 'none',
             },
-          }}>
+          }}
+        >
           <hr
             css={{
               border: 0,

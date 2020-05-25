@@ -119,13 +119,21 @@ const SponsorInfo = (props) => {
 SponsorInfo.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({
-    state: PropTypes.shape({}),
+    state: PropTypes.shape({
+      level: PropTypes.string,
+    }),
   }).isRequired,
 };
 
 const SponsorInfoWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => <SponsorInfo {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => (
+      <SponsorInfo
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 

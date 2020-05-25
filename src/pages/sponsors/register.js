@@ -14,13 +14,18 @@ import RegisterStepper from '../../components/register/register-stepper';
 import Status from '../members/status';
 import presets from '../../utils/presets';
 
+// Local Variables
+const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      level: PropTypes.string,
+    }),
+  }).isRequired,
+};
+
 // Component Definition
 class RegisterSponsorContent extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    location: PropTypes.shape({}).isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -192,6 +197,8 @@ class RegisterSponsorContent extends Component {
     );
   }
 }
+
+RegisterSponsorContent.propTypes = propTypes;
 
 const RegisterSponsor = (props) => (
   // eslint-disable-next-line

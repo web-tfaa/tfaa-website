@@ -40,7 +40,12 @@ const stripeAnimation = css.keyframes({
 
 // Component Definition
 const RegisterButton = ({
-  buttonType, children, isDisabled, onClick, overrideCSS, isRed,
+  buttonType,
+  children,
+  isDisabled,
+  isRed,
+  onClick,
+  overrideCSS,
 }) => (
   <button
     css={{

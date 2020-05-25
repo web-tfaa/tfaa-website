@@ -9,13 +9,14 @@ import LoadingContainer from '../shared/LoadingContainer';
 import SignInUpElement from './sign-in-up-element';
 import SignUpForm from './signup-form';
 
+// Local Variables
+const propTypes = {
+  onCompleteStep: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
 // Component Definition
 class RegisterEmail extends Component {
-  static propTypes = {
-    onCompleteStep: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -96,5 +97,7 @@ class RegisterEmail extends Component {
     );
   }
 }
+
+RegisterEmail.propTypes = propTypes;
 
 export default RegisterEmail;

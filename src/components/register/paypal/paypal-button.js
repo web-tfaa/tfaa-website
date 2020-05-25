@@ -73,7 +73,7 @@ class PaypalButton extends React.Component {
             amount: {
               total,
               currency,
-            }
+            },
           },
         ],
       });
@@ -109,8 +109,8 @@ class PaypalButton extends React.Component {
             onError={onError}
             payment={payment}
             style={{ label: 'pay', tagline: 'false', size: 'medium' }}
-          />)
-        }
+          />
+        )}
       </div>
     );
   }
