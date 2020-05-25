@@ -12,7 +12,7 @@ const propTypes = {
 };
 
 // Component Definition
-const PageContainer = props => {
+const PageContainer = (props) => {
   const { children, sidebarYaml } = props;
 
   return (

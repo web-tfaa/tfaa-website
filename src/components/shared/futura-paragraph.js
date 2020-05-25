@@ -7,9 +7,10 @@ import { options } from '../../utils/typography';
 const FuturaParagraph = ({ children }) => (
   <p
     css={{
-      fontFamily: options.headerFontFamily.join(`,`),
+      fontFamily: options.headerFontFamily.join(','),
       lineHeight: '1.6',
-    }}>
+    }}
+  >
     {children}
   </p>
 );
@@ -21,5 +22,5 @@ FuturaParagraph.propTypes = {
     PropTypes.element,
     PropTypes.node,
   ]).isRequired,
-}
+};
 export default FuturaParagraph;
