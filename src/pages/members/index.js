@@ -1,7 +1,7 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 
 // Internal Dependencies
@@ -14,82 +14,82 @@ import Status from './status';
 import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 
+// Local Variables
+const propTypes = {
+  authUser: PropTypes.shape({}),
+  data: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
+
+const defaultProps = {
+  authUser: null,
+};
+
 // Component Definition
-class MembersHome extends Component {
-  static propTypes = {
-    authUser: PropTypes.shape({}),
-    data: PropTypes.shape({}).isRequired,
-    location: PropTypes.shape({}).isRequired,
-  };
+const MembersHome = ({
+  authUser,
+  // data,
+}) => {
+  const [userData, setUserData] = useState(null);
 
-  static defaultProps = {
-    authUser: null,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userData: [],
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const userList = [];
 
-    doGetUsers('registration', userList, this.handleUpdateUserList);
-  }
+    if (authUser) {
+      doGetUsers('registration', userList, setUserData);
+    }
+  }, [authUser]);
 
-  handleUpdateUserList = (userList) => {
-    this.setState({ userData: userList });
-  };
+  // componentDidMount() {
+  //   const userList = [];
 
-  render() {
-    const {
-      authUser,
-      data,
-    } = this.props;
+  //   // doGetUsers('registration', userList, this.handleUpdateUserList);
+  // }
 
-    const {
-      userData,
-    } = this.state;
+  // handleUpdateUserList = (userList) => {
+  //   this.setState({ userData: userList });
+  // };
 
-    const isAuthenticated = Boolean(authUser);
+  const isAuthenticated = Boolean(authUser);
 
-    return (
-      <div
-        css={{
-          paddingLeft: 0,
-          width: '0 auto',
-          [presets.Tablet]: {
-            paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-          },
-        }}
-      >
-        <Status />
-        <Container>
-          <Helmet>
-            <title>TMAC | Members</title>
-          </Helmet>
-          {isAuthenticated ? (
-            <MemberContent
-              authUser={authUser}
-              contentfulFileShareData={
-                data.allContentfulFileShare.edges
-              }
-              contentfulFileShareDescriptionData={
-                data.allContentfulFileShareDescriptionTextNode.edges
-              }
-              memberEmail={authUser.email}
-              userData={userData}
-              userId={authUser.uid}
-            />
-          ) : <NonMemberContent />}
-        </Container>
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      css={{
+        paddingLeft: 0,
+        width: '0 auto',
+        [presets.Tablet]: {
+          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+        },
+      }}
+    >
+      <Status />
+      <Container>
+        <Helmet>
+          <title>TMAC | Members</title>
+        </Helmet>
+        {isAuthenticated ? (
+          <MemberContent
+            authUser={authUser}
+            // contentfulFileShareData={
+            //   data.allContentfulFileShare.edges
+            // }
+            // contentfulFileShareDescriptionData={
+            //   data.allContentfulFileShareDescriptionTextNode.edges
+            // }
+            currentMemberList={userData}
+            memberEmail={authUser.email}
+            userId={authUser.uid}
+          />
+        ) : (
+          <NonMemberContent />
+        )}
+      </Container>
+    </div>
+  );
+};
+
+MembersHome.propTypes = propTypes;
+MembersHome.defaultProps = defaultProps;
 
 const Members = (props) => (
   // eslint-disapropsline

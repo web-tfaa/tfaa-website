@@ -5,13 +5,13 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
+import Alert from '../../components/shared/Alert';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
 import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
-import Alert from '../../components/shared/Alert';
 
 // Local Variables
 const propTypes = {
