@@ -66,6 +66,10 @@ const MemberInfo = ({
   const [newEmailValue, setNewEmailValue] = useState('');
   const [newEmailError, setNewEmailError] = useState('');
 
+  if (!currentUser) {
+    return null;
+  }
+
   const handleOpenChangeEmailDialog = () => {
     setIsChangeEmailDialogOpen(true);
   };
