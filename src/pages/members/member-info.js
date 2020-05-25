@@ -11,16 +11,16 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import Card from '../../../components/shared/cards/card';
-import CardHeadline from '../../../components/shared/cards/card-headline';
-import FuturaDiv from '../../../components/shared/futura-div';
-import { doUpdateEmail } from '../../../firebase/auth';
+import Card from '../../components/shared/cards/card';
+import CardHeadline from '../../components/shared/cards/card-headline';
+import FuturaDiv from '../../components/shared/futura-div';
+import { doUpdateEmail } from '../../firebase/auth';
 import {
   emailRegex,
-} from '../../../utils/helpers';
+} from '../../utils/helpers';
 
 // Local Dependencies
-import MemberInfoBlock from '../member-info-block';
+import MemberInfoBlock from './member-info-block';
 
 // Local Variables
 const propTypes = {
