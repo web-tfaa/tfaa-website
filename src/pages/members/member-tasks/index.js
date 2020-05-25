@@ -3,7 +3,7 @@ import AnnouncementIcon from '@material-ui/icons/Announcement';
 import CheckIcon from '@material-ui/icons/Check';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { useReactToPrint } from 'react-to-print';
+import ReactToPrint from 'react-to-print';
 import { green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
@@ -65,8 +65,8 @@ const MemberTasks = ({
 }) => {
   const classes = useStyles();
 
-  const printInvoiceRef = useRef(null);
-  const printReceiptRef = useRef(null);
+  const printInvoiceRef = useRef();
+  const printReceiptRef = useRef();
 
   const registeredIcon = isRegisteredForCurrentYear ? (
     <CheckIcon htmlColor={green[700]} />
@@ -74,25 +74,18 @@ const MemberTasks = ({
     <AnnouncementIcon htmlColor={red[500]} />
   );
 
-  const handlePrintInvoice = () => {
-    useReactToPrint({ content: () => printInvoiceRef.current });
-  };
-
   const invoiceInfo = currentUser && (
     <FuturaDiv>
       <h5>Need a copy of your invoice?</h5>
       If you need to pay via invoice please send payment to the TMAC Treasurer as indicated on your
       invoice.
       <div className={classes.buttonContainer}>
-        <RegisterButton
-          isRed
-          onClick={handlePrintInvoice}
-          onKeyPress={handlePrintInvoice}
-        >
-          Print Invoice
-        </RegisterButton>
+        <ReactToPrint
+          content={() => printInvoiceRef.current}
+          trigger={() => <RegisterButton isRed>Print Invoice</RegisterButton>}
+        />
       </div>
-      <div className={classes.hidden}>
+      <div style={{ display: 'none' }}>
         <Invoice
           amount={currentUser.AmountPaid}
           form={currentUser}
@@ -105,22 +98,15 @@ const MemberTasks = ({
     </FuturaDiv>
   );
 
-  const handlePrintReceipt = () => {
-    useReactToPrint({ content: () => printReceiptRef.current });
-  };
-
   const receiptInfo = currentUser && (
     <FuturaDiv>
       <h5>Need a copy of your receipt?</h5>
       Thank you for joining TMAC for the {currentSchoolYearLong} school year!
       <div className={classes.buttonContainer}>
-        <RegisterButton
-          isRed
-          onClick={handlePrintReceipt}
-          onKeyPress={handlePrintReceipt}
-        >
-          Print Receipt
-        </RegisterButton>
+        <ReactToPrint
+          content={() => printReceiptRef.current}
+          trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
+        />
       </div>
       <div className={classes.hidden}>
         <Invoice
