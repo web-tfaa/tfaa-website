@@ -8,14 +8,14 @@ import { green, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import Card from '../../../components/shared/cards/card';
-import CardHeadline from '../../../components/shared/cards/card-headline';
-import CtaButton from '../../../components/masthead/cta-button';
-import FuturaAnchor from '../../../components/shared/FuturaAnchor';
-import FuturaDiv from '../../../components/shared/futura-div';
-import Invoice from '../../../components/register/invoice';
-import RegisterButton from '../../../components/register/register-button';
-import { currentSchoolYearLong } from '../../../utils/helpers';
+import Card from '../../components/shared/cards/card';
+import CardHeadline from '../../components/shared/cards/card-headline';
+import CtaButton from '../../components/masthead/cta-button';
+import FuturaAnchor from '../../components/shared/FuturaAnchor';
+import FuturaDiv from '../../components/shared/futura-div';
+import Invoice from '../../components/register/invoice';
+import RegisterButton from '../../components/register/register-button';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const propTypes = {
