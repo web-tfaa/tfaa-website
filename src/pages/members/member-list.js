@@ -10,7 +10,7 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
 import presets from '../../utils/presets';
-import Status from './status';
+import Status from './Status';
 import { doGetUsers } from '../../firebase/db';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 

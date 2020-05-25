@@ -10,7 +10,7 @@ import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import MemberContent from './member-content';
 import NonMemberContent from './non-member-content';
-import Status from './status';
+import Status from './Status';
 import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 

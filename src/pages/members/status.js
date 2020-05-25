@@ -1,79 +1,80 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import { Link } from 'gatsby';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
-import presets, { colors } from '../../utils/presets';
+import { colors } from '../../utils/presets';
 import { auth } from '../../firebase';
-import { options } from '../../utils/typography';
 
-// Local Styles
-const statusRootStyles = {
-  background: colors.status,
-  fontSize: '87.5%',
-  padding: '0.5rem',
-  width: '0 auto',
+// Local Variables
+const propTypes = {
+  authUser: PropTypes.shape({
+    email: PropTypes.string,
+    uid: PropTypes.string,
+  }),
 };
 
-const statusTextStyles = {
-  margin: '0 auto',
-  maxWidth: 640,
-  textAlign: 'right',
+const defaultProps = {
+  authUser: null,
 };
+
+const useStyles = makeStyles((theme) => ({
+  anchor: {
+    marginLeft: theme.spacing(1.5),
+  },
+  root: {
+    background: colors.status,
+    display: 'flex',
+    fontSize: '87.5%',
+    height: theme.spacing(6),
+    justifyContent: 'flex-end',
+    padding: theme.spacing(1),
+  },
+  text: {
+    fontSize: '0.9rem',
+  },
+}));
 
 // Component Definition
-const Status = (props) => {
-  const { authUser } = props;
+const Status = ({ authUser }) => {
+  const classes = useStyles();
 
   const isAuthenticated = Boolean(authUser);
 
   const details = !isAuthenticated ? (
-    <p css={statusTextStyles}>
-      To access the Members area, please&nbsp;
-      <Link to="/members/login">log in</Link>.
-    </p>
+    <Typography className={classes.text}>
+      To access the Members area, please
+      <Link to="/members/login">
+        log in
+      </Link>.
+    </Typography>
   ) : (
-    <p css={statusTextStyles}>
+    <Typography className={classes.text}>
       Logged in as {authUser.email}
-      &nbsp;
-      <a
-        css={{
-          color: 'inherit',
-          textDecoration: 'none',
-          transition: `all ${presets.animation.speedFast} ${
-            presets.animation.curveDefault
-          }`,
-          borderBottom: `1px solid ${colors.ui.bright}`,
-          boxShadow: `inset 0 -2px 0px 0px ${colors.ui.bright}`,
-          fontFamily: options.headerFontFamily.join(','),
-          fontWeight: 'bold',
-          '&:hover': {
-            background: colors.ui.bright,
-            cursor: 'pointer',
-          },
-        }}
-        href="/members"
-        onClick={auth.doSignOut}
-      >
+      <a className={classes.anchor} href="/members" onClick={auth.doSignOut}>
         Sign out
       </a>
-    </p>
+    </Typography>
   );
 
-  return <div css={statusRootStyles}>{details}</div>;
+  return <section className={classes.root}>{details}</section>;
 };
-Status.propTypes = {
-  authUser: PropTypes.shape({}),
-};
-Status.defaultProps = {
-  authUser: null,
-};
+Status.propTypes = propTypes;
+Status.defaultProps = defaultProps;
 
-const StatusWithContext = props => (
+const StatusWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => <Status {...props} authUser={authUser} />}
+    {(authUser) => (
+      <Status
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        authUser={authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 
