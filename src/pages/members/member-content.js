@@ -25,7 +25,7 @@ import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Dependencies
 // import MemberFileShareCard from './MemberFileShareCard';
-import MemberInfoBlock from './MemberInfoBlock';
+import MemberInfo from './MemberInfo';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -144,38 +144,6 @@ const MemberContent = ({
     <AnnouncementIcon htmlColor={red[500]} />
   );
 
-  const memberInfoCard = currentUser && (
-    <Card>
-      <CardHeadline>{`Info for: ${memberEmail}`}</CardHeadline>
-      <div css={{ margin: '2rem 0px' }}>
-        <MemberInfoBlock>
-          {currentUser.FirstName} {currentUser.LastName}
-        </MemberInfoBlock>
-        <MemberInfoBlock>
-          {currentUser.Title}, {currentUser.District}
-        </MemberInfoBlock>
-        <MemberInfoBlock>{currentUser.MemberType || 'Active'} member</MemberInfoBlock>
-        <MemberInfoBlock>{currentUser.Address1}</MemberInfoBlock>
-        <MemberInfoBlock>{currentUser.Address2}</MemberInfoBlock>
-        <MemberInfoBlock>
-          {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
-        </MemberInfoBlock>
-        <MemberInfoBlock>Office Phone: {currentUser.OfficePhone}</MemberInfoBlock>
-        <MemberInfoBlock>Cell Phone: {currentUser.CellPhone}</MemberInfoBlock>
-      </div>
-      <FuturaDiv>
-        <h5>Need to update any information?</h5>
-        <span
-          css={{
-            marginLeft: '1.1rem',
-          }}
-        >
-          Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
-        </span>
-      </FuturaDiv>
-    </Card>
-  );
-
   const invoiceInfo = currentUser && (
     <FuturaDiv>
       <h5>Need a copy of your invoice?</h5>
@@ -267,7 +235,12 @@ const MemberContent = ({
     <div>
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
       <Cards>
-        {memberInfoCard}
+        {currentUser && (
+          <MemberInfo
+            currentUser={currentUser}
+            memberEmail={memberEmail}
+          />
+        )}
         {memberTaskCard}
       </Cards>
 
