@@ -24,7 +24,6 @@ const FuturaAnchor = ({ children, href, ...props }) => {
   const classes = useStyles();
   return (
     <a
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       className={classes.root}
       href={href}

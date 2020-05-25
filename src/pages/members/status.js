@@ -70,7 +70,6 @@ const StatusWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
       <Status
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         authUser={authUser}
       />
