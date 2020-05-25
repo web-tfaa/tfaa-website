@@ -5,17 +5,21 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
+import Alert from '../../components/shared/Alert';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
 import presets from '../../utils/presets';
 import Status from './status';
 import { doGetUsers } from '../../firebase/db';
-import Alert from '../../components/shared/Alert';
+import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Variables
 const propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({
+    paddingContainer: PropTypes.string,
+    root: PropTypes.string,
+  }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
   userEmail: PropTypes.string,
@@ -77,15 +81,7 @@ class MemberListContent extends Component {
       return null;
     }
 
-    const isAdmin = userEmail && [
-      'dinah.menger@fwisd.org',
-      'jclark@springisd.org',
-      'jon.lester@abileneisd.org',
-      'jeffrey.turner@allenisd.org',
-      'jim.egger@mcallenisd.net',
-      'm2mathew@me.com',
-      'mike@drumsensei.com',
-    ].includes(userEmail);
+    const isAdmin = userEmail && ADMIN_USER_EMAIL_LIST.includes(userEmail);
 
     return (
       <div className={classes.root}>
@@ -120,7 +116,9 @@ MemberListContent.defaultProps = defaultProps;
 const MemberList = (props) => (
   // eslint-disable-next-line
   <Layout location={props.location}>
-    <MemberListWithContext {...props} />
+    <MemberListWithContext
+      {...props}
+    />
   </Layout>
 );
 

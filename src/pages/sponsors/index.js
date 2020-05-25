@@ -9,12 +9,13 @@ import Layout from '../../components/layout';
 import SponsorCard from '../../components/shared/sponsor-card';
 import { doGetUsers } from '../../firebase/db';
 
+// Local Variables
+const propTypes = {
+  location: PropTypes.shape({}).isRequired,
+};
+
 // Component Definition
 class Sponsors extends Component {
-  static propTypes = {
-    location: PropTypes.shape({}).isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -164,5 +165,7 @@ class Sponsors extends Component {
     );
   }
 }
+
+Sponsors.propTypes = propTypes;
 
 export default Sponsors;

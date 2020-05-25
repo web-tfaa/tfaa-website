@@ -56,10 +56,12 @@ const FallRetreat = ({ location }) => {
           <p className={classes.text}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (registered and paid). There is no separate conference registration process.
-            {/* {'If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.'} */}
+            {/* {'If you need to register for th
+            is year, then please visit the <Link to="/members">Members</Link> page.'} */}
           </p>
 
-          {/* This "alert" should show the Fall Retreat is in past but we are in the current school year still */}
+          {/* This "alert" shou
+          ld show the Fall Retreat is in past but we are in the current school year still */}
           {/* <div className={classes.text}>
             <Card className={classes.adminCard}>
               <CardContent>
@@ -71,7 +73,8 @@ const FallRetreat = ({ location }) => {
             </Card>
           </div> */}
 
-          {/* <p className={classes.text}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
+          {/* <p classN
+          ame={classes.text}>Preconference Tea and Golf Tournament (Schedule below)</p> */}
           {/* <h5 className={classes.text}>Alternate Tea details</h5> */}
           {/* <p css={scheduleStyles}>To register for &quot;Alternate Tea&quot; fill out{' '} */}
           {/* <a
@@ -87,7 +90,8 @@ const FallRetreat = ({ location }) => {
           {/* <p css={scheduleStyles}><em>Lunch is free - provided by <a href="https://www.westmusic.com/" target="_blank" rel="noopener noreferrer">West Music</a></em></p>
           <ul css={scheduleStyles}>
             Speakers to include:
-            <li css={scheduleStyles}>Dr. Mackie Spradley – Director of Enrichment Education and Programs, Texas Education Agency & NAfME President Elect</li>
+            <li css={scheduleStyles}>Dr. Mackie Spradley – Director of Enrichment
+            Education and Programs, Texas Education Agency & NAfME President Elect</li>
             <li css={scheduleStyles}>Ms. Julie Duty – Executive Director of United Sound, Inc.</li>
           </ul> */}
         </section>

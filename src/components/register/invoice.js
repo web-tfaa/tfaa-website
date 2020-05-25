@@ -11,33 +11,37 @@ import {
 } from '../../utils/helpers';
 
 // Local Variables
+const propTypes = {
+  amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  form: PropTypes.shape({
+    District: PropTypes.string,
+    invoiceDate: PropTypes.string,
+    receiptDate: PropTypes.string,
+  }).isRequired,
+  invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  isActive: PropTypes.bool,
+  isInvoice: PropTypes.bool.isRequired,
+  paymentDetails: PropTypes.shape({
+    payerId: PropTypes.string,
+    paymentId: PropTypes.string,
+  }),
+  receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sponsorLevel: PropTypes.string,
+};
+
+const defaultProps = {
+  invoiceId: 1,
+  isActive: true,
+  paymentDetails: {},
+  receiptId: 1,
+  sponsorLevel: '',
+};
+
 const currentDate = format(new Date(), ['M/D/YYYY']);
 
 // Component Definition
 // eslint-disable-next-line
 class Invoice extends Component {
-  static propTypes = {
-    amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    form: PropTypes.shape({}).isRequired,
-    invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    isActive: PropTypes.bool,
-    isInvoice: PropTypes.bool.isRequired,
-    paymentDetails: PropTypes.shape({
-      payerId: PropTypes.string,
-      paymentId: PropTypes.string,
-    }),
-    receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    sponsorLevel: PropTypes.string,
-  };
-
-  static defaultProps = {
-    invoiceId: 1,
-    isActive: true,
-    paymentDetails: {},
-    receiptId: 1,
-    sponsorLevel: '',
-  };
-
   render() {
     const {
       amount,
@@ -194,5 +198,8 @@ class Invoice extends Component {
     );
   }
 }
+
+Invoice.propTypes = propTypes;
+Invoice.defaultProps = defaultProps;
 
 export default Invoice;

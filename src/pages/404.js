@@ -31,5 +31,5 @@ const FourOhFour = ({ location }) => (
 
 FourOhFour.propTypes = {
   location: PropTypes.shape({}).isRequired,
-}
+};
 export default FourOhFour;

@@ -1,7 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';
@@ -14,21 +14,19 @@ const propTypes = {
     PropTypes.array,
     PropTypes.element,
   ]).isRequired,
-  classes: PropTypes.shape({
-    root: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {
     borderBottom: `1px solid ${colors.ui.light}`,
     boxSizing: 'border-box',
     display: 'flex',
+    paddingBottom: theme.spacing(1),
     transform: 'translateZ(0)',
-    paddingBottom: 16,
+    width: '100%',
     [presets.Tablet]: {
       flex: '1 0 50%',
-      maxWidth: '80%',
+      // maxWidth: '80%',
       boxShadow: `0 1px 0 0 ${colors.ui.light}`,
       '&:nth-child(5),&:nth-child(6)': {
         boxShadow: 'none',
@@ -39,7 +37,7 @@ const styles = {
     },
     [presets.Hd]: {
       flex: '1 0 100%',
-      maxWidth: '90%',
+      // maxWidth: '90%',
       borderLeft: `1px solid ${colors.ui.light}`,
       '&:nth-child(4)': {
         boxShadow: 'none',
@@ -67,28 +65,20 @@ const styles = {
       padding: vPVHd,
     },
   },
-};
-
-// const cover = {
-//   bottom: 0,
-//   left: 0,
-//   position: `absolute`,
-//   right: 0,
-//   top: 0,
-// };
+}));
 
 // Component Definition
-const Card = ({
-  children,
-  classes,
-}) => (
-  <div className={classes.root}>
-    <div className={classes.innerContainer}>
-      {children}
+const Card = ({ children }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <div className={classes.innerContainer}>
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Card.propTypes = propTypes;
 
-export default withStyles(styles)(Card);
+export default Card;

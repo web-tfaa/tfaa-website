@@ -34,8 +34,9 @@ const FallGolfTournament = ({ location }) => {
 
         <section>
           <p>
-            The 6th annual Texas Music Administrators Conference Golf Tournament
-            is scheduled in conjunction with on Wednesday of our Fall Retreat. If you are interested in participating, details will be coming soon.
+            The 6th annual Texas Music Administrators Conference Golf
+            Tournament is scheduled in conjunction with on Wednesday of our Fall Retreat. If you are
+            interested in participating, details will be coming soon.
           </p>
         </section>
 
@@ -47,8 +48,7 @@ const FallGolfTournament = ({ location }) => {
         <section>
           <h4>What</h4>
           <p css={indentStyles}>
-            Golf scramble (Best Ball format with mulligans and cheating
-            encouraged!)
+            Golf scramble (Best Ball format with mulligans and cheating encouraged!)
           </p>
         </section>
 
@@ -103,9 +103,7 @@ const FallGolfTournament = ({ location }) => {
           {/* <p css={indentStyles}>
             $35 (due at the course) which includes green fee and cart
           </p> */}
-          <p css={indentStyles}>
-            Details available soon!
-          </p>
+          <p css={indentStyles}>Details available soon!</p>
         </section>
 
         <div>

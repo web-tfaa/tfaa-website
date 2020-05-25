@@ -1,7 +1,7 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 
 // Internal Dependencies
@@ -12,13 +12,14 @@ import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
 import presets from '../../utils/presets';
 
+// Local Variables
+const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
+
 // Component Definition
 class Login extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    location: PropTypes.shape({}).isRequired,
-  };
-
   handleRedirectToMembers = () => {
     navigate('/members/login');
   };
@@ -68,6 +69,8 @@ class Login extends Component {
       );
   }
 }
+
+Login.propTypes = propTypes;
 
 const LoginWithContext = (props) => (
   <AuthUserContext.Consumer>

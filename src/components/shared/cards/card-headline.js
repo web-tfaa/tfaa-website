@@ -25,7 +25,8 @@ const CardHeadline = ({ children }) => (
       [presets.VVHd]: {
         fontSize: scale(7 / 10).fontSize,
       },
-    }}>
+    }}
+  >
     {children}
   </h2>
 );

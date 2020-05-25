@@ -57,42 +57,42 @@ const colors = {
   c: [],
   // original palette by @SachaG
   // @see https://www.figma.com/file/J6IYJEtdRmwJQOrcZ2DfvxDD/Gatsby
-  gatsby: `#663399`, // was #744c9e
-  lilac: `#9D7CBF`,
+  gatsby: '#663399', // was #744c9e
+  lilac: '#9D7CBF',
   // accent color from the "bolder palette" by @ArchieHicklin
   // @see https://github.com/gatsbyjs/gatsby/issues/1173#issuecomment-309415650
-  accent: `#ffb238`, // "Mustard",
-  success: `#37b635`,
-  warning: `#ec1818`,
+  accent: '#ffb238', // "Mustard",
+  success: '#37b635',
+  warning: '#ec1818',
   ui: {
-    bright: `#ccd4e0`,
-    light: `#f5f3f7`,
-    whisper: `#fbfafc`,
+    bright: '#ccd4e0',
+    light: '#f5f3f7',
+    whisper: '#fbfafc',
   },
   gray: {
     dark: gray(8, 270),
     copy: gray(12, 270),
     calm: gray(46, 270),
   },
-  status: `#f5eefe`,
+  status: '#f5eefe',
   texasFlagBlue: '#002868',
   texasFlagRed: '#BF0A30',
 };
 
-let pointer = `a`;
-colorStr.split(`\n`).reverse()
-  .forEach(c => {
-    if (c === ``) return;
+let pointer = 'a';
+colorStr.split('\n').reverse()
+  .forEach((c) => {
+    if (c === '') return;
     colors[pointer].push(c);
     switch (pointer) {
-      case `a`:
-        pointer = `b`;
+      case 'a':
+        pointer = 'b';
         break;
-      case `b`:
-        pointer = `c`;
+      case 'b':
+        pointer = 'c';
         break;
-      case `c`:
-        pointer = `a`;
+      case 'c':
+        pointer = 'a';
         break;
       default:
         break;
