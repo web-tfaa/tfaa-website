@@ -22,7 +22,7 @@ const propTypes = {
   currentUser: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
-    AmountPaid: PropTypes.number,
+    AmountPaid: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     CellPhone: PropTypes.string,
     City: PropTypes.string,
     District: PropTypes.string,
@@ -34,14 +34,10 @@ const propTypes = {
     State: PropTypes.string,
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
-    invoiceId: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
+    invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     receiptId: PropTypes.number,
   }),
   isRegisteredForCurrentYear: PropTypes.bool.isRequired,
-  memberEmail: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -61,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
 const MemberTasks = ({
   currentUser,
   isRegisteredForCurrentYear,
-  memberEmail,
 }) => {
   const classes = useStyles();
 
@@ -128,7 +123,7 @@ const MemberTasks = ({
 
   return (
     <Card>
-      <CardHeadline>{`Tasks for: ${memberEmail}`}</CardHeadline>
+      <CardHeadline>{`Tasks for ${currentSchoolYearLong} school year`}</CardHeadline>
       <FuturaDiv
         render={() => (
           <div>
