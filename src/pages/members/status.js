@@ -47,7 +47,7 @@ const Status = ({ authUser }) => {
 
   const details = !isAuthenticated ? (
     <Typography className={classes.text}>
-      To access the Members area, please
+      To access the Members area, please{' '}
       <Link to="/members/login">
         log in
       </Link>.

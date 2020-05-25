@@ -9,7 +9,7 @@ import CardHeadline from '../../../components/shared/cards/card-headline';
 import FuturaDiv from '../../../components/shared/futura-div';
 
 // Local Dependencies
-import MemberInfoBlock from '../MemberInfoBlock';
+import MemberInfoBlock from '../member-info-block';
 
 // Local Variables
 const propTypes = {

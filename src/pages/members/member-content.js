@@ -10,8 +10,8 @@ import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Dependencies
 // import MemberFileShareCard from './MemberFileShareCard';
-import MemberInfo from './MemberInfo';
-import MemberTasks from './MemberTasks';
+import MemberInfo from './member-info';
+import MemberTasks from './member-tasks';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -149,18 +149,16 @@ const MemberContent = ({
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
       <Cards>
         {currentUser && (
-          <>
-            <MemberInfo
-              currentUser={currentUser}
-              memberEmail={memberEmail}
-            />
-            <MemberTasks
-              currentUser={currentUser}
-              isRegisteredForCurrentYear={isRegisteredForCurrentYear}
-              memberEmail={memberEmail}
-            />
-          </>
+          <MemberInfo
+            currentUser={currentUser}
+            memberEmail={memberEmail}
+          />
         )}
+        <MemberTasks
+          currentUser={currentUser}
+          isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+          memberEmail={memberEmail}
+        />
       </Cards>
 
       {/* <h2>For Members</h2>

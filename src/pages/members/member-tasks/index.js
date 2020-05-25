@@ -22,7 +22,7 @@ const propTypes = {
   currentUser: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
-    AmountPaid: PropTypes.string,
+    AmountPaid: PropTypes.number,
     CellPhone: PropTypes.string,
     City: PropTypes.string,
     District: PropTypes.string,
@@ -34,11 +34,18 @@ const propTypes = {
     State: PropTypes.string,
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
-    invoiceId: PropTypes.number,
+    invoiceId: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
     receiptId: PropTypes.number,
-  }).isRequired,
+  }),
   isRegisteredForCurrentYear: PropTypes.bool.isRequired,
   memberEmail: PropTypes.string.isRequired,
+};
+
+const defaultProps = {
+  currentUser: null,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -152,5 +159,6 @@ const MemberTasks = ({
 };
 
 MemberTasks.propTypes = propTypes;
+MemberTasks.defaultProps = defaultProps;
 
 export default MemberTasks;
