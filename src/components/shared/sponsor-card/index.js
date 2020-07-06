@@ -2,8 +2,11 @@
 import Card from '@material-ui/core/Card';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
+
+// Internal Dependencies
+import Alert from '../Alert';
 
 // Local Variables
 const propTypes = {
@@ -21,7 +24,10 @@ const defaultProps = {
 
 const TITLE_BLUE = '#32456B';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  alert: {
+    borderTop: `1px solid ${theme.palette.divider}`,
+  },
   card: {
     background: 'aliceblue',
     fontSize: '0.9rem',
@@ -41,7 +47,6 @@ const useStyles = makeStyles({
     marginTop: 32,
   },
   list: {
-    // maxWidth: '60%',
     textAlign: 'justify',
   },
   payLink: {
@@ -81,7 +86,7 @@ const useStyles = makeStyles({
     color: TITLE_BLUE,
     marginTop: '1.25rem',
   },
-});
+}));
 
 // Component Definition
 const SponsorCard = ({
@@ -137,7 +142,13 @@ const SponsorCard = ({
             <li>Company name on TMAC website</li>
           </ul>
         </Card>
-        <div className={classes.deadlineText}>
+        <Alert
+          bodyText="Sponsorship opportunities will be available soon."
+          fullWidth
+          rootClasses={classes.alert}
+          type="info"
+        />
+        {/* <div className={classes.deadlineText}>
           Deadline for recogntion at <span className={classes.strongText}>Fall Conference</span> is
           November 1st.
         </div>
@@ -152,7 +163,7 @@ const SponsorCard = ({
           to="/sponsors/sponsor-info"
         >
           Click here to register and pay
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
