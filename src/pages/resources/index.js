@@ -93,7 +93,7 @@ const Resources = ({ location }) => {
             </ExternalLink>
           </div>
         </section>
-        <section css={{ marginBottom: 32 }}>
+        {/* <section css={{ marginBottom: 32 }}>
           <h2>Archived Files</h2>
           <div>
             <ExternalLink to="https://res.cloudinary.com/tmac/image/upload/v1523127306/Abilene-ISD-Supplemental-Music-Lesson-Manual.pdf">
@@ -173,7 +173,7 @@ const Resources = ({ location }) => {
             </ExternalLink>{' '}
             — November 2009
           </div>
-        </section>
+        </section> */}
         <div
           css={{
             display: 'block',
