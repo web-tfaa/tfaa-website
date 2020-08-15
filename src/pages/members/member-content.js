@@ -11,7 +11,7 @@ import presets from '../../utils/presets';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Dependencies
-// import MemberFileShareCard from './MemberFileShareCard';
+import MemberFileShareCard from './member-file-share-card';
 import MemberInfo from './member-info';
 import MemberTasks from './member-tasks';
 
@@ -25,8 +25,8 @@ const propTypes = {
   authUser: PropTypes.shape({
     email: PropTypes.string.isRequired,
   }),
-  // contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
-  // contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
+  contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
+  contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
   currentMemberList: PropTypes.arrayOf(PropTypes.shape({})),
   memberEmail: PropTypes.string,
   setShouldRefetchUserList: PropTypes.func.isRequired,
@@ -35,8 +35,8 @@ const propTypes = {
 
 const defaultProps = {
   authUser: null,
-  // contentfulFileShareData: null,
-  // contentfulFileShareDescriptionData: null,
+  contentfulFileShareData: null,
+  contentfulFileShareDescriptionData: null,
   currentMemberList: null,
   userId: null,
 };
@@ -90,8 +90,8 @@ function memberContentReducer(state, { type, payload }) {
 // Component Definition
 const MemberContent = ({
   authUser,
-  // contentfulFileShareData,
-  // contentfulFileShareDescriptionData,
+  contentfulFileShareData,
+  contentfulFileShareDescriptionData,
   currentMemberList,
   memberEmail,
   setShouldRefetchUserList,
@@ -167,7 +167,7 @@ const MemberContent = ({
         />
       </Cards>
 
-      {/* <h2>For Members</h2>
+      <h2>For Members</h2>
 
       <Cards>
         {contentfulFileShareData
@@ -182,7 +182,7 @@ const MemberContent = ({
               }
             />
           ))}
-      </Cards> */}
+      </Cards>
 
       <div
         css={{

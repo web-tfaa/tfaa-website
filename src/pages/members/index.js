@@ -31,7 +31,7 @@ const defaultProps = {
 // Component Definition
 const MembersHome = ({
   authUser,
-  // data,
+  data,
 }) => {
   const [userData, setUserData] = useState(null);
   const [shouldRefetchUserList, setShouldRefetchUserList] = useState(false);
@@ -67,12 +67,12 @@ const MembersHome = ({
         {isAuthenticated ? (
           <MemberContent
             authUser={authUser}
-            // contentfulFileShareData={
-            //   data.allContentfulFileShare.edges
-            // }
-            // contentfulFileShareDescriptionData={
-            //   data.allContentfulFileShareDescriptionTextNode.edges
-            // }
+            contentfulFileShareData={
+              data.allContentfulFileShare.edges
+            }
+            contentfulFileShareDescriptionData={
+              data.allContentfulFileShareDescriptionTextNode.edges
+            }
             currentMemberList={userData}
             memberEmail={authUser.email}
             setShouldRefetchUserList={setShouldRefetchUserList}
