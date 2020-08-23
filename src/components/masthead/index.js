@@ -115,7 +115,10 @@ const Masthead = () => {
         >
           Supporting Music Education in Texas
         </div>
-        <CtaButton to="/about/">
+        <CtaButton
+          buttonColor="blue"
+          to="/about/"
+        >
           <span>Learn More</span>
           <ArrowForwardIcon />
         </CtaButton>

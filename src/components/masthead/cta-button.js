@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { css } from 'glamor';
 import { Link } from 'gatsby';
-import { green, red } from '@material-ui/core/colors';
+import { blue, green, red } from '@material-ui/core/colors';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -20,16 +20,42 @@ const stripeAnimation = css.keyframes({
   '100%': { backgroundPosition: '30px 60px' },
 });
 
+const getButtonColor = (buttonColor) => {
+  let background = red['50'];
+  let hover = red['800'];
+  let primary = texasFlagRed;
+
+  if (buttonColor === 'blue') {
+    background = blue['50'];
+    hover = blue['800'];
+    primary = texasFlagBlue;
+  } else if (buttonColor === 'green') {
+    background = green['50'];
+    hover = green['100'];
+    primary = green500;
+  }
+
+  return {
+    background,
+    hover,
+    primary,
+  }
+};
+
 // Component Definition
 const CtaButton = ({
-  children, isGreen, overrideCSS, to, ...other
+  buttonColor,
+  children,
+  overrideCSS,
+  to,
+  ...other
 }) => (
   <Link
     css={{
       ...overrideCSS,
       ...scale(1 / 5),
       display: 'inline-block',
-      border: `1px solid ${isGreen ? green500 : texasFlagRed}`,
+      border: `1px solid ${getButtonColor(buttonColor).primary}`,
       fontFamily: options.headerFontFamily.join(','),
       padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
       borderRadius: presets.radiusLg,
@@ -42,17 +68,17 @@ const CtaButton = ({
       },
       // Increase specificity
       '&&': {
-        backgroundColor: isGreen ? green['50'] : red['50'],
-        border: `2px solid ${isGreen ? green500 : texasFlagRed}`,
+        backgroundColor: getButtonColor(buttonColor).background,
+        border: `2px solid ${getButtonColor(buttonColor).primary}`,
         boxShadow: 'none',
-        color: isGreen ? green500 : texasFlagRed,
+        color: getButtonColor(buttonColor).primary,
         fontWeight: 'normal',
         backgroundSize: '30px 30px',
         textDecoration: 'none',
         transition: `all ${presets.animation.speedDefault} ${presets.animation.curveDefault}`,
         ':hover, &:focus': {
           backgroundSize: '30px 30px',
-          backgroundColor: isGreen ? green500 : texasFlagRed,
+          backgroundColor: getButtonColor(buttonColor).hover,
           backgroundImage:
             'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
           color: '#fff',
@@ -60,7 +86,7 @@ const CtaButton = ({
         },
         ':focus': {
           outline: 0,
-          boxShadow: `0 0 0 0.2rem ${hex2rgba(isGreen ? green500 : texasFlagBlue, 0.25)}`,
+          boxShadow: `0 0 0 0.2rem ${hex2rgba(getButtonColor(buttonColor).background, 0.25)}`,
         },
         ':after': {
           content: '',
@@ -76,16 +102,20 @@ const CtaButton = ({
 );
 
 CtaButton.propTypes = {
+  buttonColor: PropTypes.oneOf([
+    'green',
+    'red',
+    'blue',
+  ]),
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-  isGreen: PropTypes.bool,
   overrideCSS: PropTypes.string,
   to: PropTypes.string,
 };
 CtaButton.defaultProps = {
-  isGreen: false,
+  buttonColor: 'red',
   overrideCSS: '',
   to: null,
 };
