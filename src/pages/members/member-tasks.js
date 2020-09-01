@@ -133,7 +133,10 @@ const MemberTasks = ({
         )}
       />
       {!isRegisteredForCurrentYear && (
-        <CtaButton isGreen to="/members/join">
+        <CtaButton
+          buttonColor="blue"
+          to="/members/join"
+        >
           Join TMAC
         </CtaButton>
       )}

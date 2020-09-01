@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
@@ -44,9 +45,11 @@ const MemberTableRowActionElements = ({ user }) => {
         <ReactToPrint
           content={() => componentRef.current}
           trigger={() => (
-            <IconButton aria-label="Print receipt">
-              <ReceiptIcon className={classes.icon} />
-            </IconButton>
+            <Tooltip title="Print receipt">
+              <IconButton aria-label="Print receipt">
+                <ReceiptIcon className={classes.icon} />
+              </IconButton>
+            </Tooltip>
           )}
         />
         <div css={{ display: 'none' }}>
@@ -68,9 +71,11 @@ const MemberTableRowActionElements = ({ user }) => {
         <ReactToPrint
           content={() => componentRef.current}
           trigger={() => (
-            <IconButton aria-label="Print invoice">
-              <PrintIcon className={classes.icon} />
-            </IconButton>
+            <Tooltip title="Print invoice">
+              <IconButton aria-label="Print invoice">
+                <PrintIcon className={classes.icon} />
+              </IconButton>
+            </Tooltip>
           )}
         />
         <div css={{ display: 'none' }}>

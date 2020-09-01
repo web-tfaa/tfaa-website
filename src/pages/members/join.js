@@ -99,7 +99,7 @@ const JoinContainer = (props) => {
             }}
           >
             <CtaButton
-              isGreen
+              buttonColor="blue"
               to="/members/register"
             >
               <span>

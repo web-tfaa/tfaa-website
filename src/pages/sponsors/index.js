@@ -58,39 +58,39 @@ class Sponsors extends Component {
 
     Object.values(initialSponsorData).forEach((sponsor) => {
       switch (sponsor.SponsorLevel) {
-        case 'Class Champion':
-          this.setState((state) => ({
-            championData: [
-              ...state.championData,
-              {
-                SponsorOrganization: sponsor.SponsorOrganization,
-                OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-              },
-            ],
-          }));
-          break;
-        case 'Gold Medal':
-          this.setState((state) => ({
-            goldData: [
-              ...state.goldData,
-              {
-                SponsorOrganization: sponsor.SponsorOrganization,
-                OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-              },
-            ],
-          }));
-          break;
-        case 'Silver Medal':
-          this.setState((state) => ({
-            silverData: [
-              ...state.silverData,
-              {
-                SponsorOrganization: sponsor.SponsorOrganization,
-                OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
-              },
-            ],
-          }));
-          break;
+        // case 'Class Champion':
+        //   this.setState((state) => ({
+        //     championData: [
+        //       ...state.championData,
+        //       {
+        //         SponsorOrganization: sponsor.SponsorOrganization,
+        //         OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
+        //       },
+        //     ],
+        //   }));
+        //   break;
+        // case 'Gold Medal':
+        //   this.setState((state) => ({
+        //     goldData: [
+        //       ...state.goldData,
+        //       {
+        //         SponsorOrganization: sponsor.SponsorOrganization,
+        //         OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
+        //       },
+        //     ],
+        //   }));
+        //   break;
+        // case 'Silver Medal':
+        //   this.setState((state) => ({
+        //     silverData: [
+        //       ...state.silverData,
+        //       {
+        //         SponsorOrganization: sponsor.SponsorOrganization,
+        //         OrganizationWebsiteAddress: sponsor.OrganizationWebsiteAddress,
+        //       },
+        //     ],
+        //   }));
+        //   break;
         case 'Bronze Medal':
           this.setState((state) => ({
             bronzeData: [
@@ -135,7 +135,7 @@ class Sponsors extends Component {
                 flexDirection: 'column',
               }}
             >
-              <SponsorCard
+              {/* <SponsorCard
                 max={2000}
                 sponsorClass="Class Champion"
                 sponsorData={championData}
@@ -151,7 +151,7 @@ class Sponsors extends Component {
                 max={1499}
                 sponsorClass="Silver Medal"
                 sponsorData={silverData}
-              />
+              /> */}
               <SponsorCard
                 min={500}
                 max={999}
