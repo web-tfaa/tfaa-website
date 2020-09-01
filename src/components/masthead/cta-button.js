@@ -44,7 +44,7 @@ const getButtonColor = (buttonColor) => {
 
 // Component Definition
 const CtaButton = ({
-  buttonColor,
+  buttonColor = 'blue',
   children,
   overrideCSS,
   to,
