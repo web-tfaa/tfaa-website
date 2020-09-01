@@ -1,8 +1,7 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import hex2rgba from 'hex2rgba';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 // Internal Dependencies
 import AuthUserContext from './session/AuthUserContext';
@@ -32,16 +31,14 @@ import '../fonts/Webfonts/futurapt_demiitalic_macroman/stylesheet.css';
 import 'typeface-spectral';
 import 'typeface-space-mono';
 
-// Local Variables
-const propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.element,
-  ]).isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  location: PropTypes.shape({}).isRequired,
-};
+// Local Typings
+interface Props {
+  children: ReactElement;
+  isAuthenticated: boolean;
+  location: Location;
+}
 
+// Local Variables
 const sidebarStyles = {
   backgroundColor: colors.ui.whisper,
   borderRight: `1px solid ${colors.ui.light}`,
@@ -81,15 +78,13 @@ const sidebarStyles = {
 };
 
 // Component Definition
-const DefaultLayout = (props) => {
-  const {
-    children,
-    isAuthenticated,
-    location: {
-      pathname: path,
-    },
-  } = props;
-
+const DefaultLayout: React.FC<Props> = ({
+  children,
+  isAuthenticated,
+  location: {
+    pathname: path,
+  },
+}) => {
   const isHome = path === '/';
   const isSponsors = path.slice(0, 9) === '/sponsors';
   const isAbout = path.slice(0, 6) === '/about';
@@ -207,8 +202,6 @@ const DefaultLayout = (props) => {
     </div>
   );
 };
-
-DefaultLayout.propTypes = propTypes;
 
 const DefaultLayoutWithContext = (props) => (
   <AuthUserContext.Consumer>
