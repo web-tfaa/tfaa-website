@@ -125,8 +125,9 @@ class RegisterSponsorForm extends Component {
     this.state = {
       ...INITIAL_STATE,
       hasCompletedRegisterSponsorForm: false,
-      radioValueFallRetreat: 'Yes',
-      radioValueSpringRoundTable: 'Yes',
+      // TODO: Change back to "Yes" in a non-pandemic year
+      radioValueFallRetreat: 'No',
+      radioValueSpringRoundTable: 'No',
       // eslint-disable-next-line
       userId: props.authUser.uid,
     };
@@ -376,7 +377,9 @@ class RegisterSponsorForm extends Component {
       radioValueSpringRoundTable,
     } = this.state;
 
-    if (isAuthenticated) navigate('/members');
+    if (isAuthenticated) {
+      navigate('/members');
+    }
 
     const hasInput = SponsorOrganization !== ''
       && OrganizationContactName !== ''
@@ -565,12 +568,12 @@ class RegisterSponsorForm extends Component {
             </label>
             <div css={baseErrorStyles}>{ContactPhoneError}</div>
 
-            <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+            {/* <hr css={{ color: 'blue', height: 3, marginTop: 32 }} /> */}
 
             {/* Fall Retreat Intent */}
-            <FormControl component="fieldset">
+            {/* <FormControl component="fieldset"> */}
               {/* eslint-disable-next-line */}
-              <label css={labelStyles} htmlFor="FallRetreatIntent">
+              {/* <label css={labelStyles} htmlFor="FallRetreatIntent">
                 Will you (or another company representative) be present at the Fall Retreat in
                 Austin - November 14-16, 2018?
                 <RadioGroup
@@ -603,15 +606,15 @@ class RegisterSponsorForm extends Component {
                   <FormControlLabel control={<Radio />} label="No" value="No" />
                   <FormControlLabel control={<Radio />} label="Uncertain" value="Uncertain" />
                 </RadioGroup>
-              </label>
-            </FormControl>
+              </label> */}
+            {/* </FormControl> */}
 
-            <hr css={{ color: 'blue', height: 3, marginTop: 32 }} />
+            {/* <hr css={{ color: 'blue', height: 3, marginTop: 32 }} /> */}
 
             {/* Spring Round Table Intent */}
-            <FormControl component="fieldset">
+            {/* <FormControl component="fieldset"> */}
               {/* eslint-disable-next-line */}
-              <label css={labelStyles} htmlFor="SpringRoundTableIntent">
+              {/* <label css={labelStyles} htmlFor="SpringRoundTableIntent">
                 Will you (or another company representative) be present at the TMEA Round Table in
                 San Antonio - February 13, 2019?
                 <RadioGroup
@@ -644,8 +647,8 @@ class RegisterSponsorForm extends Component {
                   <FormControlLabel control={<Radio />} label="No" value="No" />
                   <FormControlLabel control={<Radio />} label="Uncertain" value="Uncertain" />
                 </RadioGroup>
-              </label>
-            </FormControl>
+              </label> */}
+            {/* </FormControl> */}
 
             {/* Hidden input to help curtail spam */}
             <input
