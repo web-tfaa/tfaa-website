@@ -6,8 +6,8 @@ import { graphql } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import Alert from '../../components/shared/Alert';
 import Container from '../../components/shared/container';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -48,16 +48,14 @@ const Events = ({ data, location }) => {
             Summer Round Table
             {/* <span className={classes.updatedLabel}>(updated)</span> */}
           </h4>
-          <Alert
-            bodyText={`
-              As state conventions will be held virtually, there will be no TMAC
-              Summer Round Table for 2020.
-            `}
-            fullWidth
-            rootClasses={classes.alert}
-            type="warning"
-          />
-          <p>
+          <EnhancedAlert
+            severity="warning"
+            title="No Summer Round Table 2020"
+          >
+            As state conventions will be held virtually, there will be no TMAC
+            Summer Round Table for 2020.
+          </EnhancedAlert>
+          <p css={{ marginTop: 24, paddingLeft: 8 }}>
             Held in conjunction with the&nbsp;
             <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
             ,&nbsp;
@@ -68,14 +66,20 @@ const Events = ({ data, location }) => {
         </section>
         <section>
           <h4>Fall Retreat</h4>
-          <p>
+          <EnhancedAlert
+            severity="warning"
+            title="No Fall Retreat 2020"
+          >
+            The 2020 Fall Retreat event is canceled. There will not be a virtual option.
+          </EnhancedAlert>
+          {/* <p>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (registered and paid). There is no separate conference registration process.
-          </p>
+          </p> */}
         </section>
         <section>
           <h4>TMEA Round Table</h4>
-          <p>
+          <p css={{ paddingLeft: 8 }}>
             Round Table Meeting at the{' '}
             <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
           </p>

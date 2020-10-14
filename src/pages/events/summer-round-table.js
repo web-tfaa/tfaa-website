@@ -5,7 +5,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
-import Alert from '../../components/shared/Alert';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
@@ -47,15 +47,13 @@ const SummerRoundTable = ({ location }) => {
       </Helmet>
       <Container>
         <h1>{titleOfEvent}</h1>
-        <Alert
-          bodyText={`
-              As state conventions will be held virtually, there will be no TMAC
-              Summer Round Table for 2020.
-            `}
-          fullWidth
-          rootClasses={classes.alert}
-          type="warning"
-        />
+        <EnhancedAlert
+          severity="warning"
+          title="No Summer Round Table 2020"
+        >
+          As state conventions will be held virtually, there will be no TMAC
+          Summer Round Table for 2020.
+        </EnhancedAlert>
         <section>
           <h4>When</h4>
           <p className={classes.description}>

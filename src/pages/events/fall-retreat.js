@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 import presets from '../../utils/presets';
 import { useEventData } from '../../utils/hooks/useEventData';
@@ -52,13 +53,19 @@ const FallRetreat = ({ location }) => {
         <h1>{fallRetreat.titleOfEvent}</h1>
 
         <section>
-          <h4>Who</h4>
-          <p className={classes.text}>
+          <EnhancedAlert
+            severity="warning"
+            title="No Fall Retreat 2020"
+          >
+            The 2020 Fall Retreat event is canceled. There will not be a virtual option.
+          </EnhancedAlert>
+          {/* <h4>Who</h4> */}
+          {/* <p className={classes.text}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (registered and paid). There is no separate conference registration process.
-            {/* {'If you need to register for th
-            is year, then please visit the <Link to="/members">Members</Link> page.'} */}
-          </p>
+            {'If you need to register for th
+            is year, then please visit the <Link to="/members">Members</Link> page.'}
+          </p> */}
 
           {/* This "alert" shou
           ld show the Fall Retreat is in past but we are in the current school year still */}
@@ -96,13 +103,14 @@ const FallRetreat = ({ location }) => {
           </ul> */}
         </section>
 
-        <section>
+        {/* <section>
           <h4>When</h4>
-          <p className={classes.text}>{fallRetreat.dateOfEvent}</p>
-        </section>
+          <p className={classes.text}>Fall 2021</p> */}
+          {/* <p className={classes.text}>{fallRetreat.dateOfEvent}</p> */}
+        {/* </section> */}
 
-        <section>
-          <h4>Schedule available mid Fall</h4>
+        {/* <section>
+          <h4>Schedule available mid Fall 2021</h4> */}
           {/* <h4>Schedule</h4> */}
 
           {/* <h5 className={classes.text}>Wednesday</h5>
@@ -125,9 +133,9 @@ const FallRetreat = ({ location }) => {
           <p css={scheduleStyles}>8:00am - Registration and Breakfast</p>
           <p css={scheduleStyles}>8:30am - TMAC Business Meeting followed by round table topics.</p>
           <p css={scheduleStyles}>12:00pm  - Conference ends</p> */}
-        </section>
+        {/* </section> */}
 
-        <section>
+        {/* <section>
           <h4>Where</h4>
           <div className={classes.text}>
             <p>
@@ -168,7 +176,7 @@ const FallRetreat = ({ location }) => {
               For Hotel reservations click here
             </Button>
           </div>
-        </section>
+        </section> */}
         <div
           css={{
             display: 'block',
