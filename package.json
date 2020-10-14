@@ -14,7 +14,8 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "lint": "eslint '**/*.{js,jsx}'",
-    "lint:fix": "eslint '**/*.{js,jsx}' --fix"
+    "lint:fix": "eslint '**/*.{js,jsx}' --fix",
+    "type-check": "tsc --noEmit"
   },
   "browserslist": [
     "last 2 versions",
@@ -27,6 +28,7 @@
     "@babel/polyfill": "^7.8.7",
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-plugin-transform-regenerator": "^6.26.0",
@@ -45,6 +47,7 @@
     "gatsby-plugin-react-helmet": "3.3.10",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-sharp": "^2.6.9",
+    "gatsby-plugin-typescript": "^2.4.18",
     "gatsby-plugin-typography": "2.5.10",
     "gatsby-source-contentful": "2.3.37",
     "glamor": "^2.20.40",
@@ -70,14 +73,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "babel-eslint": "^10.0.3",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^7.1.0",
+    "eslint": "^7.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^4.1.0"
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "typescript": "^4.0.2"
   }
 }
