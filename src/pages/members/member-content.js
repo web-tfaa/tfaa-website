@@ -1,11 +1,13 @@
 // External Dependencies
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {
+  Box,
+  CircularProgress,
+ } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import Alert from '../../components/shared/Alert';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Cards from '../../components/shared/cards';
 import presets from '../../utils/presets';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
@@ -41,28 +43,6 @@ const defaultProps = {
   userId: null,
 };
 
-const useStyles = makeStyles((theme) => ({
-  alert: {
-    margin: theme.spacing(2),
-  },
-}));
-
-// const taskIconStyles = {
-//   height: 24,
-//   marginRight: 8,
-//   width: 24,
-// };
-
-// const checkIconStyles = {
-//   ...taskIconStyles,
-//   color: 'green',
-// };
-
-// const clearIconStyles = {
-//   ...taskIconStyles,
-//   color: 'red',
-// };
-
 const MEMBER_CONTENT_REDUCER_INITIAL_STATE = {
   currentUser: null,
   isRegisteredForCurrentYear: false,
@@ -97,7 +77,6 @@ const MemberContent = ({
   setShouldRefetchUserList,
   userId,
 }) => {
-  const classes = useStyles();
 
   const [state, dispatchState] = useReducer(
     memberContentReducer,
@@ -154,13 +133,16 @@ const MemberContent = ({
   return (
     <div>
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
-      <Alert
-        bodyText={`Welcome ${memberEmail}`}
-        rootClasses={classes.alert}
-        type="info"
-      />
+      <Box mb={2}>
+        <EnhancedAlert severity="info">
+          {`Welcome ${memberEmail}`}
+        </EnhancedAlert>
+      </Box>
       <Cards>
-        <MemberInfo currentUser={currentUser} setShouldRefetchUserList={setShouldRefetchUserList} />
+        <MemberInfo
+          currentUser={currentUser}
+          setShouldRefetchUserList={setShouldRefetchUserList}
+        />
         <MemberTasks
           currentUser={currentUser}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
@@ -173,13 +155,13 @@ const MemberContent = ({
         {contentfulFileShareData
           && contentfulFileShareData.map((edge, index) => (
             <MemberFileShareCard
-              key={edge.node.id}
-              node={edge.node}
               description={
                 contentfulFileShareDescriptionData
                   ? contentfulFileShareDescriptionData[index].node.description
                   : null
               }
+              key={edge.node.id}
+              node={edge.node}
             />
           ))}
       </Cards>
