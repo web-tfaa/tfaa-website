@@ -10,7 +10,7 @@
   "scripts": {
     "clean:gatsby": "gatsby clean",
     "clean:purge": "rm -rf node_modules && yarn cache clean",
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "lint": "eslint '**/*.{js,jsx}'",
@@ -73,6 +73,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-helmet": "^6.1.0",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "babel-eslint": "^10.0.3",
