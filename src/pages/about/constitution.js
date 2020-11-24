@@ -1,5 +1,5 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
+import { Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
@@ -7,7 +7,9 @@ import { makeStyles } from '@material-ui/styles';
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
+import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
+import MembershipByLaws from './MembershipByLaws';
 import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/sidebar-body';
 
@@ -52,13 +54,19 @@ const Constitution = ({ location }) => {
   const classes = useStyles();
 
   return (
-    <Layout location={location}>
-      <Helmet>
-        <title>TMAC | Constitution and Bylaws</title>
-      </Helmet>
+    <Layout location={location} pageTitle="Constitution and Bylaws">
       <div className={classes.root}>
         <Container>
           <h1>Constitution and Bylaws of Texas Music Administrators Conference</h1>
+          <Box mb={3}>
+            <FuturaAnchor
+              download
+              href="https://res.cloudinary.com/tmac/image/upload/v1606193457/TMAC_Bylaws_for_website-Updated_11-19-20.pdf"
+              rel="noreferrer noopener"
+              target="_blank">
+              Download
+            </FuturaAnchor>
+          </Box>
           <CardHeadline>ARTICLE I &mdash; ORGANIZATION</CardHeadline>
 
           <section>
@@ -72,117 +80,85 @@ const Constitution = ({ location }) => {
               </dd>
               <dt>Section 2 &mdash; Purpose</dt>
               <dd className={classes.paddingMedium}>
-                Beyond the general purposes of the Corporation described in its Certificate of
-                Formation, the specific purposes for which the Corporation was formed are:
+                {`Beyond the general purposes of the Corporation described in its Certificate of
+                Formation, the specific purposes for which the Corporation was formed are:`}
               </dd>
               <div className={classes.purposeSubGroup}>
                 <span className={classes.purposeSubGroupLetter}>(a)</span>
                 <dd>
-                  The Corporation is organized exclusively for charitable, scientific and
+                  {`The Corporation is organized exclusively for charitable, scientific and
                   educational purposes, more specifically to promote and support music education and
                   music educators through collaboration, networking, and the sharing of best
                   practices so that every child in Texas is assured of receiving quality instruction
-                  in the understanding, appreciation, and performance of music.
+                  in the understanding, appreciation, and performance of music.`}
                 </dd>
               </div>
               <div className={classes.purposeSubGroup}>
                 <span className={classes.purposeSubGroupLetter}>(b)</span>
                 <dd>
-                  To receive by gift, grant, devise, bequest or otherwise, and from any private or
+                  {`To receive by gift, grant, devise, bequest or otherwise, and from any private or
                   public sources, personal or real property, and to hold, administer, sell, invest,
                   reinvest, manage, use, disburse and distribute, and apply the income and/or
                   principal of the same in accordance with the directions and intent of the donor or
                   donors of such property, or, in the absence of such directions, as the Corporation
                   may deem best from time to time, for the promotion of any or all of the foregoing
-                  purposes.
+                  purposes.`}
                 </dd>
               </div>
               <div className={classes.purposeSubGroup}>
                 <span className={classes.purposeSubGroupLetter}>(c)</span>
                 <dd>
-                  To do any and all things, either alone or in cooperation with other organizations
+                  {`To do any and all things, either alone or in cooperation with other organizations
                   or institutions, and either directly or by contribution to such other
                   organizations or institutions, which it may deem necessary or proper in order to
-                  carry into effect any or all of the foregoing objects or purposes.
+                  carry into effect any or all of the foregoing objects or purposes.`}
                 </dd>
               </div>
             </dl>
           </section>
 
-          <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
-          <section>
-            <dl className={classes.paddingMedium}>
-              <dt>Section 1 &mdash; Membership</dt>
-              <dd className={classes.paddingMedium}>
-                Membership in this Corporation shall be open to all individuals who are currently
-                serving in any administrative capacity, retired from such an administrative
-                position, or interested in administration related to music education programs at any
-                level. Membership shall be designated as “Active” or “Retired” as appropriate to the
-                employment status of the member.
-              </dd>
-              <dt>Section 2 &mdash; Annual dues</dt>
-              <dd className={classes.paddingMedium}>
-                A registration fee of $50 (Active Member) or $30 (Retired Member) per year shall
-                entitle an individual to full membership in the Texas Music Administrators
-                Conference. A majority vote of the members present at a regular meeting of the full
-                membership is required to change these amounts. Continued membership is contingent
-                upon being up-to-date on annual membership registration fees.
-              </dd>
-              <dt>Section 3 &mdash; Rights of members</dt>
-              <dd className={classes.paddingMedium}>
-                Each member in good standing shall be eligible to vote on actions before the full
-                membership, to vote for candidates for the executive board, serve on committees and
-                bring business before the general membership.
-              </dd>
-              <dt>Section 4 &mdash; Non-voting membership</dt>
-              <dd className={classes.paddingMedium}>
-                The non-voting membership categories must be adopted by the Board of Directors and
-                proposed as an amendment to these by-laws to the membership as outlined in Article
-                VI.
-              </dd>
-            </dl>
-          </section>
+          <MembershipByLaws />
 
           <CardHeadline>ARTICLE III &mdash; MEETINGS OF MEMBERS</CardHeadline>
           <section>
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Fall Retreat</dt>
               <dd className={classes.paddingMedium}>
-                A fall retreat for the members shall be held annually. The specific date, time and
-                location of the retreat will be designated by the President.
+                {`A fall retreat for the members shall be held annually. The specific date, time and
+                location of the retreat will be designated by the President.`}
               </dd>
               <dt>Section 2 &mdash; Annual meeting</dt>
               <dd className={classes.paddingMedium}>
-                Meeting(s) of the membership shall take place during the Texas Music Educators
+                {`Meeting(s) of the membership shall take place during the Texas Music Educators
                 Association Conference in the designated conference city. The specific dates, times
-                and locations of these meetings will be designated by the President.
+                and locations of these meetings will be designated by the President.`}
               </dd>
               <dt>Section 3 &mdash; Special meetings</dt>
               <dd className={classes.paddingMedium}>
-                Special meetings may be called by the President when it is deemed to be in the best
-                interest of the Corporation.
+                {`Special meetings may be called by the President when it is deemed to be in the best
+                interest of this Corporation.`}
               </dd>
               <dt>Section 4 &mdash; Notice of meetings</dt>
               <dd className={classes.paddingMedium}>
-                Written notice of each meeting shall be sent to the membership via e-mail, and
-                posted on the web site, not less than two weeks prior to the meeting.
+                {` Written notice of each meeting shall be sent to the membership via e-mail, and
+                posted on the web site, not less than two weeks prior to the meeting.`}
               </dd>
               <dt>Section 5 &mdash; Quorum</dt>
               <dd className={classes.paddingMedium}>
-                The members present at any properly noticed meeting shall constitute a quorum.
+                {`The members present at any properly noticed meeting shall constitute a quorum.`}
               </dd>
               <dt>Section 6 &mdash; Voting</dt>
               <dd className={classes.paddingMedium}>
-                All issues to be voted on shall be duly moved and seconded prior to the call for a
+                {`All issues to be voted on shall be duly moved and seconded prior to the call for a
                 vote. Each vote shall be decided by a simple majority of those present at the
                 meeting in which the vote takes place. A voice or hand vote is acceptable for issues
                 except the election of officers. A written ballot may be taken on any issue at the
-                discretion of the chair of the Board of Directors.
+                discretion of the chair of the Board of Directors.`}
               </dd>
               <dt>Section 7 &mdash; Order of Business</dt>
               <dd className={classes.paddingMedium}>
-                The order of business for board and general membership meetings shall be conducted
-                according to Robert’s Rules of Order and follow the general outline below:
+                {`The order of business for board and general membership meetings shall be conducted
+                according to Robert’s Rules of Order and follow the general outline below:`}
                 <ol>
                   <li>Introductions – Roll Call</li>
                   <li>Adoption of the Minutes of the preceding meeting.</li>
@@ -201,42 +177,39 @@ const Constitution = ({ location }) => {
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Board Role, Size, Compensation</dt>
               <dd className={classes.paddingMedium}>
-                The Board of Directors, which may otherwise be referred to as the Executive Board,
+                {`The Board of Directors, which may otherwise be referred to as the Executive Board,
                 is responsible for overall policy and direction of this Corporation, and may
                 delegate responsibility for day-to- day operations to individual Directors and
                 committees. The Board of Directors shall have up to 4 elected members and 1 member
                 who serves as an Executive Secretary (see Section 10 below). The Directors shall
                 receive no compensation other than reasonable expenses, except as noted in Article
-                10 below.
+                10 below.`}
               </dd>
               <dt>Section 2 &mdash; Terms</dt>
               <dd className={classes.paddingMedium}>
-                All elected Directors shall serve a one-year term in each officer position in the
-                following sequence: Secretary, Vice-President, President and Past President.
+                {`All elected Directors shall serve a one-year term in each officer position in the
+                following sequence: Secretary, Vice-President, President and Past President.`}
               </dd>
               <dt>Section 3 &mdash; Meetings</dt>
               <dd className={classes.paddingMedium}>
-                The Board of Directors shall meet at least twice per year, at a time and place set
-                by the President, in conjunction with the general membership meetings.
+                {`The Board of Directors shall meet at least twice per year, at a time and place set
+                by the President, in conjunction with the general membership meetings.`}
               </dd>
               <dt>Section 4 &mdash; Board Elections</dt>
               <dd className={classes.paddingMedium}>
-                New Directors and current Directors shall be elected or re-elected by the voting
+                {`New Directors and current Directors shall be elected or re-elected by the voting
                 members at the annual meeting. Directors will be elected by a simple majority of
                 members present at the annual meeting on a written ballot. Unopposed candidates may
-                be elected through a voice vote, by consensus of the members present.
+                be elected through a voice vote, by consensus of the members present.`}
               </dd>
               <dt>Section 5 &mdash; Election Procedures</dt>
               <dd className={classes.paddingMedium}>
-                A Nominating Committee, chaired by the Vice-President, shall be responsible for
-                presenting a slate of prospective Secretary candidates to the Board of Directors. In
-                addition, any member may nominate a candidate for Secretary to the slate of nominees
-                from the floor.
+                {`A Nominating Committee, chaired by the Vice-President, shall be responsible for presenting a slate of prospective Secretary candidates to the Board of Directors. In addition, any member may nominate a candidate for Secretary to the slate of nominees from the floor.`}
               </dd>
               <dt>Section 6 &mdash; Officers and Duties</dt>
               <dd className={classes.paddingMedium}>
-                There shall be four officers of the Board of Directors consisting of a President,
-                Vice-President, Past President, and Secretary. Their duties are as follows:
+                {`There shall be four officers of the Board of Directors consisting of a President,
+                Vice-President, Past President, and Secretary. Their duties are as follows:`}
               </dd>
               <dd className={classes.paddingLarge}>
                 The <em className={classes.strong}>President</em> shall convene regularly scheduled
@@ -262,84 +235,49 @@ const Constitution = ({ location }) => {
               </dd>
               <dt>Section 7 &mdash; Vacancies</dt>
               <dd className={classes.paddingMedium}>
-                When a vacancy on the Board of Directors exists, the Director in the preceding
+                {`When a vacancy on the Board of Directors exists, the Director in the preceding
                 position shall fill the vacant position, and the remaining Directors shall have the
                 authority to appoint a replacement for the remaining vacancy from the current
                 membership. Such appointments shall last only to the end of the resigning or removed
-                Director’s regular term.
+                Director’s regular term.`}
               </dd>
               <dt>Section 8 &mdash; Resignation and Termination</dt>
               <dd className={classes.paddingMedium}>
-                Resignation as a member of the Board of Directors must be in writing and received by
+                {`Resignation as a member of the Board of Directors must be in writing and received by
                 the President. A Director may be removed for other reasons by a two-third vote of
-                the remaining Directors.
+                the remaining Directors.`}
               </dd>
               <dt>Section 9 &mdash; Special Meetings</dt>
               <dd className={classes.paddingMedium}>
-                Special meetings of the Board of Directors shall be called at the request of the
-                President as deemed necessary to conduct the business of this Corporation.
+                {`Special meetings of the Board of Directors shall be called at the request of the
+                President as deemed necessary to conduct the business of this Corporation.`}
               </dd>
               <dt>Section 10 &mdash; Executive Secretary</dt>
               <dd className={classes.paddingMedium}>
-                An Executive Secretary shall be appointed annually by the Board of Directors. The
-                current Executive Secretary may be re-appointed by the Board of Directors. If the
-                position is vacant, a new Executive Secretary may be recommended to the Board of
-                Directors by a committee appointed by the President. The Executive Secretary reports
-                to the Finance Committee and serves as an ex- officio, non-voting member of the
-                Board of Directors. The Executive Secretary’s duties include, but are not limited
-                to, handling financial operations of this Corporation, including assisting in the
-                preparation of the budget, helping develop fundraising plans, executing payment for
-                all expenses authorized by the Board of Directors, and making financial information
-                available to members; provide an annual financial report to the general membership;
-                provide timely and efficient communication to the membership pertaining to
-                organizational events, and to the Executive Board pertaining to required tasks and
-                duties; attend all meetings of the Executive Board and general membership; generate
-                membership lists for selected events; and other duties as required for the health
-                and benefit of this Corporation. The Executive Secretary shall receive an annual
-                Honorarium, set by the Executive Board paid at the end of each fiscal year. The
-                amount of such Honorarium shall not exceed compensation that is commensurate with
-                the duties that the Executive Secretary performs for the Board of Directors.
+                {`An Executive Secretary shall be appointed annually by the Board of Directors. The current Executive Secretary may be re-appointed by the Board of Directors. If the position is vacant, a new Executive Secretary may be recommended to the Board of Directors by a committee appointed by the President. The Executive Secretary reports to the Finance Committee and serves as an ex-
+officio, non-voting member of the Board of Directors. The Executive Secretary’s duties include, but are not limited to, handling financial operations of this Corporation, including assisting in the preparation of the budget, helping develop fundraising plans, executing payment for all expenses authorized by the Board of Directors, and making financial information available to members; provide an annual financial report to the general membership; provide timely and efficient communication to the membership pertaining to organizational events, and to the Executive Board pertaining to required tasks and duties; attend all meetings of the Executive Board and general membership; generate membership lists for selected events; and other duties as required for the health and benefit of this Corporation. The Executive Secretary shall receive an annual Honorarium, set by the Executive Board paid by the end of each fiscal year. The amount of such Honorarium shall not exceed compensation that is commensurate with the duties that the Executive Secretary performs for the Board of Directors.`}
               </dd>
               <dt>Section 11 &mdash; Powers</dt>
               <dd className={classes.paddingMedium}>
-                In addition to the powers expressly conferred by these Bylaws, the Board may
+                {`In addition to the powers expressly conferred by these Bylaws, the Board may
                 exercise such powers and do such lawful things as are not prohibited by statute or
-                by these Bylaws.
+                by these Bylaws.`}
               </dd>
               <dt>Section 12 &mdash; Voting</dt>
               <dd className={classes.paddingMedium}>
-                The presence at a meeting of not less than a majority of the Directors then serving
-                shall constitute a quorum. Action by a majority of voting Directors where a quorum
-                is present shall constitute the action of the Directors of this Corporation
+                {`The presence at a meeting of not less than a majority of the Directors then serving shall constitute a quorum. Action by a majority of voting Directors where a quorum is present shall constitute the action of the Directors of this Corporation`}
               </dd>
               <dt>Section 13 &mdash; Participation by Telephone</dt>
               <dd className={classes.paddingMedium}>
-                Directors may participate in and hold a meeting of the Board by means of conference
-                telephone or similar communications equipment by means of which all persons
-                participating in the meeting can hear and speak to each other, and participation in
-                the meeting pursuant to this paragraph shall constitute presence at such meeting,
-                except where a Director participates in the meeting for the express purpose of
-                objecting to the transaction of any business on the grounds that the meeting was not
-                lawfully called or convened.
+                {`Directors may participate in and hold a meeting of the Board by means of conference telephone or similar communications equipment by means of which all persons participating in the meeting can hear and speak to each other, and participation in the meeting pursuant to this paragraph shall constitute presence at such meeting, except where a Director participates in the meeting for the express purpose of objecting to the transaction of any business on the grounds that the meeting was not lawfully called or convened.`}
               </dd>
               <dt>Section 14 &mdash; Consent</dt>
               <dd className={classes.paddingMedium}>
-                Any action required or permitted to be taken at a meeting of the Board may be taken
-                without a meeting if a consent in writing setting forth the action so taken is
-                signed by all members of the Board. Any such signed consent, or an electronically
-                transmitted copy thereof, shall be placed in the minutes book of the Corporation.
+                {`Any action required or permitted to be taken at a meeting of the Board may be taken without a meeting if a consent in writing setting forth the action so taken is signed by all members of the Board. Any such signed consent, or an electronically transmitted copy thereof, shall be placed in the minutes book of the Corporation.`}
               </dd>
               <dt>Section 15 &mdash; Indemnification</dt>
               <dd className={classes.paddingMedium}>
-                To the fullest extent allowed by, and in accordance with, the terms and provisions
-                of the Texas Business Organizations Code, including, but not limited to the
-                indemnifications provided by Sections 8.101, 8.051, 8.052 and 8.104 thereof, or any
-                other applicable law, no person shall be liable to the Corporation for monetary
-                damages for or with respect to any acts or omissions in his/her capacity as a member
-                of the Board or a committee. No amendment to or repeal of this provision shall apply
-                to or have any effect on the liability of any Director or committee member with
-                respect to acts or omissions of such Director or committee member prior to any such
-                repeal or amendment.
+                {`To the fullest extent allowed by, and in accordance with, the terms and provisions of the Texas Business Organizations Code, including, but not limited to the indemnifications provided by Sections 8.101, 8.051, 8.052 and 8.104 thereof, or any other applicable law, no person shall be liable to the Corporation for monetary damages for or with respect to any acts or omissions in his/her capacity as a member of the Board or a committee. No amendment to or repeal of this provision shall apply to or have any effect on the liability of any Director or committee member with respect to acts or omissions of such Director or committee member prior to any such repeal or amendment.`}
               </dd>
             </dl>
           </section>
@@ -349,44 +287,20 @@ const Constitution = ({ location }) => {
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Committee Formation</dt>
               <dd className={classes.paddingMedium}>
-                The Board may create committees as needed, such as fundraising, nominating, data
-                collection, etc. The President appoints all committee chairs.
+                {`The Board may create committees as needed, such as fundraising, nominating, data
+                collection, etc. The President appoints all committee chairs.`}
               </dd>
               <dt>Section 2 &mdash; Finance Committee</dt>
               <dd className={classes.paddingMedium}>
-                The Finance Committee shall be appointed by the President and consist of two
-                Directors and three Past Presidents. The Finance Committee has oversight of the
-                Executive Secretary in all matters pertaining to finances, including but not limited
-                to the annual budget. The Finance Committee is responsible for developing and
-                reviewing fiscal procedures and annual budget. The Board of Directors must approve
-                the budget, and all expenditures must be within the budget. Any major change in the
-                budget must be approved by the Board of Directors. The fiscal year shall run April 1
-                to March 30 annually. Annual reports are required to be submitted to the Board
-                showing income, expenditures and pending income. The financial records of this
-                Corporation are public information and shall be made available to the membership,
-                the Directors, and the public.
+                {`The Finance Committee shall be appointed by the President and consist of two Directors and three Past Presidents. The Finance Committee has oversight of the Executive Secretary in all matters pertaining to finances, including but not limited to the annual budget. The Finance Committee is responsible for developing and reviewing fiscal procedures and annual budget. The Board of Directors must approve the budget, and all expenditures must be within the budget. Any major change in the budget must be approved by the Board of Directors. The fiscal year shall run April 1 to March 30 annually. Annual reports are required to be submitted to the Board showing income, expenditures and pending income. The financial records of this Corporation are public information and shall be made available to the membership, the Directors, and the public.`}
               </dd>
               <dt>Section 3 &mdash; Nominating Committee</dt>
               <dd className={classes.paddingMedium}>
-                The Vice-President will chair the nominating committee and will invite active
-                members to serve on this committee as directed by the President. The committee shall
-                contact all possible nominees to determine their willingness to serve. A slate,
-                containing the name of one or more active members who have agreed to run for the
-                Secretary position must be presented to the Board for ratification prior to placing
-                the election on a meeting agenda for the members. The committee members shall serve
-                as the election officials, should a written ballot be taken on the election of the
-                new board member.
+                {`The Vice-President will chair the nominating committee and will invite active members to serve on this committee as directed by the President. The committee shall contact all possible nominees to determine their willingness to serve. A slate, containing the name of one or more active members who have agreed to run for the Secretary position must be presented to the Board for ratification prior to placing the election on a meeting agenda for the members. The committee members shall serve as the election officials, should a written ballot be taken on the election of the new board member.`}
               </dd>
               <dt>Section 4 &mdash; Recognitions Committee</dt>
               <dd className={classes.paddingMedium}>
-                The Vice-President will chair the recognitions committee and invite no less than 2
-                active members to serve on this committee prior to the Fall Retreat. This committee
-                will be charged with the task of soliciting nominations for “Outstanding
-                Administrator” from the general Texas Music Educators Association Membership. From
-                those TMAC members in good standing who are nominated, the committee will recommend
-                a single honoree to the Board for approval. The honoree will be announced at the
-                conclusion of the Fall Retreat and a formal presentation will be coordinated with
-                the TMEA board during a general session at the February conference.
+                {`The Vice-President will chair the recognitions committee and invite no less than 2 active members to serve on this committee prior to the Fall Retreat. This committee will be charged with the task of soliciting nominations for “Outstanding Administrator” from the general Texas Music Educators Association Membership. From those TMAC members in good standing who are nominated, the committee will recommend a single honoree to the Board for approval. The honoree will be announced at the conclusion of the Fall Retreat and a formal presentation will be coordinated with the TMEA board during a general session at the February conference.`}
               </dd>
             </dl>
           </section>
@@ -396,10 +310,7 @@ const Constitution = ({ location }) => {
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Amendments</dt>
               <dd className={classes.paddingMedium}>
-                These Bylaws may be amended, when necessary, by a two-thirds majority of the
-                membership in good standing who are present and voting at a regular meeting.
-                Proposed amendments must be submitted to the Secretary to be sent out to all
-                members, prior to the meeting, with regular Membership meeting announcements.
+                {`These Bylaws may be amended, when necessary, by a two-thirds majority of the membership in good standing who are present and voting at a regular meeting. Proposed amendments must be submitted to the Secretary to be sent out to all members, prior to the meeting, with regular Membership meeting announcements.`}
               </dd>
             </dl>
           </section>
@@ -409,10 +320,7 @@ const Constitution = ({ location }) => {
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Memorials</dt>
               <dd className={classes.paddingMedium}>
-                At the passing of a current or former TMAC member, this Corporation will make the
-                donation of a sum not to exceed $500 per individual, to be designated by the
-                Directors, to the Texas Music Educators Association Scholarship Fund in memory of
-                the individual, their service to music education and their participation in TMAC.
+                {`At the passing of a current or former TMAC member, this Corporation will make the donation of a sum not to exceed $500 per individual, to be designated by the Directors, to the Texas Music Educators Association Scholarship Fund in memory of the individual, their service to music education and their participation in TMAC.`}
               </dd>
             </dl>
           </section>
@@ -421,7 +329,8 @@ const Constitution = ({ location }) => {
           <section>
             <dl className={classes.paddingMedium}>
               <dd className={classes.paddingMedium}>
-                The fiscal year of this Corporation shall be from April 1st through March 31st.
+                The fiscal year of this Corporation shall be from April 1<sup>st</sup> through March
+                31<sup>st</sup>.
               </dd>
             </dl>
           </section>
@@ -430,18 +339,14 @@ const Constitution = ({ location }) => {
           <section>
             <dl className={classes.paddingMedium}>
               <dd className={classes.paddingMedium}>
-                The officers, Directors, committee members, employees and persons served by this
-                Corporation shall be selected entirely on a nondiscriminatory basis with respect to
-                age, sex, color, race, religion, national origin, and disability.
+                {`The officers, Directors, committee members, employees and persons served by this Corporation shall be selected entirely on a nondiscriminatory basis with respect to age, sex, color, race, religion, national origin, and disability.`}
               </dd>
             </dl>
           </section>
 
           <section>
             <em>
-              These Bylaws were originally approved at a meeting of the Texas Music Administrators
-              Conference membership on February 15, 2008. These Bylaws were amended on November 21,
-              2013; February 12, 2014; July 26, 2019; and September 16, 2019.
+              {`These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These Bylaws were amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16, 2019; and November 19, 2020.`}
             </em>
           </section>
           {/* Mobile sidebar */}
@@ -451,8 +356,7 @@ const Constitution = ({ location }) => {
               [presets.Tablet]: {
                 display: 'none',
               },
-            }}
-          >
+            }}>
             <hr className={classes.mobileHr} />
             <SidebarBody inline yaml={aboutSidebar} />
           </div>
@@ -463,10 +367,7 @@ const Constitution = ({ location }) => {
 };
 
 Constitution.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]).isRequired,
+  location: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default Constitution;
