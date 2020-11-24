@@ -36,6 +36,7 @@ interface Props {
   children: ReactElement;
   isAuthenticated: boolean;
   location: Location;
+  pageTitle?: string;
 }
 
 // Local Variables
@@ -84,6 +85,7 @@ const DefaultLayout: React.FC<Props> = ({
   location: {
     pathname: path,
   },
+  pageTitle,
 }) => {
   const isHome = path === '/';
   const isSponsors = path.slice(0, 9) === '/sponsors';
@@ -95,7 +97,7 @@ const DefaultLayout: React.FC<Props> = ({
   const hasSidebar = isAbout || isEvents || isResources
     || (isAuthenticated && isMembers);
 
-  const leftPadding = (rhythmSize) => (hasSidebar ? rhythm(rhythmSize) : 0);
+  const leftPadding = (rhythmSize: any) => (hasSidebar ? rhythm(rhythmSize) : 0);
 
   return (
     <div
@@ -110,6 +112,7 @@ const DefaultLayout: React.FC<Props> = ({
         <meta name="og:type" content="website" />
         <meta name="og:site_name" content="TMAC" />
         <html lang="en" amp />
+        {pageTitle && <title>TMAC | {pageTitle}</title>}
       </Helmet>
       <TopNav />
       <div
@@ -203,7 +206,7 @@ const DefaultLayout: React.FC<Props> = ({
   );
 };
 
-const DefaultLayoutWithContext = (props) => (
+const DefaultLayoutWithContext = (props: any) => (
   <AuthUserContext.Consumer>
     {(authUser) => <DefaultLayout {...props} isAuthenticated={!!authUser} />}
   </AuthUserContext.Consumer>
