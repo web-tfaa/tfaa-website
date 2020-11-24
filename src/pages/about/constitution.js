@@ -52,10 +52,7 @@ const Constitution = ({ location }) => {
   const classes = useStyles();
 
   return (
-    <Layout location={location}>
-      <Helmet>
-        <title>TMAC | Constitution and Bylaws</title>
-      </Helmet>
+    <Layout location={location} pageTitle="Constitution and Bylaws">
       <div className={classes.root}>
         <Container>
           <h1>Constitution and Bylaws of Texas Music Administrators Conference</h1>
@@ -451,8 +448,7 @@ const Constitution = ({ location }) => {
               [presets.Tablet]: {
                 display: 'none',
               },
-            }}
-          >
+            }}>
             <hr className={classes.mobileHr} />
             <SidebarBody inline yaml={aboutSidebar} />
           </div>
@@ -463,10 +459,7 @@ const Constitution = ({ location }) => {
 };
 
 Constitution.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]).isRequired,
+  location: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default Constitution;
