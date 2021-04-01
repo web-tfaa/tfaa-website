@@ -31,7 +31,8 @@ const NonMemberContent = () => (
     <div
       css={{
         paddingBottom: '1.5rem',
-      }}>
+      }}
+    >
       <CardHeadline>Membership</CardHeadline>
       <div css={contentStyles}>
         Our members promote and support music education and music educators through collaboration,

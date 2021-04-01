@@ -7,7 +7,7 @@ import React, { ReactElement } from 'react';
 import AuthUserContext from './session/AuthUserContext';
 import Footer from './footer';
 import MobileNav from './nav/mobile-nav';
-import SidebarBody from './shared/sidebar/sidebar-body';
+import SidebarBody from './shared/sidebar/SidebarBody';
 import TopNav from './nav/top-nav';
 import withAuthentication from './session/withAuthentication';
 
@@ -111,7 +111,7 @@ const DefaultLayout: React.FC<Props> = ({
         <meta name="twitter:site" content="@TXMusicLeaders" />
         <meta name="og:type" content="website" />
         <meta name="og:site_name" content="TMAC" />
-        <html lang="en" amp />
+        <html lang="en" />
         {pageTitle && <title>TMAC | {pageTitle}</title>}
       </Helmet>
       <TopNav />
@@ -200,7 +200,9 @@ const DefaultLayout: React.FC<Props> = ({
           {children}
         </div>
       </div>
+
       <MobileNav />
+
       <Footer />
     </div>
   );

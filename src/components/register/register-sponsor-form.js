@@ -572,7 +572,7 @@ class RegisterSponsorForm extends Component {
 
             {/* Fall Retreat Intent */}
             {/* <FormControl component="fieldset"> */}
-              {/* eslint-disable-next-line */}
+            {/* eslint-disable-next-line */}
               {/* <label css={labelStyles} htmlFor="FallRetreatIntent">
                 Will you (or another company representative) be present at the Fall Retreat in
                 Austin - November 14-16, 2018?
@@ -613,7 +613,7 @@ class RegisterSponsorForm extends Component {
 
             {/* Spring Round Table Intent */}
             {/* <FormControl component="fieldset"> */}
-              {/* eslint-disable-next-line */}
+            {/* eslint-disable-next-line */}
               {/* <label css={labelStyles} htmlFor="SpringRoundTableIntent">
                 Will you (or another company representative) be present at the TMEA Round Table in
                 San Antonio - February 13, 2019?

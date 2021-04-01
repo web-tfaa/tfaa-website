@@ -11,7 +11,7 @@ import presets from '../../utils/presets';
 import { firebase } from '../../firebase';
 
 // Sidebar Data
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import membersSidebar from './members-links.yml';
 
 // Component Definition

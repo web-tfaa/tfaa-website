@@ -12,7 +12,7 @@ import FuturaParagraph from '../../../components/shared/futura-paragraph';
 import Layout from '../../../components/layout';
 import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
-import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../../components/shared/sidebar/SidebarBody';
 
 // Local Variables
 const rootStyles = {

@@ -11,7 +11,7 @@ import { pastPresidents } from '../../../components/resources/resources-constant
 
 // Sidebar data
 import Layout from '../../../components/layout';
-import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../../components/shared/sidebar/SidebarBody';
 import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
 import { options } from '../../../utils/typography';

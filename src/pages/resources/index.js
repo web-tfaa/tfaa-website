@@ -7,7 +7,7 @@ import React from 'react';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import resourcesSidebar from './resources-links.yml';

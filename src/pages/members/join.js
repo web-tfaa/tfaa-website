@@ -17,7 +17,7 @@ import presets from '../../utils/presets';
 import Status from './status';
 
 // Sidebar Data
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import membersSidebar from './members-links.yml';
 
 // // Local Variables

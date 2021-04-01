@@ -10,7 +10,7 @@ import Container from '../../components/shared/container';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
