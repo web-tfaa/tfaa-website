@@ -39,7 +39,7 @@ const getButtonColor = (buttonColor) => {
     background,
     hover,
     primary,
-  }
+  };
 };
 
 // Component Definition

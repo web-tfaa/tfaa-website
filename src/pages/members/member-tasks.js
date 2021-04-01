@@ -116,7 +116,6 @@ const MemberTasks = ({
     </FuturaDiv>
   );
 
-
   const isInvoiced = currentUser && currentUser.PaymentOption.toLowerCase() === 'invoiced';
 
   const isPaypal = currentUser && currentUser.PaymentOption.toLowerCase() === 'paypal';

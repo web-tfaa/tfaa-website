@@ -11,7 +11,7 @@ import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
 import MembershipByLaws from './MembershipByLaws';
 import presets from '../../utils/presets';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import aboutSidebar from './about-links.yml';
@@ -63,7 +63,8 @@ const Constitution = ({ location }) => {
               download
               href="https://res.cloudinary.com/tmac/image/upload/v1606193457/TMAC_Bylaws_for_website-Updated_11-19-20.pdf"
               rel="noreferrer noopener"
-              target="_blank">
+              target="_blank"
+            >
               Download
             </FuturaAnchor>
           </Box>
@@ -145,7 +146,7 @@ const Constitution = ({ location }) => {
               </dd>
               <dt>Section 5 &mdash; Quorum</dt>
               <dd className={classes.paddingMedium}>
-                {`The members present at any properly noticed meeting shall constitute a quorum.`}
+                The members present at any properly noticed meeting shall constitute a quorum.
               </dd>
               <dt>Section 6 &mdash; Voting</dt>
               <dd className={classes.paddingMedium}>
@@ -204,7 +205,7 @@ const Constitution = ({ location }) => {
               </dd>
               <dt>Section 5 &mdash; Election Procedures</dt>
               <dd className={classes.paddingMedium}>
-                {`A Nominating Committee, chaired by the Vice-President, shall be responsible for presenting a slate of prospective Secretary candidates to the Board of Directors. In addition, any member may nominate a candidate for Secretary to the slate of nominees from the floor.`}
+                A Nominating Committee, chaired by the Vice-President, shall be responsible for presenting a slate of prospective Secretary candidates to the Board of Directors. In addition, any member may nominate a candidate for Secretary to the slate of nominees from the floor.
               </dd>
               <dt>Section 6 &mdash; Officers and Duties</dt>
               <dd className={classes.paddingMedium}>
@@ -265,19 +266,19 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               </dd>
               <dt>Section 12 &mdash; Voting</dt>
               <dd className={classes.paddingMedium}>
-                {`The presence at a meeting of not less than a majority of the Directors then serving shall constitute a quorum. Action by a majority of voting Directors where a quorum is present shall constitute the action of the Directors of this Corporation`}
+                The presence at a meeting of not less than a majority of the Directors then serving shall constitute a quorum. Action by a majority of voting Directors where a quorum is present shall constitute the action of the Directors of this Corporation
               </dd>
               <dt>Section 13 &mdash; Participation by Telephone</dt>
               <dd className={classes.paddingMedium}>
-                {`Directors may participate in and hold a meeting of the Board by means of conference telephone or similar communications equipment by means of which all persons participating in the meeting can hear and speak to each other, and participation in the meeting pursuant to this paragraph shall constitute presence at such meeting, except where a Director participates in the meeting for the express purpose of objecting to the transaction of any business on the grounds that the meeting was not lawfully called or convened.`}
+                Directors may participate in and hold a meeting of the Board by means of conference telephone or similar communications equipment by means of which all persons participating in the meeting can hear and speak to each other, and participation in the meeting pursuant to this paragraph shall constitute presence at such meeting, except where a Director participates in the meeting for the express purpose of objecting to the transaction of any business on the grounds that the meeting was not lawfully called or convened.
               </dd>
               <dt>Section 14 &mdash; Consent</dt>
               <dd className={classes.paddingMedium}>
-                {`Any action required or permitted to be taken at a meeting of the Board may be taken without a meeting if a consent in writing setting forth the action so taken is signed by all members of the Board. Any such signed consent, or an electronically transmitted copy thereof, shall be placed in the minutes book of the Corporation.`}
+                Any action required or permitted to be taken at a meeting of the Board may be taken without a meeting if a consent in writing setting forth the action so taken is signed by all members of the Board. Any such signed consent, or an electronically transmitted copy thereof, shall be placed in the minutes book of the Corporation.
               </dd>
               <dt>Section 15 &mdash; Indemnification</dt>
               <dd className={classes.paddingMedium}>
-                {`To the fullest extent allowed by, and in accordance with, the terms and provisions of the Texas Business Organizations Code, including, but not limited to the indemnifications provided by Sections 8.101, 8.051, 8.052 and 8.104 thereof, or any other applicable law, no person shall be liable to the Corporation for monetary damages for or with respect to any acts or omissions in his/her capacity as a member of the Board or a committee. No amendment to or repeal of this provision shall apply to or have any effect on the liability of any Director or committee member with respect to acts or omissions of such Director or committee member prior to any such repeal or amendment.`}
+                To the fullest extent allowed by, and in accordance with, the terms and provisions of the Texas Business Organizations Code, including, but not limited to the indemnifications provided by Sections 8.101, 8.051, 8.052 and 8.104 thereof, or any other applicable law, no person shall be liable to the Corporation for monetary damages for or with respect to any acts or omissions in his/her capacity as a member of the Board or a committee. No amendment to or repeal of this provision shall apply to or have any effect on the liability of any Director or committee member with respect to acts or omissions of such Director or committee member prior to any such repeal or amendment.
               </dd>
             </dl>
           </section>
@@ -292,15 +293,15 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               </dd>
               <dt>Section 2 &mdash; Finance Committee</dt>
               <dd className={classes.paddingMedium}>
-                {`The Finance Committee shall be appointed by the President and consist of two Directors and three Past Presidents. The Finance Committee has oversight of the Executive Secretary in all matters pertaining to finances, including but not limited to the annual budget. The Finance Committee is responsible for developing and reviewing fiscal procedures and annual budget. The Board of Directors must approve the budget, and all expenditures must be within the budget. Any major change in the budget must be approved by the Board of Directors. The fiscal year shall run April 1 to March 30 annually. Annual reports are required to be submitted to the Board showing income, expenditures and pending income. The financial records of this Corporation are public information and shall be made available to the membership, the Directors, and the public.`}
+                The Finance Committee shall be appointed by the President and consist of two Directors and three Past Presidents. The Finance Committee has oversight of the Executive Secretary in all matters pertaining to finances, including but not limited to the annual budget. The Finance Committee is responsible for developing and reviewing fiscal procedures and annual budget. The Board of Directors must approve the budget, and all expenditures must be within the budget. Any major change in the budget must be approved by the Board of Directors. The fiscal year shall run April 1 to March 30 annually. Annual reports are required to be submitted to the Board showing income, expenditures and pending income. The financial records of this Corporation are public information and shall be made available to the membership, the Directors, and the public.
               </dd>
               <dt>Section 3 &mdash; Nominating Committee</dt>
               <dd className={classes.paddingMedium}>
-                {`The Vice-President will chair the nominating committee and will invite active members to serve on this committee as directed by the President. The committee shall contact all possible nominees to determine their willingness to serve. A slate, containing the name of one or more active members who have agreed to run for the Secretary position must be presented to the Board for ratification prior to placing the election on a meeting agenda for the members. The committee members shall serve as the election officials, should a written ballot be taken on the election of the new board member.`}
+                The Vice-President will chair the nominating committee and will invite active members to serve on this committee as directed by the President. The committee shall contact all possible nominees to determine their willingness to serve. A slate, containing the name of one or more active members who have agreed to run for the Secretary position must be presented to the Board for ratification prior to placing the election on a meeting agenda for the members. The committee members shall serve as the election officials, should a written ballot be taken on the election of the new board member.
               </dd>
               <dt>Section 4 &mdash; Recognitions Committee</dt>
               <dd className={classes.paddingMedium}>
-                {`The Vice-President will chair the recognitions committee and invite no less than 2 active members to serve on this committee prior to the Fall Retreat. This committee will be charged with the task of soliciting nominations for “Outstanding Administrator” from the general Texas Music Educators Association Membership. From those TMAC members in good standing who are nominated, the committee will recommend a single honoree to the Board for approval. The honoree will be announced at the conclusion of the Fall Retreat and a formal presentation will be coordinated with the TMEA board during a general session at the February conference.`}
+                The Vice-President will chair the recognitions committee and invite no less than 2 active members to serve on this committee prior to the Fall Retreat. This committee will be charged with the task of soliciting nominations for “Outstanding Administrator” from the general Texas Music Educators Association Membership. From those TMAC members in good standing who are nominated, the committee will recommend a single honoree to the Board for approval. The honoree will be announced at the conclusion of the Fall Retreat and a formal presentation will be coordinated with the TMEA board during a general session at the February conference.
               </dd>
             </dl>
           </section>
@@ -310,7 +311,7 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Amendments</dt>
               <dd className={classes.paddingMedium}>
-                {`These Bylaws may be amended, when necessary, by a two-thirds majority of the membership in good standing who are present and voting at a regular meeting. Proposed amendments must be submitted to the Secretary to be sent out to all members, prior to the meeting, with regular Membership meeting announcements.`}
+                These Bylaws may be amended, when necessary, by a two-thirds majority of the membership in good standing who are present and voting at a regular meeting. Proposed amendments must be submitted to the Secretary to be sent out to all members, prior to the meeting, with regular Membership meeting announcements.
               </dd>
             </dl>
           </section>
@@ -320,7 +321,7 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
             <dl className={classes.paddingMedium}>
               <dt>Section 1 &mdash; Memorials</dt>
               <dd className={classes.paddingMedium}>
-                {`At the passing of a current or former TMAC member, this Corporation will make the donation of a sum not to exceed $500 per individual, to be designated by the Directors, to the Texas Music Educators Association Scholarship Fund in memory of the individual, their service to music education and their participation in TMAC.`}
+                At the passing of a current or former TMAC member, this Corporation will make the donation of a sum not to exceed $500 per individual, to be designated by the Directors, to the Texas Music Educators Association Scholarship Fund in memory of the individual, their service to music education and their participation in TMAC.
               </dd>
             </dl>
           </section>
@@ -339,14 +340,14 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           <section>
             <dl className={classes.paddingMedium}>
               <dd className={classes.paddingMedium}>
-                {`The officers, Directors, committee members, employees and persons served by this Corporation shall be selected entirely on a nondiscriminatory basis with respect to age, sex, color, race, religion, national origin, and disability.`}
+                The officers, Directors, committee members, employees and persons served by this Corporation shall be selected entirely on a nondiscriminatory basis with respect to age, sex, color, race, religion, national origin, and disability.
               </dd>
             </dl>
           </section>
 
           <section>
             <em>
-              {`These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These Bylaws were amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16, 2019; and November 19, 2020.`}
+              These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These Bylaws were amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16, 2019; and November 19, 2020.
             </em>
           </section>
           {/* Mobile sidebar */}
@@ -356,7 +357,8 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               [presets.Tablet]: {
                 display: 'none',
               },
-            }}>
+            }}
+          >
             <hr className={classes.mobileHr} />
             <SidebarBody inline yaml={aboutSidebar} />
           </div>

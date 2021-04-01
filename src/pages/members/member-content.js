@@ -2,7 +2,7 @@
 import {
   Box,
   CircularProgress,
- } from '@material-ui/core';
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 
@@ -19,7 +19,7 @@ import MemberTasks from './member-tasks';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Variables
 
@@ -77,7 +77,6 @@ const MemberContent = ({
   setShouldRefetchUserList,
   userId,
 }) => {
-
   const [state, dispatchState] = useReducer(
     memberContentReducer,
     MEMBER_CONTENT_REDUCER_INITIAL_STATE,

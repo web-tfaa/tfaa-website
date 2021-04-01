@@ -1,18 +1,18 @@
 // External Dependencies
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import hex2rgba from 'hex2rgba';
 
 // Internal Dependencies
-import SidebarBody from './sidebar-body';
+import SidebarBody from './SidebarBody';
 import presets, { colors } from '../../../utils/presets';
 import { rhythm } from '../../../utils/typography';
 
-// Local Variables
-const propTypes = {
-  sidebarYaml: PropTypes.shape().isRequired,
-};
+// Local Typings
+interface Props {
+  sidebarYaml: any;
+}
 
+// Local Variables
 const sidebarStyles = {
   borderRight: `1px solid ${colors.ui.light}`,
   backgroundColor: colors.ui.whisper,
@@ -55,8 +55,8 @@ const sidebarStyles = {
 };
 
 // Component Definition
-const Sidebar = (props) => {
-  const { sidebarYaml } = props;
+const Sidebar: FC<Props> = ({ sidebarYaml }) => {
+  console.log('sidebarYaml', sidebarYaml);
 
   return (
     <div css={{ ...sidebarStyles }}>
@@ -65,5 +65,4 @@ const Sidebar = (props) => {
   );
 };
 
-Sidebar.propTypes = propTypes;
 export default Sidebar;
