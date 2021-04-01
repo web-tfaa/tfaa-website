@@ -63,7 +63,7 @@ const FallGolfTournament = ({ location }) => {
         {/* <section>
           <h4>When</h4>
           <p css={indentStyles}>{fallGolfTourny.dateOfEvent}</p> */}
-          {/* <ul css={{ marginLeft: 36 }}>
+        {/* <ul css={{ marginLeft: 36 }}>
             <li>10:30 AM — Warm-up/Check-in</li>
             <li>11:00 AM — Lunch (provided by Conn-Selmer)</li>
             <li>11:45 AM — Begin to tee off in groups</li>
@@ -74,7 +74,7 @@ const FallGolfTournament = ({ location }) => {
           <h4>Where</h4>
           <div css={indentStyles}>
             <p>Details available soon!</p> */}
-            {/* <p>
+        {/* <p>
               <a
                 href="http://www.austintexas.gov/department/jimmy-clay-course"
                 rel="noopener noreferrer"
@@ -103,15 +103,15 @@ const FallGolfTournament = ({ location }) => {
             <p>
               Phone: <a href="tel:+15124440999">(512) 444-0999</a>
             </p> */}
-          {/* </div>
+        {/* </div>
         </section> */}
 
         {/* <section>
           <h4>Cost</h4> */}
-          {/* <p css={indentStyles}>
+        {/* <p css={indentStyles}>
             $35 (due at the course) which includes green fee and cart
           </p> */}
-          {/* <p css={indentStyles}>Details available soon!</p>
+        {/* <p css={indentStyles}>Details available soon!</p>
         </section> */}
 
         {/* <div>

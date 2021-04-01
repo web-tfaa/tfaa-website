@@ -106,14 +106,14 @@ const FallRetreat = ({ location }) => {
         {/* <section>
           <h4>When</h4>
           <p className={classes.text}>Fall 2021</p> */}
-          {/* <p className={classes.text}>{fallRetreat.dateOfEvent}</p> */}
+        {/* <p className={classes.text}>{fallRetreat.dateOfEvent}</p> */}
         {/* </section> */}
 
         {/* <section>
           <h4>Schedule available mid Fall 2021</h4> */}
-          {/* <h4>Schedule</h4> */}
+        {/* <h4>Schedule</h4> */}
 
-          {/* <h5 className={classes.text}>Wednesday</h5>
+        {/* <h5 className={classes.text}>Wednesday</h5>
           <p css={scheduleStyles}>11:00am - Golf tournament (details and specific times to come)</p>
           <p css={scheduleStyles}>12:00pm - TMAC Alternate Tea</p>
           <div css={{ paddingLeft: 16 }}>

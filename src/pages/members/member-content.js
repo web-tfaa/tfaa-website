@@ -2,7 +2,7 @@
 import {
   Box,
   CircularProgress,
- } from '@material-ui/core';
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 
@@ -77,7 +77,6 @@ const MemberContent = ({
   setShouldRefetchUserList,
   userId,
 }) => {
-
   const [state, dispatchState] = useReducer(
     memberContentReducer,
     MEMBER_CONTENT_REDUCER_INITIAL_STATE,

@@ -65,7 +65,7 @@ const MembershipByLaws: React.FC<Props> = ({ showLinkToByLaws = false }) => {
         </dl>
       </section>
     </>
-  )
+  );
 };
 
 export default MembershipByLaws;

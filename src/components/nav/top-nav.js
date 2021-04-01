@@ -179,5 +179,4 @@ const TopNavWithContext = (props) => (
   </AuthUserContext.Consumer>
 );
 
-
 export default TopNavWithContext;
