@@ -6,7 +6,7 @@ import React from 'react';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import presets from '../../utils/presets';
 import { useEventData } from '../../utils/hooks/useEventData';
 

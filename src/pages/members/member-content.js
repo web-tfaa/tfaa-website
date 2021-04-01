@@ -19,7 +19,7 @@ import MemberTasks from './member-tasks';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Variables
 

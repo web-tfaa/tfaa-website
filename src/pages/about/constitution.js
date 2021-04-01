@@ -11,7 +11,7 @@ import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
 import MembershipByLaws from './MembershipByLaws';
 import presets from '../../utils/presets';
-import SidebarBody from '../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import aboutSidebar from './about-links.yml';

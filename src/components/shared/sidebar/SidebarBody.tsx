@@ -1,27 +1,57 @@
 // External Dependencies
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'gatsby';
 
 // Internal Dependencies
 import { rhythm, scale, options } from '../../../utils/typography';
 import presets, { colors } from '../../../utils/presets';
 
+// Local Typings
+interface SidebarBodyProps {
+  inline?: boolean;
+  yaml: any;
+}
+
+interface SectionProps {
+  headerStyles: any;
+  index: number;
+  isInline: boolean;
+  title: string;
+}
+
+interface SectionLinksProps {
+  isInline: boolean;
+  items: any;
+}
+
 // Component Definitions
-const Section = (props) => (
+const Section: FC<SectionProps> = ({
+  headerStyles,
+  index,
+  title,
+  ...otherProps
+}) => (
   <div>
     <h3
       css={{
-        ...props.headerStyles,
-        marginTop: props.index === 0 ? 0 : rhythm(3 / 2),
+        ...headerStyles,
+        marginTop: index === 0 ? 0 : rhythm(3 / 2),
       }}
     >
-      {props.title}
+      {title}
     </h3>
-    <SectionLinks {...props} title={props.title} />
+
+    <SectionLinks
+      {...otherProps}
+      title={title}
+    />
   </div>
 );
 
-const SectionLinks = (props) => {
+const SectionLinks: FC<SectionLinksProps> = ({
+  isInline,
+  items,
+}) => {
   const listStyles = {
     listStyle: 'none',
     margin: 0,
@@ -33,41 +63,37 @@ const SectionLinks = (props) => {
     <ul
       css={{
         ...listStyles,
-        // For nested <ul>s in the "Tutorial" section
         '& ul': {
           ...listStyles,
         },
       }}
     >
-      {props.items.map((item, index) => (
+      {/* eslint-disable-next-line react/no-array-index-key */}
+      {items.map((item, index) => (
         <SectionLink
-          children={item.items}
-          isInline={props.isInline}
+          isInline={isInline}
           key={index}
           node={item}
-        />
+        >
+          {item.items}
+        </SectionLink>
       ))}
     </ul>
   );
 };
 
-const SectionLink = (props) => {
-  // Don't show the main docs link on mobile as we put these
-  // links on that main docs page so it's confusing to have
-  // the page link to itself.
-  // if (props.isInline && props.node.link === `/about/`) {
-  //   return null
-  // }
-
+const SectionLink: FC = (props) => {
   let childnodes = null;
   if (props.children) {
     childnodes = props.children.map((childnode, index) => (
       <SectionLink
-        children={childnode.items}
         isNested
+        // eslint-disable-next-line react/no-array-index-key
         key={index}
         node={childnode}
-      />
+      >
+        {childnode.items}
+      </SectionLink>
     ));
   }
 
@@ -149,9 +175,15 @@ const SectionLink = (props) => {
     };
 
   return (
-    <li key={item.title} css={linkStyle}>
+    <li
+      css={linkStyle}
+      key={item.title}
+    >
       {item.link.charAt(0) === '#' ? (
-        <a href={item.link} className="nav-link">
+        <a
+          className="nav-link"
+          href={item.link}
+        >
           {title}
         </a>
       ) : (
@@ -168,55 +200,52 @@ const SectionLink = (props) => {
   );
 };
 
-class SidebarBody extends React.Component {
-  render() {
-    const { yaml, inline } = this.props;
+const SidebarBody: FC<SidebarBodyProps> = ({
+  inline: isInline,
+  yaml: menu
+}) => {
+  // Use original sizes on mobile as the text is inline
+  // but smaller on > tablet so as not to compete with body text.
+  const fontSize = isInline
+    ? scale(0).fontSize
+    : scale(-2 / 10).fontSize;
 
-    const menu = yaml;
-    const isInline = inline;
+  const headerStyles = isInline
+    ? {
+      fontSize: scale(2 / 5).fontSize,
+    }
+    : {
+      fontSize: scale(-2 / 5).fontSize,
+      color: colors.lilac,
+      textTransform: 'uppercase',
+      letterSpacing: '.15em',
+      fontWeight: 'normal',
+    };
 
-    // Use original sizes on mobile as the text is inline
-    // but smaller on > tablet so as not to compete with body text.
-    const fontSize = isInline ? scale(0).fontSize : scale(-2 / 10).fontSize;
-
-    const headerStyles = isInline
-      ? {
-        fontSize: scale(2 / 5).fontSize,
-      }
-      : {
-        fontSize: scale(-2 / 5).fontSize,
-        color: colors.lilac,
-        textTransform: 'uppercase',
-        letterSpacing: '.15em',
-        fontWeight: 'normal',
-      };
-
-    return (
-      <div
-        css={{
-          padding: isInline ? 0 : rhythm(3 / 4),
-        }}
-        className="docSearch-sidebar"
-      >
-        {menu.map((section, index) => (
-          <div
-            key={index}
-            css={{
-              fontSize,
-            }}
-          >
-            <Section
-              {...section}
-              headerStyles={headerStyles}
-              index={index}
-              isInline={isInline}
-              title={section.title}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      className="docSearch-sidebar"
+      css={{
+        padding: isInline ? 0 : rhythm(3 / 4),
+      }}
+    >
+      {menu.map((section, index) => (
+        <div
+          css={{ fontSize }}
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+        >
+          <Section
+            {...section}
+            headerStyles={headerStyles}
+            index={index}
+            isInline={isInline}
+            title={section.title}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default SidebarBody;

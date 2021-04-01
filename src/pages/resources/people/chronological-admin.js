@@ -14,7 +14,7 @@ import { options } from '../../../utils/typography';
 import Layout from '../../../components/layout';
 import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
-import SidebarBody from '../../../components/shared/sidebar/sidebar-body';
+import SidebarBody from '../../../components/shared/sidebar/SidebarBody';
 
 // Local Variables
 const propTypes = {

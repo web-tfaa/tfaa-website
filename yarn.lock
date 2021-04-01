@@ -2716,6 +2716,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/gray-percentage@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/gray-percentage/-/gray-percentage-2.0.0.tgz#263a255aa9d218f3c24fdd3a656732159fd077ca"
+  integrity sha512-yEEubKQ92XA6yB9fTjKihFfb2bx/x/GfUComPMTrF0/0YqVLTFU3q/yqAsOKeYGRYYcCUhG1tdkW5c3uruC7JQ==
+
 "@types/hast@^2.0.0":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@types/hast/-/hast-2.3.1.tgz#b16872f2a6144c7025f296fb9636a667ebb79cd9"
