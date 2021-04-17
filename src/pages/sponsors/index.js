@@ -6,8 +6,10 @@ import React, { Component } from 'react';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import SponsorCard from '../../components/shared/sponsor-card';
+// import SponsorCard from '../../components/shared/sponsor-card';
+import SponsorCardAlertOnly from '../../components/shared/sponsor-card/sponsor-card-alert-only';
 import { doGetUsers } from '../../firebase/db';
+// import EnhancedAlert from '../../components/shared/EnhancedAlert';
 
 // Local Variables
 const propTypes = {
@@ -152,12 +154,13 @@ class Sponsors extends Component {
                 sponsorClass="Silver Medal"
                 sponsorData={silverData}
               /> */}
-              <SponsorCard
+              {/* <SponsorCard
                 min={500}
                 max={999}
                 sponsorClass="Bronze Medal"
                 sponsorData={bronzeData}
-              />
+              /> */}
+              <SponsorCardAlertOnly />
             </div>
           </Container>
         </section>
