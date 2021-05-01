@@ -17,10 +17,6 @@ import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Variables
 const propTypes = {
-  classes: PropTypes.shape({
-    paddingContainer: PropTypes.string,
-    root: PropTypes.string,
-  }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
   userEmail: PropTypes.string,

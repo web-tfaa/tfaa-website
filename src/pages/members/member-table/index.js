@@ -22,17 +22,17 @@ const propTypes = {
 const useStyles = makeStyles((theme) => ({
   cell: {
     '&:first-child': {
-      paddingLeft: 24,
+      paddingLeft: theme.spacing(3),
     },
   },
   empty: {
-    padding: 32,
+    padding: theme.spacing(4),
   },
   overflowWrapper: {
     overflowX: 'auto',
   },
   paper: {
-    marginTop: 24,
+    marginTop: theme.spacing(3),
     width: '100%',
   },
   pagerButton: {
@@ -136,6 +136,7 @@ const MemberListTable = ({
               order={order}
               orderBy={orderBy}
             />
+
             <TableBody>
               {data
                 && data.length > 0
@@ -152,18 +153,23 @@ const MemberListTable = ({
                       >
                         {user.FirstName}
                       </TableCell>
+
                       <TableCell className={classes.cell} key={user.LastName}>
                         {user.LastName}
                       </TableCell>
+
                       <TableCell className={classes.cell} key={user.District}>
                         {user.District}
                       </TableCell>
+
                       <TableCell className={classes.cell} key={user.Title}>
                         {user.Title}
                       </TableCell>
+
                       <TableCell className={classes.cell} key={user.Email}>
                         {uglifyEmail(user.Email)}
                       </TableCell>
+
                       {isAdmin && (
                         <TableCell className={classes.cell}>
                           <MemberTableRowActionElements user={user} />
@@ -177,6 +183,7 @@ const MemberListTable = ({
           <div className={classes.empty}>No members for the current school year</div>
         )}
       </div>
+
       {data && data.length > 5 && (
         <TablePagination
           backIconButtonProps={{
