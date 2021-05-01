@@ -206,6 +206,10 @@ const _options = {
         fontWeight: 600,
         marginBottom: '0.25rem',
       },
+      '.main-body input': {
+        letterSpacing: '0.5px',
+        padding: '8px 12px',
+      },
       '.main-body input[type=text] input[type=password]': {
         border: `1.5px solid ${colors.ui.bright}`,
         borderRadius: 2,
