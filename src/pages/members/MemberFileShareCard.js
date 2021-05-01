@@ -36,6 +36,7 @@ const MemberFileShareCard = ({ node, description }) => {
   if (!node) {
     return null;
   }
+
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>

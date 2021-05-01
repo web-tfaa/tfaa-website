@@ -5,12 +5,13 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
-import Alert from '../../components/shared/Alert';
+// import Alert from '../../components/shared/Alert';
 import AuthUserContext from '../../components/session/AuthUserContext';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
-import presets from '../../utils/presets';
 import Status from './status';
+import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
@@ -86,20 +87,22 @@ class MemberListContent extends Component {
     return (
       <div className={classes.root}>
         <Status />
+
         <Helmet>
           <title>TMAC | Member List</title>
         </Helmet>
+
         <div className={classes.paddingContainer}>
           <h2>Member list</h2>
           {isAdmin && (
-            <Alert
-              bodyText={`
-                You can print any member's invoice or receipt from each row.
-              `}
+            <EnhancedAlert
               title="Admin View"
-              type="info"
-            />
+              severity="info"
+            >
+              You can print any member&apos;s invoice or receipt from each row.
+            </EnhancedAlert>
           )}
+
           <MemberListTable
             data={Object.values(userData)}
             isAdmin={isAdmin}

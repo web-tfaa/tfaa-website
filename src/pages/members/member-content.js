@@ -13,7 +13,7 @@ import presets from '../../utils/presets';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Dependencies
-import MemberFileShareCard from './member-file-share-card';
+import MemberFileShareCard from './MemberFileShareCard';
 import MemberInfo from './member-info';
 import MemberTasks from './member-tasks';
 
