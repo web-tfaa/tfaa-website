@@ -36,7 +36,7 @@ const MemberFileShareCard = ({ node, description }) => {
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>
-      <h5 className={classes.cardTitle}>{format(node.date, ['MMMM DD YYYY'])}</h5>
+      <h5 className={classes.cardTitle}>{format(node.date, ['MMMM dd yyyy'])}</h5>
       <FuturaDiv>{description}</FuturaDiv>
       <FuturaAnchor download href={node.link}>
         Download

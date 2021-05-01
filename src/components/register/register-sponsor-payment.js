@@ -26,7 +26,7 @@ import { options } from '../../utils/typography';
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
-const currentDate = format(new Date(), ['M/D/YYYY']);
+const currentDate = format(new Date(), ['M/d/yyyy']);
 
 const labelStyles = {
   display: 'block',
