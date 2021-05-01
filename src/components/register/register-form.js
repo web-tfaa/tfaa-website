@@ -1,20 +1,21 @@
 /* eslint-disable camelcase */
 
 // External Dependencies
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { navigate } from 'gatsby';
 import { withStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
+import EnhancedAlert from '../shared/EnhancedAlert';
 import AuthUserContext from '../session/AuthUserContext';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
@@ -30,12 +31,6 @@ import {
 
 // Local Variables
 const styles = (theme) => ({
-  adminCard: {
-    alignSelf: 'flex-start',
-    borderLeft: `4px solid ${theme.palette.error.main}`,
-    marginBottom: 16,
-    maxWidth: '80%',
-  },
   cityContainer: {
     marginBottom: 0,
   },
@@ -43,7 +38,7 @@ const styles = (theme) => ({
     display: 'flex',
   },
   error: {
-    color: 'red',
+    color: theme.palette.error.main,
     fontFamily: options.bodyFontFamily.join(','),
     fontWeight: 500,
     marginTop: '0.4rem',
@@ -59,7 +54,7 @@ const styles = (theme) => ({
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
-    marginTop: 16,
+    marginTop: theme.spacing(2),
     textTransform: 'uppercase',
   },
   radioButtonLabel: {
@@ -71,7 +66,7 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
   },
   stateContainer: {
-    marginLeft: 12,
+    marginLeft: theme.spacing(1.5),
     marginBottom: 0,
     width: '40%',
   },
@@ -641,13 +636,16 @@ class RegisterForm extends Component {
               }}
             >
               {!hasValidInput && (
-                <Card className={classes.adminCard}>
-                  <CardContent>
-                    <Typography variant="body2">
-                      Please make sure all required fields above are completed.
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <Box
+                  clone
+                  mb={2.5}
+                  mt={1}
+                  width="100%"
+                >
+                  <EnhancedAlert severity="error">
+                    Please make sure all required fields above are completed.
+                  </EnhancedAlert>
+                </Box>
               )}
               <RegisterButton
                 buttonType="submit"
