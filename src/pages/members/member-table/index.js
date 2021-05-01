@@ -126,7 +126,7 @@ const MemberListTable = ({
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} variant="outlined">
       <div className={classes.overflowWrapper}>
         {data && data.length > 0 ? (
           <Table className={classes.table}>

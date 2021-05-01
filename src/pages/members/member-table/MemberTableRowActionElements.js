@@ -1,11 +1,13 @@
 // External Dependencies
-import IconButton from '@material-ui/core/IconButton';
+import {
+  IconButton,
+  Tooltip,
+} from '@material-ui/core';
 import PrintIcon from '@material-ui/icons/Print';
 import PropTypes from 'prop-types';
 import React, { Fragment, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import ReceiptIcon from '@material-ui/icons/Receipt';
-import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
@@ -52,6 +54,7 @@ const MemberTableRowActionElements = ({ user }) => {
             </Tooltip>
           )}
         />
+
         <div css={{ display: 'none' }}>
           <Invoice
             amount={user.AmountPaid}
@@ -65,6 +68,7 @@ const MemberTableRowActionElements = ({ user }) => {
       </Fragment>
     );
   }
+
   if (hasInvoice) {
     return (
       <Fragment key={`print-invoice-${user.userId}`}>
@@ -78,6 +82,7 @@ const MemberTableRowActionElements = ({ user }) => {
             </Tooltip>
           )}
         />
+
         <div css={{ display: 'none' }}>
           <Invoice
             amount={user.AmountPaid}
