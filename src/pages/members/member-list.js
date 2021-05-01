@@ -1,8 +1,8 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 // import Alert from '../../components/shared/Alert';
@@ -30,7 +30,7 @@ const defaultProps = {
   userEmail: '',
 };
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   adminCard: {
     borderLeft: `4px solid ${theme.palette.alert.info}`,
     maxWidth: '75%',
@@ -45,73 +45,62 @@ const styles = (theme) => ({
       paddingLeft: 0,
     },
   },
-});
+}));
+
+const EMPTY_ARRAY = [];
 
 // Component Definition
-class MemberListContent extends Component {
-  constructor(props) {
-    super(props);
+const MemberListContent = ({
+  isAuthenticated,
+  userEmail,
+}) => {
+  const classes = useStyles();
 
-    this.state = {
-      userData: [],
-    };
-  }
+  const [userData, setUserData] = useState(EMPTY_ARRAY);
 
-  componentDidMount() {
-    const userList = [];
-
-    doGetUsers('registration', userList, this.handleUpdateUserList);
-  }
-
-  handleUpdateUserList = (userList) => {
-    this.setState({ userData: userList });
+  const handleUpdateUserList = (userList) => {
+    setUserData(userList);
   };
 
-  render() {
-    const {
-      classes,
-      isAuthenticated,
-      userEmail,
-    } = this.props;
+  useEffect(() => {
+    const userList = [];
 
-    const {
-      userData,
-    } = this.state;
+    doGetUsers('registration', userList, handleUpdateUserList);
+  }, []);
 
-    if (!isAuthenticated) {
-      return null;
-    }
-
-    const isAdmin = userEmail && ADMIN_USER_EMAIL_LIST.includes(userEmail);
-
-    return (
-      <div className={classes.root}>
-        <Status />
-
-        <Helmet>
-          <title>TMAC | Member List</title>
-        </Helmet>
-
-        <div className={classes.paddingContainer}>
-          <h2>Member list</h2>
-          {isAdmin && (
-            <EnhancedAlert
-              title="Admin View"
-              severity="info"
-            >
-              You can print any member&apos;s invoice or receipt from each row.
-            </EnhancedAlert>
-          )}
-
-          <MemberListTable
-            data={Object.values(userData)}
-            isAdmin={isAdmin}
-          />
-        </div>
-      </div>
-    );
+  if (!isAuthenticated) {
+    return null;
   }
-}
+
+  const isAdmin = userEmail && ADMIN_USER_EMAIL_LIST.includes(userEmail);
+
+  return (
+    <div className={classes.root}>
+      <Status />
+
+      <Helmet>
+        <title>TMAC | Member List</title>
+      </Helmet>
+
+      <div className={classes.paddingContainer}>
+        <h2>Member list</h2>
+        {isAdmin && (
+          <EnhancedAlert
+            title="Admin View"
+            severity="info"
+          >
+            You can print any member&apos;s invoice or receipt from each row.
+          </EnhancedAlert>
+        )}
+
+        <MemberListTable
+          data={Object.values(userData)}
+          isAdmin={isAdmin}
+        />
+      </div>
+    </div>
+  );
+};
 
 MemberListContent.propTypes = propTypes;
 MemberListContent.defaultProps = defaultProps;
@@ -137,4 +126,4 @@ const MemberListWithContext = (props) => (
   </AuthUserContext.Consumer>
 );
 
-export default withStyles(styles)(MemberList);
+export default MemberList;
