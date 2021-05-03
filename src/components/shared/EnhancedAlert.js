@@ -10,7 +10,7 @@ const propTypes = {
   children: PropTypes.node.isRequired,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
-  severity: PropTypes.oneOf(['warning', 'info']),
+  severity: PropTypes.oneOf(['error', 'info', 'warning']),
   title: PropTypes.node,
 };
 
