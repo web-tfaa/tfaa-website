@@ -1,4 +1,5 @@
 // External Dependencies
+import { Box } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -41,44 +42,60 @@ const Events = ({ data, location }) => {
       <Helmet>
         <title>TMAC | Events</title>
       </Helmet>
+
       <Container>
         <h1>{data.site.siteMetadata.title} Events</h1>
+
         <section>
           <h4>
             Summer Round Table
             {/* <span className={classes.updatedLabel}>(updated)</span> */}
           </h4>
-          <EnhancedAlert
-            severity="warning"
-            title="No Summer Round Table 2020"
-          >
-            As state conventions will be held virtually, there will be no TMAC
-            Summer Round Table for 2020.
-          </EnhancedAlert>
-          <p css={{ marginTop: 24, paddingLeft: 8 }}>
+
+          <Box pl={1}>
+            Schedule available mid Fall 2021
+          </Box>
+
+          {/* <p css={{ marginTop: 24, paddingLeft: 8 }}>
             Held in conjunction with the&nbsp;
             <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
             ,&nbsp;
             <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
             <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer
             conventions. New music administrators are encouraged to attend!
-          </p>
+          </p> */}
+
+          <Box mt={3} pl={1}>
+            Held in conjunction with these summer conventions:
+            <ul>
+              <li>
+                <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
+              </li>
+              <li>
+                <a href="https://www.tcda.net/">Texas Choral Directors Association</a>
+              </li>
+              <li>
+                <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a>
+              </li>
+            </ul>
+          </Box>
+
         </section>
         <section>
           <h4>Fall Retreat</h4>
-          <EnhancedAlert
-            severity="warning"
-            title="No Fall Retreat 2020"
-          >
-            The 2020 Fall Retreat event is canceled. There will not be a virtual option.
+          <EnhancedAlert severity="info">
+            Details about the 2021 Fall Retreat event will be available in late summer 2021.
           </EnhancedAlert>
+
           {/* <p>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (registered and paid). There is no separate conference registration process.
           </p> */}
         </section>
+
         <section>
           <h4>TMEA Round Table</h4>
+
           <p css={{ paddingLeft: 8 }}>
             Round Table Meeting at the{' '}
             <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
