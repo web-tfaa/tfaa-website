@@ -1,13 +1,16 @@
 // External Dependencies
-import Button from '@material-ui/core/Button';
+import {
+  Box,
+  // Button,
+} from '@material-ui/core';
 // import Card from '@material-ui/core/Card';
 // import CardContent from '@material-ui/core/CardContent';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
-// import { Link } from 'gatsby';
+import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -21,16 +24,16 @@ import { useEventData } from '../../utils/hooks/useEventData';
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  hotelButton: {
-    backgroundColor: theme.palette.events.hotelCta,
-    color: theme.palette.getContrastText(theme.palette.events.hotelCta),
-    fontWeight: 600,
-  },
-  text: {
-    marginLeft: theme.spacing(2),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   hotelButton: {
+//     backgroundColor: theme.palette.events.hotelCta,
+//     color: theme.palette.getContrastText(theme.palette.events.hotelCta),
+//     fontWeight: 600,
+//   },
+//   text: {
+//     marginLeft: theme.spacing(2),
+//   },
+// }));
 
 // const scheduleStyles = {
 //   margin: '6px 0px 6px 32px',
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 // Component Definition
 const FallRetreat = ({ location }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const { edges } = useEventData();
 
@@ -49,23 +52,25 @@ const FallRetreat = ({ location }) => {
       <Helmet>
         <title>TMAC | Fall Retreat</title>
       </Helmet>
+
       <Container>
         <h1>{fallRetreat.titleOfEvent}</h1>
 
         <section>
-          <EnhancedAlert
-            severity="warning"
-            title="No Fall Retreat 2020"
-          >
-            The 2020 Fall Retreat event is canceled. There will not be a virtual option.
+          <EnhancedAlert severity="info">
+            Schedule available mid Fall 2021
           </EnhancedAlert>
-          {/* <h4>Who</h4> */}
-          {/* <p className={classes.text}>
+
+          <h4>Who</h4>
+
+          <Box component="p" ml={2}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (registered and paid). There is no separate conference registration process.
-            {'If you need to register for th
-            is year, then please visit the <Link to="/members">Members</Link> page.'}
-          </p> */}
+
+          </Box>
+          <Box component="p" ml={2}>
+            If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.
+          </Box>
 
           {/* This "alert" shou
           ld show the Fall Retreat is in past but we are in the current school year still */}
@@ -103,15 +108,16 @@ const FallRetreat = ({ location }) => {
           </ul> */}
         </section>
 
-        {/* <section>
-          <h4>When</h4>
-          <p className={classes.text}>Fall 2021</p> */}
-        {/* <p className={classes.text}>{fallRetreat.dateOfEvent}</p> */}
+        {/* <section> */}
+        {/* <h4>When</h4> */}
+        {/* <p>Fall 2021</p> */}
+        {/* <p>{fallRetreat.dateOfEvent}</p> */}
         {/* </section> */}
 
         {/* <section>
-          <h4>Schedule available mid Fall 2021</h4> */}
-        {/* <h4>Schedule</h4> */}
+          <h4>Schedule available mid Fall 2021</h4>
+        </section> */}
+        {/* <h4>Schedule</h4>
 
         {/* <h5 className={classes.text}>Wednesday</h5>
           <p css={scheduleStyles}>11:00am - Golf tournament (details and specific times to come)</p>
@@ -177,6 +183,7 @@ const FallRetreat = ({ location }) => {
             </Button>
           </div>
         </section> */}
+
         <div
           css={{
             display: 'block',

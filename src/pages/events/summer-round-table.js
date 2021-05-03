@@ -1,8 +1,8 @@
 // External Dependencies
+import { Box } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 // Internal Dependencies
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
@@ -15,21 +15,8 @@ import { useEventData } from '../../utils/hooks/useEventData';
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
-// Local Variables
-const useStyles = makeStyles((theme) => ({
-  alert: {
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(2),
-  },
-  description: {
-    marginLeft: theme.spacing(2),
-  },
-}));
-
 // Component Definition
 const SummerRoundTable = ({ location }) => {
-  const classes = useStyles();
-
   const { edges } = useEventData();
 
   const summerRoundTable = edges.find((e) => e.node.titleOfEvent.includes('Summer Convention')).node;
@@ -45,22 +32,24 @@ const SummerRoundTable = ({ location }) => {
       <Helmet>
         <title>TMAC | Summer Round Table</title>
       </Helmet>
+
       <Container>
         <h1>{titleOfEvent}</h1>
-        <EnhancedAlert
-          severity="warning"
-          title="No Summer Round Table 2020"
-        >
-          As state conventions will be held virtually, there will be no TMAC
-          Summer Round Table for 2020.
+
+        <EnhancedAlert severity="info">
+          Details about the 2021 TMAC Summer Round Table will be available soon.
         </EnhancedAlert>
+
         <section>
           <h4>When</h4>
-          <p className={classes.description}>
-            {dateOfEvent}
-            <br />
+
+          <Box ml={2}>
+            <Box mb={2}>
+              {dateOfEvent}
+            </Box>
+
             {timeOfEvent}
-          </p>
+          </Box>
         </section>
 
         {/* <section>
@@ -84,22 +73,31 @@ const SummerRoundTable = ({ location }) => {
           </div>
         </section> */}
 
-        {/* <section>
+        <section>
           <h4>Why</h4>
-          <p className={classes.description}>
-            Held in conjunction with the&nbsp;
-            <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
-            ,&nbsp;
-            <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
-            <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer
-            conventions.
-          </p>
-        </section> */}
 
-        {/* <section>
+          <Box ml={2}>
+            Held in conjunction with these summer conventions:
+            <ul>
+              <li>
+                <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
+              </li>
+              <li>
+                <a href="https://www.tcda.net/">Texas Choral Directors Association</a>
+              </li>
+              <li>
+                <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a>
+              </li>
+            </ul>
+          </Box>
+        </section>
+
+        <section>
           <h4>Who</h4>
-          <p className={classes.description}>New music administrators are encouraged to attend!</p>
-        </section> */}
+
+          <Box component="p" ml={2}>New music administrators are encouraged to attend!</Box>
+        </section>
+
         <div
           css={{
             display: 'block',

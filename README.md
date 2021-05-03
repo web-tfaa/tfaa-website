@@ -4,7 +4,7 @@ This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Ad
 
 ## Tools
 
-- GatsbyJS <img alt="Gatsby icon" src="https://www.gatsbyjs.org/monogram.svg" width="20">
+- GatsbyJS
 - React
 - Glamor
 - Contentful (as CMS)

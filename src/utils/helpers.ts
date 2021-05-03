@@ -31,10 +31,10 @@ export const emailRegex = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 export const zipCodeRegex = /^\d{5}(?:[-\s]\d{4})?$/i;
 
 // Current Year - four-digit string
-export const currentYearLong = format(new Date(), 'YYYY');
+export const currentYearLong = format(new Date(), 'yyyy');
 
 // Current Year - two-digit string
-export const currentYearShort = format(new Date(), 'YY');
+export const currentYearShort = format(new Date(), 'yy');
 
 // The "year" for TMAC starts on 4/1
 // new Date(2021, 3, 1) → 4/1/2021

@@ -26,7 +26,7 @@ import {
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
-const currentDate = format(new Date(), ['M/D/YYYY']);
+const currentDate = format(new Date(), ['M/d/yyyy']);
 
 // This will tell the database action where to put the new record
 const collection = 'registration';

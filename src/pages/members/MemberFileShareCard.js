@@ -1,7 +1,10 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import format from 'date-fns/format';
+import {
+  format,
+  parseISO,
+} from 'date-fns';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
@@ -33,10 +36,11 @@ const MemberFileShareCard = ({ node, description }) => {
   if (!node) {
     return null;
   }
+
   return (
     <Card>
       <CardHeadline>{node.title}</CardHeadline>
-      <h5 className={classes.cardTitle}>{format(node.date, ['MMMM DD YYYY'])}</h5>
+      <h5 className={classes.cardTitle}>{format(parseISO(node.date), ['MMMM d, yyyy'])}</h5>
       <FuturaDiv>{description}</FuturaDiv>
       <FuturaAnchor download href={node.link}>
         Download
