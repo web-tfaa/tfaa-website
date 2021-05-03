@@ -52,9 +52,9 @@ const Events = ({ data, location }) => {
             {/* <span className={classes.updatedLabel}>(updated)</span> */}
           </h4>
 
-          <Box pl={1}>
-            Schedule available mid Fall 2021
-          </Box>
+          <EnhancedAlert severity="info">
+            Details about the 2021 Summer Round Table will be available soon.
+          </EnhancedAlert>
 
           {/* <p css={{ marginTop: 24, paddingLeft: 8 }}>
             Held in conjunction with the&nbsp;
@@ -83,9 +83,10 @@ const Events = ({ data, location }) => {
         </section>
         <section>
           <h4>Fall Retreat</h4>
-          <EnhancedAlert severity="info">
-            Details about the 2021 Fall Retreat event will be available in late summer 2021.
-          </EnhancedAlert>
+
+          <Box pl={1}>
+            Fall Retreat schedule will be available mid Fall 2021
+          </Box>
 
           {/* <p>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
