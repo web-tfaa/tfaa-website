@@ -80,6 +80,7 @@ const MemberTasks = ({
           trigger={() => <RegisterButton isRed>Print Invoice</RegisterButton>}
         />
       </div>
+
       <div style={{ display: 'none' }}>
         <Invoice
           amount={currentUser.AmountPaid}
@@ -103,6 +104,7 @@ const MemberTasks = ({
           trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
         />
       </div>
+
       <div className={classes.hidden}>
         <Invoice
           amount={currentUser.AmountPaid}
@@ -131,6 +133,7 @@ const MemberTasks = ({
           </div>
         )}
       />
+
       {!isRegisteredForCurrentYear && (
         <CtaButton
           buttonColor="blue"
@@ -139,8 +142,11 @@ const MemberTasks = ({
           Join TMAC
         </CtaButton>
       )}
+
       {isInvoiced && invoiceInfo}
+
       {isPaypal && receiptInfo}
+
       {isRegisteredForCurrentYear && (
         <>
           <FuturaDiv>
