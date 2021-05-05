@@ -22,7 +22,6 @@ import membersSidebar from './members-links.yml';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Variables
-
 const propTypes = {
   authUser: PropTypes.shape({
     email: PropTypes.string.isRequired,
@@ -83,7 +82,9 @@ const MemberContent = ({
   );
 
   const {
-    currentUser, isLoadingUserData, isRegisteredForCurrentYear,
+    currentUser,
+    isLoadingUserData,
+    isRegisteredForCurrentYear,
   } = state;
 
   useEffect(() => {
@@ -132,16 +133,19 @@ const MemberContent = ({
   return (
     <div>
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
+
       <Box mb={2}>
         <EnhancedAlert severity="info">
           {`Welcome ${memberEmail}`}
         </EnhancedAlert>
       </Box>
+
       <Cards>
         <MemberInfo
           currentUser={currentUser}
           setShouldRefetchUserList={setShouldRefetchUserList}
         />
+
         <MemberTasks
           currentUser={currentUser}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}

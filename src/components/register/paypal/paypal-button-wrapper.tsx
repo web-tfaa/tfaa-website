@@ -1,10 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
 // External Dependencies
-import { Collapse } from '@material-ui/core';
-import React, { FC, useState } from 'react';
+import {
+  Box,
+  Collapse,
+} from '@material-ui/core';
+import React, { FC, ReactElement, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Local Dependencies
 import PaypalButton from './paypal-button';
+import EnhancedAlert from '../../shared/EnhancedAlert';
 
 // Local Typings
 interface PaypalPayment {
@@ -32,17 +37,12 @@ interface Props {
 }
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  paymentError: {
-    background: '#fafafa',
-    border: `1px solid ${theme.palette.error.main}`,
-    borderRadius: 4,
-    marginTop: theme.spacing(2),
-    maxWidth: '75%',
-    padding: theme.spacing(1),
-    color: theme.palette.error.main,
+const useStyles = makeStyles({
+  errorSpan: {
+    fontWeight: 500,
+    whiteSpace: 'nowrap',
   },
-}));
+});
 
 const CLIENT = {
   // Currently using the sandbox id from this paypal demo
@@ -55,8 +55,6 @@ const ENV = process.env.NODE_ENV === 'production'
   ? 'production'
   : 'sandbox';
 
-const errorText = 'There was an issue using PayPal. Please try clicking the "Pay with PayPal" button again or print an invoice and send payment to the TMAC Treasurer.';
-
 // Component Definition
 const PaypalButtonWrapper: FC<Props> = ({
   amount,
@@ -64,7 +62,15 @@ const PaypalButtonWrapper: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  const [paymentError, setPaymentError] = useState('');
+  const [paymentError, setPaymentError] = useState<ReactElement | null>(null);
+
+  const errorText = (
+    <>
+      There was an issue using PayPal. Please try clicking the{' '}
+      <span className={classes.errorSpan}>"Pay with PayPal"</span>{' '}
+      button again or print an invoice and send payment to the TMAC Treasurer.
+    </>
+  );
 
   const handleSuccess = (payment: PaypalPayment) => {
     console.log('Successful payment!', payment);
@@ -85,7 +91,7 @@ const PaypalButtonWrapper: FC<Props> = ({
   };
 
   return (
-    <div>
+    <>
       <PaypalButton
         client={CLIENT}
         commit
@@ -98,11 +104,13 @@ const PaypalButtonWrapper: FC<Props> = ({
       />
 
       <Collapse in={Boolean(paymentError)}>
-        <p className={classes.paymentError}>
-          {paymentError}
-        </p>
+        <Box mt={2}>
+          <EnhancedAlert severity="error">
+            {paymentError}
+          </EnhancedAlert>
+        </Box>
       </Collapse>
-    </div>
+    </>
   );
 };
 

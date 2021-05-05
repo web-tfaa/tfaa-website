@@ -1,5 +1,5 @@
+/* eslint-disable react/prefer-stateless-function */
 // eslint-disable global-require
-// eslint-disable react/prefer-stateless-function
 
 // External Dependencies
 import React from 'react';

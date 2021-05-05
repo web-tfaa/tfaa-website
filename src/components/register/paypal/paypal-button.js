@@ -1,7 +1,7 @@
 /*
   Inspiration taken from this blog post
   https://www.robinwieruch.de/react-paypal-payment/
-  Only changs were to use `componentDidUpdate` instead of `componentWillRecieveProps`
+  Only changes were to use `componentDidUpdate` instead of `componentWillRecieveProps`
 */
 
 // External Dependencies
@@ -9,19 +9,20 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Local Variables
+const propTypes = {
+  client: PropTypes.shape({}).isRequired,
+  commit: PropTypes.bool.isRequired,
+  currency: PropTypes.string.isRequired,
+  env: PropTypes.string.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
+};
+
 // Component Definition
 class PaypalButton extends React.Component {
-  static propTypes = {
-    client: PropTypes.shape({}).isRequired,
-    commit: PropTypes.bool.isRequired,
-    currency: PropTypes.string.isRequired,
-    env: PropTypes.string.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onError: PropTypes.func.isRequired,
-    onSuccess: PropTypes.func.isRequired,
-    total: PropTypes.number.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -97,23 +98,21 @@ class PaypalButton extends React.Component {
     // https://github.com/paypal/paypal-checkout/blob/master/docs/frameworks.md#reactjs-element
     const PayPalButton = this.paypal.Button.driver('react', { React, ReactDOM });
 
-    return (
-      <div>
-        {showButton && (
-          <PayPalButton
-            client={client}
-            commit={commit}
-            env={env}
-            onAuthorize={onAuthorize}
-            onCancel={onCancel}
-            onError={onError}
-            payment={payment}
-            style={{ label: 'pay', tagline: 'false', size: 'medium' }}
-          />
-        )}
-      </div>
-    );
+    return showButton ? (
+      <PayPalButton
+        client={client}
+        commit={commit}
+        env={env}
+        onAuthorize={onAuthorize}
+        onCancel={onCancel}
+        onError={onError}
+        payment={payment}
+        style={{ label: 'pay', tagline: 'false', size: 'medium' }}
+      />
+    ) : null;
   }
 }
+
+PaypalButton.propTypes = propTypes;
 
 export default PaypalButton;
