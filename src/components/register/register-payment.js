@@ -277,8 +277,9 @@ class RegisterPayment extends Component {
 
             <ReactToPrint
               content={() => this.printReceipt}
-              trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
+              trigger={() => <RegisterButton>Print Receipt</RegisterButton>}
             />
+
             <div css={{ display: 'none' }}>
               <Invoice
                 amount={this.getCurrentAmount()}
@@ -331,20 +332,22 @@ class RegisterPayment extends Component {
 
               <div css={{ marginLeft: 32, marginTop: 24 }}>
                 <div css={{ marginBottom: 24 }}>
-                  Follow these easy steps:
+                  Follow these steps:
                   <ol>
                     <li>Click the button below to print an invoice.</li>
                     <li>Send the invoice and payment directly to the TMAC Treasurer.</li>
                   </ol>
                 </div>
+
                 <ReactToPrint
                   content={() => this.printInvoice}
                   trigger={() => (
-                    <RegisterButton isRed onClick={this.handleIncrementInvoiceId}>
+                    <RegisterButton onClick={this.handleIncrementInvoiceId}>
                       Print Invoice
                     </RegisterButton>
                   )}
                 />
+
                 <div css={{ display: 'none' }}>
                   <Invoice
                     amount={this.getCurrentAmount()}
@@ -357,10 +360,12 @@ class RegisterPayment extends Component {
                     }}
                   />
                 </div>
+
                 <div css={{ marginTop: 24 }}>
-                  If your district requires the IRS W-9 Form for TMAC, then you can download or
+                  If your district requires the IRS W-9 Form for TMAC, then download or
                   print a copy below.
                 </div>
+
                 <div css={{ marginTop: 24 }}>
                   <a
                     download

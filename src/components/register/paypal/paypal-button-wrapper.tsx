@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 // External Dependencies
+import * as Sentry from '@sentry/gatsby';
 import {
   Box,
   Collapse,
@@ -83,25 +84,29 @@ const PaypalButtonWrapper: FC<Props> = ({
   const handleError = (error: any) => {
     console.log('Erroneous payment OR failed to load script!', error);
     setPaymentError(errorText);
+    Sentry.captureException(error);
   };
 
   const handleCancel = (data: PaypalPaymentCancel) => {
     console.log('Canceled payment!', data);
     setPaymentError(errorText);
+    Sentry.captureException(data);
   };
 
   return (
     <>
-      <PaypalButton
-        client={CLIENT}
-        commit
-        currency="USD"
-        env={ENV}
-        onCancel={handleCancel}
-        onError={handleError}
-        onSuccess={handleSuccess}
-        total={amount}
-      />
+      <Box mt={2}>
+        <PaypalButton
+          client={CLIENT}
+          commit
+          currency="USD"
+          env={ENV}
+          onCancel={handleCancel}
+          onError={handleError}
+          onSuccess={handleSuccess}
+          total={amount}
+        />
+      </Box>
 
       <Collapse in={Boolean(paymentError)}>
         <Box mt={2}>
