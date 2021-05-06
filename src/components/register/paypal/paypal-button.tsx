@@ -35,7 +35,7 @@ const PaypalButton: FC<Props> = ({
   onSuccess,
   total,
 }) => {
-  const paypalRef = useRef(null);
+  const paypalRef = useRef<any>(null);
 
   const [showButton, setShowButton] = useState(false);
   const previousShowButton = usePrevious(showButton);
@@ -66,7 +66,7 @@ const PaypalButton: FC<Props> = ({
       ],
     });
 
-  const onAuthorize = (data, actions) =>
+  const onAuthorize = (data: any, actions: any) =>
     actions.payment.execute()
       .then(() => {
         const payment = {
