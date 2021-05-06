@@ -92,16 +92,18 @@ const PaypalButtonWrapper: FC<Props> = ({
 
   return (
     <>
-      <PaypalButton
-        client={CLIENT}
-        commit
-        currency="USD"
-        env={ENV}
-        onCancel={handleCancel}
-        onError={handleError}
-        onSuccess={handleSuccess}
-        total={amount}
-      />
+      <Box mt={2}>
+        <PaypalButton
+          client={CLIENT}
+          commit
+          currency="USD"
+          env={ENV}
+          onCancel={handleCancel}
+          onError={handleError}
+          onSuccess={handleSuccess}
+          total={amount}
+        />
+      </Box>
 
       <Collapse in={Boolean(paymentError)}>
         <Box mt={2}>

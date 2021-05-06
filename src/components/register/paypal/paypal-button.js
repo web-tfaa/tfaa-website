@@ -1,13 +1,16 @@
 /*
-  Inspiration taken from this blog post
-  https://www.robinwieruch.de/react-paypal-payment/
-  Only changes were to use `componentDidUpdate` instead of `componentWillRecieveProps`
+Inspiration taken from this blog post
+https://www.robinwieruch.de/react-paypal-payment/
+Only changes were to use `componentDidUpdate` instead of `componentWillRecieveProps`
 */
 
 // External Dependencies
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+
+// Local Dependencies
+import usePrevious from '../../../utils/hooks/usePrevious';
 
 // Local Variables
 const propTypes = {
@@ -22,96 +25,81 @@ const propTypes = {
 };
 
 // Component Definition
-class PaypalButton extends React.Component {
-  constructor(props) {
-    super(props);
+const PaypalButton = ({
+  client,
+  commit,
+  currency,
+  env,
+  onCancel,
+  onError,
+  onSuccess,
+  total,
+}) => {
+  const paypalRef = useRef(null);
 
-    this.state = {
-      showButton: false,
-    };
+  console.log('paypalRef', paypalRef);
 
+  const [showButton, setShowButton] = useState(false);
+  const previousShowButton = usePrevious(showButton);
+
+  // Check for window to make sure the site is built and deployed
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.React = React;
-      window.ReactDOM = ReactDOM;
-
-      this.paypal = window.paypal;
+      paypalRef.current = window.paypal;
     }
-  }
+  }, []);
 
-  componentDidMount() {
-    if (this.paypal) {
-      this.setState({ showButton: true });
+  // If the paypal ref exists and showButton was false, we show the button
+  useEffect(() => {
+    if (paypalRef.current && !previousShowButton) {
+      setShowButton(true);
     }
-  }
+  }, [paypalRef.current, previousShowButton]);
 
-  /* eslint-disable react/no-did-update-set-state */
-  componentDidUpdate(prevProps, prevState) {
-    if (this.paypal && !prevState.showButton) {
-      this.setState({ showButton: true });
-    }
-  }
-
-  render() {
-    const {
-      client,
-      commit,
-      currency,
-      env,
-      onCancel,
-      onError,
-      onSuccess,
-      total,
-    } = this.props;
-
-    const {
-      showButton,
-    } = this.state;
-
-    const payment = () =>
-      this.paypal.rest.payment.create(env, client, {
-        transactions: [
-          {
-            amount: {
-              total,
-              currency,
-            },
+  const payment = () =>
+    paypalRef.current?.rest.payment.create(env, client, {
+      transactions: [
+        {
+          amount: {
+            total,
+            currency,
           },
-        ],
+        },
+      ],
+    });
+
+  const onAuthorize = (data, actions) =>
+    actions.payment.execute()
+      .then(() => {
+        const payment = {
+          cancelled: false,
+          paid: true,
+          payerID: data.payerID,
+          paymentID: data.paymentID,
+          paymentToken: data.paymentToken,
+          returnUrl: data.returnUrl,
+        };
+
+        onSuccess(payment);
       });
 
-    const onAuthorize = (data, actions) =>
-      actions.payment.execute()
-        .then(() => {
-          const payment = {
-            cancelled: false,
-            paid: true,
-            payerID: data.payerID,
-            paymentID: data.paymentID,
-            paymentToken: data.paymentToken,
-            returnUrl: data.returnUrl,
-          };
+  // From the paypal docs here
+  // https://github.com/paypal/paypal-checkout/blob/master/docs/frameworks.md#reactjs-element
+  const PayPalButton = paypalRef.current?.Button.driver('react', { React, ReactDOM });
 
-          onSuccess(payment);
-        });
-
-    // From the paypal docs here
-    // https://github.com/paypal/paypal-checkout/blob/master/docs/frameworks.md#reactjs-element
-    const PayPalButton = this.paypal.Button.driver('react', { React, ReactDOM });
-
-    return showButton ? (
-      <PayPalButton
-        client={client}
-        commit={commit}
-        env={env}
-        onAuthorize={onAuthorize}
-        onCancel={onCancel}
-        onError={onError}
-        payment={payment}
-        style={{ label: 'pay', tagline: 'false', size: 'medium' }}
-      />
-    ) : null;
-  }
-}
+  return showButton ? (
+    <PayPalButton
+      client={client}
+      commit={commit}
+      env={env}
+      onAuthorize={onAuthorize}
+      onCancel={onCancel}
+      onError={onError}
+      payment={payment}
+      style={{ label: 'pay', tagline: 'false', size: 'medium' }}
+    />
+  ) : null;
+};
 
 PaypalButton.propTypes = propTypes;
 
