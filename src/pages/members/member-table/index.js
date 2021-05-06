@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey['300'],
     color: theme.palette.grey['600'],
     marginRight: theme.spacing(1),
+
     '&:disabled': {
       backgroundColor: theme.palette.action.disabled,
     },
@@ -47,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
     '&:nth-of-type(odd)': {
       backgroundColor: 'rgba(0, 0, 0, 0,.87)',
     },
+
+    '& td:last-child': {
+      paddingRight: theme.spacing(3),
+    }
   },
   table: {
     marginBottom: 0,
