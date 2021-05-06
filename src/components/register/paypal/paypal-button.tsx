@@ -1,31 +1,31 @@
 /*
 Inspiration taken from this blog post
 https://www.robinwieruch.de/react-paypal-payment/
-Only changes were to use `componentDidUpdate` instead of `componentWillRecieveProps`
 */
 
 // External Dependencies
-import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  FC, useEffect, useRef, useState
+} from 'react';
 import ReactDOM from 'react-dom';
 
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
 
-// Local Variables
-const propTypes = {
-  client: PropTypes.shape({}).isRequired,
-  commit: PropTypes.bool.isRequired,
-  currency: PropTypes.string.isRequired,
-  env: PropTypes.string.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired,
-  total: PropTypes.number.isRequired,
-};
+// Local Typings
+interface Props {
+  client: any;
+  commit: boolean;
+  currency: string;
+  env: string;
+  onCancel: (data: any) => void;
+  onError: (data: any) => void;
+  onSuccess: (data: any) => void;
+  total: number;
+}
 
 // Component Definition
-const PaypalButton = ({
+const PaypalButton: FC<Props> = ({
   client,
   commit,
   currency,
@@ -36,8 +36,6 @@ const PaypalButton = ({
   total,
 }) => {
   const paypalRef = useRef(null);
-
-  console.log('paypalRef', paypalRef);
 
   const [showButton, setShowButton] = useState(false);
   const previousShowButton = usePrevious(showButton);
@@ -100,7 +98,5 @@ const PaypalButton = ({
     />
   ) : null;
 };
-
-PaypalButton.propTypes = propTypes;
 
 export default PaypalButton;
