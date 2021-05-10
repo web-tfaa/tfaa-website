@@ -23,6 +23,13 @@ module.exports = {
       },
     },
     {
+      resolve: '@sentry/gatsby',
+      options: {
+        dsn: 'https://91ab83b9f539459bb8a11d56ad3bbf2e@o619843.ingest.sentry.io/5751393',
+        sampleRate: 0.7,
+      },
+    },
+    {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
