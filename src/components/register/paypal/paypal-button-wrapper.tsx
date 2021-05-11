@@ -1,16 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 // External Dependencies
-import * as Sentry from '@sentry/gatsby';
 import {
   Box,
   Collapse,
 } from '@material-ui/core';
-import React, { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Local Dependencies
 import PaypalButton from './paypal-button';
 import EnhancedAlert from '../../shared/EnhancedAlert';
+import { logError } from '../../../utils/logError';
 
 // Local Typings
 interface PaypalPayment {
@@ -74,23 +74,20 @@ const PaypalButtonWrapper: FC<Props> = ({
   );
 
   const handleSuccess = (payment: PaypalPayment) => {
-    console.log('Successful payment!', payment);
-
+    console.log('Successful payment', payment);
     onSuccessfulPayment(payment);
   };
 
   // Not sure about the shape of the Paypal error
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleError = (error: any) => {
-    console.log('Erroneous payment OR failed to load script!', error);
+  const handleError = (error: Error) => {
     setPaymentError(errorText);
-    Sentry.captureException(error);
+    logError('Erroneous payment OR failed to load script', error);
   };
 
   const handleCancel = (data: PaypalPaymentCancel) => {
-    console.log('Canceled payment!', data);
+    console.log('Canceled payment', data);
     setPaymentError(errorText);
-    Sentry.captureException(data);
   };
 
   return (
