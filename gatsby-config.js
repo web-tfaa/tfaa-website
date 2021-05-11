@@ -1,7 +1,7 @@
 // Give gatsby access to env keys
-import { config } from 'dotenv';
-
-config();
+require('dotenv').config({
+  path: '.env',
+});
 
 module.exports = {
   siteMetadata: {

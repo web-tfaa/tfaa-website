@@ -37,7 +37,6 @@
     "clsx": "^1.1.0",
     "core-js": "^3.11.1",
     "date-fns": "^2.21.1",
-    "dotenv": "^8.2.0",
     "firebase": "^7.19.0",
     "gatsby": "^3.4.0",
     "gatsby-cli": "^3.4.0",
