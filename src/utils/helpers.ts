@@ -44,6 +44,8 @@ export const currentSchoolYearShort = isTodayAfterMarch31st
   ? `${currentYearShort}-${Number(currentYearShort) + 1}`
   : `${Number(currentYearShort) - 1}-${currentYearShort}`;
 
+console.log('currentSchoolYearShort', currentSchoolYearShort);
+
 export const currentSchoolYearLong = isTodayAfterMarch31st
   ? `${currentYearLong}-${Number(currentYearLong) + 1}`
   : `${Number(currentYearLong) - 1}-${currentYearLong}`;

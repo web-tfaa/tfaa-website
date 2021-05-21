@@ -22,5 +22,9 @@
   "include": [
     "src/**/*"
   ],
-  "exclude": ["node_modules", "public", ".cache"]
+  "exclude": ["node_modules", "public", ".cache"],
+  "files": [
+    "src/types/types.d.ts",
+    "src/types/yaml.d.ts"
+  ]
 }

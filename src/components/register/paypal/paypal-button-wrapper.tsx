@@ -4,7 +4,7 @@ import {
   Box,
   Collapse,
 } from '@material-ui/core';
-import { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Local Dependencies

@@ -7,6 +7,8 @@ const getFirebaseCollectionName = (collection) => `${collection}_${currentSchool
 
 // Create/Update user entry in Firestore
 export const doCreateEntry = (form, collection, documentId, callback) => {
+  console.log('doCreateEntry: form', form);
+
   const collectionName = getFirebaseCollectionName(collection);
 
   console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);

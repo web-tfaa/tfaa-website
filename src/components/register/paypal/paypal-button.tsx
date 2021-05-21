@@ -11,17 +11,47 @@ import ReactDOM from 'react-dom';
 
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
+import { logError } from '../../../utils/logError';
 
 // Local Typings
 interface Props {
-  client: any;
+  client: string;
   commit: boolean;
   currency: string;
   env: string;
-  onCancel: (data: any) => void;
-  onError: (data: any) => void;
-  onSuccess: (data: any) => void;
+  onCancel: (data: unknown) => void;
+  onError: (error: Error) => void;
+  onSuccess: (data: unknown) => void;
   total: number;
+}
+
+interface Transaction {
+  amount: {
+    total: number;
+    currency: string;
+  }
+}
+
+interface CreatePaymentPayload {
+  transactions: Transaction[];
+}
+
+interface PaypalGlobalObject {
+  Button: {
+    driver: (
+      type: string,
+      packages: any,
+    ) => void;
+  }
+  rest: {
+    payment: {
+      create: (
+        env: string,
+        client: string,
+        payload: CreatePaymentPayload,
+      ) => void;
+    }
+  }
 }
 
 // Component Definition
@@ -35,7 +65,8 @@ const PaypalButton: FC<Props> = ({
   onSuccess,
   total,
 }) => {
-  const paypalRef = useRef<any>(null);
+  const paypalRef = useRef<PaypalGlobalObject>(null);
+  console.log('paypalRef', paypalRef.current);
 
   const [showButton, setShowButton] = useState(false);
   const previousShowButton = usePrevious(showButton);
@@ -66,19 +97,22 @@ const PaypalButton: FC<Props> = ({
       ],
     });
 
-  const onAuthorize = (data: any, actions: any) =>
-    actions.payment.execute()
+  const onAuthorize = (data: unknown, actions: unknown) =>
+    actions?.payment?.execute()
       .then(() => {
         const payment = {
           cancelled: false,
           paid: true,
-          payerID: data.payerID,
-          paymentID: data.paymentID,
-          paymentToken: data.paymentToken,
-          returnUrl: data.returnUrl,
+          payerID: data?.payerID,
+          paymentID: data?.paymentID,
+          paymentToken: data?.paymentToken,
+          returnUrl: data?.returnUrl,
         };
 
         onSuccess(payment);
+      })
+      .catch((error) => {
+        logError('PaypalButton : onAuthorize error', error);
       });
 
   // From the paypal docs here

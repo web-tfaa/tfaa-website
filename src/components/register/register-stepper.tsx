@@ -1,28 +1,28 @@
 // External Dependencies
-import Card from '@material-ui/core/Card';
-import PropTypes from 'prop-types';
-import React from 'react';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Stepper from '@material-ui/core/Stepper';
+import {
+  Card,
+  Step,
+  StepLabel,
+  Stepper,
+} from '@material-ui/core';
+import React, { FC } from 'react';
 
-// Local Variables
-const propTypes = {
-  activeStep: PropTypes.number.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  isViewingSponsors: PropTypes.bool,
-};
-
-const defaultProps = {
-  isViewingSponsors: false,
-};
+// Local Typings
+interface Props {
+  activeStep: number;
+  isAuthenticated: boolean;
+  isViewingSponsors?: boolean;
+}
 
 // Local Functions
-function getSteps(isAuthenticated = false, isViewingSponsors = false) {
+function getSteps(
+  isAuthenticated = false,
+  isViewingSponsors = false,
+): string[] {
   return [
     // We show a different message if the user is already logged in
     isAuthenticated
-      ? 'Login to the TMAC members area'
+      ? 'Sign in to the TMAC members area'
       : 'Sign up for TMAC website login',
     'Complete registration form',
     isViewingSponsors
@@ -32,15 +32,15 @@ function getSteps(isAuthenticated = false, isViewingSponsors = false) {
 }
 
 // Component Definition
-const RegisterStepper = ({
+const RegisterStepper: FC<Props> = ({
   activeStep,
   isAuthenticated,
-  isViewingSponsors,
+  isViewingSponsors = false,
 }) => {
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
-    <Card>
+    <Card variant="outlined">
       <Stepper
         activeStep={activeStep}
         alternativeLabel
@@ -56,8 +56,5 @@ const RegisterStepper = ({
     </Card>
   );
 };
-
-RegisterStepper.propTypes = propTypes;
-RegisterStepper.defaultProps = defaultProps;
 
 export default RegisterStepper;

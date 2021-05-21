@@ -25,11 +25,15 @@ import {
   removeErrorKeys,
   zipCodeRegex,
 } from '../../utils/helpers';
-import {
-  doCreateEntry,
-} from '../../firebase/db';
+import { doCreateEntry } from '../../firebase/db';
 
 // Local Variables
+const propTypes = {
+  authUser: PropTypes.shape({}).isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  onCompleteStep: PropTypes.func.isRequired,
+};
+
 const styles = (theme) => ({
   cityContainer: {
     marginBottom: 0,
@@ -78,40 +82,40 @@ const styles = (theme) => ({
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
 const INITIAL_STATE = {
-  honeypot: '',
-  isAuthenticated: false,
-  FirstName: '',
-  FirstNameError: '',
-  LastName: '',
-  LastNameError: '',
-  Title: '',
-  TitleError: '',
-  District: '',
-  DistrictError: '',
   Address1: '',
   Address1Error: '',
   // Address2 is not required, so cannot have an error
   Address2: '',
-  City: '',
-  CityError: '',
-  State: '',
-  StateError: '',
-  ZipCode: '',
-  ZipCodeError: '',
-  Email: '',
-  EmailError: '',
-  OfficePhone: '',
-  OfficePhoneError: '',
+  AmountPaid: 0,
   CellPhone: '',
   CellPhoneError: '',
-  NewToTMAC: true,
+  City: '',
+  CityError: '',
+  District: '',
+  DistrictError: '',
+  Email: '',
+  EmailError: '',
+  FirstName: '',
+  FirstNameError: '',
+  LastName: '',
+  LastNameError: '',
   MemberType: '',
+  NewToTMAC: true,
+  OfficePhone: '',
+  OfficePhoneError: '',
   PaymentOption: 'Invoiced',
-  AmountPaid: 0,
-  invoiceDate: '',
-  invoiceId: 0,
   PaypalPayerID: '',
   PaypalPaymentID: '',
+  State: '',
+  StateError: '',
+  Title: '',
+  TitleError: '',
+  ZipCode: '',
+  ZipCodeError: '',
+  honeypot: '',
+  invoiceDate: '',
+  invoiceId: 0,
+  isAuthenticated: false,
   receiptDate: '',
   receiptId: 0,
 };
@@ -135,12 +139,6 @@ const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
 
 // Component Definition
 class RegisterForm extends Component {
-  static propTypes = {
-    authUser: PropTypes.shape({}).isRequired,
-    classes: PropTypes.shape({}).isRequired,
-    onCompleteStep: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -148,7 +146,7 @@ class RegisterForm extends Component {
       ...INITIAL_STATE,
       hasCompletedRegisterInfoForm: false,
       radioValue: 'Yes',
-      // eslint-disable-next-line
+      // eslint-disable-next-line react/no-unused-state
       userId: props.authUser.uid,
     };
   }
@@ -661,6 +659,8 @@ class RegisterForm extends Component {
     );
   }
 }
+
+RegisterForm.propTypes = propTypes;
 
 const RegisterFormWithContext = (props) => (
   <AuthUserContext.Consumer>

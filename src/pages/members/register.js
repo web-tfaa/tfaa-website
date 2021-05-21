@@ -41,7 +41,7 @@ class RegisterContent extends Component {
   }
 
   componentDidMount() {
-    this.activeComponent = true;
+    // this.activeComponent = true;
 
     const {
       isAuthenticated,
@@ -56,9 +56,9 @@ class RegisterContent extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.activeComponent = false;
-  }
+  // componentWillUnmount() {
+  //   this.activeComponent = false;
+  // }
 
   getCurrentStepContent(isAuthenticated) {
     const {
@@ -109,16 +109,16 @@ class RegisterContent extends Component {
       form,
     } = this.state;
 
-    if (this.activeComponent) {
-      this.setState({
-        activeStep: activeStep + 1,
-        completedSteps: [...completedSteps, step],
-        form: {
-          ...form,
-          ...updatedForm,
-        },
-      });
-    }
+    // if (this.activeComponent) {
+    this.setState({
+      activeStep: activeStep + 1,
+      completedSteps: [...completedSteps, step],
+      form: {
+        ...form,
+        ...updatedForm,
+      },
+    });
+    // }
   };
 
   render() {
@@ -142,6 +142,7 @@ class RegisterContent extends Component {
         }}
       >
         <Status />
+
         <Container>
           <Helmet>
             <title>TMAC | Register</title>
