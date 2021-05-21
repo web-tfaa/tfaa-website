@@ -7,7 +7,8 @@ https://www.robinwieruch.de/react-paypal-payment/
 import React, {
   FC, useEffect, useRef, useState
 } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { PayPalButtons } from '@paypal/react-paypal-js';
 
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
@@ -15,12 +16,12 @@ import { logError } from '../../../utils/logError';
 
 // Local Typings
 interface Props {
-  client: string;
-  commit: boolean;
+  // client: string;
+  // commit: boolean;
   currency: string;
-  env: string;
+  // env: string;
   onCancel: (data: unknown) => void;
-  onError: (error: Error) => void;
+  onError: (error: unknown) => void;
   onSuccess: (data: unknown) => void;
   total: number;
 }
@@ -56,10 +57,10 @@ interface PaypalGlobalObject {
 
 // Component Definition
 const PaypalButton: FC<Props> = ({
-  client,
-  commit,
+  // client,
+  // commit,
   currency,
-  env,
+  // env,
   onCancel,
   onError,
   onSuccess,
@@ -97,6 +98,18 @@ const PaypalButton: FC<Props> = ({
       ],
     });
 
+  const onCreateOrder = (
+    data: unknown,
+    actions: unknown,
+  ) =>
+    actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: total,
+        },
+      }],
+    });
+
   const onAuthorize = (data: unknown, actions: unknown) =>
     actions?.payment?.execute()
       .then(() => {
@@ -117,19 +130,35 @@ const PaypalButton: FC<Props> = ({
 
   // From the paypal docs here
   // https://github.com/paypal/paypal-checkout/blob/master/docs/frameworks.md#reactjs-element
-  const PayPalButton = paypalRef.current?.Button.driver('react', { React, ReactDOM });
+  // const PayPalButton = paypalRef.current?.Button.driver('react', { React, ReactDOM });
 
   return showButton ? (
-    <PayPalButton
-      client={client}
-      commit={commit}
-      env={env}
-      onAuthorize={onAuthorize}
+    <PayPalButtons
+      // client={client}
+      // commit={commit}
+      // env={env}
+      createOrder={onCreateOrder}
       onCancel={onCancel}
       onError={onError}
-      payment={payment}
-      style={{ label: 'pay', tagline: 'false', size: 'medium' }}
+      // payment={payment}
+      style={{
+        color: 'gold',
+        label: 'pay',
+        shape: 'pill',
+        tagline: false,
+        // size: 'medium',
+      }}
     />
+    // <PayPalButton
+    //   client={client}
+    //   commit={commit}
+    //   env={env}
+    //   onAuthorize={onAuthorize}
+    //   onCancel={onCancel}
+    //   onError={onError}
+    //   payment={payment}
+    //   style={{ label: 'pay', tagline: 'false', size: 'medium' }}
+    // />
   ) : null;
 };
 
