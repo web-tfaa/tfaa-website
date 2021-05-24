@@ -2,6 +2,10 @@
 import React, { FC } from 'react';
 
 // Internal Dependencies
+import {
+  HandleCompleteStepType,
+  IRegisterForm,
+} from '../../pages/members/register';
 import FormHr from '../shared/form-hr';
 import RegisterForm from './register-form';
 import RegisterSponsorForm from './register-sponsor-form';
@@ -9,13 +13,17 @@ import RegisterSponsorForm from './register-sponsor-form';
 // Local Typings
 interface Props {
   isViewingSponsors?: boolean;
-  onCompleteStep: (step: number, form: unknown) => void;
+  onCompleteStep: HandleCompleteStepType;
+  onSetForm: (form: IRegisterForm) => void;
+  registerForm: IRegisterForm;
 }
 
 // Component Definition
 const RegisterInfo: FC<Props> = ({
   isViewingSponsors = false,
   onCompleteStep,
+  onSetForm,
+  registerForm,
 }) => (
   <section>
     <h2>
@@ -28,7 +36,11 @@ const RegisterInfo: FC<Props> = ({
     {isViewingSponsors ? (
       <RegisterSponsorForm onCompleteStep={onCompleteStep} />
     ) : (
-      <RegisterForm onCompleteStep={onCompleteStep} />
+      <RegisterForm
+        onCompleteStep={onCompleteStep}
+        onSetForm={onSetForm}
+        registerForm={registerForm}
+      />
     )}
   </section>
 );

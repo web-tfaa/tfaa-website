@@ -6,7 +6,7 @@ export const logError = (
   originalError: Error
 ): void => {
   // Let's not log errors to Sentry if we are testing
-  if (process.env.NODE_ENV !== 'test') {
+  if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
     console.error(errorMessage);
 
     // The Error constructor always has a "message"
