@@ -9,7 +9,7 @@ import {
   RadioGroup,
 } from '@material-ui/core';
 import React, {
-  FC, useRef, useEffect, useState
+  FC, useCallback, useState
 } from 'react';
 import clsx from 'clsx';
 import { navigate } from 'gatsby';
@@ -113,15 +113,6 @@ const RegisterForm: FC<Props> = ({
   onSetForm,
   registerForm,
 }) => {
-  /* REMOVE ME */
-  const countRef = useRef(1);
-  console.log('countRef', countRef.current);
-
-  useEffect(() => {
-    countRef.current += 1;
-  });
-  /* REMOVE ME */
-
   const classes = useStyles();
 
   const [isFormTouched, setIsFormTouched] = useState(false);
@@ -129,6 +120,37 @@ const RegisterForm: FC<Props> = ({
   if (!authUser) {
     return null;
   }
+
+  // Pull the form values out
+  const {
+    Address1,
+    Address1Error,
+    Address2,
+    CellPhone,
+    CellPhoneError,
+    City,
+    CityError,
+    District,
+    DistrictError,
+    Email,
+    EmailError,
+    FirstName,
+    FirstNameError,
+    LastName,
+    LastNameError,
+    NewToTMAC,
+    OfficePhone,
+    OfficePhoneError,
+    State,
+    StateError,
+    Title,
+    TitleError,
+    ZipCode,
+    ZipCodeError,
+    hasCompletedRegisterInfoForm,
+    honeypot,
+    isAuthenticated,
+  } = registerForm;
 
   const handleCompleteInfoStep = () => {
     setTimeout(() => onCompleteStep(0), 2200);
@@ -216,18 +238,6 @@ const RegisterForm: FC<Props> = ({
   };
 
   const handleUpdateInputError = (name, value) => {
-    const {
-      FirstName,
-      LastName,
-      Title,
-      District,
-      Address1,
-      City,
-      State,
-      OfficePhone,
-      CellPhone,
-    } = registerForm;
-
     switch (name) {
       case 'FirstName':
         if (!FirstName && value) {
@@ -351,19 +361,26 @@ const RegisterForm: FC<Props> = ({
     }
   };
 
-  const handleUpdateErrors = (name, value) => {
+  const handleUpdateErrors = useCallback((name, value) => {
     if (name === 'Email') {
       handleUpdateEmailError(value);
     } else if (name === 'ZipCode') {
       handleUpdateZipCodeError(value);
-    } else handleUpdateInputError(name, value);
-  };
+    } else {
+      handleUpdateInputError(name, value);
+    }
+  }, [registerForm]);
 
   const handleUpdate = async (event) => {
     if (!isFormTouched) {
       console.log('touched form');
       setIsFormTouched(true);
     }
+
+    console.log('NAME → ', event.target.name, {
+      ...registerForm,
+      [event.target.name]: event.target.value,
+    });
 
     const isPhoneValue = event.target.name.endsWith('Phone');
 
@@ -383,36 +400,6 @@ const RegisterForm: FC<Props> = ({
       NewToTMAC: event.target.value,
     });
   };
-
-  const {
-    Address1,
-    Address1Error,
-    Address2,
-    CellPhone,
-    CellPhoneError,
-    City,
-    CityError,
-    District,
-    DistrictError,
-    Email,
-    EmailError,
-    FirstName,
-    FirstNameError,
-    LastName,
-    LastNameError,
-    NewToTMAC,
-    OfficePhone,
-    OfficePhoneError,
-    State,
-    StateError,
-    Title,
-    TitleError,
-    ZipCode,
-    ZipCodeError,
-    hasCompletedRegisterInfoForm,
-    honeypot,
-    isAuthenticated,
-  } = registerForm;
 
   if (isAuthenticated) {
     navigate('/members');
@@ -636,6 +623,7 @@ const RegisterForm: FC<Props> = ({
 
           {/* Hidden input to help curtail spam */}
           <input
+            aria-label="hidden input"
             css={{ opacity: 0, height: 1, width: 1 }}
             id="honeypot"
             name="honeypot"

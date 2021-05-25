@@ -124,6 +124,11 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
     }
   }, []);
 
+  const handleUpdateForm = (newForm: IRegisterForm) => {
+    console.log('newForm', newForm);
+    setForm(newForm);
+  };
+
   const handleCompleteStep: HandleCompleteStepType = (step) => {
     setActiveStep(activeStep + 1);
     setCompletedSteps([...completedSteps, step]);
@@ -141,7 +146,7 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
       <RegisterInfo
         registerForm={form}
         onCompleteStep={handleCompleteStep}
-        onSetForm={setForm}
+        onSetForm={handleUpdateForm}
       />
     );
 
