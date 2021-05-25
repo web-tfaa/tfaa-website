@@ -51,11 +51,7 @@ class RegisterPayment extends Component {
   }
 
   componentDidMount() {
-    this.activeComponent = true;
-
-    if (this.activeComponent) {
-      doGetInvoiceId(this.handleGetCurrentInvoiceId);
-    }
+    doGetInvoiceId(this.handleGetCurrentInvoiceId);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -87,8 +83,6 @@ class RegisterPayment extends Component {
 
   componentWillUnmount() {
     const { hasCompletedPayment } = this.state;
-
-    this.activeComponent = false;
 
     return hasCompletedPayment
       ? this.handleIncrementReceiptId()
@@ -132,45 +126,41 @@ class RegisterPayment extends Component {
       receiptId,
     };
 
-    if (this.activeComponent) {
-      this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value });
 
-      return doUpdateEntry(updatedForm, collection, form.userId);
-    }
+    return doUpdateEntry(updatedForm, collection, form.userId);
   };
 
   handleCompletePaymentStep = () => {
-    if (this.activeComponent) {
-      const {
-        form,
-        onCompleteStep,
-      } = this.props;
+    const {
+      form,
+      onCompleteStep,
+    } = this.props;
 
-      const {
-        invoiceId,
-        paymentDetails,
-        receiptId,
-        value,
-      } = this.state;
+    const {
+      invoiceId,
+      paymentDetails,
+      receiptId,
+      value,
+    } = this.state;
 
-      const isActive = value === 'active';
+    const isActive = value === 'active';
 
-      const documentId = form.userId;
+    const documentId = form.userId;
 
-      const updatedForm = {
-        PaypalPayerID: paymentDetails.payerId,
-        PaypalPaymentID: paymentDetails.paymentId,
-        PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
-        AmountPaid: isActive ? '$50.00' : '$30.00',
-        invoiceDate: currentDate,
-        invoiceId,
-        MemberType: isActive ? 'Active' : 'Retired',
-        receiptId,
-      };
+    const updatedForm = {
+      PaypalPayerID: paymentDetails.payerId,
+      PaypalPaymentID: paymentDetails.paymentId,
+      PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
+      AmountPaid: isActive ? '$50.00' : '$30.00',
+      invoiceDate: currentDate,
+      invoiceId,
+      MemberType: isActive ? 'Active' : 'Retired',
+      receiptId,
+    };
 
-      doUpdateEntry(updatedForm, collection, documentId);
-      onCompleteStep(2, updatedForm);
-    }
+    doUpdateEntry(updatedForm, collection, documentId);
+    onCompleteStep(2, updatedForm);
   };
 
   handleIncrementInvoiceId = () => {
@@ -210,34 +200,28 @@ class RegisterPayment extends Component {
   };
 
   handleUpdateCompletedStep = (payment) => {
-    if (this.activeComponent) {
-      doGetReceiptId(this.handleGetCurrentReceiptId);
+    doGetReceiptId(this.handleGetCurrentReceiptId);
 
-      this.setState({
-        hasCompletedPayment: true,
-        paymentDetails: {
-          payerId: payment.payerID,
-          paymentId: payment.paymentID,
-          receiptDate: currentDate,
-        },
-      }, () => this.handleCompletePaymentStep());
-    }
+    this.setState({
+      hasCompletedPayment: true,
+      paymentDetails: {
+        payerId: payment.payerID,
+        paymentId: payment.paymentID,
+        receiptDate: currentDate,
+      },
+    }, () => this.handleCompletePaymentStep());
   };
 
   handleGetCurrentInvoiceId = (invoiceId) => {
-    if (this.activeComponent) {
-      this.setState({
-        invoiceId,
-      });
-    }
+    this.setState({
+      invoiceId,
+    });
   };
 
   handleGetCurrentReceiptId = (receiptId) => {
-    if (this.activeComponent) {
-      this.setState({
-        receiptId,
-      });
-    }
+    this.setState({
+      receiptId,
+    });
   };
 
   render() {

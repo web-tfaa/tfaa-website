@@ -117,8 +117,6 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
   const [form, setForm] = useState(intialFormValues);
   const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
 
-  console.log('form', form);
-
   useEffect(() => {
     if (activeStep === 0 && isAuthenticated) {
       setActiveStep(1);

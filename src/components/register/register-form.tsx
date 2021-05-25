@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  // TextField,
 } from '@material-ui/core';
 import React, {
   FC, useCallback, useState
@@ -33,16 +34,20 @@ import {
 } from '../../pages/members/register';
 import { doCreateEntry } from '../../firebase/db';
 import { logError } from '../../utils/logError';
+import { registerMemberSchema } from './schemas';
 
 // Local Typings
-interface Props {
-  authUser: {
-    uid: string;
-  } | null;
+interface ContextProps {
   initialFormValues: IRegisterForm;
   onCompleteStep: HandleCompleteStepType;
   onSetForm: (form: IRegisterForm) => void;
   registerForm: IRegisterForm;
+}
+
+interface Props extends ContextProps {
+  authUser: {
+    uid: string;
+  } | null;
 }
 
 // Local Variables
@@ -59,6 +64,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     marginTop: '0.4rem',
     textTransform: 'initial',
+  },
+  honey: {
+    height: 1,
+    opacity: 0,
+    width: 1,
   },
   input: {
     display: 'block',
@@ -441,6 +451,7 @@ const RegisterForm: FC<Props> = ({
       <Formik
         initialValues={initialFormValues}
         onSubmit={handleClickSubmitButton}
+        validationSchema={registerMemberSchema}
       >
         {/* <Form onSubmit={(event) => event.preventDefault()}> */}
         <Form>
@@ -727,7 +738,7 @@ const RegisterForm: FC<Props> = ({
           {/* Hidden input to help curtail spam */}
           <input
             aria-label="hidden input"
-            css={{ opacity: 0, height: 1, width: 1 }}
+            className={classes.honey}
             id="honeypot"
             name="honeypot"
             onChange={handleUpdate}
@@ -771,7 +782,7 @@ const RegisterForm: FC<Props> = ({
   );
 };
 
-const RegisterFormWithContext: FC<Props> = (props) => (
+const RegisterFormWithContext: FC<ContextProps> = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => <RegisterForm {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
