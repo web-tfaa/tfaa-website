@@ -39,6 +39,12 @@ const _options = {
     'Courier New',
     'monospace',
   ],
+  muiFontFamily: [
+    'Roboto',
+    'Helvetica Neue',
+    'Arial',
+    'sans-serif',
+  ],
   baseFontSize: '18px',
   baseLineHeight: 1.4,
   headerLineHeight: 1.075,
@@ -201,12 +207,12 @@ const _options = {
         background: 'none',
         boxShadow: 'none',
       },
-      '.main-body label': {
+      '.main-body label:not(.MuiFormLabel-root)': {
         fontFamily: options.headerFontFamily.join(','),
         fontWeight: 600,
         marginBottom: '0.25rem',
       },
-      '.main-body input': {
+      '.main-body input:not(.MuiInputBase-input)': {
         letterSpacing: '0.5px',
         padding: '8px 12px',
       },
@@ -216,8 +222,14 @@ const _options = {
         fontFamily: options.headerFontFamily.join(','),
         padding: '0.5rem',
       },
-      '.main-body input:focus': {
+      '.main-body input:focus :not(.MuiInputBase-input)': {
         border: `2px solid ${texasFlagBlue}`,
+      },
+      '.main-body .MuiFormLabel-root': {
+        fontFamily: options.muiFontFamily.join(','),
+      },
+      '.main-body .MuiInputBase-input': {
+        fontFamily: options.muiFontFamily.join(','),
       },
       '::-webkit-input-placeholder': {
         color: colors.gray.calm,

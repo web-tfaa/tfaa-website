@@ -5,14 +5,14 @@ export const registerMemberSchema = yup.object({
   Address1: yup
     .string()
     .trim()
-    .required('Address1 is required'),
+    .required('Address 1 is required'),
   Address2: yup
     .string()
     .trim(),
   CellPhone: yup
     .string()
     .trim()
-    .required('CellPhone is required'),
+    .required('Cell Phone is required'),
   City: yup
     .string()
     .trim()
@@ -29,15 +29,15 @@ export const registerMemberSchema = yup.object({
   FirstName: yup
     .string()
     .trim()
-    .required('FirstName is required'),
+    .required('First Name is required'),
   LastName: yup
     .string()
     .trim()
-    .required('LastName is required'),
+    .required('Last Name is required'),
   OfficePhone: yup
     .string()
     .trim()
-    .required('OfficePhone is required'),
+    .required('Office Phone is required'),
   State: yup
     .string()
     .trim()
@@ -49,5 +49,5 @@ export const registerMemberSchema = yup.object({
   ZipCode: yup
     .string()
     .trim()
-    .required('ZipCode is required'),
+    .required('Zip Code is required'),
 });

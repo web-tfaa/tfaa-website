@@ -6,6 +6,8 @@ import React, { FC } from 'react';
 // Local Typings
 interface Props {
   className?: string;
+  errorMessage: unknown; // will cast to string
+  fullWidth?: boolean;
   hasError: boolean;
   id: string; // applied to id and name
   isTouched: boolean;
@@ -22,6 +24,8 @@ interface Props {
 // Component Definition
 const CustomTextField: FC<Props> = ({
   className,
+  errorMessage,
+  fullWidth = true,
   hasError,
   id,
   isTouched,
@@ -35,8 +39,8 @@ const CustomTextField: FC<Props> = ({
     className={className}
     color="primary"
     error={isTouched && hasError}
-    fullWidth
-    helperText={isTouched && hasError}
+    fullWidth={fullWidth}
+    helperText={isTouched && errorMessage as string}
     id={id}
     label={label}
     name={id}
