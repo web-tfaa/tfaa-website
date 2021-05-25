@@ -11,7 +11,7 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
-import RegisterInfo from '../../components/register/register-info';
+import RegisterFormWrapper from '../../components/register/register-form-wrapper';
 import RegisterPayment from '../../components/register/register-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
@@ -68,9 +68,10 @@ export type HandleCompleteStepType = (step: Steps) => void;
 
 // Local Variables
 const COMPLETED_STEPS_INITIAL_STATE: Steps[] = [];
+
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
-const FORM_INITIAL_STATE: IRegisterForm = {
+const intialFormValues: IRegisterForm = {
   Address1: '',
   Address1Error: '',
   // Address2 is not required, so cannot have an error
@@ -113,7 +114,7 @@ const FORM_INITIAL_STATE: IRegisterForm = {
 // Component Definition
 const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [form, setForm] = useState(FORM_INITIAL_STATE);
+  const [form, setForm] = useState(intialFormValues);
   const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
 
   console.log('form', form);
@@ -143,7 +144,8 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
     );
 
     const stepTwoContent = (
-      <RegisterInfo
+      <RegisterFormWrapper
+        initialFormValues={intialFormValues}
         registerForm={form}
         onCompleteStep={handleCompleteStep}
         onSetForm={handleUpdateForm}

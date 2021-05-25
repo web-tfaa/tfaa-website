@@ -14,6 +14,7 @@ import React, {
 import clsx from 'clsx';
 import { navigate } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
+import { Formik, Field, Form } from 'formik';
 
 // Internal Dependencies
 import EnhancedAlert from '../shared/EnhancedAlert';
@@ -38,6 +39,7 @@ interface Props {
   authUser: {
     uid: string;
   } | null;
+  initialFormValues: IRegisterForm;
   onCompleteStep: HandleCompleteStepType;
   onSetForm: (form: IRegisterForm) => void;
   registerForm: IRegisterForm;
@@ -109,6 +111,7 @@ const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
 // Component Definition
 const RegisterForm: FC<Props> = ({
   authUser,
+  initialFormValues,
   onCompleteStep,
   onSetForm,
   registerForm,
@@ -156,12 +159,21 @@ const RegisterForm: FC<Props> = ({
     setTimeout(() => onCompleteStep(0), 2200);
   };
 
-  const handleClickSubmitButton = async (event) => {
+  const handleClickSubmitButton = async (
+    values: IRegisterForm,
+  ) => {
     if (!authUser) {
       return null;
     }
 
-    event.preventDefault();
+    // Make copy of values
+    const updatedValues = values;
+
+    // event.preventDefault();
+
+    // const {
+
+    // } = updatedValues;
 
     const { uid: authenticatedUserId } = authUser;
 
@@ -169,7 +181,7 @@ const RegisterForm: FC<Props> = ({
     const documentId = authenticatedUserId;
 
     // The Google Sheet doesn't need these values
-    const form = removeErrorKeys(registerForm);
+    const form = removeErrorKeys(updatedValues);
     delete form.isAuthenticated;
     delete form.honeypot;
     delete form.hasCompletedRegisterInfoForm;
@@ -418,16 +430,31 @@ const RegisterForm: FC<Props> = ({
 
   const hasValidInput = hasInput && !honeypot;
 
+  if (hasCompletedRegisterInfoForm) {
+    return <LoadingContainer step={3} title="Information Form Complete" />;
+  }
+
+  console.log('initialFormValues', initialFormValues);
+
   return (
     <div className="login-form">
-      {hasCompletedRegisterInfoForm ? (
-        <LoadingContainer step={3} title="Information Form Complete" />
-      ) : (
-        <form onSubmit={(event) => event.preventDefault()}>
+      <Formik
+        initialValues={initialFormValues}
+        onSubmit={handleClickSubmitButton}
+      >
+        {/* <Form onSubmit={(event) => event.preventDefault()}> */}
+        <Form>
           {/* FIRST NAME */}
           <label className={classes.label} htmlFor="FirstName">
             First Name*
-            <input
+            <Field
+              className={classes.input}
+              id="FirstName"
+              name="FirstName"
+              placeholder="e.g. Sally"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="FirstName"
               onChange={handleUpdate}
@@ -435,14 +462,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={FirstName}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{FirstNameError}</div>
 
           {/* LAST NAME */}
           <label className={classes.label} htmlFor="LastName">
             Last Name*
-            <input
+            <Field
+              className={classes.input}
+              id="LastName"
+              name="LastName"
+              placeholder="e.g. Drumm"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="LastName"
               onChange={handleUpdate}
@@ -450,14 +484,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={LastName}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{LastNameError}</div>
 
           {/* TITLE */}
           <label className={classes.label} htmlFor="Title">
             Title*
-            <input
+            <Field
+              className={classes.input}
+              id="Title"
+              name="Title"
+              placeholder="e.g. Director of Fine Arts"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="Title"
               onChange={handleUpdate}
@@ -465,14 +506,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={Title}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{TitleError}</div>
 
           {/* DISTRICT */}
           <label className={classes.label} htmlFor="District">
             District*
-            <input
+            <Field
+              className={classes.input}
+              id="District"
+              name="District"
+              placeholder="e.g. Texas ISD"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="District"
               onChange={handleUpdate}
@@ -480,14 +528,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={District}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{DistrictError}</div>
 
           {/* ADDRESS 1 */}
           <label className={classes.label} htmlFor="Address1">
             Address 1*
-            <input
+            <Field
+              className={classes.input}
+              id="Address1"
+              name="Address1"
+              placeholder="e.g. 123 Main St."
+              required
+            />
+            {/* <input
               className={classes.input}
               name="Address1"
               onChange={handleUpdate}
@@ -495,28 +550,41 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={Address1}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{Address1Error}</div>
 
           {/* ADDRESS 2 */}
           <label className={classes.label} htmlFor="Address2">
             Address 2
-            <input
+            <Field
+              className={classes.input}
+              id="Address2"
+              name="Address2"
+              placeholder="e.g. Suite 19"
+            />
+            {/* <input
               className={classes.input}
               name="Address2"
               onChange={handleUpdate}
               placeholder="e.g. Suite 19"
               type="text"
               value={Address2}
-            />
+            /> */}
           </label>
 
           <div className={classes.cityStateContainer}>
             {/* CITY */}
             <label className={clsx(classes.label, classes.cityContainer)} htmlFor="City">
               City*
-              <input
+              <Field
+                className={classes.input}
+                id="City"
+                name="City"
+                placeholder="e.g. Dallas"
+                required
+              />
+              {/* <input
                 className={classes.input}
                 name="City"
                 onChange={handleUpdate}
@@ -524,14 +592,21 @@ const RegisterForm: FC<Props> = ({
                 required
                 type="text"
                 value={City}
-              />
+              /> */}
               <div className={classes.error}>{CityError}</div>
             </label>
 
             {/* STATE */}
             <label className={clsx(classes.label, classes.stateContainer)} htmlFor="State">
               State*
-              <input
+              <Field
+                className={classes.input}
+                id="State"
+                name="State"
+                placeholder="e.g. TX"
+                required
+              />
+              {/* <input
                 className={clsx(classes.input, classes.stateInput)}
                 name="State"
                 onChange={handleUpdate}
@@ -539,7 +614,7 @@ const RegisterForm: FC<Props> = ({
                 required
                 type="text"
                 value={State}
-              />
+              /> */}
               <div className={classes.error}>{StateError}</div>
             </label>
           </div>
@@ -547,7 +622,14 @@ const RegisterForm: FC<Props> = ({
           {/* ZIP */}
           <label className={classes.label} htmlFor="ZipCode">
             ZIP Code*
-            <input
+            <Field
+              className={classes.input}
+              id="ZipCode"
+              name="ZipCode"
+              placeholder="e.g. 75150"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="ZipCode"
               onChange={handleUpdate}
@@ -555,14 +637,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={ZipCode}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{ZipCodeError}</div>
 
           {/* EMAIL */}
           <label className={classes.label} htmlFor="Email">
             Email*
-            <input
+            <Field
+              className={classes.input}
+              id="Email"
+              name="Email"
+              placeholder="e.g. music@austinisd.edu"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="Email"
               onChange={handleUpdate}
@@ -570,14 +659,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="email"
               value={Email}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{EmailError}</div>
 
           {/* OFFICE PHONE */}
           <label className={classes.label} htmlFor="OfficePhone">
             Office Phone*
-            <input
+            <Field
+              className={classes.input}
+              id="OfficePhone"
+              name="OfficePhone"
+              placeholder="e.g. (512) 555-1919"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="OfficePhone"
               onChange={handleUpdate}
@@ -585,14 +681,21 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={formatPhone(OfficePhone)}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{OfficePhoneError}</div>
 
           {/* CELL PHONE */}
           <label className={classes.label} htmlFor="CellPhone">
             Cell Phone*
-            <input
+            <Field
+              className={classes.input}
+              id="CellPhone"
+              name="CellPhone"
+              placeholder="e.g. (512) 555-1919"
+              required
+            />
+            {/* <input
               className={classes.input}
               name="CellPhone"
               onChange={handleUpdate}
@@ -600,7 +703,7 @@ const RegisterForm: FC<Props> = ({
               required
               type="text"
               value={formatPhone(CellPhone)}
-            />
+            /> */}
           </label>
           <div className={classes.error}>{CellPhoneError}</div>
 
@@ -656,14 +759,14 @@ const RegisterForm: FC<Props> = ({
 
             <RegisterButton
               buttonType="submit"
-              isDisabled={!hasValidInput}
-              onClick={handleClickSubmitButton}
+              // isDisabled={!hasValidInput}
+              // onClick={handleClickSubmitButton}
             >
               Continue to Step 3
             </RegisterButton>
           </div>
-        </form>
-      )}
+        </Form>
+      </Formik>
     </div>
   );
 };

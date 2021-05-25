@@ -12,6 +12,7 @@ import RegisterSponsorForm from './register-sponsor-form';
 
 // Local Typings
 interface Props {
+  initialFormValues: IRegisterForm;
   isViewingSponsors?: boolean;
   onCompleteStep: HandleCompleteStepType;
   onSetForm: (form: IRegisterForm) => void;
@@ -19,7 +20,8 @@ interface Props {
 }
 
 // Component Definition
-const RegisterInfo: FC<Props> = ({
+const RegisterFormWrapper: FC<Props> = ({
+  initialFormValues,
   isViewingSponsors = false,
   onCompleteStep,
   onSetForm,
@@ -37,6 +39,7 @@ const RegisterInfo: FC<Props> = ({
       <RegisterSponsorForm onCompleteStep={onCompleteStep} />
     ) : (
       <RegisterForm
+        initialFormValues={initialFormValues}
         onCompleteStep={onCompleteStep}
         onSetForm={onSetForm}
         registerForm={registerForm}
@@ -45,4 +48,4 @@ const RegisterInfo: FC<Props> = ({
   </section>
 );
 
-export default RegisterInfo;
+export default RegisterFormWrapper;
