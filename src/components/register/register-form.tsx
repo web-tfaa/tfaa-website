@@ -11,14 +11,13 @@ import {
 import React, { FC } from 'react';
 import { navigate } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 
 // Internal Dependencies
 import EnhancedAlert from '../shared/EnhancedAlert';
 import AuthUserContext from '../session/AuthUserContext';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
-import { options } from '../../utils/typography';
 import {
   // emailRegex,
   removeErrorKeys,
@@ -48,37 +47,11 @@ interface Props extends ContextProps {
 }
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  // cityContainer: {
-  //   marginBottom: 0,
-  // },
-  // cityStateContainer: {
-  //   display: 'flex',
-  // },
-  error: {
-    color: theme.palette.error.main,
-    fontFamily: options.bodyFontFamily.join(','),
-    fontWeight: 500,
-    marginTop: '0.4rem',
-    textTransform: 'initial',
-  },
+const useStyles = makeStyles({
   honey: {
     height: 1,
     opacity: 0,
     width: 1,
-  },
-  input: {
-    display: 'block',
-    fontSize: '1rem',
-    minWidth: '70%',
-    padding: '0.3rem',
-  },
-  label: {
-    display: 'block',
-    fontSize: '90%',
-    letterSpacing: '0.05rem',
-    marginTop: theme.spacing(2),
-    textTransform: 'uppercase',
   },
   radioButtonLabel: {
     display: 'block',
@@ -88,15 +61,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 0,
     textTransform: 'uppercase',
   },
-  stateContainer: {
-    marginLeft: theme.spacing(1.5),
-    marginBottom: 0,
-    width: '40%',
-  },
-  stateInput: {
-    width: '80%',
-  },
-}));
+});
 
 // Local Functions
 const formatPhone = (phone) => {
@@ -129,33 +94,8 @@ const RegisterForm: FC<Props> = ({
     return null;
   }
 
-  // Pull the form values out
   const {
-    Address1,
-    // Address1Error,
-    CellPhone,
-    // CellPhoneError,
-    City,
-    // CityError,
-    District,
-    // DistrictError,
-    Email,
-    // EmailError,
-    FirstName,
-    // FirstNameError,
-    LastName,
-    // LastNameError,
-    // NewToTMAC,
-    OfficePhone,
-    // OfficePhoneError,
-    // State,
-    // StateError,
-    Title,
-    // TitleError,
-    ZipCode,
-    // ZipCodeError,
     hasCompletedRegisterInfoForm,
-    // honeypot,
     isAuthenticated,
   } = registerForm;
 
@@ -219,19 +159,6 @@ const RegisterForm: FC<Props> = ({
   if (isAuthenticated) {
     navigate('/members');
   }
-
-  const hasInput = FirstName !== ''
-    && LastName !== ''
-    && Title !== ''
-    && District !== ''
-    && Address1 !== ''
-    && City !== ''
-    && ZipCode !== ''
-    && Email !== ''
-    && OfficePhone !== ''
-    && CellPhone !== '';
-
-  const hasValidInput = hasInput && !values.honeypot;
 
   if (hasCompletedRegisterInfoForm) {
     return <LoadingContainer step={3} title="Information Form Complete" />;
@@ -425,7 +352,6 @@ const RegisterForm: FC<Props> = ({
                 />
               </Box>
 
-              {/* NEW TO TMAC */}
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
                 <label className={classes.radioButtonLabel} htmlFor="NewToTMAC">
@@ -453,7 +379,6 @@ const RegisterForm: FC<Props> = ({
                 value={values.honeypot}
               />
 
-              {/* SUBMIT BUTTON */}
               <div
                 style={{
                   display: 'flex',
@@ -462,23 +387,20 @@ const RegisterForm: FC<Props> = ({
                   alignItems: 'center',
                 }}
               >
-                {!hasValidInput && (
-                  <Box
-                    clone
-                    mb={2.5}
-                    mt={1}
-                    width="100%"
-                  >
-                    <EnhancedAlert severity={hasTouchedform && hasErrors ? 'error' : 'info'}>
-                      Please make sure all required fields above are completed.
-                    </EnhancedAlert>
-                  </Box>
-                )}
+                <Box
+                  clone
+                  mb={2.5}
+                  mt={1}
+                  width="100%"
+                >
+                  <EnhancedAlert severity={hasTouchedform && hasErrors ? 'error' : 'info'}>
+                    Please make sure all required fields above are completed.
+                  </EnhancedAlert>
+                </Box>
 
                 <RegisterButton
                   buttonType="submit"
                   isDisabled={hasTouchedform && hasErrors}
-                  // onClick={handleClickSubmitButton}
                 >
                   Continue to Step 3
                 </RegisterButton>
