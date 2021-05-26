@@ -226,10 +226,11 @@ const _options = {
         border: `2px solid ${texasFlagBlue}`,
       },
       '.main-body .MuiFormLabel-root': {
-        fontFamily: options.muiFontFamily.join(','),
+        // fontFamily: options.muiFontFamily.join(','),
       },
       '.main-body .MuiInputBase-input': {
-        fontFamily: options.muiFontFamily.join(','),
+        paddingTop: '32px',
+        // fontFamily: options.muiFontFamily.join(','),
       },
       '::-webkit-input-placeholder': {
         color: colors.gray.calm,

@@ -5,12 +5,11 @@ import React, { FC } from 'react';
 
 // Local Typings
 interface Props {
-  className?: string;
   errorMessage: unknown; // will cast to string
   fullWidth?: boolean;
   hasError: boolean;
   id: string; // applied to id and name
-  isTouched: boolean;
+  isTouched: boolean | undefined;
   label: string;
   onChange: FormikHandlers['handleChange'];
   value: string | undefined;
@@ -23,7 +22,6 @@ interface Props {
 
 // Component Definition
 const CustomTextField: FC<Props> = ({
-  className,
   errorMessage,
   fullWidth = true,
   hasError,
@@ -36,7 +34,6 @@ const CustomTextField: FC<Props> = ({
 }) => (
   <TextField
     {...otherProps}
-    className={className}
     color="primary"
     error={isTouched && hasError}
     fullWidth={fullWidth}

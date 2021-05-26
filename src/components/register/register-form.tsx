@@ -7,12 +7,8 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
-  TextField,
 } from '@material-ui/core';
-import React, {
-  FC, useState
-} from 'react';
-import clsx from 'clsx';
+import React, { FC } from 'react';
 import { navigate } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
 import { Field, Form, Formik } from 'formik';
@@ -53,12 +49,12 @@ interface Props extends ContextProps {
 
 // Local Variables
 const useStyles = makeStyles((theme) => ({
-  cityContainer: {
-    marginBottom: 0,
-  },
-  cityStateContainer: {
-    display: 'flex',
-  },
+  // cityContainer: {
+  //   marginBottom: 0,
+  // },
+  // cityStateContainer: {
+  //   display: 'flex',
+  // },
   error: {
     color: theme.palette.error.main,
     fontFamily: options.bodyFontFamily.join(','),
@@ -129,8 +125,6 @@ const RegisterForm: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  const [isFormTouched, setIsFormTouched] = useState(false);
-
   if (!authUser) {
     return null;
   }
@@ -151,7 +145,7 @@ const RegisterForm: FC<Props> = ({
     // FirstNameError,
     LastName,
     LastNameError,
-    NewToTMAC,
+    // NewToTMAC,
     OfficePhone,
     OfficePhoneError,
     // State,
@@ -221,201 +215,6 @@ const RegisterForm: FC<Props> = ({
     // Update the form data and advance the steps with the above callback function
   };
 
-  // const handleUpdateEmailError = (value) => {
-  //   if (!value) {
-  //     onSetForm({
-  //       ...registerForm,
-  //       EmailError: 'Email is required',
-  //     });
-  //   } else if (value && emailRegex.test(value)) {
-  //     onSetForm({
-  //       ...registerForm,
-  //       EmailError: '',
-  //     });
-  //   } else if (value && !emailRegex.test(value)) {
-  //     onSetForm({
-  //       ...registerForm,
-  //       EmailError: 'Use a valid Email',
-  //     });
-  //   }
-  // };
-
-  // const handleUpdateZipCodeError = (value) => {
-  //   if (!value) {
-  //     onSetForm({
-  //       ...registerForm,
-  //       ZipCodeError: 'ZIP Code is required',
-  //     });
-  //   } else if (value && zipCodeRegex.test(value)) {
-  //     onSetForm({
-  //       ...registerForm,
-  //       ZipCodeError: '',
-  //     });
-  //   } else if (value && !zipCodeRegex.test(value)) {
-  //     onSetForm({
-  //       ...registerForm,
-  //       ZipCodeError: 'Use a valid ZIP Code',
-  //     });
-  //   }
-  // };
-
-  // const handleUpdateInputError = (name, value) => {
-  //   switch (name) {
-  //     case 'FirstName':
-  //       if (!FirstName && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           FirstNameError: '',
-  //         });
-  //       } else if (FirstName && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           FirstNameError: 'First Name is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'LastName':
-  //       if (!LastName && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           LastNameError: '',
-  //         });
-  //       } else if (LastName && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           LastNameError: 'Last Name is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'Title':
-  //       if (!Title && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           TitleError: '',
-  //         });
-  //       } else if (Title && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           TitleError: 'Title is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'District':
-  //       if (!District && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           DistrictError: '',
-  //         });
-  //       } else if (District && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           DistrictError: 'District is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'Address1':
-  //       if (!Address1 && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           Address1Error: '',
-  //         });
-  //       } else if (Address1 && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           Address1Error: 'Address 1 is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'City':
-  //       if (!City && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           CityError: '',
-  //         });
-  //       } else if (City && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           CityError: 'City is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'State':
-  //       if (!State && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           StateError: '',
-  //         });
-  //       } else if (State && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           StateError: 'State is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'OfficePhone':
-  //       if (!OfficePhone && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           OfficePhoneError: '',
-  //         });
-  //       } else if (OfficePhone && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           OfficePhoneError: 'Office Phone is required',
-  //         });
-  //       }
-  //       break;
-  //     case 'CellPhone':
-  //       if (!CellPhone && value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           CellPhoneError: '',
-  //         });
-  //       } else if (CellPhone && !value) {
-  //         onSetForm({
-  //           ...registerForm,
-  //           CellPhoneError: 'Cell Phone is required',
-  //         });
-  //       }
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  // const handleUpdateErrors = useCallback((name, value) => {
-  //   if (name === 'Email') {
-  //     handleUpdateEmailError(value);
-  //   } else if (name === 'ZipCode') {
-  //     handleUpdateZipCodeError(value);
-  //   } else {
-  //     handleUpdateInputError(name, value);
-  //   }
-  // }, [registerForm]);
-
-  // const handleUpdate = async (event) => {
-  //   if (!isFormTouched) {
-  //     console.log('touched form');
-  //     setIsFormTouched(true);
-  //   }
-
-  //   console.log('NAME → ', event.target.name, {
-  //     ...registerForm,
-  //     [event.target.name]: event.target.value,
-  //   });
-
-  //   const isPhoneValue = event.target.name.endsWith('Phone');
-
-  //   await onSetForm({
-  //     ...registerForm,
-  //     [event.target.name]: isPhoneValue
-  //       ? stripPhone(event.target.value)
-  //       : event.target.value,
-  //   });
-
-  //   handleUpdateErrors(event.target.name, event.target.value);
-  // };
-
   const handleChangeNewToTMAC = (event) => {
     onSetForm({
       ...registerForm,
@@ -459,259 +258,158 @@ const RegisterForm: FC<Props> = ({
           values,
         }) => (
           <Form onSubmit={handleSubmit}>
-            {/* FIRST NAME */}
-            <CustomTextField
-              className="register-input"
-              errorMessage={errors.FirstName}
-              hasError={Boolean(errors.FirstName)}
-              id="FirstName"
-              isTouched={touched.FirstName}
-              label="First Name"
-              onChange={handleChange}
-              value={values.FirstName}
-            />
-
-            {/* <label className={classes.label} htmlFor="FirstName">
-              First Name*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.FirstName}
+                hasError={Boolean(errors.FirstName)}
                 id="FirstName"
-                name="FirstName"
-                placeholder="e.g. Sally"
-                required
-              /> */}
-            {/* <input
-                className={classes.input}
-                name="FirstName"
-                onChange={handleUpdate}
-                placeholder="e.g. Sally"
-                required
-                type="text"
-                value={FirstName}
-              /> */}
-            {/* </label> */}
-            {/* <div className={classes.error}>{FirstNameError}</div> */}
+                isTouched={touched.FirstName}
+                label="First Name"
+                onChange={handleChange}
+                value={values.FirstName}
+              />
+            </Box>
 
-            {/* LAST NAME */}
-            <label className={classes.label} htmlFor="LastName">
-              Last Name*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.LastName}
+                hasError={Boolean(errors.LastName)}
                 id="LastName"
-                name="LastName"
-                placeholder="e.g. Drumm"
+                isTouched={touched.LastName}
+                label="Last Name"
+                onChange={handleChange}
+                value={values.LastName}
               />
-              {/* <input
-                className={classes.input}
-                name="LastName"
-                onChange={handleUpdate}
-                placeholder="e.g. Drumm"
-                type="text"
-                value={LastName}
-              /> */}
-            </label>
-            <div className={classes.error}>{LastNameError}</div>
+            </Box>
 
-            {/* TITLE */}
-            <label className={classes.label} htmlFor="Title">
-              Title*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.Title}
+                hasError={Boolean(errors.Title)}
                 id="Title"
-                name="Title"
-                placeholder="e.g. Director of Fine Arts"
+                isTouched={touched.Title}
+                label="Title"
+                onChange={handleChange}
+                value={values.Title}
               />
-              {/* <input
-                className={classes.input}
-                name="Title"
-                onChange={handleUpdate}
-                placeholder="e.g. Director of Fine Arts"
-                type="text"
-                value={Title}
-              /> */}
-            </label>
-            <div className={classes.error}>{TitleError}</div>
+            </Box>
 
-            {/* DISTRICT */}
-            <label className={classes.label} htmlFor="District">
-              District*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.District}
+                hasError={Boolean(errors.District)}
                 id="District"
-                name="District"
-                placeholder="e.g. Texas ISD"
+                isTouched={touched.District}
+                label="District"
+                onChange={handleChange}
+                value={values.District}
               />
-              {/* <input
-                className={classes.input}
-                name="District"
-                onChange={handleUpdate}
-                placeholder="e.g. Texas ISD"
-                type="text"
-                value={District}
-              /> */}
-            </label>
-            <div className={classes.error}>{DistrictError}</div>
+            </Box>
 
-            {/* ADDRESS 1 */}
-            <label className={classes.label} htmlFor="Address1">
-              Address 1*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.Address1}
+                hasError={Boolean(errors.Address1)}
                 id="Address1"
-                name="Address1"
-                placeholder="e.g. 123 Main St."
+                isTouched={touched.Address1}
+                label="Address 1"
+                onChange={handleChange}
+                value={values.Address1}
               />
-              {/* <input
-                className={classes.input}
-                name="Address1"
-                onChange={handleUpdate}
-                placeholder="e.g. 123 Main St."
-                type="text"
-                value={Address1}
-              /> */}
-            </label>
-            <div className={classes.error}>{Address1Error}</div>
+            </Box>
 
-            {/* ADDRESS 2 */}
-            <label className={classes.label} htmlFor="Address2">
-              Address 2
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.Address2}
+                hasError={Boolean(errors.Address2)}
                 id="Address2"
-                name="Address2"
-                placeholder="e.g. Suite 19"
+                isTouched={touched.Address2}
+                label="Address 2"
+                onChange={handleChange}
+                value={values.Address2}
               />
-              {/* <input
-                className={classes.input}
-                name="Address2"
-                onChange={handleUpdate}
-                placeholder="e.g. Suite 19"
-                type="text"
-                value={Address2}
-              /> */}
-            </label>
+            </Box>
 
-            <div className={classes.cityStateContainer}>
-              {/* CITY */}
-              <label className={clsx(classes.label, classes.cityContainer)} htmlFor="City">
-                City*
-                <Field
-                  className={classes.input}
+            <Box
+              display="flex"
+              mb={3}
+            >
+              <Box mb={0}>
+                <CustomTextField
+                  errorMessage={errors.City}
+                  hasError={Boolean(errors.City)}
                   id="City"
-                  name="City"
-                  placeholder="e.g. Dallas"
+                  isTouched={touched.City}
+                  label="City"
+                  onChange={handleChange}
+                  value={values.City}
                 />
-                {/* <input
-                  className={classes.input}
-                  name="City"
-                  onChange={handleUpdate}
-                  placeholder="e.g. Dallas"
-                  type="text"
-                  value={City}
-                /> */}
-                <div className={classes.error}>{CityError}</div>
-              </label>
+              </Box>
 
-              {/* STATE */}
-              <label className={clsx(classes.label, classes.stateContainer)} htmlFor="State">
-                State*
-                <Field
-                  className={classes.input}
+              <Box
+                mb={0}
+                ml={1.5}
+                width="50%"
+              >
+                <CustomTextField
+                  errorMessage={errors.State}
+                  hasError={Boolean(errors.State)}
                   id="State"
-                  name="State"
-                  placeholder="e.g. TX"
+                  isTouched={touched.State}
+                  label="State"
+                  onChange={handleChange}
+                  value={values.State}
                 />
-                {/* <input
-                  className={clsx(classes.input, classes.stateInput)}
-                  name="State"
-                  onChange={handleUpdate}
-                  placeholder="e.g. TX"
-                  type="text"
-                  value={State}
-                /> */}
-                <div className={classes.error}>{StateError}</div>
-              </label>
-            </div>
+              </Box>
+            </Box>
 
-            {/* ZIP */}
-            <label className={classes.label} htmlFor="ZipCode">
-              ZIP Code*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.ZipCode}
+                hasError={Boolean(errors.ZipCode)}
                 id="ZipCode"
-                name="ZipCode"
-                placeholder="e.g. 75150"
+                isTouched={touched.ZipCode}
+                label="Zip Code"
+                onChange={handleChange}
+                value={values.ZipCode}
               />
-              {/* <input
-                className={classes.input}
-                name="ZipCode"
-                onChange={handleUpdate}
-                placeholder="e.g. 75150"
-                type="text"
-                value={ZipCode}
-              /> */}
-            </label>
-            <div className={classes.error}>{ZipCodeError}</div>
+            </Box>
 
-            {/* EMAIL */}
-            <label className={classes.label} htmlFor="Email">
-              Email*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.Email}
+                hasError={Boolean(errors.Email)}
                 id="Email"
-                name="Email"
-                placeholder="e.g. music@austinisd.edu"
+                isTouched={touched.Email}
+                label="Email"
+                onChange={handleChange}
+                value={values.Email}
               />
-              {/* <input
-                className={classes.input}
-                name="Email"
-                onChange={handleUpdate}
-                placeholder="e.g. music@austinisd.edu"
-                type="email"
-                value={Email}
-              /> */}
-            </label>
-            <div className={classes.error}>{EmailError}</div>
+            </Box>
 
-            {/* OFFICE PHONE */}
-            <label className={classes.label} htmlFor="OfficePhone">
-              Office Phone*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.OfficePhone}
+                hasError={Boolean(errors.OfficePhone)}
                 id="OfficePhone"
-                name="OfficePhone"
-                placeholder="e.g. (512) 555-1919"
+                isTouched={touched.OfficePhone}
+                label="Office Phone"
+                onChange={handleChange}
+                value={values.OfficePhone}
               />
-              {/* <input
-                className={classes.input}
-                name="OfficePhone"
-                onChange={handleUpdate}
-                placeholder="e.g. (512) 555-1919"
-                type="text"
-                value={formatPhone(OfficePhone)}
-              /> */}
-            </label>
-            <div className={classes.error}>{OfficePhoneError}</div>
+            </Box>
 
-            {/* CELL PHONE */}
-            <label className={classes.label} htmlFor="CellPhone">
-              Cell Phone*
-              <Field
-                className={classes.input}
+            <Box mb={3}>
+              <CustomTextField
+                errorMessage={errors.CellPhone}
+                hasError={Boolean(errors.CellPhone)}
                 id="CellPhone"
-                name="CellPhone"
-                placeholder="e.g. (512) 555-1919"
+                isTouched={touched.CellPhone}
+                label="Cell Phone"
+                onChange={handleChange}
+                value={values.CellPhone}
               />
-              {/* <input
-                className={classes.input}
-                name="CellPhone"
-                onChange={handleUpdate}
-                placeholder="e.g. (512) 555-1919"
-                type="text"
-                value={formatPhone(CellPhone)}
-              /> */}
-            </label>
-            <div className={classes.error}>{CellPhoneError}</div>
+            </Box>
 
             {/* NEW TO TMAC */}
             <FormControl component="fieldset">
@@ -757,7 +455,7 @@ const RegisterForm: FC<Props> = ({
                   mt={1}
                   width="100%"
                 >
-                  <EnhancedAlert severity={isFormTouched && !hasInput ? 'error' : 'info'}>
+                  <EnhancedAlert severity={!hasInput ? 'error' : 'info'}>
                     Please make sure all required fields above are completed.
                   </EnhancedAlert>
                 </Box>
