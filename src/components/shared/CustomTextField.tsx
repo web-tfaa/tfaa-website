@@ -11,6 +11,7 @@ interface Props {
   id: string; // applied to id and name
   isTouched: boolean | undefined;
   label: string;
+  onBlur: FormikHandlers['handleBlur'];
   onChange: FormikHandlers['handleChange'];
   value: string | undefined;
 }
@@ -28,6 +29,7 @@ const CustomTextField: FC<Props> = ({
   id,
   isTouched,
   label,
+  onBlur,
   onChange,
   value,
   ...otherProps
@@ -41,6 +43,7 @@ const CustomTextField: FC<Props> = ({
     id={id}
     label={label}
     name={id}
+    onBlur={onBlur} // This updates `touched`
     onChange={onChange}
     value={value}
     variant="filled"

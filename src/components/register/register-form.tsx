@@ -132,30 +132,30 @@ const RegisterForm: FC<Props> = ({
   // Pull the form values out
   const {
     Address1,
-    Address1Error,
+    // Address1Error,
     CellPhone,
-    CellPhoneError,
+    // CellPhoneError,
     City,
-    CityError,
+    // CityError,
     District,
-    DistrictError,
+    // DistrictError,
     Email,
-    EmailError,
+    // EmailError,
     FirstName,
     // FirstNameError,
     LastName,
-    LastNameError,
+    // LastNameError,
     // NewToTMAC,
     OfficePhone,
-    OfficePhoneError,
+    // OfficePhoneError,
     // State,
-    StateError,
+    // StateError,
     Title,
-    TitleError,
+    // TitleError,
     ZipCode,
-    ZipCodeError,
+    // ZipCodeError,
     hasCompletedRegisterInfoForm,
-    honeypot,
+    // honeypot,
     isAuthenticated,
   } = registerForm;
 
@@ -172,12 +172,6 @@ const RegisterForm: FC<Props> = ({
 
     // Make copy of values
     const updatedValues = values;
-
-    // event.preventDefault();
-
-    // const {
-
-    // } = updatedValues;
 
     const { uid: authenticatedUserId } = authUser;
 
@@ -237,7 +231,7 @@ const RegisterForm: FC<Props> = ({
     && OfficePhone !== ''
     && CellPhone !== '';
 
-  const hasValidInput = hasInput && !honeypot;
+  const hasValidInput = hasInput && !values.honeypot;
 
   if (hasCompletedRegisterInfoForm) {
     return <LoadingContainer step={3} title="Information Form Complete" />;
@@ -252,225 +246,246 @@ const RegisterForm: FC<Props> = ({
       >
         {({
           errors,
+          handleBlur,
           handleChange,
           handleSubmit,
           touched,
           values,
-        }) => (
-          <Form onSubmit={handleSubmit}>
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.FirstName}
-                hasError={Boolean(errors.FirstName)}
-                id="FirstName"
-                isTouched={touched.FirstName}
-                label="First Name"
-                onChange={handleChange}
-                value={values.FirstName}
-              />
-            </Box>
+        }) => {
+          // console.log('errorss.........', errors);
+          console.log('touched.........', touched);
 
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.LastName}
-                hasError={Boolean(errors.LastName)}
-                id="LastName"
-                isTouched={touched.LastName}
-                label="Last Name"
-                onChange={handleChange}
-                value={values.LastName}
-              />
-            </Box>
+          const hasTouchedform = Object.values(touched).length > 0;
+          const hasErrors = Object.values(errors).length > 0;
 
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.Title}
-                hasError={Boolean(errors.Title)}
-                id="Title"
-                isTouched={touched.Title}
-                label="Title"
-                onChange={handleChange}
-                value={values.Title}
-              />
-            </Box>
-
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.District}
-                hasError={Boolean(errors.District)}
-                id="District"
-                isTouched={touched.District}
-                label="District"
-                onChange={handleChange}
-                value={values.District}
-              />
-            </Box>
-
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.Address1}
-                hasError={Boolean(errors.Address1)}
-                id="Address1"
-                isTouched={touched.Address1}
-                label="Address 1"
-                onChange={handleChange}
-                value={values.Address1}
-              />
-            </Box>
-
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.Address2}
-                hasError={Boolean(errors.Address2)}
-                id="Address2"
-                isTouched={touched.Address2}
-                label="Address 2"
-                onChange={handleChange}
-                value={values.Address2}
-              />
-            </Box>
-
-            <Box
-              display="flex"
-              mb={3}
-            >
-              <Box mb={0}>
+          return (
+            <Form onSubmit={handleSubmit}>
+              <Box mb={3}>
                 <CustomTextField
-                  errorMessage={errors.City}
-                  hasError={Boolean(errors.City)}
-                  id="City"
-                  isTouched={touched.City}
-                  label="City"
+                  errorMessage={errors.FirstName}
+                  hasError={Boolean(errors.FirstName)}
+                  id="FirstName"
+                  isTouched={touched.FirstName}
+                  label="First Name"
+                  onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.City}
+                  value={values.FirstName}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.LastName}
+                  hasError={Boolean(errors.LastName)}
+                  id="LastName"
+                  isTouched={touched.LastName}
+                  label="Last Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.LastName}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.Title}
+                  hasError={Boolean(errors.Title)}
+                  id="Title"
+                  isTouched={touched.Title}
+                  label="Title"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.Title}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.District}
+                  hasError={Boolean(errors.District)}
+                  id="District"
+                  isTouched={touched.District}
+                  label="District"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.District}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.Address1}
+                  hasError={Boolean(errors.Address1)}
+                  id="Address1"
+                  isTouched={touched.Address1}
+                  label="Address 1"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.Address1}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.Address2}
+                  hasError={Boolean(errors.Address2)}
+                  id="Address2"
+                  isTouched={touched.Address2}
+                  label="Address 2"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.Address2}
                 />
               </Box>
 
               <Box
-                mb={0}
-                ml={1.5}
-                width="50%"
+                display="flex"
+                mb={3}
               >
+                <Box mb={0}>
+                  <CustomTextField
+                    errorMessage={errors.City}
+                    hasError={Boolean(errors.City)}
+                    id="City"
+                    isTouched={touched.City}
+                    label="City"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.City}
+                  />
+                </Box>
+
+                <Box
+                  mb={0}
+                  ml={1.5}
+                  width="50%"
+                >
+                  <CustomTextField
+                    errorMessage={errors.State}
+                    hasError={Boolean(errors.State)}
+                    id="State"
+                    isTouched={touched.State}
+                    label="State"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.State}
+                  />
+                </Box>
+              </Box>
+
+              <Box mb={3}>
                 <CustomTextField
-                  errorMessage={errors.State}
-                  hasError={Boolean(errors.State)}
-                  id="State"
-                  isTouched={touched.State}
-                  label="State"
+                  errorMessage={errors.ZipCode}
+                  hasError={Boolean(errors.ZipCode)}
+                  id="ZipCode"
+                  isTouched={touched.ZipCode}
+                  label="Zip Code"
+                  onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.State}
+                  value={values.ZipCode}
                 />
               </Box>
-            </Box>
 
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.ZipCode}
-                hasError={Boolean(errors.ZipCode)}
-                id="ZipCode"
-                isTouched={touched.ZipCode}
-                label="Zip Code"
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.Email}
+                  hasError={Boolean(errors.Email)}
+                  id="Email"
+                  isTouched={touched.Email}
+                  label="Email"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.Email}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.OfficePhone}
+                  hasError={Boolean(errors.OfficePhone)}
+                  id="OfficePhone"
+                  isTouched={touched.OfficePhone}
+                  label="Office Phone"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.OfficePhone}
+                />
+              </Box>
+
+              <Box mb={3}>
+                <CustomTextField
+                  errorMessage={errors.CellPhone}
+                  hasError={Boolean(errors.CellPhone)}
+                  id="CellPhone"
+                  isTouched={touched.CellPhone}
+                  label="Cell Phone"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.CellPhone}
+                />
+              </Box>
+
+              {/* NEW TO TMAC */}
+              <FormControl component="fieldset">
+                {/* eslint-disable-next-line */}
+                <label className={classes.radioButtonLabel} htmlFor="NewToTMAC">
+                  New To TMAC*
+                  <RadioGroup
+                    aria-label="NewToTMAC"
+                    name="NewToTMAC"
+                    onChange={handleChangeNewToTMAC}
+                    value={values.NewToTMAC}
+                  >
+                    <FormControlLabel control={<Radio size="small" />} label="Yes" value="Yes" />
+                    <FormControlLabel control={<Radio size="small" />} label="No" value="No" />
+                  </RadioGroup>
+                </label>
+              </FormControl>
+
+              {/* Hidden input to help curtail spam */}
+              <input
+                aria-label="hidden input"
+                className={classes.honey}
+                id="honeypot"
+                name="honeypot"
                 onChange={handleChange}
-                value={values.ZipCode}
+                type="text"
+                value={values.honeypot}
               />
-            </Box>
 
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.Email}
-                hasError={Boolean(errors.Email)}
-                id="Email"
-                isTouched={touched.Email}
-                label="Email"
-                onChange={handleChange}
-                value={values.Email}
-              />
-            </Box>
-
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.OfficePhone}
-                hasError={Boolean(errors.OfficePhone)}
-                id="OfficePhone"
-                isTouched={touched.OfficePhone}
-                label="Office Phone"
-                onChange={handleChange}
-                value={values.OfficePhone}
-              />
-            </Box>
-
-            <Box mb={3}>
-              <CustomTextField
-                errorMessage={errors.CellPhone}
-                hasError={Boolean(errors.CellPhone)}
-                id="CellPhone"
-                isTouched={touched.CellPhone}
-                label="Cell Phone"
-                onChange={handleChange}
-                value={values.CellPhone}
-              />
-            </Box>
-
-            {/* NEW TO TMAC */}
-            <FormControl component="fieldset">
-              {/* eslint-disable-next-line */}
-              <label className={classes.radioButtonLabel} htmlFor="NewToTMAC">
-                New To TMAC*
-                <RadioGroup
-                  aria-label="NewToTMAC"
-                  name="NewToTMAC"
-                  onChange={handleChangeNewToTMAC}
-                  value={values.NewToTMAC}
-                >
-                  <FormControlLabel control={<Radio size="small" />} label="Yes" value="Yes" />
-                  <FormControlLabel control={<Radio size="small" />} label="No" value="No" />
-                </RadioGroup>
-              </label>
-            </FormControl>
-
-            {/* Hidden input to help curtail spam */}
-            <input
-              aria-label="hidden input"
-              className={classes.honey}
-              id="honeypot"
-              name="honeypot"
-              onChange={handleChange}
-              type="text"
-              value={honeypot}
-            />
-
-            {/* SUBMIT BUTTON */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {!hasValidInput && (
-                <Box
-                  clone
-                  mb={2.5}
-                  mt={1}
-                  width="100%"
-                >
-                  <EnhancedAlert severity={!hasInput ? 'error' : 'info'}>
-                    Please make sure all required fields above are completed.
-                  </EnhancedAlert>
-                </Box>
-              )}
-
-              <RegisterButton
-                buttonType="submit"
-                // isDisabled={!hasValidInput}
-                // onClick={handleClickSubmitButton}
+              {/* SUBMIT BUTTON */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
               >
-                Continue to Step 3
-              </RegisterButton>
-            </div>
-          </Form>
-        )}
+                {!hasValidInput && (
+                  <Box
+                    clone
+                    mb={2.5}
+                    mt={1}
+                    width="100%"
+                  >
+                    <EnhancedAlert severity={hasTouchedform && hasErrors ? 'error' : 'info'}>
+                      Please make sure all required fields above are completed.
+                    </EnhancedAlert>
+                  </Box>
+                )}
+
+                <RegisterButton
+                  buttonType="submit"
+                  isDisabled={hasTouchedform && hasErrors}
+                  // onClick={handleClickSubmitButton}
+                >
+                  Continue to Step 3
+                </RegisterButton>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );
