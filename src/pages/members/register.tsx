@@ -23,6 +23,9 @@ import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Typings
 interface Props {
+  authUser: {
+    uid: string;
+  } | null;
   isAuthenticated: boolean;
 }
 export interface IRegisterForm {
@@ -43,7 +46,7 @@ export interface IRegisterForm {
   LastName: string;
   LastNameError: string;
   MemberType: string;
-  NewToTMAC: boolean;
+  NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
   OfficePhoneError: string;
   PaymentOption: string;
@@ -90,7 +93,7 @@ const intialFormValues: IRegisterForm = {
   LastName: '',
   LastNameError: '',
   MemberType: '',
-  NewToTMAC: true,
+  NewToTMAC: 'Yes',
   OfficePhone: '',
   OfficePhoneError: '',
   PaymentOption: 'Invoiced',
@@ -112,7 +115,10 @@ const intialFormValues: IRegisterForm = {
 };
 
 // Component Definition
-const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
+const RegisterContent: FC<Props> = ({
+  authUser,
+  isAuthenticated,
+}) => {
   const [activeStep, setActiveStep] = useState(0);
   const [form, setForm] = useState(intialFormValues);
   const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
@@ -123,10 +129,9 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
     }
   }, []);
 
-  const handleUpdateForm = (newForm: IRegisterForm) => {
-    console.log('newForm', newForm);
-    setForm(newForm);
-  };
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleCompleteStep: HandleCompleteStepType = (step) => {
     setActiveStep(activeStep + 1);
@@ -146,12 +151,13 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
         initialFormValues={intialFormValues}
         registerForm={form}
         onCompleteStep={handleCompleteStep}
-        onSetForm={handleUpdateForm}
+        onSetForm={setForm}
       />
     );
 
     const stepThreeContent = (
       <RegisterPayment
+        authenticatedUserId={authUser?.uid}
         form={form}
         onCompleteStep={handleCompleteStep}
       />
@@ -229,7 +235,13 @@ const RegisterContent: FC<Props> = ({ isAuthenticated }) => {
 
 const RegisterWithContext: FC = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => <RegisterContent {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => (
+      <RegisterContent
+        {...props}
+        authUser={authUser}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 

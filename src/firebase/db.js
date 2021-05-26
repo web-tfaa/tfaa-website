@@ -1,12 +1,18 @@
 // Internal Dependencies
 import { db } from './firebase';
 import { currentSchoolYearShort } from '../utils/helpers';
+import { logError } from '../utils/logError';
 
 // Local Variables
 const getFirebaseCollectionName = (collection) => `${collection}_${currentSchoolYearShort}`;
 
 // Create/Update user entry in Firestore
-export const doCreateEntry = (form, collection, documentId, callback) => {
+export const doCreateEntry = (
+  form,
+  collection,
+  documentId,
+  callback,
+) => {
   console.log('doCreateEntry: form', form);
 
   const collectionName = getFirebaseCollectionName(collection);
@@ -19,14 +25,23 @@ export const doCreateEntry = (form, collection, documentId, callback) => {
     .set(form)
     .then(() => {
       console.log(`Registration for ${documentId} in ${currentSchoolYearShort} was successful`);
-      callback(form);
+      if (callback) {
+        callback(form);
+      }
     })
     .catch((err) => {
       console.log(`Error adding registration for ${documentId} document`, err);
+      logError(`Error adding registration for ${documentId} document`, err);
     });
 };
 
-export const doUpdateEntry = (form, collection, documentId) => {
+export const doUpdateEntry = (
+  form,
+  collection,
+  documentId,
+) => {
+  console.log('doUpdateEntry: form', form);
+
   const collectionName = getFirebaseCollectionName(collection);
 
   console.log('doUpdateEntry : updating...', collectionName);
@@ -42,6 +57,7 @@ export const doUpdateEntry = (form, collection, documentId) => {
     })
     .catch((err) => {
       console.log(`Error updating payment info for ${documentId} document`, err);
+      logError(`Error updating payment info for ${documentId} document`, err);
     });
 };
 
@@ -63,6 +79,7 @@ export const doGetUsers = (collection, userList, callback) => {
     })
     .catch((error) => {
       console.log('Error getting user docs: ', error);
+      logError('Error getting user docs: ', error);
     });
 };
 
@@ -82,6 +99,7 @@ export const doGetInvoiceId = (callback) =>
     })
     .catch((err) => {
       console.log('Error getting document for invoice:', err);
+      logError('Error getting document for invoice:', err);
     });
 
 export const doUpdateInvoiceId = () => {
@@ -101,12 +119,14 @@ export const doUpdateInvoiceId = () => {
       })
       .catch((err) => {
         console.log('Error getting document for invoice:', err);
+        logError('Error getting document for invoice:', err);
       }))
     .then(() => {
       console.log('transaction successfully committed');
     })
     .catch((err) => {
       console.log('transaction failed', err);
+      logError('transaction failed', err);
     });
 };
 
@@ -126,6 +146,7 @@ export const doGetReceiptId = (callback) =>
     })
     .catch((err) => {
       console.log('Error getting document for receipt:', err);
+      logError('Error getting document for receipt:', err);
     });
 
 export const doUpdateReceiptId = () => {
@@ -145,11 +166,13 @@ export const doUpdateReceiptId = () => {
       })
       .catch((err) => {
         console.log('Error getting document for receipt:', err);
+        logError('Error getting document for receipt:', err);
       }))
     .then(() => {
       console.log('transaction successfully committed');
     })
     .catch((err) => {
       console.log('transaction failed', err);
+      logError('transaction failed', err);
     });
 };

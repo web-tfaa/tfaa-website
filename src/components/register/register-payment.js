@@ -26,6 +26,12 @@ import {
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
+const propTypes = {
+  authenticatedUserId: PropTypes.string.isRequired,
+  form: PropTypes.shape({}).isRequired,
+  onCompleteStep: PropTypes.func.isRequired,
+};
+
 const currentDate = format(new Date(), ['M/d/yyyy']);
 
 // This will tell the database action where to put the new record
@@ -33,11 +39,6 @@ const collection = 'registration';
 
 // Component Definition
 class RegisterPayment extends Component {
-  static propTypes = {
-    form: PropTypes.shape({}).isRequired,
-    onCompleteStep: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -56,7 +57,7 @@ class RegisterPayment extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const {
-      form,
+      authenticatedUserId,
     } = this.props;
 
     const {
@@ -74,10 +75,14 @@ class RegisterPayment extends Component {
       receiptId,
     };
 
+    console.log('componentDidUpdate');
+    console.log('updatedForm', updatedForm);
+    console.log('authenticatedUserId', authenticatedUserId);
+
     if ((prevState.invoiceId === 0 && invoiceId > 0)
       || (prevState.receiptId === 0 && receiptId > 0)) {
-      // Can we get userId without access to the `form`
-      return doUpdateEntry(updatedForm, collection, form.userId);
+      // Can we get userId without access to the `form`?
+      return doUpdateEntry(updatedForm, collection, authenticatedUserId);
     }
   }
 
@@ -367,5 +372,7 @@ class RegisterPayment extends Component {
     );
   }
 }
+
+RegisterPayment.propTypes = propTypes;
 
 export default RegisterPayment;

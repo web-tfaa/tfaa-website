@@ -95,6 +95,7 @@ const RegisterForm: FC<Props> = ({
   }
 
   const {
+    NewToTMAC,
     hasCompletedRegisterInfoForm,
     isAuthenticated,
   } = registerForm;
@@ -145,8 +146,6 @@ const RegisterForm: FC<Props> = ({
     } catch (error) {
       logError('handleClickSubmitButton error in RegisterForm', error);
     }
-
-    // Update the form data and advance the steps with the above callback function
   };
 
   const handleChangeNewToTMAC = (event) => {
@@ -179,9 +178,6 @@ const RegisterForm: FC<Props> = ({
           touched,
           values,
         }) => {
-          // console.log('errorss.........', errors);
-          console.log('touched.........', touched);
-
           const hasTouchedform = Object.values(touched).length > 0;
           const hasErrors = Object.values(errors).length > 0;
 
@@ -360,10 +356,18 @@ const RegisterForm: FC<Props> = ({
                     aria-label="NewToTMAC"
                     name="NewToTMAC"
                     onChange={handleChangeNewToTMAC}
-                    value={values.NewToTMAC}
+                    value={NewToTMAC}
                   >
-                    <FormControlLabel control={<Radio size="small" />} label="Yes" value="Yes" />
-                    <FormControlLabel control={<Radio size="small" />} label="No" value="No" />
+                    <FormControlLabel
+                      control={<Radio size="small" />}
+                      label="Yes"
+                      value="Yes"
+                    />
+                    <FormControlLabel
+                      control={<Radio size="small" />}
+                      label="No"
+                      value="No"
+                    />
                   </RadioGroup>
                 </label>
               </FormControl>

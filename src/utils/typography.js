@@ -225,12 +225,8 @@ const _options = {
       '.main-body input:focus :not(.MuiInputBase-input)': {
         border: `2px solid ${texasFlagBlue}`,
       },
-      '.main-body .MuiFormLabel-root': {
-        // fontFamily: options.muiFontFamily.join(','),
-      },
       '.main-body .MuiInputBase-input': {
         paddingTop: '32px',
-        // fontFamily: options.muiFontFamily.join(','),
       },
       '::-webkit-input-placeholder': {
         color: colors.gray.calm,
