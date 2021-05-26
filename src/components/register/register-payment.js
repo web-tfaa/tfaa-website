@@ -27,7 +27,7 @@ import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const propTypes = {
-  authenticatedUserId: PropTypes.string.isRequired,
+  authenticatedUserId: PropTypes.string,
   form: PropTypes.shape({}).isRequired,
   onCompleteStep: PropTypes.func.isRequired,
 };
@@ -79,8 +79,9 @@ class RegisterPayment extends Component {
     console.log('updatedForm', updatedForm);
     console.log('authenticatedUserId', authenticatedUserId);
 
-    if ((prevState.invoiceId === 0 && invoiceId > 0)
-      || (prevState.receiptId === 0 && receiptId > 0)) {
+    if (authenticatedUserId
+      && ((prevState.invoiceId === 0 && invoiceId > 0)
+      || (prevState.receiptId === 0 && receiptId > 0))) {
       // Can we get userId without access to the `form`?
       return doUpdateEntry(updatedForm, collection, authenticatedUserId);
     }
