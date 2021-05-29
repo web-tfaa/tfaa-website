@@ -45,16 +45,16 @@ const useStyles = makeStyles({
   },
 });
 
-// const CLIENT = {
-//   // Currently using the sandbox id from this paypal demo
-//   // https://github.com/paypal/paypal-checkout-demo/blob/master/src/react.htm
-//   sandbox: process.env.GATSBY_PAYPAL_CLIENT_ID_SANDBOX,
-//   production: process.env.GATSBY_PAYPAL_CLIENT_ID_PRODUCTION,
-// };
+const CLIENT = {
+  // Currently using the sandbox id from this paypal demo
+  // https://github.com/paypal/paypal-checkout-demo/blob/master/src/react.htm
+  sandbox: process.env.GATSBY_PAYPAL_CLIENT_ID_SANDBOX,
+  production: process.env.GATSBY_PAYPAL_CLIENT_ID_PRODUCTION,
+};
 
-// const ENV = process.env.NODE_ENV === 'production'
-//   ? 'production'
-//   : 'sandbox';
+const ENV = process.env.NODE_ENV === 'production'
+  ? 'production'
+  : 'sandbox';
 
 // Component Definition
 const PaypalButtonWrapper: FC<Props> = ({
@@ -94,10 +94,9 @@ const PaypalButtonWrapper: FC<Props> = ({
     <>
       <Box mt={2}>
         <PaypalButton
-          // client={CLIENT}
-          // commit
+          client={CLIENT}
           currency="USD"
-          // env={ENV}
+          env={ENV}
           onCancel={handleCancel}
           onError={handleError}
           onSuccess={handleSuccess}

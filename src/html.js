@@ -69,7 +69,7 @@ export default class HTML extends React.Component {
             id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
-          {/* <script src="https://www.paypalobjects.com/api/checkout.js" /> */}
+          <script src="https://www.paypalobjects.com/api/checkout.js" />
           {this.props.postBodyComponents}
         </body>
       </html>

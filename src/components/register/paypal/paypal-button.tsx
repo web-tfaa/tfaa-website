@@ -7,8 +7,7 @@ https://www.robinwieruch.de/react-paypal-payment/
 import React, {
   FC, useEffect, useRef, useState
 } from 'react';
-// import ReactDOM from 'react-dom';
-import { PayPalButtons } from '@paypal/react-paypal-js';
+import ReactDOM from 'react-dom';
 
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
@@ -16,10 +15,9 @@ import { logError } from '../../../utils/logError';
 
 // Local Typings
 interface Props {
-  // client: string;
-  // commit: boolean;
+  client: string;
   currency: string;
-  // env: string;
+  env: 'production' | 'sandbox';
   onCancel: (data: unknown) => void;
   onError: (error: unknown) => void;
   onSuccess: (data: unknown) => void;
@@ -57,16 +55,15 @@ interface PaypalGlobalObject {
 
 // Component Definition
 const PaypalButton: FC<Props> = ({
-  // client,
-  // commit,
+  client,
   currency,
-  // env,
+  env,
   onCancel,
   onError,
   onSuccess,
   total,
 }) => {
-  const paypalRef = useRef<PaypalGlobalObject>(null);
+  const paypalRef = useRef<PaypalGlobalObject | null>(null);
   console.log('paypalRef', paypalRef.current);
 
   const [showButton, setShowButton] = useState(false);
@@ -86,6 +83,10 @@ const PaypalButton: FC<Props> = ({
     }
   }, [paypalRef.current, previousShowButton]);
 
+  if (!showButton) {
+    return null;
+  }
+
   const payment = () =>
     paypalRef.current?.rest.payment.create(env, client, {
       transactions: [
@@ -98,28 +99,16 @@ const PaypalButton: FC<Props> = ({
       ],
     });
 
-  const onCreateOrder = (
-    data: unknown,
-    actions: unknown,
-  ) =>
-    actions.order.create({
-      purchase_units: [{
-        amount: {
-          value: total,
-        },
-      }],
-    });
-
   const onAuthorize = (data: unknown, actions: unknown) =>
     actions?.payment?.execute()
       .then(() => {
         const payment = {
           cancelled: false,
           paid: true,
-          payerID: data?.payerID,
-          paymentID: data?.paymentID,
-          paymentToken: data?.paymentToken,
-          returnUrl: data?.returnUrl,
+          payerID: data.payerID,
+          paymentID: data.paymentID,
+          paymentToken: data.paymentToken,
+          returnUrl: data.returnUrl,
         };
 
         onSuccess(payment);
@@ -130,36 +119,20 @@ const PaypalButton: FC<Props> = ({
 
   // From the paypal docs here
   // https://github.com/paypal/paypal-checkout/blob/master/docs/frameworks.md#reactjs-element
-  // const PayPalButton = paypalRef.current?.Button.driver('react', { React, ReactDOM });
+  const PayPalButton = paypalRef.current?.Button.driver('react', { React, ReactDOM });
 
-  return showButton ? (
-    <PayPalButtons
-      // client={client}
-      // commit={commit}
-      // env={env}
-      createOrder={onCreateOrder}
+  return (
+    <PayPalButton
+      client={client}
+      commit
+      env={env}
+      onAuthorize={onAuthorize}
       onCancel={onCancel}
       onError={onError}
-      // payment={payment}
-      style={{
-        color: 'gold',
-        label: 'pay',
-        shape: 'pill',
-        tagline: false,
-        // size: 'medium',
-      }}
+      payment={payment}
+      style={{ label: 'pay', tagline: 'false', size: 'medium' }}
     />
-    // <PayPalButton
-    //   client={client}
-    //   commit={commit}
-    //   env={env}
-    //   onAuthorize={onAuthorize}
-    //   onCancel={onCancel}
-    //   onError={onError}
-    //   payment={payment}
-    //   style={{ label: 'pay', tagline: 'false', size: 'medium' }}
-    // />
-  ) : null;
+  );
 };
 
 export default PaypalButton;
