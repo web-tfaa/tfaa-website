@@ -111,6 +111,10 @@ const MemberTable = ({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  if (!data) {
+    return null;
+  }
+
   function handleChangePage(event, newPage) {
     setPage(newPage);
   }
