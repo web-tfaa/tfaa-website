@@ -18,17 +18,14 @@ import EnhancedAlert from '../shared/EnhancedAlert';
 import AuthUserContext from '../session/AuthUserContext';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
-import {
-  // emailRegex,
-  removeErrorKeys,
-  // zipCodeRegex,
-} from '../../utils/helpers';
+import { removeErrorKeys } from '../../utils/helpers';
 import {
   HandleCompleteStepType,
   IRegisterForm,
 } from '../../pages/members/register';
 import { doCreateEntry } from '../../firebase/db';
 import { logError } from '../../utils/logError';
+import { formatPhone } from '../../utils/formatPhone';
 import { registerMemberSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
 
@@ -62,21 +59,6 @@ const useStyles = makeStyles({
     textTransform: 'uppercase',
   },
 });
-
-// Local Functions
-const formatPhone = (phone) => {
-  let cleanPhone = phone;
-  if (cleanPhone.startsWith('1')) {
-    cleanPhone = cleanPhone.slice(1);
-  }
-  if (cleanPhone.length !== 10) {
-    return phone;
-  }
-  return `(${cleanPhone.substr(0, 3)}) ${cleanPhone.substr(
-    3,
-    3,
-  )}-${cleanPhone.substr(6, 4)}`;
-};
 
 // const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
 
@@ -187,9 +169,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.FirstName}
                   hasError={Boolean(errors.FirstName)}
-                  id="FirstName"
                   isTouched={touched.FirstName}
                   label="First Name"
+                  name="FirstName"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.FirstName}
@@ -200,9 +182,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.LastName}
                   hasError={Boolean(errors.LastName)}
-                  id="LastName"
                   isTouched={touched.LastName}
                   label="Last Name"
+                  name="LastName"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.LastName}
@@ -213,9 +195,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.Title}
                   hasError={Boolean(errors.Title)}
-                  id="Title"
                   isTouched={touched.Title}
                   label="Title"
+                  name="Title"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Title}
@@ -226,9 +208,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.District}
                   hasError={Boolean(errors.District)}
-                  id="District"
                   isTouched={touched.District}
                   label="District"
+                  name="District"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.District}
@@ -239,9 +221,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.Address1}
                   hasError={Boolean(errors.Address1)}
-                  id="Address1"
                   isTouched={touched.Address1}
                   label="Address 1"
+                  name="Address1"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Address1}
@@ -252,9 +234,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.Address2}
                   hasError={Boolean(errors.Address2)}
-                  id="Address2"
                   isTouched={touched.Address2}
                   label="Address 2"
+                  name="Address2"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Address2}
@@ -269,9 +251,9 @@ const RegisterForm: FC<Props> = ({
                   <CustomTextField
                     errorMessage={errors.City}
                     hasError={Boolean(errors.City)}
-                    id="City"
                     isTouched={touched.City}
                     label="City"
+                    name="City"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.City}
@@ -286,9 +268,9 @@ const RegisterForm: FC<Props> = ({
                   <CustomTextField
                     errorMessage={errors.State}
                     hasError={Boolean(errors.State)}
-                    id="State"
                     isTouched={touched.State}
                     label="State"
+                    name="State"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.State}
@@ -300,9 +282,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.ZipCode}
                   hasError={Boolean(errors.ZipCode)}
-                  id="ZipCode"
                   isTouched={touched.ZipCode}
                   label="Zip Code"
+                  name="ZipCode"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.ZipCode}
@@ -313,9 +295,9 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.Email}
                   hasError={Boolean(errors.Email)}
-                  id="Email"
                   isTouched={touched.Email}
                   label="Email"
+                  name="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.Email}
@@ -326,11 +308,12 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.OfficePhone}
                   hasError={Boolean(errors.OfficePhone)}
-                  id="OfficePhone"
                   isTouched={touched.OfficePhone}
                   label="Office Phone"
+                  name="OfficePhone"
                   onBlur={handleBlur}
                   onChange={handleChange}
+                  type="tel"
                   value={values.OfficePhone}
                 />
               </Box>
@@ -339,11 +322,12 @@ const RegisterForm: FC<Props> = ({
                 <CustomTextField
                   errorMessage={errors.CellPhone}
                   hasError={Boolean(errors.CellPhone)}
-                  id="CellPhone"
                   isTouched={touched.CellPhone}
                   label="Cell Phone"
+                  name="CellPhone"
                   onBlur={handleBlur}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  type="tel"
                   value={values.CellPhone}
                 />
               </Box>

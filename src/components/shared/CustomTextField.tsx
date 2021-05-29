@@ -1,18 +1,22 @@
 // External Dependencies
-import { FormikHandlers } from 'formik';
+import { FormikHandlers, useField, useFormikContext } from 'formik';
 import { TextField } from '@material-ui/core';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+
+// Internal Dependencies
+import { formatPhone } from '../../utils/formatPhone';
 
 // Local Typings
 interface Props {
   errorMessage: unknown; // will cast to string
   fullWidth?: boolean;
   hasError: boolean;
-  id: string; // applied to id and name
   isTouched: boolean | undefined;
   label: string;
+  name: string; // applied to id and name
   onBlur: FormikHandlers['handleBlur'];
-  onChange: FormikHandlers['handleChange'];
+  onChange?: FormikHandlers['handleChange'];
+  type?: string;
   value: string | undefined;
 }
 
@@ -26,28 +30,46 @@ const CustomTextField: FC<Props> = ({
   errorMessage,
   fullWidth = true,
   hasError,
-  id,
   isTouched,
   label,
-  onBlur,
-  onChange,
-  value,
+  name,
+  type,
   ...otherProps
-}) => (
-  <TextField
-    {...otherProps}
-    color="primary"
-    error={isTouched && hasError}
-    fullWidth={fullWidth}
-    helperText={isTouched && errorMessage as string}
-    id={id}
-    label={label}
-    name={id}
-    onBlur={onBlur} // This updates `touched`
-    onChange={onChange}
-    value={value}
-    variant="filled"
-  />
-);
+}) => {
+  const { setFieldValue } = useFormikContext();
+
+  const [field] = useField(name);
+
+  const { value: valueFromFormikField } = field;
+
+  // We have to use Formik's system to manually format phone numbers
+  useEffect(() => {
+    if (type === 'tel' && valueFromFormikField.length > 0) {
+      setFieldValue(
+        name,
+        formatPhone(valueFromFormikField) as string,
+      );
+    }
+  }, [name, setFieldValue, type, valueFromFormikField]);
+
+  const updatedField = {
+    ...field,
+    value: valueFromFormikField,
+  };
+
+  return (
+    <TextField
+      {...otherProps}
+      color="primary"
+      error={isTouched && hasError}
+      fullWidth={fullWidth}
+      helperText={isTouched && errorMessage as string}
+      id={name}
+      label={label}
+      variant="filled"
+      {...updatedField}
+    />
+  );
+};
 
 export default CustomTextField;
