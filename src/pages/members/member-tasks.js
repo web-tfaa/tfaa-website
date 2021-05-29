@@ -96,8 +96,12 @@ const MemberTasks = ({
 
   const receiptInfo = currentUser && (
     <FuturaDiv>
+      <p>
+        Thank you for joining TMAC for the {currentSchoolYearLong} school year!
+      </p>
+
       <h5>Need a copy of your receipt?</h5>
-      Thank you for joining TMAC for the {currentSchoolYearLong} school year!
+
       <div className={classes.buttonContainer}>
         <ReactToPrint
           content={() => printReceiptRef.current}

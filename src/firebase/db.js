@@ -73,7 +73,13 @@ export const doGetUsers = (collection, userList, callback) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        updatedUserList[doc.id] = doc.data();
+        const userObject = doc.data();
+
+        // The doc.id is the userId
+        updatedUserList[doc.id] = {
+          ...userObject,
+          userId: doc.id,
+        };
       });
       return callback(updatedUserList);
     })

@@ -22,6 +22,7 @@ import Card from '../../components/shared/cards/card';
 import CardSubtitle from '../../components/shared/CardSubtitle';
 import { doUpdateEmail } from '../../firebase/auth';
 import { emailRegex } from '../../utils/helpers';
+import presets from '../../utils/presets';
 
 // Local Variables
 const propTypes = {
@@ -60,6 +61,19 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
   },
   listItemText: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.9rem',
+      maxWidth: '70%',
+    },
+    [presets.Mobile]: {
+      maxWidth: '60%',
+    },
+    [presets.Phablet]: {
+      maxWidth: '70%',
+    },
+    [presets.Tablet]: {
+      maxWidth: '80%',
+    },
     fontSize: '1rem',
   },
   subheader: {
@@ -157,6 +171,7 @@ const MemberInfo = ({
                         </div>
                         <div>Office: {currentUser.OfficePhone}</div>
                         <div>Cell: {currentUser.CellPhone}</div>
+                        <div>{currentUser.Email}</div>
                       </address>
                     </>
                   )}
@@ -197,15 +212,13 @@ const MemberInfo = ({
         <section>
           <CardSubtitle>Member actions</CardSubtitle>
 
-          {/* change email */}
-
           <List>
             <ListItem className={classes.listItem}>
               <ListItemText
                 classes={{
                   primary: classes.listItemText,
                 }}
-                primary="Change email for TMAC website login"
+                primary="Update email for TMAC website login"
               />
 
               <ListItemSecondaryAction>
@@ -213,30 +226,27 @@ const MemberInfo = ({
                   color="primary"
                   size="small"
                   onClick={handleOpenChangeEmailDialog}
-                // onKeyPress={handleOpenChangeEmailDialog}
                   variant="outlined"
                 >
-                  Update email
+                  Update
                 </Button>
               </ListItemSecondaryAction>
             </ListItem>
+
+            <ListItem className={classes.listItem}>
+              <ListItemText
+                classes={{
+                  primary: classes.listItemText,
+                }}
+                primary="Need to update any information?"
+                secondary={(
+                  <>
+                    Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
+                  </>
+                )}
+              />
+            </ListItem>
           </List>
-
-          {/* update any info? */}
-
-          {currentUser && (
-            <>
-              {/* <FuturaDiv> */}
-              <Typography className={classes.subheader}>
-                Need to update any information?
-              </Typography>
-
-              <span className={classes.emailContainer}>
-                Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
-              </span>
-              {/* </FuturaDiv> */}
-            </>
-          )}
         </section>
       </Card>
 
@@ -247,7 +257,10 @@ const MemberInfo = ({
         <DialogTitle>Change Email Address</DialogTitle>
 
         <DialogContent>
-          <Typography className={classes.contentText} variant="body2">
+          <Typography
+            className={classes.contentText}
+            variant="body2"
+          >
             This email is used to sign in to the TMAC website. Make sure you have access to the new
             email address for future use.
           </Typography>

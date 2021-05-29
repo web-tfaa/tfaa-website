@@ -6,6 +6,7 @@ import {
   Stepper,
 } from '@material-ui/core';
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 // Local Typings
 interface Props {
@@ -31,12 +32,22 @@ function getSteps(
   ];
 }
 
+// Local Variables
+const useStyles = makeStyles((theme) => ({
+  stepLabel: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.9rem',
+    },
+  },
+}));
+
 // Component Definition
 const RegisterStepper: FC<Props> = ({
   activeStep,
   isAuthenticated,
   isViewingSponsors = false,
 }) => {
+  const classes = useStyles();
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
@@ -48,7 +59,13 @@ const RegisterStepper: FC<Props> = ({
         {steps.map((label) => {
           return (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel
+                classes={{
+                  label: classes.stepLabel,
+                }}
+              >
+                {label}
+              </StepLabel>
             </Step>
           );
         })}

@@ -100,7 +100,7 @@ function uglifyEmail(email) {
 }
 
 // Component Definition
-const MemberListTable = ({
+const MemberTable = ({
   data,
   isAdmin,
 }) => {
@@ -110,6 +110,10 @@ const MemberListTable = ({
   const [orderBy, setOrderBy] = useState('LastName');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  // if (data.length < 1) {
+  //   return null;
+  // }
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -131,9 +135,12 @@ const MemberListTable = ({
   }
 
   return (
-    <Paper className={classes.paper} variant="outlined">
+    <Paper
+      className={classes.paper}
+      variant="outlined"
+    >
       <div className={classes.overflowWrapper}>
-        {data && data.length > 0 ? (
+        {data.length > 0 ? (
           <Table className={classes.table}>
             <MemberTableHead
               isAdmin={isAdmin}
@@ -143,49 +150,64 @@ const MemberListTable = ({
             />
 
             <TableBody>
-              {data
-                && data.length > 0
-                && stableSort(data, getSorting(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((user) => (
-                    <TableRow className={classes.row} key={user.userId}>
-                      <TableCell
-                        className={classes.cell}
-                        component="th"
-                        key={user.FirstName}
-                        padding="none"
-                        scope="row"
-                      >
-                        {user.FirstName}
-                      </TableCell>
+              {stableSort(data, getSorting(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((user) => (
+                  <TableRow
+                    className={classes.row}
+                    key={user.userId}
+                  >
+                    <TableCell
+                      className={classes.cell}
+                      component="th"
+                      key={user.FirstName}
+                      padding="none"
+                      scope="row"
+                    >
+                      {user.FirstName}
+                    </TableCell>
 
-                      <TableCell className={classes.cell} key={user.LastName}>
-                        {user.LastName}
-                      </TableCell>
+                    <TableCell
+                      className={classes.cell}
+                      key={user.LastName}
+                    >
+                      {user.LastName}
+                    </TableCell>
 
-                      <TableCell className={classes.cell} key={user.District}>
-                        {user.District}
-                      </TableCell>
+                    <TableCell
+                      className={classes.cell}
+                      key={user.District}
+                    >
+                      {user.District}
+                    </TableCell>
 
-                      <TableCell className={classes.cell} key={user.Title}>
-                        {user.Title}
-                      </TableCell>
+                    <TableCell
+                      className={classes.cell}
+                      key={user.Title}
+                    >
+                      {user.Title}
+                    </TableCell>
 
-                      <TableCell className={classes.cell} key={user.Email}>
-                        {uglifyEmail(user.Email)}
-                      </TableCell>
+                    <TableCell
+                      className={classes.cell}
+                      key={user.Email}
+                    >
+                      {uglifyEmail(user.Email)}
+                    </TableCell>
 
-                      {isAdmin && (
-                        <TableCell className={classes.cell}>
-                          <MemberTableRowActionElements user={user} />
-                        </TableCell>
-                      )}
-                    </TableRow>
-                  ))}
+                    {isAdmin && (
+                      <TableCell className={classes.cell}>
+                        <MemberTableRowActionElements user={user} />
+                      </TableCell>
+                    )}
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         ) : (
-          <div className={classes.empty}>No members for the current school year</div>
+          <div className={classes.empty}>
+            No members for the current school year
+          </div>
         )}
       </div>
 
@@ -216,6 +238,6 @@ const MemberListTable = ({
   );
 };
 
-MemberListTable.propTypes = propTypes;
+MemberTable.propTypes = propTypes;
 
-export default MemberListTable;
+export default MemberTable;
