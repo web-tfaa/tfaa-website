@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translateZ(0)',
     width: '100%',
     [presets.Tablet]: {
-      flex: '1 0 50%',
-      // maxWidth: '80%',
       boxShadow: `0 1px 0 0 ${colors.ui.light}`,
       '&:nth-child(5),&:nth-child(6)': {
         boxShadow: 'none',
@@ -37,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     },
     [presets.Hd]: {
       flex: '1 0 100%',
-      // maxWidth: '90%',
       borderLeft: `1px solid ${colors.ui.light}`,
       '&:nth-child(4)': {
         boxShadow: 'none',
@@ -51,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     padding: rhythm(presets.gutters.default / 2),
     paddingBottom: 0,
     transform: 'translateZ(0)',
+    width: '100%',
     [presets.Mobile]: {
       padding: vP,
       paddingBottom: 0,

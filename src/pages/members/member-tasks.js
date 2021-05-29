@@ -9,13 +9,13 @@ import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
-import CardHeadline from '../../components/shared/cards/card-headline';
 import CtaButton from '../../components/masthead/cta-button';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
 import RegisterButton from '../../components/register/register-button';
 import { currentSchoolYearLong } from '../../utils/helpers';
+import CardSubtitle from '../../components/shared/CardSubtitle';
 
 // Local Variables
 const propTypes = {
@@ -128,9 +128,9 @@ const MemberTasks = ({
 
   return (
     <Card>
-      <CardHeadline>
-        {`Tasks for ${currentSchoolYearLong} school year`}
-      </CardHeadline>
+      <CardSubtitle>
+        Tasks for {currentSchoolYearLong} school year
+      </CardSubtitle>
 
       <FuturaDiv
         render={() => (
