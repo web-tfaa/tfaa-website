@@ -5,7 +5,7 @@ import {
 } from 'date-fns';
 
 // Begin Helpers
-export const removeErrorKeys = (form: any) => {
+export const removeErrorKeys = (form: unknown) => {
   let found = false;
   const result = { ...form };
   const resultKeys = Object.keys(result);

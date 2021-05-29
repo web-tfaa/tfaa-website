@@ -8,7 +8,7 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
-import RegisterInfo from '../../components/register/register-info';
+import RegisterFormWrapper from '../../components/register/register-form-wrapper';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from '../members/status';
@@ -97,7 +97,7 @@ class RegisterSponsorContent extends Component {
     );
 
     const step2Content = (
-      <RegisterInfo
+      <RegisterFormWrapper
         isViewingSponsors={isViewingSponsors}
         onCompleteStep={this.handleCompleteStep}
       />

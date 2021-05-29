@@ -61,8 +61,12 @@ NavItem.propTypes = {
 };
 
 // Component Definition
-const TopNav = (props) => {
-  const { isAuthenticated } = props;
+const TopNav = ({ isAuthenticated }) => {
+  const handlePressKeyDown = (event) => {
+    if (['Enter', ' '].includes(event.key)) {
+      auth.doSignOut();
+    }
+  };
 
   return (
     <div
@@ -157,7 +161,7 @@ const TopNav = (props) => {
                 float: 'right',
               }}
               onClick={auth.doSignOut}
-              onKeyUp={auth.doSignOut}
+              onKeyDown={handlePressKeyDown}
               role="button"
               tabIndex={0}
             >

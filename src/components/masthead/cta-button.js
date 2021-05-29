@@ -81,7 +81,7 @@ const CtaButton = ({
           backgroundColor: getButtonColor(buttonColor).hover,
           backgroundImage:
             'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
-          color: '#fff',
+          color: buttonColor === 'green' ? '#222' : '#fff',
           animation: `${stripeAnimation} 2.8s linear infinite`,
         },
         ':focus': {

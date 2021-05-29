@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
-import CardHeadline from '../../components/shared/cards/card-headline';
+import CardSubtitle from '../../components/shared/CardSubtitle';
 import CtaButton from '../../components/masthead/cta-button';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import FuturaDiv from '../../components/shared/futura-div';
@@ -96,12 +96,20 @@ const MemberTasks = ({
 
   const receiptInfo = currentUser && (
     <FuturaDiv>
+      <p>
+        Thank you for joining TMAC for the {currentSchoolYearLong} school year!
+      </p>
+
       <h5>Need a copy of your receipt?</h5>
-      Thank you for joining TMAC for the {currentSchoolYearLong} school year!
+
       <div className={classes.buttonContainer}>
         <ReactToPrint
           content={() => printReceiptRef.current}
-          trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
+          trigger={() => (
+            <RegisterButton>
+              Print Receipt
+            </RegisterButton>
+          )}
         />
       </div>
 
@@ -124,7 +132,10 @@ const MemberTasks = ({
 
   return (
     <Card>
-      <CardHeadline>{`Tasks for ${currentSchoolYearLong} school year`}</CardHeadline>
+      <CardSubtitle>
+        Tasks for {currentSchoolYearLong} school year
+      </CardSubtitle>
+
       <FuturaDiv
         render={() => (
           <div>
@@ -152,6 +163,7 @@ const MemberTasks = ({
           <FuturaDiv>
             If your district requires the IRS W-9 Form for TMAC, download or print a copy below.
           </FuturaDiv>
+
           <FuturaAnchor
             download
             href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"

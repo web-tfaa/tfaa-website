@@ -26,6 +26,12 @@ import {
 import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
+const propTypes = {
+  authenticatedUserId: PropTypes.string,
+  form: PropTypes.shape({}).isRequired,
+  onCompleteStep: PropTypes.func.isRequired,
+};
+
 const currentDate = format(new Date(), ['M/d/yyyy']);
 
 // This will tell the database action where to put the new record
@@ -33,11 +39,6 @@ const collection = 'registration';
 
 // Component Definition
 class RegisterPayment extends Component {
-  static propTypes = {
-    form: PropTypes.shape({}).isRequired,
-    onCompleteStep: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -51,17 +52,11 @@ class RegisterPayment extends Component {
   }
 
   componentDidMount() {
-    this.activeComponent = true;
-
-    if (this.activeComponent) {
-      doGetInvoiceId(this.handleGetCurrentInvoiceId);
-    }
+    doGetInvoiceId(this.handleGetCurrentInvoiceId);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      form,
-    } = this.props;
+    const { authenticatedUserId } = this.props;
 
     const {
       invoiceId,
@@ -78,16 +73,16 @@ class RegisterPayment extends Component {
       receiptId,
     };
 
-    if ((prevState.invoiceId === 0 && invoiceId > 0)
-      || (prevState.receiptId === 0 && receiptId > 0)) {
-      return doUpdateEntry(updatedForm, collection, form.userId);
+    if (authenticatedUserId
+      && ((prevState.invoiceId === 0 && invoiceId > 0)
+      || (prevState.receiptId === 0 && receiptId > 0))) {
+      // Can we get userId without access to the `form`?
+      return doUpdateEntry(updatedForm, collection, authenticatedUserId);
     }
   }
 
   componentWillUnmount() {
     const { hasCompletedPayment } = this.state;
-
-    this.activeComponent = false;
 
     return hasCompletedPayment
       ? this.handleIncrementReceiptId()
@@ -98,9 +93,7 @@ class RegisterPayment extends Component {
   }
 
   getCurrentAmount = () => {
-    const {
-      value,
-    } = this.state;
+    const { value } = this.state;
 
     switch (value) {
       case 'active':
@@ -113,9 +106,7 @@ class RegisterPayment extends Component {
   }
 
   handleChangeRadioSelection = (event) => {
-    const {
-      form,
-    } = this.props;
+    const { authenticatedUserId } = this.props;
 
     const {
       invoiceId,
@@ -131,51 +122,15 @@ class RegisterPayment extends Component {
       receiptId,
     };
 
-    if (this.activeComponent) {
-      this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value });
 
-      return doUpdateEntry(updatedForm, collection, form.userId);
-    }
+    return doUpdateEntry(updatedForm, collection, authenticatedUserId);
   };
 
   handleCompletePaymentStep = () => {
-    if (this.activeComponent) {
-      const {
-        form,
-        onCompleteStep,
-      } = this.props;
-
-      const {
-        invoiceId,
-        paymentDetails,
-        receiptId,
-        value,
-      } = this.state;
-
-      const isActive = value === 'active';
-
-      const documentId = form.userId;
-
-      const updatedForm = {
-        PaypalPayerID: paymentDetails.payerId,
-        PaypalPaymentID: paymentDetails.paymentId,
-        PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
-        AmountPaid: isActive ? '$50.00' : '$30.00',
-        invoiceDate: currentDate,
-        invoiceId,
-        MemberType: isActive ? 'Active' : 'Retired',
-        receiptId,
-      };
-
-      doUpdateEntry(updatedForm, collection, documentId);
-      onCompleteStep(2, updatedForm);
-    }
-  };
-
-  handleIncrementInvoiceId = () => {
-    // Called when unmounting the component if no purchase made
     const {
-      form,
+      authenticatedUserId,
+      onCompleteStep,
     } = this.props;
 
     const {
@@ -187,7 +142,33 @@ class RegisterPayment extends Component {
 
     const isActive = value === 'active';
 
-    const documentId = form.userId;
+    const updatedForm = {
+      PaypalPayerID: paymentDetails.payerId,
+      PaypalPaymentID: paymentDetails.paymentId,
+      PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
+      AmountPaid: isActive ? '$50.00' : '$30.00',
+      invoiceDate: currentDate,
+      invoiceId,
+      MemberType: isActive ? 'Active' : 'Retired',
+      receiptId,
+    };
+
+    doUpdateEntry(updatedForm, collection, authenticatedUserId);
+    onCompleteStep(2, updatedForm);
+  };
+
+  handleIncrementInvoiceId = () => {
+    // Called when unmounting the component if no purchase made
+    const { authenticatedUserId } = this.props;
+
+    const {
+      invoiceId,
+      paymentDetails,
+      receiptId,
+      value,
+    } = this.state;
+
+    const isActive = value === 'active';
 
     const updatedForm = {
       ...paymentDetails,
@@ -198,7 +179,7 @@ class RegisterPayment extends Component {
     };
 
     return Promise.all([
-      doUpdateEntry(updatedForm, collection, documentId),
+      doUpdateEntry(updatedForm, collection, authenticatedUserId),
       doUpdateInvoiceId(),
     ]);
   };
@@ -209,40 +190,32 @@ class RegisterPayment extends Component {
   };
 
   handleUpdateCompletedStep = (payment) => {
-    if (this.activeComponent) {
-      doGetReceiptId(this.handleGetCurrentReceiptId);
+    doGetReceiptId(this.handleGetCurrentReceiptId);
 
-      this.setState({
-        hasCompletedPayment: true,
-        paymentDetails: {
-          payerId: payment.payerID,
-          paymentId: payment.paymentID,
-          receiptDate: currentDate,
-        },
-      }, () => this.handleCompletePaymentStep());
-    }
+    this.setState({
+      hasCompletedPayment: true,
+      paymentDetails: {
+        payerId: payment.payerID,
+        paymentId: payment.paymentID,
+        receiptDate: currentDate,
+      },
+    }, () => this.handleCompletePaymentStep());
   };
 
   handleGetCurrentInvoiceId = (invoiceId) => {
-    if (this.activeComponent) {
-      this.setState({
-        invoiceId,
-      });
-    }
+    this.setState({
+      invoiceId,
+    });
   };
 
   handleGetCurrentReceiptId = (receiptId) => {
-    if (this.activeComponent) {
-      this.setState({
-        receiptId,
-      });
-    }
+    this.setState({
+      receiptId,
+    });
   };
 
   render() {
-    const {
-      form,
-    } = this.props;
+    const { form } = this.props;
 
     const {
       hasCompletedPayment,
@@ -382,5 +355,7 @@ class RegisterPayment extends Component {
     );
   }
 }
+
+RegisterPayment.propTypes = propTypes;
 
 export default RegisterPayment;
