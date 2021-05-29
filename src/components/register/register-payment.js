@@ -56,9 +56,7 @@ class RegisterPayment extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      authenticatedUserId,
-    } = this.props;
+    const { authenticatedUserId } = this.props;
 
     const {
       invoiceId,
@@ -99,9 +97,7 @@ class RegisterPayment extends Component {
   }
 
   getCurrentAmount = () => {
-    const {
-      value,
-    } = this.state;
+    const { value } = this.state;
 
     switch (value) {
       case 'active':
@@ -114,9 +110,7 @@ class RegisterPayment extends Component {
   }
 
   handleChangeRadioSelection = (event) => {
-    const {
-      form,
-    } = this.props;
+    const { authenticatedUserId } = this.props;
 
     const {
       invoiceId,
@@ -134,12 +128,12 @@ class RegisterPayment extends Component {
 
     this.setState({ value: event.target.value });
 
-    return doUpdateEntry(updatedForm, collection, form.userId);
+    return doUpdateEntry(updatedForm, collection, authenticatedUserId);
   };
 
   handleCompletePaymentStep = () => {
     const {
-      form,
+      authenticatedUserId,
       onCompleteStep,
     } = this.props;
 
@@ -152,8 +146,6 @@ class RegisterPayment extends Component {
 
     const isActive = value === 'active';
 
-    const documentId = form.userId;
-
     const updatedForm = {
       PaypalPayerID: paymentDetails.payerId,
       PaypalPaymentID: paymentDetails.paymentId,
@@ -165,15 +157,13 @@ class RegisterPayment extends Component {
       receiptId,
     };
 
-    doUpdateEntry(updatedForm, collection, documentId);
+    doUpdateEntry(updatedForm, collection, authenticatedUserId);
     onCompleteStep(2, updatedForm);
   };
 
   handleIncrementInvoiceId = () => {
     // Called when unmounting the component if no purchase made
-    const {
-      form,
-    } = this.props;
+    const { authenticatedUserId } = this.props;
 
     const {
       invoiceId,
@@ -184,8 +174,6 @@ class RegisterPayment extends Component {
 
     const isActive = value === 'active';
 
-    const documentId = form.userId;
-
     const updatedForm = {
       ...paymentDetails,
       invoiceDate: currentDate,
@@ -195,7 +183,7 @@ class RegisterPayment extends Component {
     };
 
     return Promise.all([
-      doUpdateEntry(updatedForm, collection, documentId),
+      doUpdateEntry(updatedForm, collection, authenticatedUserId),
       doUpdateInvoiceId(),
     ]);
   };
@@ -231,9 +219,7 @@ class RegisterPayment extends Component {
   };
 
   render() {
-    const {
-      form,
-    } = this.props;
+    const { form } = this.props;
 
     const {
       hasCompletedPayment,
