@@ -101,7 +101,11 @@ const MemberTasks = ({
       <div className={classes.buttonContainer}>
         <ReactToPrint
           content={() => printReceiptRef.current}
-          trigger={() => <RegisterButton isRed>Print Receipt</RegisterButton>}
+          trigger={() => (
+            <RegisterButton>
+              Print Receipt
+            </RegisterButton>
+          )}
         />
       </div>
 
@@ -124,7 +128,10 @@ const MemberTasks = ({
 
   return (
     <Card>
-      <CardHeadline>{`Tasks for ${currentSchoolYearLong} school year`}</CardHeadline>
+      <CardHeadline>
+        {`Tasks for ${currentSchoolYearLong} school year`}
+      </CardHeadline>
+
       <FuturaDiv
         render={() => (
           <div>
@@ -152,6 +159,7 @@ const MemberTasks = ({
           <FuturaDiv>
             If your district requires the IRS W-9 Form for TMAC, download or print a copy below.
           </FuturaDiv>
+
           <FuturaAnchor
             download
             href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
