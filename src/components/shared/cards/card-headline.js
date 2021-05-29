@@ -7,12 +7,16 @@ import presets from '../../../utils/presets';
 import { scale } from '../../../utils/typography';
 
 // Component Definition
-const CardHeadline = ({ children }) => (
+const CardHeadline = ({
+  children,
+  gutterBottom = true,
+}) => (
   <h2
     css={{
       ...scale(2 / 5),
       lineHeight: 1.2,
       marginTop: 0,
+      marginBottom: gutterBottom ? 'inherit' : 0,
       [presets.Tablet]: {
         fontSize: scale(1 / 10).fontSize,
       },
@@ -33,6 +37,7 @@ const CardHeadline = ({ children }) => (
 
 CardHeadline.propTypes = {
   children: PropTypes.string.isRequired,
+  gutterBottom: PropTypes.bool,
 };
 
 export default CardHeadline;

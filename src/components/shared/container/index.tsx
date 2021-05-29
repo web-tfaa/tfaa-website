@@ -1,15 +1,23 @@
 // External Dependencies
-import React from 'react';
+import React, { FC } from 'react';
 
 // Internal Dependencies
 import presets from '../../../utils/presets';
 import { rhythm, options } from '../../../utils/typography';
 
-// Local Variables
+// Local Typings
+interface Props {
+  className?: string;
+  css?: unknown;
+  hasSideBar?: boolean;
+}
 
 // Component Definition
-export default ({
-  children, className, hasSideBar = true, css = {},
+const Container: FC<Props> = ({
+  children,
+  className,
+  css = {},
+  hasSideBar = true,
 }) => (
   <div
     css={{
@@ -28,3 +36,5 @@ export default ({
     {children}
   </div>
 );
+
+export default Container;

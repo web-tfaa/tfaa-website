@@ -15,7 +15,7 @@
     "serve": "gatsby serve",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint '**/*.{js,jsx,ts,tsx}' --fix",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --pretty --noEmit"
   },
   "browserslist": [
     "last 2 versions",
@@ -37,8 +37,8 @@
     "clsx": "^1.1.0",
     "core-js": "^3.11.1",
     "date-fns": "^2.21.1",
-    "dotenv": "^8.2.0",
     "firebase": "^7.19.0",
+    "formik": "^2.2.8",
     "gatsby": "^3.4.0",
     "gatsby-cli": "^3.4.0",
     "gatsby-image": "3.4.0",
@@ -66,7 +66,8 @@
     "typeface-space-mono": "^1.1.13",
     "typeface-spectral": "^1.1.13",
     "typography": "^1.0.0-alpha.4",
-    "typography-breakpoint-constants": "1.0.0-alpha.0"
+    "typography-breakpoint-constants": "1.0.0-alpha.0",
+    "yup": "0.32.9"
   },
   "engines": {
     "node": "^12.22.1",

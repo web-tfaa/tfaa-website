@@ -1,24 +1,28 @@
 // External Dependencies
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import TextField from '@material-ui/core/TextField';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
-import CardHeadline from '../../components/shared/cards/card-headline';
-import FuturaDiv from '../../components/shared/futura-div';
+import CardSubtitle from '../../components/shared/CardSubtitle';
+import presets from '../../utils/presets';
 import { doUpdateEmail } from '../../firebase/auth';
-import { emailRegex } from '../../utils/helpers';
-
-// Local Dependencies
-import MemberInfoBlock from './member-info-block';
+import { emailRegex, currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const propTypes = {
@@ -44,14 +48,39 @@ const defaultProps = {
 };
 
 const useStyles = makeStyles((theme) => ({
+  address: {
+    fontStyle: 'normal',
+  },
   contentText: {
+    marginBottom: theme.spacing(2),
+  },
+  divider: {
     marginBottom: theme.spacing(2),
   },
   emailContainer: {
     marginLeft: theme.spacing(2),
   },
+  listItemText: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.9rem',
+      maxWidth: '70%',
+    },
+    [presets.Mobile]: {
+      maxWidth: '60%',
+    },
+    [presets.Phablet]: {
+      maxWidth: '70%',
+    },
+    [presets.Tablet]: {
+      maxWidth: '80%',
+    },
+    fontSize: '1rem',
+  },
   subheader: {
     marginTop: theme.spacing(3),
+  },
+  subtitle: {
+    fontWeight: 600,
   },
   textField: {
     width: '75%',
@@ -119,53 +148,124 @@ const MemberInfo = ({
   return (
     <>
       <Card>
-        <CardHeadline>Member Info</CardHeadline>
-        {currentUser && (
-          <>
-            <div>
-              <MemberInfoBlock>
-                {currentUser.FirstName} {currentUser.LastName}
-              </MemberInfoBlock>
-              <MemberInfoBlock>
-                {currentUser.Title}, {currentUser.District}
-              </MemberInfoBlock>
-              <MemberInfoBlock>{currentUser.MemberType || 'Active'} member</MemberInfoBlock>
-              <MemberInfoBlock>{currentUser.Address1}</MemberInfoBlock>
-              <MemberInfoBlock>{currentUser.Address2}</MemberInfoBlock>
-              <MemberInfoBlock>
-                {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
-              </MemberInfoBlock>
-              <MemberInfoBlock>Office Phone: {currentUser.OfficePhone}</MemberInfoBlock>
-              <MemberInfoBlock>Cell Phone: {currentUser.CellPhone}</MemberInfoBlock>
-            </div>
-            <FuturaDiv>
-              <h5 className={classes.subheader}>Need to update any information?</h5>
-              <span className={classes.emailContainer}>
-                Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
-              </span>
-            </FuturaDiv>
-          </>
-        )}
-        <FuturaDiv>
-          <h5 className={classes.subheader}>Change email for TMAC website login</h5>
-          <Button
-            color="primary"
-            size="small"
-            onClick={handleOpenChangeEmailDialog}
-            onKeyPress={handleOpenChangeEmailDialog}
-            variant="outlined"
-          >
-            Update email
-          </Button>
-        </FuturaDiv>
+        <section>
+          {currentUser && (
+            <>
+              <CardSubtitle>Member Info</CardSubtitle>
+
+              <List>
+                <ListItem>
+                  <ListItemText
+                    primary={(
+                      <>
+                        <div>{currentUser.FirstName} {currentUser.LastName}</div>
+                        <div>{currentUser.Title}, {currentUser.District}</div>
+                      </>
+                    )}
+                    secondary={(
+                      <>
+                        <address className={classes.address}>
+                          <div>{currentUser.Address1}</div>
+                          <div>{currentUser.Address2}</div>
+                          <div>
+                            {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
+                          </div>
+                          <div>Office: {currentUser.OfficePhone}</div>
+                          <div>Cell: {currentUser.CellPhone}</div>
+                          <div>{currentUser.Email}</div>
+                        </address>
+                      </>
+                    )}
+                    secondaryTypographyProps={{
+                      component: 'div',
+                    }}
+                  />
+                </ListItem>
+              </List>
+
+              <Divider className={classes.divider} />
+            </>
+          )}
+        </section>
+
+        <section>
+          <CardSubtitle>Membership status</CardSubtitle>
+
+          <List>
+            <ListItem className={classes.listItem}>
+              <ListItemText
+                classes={{
+                  primary: classes.listItemText,
+                }}
+                primary={(
+                  <>
+                    {!currentUser ? 'Inactive' : currentUser?.MemberType || 'Active'} member
+                  </>
+                )}
+                secondary={`for the ${currentSchoolYearLong} school year`}
+              />
+            </ListItem>
+          </List>
+
+          <Divider className={classes.divider} />
+        </section>
+
+        <section>
+          <CardSubtitle>Member actions</CardSubtitle>
+
+          <List>
+            <ListItem className={classes.listItem}>
+              <ListItemText
+                classes={{
+                  primary: classes.listItemText,
+                }}
+                primary="Update email for TMAC website login"
+              />
+
+              <ListItemSecondaryAction>
+                <Button
+                  color="primary"
+                  size="small"
+                  onClick={handleOpenChangeEmailDialog}
+                  variant="outlined"
+                >
+                  Update
+                </Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+
+            <ListItem className={classes.listItem}>
+              <ListItemText
+                classes={{
+                  primary: classes.listItemText,
+                }}
+                primary="Need to update any information?"
+                secondary={(
+                  <>
+                    Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
+                  </>
+                )}
+              />
+            </ListItem>
+          </List>
+        </section>
       </Card>
-      <Dialog onClose={handleCloseChangeEmailDialog} open={isChangeEmailDialogOpen}>
+
+      <Dialog
+        onClose={handleCloseChangeEmailDialog}
+        open={isChangeEmailDialogOpen}
+      >
         <DialogTitle>Change Email Address</DialogTitle>
+
         <DialogContent>
-          <Typography className={classes.contentText} variant="body2">
+          <Typography
+            className={classes.contentText}
+            variant="body2"
+          >
             This email is used to sign in to the TMAC website. Make sure you have access to the new
             email address for future use.
           </Typography>
+
           <TextField
             className={classes.textField}
             error={Boolean(newEmailError)}
@@ -176,10 +276,15 @@ const MemberInfo = ({
             variant="filled"
           />
         </DialogContent>
+
         <DialogActions>
-          <Button onClick={handleCloseChangeEmailDialog} onKeyPress={handleCloseChangeEmailDialog}>
+          <Button
+            onClick={handleCloseChangeEmailDialog}
+            onKeyPress={handleCloseChangeEmailDialog}
+          >
             Cancel
           </Button>
+
           <Button
             color="primary"
             onClick={handleSubmitChangeEmail}

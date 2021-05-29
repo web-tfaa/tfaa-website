@@ -102,9 +102,7 @@ const JoinContainer = (props) => {
               buttonColor="blue"
               to="/members/register"
             >
-              <span>
-                Begin Registration
-              </span>
+              Begin Registration
               <ArrowForwardIcon />
             </CtaButton>
           </div>

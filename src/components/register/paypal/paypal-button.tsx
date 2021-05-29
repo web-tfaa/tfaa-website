@@ -11,23 +11,51 @@ import ReactDOM from 'react-dom';
 
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
+import { logError } from '../../../utils/logError';
 
 // Local Typings
 interface Props {
-  client: any;
-  commit: boolean;
+  client: string;
   currency: string;
-  env: string;
-  onCancel: (data: any) => void;
-  onError: (data: any) => void;
-  onSuccess: (data: any) => void;
+  env: 'production' | 'sandbox';
+  onCancel: (data: unknown) => void;
+  onError: (error: unknown) => void;
+  onSuccess: (data: unknown) => void;
   total: number;
+}
+
+interface Transaction {
+  amount: {
+    total: number;
+    currency: string;
+  }
+}
+
+interface CreatePaymentPayload {
+  transactions: Transaction[];
+}
+
+interface PaypalGlobalObject {
+  Button: {
+    driver: (
+      type: string,
+      packages: any,
+    ) => void;
+  }
+  rest: {
+    payment: {
+      create: (
+        env: string,
+        client: string,
+        payload: CreatePaymentPayload,
+      ) => void;
+    }
+  }
 }
 
 // Component Definition
 const PaypalButton: FC<Props> = ({
   client,
-  commit,
   currency,
   env,
   onCancel,
@@ -35,7 +63,8 @@ const PaypalButton: FC<Props> = ({
   onSuccess,
   total,
 }) => {
-  const paypalRef = useRef<any>(null);
+  const paypalRef = useRef<PaypalGlobalObject | null>(null);
+  console.log('paypalRef', paypalRef.current);
 
   const [showButton, setShowButton] = useState(false);
   const previousShowButton = usePrevious(showButton);
@@ -54,6 +83,10 @@ const PaypalButton: FC<Props> = ({
     }
   }, [paypalRef.current, previousShowButton]);
 
+  if (!showButton) {
+    return null;
+  }
+
   const payment = () =>
     paypalRef.current?.rest.payment.create(env, client, {
       transactions: [
@@ -66,8 +99,8 @@ const PaypalButton: FC<Props> = ({
       ],
     });
 
-  const onAuthorize = (data: any, actions: any) =>
-    actions.payment.execute()
+  const onAuthorize = (data: unknown, actions: unknown) =>
+    actions?.payment?.execute()
       .then(() => {
         const payment = {
           cancelled: false,
@@ -79,16 +112,19 @@ const PaypalButton: FC<Props> = ({
         };
 
         onSuccess(payment);
+      })
+      .catch((error) => {
+        logError('PaypalButton : onAuthorize error', error);
       });
 
   // From the paypal docs here
   // https://github.com/paypal/paypal-checkout/blob/master/docs/frameworks.md#reactjs-element
   const PayPalButton = paypalRef.current?.Button.driver('react', { React, ReactDOM });
 
-  return showButton ? (
+  return (
     <PayPalButton
       client={client}
-      commit={commit}
+      commit
       env={env}
       onAuthorize={onAuthorize}
       onCancel={onCancel}
@@ -96,7 +132,7 @@ const PaypalButton: FC<Props> = ({
       payment={payment}
       style={{ label: 'pay', tagline: 'false', size: 'medium' }}
     />
-  ) : null;
+  );
 };
 
 export default PaypalButton;
