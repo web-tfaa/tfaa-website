@@ -73,10 +73,6 @@ class RegisterPayment extends Component {
       receiptId,
     };
 
-    console.log('componentDidUpdate');
-    console.log('updatedForm', updatedForm);
-    console.log('authenticatedUserId', authenticatedUserId);
-
     if (authenticatedUserId
       && ((prevState.invoiceId === 0 && invoiceId > 0)
       || (prevState.receiptId === 0 && receiptId > 0))) {

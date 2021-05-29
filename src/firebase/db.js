@@ -13,8 +13,6 @@ export const doCreateEntry = (
   documentId,
   callback,
 ) => {
-  console.log('doCreateEntry: form', form);
-
   const collectionName = getFirebaseCollectionName(collection);
 
   console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
@@ -40,8 +38,6 @@ export const doUpdateEntry = (
   collection,
   documentId,
 ) => {
-  console.log('doUpdateEntry: form', form);
-
   const collectionName = getFirebaseCollectionName(collection);
 
   console.log('doUpdateEntry : updating...', collectionName);

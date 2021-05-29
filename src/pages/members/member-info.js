@@ -20,9 +20,9 @@ import { makeStyles } from '@material-ui/styles';
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
 import CardSubtitle from '../../components/shared/CardSubtitle';
-import { doUpdateEmail } from '../../firebase/auth';
-import { emailRegex } from '../../utils/helpers';
 import presets from '../../utils/presets';
+import { doUpdateEmail } from '../../firebase/auth';
+import { emailRegex, currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const propTypes = {
@@ -149,65 +149,66 @@ const MemberInfo = ({
     <>
       <Card>
         <section>
-          <CardSubtitle>Member Info</CardSubtitle>
-
           {currentUser && (
-            <List>
-              <ListItem>
-                <ListItemText
-                  primary={(
-                    <>
-                      <div>{currentUser.FirstName} {currentUser.LastName}</div>
-                      <div>{currentUser.Title}, {currentUser.District}</div>
-                    </>
-                  )}
-                  secondary={(
-                    <>
-                      <address className={classes.address}>
-                        <div>{currentUser.Address1}</div>
-                        <div>{currentUser.Address2}</div>
-                        <div>
-                          {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
-                        </div>
-                        <div>Office: {currentUser.OfficePhone}</div>
-                        <div>Cell: {currentUser.CellPhone}</div>
-                        <div>{currentUser.Email}</div>
-                      </address>
-                    </>
-                  )}
-                  secondaryTypographyProps={{
-                    component: 'div',
-                  }}
-                />
-              </ListItem>
-            </List>
+            <>
+              <CardSubtitle>Member Info</CardSubtitle>
+
+              <List>
+                <ListItem>
+                  <ListItemText
+                    primary={(
+                      <>
+                        <div>{currentUser.FirstName} {currentUser.LastName}</div>
+                        <div>{currentUser.Title}, {currentUser.District}</div>
+                      </>
+                    )}
+                    secondary={(
+                      <>
+                        <address className={classes.address}>
+                          <div>{currentUser.Address1}</div>
+                          <div>{currentUser.Address2}</div>
+                          <div>
+                            {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
+                          </div>
+                          <div>Office: {currentUser.OfficePhone}</div>
+                          <div>Cell: {currentUser.CellPhone}</div>
+                          <div>{currentUser.Email}</div>
+                        </address>
+                      </>
+                    )}
+                    secondaryTypographyProps={{
+                      component: 'div',
+                    }}
+                  />
+                </ListItem>
+              </List>
+
+              <Divider className={classes.divider} />
+            </>
           )}
         </section>
-
-        <Divider className={classes.divider} />
 
         <section>
           <CardSubtitle>Membership status</CardSubtitle>
 
-          {currentUser && (
-            <List>
-              <ListItem className={classes.listItem}>
-                <ListItemText
-                  classes={{
-                    primary: classes.listItemText,
-                  }}
-                  primary={(
-                    <>
-                      {currentUser.MemberType || 'Active'} member
-                    </>
-                  )}
-                />
-              </ListItem>
-            </List>
-          )}
-        </section>
+          <List>
+            <ListItem className={classes.listItem}>
+              <ListItemText
+                classes={{
+                  primary: classes.listItemText,
+                }}
+                primary={(
+                  <>
+                    {!currentUser ? 'Inactive' : currentUser?.MemberType || 'Active'} member
+                  </>
+                )}
+                secondary={`for the ${currentSchoolYearLong} school year`}
+              />
+            </ListItem>
+          </List>
 
-        <Divider className={classes.divider} />
+          <Divider className={classes.divider} />
+        </section>
 
         <section>
           <CardSubtitle>Member actions</CardSubtitle>
