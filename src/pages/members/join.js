@@ -47,6 +47,7 @@ const JoinContainer = (props) => {
         }}
       >
         <Status />
+
         <Container>
           <Helmet>
             <title>TMAC | Join TMAC</title>
@@ -60,9 +61,11 @@ const JoinContainer = (props) => {
             }}
           >
             <CardHeadline>Join TMAC</CardHeadline>
+
             <FuturaDiv>
               To join TMAC please complete these three steps:
             </FuturaDiv>
+
             <FuturaDiv>
               <span css={boldStyles}>
                 1.
@@ -70,6 +73,7 @@ const JoinContainer = (props) => {
               </span>
               Sign up for a TMAC website login.
             </FuturaDiv>
+
             <FuturaDiv>
               <span css={boldStyles}>
                 2.
@@ -77,6 +81,7 @@ const JoinContainer = (props) => {
               </span>
               Complete the Registration Form.
             </FuturaDiv>
+
             <FuturaDiv>
               <span css={boldStyles}>
                 3.
@@ -84,6 +89,7 @@ const JoinContainer = (props) => {
               </span>
               Pay dues online using PayPal (or mail invoice with check via mail).
             </FuturaDiv>
+
             <p>
               Note: Sponsors should register at the
               {' '}

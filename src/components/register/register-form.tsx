@@ -107,10 +107,6 @@ const RegisterForm: FC<Props> = ({
     delete form.honeypot;
     delete form.hasCompletedRegisterInfoForm;
 
-    // We set the new to TMAC value to what the radio button value was
-    // form.NewToTMAC = form.radioValue;
-    // delete form.radioValue;
-
     // Send phone values in formatted
     form.OfficePhone = formatPhone(form.OfficePhone);
     form.CellPhone = formatPhone(form.CellPhone);
@@ -118,12 +114,19 @@ const RegisterForm: FC<Props> = ({
     // This will tell the database action where to put the new record
     const collection = 'registration';
 
+    // The userId is needed to sync the Google Sheet with the Firestore DB
+    const formWithUserId = {
+      ...form,
+      userId: authenticatedUserId,
+    }
+
     try {
-      await doCreateEntry(form, collection, documentId);
+      await doCreateEntry(formWithUserId, collection, documentId);
       await onSetForm({
-        ...form,
+        ...formWithUserId,
         hasCompletedRegisterInfoForm: true,
       });
+
       handleCompleteInfoStep();
     } catch (error) {
       logError('handleClickSubmitButton error in RegisterForm', error);
