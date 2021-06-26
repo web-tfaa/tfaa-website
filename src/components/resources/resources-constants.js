@@ -210,4 +210,8 @@ export const pastPresidents = [
     year: '2019-2020',
     name: 'Jay Lester',
   },
+  {
+    year: '2020-2021',
+    name: 'Jim Egger',
+  },
 ];
