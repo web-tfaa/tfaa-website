@@ -84,7 +84,7 @@ const JayLester = ({ location }) => (
           several universities. Jay stays active as a music adjudicator as an active member of the
           Texas Music Adjudicators Association judging concert band, marching band, and orchestra
           each year. He has also judged TMEA Honor Band and Orchestra contests at the Area and State
-          level. Jay enjoys judges music festivals for Director’s Choice, Peak, and South Coast.
+          level. Jay enjoys judging music festivals for Director’s Choice, Peak, and South Coast.
         </FuturaParagraph>
         <FuturaParagraph>
           Additionally, Mr. Lester has also been involved with the Texas Art Educators Association,

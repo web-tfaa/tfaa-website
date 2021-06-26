@@ -143,8 +143,8 @@ class RegisterPayment extends Component {
     const isActive = value === 'active';
 
     const updatedForm = {
-      PaypalPayerID: paymentDetails.payerId,
-      PaypalPaymentID: paymentDetails.paymentId,
+      PaypalPayerID: paymentDetails.payerId || '',
+      PaypalPaymentID: paymentDetails.paymentId || '',
       PaymentOption: paymentDetails.paymentId ? 'Paypal' : 'Invoiced',
       AmountPaid: isActive ? '$50.00' : '$30.00',
       invoiceDate: currentDate,

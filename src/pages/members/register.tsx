@@ -4,6 +4,7 @@
 
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { navigate } from 'gatsby';
 import React, { FC, useEffect, useState } from 'react';
 
 // Internal Dependencies
@@ -128,10 +129,6 @@ const RegisterContent: FC<Props> = ({
       setActiveStep(1);
     }
   }, []);
-
-  if (!isAuthenticated) {
-    return null;
-  }
 
   const handleCompleteStep: HandleCompleteStepType = (step) => {
     setActiveStep(activeStep + 1);
