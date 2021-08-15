@@ -37,7 +37,7 @@ const SummerRoundTable = ({ location }) => {
         <h1>{titleOfEvent}</h1>
 
         <EnhancedAlert severity="info">
-          Details about the 2021 TMAC Summer Round Table will be available soon.
+          Details about the 2022 TMAC Summer Round Table will be available soon.
         </EnhancedAlert>
 
         <section>

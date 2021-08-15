@@ -1,8 +1,8 @@
 // External Dependencies
 import { Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';
@@ -10,8 +10,8 @@ import Container from '../../components/shared/container';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
 import MembershipByLaws from './MembershipByLaws';
-import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
+import presets from '../../utils/presets';
 
 // Sidebar data
 import aboutSidebar from './about-links.yml';
@@ -57,11 +57,11 @@ const Constitution = ({ location }) => {
     <Layout location={location} pageTitle="Constitution and Bylaws">
       <div className={classes.root}>
         <Container>
-          <h1>Constitution and Bylaws of Texas Music Administrators Conference</h1>
+          <h1>BYLAWS OF TEXAS MUSIC ADMINISTRATORS CONFERENCE, INC.</h1>
           <Box mb={3}>
             <FuturaAnchor
               download
-              href="https://res.cloudinary.com/tmac/image/upload/v1606193457/TMAC_Bylaws_for_website-Updated_11-19-20.pdf"
+              href="https://res.cloudinary.com/tmac/image/upload/v1629044838/TMAC_Bylaws_-_Updated_7-23-21.pdf"
               rel="noreferrer noopener"
               target="_blank"
             >
