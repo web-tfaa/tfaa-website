@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 // Internal Dependencies
-// import EnhancedAlert from '../../components/shared/EnhancedAlert';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
@@ -36,9 +36,9 @@ const SummerRoundTable = ({ location }) => {
       <Container>
         <h1>{titleOfEvent}</h1>
 
-        {/* <EnhancedAlert severity="info">
-          Details about the 2021 TMAC Summer Round Table will be available soon.
-        </EnhancedAlert> */}
+        <EnhancedAlert severity="info">
+          Details about the 2022 TMAC Summer Round Table will be available soon.
+        </EnhancedAlert>
 
         <section>
           <h4>When</h4>

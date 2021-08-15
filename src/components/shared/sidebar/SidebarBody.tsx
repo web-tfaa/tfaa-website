@@ -216,10 +216,11 @@ const SidebarBody: FC<SidebarBodyProps> = ({
     }
     : {
       fontSize: scale(-2 / 5).fontSize,
-      color: colors.lilac,
+      fontWeight: 600,
+      color: colors.texasFlagBlue,
       textTransform: 'uppercase',
       letterSpacing: '.15em',
-      fontWeight: 'normal',
+      // fontWeight: 'normal',
     };
 
   return (
