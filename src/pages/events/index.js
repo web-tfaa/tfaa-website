@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
   updatedLabel: {
-    color: 'cadetblue',
-    fontSize: '1rem',
+    color: theme.palette.success.main,
+    fontSize: '0.9rem',
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -82,13 +83,23 @@ const Events = ({ data, location }) => {
 
         </section>
         <section>
-          <h4>Fall Retreat</h4>
+          <h4>
+            Fall Retreat
+            <span className={classes.updatedLabel}>updated</span>
+          </h4>
 
           <Box
             mb={2}
             pl={1}
           >
-            <Link to="/events/fall-retreat/">Fall Retreat</Link> will be Nov. 17-19 in Austin.
+            The 2021 Fall Retreat will be Nov. 17-19 in Austin.
+          </Box>
+
+          <Box
+            mb={2}
+            pl={1}
+          >
+            <Link to="/events/fall-retreat/">Click here</Link> for more details and to reserve your hotel accommodations.
           </Box>
 
           <Box pl={1}>
@@ -101,9 +112,16 @@ const Events = ({ data, location }) => {
           <h4>TMEA Round Table</h4>
 
           <p css={{ paddingLeft: 8 }}>
-            Round Table Meeting at the{' '}
+            Round Table Meeting on Wednesday at noon at the{' '}
             <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
           </p>
+
+          <Box
+            mb={2}
+            pl={1}
+          >
+            <Link to="/events/tmea-round-table">Click here</Link> for more details.
+          </Box>
         </section>
 
         {/* Mobile sidebar */}

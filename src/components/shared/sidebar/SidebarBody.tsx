@@ -220,7 +220,6 @@ const SidebarBody: FC<SidebarBodyProps> = ({
       color: colors.texasFlagBlue,
       textTransform: 'uppercase',
       letterSpacing: '.15em',
-      // fontWeight: 'normal',
     };
 
   return (

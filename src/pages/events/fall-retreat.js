@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.events.hotelCta,
     color: theme.palette.getContrastText(theme.palette.events.hotelCta),
     fontWeight: 600,
+    marginBottom: theme.spacing(2),
   },
   openInNewIcon: {
     fontSize: '1em',
@@ -99,6 +100,19 @@ const FallRetreat = ({ location }) => {
         <section>
           <h4>Where</h4>
           <div className={classes.text}>
+            <Button
+              className="hotel-link"
+              classes={{ root: classes.hotelButton }}
+              color="primary"
+              href="https://urldefense.com/v3/__https:/www.marriott.com/events/start.mi?id=1628712503612&key=GRP__;!!FOfmI8qiWcWBHqypJtzENF0!jyzZPCsDM5kHUt1F35tHVI-Q0F_cAKGDBYU9DAczeJzzxyJBs2B3ScbLPIDA2HGv6w$"
+              rel="noopener noreferrer"
+              size="large"
+              target="_blank"
+              variant="contained"
+            >
+              For Hotel reservations click here
+              <OpenInNewIcon className={classes.openInNewIcon} />
+            </Button>
             <p>
               <a
                 href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"
@@ -124,19 +138,6 @@ const FallRetreat = ({ location }) => {
               <br />
               Fax: (512) 441-7899
             </p>
-            <Button
-              className="hotel-link"
-              classes={{ root: classes.hotelButton }}
-              color="primary"
-              href="https://urldefense.com/v3/__https:/www.marriott.com/events/start.mi?id=1628712503612&key=GRP__;!!FOfmI8qiWcWBHqypJtzENF0!jyzZPCsDM5kHUt1F35tHVI-Q0F_cAKGDBYU9DAczeJzzxyJBs2B3ScbLPIDA2HGv6w$"
-              rel="noopener noreferrer"
-              size="large"
-              target="_blank"
-              variant="contained"
-            >
-              For Hotel reservations click here
-              <OpenInNewIcon className={classes.openInNewIcon} />
-            </Button>
           </div>
         </section>
 
