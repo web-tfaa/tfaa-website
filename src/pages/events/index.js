@@ -1,14 +1,14 @@
 // External Dependencies
 import { Box } from '@material-ui/core';
-import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { graphql } from 'gatsby';
+import { Helmet } from 'react-helmet';
+import { Link, graphql } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
+// import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
   updatedLabel: {
-    color: 'cadetblue',
-    fontSize: '1rem',
+    color: theme.palette.success.main,
+    fontSize: '0.9rem',
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -52,9 +53,9 @@ const Events = ({ data, location }) => {
             {/* <span className={classes.updatedLabel}>(updated)</span> */}
           </h4>
 
-          <EnhancedAlert severity="info">
+          {/* <EnhancedAlert severity="info">
             Details about the 2021 Summer Round Table will be available soon.
-          </EnhancedAlert>
+          </EnhancedAlert> */}
 
           {/* <p css={{ marginTop: 24, paddingLeft: 8 }}>
             Held in conjunction with the&nbsp;
@@ -82,25 +83,45 @@ const Events = ({ data, location }) => {
 
         </section>
         <section>
-          <h4>Fall Retreat</h4>
+          <h4>
+            Fall Retreat
+            <span className={classes.updatedLabel}>updated</span>
+          </h4>
 
-          <Box pl={1}>
-            Fall Retreat schedule will be available mid Fall 2021
+          <Box
+            mb={2}
+            pl={1}
+          >
+            The 2021 Fall Retreat will be Nov. 17-19 in Austin.
           </Box>
 
-          {/* <p>
+          <Box
+            mb={2}
+            pl={1}
+          >
+            <Link to="/events/fall-retreat/">Click here</Link> for more details and to reserve your hotel accommodations.
+          </Box>
+
+          <Box pl={1}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (registered and paid). There is no separate conference registration process.
-          </p> */}
+          </Box>
         </section>
 
         <section>
           <h4>TMEA Round Table</h4>
 
           <p css={{ paddingLeft: 8 }}>
-            Round Table Meeting at the{' '}
+            Round Table Meeting on Wednesday at noon at the{' '}
             <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
           </p>
+
+          <Box
+            mb={2}
+            pl={1}
+          >
+            <Link to="/events/tmea-round-table">Click here</Link> for more details.
+          </Box>
         </section>
 
         {/* Mobile sidebar */}

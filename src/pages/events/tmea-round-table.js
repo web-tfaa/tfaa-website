@@ -40,7 +40,7 @@ const TmeaRoundTable = ({ location }) => {
         <section>
           <h4>Where</h4>
           <div css={indentStyles}>
-            <p>Details coming soon!</p>
+            <p>Details coming soon</p>
             {/* <a
               href="http://www.marriott.com/hotels/travel/satdt-san-antonio-marriott-riverwalk/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
               rel="noopener noreferrer"
