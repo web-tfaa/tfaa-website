@@ -293,7 +293,7 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               </dd>
               <dt>Section 2 &mdash; Finance Committee</dt>
               <dd className={classes.paddingMedium}>
-                The Finance Committee shall be appointed by the President and consist of two Directors and three Past Presidents. The Finance Committee has oversight of the Executive Secretary in all matters pertaining to finances, including but not limited to the annual budget. The Finance Committee is responsible for developing and reviewing fiscal procedures and annual budget. The Board of Directors must approve the budget, and all expenditures must be within the budget. Any major change in the budget must be approved by the Board of Directors. The fiscal year shall run April 1 to March 30 annually. Annual reports are required to be submitted to the Board showing income, expenditures and pending income. The financial records of this Corporation are public information and shall be made available to the membership, the Directors, and the public.
+                The Finance Committee shall be appointed by the President and consist of two Directors and three Past Presidents. The Finance Committee has oversight of the Executive Secretary in all matters pertaining to finances, including but not limited to the annual budget. The Finance Committee is responsible for developing and reviewing fiscal procedures and annual budget. The Board of Directors must approve the budget, and all expenditures must be within the budget. Any major change in the budget must be approved by the Board of Directors. The fiscal year shall run July 1 to June 30 annually. Annual reports are required to be submitted to the Board showing income, expenditures and pending income. The financial records of this Corporation are public information and shall be made available to the membership, the Directors, and the public.
               </dd>
               <dt>Section 3 &mdash; Nominating Committee</dt>
               <dd className={classes.paddingMedium}>
@@ -330,8 +330,8 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           <section>
             <dl className={classes.paddingMedium}>
               <dd className={classes.paddingMedium}>
-                The fiscal year of this Corporation shall be from April 1<sup>st</sup> through March
-                31<sup>st</sup>.
+                The fiscal year of this Corporation shall be from July 1<sup>st</sup> through June
+                30<sup>th</sup>.
               </dd>
             </dl>
           </section>
@@ -347,7 +347,7 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
 
           <section>
             <em>
-              These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These Bylaws were amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16, 2019; and November 19, 2020.
+              These Bylaws were originally approved at a meeting of the Texas Music Administrators Conference membership on February 15, 2008. These Bylaws were amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16, 2019; November 19, 2020; and July 23, 2021.
             </em>
           </section>
           {/* Mobile sidebar */}
