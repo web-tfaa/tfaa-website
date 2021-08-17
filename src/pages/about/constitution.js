@@ -61,7 +61,7 @@ const Constitution = ({ location }) => {
           <Box mb={3}>
             <FuturaAnchor
               download
-              href="https://res.cloudinary.com/tmac/image/upload/v1629044838/TMAC_Bylaws_-_Updated_7-23-21.pdf"
+              href="https://res.cloudinary.com/tmac/image/upload/v1629210484/TMAC_Bylaws_-_Updated_7-23-21.pdf"
               rel="noreferrer noopener"
               target="_blank"
             >
