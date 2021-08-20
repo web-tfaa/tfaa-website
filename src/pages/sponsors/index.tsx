@@ -54,7 +54,7 @@ const Sponsors: FC<Props> = ({ location }) => {
         </Helmet>
 
         <Container>
-          <Typography>Sponsors</Typography>
+          <h1>Sponsors</h1>
 
           <Box
             display="flex"
