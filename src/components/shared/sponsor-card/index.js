@@ -180,7 +180,7 @@ const classChampionPerksListItems = (
       10 min (max) to address the membership at the event
       in which lunch or reception is sponsored.
     </li>
-    <li>Same perks as listed for Level 2</li>
+    <li>Same perks as listed for Gold Medal</li>
   </>
 );
 
