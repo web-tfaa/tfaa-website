@@ -57,9 +57,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '1rem',
     maxWidth: '90%',
   },
+  chip: {
+    border: `1px solid ${theme.palette.grey[500]}`,
+    fontSize: '0.8rem',
+  },
   chipAvailable: {
-    backgroundColor: theme.palette.success.dark,
-    color: theme.palette.common.white,
+    backgroundColor: green.A400,
+    border: `1px solid ${theme.palette.grey[500]}`,
+    fontSize: '0.8rem',
   },
   deadlineText: {
     marginBottom: 16,
@@ -165,11 +170,6 @@ const goldMedalPerksListItems = (
     <li>
       Two (2) emails sent to membership through the TMAC Executive
       Secretary from the Gold Medal Sponsor.
-      <ul>
-        <li>
-          There is no presentation to the membership with this sponsorship level.
-        </li>
-      </ul>
     </li>
   </>
 );
@@ -232,7 +232,7 @@ const SponsorCard = ({
             variant="outlined"
           >
             <CardContent className={classes.cardContent}>
-              <h5 className={classes.titleFive}>Price</h5>
+              <h5 className={classes.titleFive}>Sponsor a Meal</h5>
 
               <Typography
                 className={classes.perkNote}
@@ -252,39 +252,29 @@ const SponsorCard = ({
 
               <ul className={classes.list}>
                 <li>
-                  The cost of lunch at the Fall Retreat
-                  <ul>
-                    <li>
-                      <Chip
-                        label="Unavailable"
-                        size="small"
-                      />
-                    </li>
-                  </ul>
+                  The cost of lunch at the Fall Retreat{' '}
+                  <Chip
+                    className={classes.chip}
+                    label="Already Secured"
+                    size="small"
+                  />
+
                 </li>
                 <li>
-                  The cost of lunch at the TMEA TMAC Roundtable
-                  <ul>
-                    <li>
-                      <Chip
-                        // color="primary"
-                        className={classes.chipAvailable}
-                        label="Available"
-                        size="small"
-                      />
-                    </li>
-                  </ul>
+                  The cost of lunch at the TMEA TMAC Roundtable{' '}
+                  <Chip
+                    className={classes.chipAvailable}
+                    label="Available"
+                    size="small"
+                  />
                 </li>
                 <li>
-                  The cost of a reception at the Fall Retreat
-                  <ul>
-                    <li>
-                      <Chip
-                        label="Unavailable"
-                        size="small"
-                      />
-                    </li>
-                  </ul>
+                  The cost of a reception at the Fall Retreat{' '}
+                  <Chip
+                    className={classes.chip}
+                    label="Already Secured"
+                    size="small"
+                  />
                 </li>
               </ul>
             </CardContent>
@@ -314,6 +304,17 @@ const SponsorCard = ({
               Please note that admission/attendance at the
               TMAC Fall Retreat and TMAC Roundtable Meeting
               at TMEA is not included in this sponsor level.
+            </Typography>
+          </Box>
+        )}
+
+        {title === SPONSORSHIP_LEVELS.GOLD_MEDAL && (
+          <Box mx={5}>
+            <Typography
+              className={classes.perkNote}
+              variant="body2"
+            >
+              There is no presentation to the membership with this sponsor level.
             </Typography>
           </Box>
         )}
