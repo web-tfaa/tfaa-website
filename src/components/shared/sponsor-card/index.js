@@ -1,28 +1,40 @@
 // External Dependencies
-import Card from '@material-ui/core/Card';
+import {
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  Typography,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
-
-// Internal Dependencies
-import Alert from '../Alert';
+import green from '@material-ui/core/colors/green';
 
 // Local Variables
 const propTypes = {
-  max: PropTypes.number,
-  min: PropTypes.number,
-  sponsorClass: PropTypes.string.isRequired,
   sponsorData: PropTypes.arrayOf(PropTypes.shape({})),
+  subtitle: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
-  max: null,
-  min: null,
   sponsorData: [],
 };
 
 const TITLE_BLUE = '#32456B';
+
+export const SPONSORSHIP_LEVELS = {
+  CLASS_CHAMPION: 'Class Champion',
+  GOLD_MEDAL: 'Gold Medal',
+  SILVER_MEDAL: 'Silver Medal',
+};
+
+export const SPONSORSHIP_PRICE = {
+  [SPONSORSHIP_LEVELS.SILVER_MEDAL]: '$1000',
+  [SPONSORSHIP_LEVELS.GOLD_MEDAL]: '$2000',
+};
 
 const useStyles = makeStyles((theme) => ({
   alert: {
@@ -33,7 +45,21 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.9rem',
     marginBottom: '1rem',
     maxWidth: '90%',
-    padding: '0 1rem',
+  },
+  cardContent: {
+    '&:last-child': {
+      paddingBottom: 0,
+    },
+  },
+  championPriceCard: {
+    background: green[50],
+    fontSize: '0.9rem',
+    marginBottom: '1rem',
+    maxWidth: '90%',
+  },
+  chipAvailable: {
+    backgroundColor: theme.palette.success.dark,
+    color: theme.palette.common.white,
   },
   deadlineText: {
     marginBottom: 16,
@@ -54,13 +80,16 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '600',
     margin: '24px 0',
   },
+  perkNote: {
+    fontSize: '0.8rem',
+  },
   root: {
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 4,
     boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
     marginBottom: '1em',
-    padding: '2em 3em',
+    padding: '0.5rem 1rem',
   },
   sponsorInfo: {
     alignItems: 'center',
@@ -84,16 +113,86 @@ const useStyles = makeStyles((theme) => ({
   },
   titleFour: {
     color: TITLE_BLUE,
+    fontSize: '1.25rem',
     marginTop: '1.25rem',
+  },
+  titleFive: {
+    color: TITLE_BLUE,
+    marginTop: '0.5rem',
   },
 }));
 
+const silverMedalPerksListItems = (
+  <>
+    <li>Name recognition in all printed programs</li>
+    <li>Company name and link to company website on the TMAC website</li>
+  </>
+);
+
+const goldMedalPerksListItems = (
+  <>
+    <li>Name recognition in all printed programs</li>
+    <li>Company name and link to company website on the TMAC website</li>
+    <li>Attendance to Fall Retreat (Nov) and TMEA Roundtable (Feb)</li>
+    <ul>
+      <li>
+        Each &quot;Gold Medal&quot; sponsor will have a designated space
+        around the banquet room for tables during the Fall Retreat.
+        TMAC members in attendance at the Fall Retreat will have time
+        to visit the tables and vendors.
+      </li>
+    </ul>
+    <li>
+      Options for sponsors to work with TMAC Executive Secretary for additional name recognition:
+    </li>
+    <ul>
+      <li>
+        Table Decorations
+      </li>
+      <li>
+        Lanyards
+      </li>
+      <li>
+        Note Pads
+      </li>
+      <li>
+        Pens
+      </li>
+      <li>
+        Keynote Speakers on professional development topics for administrators in attendance
+      </li>
+    </ul>
+    <li>
+      Two (2) emails sent to membership through the TMAC Executive
+      Secretary from the Gold Medal Sponsor.
+      <ul>
+        <li>
+          There is no presentation to the membership with this sponsorship level.
+        </li>
+      </ul>
+    </li>
+  </>
+);
+
+const classChampionPerksListItems = (
+  <>
+    <li>
+      10 min (max) to address the membership at the event
+      in which lunch or reception is sponsored.
+    </li>
+    <li>Same perks as listed for Level 2</li>
+  </>
+);
+
 // Component Definition
 const SponsorCard = ({
-  max, min, sponsorClass, sponsorData,
+  sponsorData,
+  subtitle,
+  title,
 }) => {
   const classes = useStyles();
 
+  // TODO: Can this live outside of the component?
   const renderSponsors = (sponsorData) =>
     sponsorData.length > 0
     && sponsorData.map((sponsor) => (
@@ -116,57 +215,115 @@ const SponsorCard = ({
       </div>
     ));
 
-  // const donationAmount = min
-  //   ? `${min.toLocaleString()}-${max.toLocaleString()}`
-  //   : `${max.toLocaleString()}+`;
-
   return (
     <div className={classes.root}>
-      <h2>{sponsorClass}</h2>
-      <h4 className={classes.titleFour}>($500 donation)</h4>
-      {/* <h4 className={classes.titleFour}>(${donationAmount} donation)</h4> */}
+      <h2>{title}</h2>
+
+      <h4 className={classes.titleFour}>{subtitle}</h4>
 
       {sponsorData.length > 0 && <hr className={classes.divider} />}
 
       {renderSponsors(sponsorData)}
 
-      <hr className={classes.divider} />
-
       <div className={classes.sponsorInfo}>
-        <Card className={classes.card} elevation={2}>
-          <h5 className={classes.titleFour}>Sponsorship receives:</h5>
-          <ul className={classes.list}>
-            {/* {sponsorClass === 'Class Champion' && (
-              <li>
-                Up to 20 min presentation to TMAC membership at either November Conference or TMEA
-                Meeting
-              </li>
-            )}
-            <li>Company name in programs for TMAC November Conference and TMEA Meeting</li> */}
-            <li>Company name on TMAC website with link to your company</li>
-          </ul>
+        {title === SPONSORSHIP_LEVELS.CLASS_CHAMPION && (
+          <Card
+            className={classes.championPriceCard}
+            variant="outlined"
+          >
+            <CardContent className={classes.cardContent}>
+              <h5 className={classes.titleFive}>Price</h5>
+
+              <Typography
+                className={classes.perkNote}
+                variant="body2"
+              >
+                All costs are paid to TMAC. TMAC is a tax exempt organization now.
+              </Typography>
+
+              <Box mt={1.5}>
+                <Typography
+                  className={classes.perkNote}
+                  variant="body2"
+                >
+                  Secure sponsorship by paying for:
+                </Typography>
+              </Box>
+
+              <ul className={classes.list}>
+                <li>
+                  The cost of lunch at the Fall Retreat
+                  <ul>
+                    <li>
+                      <Chip
+                        label="Unavailable"
+                        size="small"
+                      />
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  The cost of lunch at the TMEA TMAC Roundtable
+                  <ul>
+                    <li>
+                      <Chip
+                        // color="primary"
+                        className={classes.chipAvailable}
+                        label="Available"
+                        size="small"
+                      />
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  The cost of a reception at the Fall Retreat
+                  <ul>
+                    <li>
+                      <Chip
+                        label="Unavailable"
+                        size="small"
+                      />
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card className={classes.card} variant="outlined">
+          <CardContent className={classes.cardContent}>
+            <h5 className={classes.titleFive}>Sponsorship perks:</h5>
+            <ul className={classes.list}>
+              {title === SPONSORSHIP_LEVELS.SILVER_MEDAL
+                && silverMedalPerksListItems}
+              {title === SPONSORSHIP_LEVELS.GOLD_MEDAL
+                && goldMedalPerksListItems}
+              {title === SPONSORSHIP_LEVELS.CLASS_CHAMPION
+                && classChampionPerksListItems}
+            </ul>
+          </CardContent>
         </Card>
-        {/* <Alert
-          bodyText="Sponsorship opportunities will be available soon."
-          fullWidth
-          rootClasses={classes.alert}
-          type="info"
-        /> */}
-        {/* <div className={classes.deadlineText}>
-          Deadline for recogntion at <span className={classes.strongText}>Fall Conference</span> is
-          November 1st.
-        </div>
-        <div className={classes.deadlineTextBottom}>
-          {' '}
-          Sponsors registering after November 1st will be recognized at the{' '}
-          <span className={classes.strongText}>TMEA Round Table</span>.
-        </div> */}
+
+        {title === SPONSORSHIP_LEVELS.SILVER_MEDAL && (
+          <Box mx={5}>
+            <Typography
+              className={classes.perkNote}
+              variant="body2"
+            >
+              Please note that admission/attendance at the
+              TMAC Fall Retreat and TMAC Roundtable Meeting
+              at TMEA is not included in this sponsor level.
+            </Typography>
+          </Box>
+        )}
+
         <Link
           className={classes.payLink}
-          state={{ level: sponsorClass }}
+          state={{ level: title }}
           to="/sponsors/sponsor-info"
         >
-          Click here to register and pay for Bronze Sponsorship
+          {`Register and pay for ${title} sponsorship`}
         </Link>
       </div>
     </div>
