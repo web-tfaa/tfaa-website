@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 // External Dependencies
 import {
   Box,
@@ -10,7 +8,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { FC, useState } from 'react';
-// import { navigate } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 import { Form, Formik } from 'formik';
 
@@ -115,7 +112,6 @@ const INITIAL_FORM_VALUES: SponsorFormValues = {
   honeypot: '',
   invoiceDate: '',
   invoiceId: 0,
-  // isAuthenticated: false,
   OrganizationContactName: '',
   OrganizationContactNameError: '',
   OrganizationWebsiteAddress: '',
@@ -151,8 +147,6 @@ const formatPhone = (phone) => {
   )}-${cleanPhone.substr(6, 4)}`;
 };
 
-// const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
-
 // Component Definition
 const RegisterSponsorForm: FC<Props> = ({
   authUser,
@@ -170,7 +164,7 @@ const RegisterSponsorForm: FC<Props> = ({
     setHasCompletedRegisterSponsorForm,
   ] = useState(false);
 
-  console.log('current form', form);
+  // console.log('current form', form);
 
   const { SponsorLevel } = form;
 
@@ -227,8 +221,6 @@ const RegisterSponsorForm: FC<Props> = ({
     }
 
     doCreateEntry(updatedFormWithUserId, collection, documentId, handleUpdateCompletedStep);
-
-    // Update the form data and advance the steps with the above callback function
   };
 
   const handleChangeSponsorLevel = (event) => {
@@ -338,9 +330,13 @@ const RegisterSponsorForm: FC<Props> = ({
                     />
                     <FormControlLabel
                       className={classes.classChampionRadioLabelRoot}
-                      control={<Radio size="small" />}
+                      control={(
+                        <Box mb={4}>
+                          <Radio size="small" />
+                        </Box>
+                      )}
                       label={(
-                        <Box mt={1}>
+                        <>
                           <Typography component="span">
                             {SPONSORSHIP_LEVELS.CLASS_CHAMPION}
                           </Typography>
@@ -351,7 +347,7 @@ const RegisterSponsorForm: FC<Props> = ({
                           >
                             {' '} — We want to sponsor a meal and will be in touch with the Executive Secretary
                           </Typography>
-                        </Box>
+                        </>
                       )}
                       value={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
                     />
@@ -544,7 +540,7 @@ const RegisterSponsorForm: FC<Props> = ({
   );
 };
 
-const RegisterSponsorFormWithContext: FC = (props: ContextProps) => (
+const RegisterSponsorFormWithContext: FC<ContextProps> = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => <RegisterSponsorForm {...props} authUser={authUser} />}
   </AuthUserContext.Consumer>
