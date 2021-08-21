@@ -6,26 +6,36 @@ import {
   HandleCompleteStepType,
   IRegisterForm,
 } from '../../pages/members/register';
+import {
+  HandleCompleteSponsorStepType,
+  SponsorFormValues,
+} from '../../pages/sponsors/register';
 import FormHr from '../shared/form-hr';
 import RegisterForm from './register-form';
 import RegisterSponsorForm from './register-sponsor-form';
 
 // Local Typings
 interface Props {
-  initialFormValues: IRegisterForm;
+  initialFormValues?: IRegisterForm;
+  initialSponsorFormValues?: SponsorFormValues;
   isViewingSponsors?: boolean;
-  onCompleteStep: HandleCompleteStepType;
-  onSetForm: (form: IRegisterForm) => void;
-  registerForm: IRegisterForm;
+  onCompleteStep: HandleCompleteStepType | HandleCompleteSponsorStepType;
+  onSetForm?: (form: IRegisterForm) => void;
+  onSetSponsorForm?: (form: SponsorFormValues) => void;
+  registerForm?: IRegisterForm;
+  sponsorForm?: SponsorFormValues;
 }
 
 // Component Definition
 const RegisterFormWrapper: FC<Props> = ({
   initialFormValues,
+  initialSponsorFormValues,
   isViewingSponsors = false,
   onCompleteStep,
   onSetForm,
+  onSetSponsorForm,
   registerForm,
+  sponsorForm,
 }) => (
   <section>
     <h2>
@@ -35,9 +45,18 @@ const RegisterFormWrapper: FC<Props> = ({
 
     <FormHr />
 
-    {isViewingSponsors ? (
-      <RegisterSponsorForm onCompleteStep={onCompleteStep} />
-    ) : (
+    {isViewingSponsors && initialSponsorFormValues
+      && onSetSponsorForm && sponsorForm && (
+      <RegisterSponsorForm
+        initialSponsorFormValues={initialSponsorFormValues}
+        onCompleteStep={onCompleteStep}
+        onSetSponsorForm={onSetSponsorForm}
+        sponsorForm={sponsorForm}
+      />
+    )}
+
+    {!isViewingSponsors && initialFormValues
+      && registerForm && onSetForm && (
       <RegisterForm
         initialFormValues={initialFormValues}
         onCompleteStep={onCompleteStep}

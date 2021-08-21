@@ -36,8 +36,9 @@ function getSteps(
 const useStyles = makeStyles((theme) => ({
   stepLabel: {
     [theme.breakpoints.down('xs')]: {
-      fontSize: '0.9rem',
+      fontSize: '0.8rem',
     },
+    fontSize: '0.9rem',
   },
 }));
 

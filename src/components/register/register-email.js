@@ -26,39 +26,25 @@ class RegisterEmail extends Component {
     };
   }
 
-  componentDidMount() {
-    this.activeComponent = true;
-  }
-
-  componentWillUnmount() {
-    this.activeComponent = false;
-  }
-
   handleCompleteEmailStep = () => {
-    if (this.activeComponent) {
-      const { onCompleteStep } = this.props;
-      const { hasCompletedRegisterEmail } = this.state;
+    const { onCompleteStep } = this.props;
+    const { hasCompletedRegisterEmail } = this.state;
 
-      if (hasCompletedRegisterEmail) {
-        setTimeout(() => onCompleteStep(0), 1000);
-      }
+    if (hasCompletedRegisterEmail) {
+      setTimeout(() => onCompleteStep(0), 1000);
     }
   };
 
   handleClickSignInLink = () => {
-    if (this.activeComponent) {
-      this.setState({
-        viewingSignUp: false,
-      });
-    }
+    this.setState({
+      viewingSignUp: false,
+    });
   };
 
   handleUpdateCompletedStep = () => {
-    if (this.activeComponent) {
-      this.setState({
-        hasCompletedRegisterEmail: true,
-      }, this.handleCompleteEmailStep);
-    }
+    this.setState({
+      hasCompletedRegisterEmail: true,
+    }, this.handleCompleteEmailStep);
   }
 
   render() {

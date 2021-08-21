@@ -86,9 +86,7 @@ const RegisterForm: FC<Props> = ({
     setTimeout(() => onCompleteStep(0), 2200);
   };
 
-  const handleClickSubmitButton = async (
-    values: IRegisterForm,
-  ) => {
+  const handleClickSubmitButton = async (values: IRegisterForm) => {
     if (!authUser) {
       return null;
     }
@@ -101,7 +99,7 @@ const RegisterForm: FC<Props> = ({
     // This will identify each row in the database and serve as the document name
     const documentId = authenticatedUserId;
 
-    // The Google Sheet doesn't need these values
+    // Delete any values that we don't need in the synced Google Sheet
     const form = removeErrorKeys(updatedValues);
     delete form.isAuthenticated;
     delete form.honeypot;
@@ -118,7 +116,7 @@ const RegisterForm: FC<Props> = ({
     const formWithUserId = {
       ...form,
       userId: authenticatedUserId,
-    }
+    };
 
     try {
       await doCreateEntry(formWithUserId, collection, documentId);
@@ -145,7 +143,12 @@ const RegisterForm: FC<Props> = ({
   }
 
   if (hasCompletedRegisterInfoForm) {
-    return <LoadingContainer step={3} title="Information Form Complete" />;
+    return (
+      <LoadingContainer
+        step={3}
+        title="Information Form Complete"
+      />
+    );
   }
 
   return (
@@ -173,7 +176,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.FirstName}
                   hasError={Boolean(errors.FirstName)}
                   isTouched={touched.FirstName}
-                  label="First Name"
+                  label="First Name*"
                   name="FirstName"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -186,7 +189,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.LastName}
                   hasError={Boolean(errors.LastName)}
                   isTouched={touched.LastName}
-                  label="Last Name"
+                  label="Last Name*"
                   name="LastName"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -199,7 +202,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.Title}
                   hasError={Boolean(errors.Title)}
                   isTouched={touched.Title}
-                  label="Title"
+                  label="Title*"
                   name="Title"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -212,7 +215,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.District}
                   hasError={Boolean(errors.District)}
                   isTouched={touched.District}
-                  label="District"
+                  label="District*"
                   name="District"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -225,7 +228,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.Address1}
                   hasError={Boolean(errors.Address1)}
                   isTouched={touched.Address1}
-                  label="Address 1"
+                  label="Address 1*"
                   name="Address1"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -255,7 +258,7 @@ const RegisterForm: FC<Props> = ({
                     errorMessage={errors.City}
                     hasError={Boolean(errors.City)}
                     isTouched={touched.City}
-                    label="City"
+                    label="City*"
                     name="City"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -272,7 +275,7 @@ const RegisterForm: FC<Props> = ({
                     errorMessage={errors.State}
                     hasError={Boolean(errors.State)}
                     isTouched={touched.State}
-                    label="State"
+                    label="State*"
                     name="State"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -286,7 +289,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.ZipCode}
                   hasError={Boolean(errors.ZipCode)}
                   isTouched={touched.ZipCode}
-                  label="Zip Code"
+                  label="Zip Code*"
                   name="ZipCode"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -299,7 +302,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.Email}
                   hasError={Boolean(errors.Email)}
                   isTouched={touched.Email}
-                  label="Email"
+                  label="Email*"
                   name="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -312,7 +315,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.OfficePhone}
                   hasError={Boolean(errors.OfficePhone)}
                   isTouched={touched.OfficePhone}
-                  label="Office Phone"
+                  label="Office Phone*"
                   name="OfficePhone"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -326,7 +329,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.CellPhone}
                   hasError={Boolean(errors.CellPhone)}
                   isTouched={touched.CellPhone}
-                  label="Cell Phone"
+                  label="Cell Phone*"
                   name="CellPhone"
                   onBlur={handleBlur}
                   // onChange={handleChange}

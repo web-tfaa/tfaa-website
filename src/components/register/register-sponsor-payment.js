@@ -66,28 +66,23 @@ const collection = 'sponsor';
 class RegisterSponsorPayment extends Component {
   static propTypes = {
     form: PropTypes.shape({}).isRequired,
-    initialLevel: PropTypes.string.isRequired,
     onCompleteStep: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    console.log('initialLevel', props.initialLevel);
-
     this.state = {
       // This is used to send the final donation amount to the db
-      donationAmount: this.getInitialDonationAmount(props.initialLevel),
+      donationAmount: this.getInitialDonationAmount(props.SponsorLevel),
       hasCompletedPayment: false,
       invoiceId: 0,
       paymentDetails: {},
       receiptId: 0,
-      value: props.initialLevel,
-      valueBronze: 500,
-      valueBronzeError: '',
+      value: props.form.SponsorLevel,
       valueChampion: 2000,
       valueChampionError: '',
-      valueGold: 1500,
+      valueGold: 2000,
       valueGoldError: '',
       valueSilver: 1000,
       valueSilverError: '',

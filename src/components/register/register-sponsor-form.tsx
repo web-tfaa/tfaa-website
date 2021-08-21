@@ -16,7 +16,10 @@ import AuthUserContext from '../session/AuthUserContext';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
-import { HandleCompleteSponsorStepType } from '../../pages/sponsors/register';
+import {
+  HandleCompleteSponsorStepType,
+  SponsorFormValues,
+} from '../../pages/sponsors/register';
 import { logError } from '../../utils/logError';
 import { removeErrorKeys } from '../../utils/helpers';
 import {
@@ -28,48 +31,16 @@ import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
 
 // Local Typings
 interface ContextProps {
+  initialSponsorFormValues: SponsorFormValues;
   onCompleteStep: HandleCompleteSponsorStepType;
+  onSetSponsorForm: (form: SponsorFormValues) => void;
+  sponsorForm: SponsorFormValues;
 }
 
 interface Props extends ContextProps {
   authUser: {
     uid: string;
   } | null;
-}
-
-interface SponsorFormValues {
-  AmountDonated: 1000 | 2000 | null;
-  City: string;
-  CityError: string;
-  ContactAddress1: string;
-  ContactAddress1Error: string;
-  ContactAddress2: string;
-  ContactPhone: string;
-  ContactPhoneError: string;
-  Email: string;
-  EmailError: string;
-  honeypot: string;
-  invoiceDate: string;
-  invoiceId: number;
-  isAuthenticated?: boolean;
-  OrganizationContactName: string;
-  OrganizationContactNameError: string;
-  OrganizationWebsiteAddress: string;
-  OrganizationWebsiteAddressError: string;
-  PaymentOption: 'Invoiced' | 'Paypal';
-  PaypalPayerID: string;
-  PaypalPaymentID: string;
-  receiptDate: string;
-  receiptId: number;
-  SponsorLevel: string;
-  SponsorOrganization: string;
-  SponsorOrganizationError: string;
-  State: string;
-  StateError: string;
-  Title: string;
-  TitleError: string;
-  ZipCode: string;
-  ZipCodeError: string;
 }
 
 // Local Variables
@@ -96,42 +67,6 @@ const useStyles = makeStyles({
   },
 });
 
-// All form values here must exactly match the column header names in the
-//  associated Google Sheet to which we are writing this form data
-const INITIAL_FORM_VALUES: SponsorFormValues = {
-  AmountDonated: 1000,
-  City: '',
-  CityError: '',
-  ContactAddress1: '',
-  ContactAddress1Error: '',
-  ContactAddress2: '',
-  ContactPhone: '',
-  ContactPhoneError: '',
-  Email: '',
-  EmailError: '',
-  honeypot: '',
-  invoiceDate: '',
-  invoiceId: 0,
-  OrganizationContactName: '',
-  OrganizationContactNameError: '',
-  OrganizationWebsiteAddress: '',
-  OrganizationWebsiteAddressError: '',
-  PaymentOption: 'Invoiced',
-  PaypalPayerID: '',
-  PaypalPaymentID: '',
-  receiptDate: '',
-  receiptId: 0,
-  SponsorLevel: 'Silver Medal',
-  SponsorOrganization: '',
-  SponsorOrganizationError: '',
-  State: '',
-  StateError: '',
-  Title: '',
-  TitleError: '',
-  ZipCode: '',
-  ZipCodeError: '',
-};
-
 // Local Functions
 const formatPhone = (phone) => {
   let cleanPhone = phone;
@@ -150,7 +85,10 @@ const formatPhone = (phone) => {
 // Component Definition
 const RegisterSponsorForm: FC<Props> = ({
   authUser,
+  initialSponsorFormValues,
   onCompleteStep,
+  onSetSponsorForm,
+  sponsorForm,
 }) => {
   const classes = useStyles();
 
@@ -158,15 +96,14 @@ const RegisterSponsorForm: FC<Props> = ({
     return null;
   }
 
-  const [form, setForm] = useState<SponsorFormValues>(INITIAL_FORM_VALUES);
   const [
     hasCompletedRegisterSponsorForm,
     setHasCompletedRegisterSponsorForm,
   ] = useState(false);
 
-  // console.log('current form', form);
+  const { SponsorLevel } = sponsorForm;
 
-  const { SponsorLevel } = form;
+  console.log('current sponsor form', sponsorForm);
 
   const handleCompleteInfoStep = () => {
     setTimeout(() => onCompleteStep(0), 1200);
@@ -210,7 +147,7 @@ const RegisterSponsorForm: FC<Props> = ({
 
     try {
       await doCreateEntry(updatedFormWithUserId, collection, documentId);
-      await setForm({
+      await onSetSponsorForm({
         ...updatedFormWithUserId,
         hasCompletedRegisterSponsorForm: true,
       });
@@ -235,8 +172,8 @@ const RegisterSponsorForm: FC<Props> = ({
       amountDonated = null;
     }
 
-    setForm({
-      ...form,
+    onSetSponsorForm({
+      ...sponsorForm,
       AmountDonated: amountDonated,
       SponsorLevel: newSponsorLevel,
     });
@@ -254,7 +191,7 @@ const RegisterSponsorForm: FC<Props> = ({
   return (
     <div className="login-form">
       <Formik
-        initialValues={INITIAL_FORM_VALUES}
+        initialValues={initialSponsorFormValues}
         validationSchema={registerSponsorSchema}
         onSubmit={handleClickSubmitButton}
       >

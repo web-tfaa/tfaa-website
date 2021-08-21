@@ -1,10 +1,5 @@
-/*
-  Main container for the Registration process
-*/
-
 // External Dependencies
 import { Helmet } from 'react-helmet';
-// import { navigate } from 'gatsby';
 import React, { FC, useEffect, useState } from 'react';
 
 // Internal Dependencies
@@ -13,14 +8,10 @@ import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterFormWrapper from '../../components/register/register-form-wrapper';
-import RegisterPayment from '../../components/register/register-payment';
+import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
-import Status from './status';
+import Status from '../members/status';
 import presets from '../../utils/presets';
-
-// Sidebar Data
-import membersSidebar from './members-links.yml';
-import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Typings
 interface Props {
@@ -29,134 +20,136 @@ interface Props {
   } | null;
   isAuthenticated: boolean;
 }
-export interface IRegisterForm {
-  Address1: string;
-  Address1Error: string;
-  Address2?: string;
-  AmountPaid: 0;
-  CellPhone: string;
-  CellPhoneError: string;
+export interface SponsorFormValues {
+  AmountDonated: 1000 | 2000 | null;
   City: string;
   CityError: string;
-  District: string;
-  DistrictError: string;
+  ContactAddress1: string;
+  ContactAddress1Error: string;
+  ContactAddress2: string;
+  ContactPhone: string;
+  ContactPhoneError: string;
   Email: string;
   EmailError: string;
-  FirstName: string;
-  FirstNameError: string;
-  LastName: string;
-  LastNameError: string;
-  MemberType: string;
-  NewToTMAC: 'Yes' | 'No';
-  OfficePhone: string;
-  OfficePhoneError: string;
-  PaymentOption: string;
+  honeypot: string;
+  invoiceDate: string;
+  invoiceId: number;
+  isAuthenticated?: boolean;
+  OrganizationContactName: string;
+  OrganizationContactNameError: string;
+  OrganizationWebsiteAddress: string;
+  OrganizationWebsiteAddressError: string;
+  PaymentOption: 'Invoiced' | 'Paypal';
   PaypalPayerID: string;
   PaypalPaymentID: string;
+  receiptDate: string;
+  receiptId: number;
+  SponsorLevel: string;
+  SponsorOrganization: string;
+  SponsorOrganizationError: string;
   State: string;
   StateError: string;
   Title: string;
   TitleError: string;
   ZipCode: string;
   ZipCodeError: string;
-  hasCompletedRegisterInfoForm: boolean;
-  honeypot: string;
-  invoiceDate: string;
-  invoiceId: number;
-  isAuthenticated: boolean;
-  receiptDate: string;
-  receiptId: number;
 }
 type Steps = 0 | 1 | 2;
-export type HandleCompleteStepType = (step: Steps) => void;
+export type HandleCompleteSponsorStepType = (step: Steps) => void;
 
 // Local Variables
-const COMPLETED_STEPS_INITIAL_STATE: Steps[] = [];
+const COMPLETED_SPONSOR_STEPS_INITIAL_STATE: Steps[] = [];
 
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
-const intialFormValues: IRegisterForm = {
-  Address1: '',
-  Address1Error: '',
-  // Address2 is not required, so cannot have an error
-  Address2: '',
-  AmountPaid: 0,
-  CellPhone: '',
-  CellPhoneError: '',
+const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
+  AmountDonated: 1000,
   City: '',
   CityError: '',
-  District: '',
-  DistrictError: '',
+  ContactAddress1: '',
+  ContactAddress1Error: '',
+  ContactAddress2: '',
+  ContactPhone: '',
+  ContactPhoneError: '',
   Email: '',
   EmailError: '',
-  FirstName: '',
-  FirstNameError: '',
-  LastName: '',
-  LastNameError: '',
-  MemberType: '',
-  NewToTMAC: 'Yes',
-  OfficePhone: '',
-  OfficePhoneError: '',
+  honeypot: '',
+  invoiceDate: '',
+  invoiceId: 0,
+  // isAuthenticated: false,
+  OrganizationContactName: '',
+  OrganizationContactNameError: '',
+  OrganizationWebsiteAddress: '',
+  OrganizationWebsiteAddressError: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
   PaypalPaymentID: '',
+  receiptDate: '',
+  receiptId: 0,
+  SponsorLevel: 'Silver Medal',
+  SponsorOrganization: '',
+  SponsorOrganizationError: '',
   State: '',
   StateError: '',
   Title: '',
   TitleError: '',
   ZipCode: '',
   ZipCodeError: '',
-  hasCompletedRegisterInfoForm: false,
-  honeypot: '',
-  invoiceDate: '',
-  invoiceId: 0,
-  isAuthenticated: false,
-  receiptDate: '',
-  receiptId: 0,
 };
 
 // Component Definition
-const RegisterContent: FC<Props> = ({
+const RegisterSponsorContent: FC<Props> = ({
   authUser,
   isAuthenticated,
 }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [form, setForm] = useState(intialFormValues);
-  const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
+  const [sponsorForm, setSponsorForm] = useState<
+    SponsorFormValues
+  >(INITIAL_SPONSOR_FORM_VALUES);
+  const [
+    completedSponsorSteps,
+    setCompletedSponsorSteps,
+  ] = useState(COMPLETED_SPONSOR_STEPS_INITIAL_STATE);
 
   useEffect(() => {
+    // The user can skip the "sign in" step if they are already signed in
     if (activeStep === 0 && isAuthenticated) {
       setActiveStep(1);
     }
-  }, []);
+  }, [activeStep, isAuthenticated]);
 
-  const handleCompleteStep: HandleCompleteStepType = (step) => {
+  const handleCompleteSponsorStep: HandleCompleteSponsorStepType = (step) => {
     setActiveStep(activeStep + 1);
-    setCompletedSteps([...completedSteps, step]);
+    setCompletedSponsorSteps([
+      ...completedSponsorSteps,
+      step,
+    ]);
   };
 
-  const getCurrentStepContent = () => {
+  const getCurrentStepContent = (isAuthenticated) => {
     const stepOneContent = (
       <RegisterEmail
         isAuthenticated={isAuthenticated}
-        onCompleteStep={handleCompleteStep}
+        onCompleteStep={handleCompleteSponsorStep}
       />
     );
 
     const stepTwoContent = (
       <RegisterFormWrapper
-        initialFormValues={intialFormValues}
-        registerForm={form}
-        onCompleteStep={handleCompleteStep}
-        onSetForm={setForm}
+        initialSponsorFormValues={INITIAL_SPONSOR_FORM_VALUES}
+        isViewingSponsors
+        onCompleteStep={handleCompleteSponsorStep}
+        onSetSponsorForm={setSponsorForm}
+        sponsorForm={sponsorForm}
       />
     );
 
     const stepThreeContent = (
-      <RegisterPayment
+      <RegisterSponsorPayment
         authenticatedUserId={authUser?.uid}
-        form={form}
-        onCompleteStep={handleCompleteStep}
+        form={sponsorForm}
+        isViewingSponsors
+        onCompleteStep={handleCompleteSponsorStep}
       />
     );
 
@@ -178,7 +171,7 @@ const RegisterContent: FC<Props> = ({
     return currentStepContent;
   };
 
-  const hasCompletedAllSteps = completedSteps.length >= 3;
+  const hasCompletedAllSteps = completedSponsorSteps.length >= 3;
 
   /* Children change depending on which step is active */
   return (
@@ -186,54 +179,39 @@ const RegisterContent: FC<Props> = ({
       css={{
         paddingLeft: 0,
         width: '0 auto',
+        [presets.Tablet]: {
+          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+        },
       }}
     >
       <Status />
-
       <Container>
         <Helmet>
-          <title>TMAC | Register</title>
+          <title>TMAC | Register Sponsor</title>
         </Helmet>
 
         <RegisterStepper
           isAuthenticated={isAuthenticated}
+          isViewingSponsors
           activeStep={activeStep}
         />
 
-        {getCurrentStepContent()}
+        {getCurrentStepContent(isAuthenticated)}
 
         {!hasCompletedAllSteps && (
           <div style={{ marginTop: '1.5rem' }}>
-            * Registration is not complete until payment is received.
+            * Sponsor Registration is not complete until payment is received.
           </div>
         )}
       </Container>
-
-      <div
-        css={{
-          display: 'block',
-          [presets.Tablet]: {
-            display: 'none',
-          },
-        }}
-      >
-        <hr
-          css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }}
-        />
-        <SidebarBody inline yaml={membersSidebar} />
-      </div>
     </div>
   );
 };
 
-const RegisterWithContext: FC = (props) => (
+const RegisterSponsorWithContext: FC = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
-      <RegisterContent
+      <RegisterSponsorContent
         {...props}
         authUser={authUser}
         isAuthenticated={!!authUser}
@@ -242,13 +220,13 @@ const RegisterWithContext: FC = (props) => (
   </AuthUserContext.Consumer>
 );
 
-const Register: FC<{
+const RegisterSponsor: FC<{
   location: unknown,
 }> = (props) => (
   // eslint-disable-next-line react/destructuring-assignment
   <Layout location={props.location}>
-    <RegisterWithContext {...props} />
+    <RegisterSponsorWithContext {...props} />
   </Layout>
 );
 
-export default Register;
+export default RegisterSponsor;
