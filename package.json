@@ -39,7 +39,7 @@
     "date-fns": "^2.21.1",
     "firebase": "^7.19.0",
     "formik": "^2.2.8",
-    "gatsby": "^3.8.0",
+    "gatsby": "^3.12.0",
     "gatsby-cli": "^3.8.0",
     "gatsby-image": "3.8.0",
     "gatsby-plugin-canonical-urls": "3.8.0",
