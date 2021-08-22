@@ -61,7 +61,7 @@
     "react-dom": "17.0.2",
     "react-helmet": "^6.0.0",
     "react-jss": "^10.1.1",
-    "react-to-print": "^2.8.0",
+    "react-to-print": "^2.13.0",
     "react-typography": "^1.0.0-alpha.4",
     "typeface-space-mono": "^1.1.13",
     "typeface-spectral": "^1.1.13",
