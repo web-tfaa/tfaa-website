@@ -31,7 +31,7 @@ class RegisterEmail extends Component {
     const { hasCompletedRegisterEmail } = this.state;
 
     if (hasCompletedRegisterEmail) {
-      setTimeout(() => onCompleteStep(0), 1000);
+      setTimeout(() => onCompleteStep(0), 1500);
     }
   };
 

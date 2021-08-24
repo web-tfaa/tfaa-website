@@ -4,21 +4,21 @@ import React, { FC } from 'react';
 // Internal Dependencies
 import {
   HandleCompleteMemberStepType,
-  RegisterMemberForm,
+  MemberFormValues,
 } from '../../pages/members/register';
 import FormHr from '../shared/form-hr';
 import RegisterForm from './register-form';
 
 // Local Typings
 interface Props {
-  initialFormValues: RegisterMemberForm;
+  initialFormValues: MemberFormValues;
   onCompleteStep: HandleCompleteMemberStepType ;
-  onSetForm: (form: RegisterMemberForm) => void;
-  registerForm: RegisterMemberForm;
+  onSetForm: (memberForm: MemberFormValues) => void;
+  registerForm: MemberFormValues;
 }
 
 // Component Definition
-const RegisterMemberFormWrapper: FC<Props> = ({
+const MemberFormValuesWrapper: FC<Props> = ({
   initialFormValues,
   onCompleteStep,
   onSetForm,
@@ -40,4 +40,4 @@ const RegisterMemberFormWrapper: FC<Props> = ({
   </section>
 );
 
-export default RegisterMemberFormWrapper;
+export default MemberFormValuesWrapper;

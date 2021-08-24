@@ -219,7 +219,7 @@ const RegisterSponsorContent: FC<Props> = ({
     }
   }, []);
 
-  const hasCompletedAllSteps = completedSponsorSteps?.length >= 3;
+  const hasCompletedAllSponsorSteps = completedSponsorSteps?.length >= 3;
 
   /* Children change depending on which step is active */
   return (
@@ -269,7 +269,7 @@ const RegisterSponsorContent: FC<Props> = ({
           />
         )}
 
-        {!hasCompletedAllSteps && (
+        {!hasCompletedAllSponsorSteps && (
           <div style={{ marginTop: '1.5rem' }}>
             * Sponsor Registration is not complete until payment is received.
           </div>

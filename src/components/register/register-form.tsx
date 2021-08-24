@@ -21,7 +21,7 @@ import RegisterButton from './register-button';
 import { removeErrorKeys } from '../../utils/helpers';
 import {
   HandleCompleteMemberStepType,
-  RegisterMemberForm,
+  MemberFormValues,
 } from '../../pages/members/register';
 import { doCreateEntry } from '../../firebase/db';
 import { logError } from '../../utils/logError';
@@ -31,10 +31,10 @@ import CustomTextField from '../shared/CustomTextField';
 
 // Local Typings
 interface ContextProps {
-  initialFormValues: RegisterMemberForm;
+  initialFormValues: MemberFormValues;
   onCompleteStep: HandleCompleteMemberStepType;
-  onSetForm: (form: RegisterMemberForm) => void;
-  registerForm: RegisterMemberForm;
+  onSetForm: (form: MemberFormValues) => void;
+  registerForm: MemberFormValues;
 }
 
 interface Props extends ContextProps {
@@ -86,7 +86,7 @@ const RegisterForm: FC<Props> = ({
     setTimeout(() => onCompleteStep(0), 2200);
   };
 
-  const handleClickSubmitButton = async (values: RegisterMemberForm) => {
+  const handleClickSubmitButton = async (values: MemberFormValues) => {
     if (!authUser) {
       return null;
     }
