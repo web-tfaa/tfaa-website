@@ -3,18 +3,18 @@ import React, { FC } from 'react';
 
 // Internal Dependencies
 import {
-  HandleCompleteStepType,
-  IRegisterForm,
+  HandleCompleteMemberStepType,
+  RegisterMemberForm,
 } from '../../pages/members/register';
 import FormHr from '../shared/form-hr';
 import RegisterForm from './register-form';
 
 // Local Typings
 interface Props {
-  initialFormValues: IRegisterForm;
-  onCompleteStep: HandleCompleteStepType ;
-  onSetForm: (form: IRegisterForm) => void;
-  registerForm: IRegisterForm;
+  initialFormValues: RegisterMemberForm;
+  onCompleteStep: HandleCompleteMemberStepType ;
+  onSetForm: (form: RegisterMemberForm) => void;
+  registerForm: RegisterMemberForm;
 }
 
 // Component Definition

@@ -29,7 +29,7 @@ interface Props {
   } | null;
   isAuthenticated: boolean;
 }
-export interface IRegisterForm {
+export interface RegisterMemberForm {
   Address1: string;
   Address1Error: string;
   Address2?: string;
@@ -68,14 +68,14 @@ export interface IRegisterForm {
   receiptId: number;
 }
 type Steps = 0 | 1 | 2;
-export type HandleCompleteStepType = (step: Steps) => void;
+export type HandleCompleteMemberStepType = (step: Steps) => void;
 
 // Local Variables
 const COMPLETED_STEPS_INITIAL_STATE: Steps[] = [];
 
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
-const intialFormValues: IRegisterForm = {
+const INITIAL_MEMBER_FORM_VALUES: RegisterMemberForm = {
   Address1: '',
   Address1Error: '',
   // Address2 is not required, so cannot have an error
@@ -116,12 +116,12 @@ const intialFormValues: IRegisterForm = {
 };
 
 // Component Definition
-const RegisterContent: FC<Props> = ({
+const RegisterMemberContent: FC<Props> = ({
   authUser,
   isAuthenticated,
 }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [form, setForm] = useState(intialFormValues);
+  const [form, setForm] = useState(INITIAL_MEMBER_FORM_VALUES);
   const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
 
   useEffect(() => {
@@ -130,7 +130,7 @@ const RegisterContent: FC<Props> = ({
     }
   }, []);
 
-  const handleCompleteStep: HandleCompleteStepType = (step) => {
+  const handleCompleteStep: HandleCompleteMemberStepType = (step) => {
     setActiveStep(activeStep + 1);
     setCompletedSteps([...completedSteps, step]);
   };
@@ -145,7 +145,7 @@ const RegisterContent: FC<Props> = ({
 
     const stepTwoContent = (
       <RegisterFormWrapper
-        initialFormValues={intialFormValues}
+        initialFormValues={INITIAL_MEMBER_FORM_VALUES}
         registerForm={form}
         onCompleteStep={handleCompleteStep}
         onSetForm={setForm}
@@ -230,10 +230,10 @@ const RegisterContent: FC<Props> = ({
   );
 };
 
-const RegisterWithContext: FC = (props) => (
+const RegisterMemberWithContext: FC = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
-      <RegisterContent
+      <RegisterMemberContent
         {...props}
         authUser={authUser}
         isAuthenticated={!!authUser}
@@ -242,13 +242,13 @@ const RegisterWithContext: FC = (props) => (
   </AuthUserContext.Consumer>
 );
 
-const Register: FC<{
+const RegisterMember: FC<{
   location: unknown,
 }> = (props) => (
   // eslint-disable-next-line react/destructuring-assignment
   <Layout location={props.location}>
-    <RegisterWithContext {...props} />
+    <RegisterMemberWithContext {...props} />
   </Layout>
 );
 
-export default Register;
+export default RegisterMember;
