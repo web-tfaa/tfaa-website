@@ -31,10 +31,10 @@ import CustomTextField from '../shared/CustomTextField';
 
 // Local Typings
 interface ContextProps {
-  initialFormValues: MemberFormValues;
-  onCompleteStep: HandleCompleteMemberStepType;
-  onSetForm: (form: MemberFormValues) => void;
-  registerForm: MemberFormValues;
+  initialMemberFormValues: MemberFormValues;
+  memberForm: MemberFormValues;
+  onCompleteMemberStep: HandleCompleteMemberStepType;
+  onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
 }
 
 interface Props extends ContextProps {
@@ -60,15 +60,13 @@ const useStyles = makeStyles({
   },
 });
 
-// const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
-
 // Component Definition
 const RegisterForm: FC<Props> = ({
   authUser,
-  initialFormValues,
-  onCompleteStep,
-  onSetForm,
-  registerForm,
+  initialMemberFormValues,
+  memberForm,
+  onCompleteMemberStep,
+  onUpdateMemberForm,
 }) => {
   const classes = useStyles();
 
@@ -80,10 +78,10 @@ const RegisterForm: FC<Props> = ({
     NewToTMAC,
     hasCompletedRegisterInfoForm,
     isAuthenticated,
-  } = registerForm;
+  } = memberForm;
 
   const handleCompleteInfoStep = () => {
-    setTimeout(() => onCompleteStep(0), 2200);
+    setTimeout(() => onCompleteMemberStep(0), 2200);
   };
 
   const handleClickSubmitButton = async (values: MemberFormValues) => {
@@ -120,7 +118,7 @@ const RegisterForm: FC<Props> = ({
 
     try {
       await doCreateEntry(formWithUserId, collection, documentId);
-      await onSetForm({
+      await onUpdateMemberForm({
         ...formWithUserId,
         hasCompletedRegisterInfoForm: true,
       });
@@ -132,8 +130,8 @@ const RegisterForm: FC<Props> = ({
   };
 
   const handleChangeNewToTMAC = (event) => {
-    onSetForm({
-      ...registerForm,
+    onUpdateMemberForm({
+      ...memberForm,
       NewToTMAC: event.target.value,
     });
   };
@@ -154,7 +152,7 @@ const RegisterForm: FC<Props> = ({
   return (
     <div className="login-form">
       <Formik
-        initialValues={initialFormValues}
+        initialValues={initialMemberFormValues}
         validationSchema={registerMemberSchema}
         onSubmit={handleClickSubmitButton}
       >

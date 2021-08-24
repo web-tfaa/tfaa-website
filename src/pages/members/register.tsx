@@ -68,7 +68,10 @@ export interface MemberFormValues {
   receiptId: number;
 }
 type Steps = 0 | 1 | 2;
-export type HandleCompleteMemberStepType = (step: Steps) => void;
+export type HandleCompleteMemberStepType = (
+  step: Steps,
+  updatedMemberForm: MemberFormValues,
+) => void;
 
 // Local Variables
 const COMPLETED_MEMBER_STEPS_INITIAL_STATE: Steps[] = [];
@@ -257,49 +260,6 @@ const RegisterMemberContent: FC<Props> = ({
     }
   }, []);
 
-  const getCurrentStepContent = () => {
-    const stepOneContent = (
-      <RegisterEmail
-        isAuthenticated={isAuthenticated}
-        onCompleteStep={handleCompleteStep}
-      />
-    );
-
-    const stepTwoContent = (
-      <RegisterMemberFormWrapper
-        initialFormValues={INITIAL_MEMBER_FORM_VALUES}
-        registerForm={form}
-        onCompleteStep={handleCompleteStep}
-        onSetForm={setForm}
-      />
-    );
-
-    const stepThreeContent = (
-      <RegisterMemberPayment
-        authenticatedUserId={authUser?.uid}
-        form={form}
-        onCompleteStep={handleCompleteStep}
-      />
-    );
-
-    let currentStepContent;
-    switch (activeStep) {
-      case 0:
-        currentStepContent = stepOneContent;
-        break;
-      case 1:
-        currentStepContent = stepTwoContent;
-        break;
-      case 2: case 3:
-        currentStepContent = stepThreeContent;
-        break;
-      default:
-        currentStepContent = stepOneContent;
-        break;
-    }
-    return currentStepContent;
-  };
-
   const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
   /* Children change depending on which step is active */
@@ -331,10 +291,10 @@ const RegisterMemberContent: FC<Props> = ({
         {activeMemberStep === 1 && (
           <RegisterMemberFormWrapper
             authenticatedUserId={authUser?.uid}
-            initialSponsorFormValues={INITIAL_MEMBER_FORM_VALUES}
-            onCompleteSponsorStep={handleCompleteMemberStep}
-            onUpdateSponsorForm={handleUpdateMemberForm}
-            sponsorForm={memberForm}
+            initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
+            memberForm={memberForm}
+            onCompleteMemberStep={handleCompleteMemberStep}
+            onUpdateMemberForm={handleUpdateMemberForm}
           />
         )}
         {[2, 3].includes(activeMemberStep) && (

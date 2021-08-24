@@ -11,33 +11,41 @@ import RegisterForm from './register-form';
 
 // Local Typings
 interface Props {
-  initialFormValues: MemberFormValues;
-  onCompleteStep: HandleCompleteMemberStepType ;
-  onSetForm: (memberForm: MemberFormValues) => void;
-  registerForm: MemberFormValues;
+  authenticatedUserId?: string;
+  initialMemberFormValues: MemberFormValues;
+  memberForm: MemberFormValues;
+  onCompleteMemberStep: HandleCompleteMemberStepType ;
+  onUpdateMemberForm: (memberForm: MemberFormValues) => void;
 }
 
 // Component Definition
 const MemberFormValuesWrapper: FC<Props> = ({
-  initialFormValues,
-  onCompleteStep,
-  onSetForm,
-  registerForm,
-}) => (
-  <section>
-    <h2>
-      2. Register for TMAC
-    </h2>
+  authenticatedUserId,
+  initialMemberFormValues,
+  memberForm,
+  onCompleteMemberStep,
+  onUpdateMemberForm,
+}) => {
+  if (!authenticatedUserId) {
+    return null;
+  }
 
-    <FormHr />
+  return (
+    <section>
+      <h2>
+        2. Register for TMAC
+      </h2>
 
-    <RegisterForm
-      initialFormValues={initialFormValues}
-      onCompleteStep={onCompleteStep}
-      onSetForm={onSetForm}
-      registerForm={registerForm}
-    />
-  </section>
-);
+      <FormHr />
+
+      <RegisterForm
+        initialMemberFormValues={initialMemberFormValues}
+        memberForm={memberForm}
+        onCompleteMemberStep={onCompleteMemberStep}
+        onUpdateMemberForm={onUpdateMemberForm}
+      />
+    </section>
+  );
+};
 
 export default MemberFormValuesWrapper;
