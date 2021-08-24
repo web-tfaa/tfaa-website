@@ -38,7 +38,7 @@ const currentDate = format(new Date(), ['M/d/yyyy']);
 const collection = 'registration';
 
 // Component Definition
-class RegisterPayment extends Component {
+class RegisterMemberPayment extends Component {
   constructor(props) {
     super(props);
 
@@ -356,6 +356,6 @@ class RegisterPayment extends Component {
   }
 }
 
-RegisterPayment.propTypes = propTypes;
+RegisterMemberPayment.propTypes = propTypes;
 
-export default RegisterPayment;
+export default RegisterMemberPayment;

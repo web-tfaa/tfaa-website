@@ -18,7 +18,7 @@ interface Props {
 }
 
 // Component Definition
-const RegisterFormWrapper: FC<Props> = ({
+const RegisterMemberFormWrapper: FC<Props> = ({
   initialFormValues,
   onCompleteStep,
   onSetForm,
@@ -40,4 +40,4 @@ const RegisterFormWrapper: FC<Props> = ({
   </section>
 );
 
-export default RegisterFormWrapper;
+export default RegisterMemberFormWrapper;

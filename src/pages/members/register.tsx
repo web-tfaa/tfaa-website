@@ -12,8 +12,8 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
-import RegisterFormWrapper from '../../components/register/register-form-wrapper';
-import RegisterPayment from '../../components/register/register-payment';
+import RegisterMemberFormWrapper from '../../components/register/register-member-form-wrapper';
+import RegisterMemberPayment from '../../components/register/register-member-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
 import presets from '../../utils/presets';
@@ -125,6 +125,7 @@ const RegisterMemberContent: FC<Props> = ({
   const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
 
   useEffect(() => {
+    // The user can skip the "sign in" step if they are already signed in
     if (activeStep === 0 && isAuthenticated) {
       setActiveStep(1);
     }
@@ -144,7 +145,7 @@ const RegisterMemberContent: FC<Props> = ({
     );
 
     const stepTwoContent = (
-      <RegisterFormWrapper
+      <RegisterMemberFormWrapper
         initialFormValues={INITIAL_MEMBER_FORM_VALUES}
         registerForm={form}
         onCompleteStep={handleCompleteStep}
@@ -153,7 +154,7 @@ const RegisterMemberContent: FC<Props> = ({
     );
 
     const stepThreeContent = (
-      <RegisterPayment
+      <RegisterMemberPayment
         authenticatedUserId={authUser?.uid}
         form={form}
         onCompleteStep={handleCompleteStep}
