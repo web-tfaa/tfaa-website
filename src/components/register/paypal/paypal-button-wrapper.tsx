@@ -22,7 +22,7 @@ export interface PaypalPayment {
   returnUrl: string;
 }
 
-interface PaypalPaymentCancel {
+export interface PaypalPaymentCancel {
   billingID: string;
   // eslint-disable-next-line camelcase
   button_version: string;

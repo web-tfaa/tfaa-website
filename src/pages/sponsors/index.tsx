@@ -1,11 +1,11 @@
 // External Dependencies
 import {
   Box,
-  Typography,
+  // Typography,
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import React, {
-  FC, useCallback, useEffect, useState
+  FC, useEffect, useState
 } from 'react';
 
 // Internal Dependencies
@@ -17,35 +17,30 @@ import SponsorCard, {
   SPONSORSHIP_PRICE,
 } from '../../components/shared/sponsor-card';
 import usePrevious from '../../utils/hooks/usePrevious';
+import { SponsorFormValues } from './register';
 
 // Local Typings
 interface Props {
   location: unknown;
 }
 
-// Local Variables
-const emptySponsorList = [];
-
 // Component Definition
 const Sponsors: FC<Props> = ({ location }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [sponsorData, setSponsorData] = useState<unknown[] | null>(null);
+  const [sponsorData, setSponsorData] = useState<SponsorFormValues[] | null>(null);
   const previousSponsorData = usePrevious(sponsorData);
 
   console.log('isLoading', isLoading);
-  console.log('previousSponsorData', previousSponsorData);
-  console.log('sponsorData', sponsorData);
 
-  const handleUpdateSponsorData = useCallback((newSponsorData: unknown[] | null) => {
-    console.log('newSponsorData', newSponsorData);
+  const handleUpdateSponsorData = (newSponsorData: SponsorFormValues[] | null) => {
     setSponsorData(newSponsorData);
-  }, []);
+  };
 
   // Fetch sponsor data when component mounts
   useEffect(() => {
-    console.log('------- MOUNT ------------');
-    setIsLoading(true);
+    const emptySponsorList = [];
 
+    setIsLoading(true);
     doGetUsers('sponsor', emptySponsorList, handleUpdateSponsorData);
   }, []);
 
@@ -70,17 +65,20 @@ const Sponsors: FC<Props> = ({ location }) => {
             flexDirection="column"
           >
             <SponsorCard
-              sponsorData={[]}
+              sponsorData={sponsorData?.filter((sponsor) =>
+                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
               subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
               title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
             />
             <SponsorCard
-              sponsorData={[]}
+              sponsorData={sponsorData?.filter((sponsor) =>
+                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.GOLD_MEDAL)}
               subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.GOLD_MEDAL]}
               title={SPONSORSHIP_LEVELS.GOLD_MEDAL}
             />
             <SponsorCard
-              sponsorData={[]}
+              sponsorData={sponsorData?.filter((sponsor) =>
+                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
               title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
             />
           </Box>

@@ -39,7 +39,7 @@ const defaultProps = {
   sponsorOrganizationName: '',
 };
 
-const currentDate = format(new Date(), ['M/d/yyyy']);
+const currentDate = format(new Date(), 'M/d/yyyy');
 
 // Component Definition
 // eslint-disable-next-line

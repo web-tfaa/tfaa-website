@@ -4,7 +4,6 @@ https://www.robinwieruch.de/react-paypal-payment/
 */
 
 // External Dependencies
-import { disabled } from 'glamor';
 import React, {
   FC, useEffect, useRef, useState
 } from 'react';
@@ -13,14 +12,21 @@ import ReactDOM from 'react-dom';
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
 import { logError } from '../../../utils/logError';
+import {
+  PaypalPayment,
+  PaypalPaymentCancel,
+} from './paypal-button-wrapper';
 
 // Local Typings
 interface Props {
-  client: string;
+  client: {
+    sandbox: string | undefined;
+    production: string | undefined;
+  };
   env: 'production' | 'sandbox';
-  onCancel: (data: unknown) => void;
+  onCancel: (data: PaypalPaymentCancel) => void;
   onError: (error: unknown) => void;
-  onSuccess: (data: unknown) => void;
+  onSuccess: (data: PaypalPayment) => void;
   total: number;
 }
 

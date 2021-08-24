@@ -72,14 +72,21 @@ export const doGetUsers = (collection, userList, callback) => {
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const userObject = doc.data();
-        console.log('userObject ..........', userObject);
+        // console.log('userObject ..........', userObject);
 
-        // The doc.id is the userId
-        updatedUserList[doc.id] = {
-          ...userObject,
-          userId: doc.id,
-        };
+        // The doc.userId is the userId
+        if (userObject.userId) {
+          updatedUserList.push(userObject);
+        }
+
+        // updatedUserList[doc.userId] = {
+        //   ...userObject,
+        //   userId: doc.userId,
+        // };
       });
+
+      // console.log(' \\\\\\ updatedUserList //////////////', updatedUserList);
+
       return callback(updatedUserList);
     })
     .catch((error) => {

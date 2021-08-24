@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const currentDate = format(new Date(), ['M/d/yyyy']);
+const currentDate = format(new Date(), 'M/d/yyyy');
 
 // This will tell the Firestore database action where to put the new record
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
@@ -141,6 +141,7 @@ const RegisterSponsorPayment: FC<Props> = ({
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
       invoiceDate: currentDate,
       invoiceId: sponsorForm.invoiceId,
+      receiptDate: sponsorForm.receiptId ? currentDate : '',
       receiptId: sponsorForm.receiptId,
     };
 
@@ -158,6 +159,7 @@ const RegisterSponsorPayment: FC<Props> = ({
       // Increment receipt id value in Firestore
       if (hasCompletedPayment) {
         updateFirestoreReceiptId();
+
         // If no payment is made, we increment invoice id value in Firestore
       } else {
         updateFirestoreInvoiceId();
@@ -169,10 +171,10 @@ const RegisterSponsorPayment: FC<Props> = ({
   useEffect(() => {
     if (invoiceId < 1) {
       doGetInvoiceId(handleGetCurrentInvoiceId);
-    } else if (previousInvoiceId !== undefined
-        && previousInvoiceId < 1 && invoiceId > 0) {
+    } else if (previousInvoiceId === 0 && invoiceId > 0) {
       const updatedForm: SponsorFormValues = {
         ...sponsorForm,
+        invoiceDate: currentDate,
         invoiceId,
       };
 
@@ -181,14 +183,16 @@ const RegisterSponsorPayment: FC<Props> = ({
         FIRESTORE_SPONSOR_COLLECTION,
         authenticatedUserId,
       );
+      onUpdateSponsorForm(updatedForm);
     }
   }, [invoiceId, previousInvoiceId]);
 
   // We want to record the newest receiptId in the Firestore database
   useEffect(() => {
-    if (previousReceiptId === 1 && receiptId > 1) {
+    if (previousReceiptId === 0 && receiptId > 0) {
       const updatedForm: SponsorFormValues = {
         ...sponsorForm,
+        receiptDate: currentDate,
         receiptId,
       };
 
@@ -197,11 +201,12 @@ const RegisterSponsorPayment: FC<Props> = ({
         FIRESTORE_SPONSOR_COLLECTION,
         authenticatedUserId,
       );
+      onUpdateSponsorForm(updatedForm);
     }
   }, [previousReceiptId, receiptId]);
 
   const handleUpdateCompletedStep = async (payment: PaypalPayment) => {
-    await doGetReceiptId(handleGetCurrentReceiptId);
+    doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompletePaymentStep(payment);
   };

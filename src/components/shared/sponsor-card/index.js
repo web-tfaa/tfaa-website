@@ -225,6 +225,8 @@ const SponsorCard = ({
 
       {renderSponsors(sponsorData)}
 
+      {sponsorData.length > 0 && <hr className={classes.divider} />}
+
       <div className={classes.sponsorInfo}>
         {title === SPONSORSHIP_LEVELS.CLASS_CHAMPION && (
           <Card

@@ -114,7 +114,7 @@ function createSponsorFormReducerState({
 function sponsorFormReducer(state, { type, payload }) {
   switch (type) {
     case SPONSOR_FORM_ACTIONS.COMPLETE_STEP: {
-      console.log('COMPLETE_STEP : payload', payload);
+      // console.log('COMPLETE_STEP : payload', payload);
 
       const {
         completedStep,
@@ -135,7 +135,7 @@ function sponsorFormReducer(state, { type, payload }) {
       };
     }
     case SPONSOR_FORM_ACTIONS.UPDATE_ACTIVE_SPONSOR_STEP: {
-      console.log('UPDATE_ACTIVE_SPONSOR_STEP : payload', payload);
+      // console.log('UPDATE_ACTIVE_SPONSOR_STEP : payload', payload);
 
       const { newStep } = payload;
       return {
@@ -150,12 +150,12 @@ function sponsorFormReducer(state, { type, payload }) {
       };
     }
     case SPONSOR_FORM_ACTIONS.UPDATE_COMPLETED_SPONSOR_STEPS: {
-      console.log('UPDATE_COMPLETED_SPONSOR_STEPS : payload', payload);
+      // console.log('UPDATE_COMPLETED_SPONSOR_STEPS : payload', payload);
 
       return payload;
     }
     case SPONSOR_FORM_ACTIONS.UPDATE_SPONSOR_FORM: {
-      console.log('UPDATE_SPONSOR_FORM : payload', payload);
+      // console.log('UPDATE_SPONSOR_FORM : payload', payload);
 
       const { updatedForm } = payload;
 
