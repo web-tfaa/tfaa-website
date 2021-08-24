@@ -4,7 +4,8 @@ import { currentSchoolYearShort } from '../utils/helpers';
 import { logError } from '../utils/logError';
 
 // Local Variables
-const getFirebaseCollectionName = (collection) => `${collection}_${currentSchoolYearShort}`;
+const getFirebaseCollectionName = (collection) =>
+  `${collection}_${currentSchoolYearShort}`;
 
 // Create/Update user entry in Firestore
 export const doCreateEntry = (
@@ -24,6 +25,7 @@ export const doCreateEntry = (
     .then(() => {
       console.log(`Registration for ${documentId} in ${currentSchoolYearShort} was successful`);
       if (callback) {
+        // console.log('doCreateEntry, form passed to callback', form);
         callback(form);
       }
     })

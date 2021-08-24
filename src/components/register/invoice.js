@@ -27,6 +27,7 @@ const propTypes = {
   }),
   receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sponsorLevel: PropTypes.string,
+  sponsorOrganizationName: PropTypes.string,
 };
 
 const defaultProps = {
@@ -35,6 +36,7 @@ const defaultProps = {
   paymentDetails: {},
   receiptId: 1,
   sponsorLevel: '',
+  sponsorOrganizationName: '',
 };
 
 const currentDate = format(new Date(), ['M/d/yyyy']);
@@ -52,7 +54,11 @@ class Invoice extends Component {
       paymentDetails,
       receiptId,
       sponsorLevel,
+      sponsorOrganizationName,
+      ...otherProps
     } = this.props;
+
+    console.log('sponsorOrganizationName', sponsorOrganizationName);
 
     return (
       <section
@@ -63,6 +69,7 @@ class Invoice extends Component {
           width: 750,
         }}
         id="invoice-container"
+        {...otherProps}
       >
         <header
           css={{
@@ -139,7 +146,7 @@ class Invoice extends Component {
 
             <div>
               <h4>TO</h4>
-              <div>{form.District}</div>
+              <div>{form.District || sponsorOrganizationName}</div>
               <div>Accounts Payable</div>
             </div>
           </div>

@@ -1,12 +1,14 @@
 // External Dependencies
-import Paper from '@material-ui/core/Paper';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
@@ -63,7 +65,10 @@ const InvoiceTable = ({
   );
 
   return (
-    <TableContainer className={classes.root} component={Paper}>
+    <TableContainer
+      className={classes.root}
+      component={Paper}
+    >
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -73,6 +78,7 @@ const InvoiceTable = ({
             </CustomTableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">

@@ -27,7 +27,7 @@ function getSteps(
       : 'Sign up for TMAC website login',
     'Complete registration form',
     isViewingSponsors
-      ? 'Choose Sponsorship level and make payment'
+      ? 'Choose Sponsor level and make payment'
       : 'Pay TMAC dues',
   ];
 }

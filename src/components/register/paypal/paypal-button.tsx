@@ -64,7 +64,6 @@ const PaypalButton: FC<Props> = ({
   total,
 }) => {
   const paypalRef = useRef<PaypalGlobalObject | null>(null);
-  console.log('paypalRef', paypalRef.current);
 
   const [showButton, setShowButton] = useState(false);
   const previousShowButton = usePrevious(showButton);

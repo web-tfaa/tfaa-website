@@ -1,13 +1,15 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import React, { FC, useEffect, useState } from 'react';
+import React, {
+  FC, useEffect, useReducer
+} from 'react';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
-import RegisterFormWrapper from '../../components/register/register-form-wrapper';
+import RegisterSponsorFormWrapper from '../../components/register/register-sponsor-form-wrapper';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from '../members/status';
@@ -21,41 +23,35 @@ interface Props {
   isAuthenticated: boolean;
 }
 export interface SponsorFormValues {
-  AmountDonated: 1000 | 2000 | null;
+  AmountDonated: 0 | 1000 | 2000;
   City: string;
-  CityError: string;
   ContactAddress1: string;
-  ContactAddress1Error: string;
   ContactAddress2: string;
   ContactPhone: string;
-  ContactPhoneError: string;
   Email: string;
-  EmailError: string;
   honeypot: string;
   invoiceDate: string;
   invoiceId: number;
   isAuthenticated?: boolean;
   OrganizationContactName: string;
-  OrganizationContactNameError: string;
   OrganizationWebsiteAddress: string;
-  OrganizationWebsiteAddressError: string;
-  PaymentOption: 'Invoiced' | 'Paypal';
-  PaypalPayerID: string;
-  PaypalPaymentID: string;
+  PaymentOption?: 'Invoiced' | 'Paypal';
+  PaypalPayerID?: string;
+  PaypalPaymentID?: string;
   receiptDate: string;
   receiptId: number;
   SponsorLevel: string;
   SponsorOrganization: string;
-  SponsorOrganizationError: string;
   State: string;
-  StateError: string;
   Title: string;
-  TitleError: string;
   ZipCode: string;
-  ZipCodeError: string;
+  userId?: string;
 }
 type Steps = 0 | 1 | 2;
-export type HandleCompleteSponsorStepType = (step: Steps) => void;
+export type HandleCompleteSponsorStepType = (
+  step: Steps,
+  updatedForm: SponsorFormValues,
+) => void;
 
 // Local Variables
 const COMPLETED_SPONSOR_STEPS_INITIAL_STATE: Steps[] = [];
@@ -65,22 +61,16 @@ const COMPLETED_SPONSOR_STEPS_INITIAL_STATE: Steps[] = [];
 const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
   AmountDonated: 1000,
   City: '',
-  CityError: '',
   ContactAddress1: '',
-  ContactAddress1Error: '',
   ContactAddress2: '',
   ContactPhone: '',
-  ContactPhoneError: '',
   Email: '',
-  EmailError: '',
   honeypot: '',
   invoiceDate: '',
   invoiceId: 0,
   // isAuthenticated: false,
   OrganizationContactName: '',
-  OrganizationContactNameError: '',
   OrganizationWebsiteAddress: '',
-  OrganizationWebsiteAddressError: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
   PaypalPaymentID: '',
@@ -88,90 +78,167 @@ const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
   receiptId: 0,
   SponsorLevel: 'Silver Medal',
   SponsorOrganization: '',
-  SponsorOrganizationError: '',
   State: '',
-  StateError: '',
   Title: '',
-  TitleError: '',
   ZipCode: '',
-  ZipCodeError: '',
+  userId: '',
 };
+
+const initialSponsorReducerState = {
+  activeStep: 0,
+  completedSponsorSteps: COMPLETED_SPONSOR_STEPS_INITIAL_STATE,
+  sponsorForm: INITIAL_SPONSOR_FORM_VALUES,
+};
+
+// Local Reducers
+const SPONSOR_FORM_ACTIONS = {
+  COMPLETE_STEP: 'COMPLETE_STEP',
+  UPDATE_ACTIVE_SPONSOR_STEP: 'UPDATE_ACTIVE_SPONSOR_STEP',
+  UPDATE_COMPLETED_SPONSOR_STEPS: 'UPDATE_COMPLETED_SPONSOR_STEPS',
+  UPDATE_SPONSOR_FORM: 'UPDATE_SPONSOR_FORM',
+};
+
+function sponsorFormReducer(state, { type, payload }) {
+  switch (type) {
+    case SPONSOR_FORM_ACTIONS.COMPLETE_STEP: {
+      console.log('UPDATE_ACTIVE_SPONSOR_STEP : payload', payload);
+
+      const {
+        completedStep,
+        updatedForm,
+      } = payload;
+
+      return {
+        ...state,
+        activeStep: state.activeStep + 1,
+        completedSponsorSteps: [
+          ...state.completedSponsorSteps,
+          completedStep,
+        ],
+        sponsorForm: {
+          ...state.sponsorForm,
+          ...updatedForm,
+        }
+      };
+    }
+    case SPONSOR_FORM_ACTIONS.UPDATE_ACTIVE_SPONSOR_STEP: {
+      console.log('UPDATE_ACTIVE_SPONSOR_STEP : payload', payload);
+
+      const { newStep } = payload;
+      return {
+        ...state,
+        activeStep: newStep,
+        completedSponsorSteps: [
+          ...state.completedSponsorSteps,
+          // We add the previous step to the completed
+          //  list when switching to a new step
+          newStep - 1,
+        ],
+      };
+    }
+    case SPONSOR_FORM_ACTIONS.UPDATE_COMPLETED_SPONSOR_STEPS: {
+      console.log('UPDATE_COMPLETED_SPONSOR_STEPS : payload', payload);
+
+      return payload;
+    }
+    case SPONSOR_FORM_ACTIONS.UPDATE_SPONSOR_FORM: {
+      console.log('UPDATE_SPONSOR_FORM : payload', payload);
+
+      const { updatedForm } = payload;
+
+      return {
+        ...state,
+        sponsorForm: {
+          ...state.sponsorForm,
+          ...updatedForm,
+        },
+      };
+    }
+    default: {
+      throw new Error(
+        `Unexpected sponsorFormReducer reducer action: ${type}`
+      );
+    }
+  }
+}
 
 // Component Definition
 const RegisterSponsorContent: FC<Props> = ({
   authUser,
   isAuthenticated,
 }) => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [sponsorForm, setSponsorForm] = useState<
-    SponsorFormValues
-  >(INITIAL_SPONSOR_FORM_VALUES);
   const [
+    spnosorFormState,
+    dispatch,
+  ] = useReducer(
+    sponsorFormReducer,
+    initialSponsorReducerState,
+  );
+
+  const {
+    activeStep,
+    sponsorForm,
     completedSponsorSteps,
-    setCompletedSponsorSteps,
-  ] = useState(COMPLETED_SPONSOR_STEPS_INITIAL_STATE);
+  } = spnosorFormState;
+
+  console.log('TOP : spnosorFormState', spnosorFormState);
+
+  const handleUpdateActiveStep = (newStep: number) => {
+    dispatch({
+      type: SPONSOR_FORM_ACTIONS.UPDATE_ACTIVE_SPONSOR_STEP,
+      payload: { newStep },
+    });
+  };
+
+  const handleCompleteSponsorStep = (
+    step: number,
+    updatedForm: SponsorFormValues,
+  ) => {
+    dispatch({
+      type: SPONSOR_FORM_ACTIONS.COMPLETE_STEP,
+      payload: {
+        completedStep: step,
+        updatedForm,
+      },
+    });
+  };
+
+  const handleUpdateSponsorForm = (updatedForm: SponsorFormValues) => {
+    dispatch({
+      type: SPONSOR_FORM_ACTIONS.UPDATE_SPONSOR_FORM,
+      payload: {
+        updatedForm,
+      },
+    });
+  };
 
   useEffect(() => {
     // The user can skip the "sign in" step if they are already signed in
     if (activeStep === 0 && isAuthenticated) {
-      setActiveStep(1);
+      handleUpdateActiveStep(1);
     }
   }, [activeStep, isAuthenticated]);
 
-  const handleCompleteSponsorStep: HandleCompleteSponsorStepType = (step) => {
-    setActiveStep(activeStep + 1);
-    setCompletedSponsorSteps([
-      ...completedSponsorSteps,
-      step,
-    ]);
-  };
+  // const handleCompleteSponsorStep: HandleCompleteSponsorStepType = useCallback((
+  //   step,
+  //   updatedForm,
+  // ) => {
+  //   console.log('what even are you?', updatedForm);
 
-  const getCurrentStepContent = (isAuthenticated) => {
-    const stepOneContent = (
-      <RegisterEmail
-        isAuthenticated={isAuthenticated}
-        onCompleteStep={handleCompleteSponsorStep}
-      />
-    );
+  //   handleUpdateActiveStep(activeStep + 1);
+  //   handleCompleteStep(
+  //     step,
+  //     updatedForm,
+  //   );
 
-    const stepTwoContent = (
-      <RegisterFormWrapper
-        initialSponsorFormValues={INITIAL_SPONSOR_FORM_VALUES}
-        isViewingSponsors
-        onCompleteStep={handleCompleteSponsorStep}
-        onSetSponsorForm={setSponsorForm}
-        sponsorForm={sponsorForm}
-      />
-    );
+  //   // setCompletedSponsorSteps([
+  //   //   ...completedSponsorSteps,
+  //   //   step,
+  //   // ]);
+  //   // setSponsorForm(updatedForm);
+  // }, [activeStep]);
 
-    const stepThreeContent = (
-      <RegisterSponsorPayment
-        authenticatedUserId={authUser?.uid}
-        form={sponsorForm}
-        isViewingSponsors
-        onCompleteStep={handleCompleteSponsorStep}
-      />
-    );
-
-    let currentStepContent;
-    switch (activeStep) {
-      case 0:
-        currentStepContent = stepOneContent;
-        break;
-      case 1:
-        currentStepContent = stepTwoContent;
-        break;
-      case 2: case 3:
-        currentStepContent = stepThreeContent;
-        break;
-      default:
-        currentStepContent = stepOneContent;
-        break;
-    }
-    return currentStepContent;
-  };
-
-  const hasCompletedAllSteps = completedSponsorSteps.length >= 3;
+  const hasCompletedAllSteps = completedSponsorSteps?.length >= 3;
 
   /* Children change depending on which step is active */
   return (
@@ -185,6 +252,7 @@ const RegisterSponsorContent: FC<Props> = ({
       }}
     >
       <Status />
+
       <Container>
         <Helmet>
           <title>TMAC | Register Sponsor</title>
@@ -196,7 +264,29 @@ const RegisterSponsorContent: FC<Props> = ({
           activeStep={activeStep}
         />
 
-        {getCurrentStepContent(isAuthenticated)}
+        {activeStep === 0 && (
+          <RegisterEmail
+            isAuthenticated={isAuthenticated}
+            onCompleteStep={handleCompleteSponsorStep}
+          />
+        )}
+        {activeStep === 1 && (
+          <RegisterSponsorFormWrapper
+            authenticatedUserId={authUser?.uid}
+            initialSponsorFormValues={INITIAL_SPONSOR_FORM_VALUES}
+            onCompleteSponsorStep={handleCompleteSponsorStep}
+            onUpdateSponsorForm={handleUpdateSponsorForm}
+            sponsorForm={sponsorForm}
+          />
+        )}
+        {[2, 3].includes(activeStep) && (
+          <RegisterSponsorPayment
+            authenticatedUserId={authUser?.uid}
+            onCompleteSponsorStep={handleCompleteSponsorStep}
+            onUpdateSponsorForm={handleUpdateSponsorForm}
+            sponsorForm={sponsorForm}
+          />
+        )}
 
         {!hasCompletedAllSteps && (
           <div style={{ marginTop: '1.5rem' }}>

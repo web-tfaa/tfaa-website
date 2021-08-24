@@ -12,7 +12,6 @@ import { makeStyles } from '@material-ui/styles';
 import { Form, Formik } from 'formik';
 
 // Internal Dependencies
-import AuthUserContext from '../session/AuthUserContext';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
@@ -21,26 +20,18 @@ import {
   SponsorFormValues,
 } from '../../pages/sponsors/register';
 import { logError } from '../../utils/logError';
-import { removeErrorKeys } from '../../utils/helpers';
-import {
-  doCreateEntry,
-} from '../../firebase/db';
+import { doCreateEntry } from '../../firebase/db';
 import { registerSponsorSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
 import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
 
 // Local Typings
-interface ContextProps {
+interface Props {
+  authenticatedUserId: string;
   initialSponsorFormValues: SponsorFormValues;
-  onCompleteStep: HandleCompleteSponsorStepType;
-  onSetSponsorForm: (form: SponsorFormValues) => void;
+  onCompleteSponsorStep: HandleCompleteSponsorStepType;
+  onUpdateSponsorForm: (form: SponsorFormValues) => void;
   sponsorForm: SponsorFormValues;
-}
-
-interface Props extends ContextProps {
-  authUser: {
-    uid: string;
-  } | null;
 }
 
 // Local Variables
@@ -67,6 +58,9 @@ const useStyles = makeStyles({
   },
 });
 
+// This will tell the Firestore database action where to put the new record
+const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
+
 // Local Functions
 const formatPhone = (phone) => {
   let cleanPhone = phone;
@@ -84,80 +78,63 @@ const formatPhone = (phone) => {
 
 // Component Definition
 const RegisterSponsorForm: FC<Props> = ({
-  authUser,
+  authenticatedUserId,
   initialSponsorFormValues,
-  onCompleteStep,
-  onSetSponsorForm,
+  onCompleteSponsorStep,
+  onUpdateSponsorForm,
   sponsorForm,
 }) => {
   const classes = useStyles();
 
-  if (!authUser) {
-    return null;
-  }
-
+  // We use this to show a loading indicator when switching to Step 3
   const [
     hasCompletedRegisterSponsorForm,
     setHasCompletedRegisterSponsorForm,
   ] = useState(false);
 
-  const { SponsorLevel } = sponsorForm;
+  if (!authenticatedUserId) {
+    return null;
+  }
 
-  console.log('current sponsor form', sponsorForm);
-
-  const handleCompleteInfoStep = () => {
-    setTimeout(() => onCompleteStep(0), 1200);
-  };
-
-  const handleUpdateCompletedStep = () => {
+  const handleCompleteInfoStep = (updatedForm: SponsorFormValues) => {
     setHasCompletedRegisterSponsorForm(true);
-    handleCompleteInfoStep();
+    onCompleteSponsorStep(1, updatedForm);
   };
 
   const handleClickSubmitButton = async (values: SponsorFormValues) => {
-    if (!authUser) {
+    console.log('values', values);
+    if (!authenticatedUserId) {
       return null;
     }
 
     // Make copy of values
     const updatedValues = values;
 
-    const { uid: authenticatedUserId } = authUser;
-
-    // This will identify each row in the database and serve as the document name
-    const documentId = authenticatedUserId;
-
-    // Delete any values that we don't need in the synced Google Sheet
-    const updatedForm = removeErrorKeys(updatedValues);
-    // delete form.isAuthenticated;
-    delete updatedForm.honeypot;
-    delete updatedForm.hasCompletedRegisterSponsorForm;
+    // Right here we should delete any values that we
+    //  don't need in the synced Google Sheet
 
     // Send phone values in formatted
-    updatedForm.ContactPhone = formatPhone(updatedForm.ContactPhone);
-
-    // This will tell the database action where to put the new record
-    const collection = 'sponsor';
+    updatedValues.ContactPhone = formatPhone(updatedValues.ContactPhone);
 
     // The userId is needed to sync the Google Sheet with the Firestore DB
     const updatedFormWithUserId = {
-      ...updatedForm,
+      ...sponsorForm,
+      ...updatedValues,
+      AmountDonated: sponsorForm.AmountDonated,
+      SponsorLevel: sponsorForm.SponsorLevel,
       userId: authenticatedUserId,
     };
 
     try {
-      await doCreateEntry(updatedFormWithUserId, collection, documentId);
-      await onSetSponsorForm({
-        ...updatedFormWithUserId,
-        hasCompletedRegisterSponsorForm: true,
-      });
-
-      handleCompleteInfoStep();
+      await doCreateEntry(
+        updatedFormWithUserId,
+        FIRESTORE_SPONSOR_COLLECTION,
+        authenticatedUserId,
+        handleCompleteInfoStep,
+      );
     } catch (error) {
       logError('handleClickSubmitButton error in RegisterSponsorForm', error);
     }
-
-    doCreateEntry(updatedFormWithUserId, collection, documentId, handleUpdateCompletedStep);
   };
 
   const handleChangeSponsorLevel = (event) => {
@@ -169,10 +146,10 @@ const RegisterSponsorForm: FC<Props> = ({
     if (newSponsorLevel === SPONSORSHIP_LEVELS.GOLD_MEDAL) {
       amountDonated = 2000;
     } else if (newSponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION) {
-      amountDonated = null;
+      amountDonated = 0;
     }
 
-    onSetSponsorForm({
+    onUpdateSponsorForm({
       ...sponsorForm,
       AmountDonated: amountDonated,
       SponsorLevel: newSponsorLevel,
@@ -229,7 +206,7 @@ const RegisterSponsorForm: FC<Props> = ({
                     aria-label="SponsorLevel"
                     name="SponsorLevel*"
                     onChange={handleChangeSponsorLevel}
-                    value={SponsorLevel}
+                    value={sponsorForm.SponsorLevel}
                   >
                     <FormControlLabel
                       control={<Radio size="small" />}
@@ -268,7 +245,7 @@ const RegisterSponsorForm: FC<Props> = ({
                     <FormControlLabel
                       className={classes.classChampionRadioLabelRoot}
                       control={(
-                        <Box mb={4}>
+                        <Box clone mb={4}>
                           <Radio size="small" />
                         </Box>
                       )}
@@ -477,10 +454,4 @@ const RegisterSponsorForm: FC<Props> = ({
   );
 };
 
-const RegisterSponsorFormWithContext: FC<ContextProps> = (props) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => <RegisterSponsorForm {...props} authUser={authUser} />}
-  </AuthUserContext.Consumer>
-);
-
-export default RegisterSponsorFormWithContext;
+export default RegisterSponsorForm;
