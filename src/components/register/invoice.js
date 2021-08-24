@@ -21,10 +21,10 @@ const propTypes = {
   invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isActive: PropTypes.bool,
   isInvoice: PropTypes.bool.isRequired,
-  paymentDetails: PropTypes.shape({
-    payerId: PropTypes.string,
-    paymentId: PropTypes.string,
-  }),
+  // paymentDetails: PropTypes.shape({
+  //   payerId: PropTypes.string,
+  //   paymentId: PropTypes.string,
+  // }),
   receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sponsorLevel: PropTypes.string,
   sponsorOrganizationName: PropTypes.string,
@@ -33,7 +33,7 @@ const propTypes = {
 const defaultProps = {
   invoiceId: 1,
   isActive: true,
-  paymentDetails: {},
+  // paymentDetails: {},
   receiptId: 1,
   sponsorLevel: '',
   sponsorOrganizationName: '',
@@ -51,7 +51,7 @@ class Invoice extends Component {
       invoiceId,
       isActive,
       isInvoice,
-      paymentDetails,
+      // paymentDetails,
       receiptId,
       sponsorLevel,
       sponsorOrganizationName,
@@ -102,16 +102,16 @@ class Invoice extends Component {
             {(isInvoice ? form.invoiceDate : form.receiptDate) || currentDate}
           </div>
 
-          {!isInvoice && paymentDetails.payerId && (
+          {!isInvoice && form.PaypalPayerID && (
             <>
-              {paymentDetails.payerId && (
+              {form.PaypalPayerID && (
                 <div>
-                  <strong>PayPal PayerID:</strong> {paymentDetails.payerId}
+                  <strong>PayPal PayerID:</strong> {form.PaypalPayerID}
                 </div>
               )}
-              {paymentDetails.paymentId && (
+              {form.PaypalPaymentID && (
                 <div>
-                  <strong>PayPal PaymentID:</strong> {paymentDetails.paymentId}
+                  <strong>PayPal PaymentID:</strong> {form.PaypalPaymentID}
                 </div>
               )}
             </>

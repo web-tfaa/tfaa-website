@@ -1,7 +1,9 @@
 // External Dependencies
 import {
   Box,
+  Card,
   Collapse,
+  Divider,
   FormControl,
   FormControlLabel,
   Link,
@@ -19,7 +21,9 @@ import { makeStyles } from '@material-ui/styles';
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
 import Invoice from './invoice';
-import PaypalButtonWrapper from './paypal/paypal-button-wrapper';
+import PaypalButtonWrapper, {
+  PaypalPayment,
+} from './paypal/paypal-button-wrapper';
 import RegisterButton from './register-button';
 import {
   HandleCompleteSponsorStepType,
@@ -42,11 +46,6 @@ interface Props {
   onCompleteSponsorStep: HandleCompleteSponsorStepType;
   onUpdateSponsorForm: (form: SponsorFormValues) => void;
   sponsorForm: SponsorFormValues;
-}
-interface PaymentDetails {
-  payerId: string;
-  paymentId: string;
-  receiptDate: string;
 }
 
 // Local Variables
@@ -72,6 +71,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.5rem',
     marginTop: '1rem',
   },
+  successOrganizationName: {
+    fontSize: '1.25rem',
+    fontWeight: 600,
+    marginTop: theme.spacing(1.5),
+  },
+  successSponsorInfoCard: {
+    padding: theme.spacing(0, 2, 3),
+  },
 }));
 
 const currentDate = format(new Date(), ['M/d/yyyy']);
@@ -88,14 +95,10 @@ const RegisterSponsorPayment: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  // console.log('STEP 3 : sponsorForm', sponsorForm);
-
   const {
     invoiceId,
     receiptId,
   } = sponsorForm;
-
-  console.log('PAYMENT STEP : sponsorForm', sponsorForm);
 
   const previousInvoiceId = usePrevious(invoiceId);
   const previousReceiptId = usePrevious(receiptId);
@@ -110,7 +113,6 @@ const RegisterSponsorPayment: FC<Props> = ({
   ] = useState(false);
 
   const [hasCompletedPayment, setHasCompletedPayment] = useState<boolean>();
-  const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null);
 
   const handleToggleSponsorLevelOptions = () => {
     setShowSponsorLevelOptions(!showSponsorLevelOptions);
@@ -130,13 +132,13 @@ const RegisterSponsorPayment: FC<Props> = ({
     });
   };
 
-  const handleCompletePaymentStep = () => {
+  const handleCompletePaymentStep = (payment: PaypalPayment) => {
     const updatedForm: SponsorFormValues = {
       ...sponsorForm,
       AmountDonated: sponsorForm.AmountDonated,
-      PaypalPayerID: paymentDetails?.payerId,
-      PaypalPaymentID: paymentDetails?.paymentId,
-      PaymentOption: paymentDetails?.paymentId ? 'Paypal' : 'Invoiced',
+      PaypalPayerID: payment?.payerID,
+      PaypalPaymentID: payment?.paymentID,
+      PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
       invoiceDate: currentDate,
       invoiceId: sponsorForm.invoiceId,
       receiptId: sponsorForm.receiptId,
@@ -151,9 +153,6 @@ const RegisterSponsorPayment: FC<Props> = ({
   };
 
   useEffect(() => {
-    console.log(' ---------------- MOUNTED! -- step 3--------------');
-    console.log('PAYMENT STEP : sponsorForm', sponsorForm);
-
     // On unmount
     return () => {
       // Increment receipt id value in Firestore
@@ -163,21 +162,6 @@ const RegisterSponsorPayment: FC<Props> = ({
       } else {
         updateFirestoreInvoiceId();
       }
-
-      // const updatedForm = {
-      //   ...sponsorForm,
-      //   ...paymentDetails,
-      //   invoiceDate: currentDate,
-      //   // invoiceId: sponsorForm.invoiceId,
-      //   receiptId: sponsorForm.receiptId,
-      // };
-
-      // doUpdateEntry(
-      //   updatedForm,
-      //   FIRESTORE_SPONSOR_COLLECTION,
-      //   authenticatedUserId,
-      // );
-      return handleCompletePaymentStep();
     };
   }, []);
 
@@ -185,13 +169,12 @@ const RegisterSponsorPayment: FC<Props> = ({
   useEffect(() => {
     if (invoiceId < 1) {
       doGetInvoiceId(handleGetCurrentInvoiceId);
-    } else if (previousInvoiceId && previousInvoiceId < 1 && invoiceId > 0) {
+    } else if (previousInvoiceId !== undefined
+        && previousInvoiceId < 1 && invoiceId > 0) {
       const updatedForm: SponsorFormValues = {
         ...sponsorForm,
         invoiceId,
       };
-
-      console.log('invoice useEffect:', updatedForm);
 
       doUpdateEntry(
         updatedForm,
@@ -217,50 +200,74 @@ const RegisterSponsorPayment: FC<Props> = ({
     }
   }, [previousReceiptId, receiptId]);
 
-  const handleUpdateCompletedStep = (payment) => {
+  const handleUpdateCompletedStep = (payment: PaypalPayment) => {
     doGetReceiptId(handleGetCurrentReceiptId);
-
     setHasCompletedPayment(true);
-    setPaymentDetails({
-      payerId: payment.payerID,
-      paymentId: payment.paymentID,
-      receiptDate: currentDate,
-    });
-
-    handleCompletePaymentStep();
+    handleCompletePaymentStep(payment);
   };
 
   const successfulPaymentElement = (
     <div>
       <Box mb={3}>
-        <h3>Successful Payment!</h3>
+        <h2>Successful Payment!</h2>
       </Box>
 
-      <p>{sponsorForm.SponsorLevel} Sponsor - $1000</p>
-      <p>
-        {sponsorForm.OrganizationContactName}, {sponsorForm.SponsorOrganization}
-      </p>
-
-      <Box mt={6}>
-        <h3>
-          Thank you for sponsoring TMAC for the {currentSchoolYearLong} school year!
+      <Card
+        className={classes.successSponsorInfoCard}
+        variant="outlined"
+      >
+        <h3 className={classes.sponsorLevelHeading}>
+          {sponsorForm.SponsorLevel}
+          <Typography
+            className={classes.sponsorLevelAmount}
+            component="span"
+            variant="h6"
+          >
+            — {`$${sponsorForm.AmountDonated}`
+              || 'Contact the Executive Secretary for more details'}
+          </Typography>
         </h3>
+
+        <Divider />
+
+        <Typography
+          className={classes.successOrganizationName}
+          variant="body2"
+        >
+          {sponsorForm.SponsorOrganization}
+        </Typography>
+        <Typography variant="body2">
+          {sponsorForm.OrganizationContactName}, {sponsorForm.Title}
+        </Typography>
+        <Typography variant="body2">
+          {sponsorForm.Email}
+        </Typography>
+        <Typography variant="body2">
+          {sponsorForm.ContactPhone}
+        </Typography>
+
+        <Box mt={3}>
+          <ReactToPrint
+            content={() => printReceiptIdRef.current}
+            trigger={() => <RegisterButton>Print Receipt</RegisterButton>}
+          />
+        </Box>
+      </Card>
+
+      <Box
+        mt={5}
+        mx={4}
+      >
+        <h2>
+          Thank you for sponsoring TMAC for the {currentSchoolYearLong} school year!
+        </h2>
       </Box>
 
-      <FormHr />
-
-      <p>Please click below to print a copy of your receipt.</p>
-
-      <ReactToPrint
-        content={() => printReceiptIdRef.current}
-        trigger={() => <RegisterButton>Print Receipt</RegisterButton>}
-      />
       <div css={{ display: 'none' }}>
         <Invoice
           amount={sponsorForm.AmountDonated}
           form={sponsorForm}
           isInvoice={false}
-          paymentDetails={paymentDetails}
           receiptId={sponsorForm.receiptId}
           ref={printReceiptIdRef}
           sponsorLevel={sponsorForm.SponsorLevel}
@@ -442,7 +449,6 @@ const RegisterSponsorPayment: FC<Props> = ({
               amount={sponsorForm.AmountDonated}
               form={sponsorForm}
               invoiceId={sponsorForm.invoiceId}
-              // invoiced={invoiceIdRef.current}
               isInvoice
               ref={printInvoiceRef}
               sponsorLevel={sponsorForm.SponsorLevel}

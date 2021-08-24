@@ -21,7 +21,6 @@ function getSteps(
   isViewingSponsors = false,
 ): string[] {
   return [
-    // We show a different message if the user is already logged in
     isAuthenticated
       ? 'Sign in to the TMAC members area'
       : 'Sign up for TMAC website login',
@@ -57,19 +56,17 @@ const RegisterStepper: FC<Props> = ({
         activeStep={activeStep}
         alternativeLabel
       >
-        {steps.map((label) => {
-          return (
-            <Step key={label}>
-              <StepLabel
-                classes={{
-                  label: classes.stepLabel,
-                }}
-              >
-                {label}
-              </StepLabel>
-            </Step>
-          );
-        })}
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel
+              classes={{
+                label: classes.stepLabel,
+              }}
+            >
+              {label}
+            </StepLabel>
+          </Step>
+        ))}
       </Stepper>
     </Card>
   );

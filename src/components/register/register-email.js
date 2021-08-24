@@ -63,12 +63,16 @@ class RegisterEmail extends Component {
     ) : (
       <>
         <FormHr />
+
         <SignUpForm onRegisterSignUp={this.handleUpdateCompletedStep} />
+
         <FormHr />
+
         <SignInUpElement
           onClickSignIn={this.handleClickSignInLink}
           viewSignUp={false}
         />
+
         {!viewingSignUp && (
           <LoginForm onRegisterLogin={this.handleUpdateCompletedStep} />
         )}

@@ -13,7 +13,7 @@ import EnhancedAlert from '../../shared/EnhancedAlert';
 import { logError } from '../../../utils/logError';
 
 // Local Typings
-interface PaypalPayment {
+export interface PaypalPayment {
   cancelled: boolean;
   paid: boolean;
   payerID: string;

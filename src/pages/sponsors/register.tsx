@@ -219,25 +219,6 @@ const RegisterSponsorContent: FC<Props> = ({
     }
   }, [activeStep, isAuthenticated]);
 
-  // const handleCompleteSponsorStep: HandleCompleteSponsorStepType = useCallback((
-  //   step,
-  //   updatedForm,
-  // ) => {
-  //   console.log('what even are you?', updatedForm);
-
-  //   handleUpdateActiveStep(activeStep + 1);
-  //   handleCompleteStep(
-  //     step,
-  //     updatedForm,
-  //   );
-
-  //   // setCompletedSponsorSteps([
-  //   //   ...completedSponsorSteps,
-  //   //   step,
-  //   // ]);
-  //   // setSponsorForm(updatedForm);
-  // }, [activeStep]);
-
   const hasCompletedAllSteps = completedSponsorSteps?.length >= 3;
 
   /* Children change depending on which step is active */
