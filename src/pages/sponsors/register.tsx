@@ -229,7 +229,7 @@ const RegisterSponsorContent: FC<Props> = ({
     if (activeStep === 0 && isAuthenticated) {
       handleUpdateActiveStep(1);
     }
-  }, [activeStep, isAuthenticated]);
+  }, []);
 
   const hasCompletedAllSteps = completedSponsorSteps?.length >= 3;
 
