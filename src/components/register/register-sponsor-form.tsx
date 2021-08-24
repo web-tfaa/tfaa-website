@@ -8,22 +8,23 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { FC, useCallback, useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
 import { Form, Formik } from 'formik';
+import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import EnhancedAlert from '../shared/EnhancedAlert';
-import LoadingContainer from '../shared/LoadingContainer';
-import RegisterButton from './register-button';
 import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
 } from '../../pages/sponsors/register';
-import CustomTextField from '../shared/CustomTextField';
 import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
 import { doCreateEntry } from '../../firebase/db';
+import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
 import { registerSponsorSchema } from './schemas';
+import CustomTextField from '../shared/CustomTextField';
+import EnhancedAlert from '../shared/EnhancedAlert';
+import LoadingContainer from '../shared/LoadingContainer';
+import RegisterButton from './register-button';
 
 // Local Typings
 interface Props {
@@ -60,21 +61,6 @@ const useStyles = makeStyles({
 
 // This will tell the Firestore database action where to put the new record
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
-
-// Local Functions
-const formatPhone = (phone) => {
-  let cleanPhone = phone;
-  if (cleanPhone.startsWith('1')) {
-    cleanPhone = cleanPhone.slice(1);
-  }
-  if (cleanPhone.length !== 10) {
-    return phone;
-  }
-  return `(${cleanPhone.substr(0, 3)}) ${cleanPhone.substr(
-    3,
-    3,
-  )}-${cleanPhone.substr(6, 4)}`;
-};
 
 // Component Definition
 const RegisterSponsorForm: FC<Props> = ({

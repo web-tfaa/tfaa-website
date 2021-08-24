@@ -29,22 +29,21 @@ export interface SponsorFormValues {
   ContactAddress2: string;
   ContactPhone: string;
   Email: string;
-  honeypot?: string;
-  invoiceDate: string;
-  invoiceId: number;
-  isAuthenticated?: boolean;
   OrganizationContactName: string;
   OrganizationWebsiteAddress: string;
   PaymentOption?: 'Invoiced' | 'Paypal';
   PaypalPayerID?: string;
   PaypalPaymentID?: string;
-  receiptDate: string;
-  receiptId: number;
   SponsorLevel: string;
   SponsorOrganization: string;
   State: string;
   Title: string;
   ZipCode: string;
+  honeypot?: string;
+  invoiceDate: string;
+  invoiceId: number;
+  receiptDate: string;
+  receiptId: number;
   userId?: string;
 }
 type Steps = 0 | 1 | 2;
@@ -67,7 +66,6 @@ const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
   Email: '',
   invoiceDate: '',
   invoiceId: 0,
-  // isAuthenticated: false,
   OrganizationContactName: '',
   OrganizationWebsiteAddress: '',
   PaymentOption: 'Invoiced',

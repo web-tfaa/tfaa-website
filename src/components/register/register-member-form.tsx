@@ -8,39 +8,33 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
-import React, { FC } from 'react';
-import { navigate } from 'gatsby';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { FC, useState } from 'react';
 import { Form, Formik } from 'formik';
+import { makeStyles } from '@material-ui/core/styles';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import EnhancedAlert from '../shared/EnhancedAlert';
-import AuthUserContext from '../session/AuthUserContext';
-import LoadingContainer from '../shared/LoadingContainer';
-import RegisterButton from './register-button';
 import { removeErrorKeys } from '../../utils/helpers';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
 } from '../../pages/members/register';
 import { doCreateEntry } from '../../firebase/db';
-import { logError } from '../../utils/logError';
 import { formatPhone } from '../../utils/formatPhone';
+import { logError } from '../../utils/logError';
 import { registerMemberSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
+import EnhancedAlert from '../shared/EnhancedAlert';
+import LoadingContainer from '../shared/LoadingContainer';
+import RegisterButton from './register-button';
 
 // Local Typings
-interface ContextProps {
+interface Props {
+  authenticatedUserId: string;
   initialMemberFormValues: MemberFormValues;
   memberForm: MemberFormValues;
   onCompleteMemberStep: HandleCompleteMemberStepType;
   onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
-}
-
-interface Props extends ContextProps {
-  authUser: {
-    uid: string;
-  } | null;
 }
 
 // Local Variables
@@ -60,9 +54,12 @@ const useStyles = makeStyles({
   },
 });
 
+// This will tell the Firestore database action where to put the new record
+const FIRESTORE_MEMBER_COLLECTION = 'registration';
+
 // Component Definition
-const RegisterForm: FC<Props> = ({
-  authUser,
+const RegisterMemberForm: FC<Props> = ({
+  authenticatedUserId,
   initialMemberFormValues,
   memberForm,
   onCompleteMemberStep,
@@ -70,69 +67,66 @@ const RegisterForm: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  if (!authUser) {
+  // We use this to show a loading indicator when switching to Step 3
+  const [
+    hasCompletedMemberRegisterForm,
+    setHasCompletedMemberRegisterForm,
+  ] = useState(false);
+
+  if (!authenticatedUserId) {
     return null;
   }
 
   const {
     NewToTMAC,
-    hasCompletedRegisterInfoForm,
     isAuthenticated,
   } = memberForm;
 
-  const handleCompleteInfoStep = () => {
-    setTimeout(() => onCompleteMemberStep(0), 2200);
+  const handleCompleteMemberInfoStep = (updatedMemberForm: MemberFormValues) => {
+    setHasCompletedMemberRegisterForm(true);
+    onCompleteMemberStep(0, updatedMemberForm);
   };
 
   const handleClickSubmitButton = async (values: MemberFormValues) => {
-    if (!authUser) {
+    if (!authenticatedUserId) {
       return null;
     }
 
     // Make copy of values
     const updatedValues = values;
 
-    const { uid: authenticatedUserId } = authUser;
-
-    // This will identify each row in the database and serve as the document name
-    const documentId = authenticatedUserId;
-
-    // Delete any values that we don't need in the synced Google Sheet
-    const form = removeErrorKeys(updatedValues);
-    delete form.isAuthenticated;
-    delete form.honeypot;
-    delete form.hasCompletedRegisterInfoForm;
+    // Right here we should delete any values that we
+    //  don't need in the synced Google Sheet
+    delete updatedValues.honeypot;
 
     // Send phone values in formatted
-    form.OfficePhone = formatPhone(form.OfficePhone);
-    form.CellPhone = formatPhone(form.CellPhone);
-
-    // This will tell the database action where to put the new record
-    const collection = 'registration';
+    updatedValues.OfficePhone = formatPhone(updatedValues.OfficePhone);
+    updatedValues.CellPhone = formatPhone(updatedValues.CellPhone);
 
     // The userId is needed to sync the Google Sheet with the Firestore DB
-    const formWithUserId = {
-      ...form,
+    const updatedMemberFormWithUserId = {
+      ...updatedValues,
       userId: authenticatedUserId,
     };
 
     try {
-      await doCreateEntry(formWithUserId, collection, documentId);
-      await onUpdateMemberForm({
-        ...formWithUserId,
-        hasCompletedRegisterInfoForm: true,
-      });
-
-      handleCompleteInfoStep();
+      await doCreateEntry(
+        updatedMemberFormWithUserId,
+        FIRESTORE_MEMBER_COLLECTION,
+        authenticatedUserId,
+        handleCompleteMemberInfoStep,
+      );
     } catch (error) {
-      logError('handleClickSubmitButton error in RegisterForm', error);
+      logError('handleClickSubmitButton error in RegisterMemberForm', error);
     }
   };
 
   const handleChangeNewToTMAC = (event) => {
+    const { value: updatedNewToTMACVAlue } = event.target;
+
     onUpdateMemberForm({
       ...memberForm,
-      NewToTMAC: event.target.value,
+      NewToTMAC: updatedNewToTMACVAlue,
     });
   };
 
@@ -140,7 +134,7 @@ const RegisterForm: FC<Props> = ({
     navigate('/members');
   }
 
-  if (hasCompletedRegisterInfoForm) {
+  if (hasCompletedMemberRegisterForm) {
     return (
       <LoadingContainer
         step={3}
@@ -405,10 +399,4 @@ const RegisterForm: FC<Props> = ({
   );
 };
 
-const RegisterFormWithContext: FC<ContextProps> = (props) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => <RegisterForm {...props} authUser={authUser} />}
-  </AuthUserContext.Consumer>
-);
-
-export default RegisterFormWithContext;
+export default RegisterMemberForm;

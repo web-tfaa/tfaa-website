@@ -31,36 +31,24 @@ interface Props {
 }
 export interface MemberFormValues {
   Address1: string;
-  Address1Error: string;
   Address2?: string;
   AmountPaid: 0;
   CellPhone: string;
-  CellPhoneError: string;
   City: string;
-  CityError: string;
   District: string;
-  DistrictError: string;
   Email: string;
-  EmailError: string;
   FirstName: string;
-  FirstNameError: string;
   LastName: string;
-  LastNameError: string;
   MemberType: string;
   NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
-  OfficePhoneError: string;
   PaymentOption: string;
   PaypalPayerID: string;
   PaypalPaymentID: string;
   State: string;
-  StateError: string;
   Title: string;
-  TitleError: string;
   ZipCode: string;
-  ZipCodeError: string;
-  hasCompletedRegisterInfoForm: boolean;
-  honeypot: string;
+  honeypot?: string;
   invoiceDate: string;
   invoiceId: number;
   isAuthenticated: boolean;
@@ -80,36 +68,23 @@ const COMPLETED_MEMBER_STEPS_INITIAL_STATE: Steps[] = [];
 //  associated Google Sheet to which we are writing this form data
 const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   Address1: '',
-  Address1Error: '',
-  // Address2 is not required, so cannot have an error
   Address2: '',
   AmountPaid: 0,
   CellPhone: '',
-  CellPhoneError: '',
   City: '',
-  CityError: '',
   District: '',
-  DistrictError: '',
   Email: '',
-  EmailError: '',
   FirstName: '',
-  FirstNameError: '',
   LastName: '',
-  LastNameError: '',
   MemberType: '',
   NewToTMAC: 'Yes',
   OfficePhone: '',
-  OfficePhoneError: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
   PaypalPaymentID: '',
   State: '',
-  StateError: '',
   Title: '',
-  TitleError: '',
   ZipCode: '',
-  ZipCodeError: '',
-  hasCompletedRegisterInfoForm: false,
   honeypot: '',
   invoiceDate: '',
   invoiceId: 0,

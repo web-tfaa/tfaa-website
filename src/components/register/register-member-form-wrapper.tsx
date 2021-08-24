@@ -7,7 +7,7 @@ import {
   MemberFormValues,
 } from '../../pages/members/register';
 import FormHr from '../shared/form-hr';
-import RegisterForm from './register-form';
+import RegisterForm from './register-member-form';
 
 // Local Typings
 interface Props {
@@ -39,6 +39,7 @@ const MemberFormValuesWrapper: FC<Props> = ({
       <FormHr />
 
       <RegisterForm
+        authenticatedUserId={authenticatedUserId}
         initialMemberFormValues={initialMemberFormValues}
         memberForm={memberForm}
         onCompleteMemberStep={onCompleteMemberStep}
