@@ -58,8 +58,6 @@ class Invoice extends Component {
       ...otherProps
     } = this.props;
 
-    console.log('sponsorOrganizationName', sponsorOrganizationName);
-
     return (
       <section
         css={{

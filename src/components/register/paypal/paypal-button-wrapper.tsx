@@ -63,7 +63,10 @@ const PaypalButtonWrapper: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  const [paymentError, setPaymentError] = useState<ReactElement | null>(null);
+  const [
+    paymentError,
+    setPaymentError,
+  ] = useState<ReactElement | null>(null);
 
   const errorText = (
     <>
@@ -92,17 +95,18 @@ const PaypalButtonWrapper: FC<Props> = ({
 
   return (
     <>
-      <Box mt={2}>
-        <PaypalButton
-          client={CLIENT}
-          currency="USD"
-          env={ENV}
-          onCancel={handleCancel}
-          onError={handleError}
-          onSuccess={handleSuccess}
-          total={amount}
-        />
-      </Box>
+      <Collapse in={amount}>
+        <Box mt={2}>
+          <PaypalButton
+            client={CLIENT}
+            env={ENV}
+            onCancel={handleCancel}
+            onError={handleError}
+            onSuccess={handleSuccess}
+            total={amount}
+          />
+        </Box>
+      </Collapse>
 
       <Collapse in={Boolean(paymentError)}>
         <Box mt={2}>

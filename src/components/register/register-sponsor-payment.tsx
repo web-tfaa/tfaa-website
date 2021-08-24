@@ -200,8 +200,8 @@ const RegisterSponsorPayment: FC<Props> = ({
     }
   }, [previousReceiptId, receiptId]);
 
-  const handleUpdateCompletedStep = (payment: PaypalPayment) => {
-    doGetReceiptId(handleGetCurrentReceiptId);
+  const handleUpdateCompletedStep = async (payment: PaypalPayment) => {
+    await doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompletePaymentStep(payment);
   };
@@ -318,8 +318,15 @@ const RegisterSponsorPayment: FC<Props> = ({
               className={classes.sponsorLevelAmount}
               component="span"
             >
-              — {`$${sponsorForm.AmountDonated}`
-                || 'Contact the Executive Secretary for more details'}
+              — {sponsorForm.AmountDonated
+              ? `$${sponsorForm.AmountDonated}`
+              : (
+                <span>
+                  Contact the{' '}
+                  <a href="mailto:jeffrey.turner@allenisd.org">TMAC Executive Secretary</a>{' '}
+                  for more details
+                </span>
+              )}
             </Typography>
           </h2>
 

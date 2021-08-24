@@ -18,12 +18,13 @@ import { currentSchoolYearLong } from '../../utils/helpers';
 // Local Variables
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '75%',
     marginLeft: 32,
     marginRight: 32,
     marginTop: theme.spacing(2),
+    width: '75%',
   },
   table: {
+    border: `2px solid ${theme.palette.grey[600]}`,
     marginBottom: 0,
     minWidth: 200,
     paddingRight: theme.spacing(1),
@@ -102,8 +103,8 @@ InvoiceTable.propTypes = {
     PropTypes.number,
   ]).isRequired,
   form: PropTypes.shape({}).isRequired,
-  isInvoice: PropTypes.bool.isRequired,
   isActive: PropTypes.bool,
+  isInvoice: PropTypes.bool.isRequired,
   sponsorLevel: PropTypes.string,
 };
 InvoiceTable.defaultProps = {

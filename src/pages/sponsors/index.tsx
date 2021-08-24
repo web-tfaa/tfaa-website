@@ -4,7 +4,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
-import React, { FC, useEffect, useState } from 'react';
+import React, {
+  FC, useCallback, useEffect, useState
+} from 'react';
 
 // Internal Dependencies
 import { doGetUsers } from '../../firebase/db';
@@ -34,10 +36,17 @@ const Sponsors: FC<Props> = ({ location }) => {
   console.log('previousSponsorData', previousSponsorData);
   console.log('sponsorData', sponsorData);
 
+  const handleUpdateSponsorData = useCallback((newSponsorData: unknown[] | null) => {
+    console.log('newSponsorData', newSponsorData);
+    setSponsorData(newSponsorData);
+  }, []);
+
   // Fetch sponsor data when component mounts
   useEffect(() => {
+    console.log('------- MOUNT ------------');
     setIsLoading(true);
-    doGetUsers('sponsor', emptySponsorList, setSponsorData);
+
+    doGetUsers('sponsor', emptySponsorList, handleUpdateSponsorData);
   }, []);
 
   useEffect(() => {

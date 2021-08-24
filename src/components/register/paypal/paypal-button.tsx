@@ -4,6 +4,7 @@ https://www.robinwieruch.de/react-paypal-payment/
 */
 
 // External Dependencies
+import { disabled } from 'glamor';
 import React, {
   FC, useEffect, useRef, useState
 } from 'react';
@@ -16,7 +17,6 @@ import { logError } from '../../../utils/logError';
 // Local Typings
 interface Props {
   client: string;
-  currency: string;
   env: 'production' | 'sandbox';
   onCancel: (data: unknown) => void;
   onError: (error: unknown) => void;
@@ -53,10 +53,12 @@ interface PaypalGlobalObject {
   }
 }
 
+// Local Variables
+const CURRENCY = 'USD';
+
 // Component Definition
 const PaypalButton: FC<Props> = ({
   client,
-  currency,
   env,
   onCancel,
   onError,
@@ -92,7 +94,7 @@ const PaypalButton: FC<Props> = ({
         {
           amount: {
             total,
-            currency,
+            currency: CURRENCY,
           },
         },
       ],

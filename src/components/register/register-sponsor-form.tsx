@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Typography,
 } from '@material-ui/core';
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Form, Formik } from 'formik';
 
@@ -19,11 +19,11 @@ import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
 } from '../../pages/sponsors/register';
-import { logError } from '../../utils/logError';
-import { doCreateEntry } from '../../firebase/db';
-import { registerSponsorSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
 import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
+import { doCreateEntry } from '../../firebase/db';
+import { logError } from '../../utils/logError';
+import { registerSponsorSchema } from './schemas';
 
 // Local Typings
 interface Props {
@@ -102,7 +102,6 @@ const RegisterSponsorForm: FC<Props> = ({
   };
 
   const handleClickSubmitButton = async (values: SponsorFormValues) => {
-    console.log('values', values);
     if (!authenticatedUserId) {
       return null;
     }
@@ -112,13 +111,13 @@ const RegisterSponsorForm: FC<Props> = ({
 
     // Right here we should delete any values that we
     //  don't need in the synced Google Sheet
+    delete updatedValues.honeypot;
 
     // Send phone values in formatted
     updatedValues.ContactPhone = formatPhone(updatedValues.ContactPhone);
 
     // The userId is needed to sync the Google Sheet with the Firestore DB
     const updatedFormWithUserId = {
-      ...sponsorForm,
       ...updatedValues,
       AmountDonated: sponsorForm.AmountDonated,
       SponsorLevel: sponsorForm.SponsorLevel,
@@ -137,7 +136,7 @@ const RegisterSponsorForm: FC<Props> = ({
     }
   };
 
-  const handleChangeSponsorLevel = (event) => {
+  const handleChangeSponsorLevel = useCallback((event) => {
     const {
       value: newSponsorLevel,
     } = event.target;
@@ -154,7 +153,7 @@ const RegisterSponsorForm: FC<Props> = ({
       AmountDonated: amountDonated,
       SponsorLevel: newSponsorLevel,
     });
-  };
+  }, []);
 
   if (hasCompletedRegisterSponsorForm) {
     return (

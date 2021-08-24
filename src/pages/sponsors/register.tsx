@@ -29,7 +29,7 @@ export interface SponsorFormValues {
   ContactAddress2: string;
   ContactPhone: string;
   Email: string;
-  honeypot: string;
+  honeypot?: string;
   invoiceDate: string;
   invoiceId: number;
   isAuthenticated?: boolean;
@@ -65,7 +65,6 @@ const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
   ContactAddress2: '',
   ContactPhone: '',
   Email: '',
-  honeypot: '',
   invoiceDate: '',
   invoiceId: 0,
   // isAuthenticated: false,
@@ -91,6 +90,7 @@ const initialSponsorReducerState = {
 };
 
 // Local Reducers
+// actions
 const SPONSOR_FORM_ACTIONS = {
   COMPLETE_STEP: 'COMPLETE_STEP',
   UPDATE_ACTIVE_SPONSOR_STEP: 'UPDATE_ACTIVE_SPONSOR_STEP',
@@ -98,10 +98,23 @@ const SPONSOR_FORM_ACTIONS = {
   UPDATE_SPONSOR_FORM: 'UPDATE_SPONSOR_FORM',
 };
 
+// function used to initialize state
+function createSponsorFormReducerState({
+  activeStep = 0,
+  completedSponsorSteps = COMPLETED_SPONSOR_STEPS_INITIAL_STATE,
+  sponsorForm = INITIAL_SPONSOR_FORM_VALUES,
+} = {}) {
+  return {
+    activeStep,
+    completedSponsorSteps,
+    sponsorForm,
+  };
+}
+
 function sponsorFormReducer(state, { type, payload }) {
   switch (type) {
     case SPONSOR_FORM_ACTIONS.COMPLETE_STEP: {
-      console.log('UPDATE_ACTIVE_SPONSOR_STEP : payload', payload);
+      console.log('COMPLETE_STEP : payload', payload);
 
       const {
         completedStep,
@@ -168,20 +181,19 @@ const RegisterSponsorContent: FC<Props> = ({
   isAuthenticated,
 }) => {
   const [
-    spnosorFormState,
+    sponsorFormState,
     dispatch,
   ] = useReducer(
     sponsorFormReducer,
     initialSponsorReducerState,
+    createSponsorFormReducerState,
   );
 
   const {
     activeStep,
     sponsorForm,
     completedSponsorSteps,
-  } = spnosorFormState;
-
-  console.log('TOP : spnosorFormState', spnosorFormState);
+  } = sponsorFormState;
 
   const handleUpdateActiveStep = (newStep: number) => {
     dispatch({
