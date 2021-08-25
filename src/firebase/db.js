@@ -25,7 +25,6 @@ export const doCreateEntry = (
     .then(() => {
       console.log(`Registration for ${documentId} in ${currentSchoolYearShort} was successful`);
       if (callback) {
-        // console.log('doCreateEntry, form passed to callback', form);
         callback(form);
       }
     })
@@ -72,20 +71,12 @@ export const doGetUsers = (collection, userList, callback) => {
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const userObject = doc.data();
-        // console.log('userObject ..........', userObject);
 
         // The doc.userId is the userId
         if (userObject.userId) {
           updatedUserList.push(userObject);
         }
-
-        // updatedUserList[doc.userId] = {
-        //   ...userObject,
-        //   userId: doc.userId,
-        // };
       });
-
-      // console.log(' \\\\\\ updatedUserList //////////////', updatedUserList);
 
       return callback(updatedUserList);
     })

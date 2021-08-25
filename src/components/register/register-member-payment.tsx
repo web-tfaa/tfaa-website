@@ -99,12 +99,6 @@ const RegisterMemberPayment: FC<Props> = ({
   } = memberForm;
 
   const previousInvoiceId = usePrevious(invoiceId);
-  const previousReceiptId = usePrevious(receiptId);
-
-  console.log('hello again', {
-    previousInvoiceId,
-    previousReceiptId,
-  });
 
   // We have these refs for printing invoice or receipt
   const printInvoiceRef = useRef<ReactInstance>(null);
@@ -131,8 +125,6 @@ const RegisterMemberPayment: FC<Props> = ({
   };
 
   const handleCompleteMemberPaymentStep = (payment: PaypalPayment) => {
-    console.log('payment', payment);
-
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
       AmountPaid: isActiveMember === 'active' ? 50 : 30,
@@ -140,9 +132,9 @@ const RegisterMemberPayment: FC<Props> = ({
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
       invoiceDate: currentDate,
-      invoiceId: memberForm.invoiceId + 1,
+      invoiceId: memberForm.invoiceId,
       receiptDate: memberForm.receiptId ? currentDate : '',
-      receiptId: memberForm.receiptId + 1,
+      receiptId: memberForm.receiptId,
     };
 
     doUpdateEntry(
@@ -154,8 +146,8 @@ const RegisterMemberPayment: FC<Props> = ({
   };
 
   useEffect(() => {
-    // doGetInvoiceId(handleGetCurrentInvoiceId);
-    // doGetReceiptId(handleGetCurrentReceiptId);
+    doGetInvoiceId(handleGetCurrentInvoiceId);
+    doGetReceiptId(handleGetCurrentReceiptId);
 
     // On unmount
     return () => {
@@ -174,7 +166,8 @@ const RegisterMemberPayment: FC<Props> = ({
   useEffect(() => {
     if (!invoiceId) {
       doGetInvoiceId(handleGetCurrentInvoiceId);
-    } else if (previousInvoiceId !== invoiceId && !hasCompletedPayment) {
+    } else if (previousInvoiceId === 0
+        && previousInvoiceId !== invoiceId && !hasCompletedPayment) {
       const updatedMemberForm: MemberFormValues = {
         ...memberForm,
         invoiceDate: currentDate,
@@ -182,7 +175,12 @@ const RegisterMemberPayment: FC<Props> = ({
       };
 
       doUpdateEntry(
-        updatedMemberForm,
+        {
+          ...updatedMemberForm,
+          // Though we have the receipt id in our local reducer state,
+          //  we don't need to store it in the DB until payment is successful
+          receiptId: 0,
+        },
         FIRESTORE_MEMBER_COLLECTION,
         authenticatedUserId,
       );
@@ -190,26 +188,8 @@ const RegisterMemberPayment: FC<Props> = ({
     }
   }, [invoiceId, previousInvoiceId]);
 
-  // We want to record the newest receiptId in the Firestore database
-  useEffect(() => {
-    if (previousReceiptId !== receiptId) {
-      const updatedMemberForm: MemberFormValues = {
-        ...memberForm,
-        receiptDate: currentDate,
-        receiptId,
-      };
-
-      doUpdateEntry(
-        updatedMemberForm,
-        FIRESTORE_MEMBER_COLLECTION,
-        authenticatedUserId,
-      );
-      onUpdateMemberForm(updatedMemberForm);
-    }
-  }, [previousReceiptId, receiptId]);
-
   const handleUpdateCompletedStep = (payment: PaypalPayment) => {
-    setTimeout(() => doGetReceiptId(handleGetCurrentReceiptId), 0);
+    doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompleteMemberPaymentStep(payment);
   };
@@ -223,7 +203,7 @@ const RegisterMemberPayment: FC<Props> = ({
       ...memberForm,
       invoiceDate: currentDate,
       invoiceId,
-      MemberType: isActive ? 'Active' : 'Retired' as 'Active' | 'Retired',
+      MemberType: isActive ? 'Active' : 'Retired' as ('Active' | 'Retired'),
       receiptId,
     };
 

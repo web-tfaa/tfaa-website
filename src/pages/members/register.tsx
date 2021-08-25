@@ -6,7 +6,7 @@
 import { Helmet } from 'react-helmet';
 // import { navigate } from 'gatsby';
 import React, {
-  FC, useEffect, useReducer, useState
+  FC, useEffect, useReducer
 } from 'react';
 
 // Internal Dependencies
@@ -108,19 +108,6 @@ const MEMBER_FORM_ACTIONS = {
   UPDATE_MEMBER_FORM: 'UPDATE_MEMBER_FORM',
 };
 
-// function used to initialize state
-function createMemberFormReducerState({
-  activeMemberStep = 0,
-  completedMemberSteps = COMPLETED_MEMBER_STEPS_INITIAL_STATE,
-  memberForm = INITIAL_MEMBER_FORM_VALUES,
-} = {}) {
-  return {
-    activeMemberStep,
-    completedMemberSteps,
-    memberForm,
-  };
-}
-
 function memberFormReducer(state, { type, payload }) {
   switch (type) {
     case MEMBER_FORM_ACTIONS.COMPLETE_MEMBER_STEP: {
@@ -185,7 +172,6 @@ const RegisterMemberContent: FC<Props> = ({
   ] = useReducer(
     memberFormReducer,
     initialMemberReducerState,
-    createMemberFormReducerState,
   );
 
   const {

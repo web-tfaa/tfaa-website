@@ -77,7 +77,6 @@ const PaypalButtonWrapper: FC<Props> = ({
   );
 
   const handleSuccess = (payment: PaypalPayment) => {
-    console.log('Successful payment', payment);
     onSuccessfulPayment(payment);
   };
 
