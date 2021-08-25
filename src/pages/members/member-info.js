@@ -242,7 +242,7 @@ const MemberInfo = ({
                 primary="Need to update any information?"
                 secondary={(
                   <>
-                    Email the <a href="mailto:jeff_turner@allenisd.org">TMAC Executive Secretary</a>.
+                    Email the <a href="mailto:jeffrey.turner@allenisd.org">TMAC Executive Secretary</a>.
                   </>
                 )}
               />

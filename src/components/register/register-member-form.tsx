@@ -8,39 +8,32 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
-import React, { FC } from 'react';
-import { navigate } from 'gatsby';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { FC, useState } from 'react';
 import { Form, Formik } from 'formik';
+import { makeStyles } from '@material-ui/core/styles';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import EnhancedAlert from '../shared/EnhancedAlert';
-import AuthUserContext from '../session/AuthUserContext';
-import LoadingContainer from '../shared/LoadingContainer';
-import RegisterButton from './register-button';
-import { removeErrorKeys } from '../../utils/helpers';
 import {
-  HandleCompleteStepType,
-  IRegisterForm,
+  HandleCompleteMemberStepType,
+  MemberFormValues,
 } from '../../pages/members/register';
 import { doCreateEntry } from '../../firebase/db';
-import { logError } from '../../utils/logError';
 import { formatPhone } from '../../utils/formatPhone';
+import { logError } from '../../utils/logError';
 import { registerMemberSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
+import EnhancedAlert from '../shared/EnhancedAlert';
+import LoadingContainer from '../shared/LoadingContainer';
+import RegisterButton from './register-button';
 
 // Local Typings
-interface ContextProps {
-  initialFormValues: IRegisterForm;
-  onCompleteStep: HandleCompleteStepType;
-  onSetForm: (form: IRegisterForm) => void;
-  registerForm: IRegisterForm;
-}
-
-interface Props extends ContextProps {
-  authUser: {
-    uid: string;
-  } | null;
+interface Props {
+  authenticatedUserId: string;
+  initialMemberFormValues: MemberFormValues;
+  memberForm: MemberFormValues;
+  onCompleteMemberStep: HandleCompleteMemberStepType;
+  onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
 }
 
 // Local Variables
@@ -60,98 +53,96 @@ const useStyles = makeStyles({
   },
 });
 
-// const stripPhone = (phone) => phone.replace(/[^0-9]+/g, '');
+// This will tell the Firestore database action where to put the new record
+const FIRESTORE_MEMBER_COLLECTION = 'registration';
 
 // Component Definition
-const RegisterForm: FC<Props> = ({
-  authUser,
-  initialFormValues,
-  onCompleteStep,
-  onSetForm,
-  registerForm,
+const RegisterMemberForm: FC<Props> = ({
+  authenticatedUserId,
+  initialMemberFormValues,
+  memberForm,
+  onCompleteMemberStep,
+  onUpdateMemberForm,
 }) => {
   const classes = useStyles();
 
-  if (!authUser) {
+  // We use this to show a loading indicator when switching to Step 3
+  const [
+    hasCompletedMemberRegisterForm,
+    setHasCompletedMemberRegisterForm,
+  ] = useState(false);
+
+  if (!authenticatedUserId) {
     return null;
   }
 
-  const {
-    NewToTMAC,
-    hasCompletedRegisterInfoForm,
-    isAuthenticated,
-  } = registerForm;
+  const { NewToTMAC } = memberForm;
 
-  const handleCompleteInfoStep = () => {
-    setTimeout(() => onCompleteStep(0), 2200);
+  const handleCompleteMemberInfoStep = (updatedMemberForm: MemberFormValues) => {
+    setHasCompletedMemberRegisterForm(true);
+    onCompleteMemberStep(1, updatedMemberForm);
   };
 
-  const handleClickSubmitButton = async (
-    values: IRegisterForm,
-  ) => {
-    if (!authUser) {
+  const handleClickSubmitButton = async (values: MemberFormValues) => {
+    if (!authenticatedUserId) {
       return null;
     }
 
     // Make copy of values
     const updatedValues = values;
 
-    const { uid: authenticatedUserId } = authUser;
-
-    // This will identify each row in the database and serve as the document name
-    const documentId = authenticatedUserId;
-
-    // The Google Sheet doesn't need these values
-    const form = removeErrorKeys(updatedValues);
-    delete form.isAuthenticated;
-    delete form.honeypot;
-    delete form.hasCompletedRegisterInfoForm;
+    // Right here we should delete any values that we
+    //  don't need in the synced Google Sheet
+    delete updatedValues.honeypot;
 
     // Send phone values in formatted
-    form.OfficePhone = formatPhone(form.OfficePhone);
-    form.CellPhone = formatPhone(form.CellPhone);
-
-    // This will tell the database action where to put the new record
-    const collection = 'registration';
+    updatedValues.OfficePhone = formatPhone(updatedValues.OfficePhone);
+    updatedValues.CellPhone = formatPhone(updatedValues.CellPhone);
 
     // The userId is needed to sync the Google Sheet with the Firestore DB
-    const formWithUserId = {
-      ...form,
+    const updatedMemberFormWithUserId = {
+      ...updatedValues,
       userId: authenticatedUserId,
-    }
+    };
 
     try {
-      await doCreateEntry(formWithUserId, collection, documentId);
-      await onSetForm({
-        ...formWithUserId,
-        hasCompletedRegisterInfoForm: true,
-      });
-
-      handleCompleteInfoStep();
+      await doCreateEntry(
+        updatedMemberFormWithUserId,
+        FIRESTORE_MEMBER_COLLECTION,
+        authenticatedUserId,
+        handleCompleteMemberInfoStep,
+      );
     } catch (error) {
-      logError('handleClickSubmitButton error in RegisterForm', error);
+      logError('handleClickSubmitButton error in RegisterMemberForm', error);
     }
   };
 
   const handleChangeNewToTMAC = (event) => {
-    onSetForm({
-      ...registerForm,
-      NewToTMAC: event.target.value,
+    const { value: updatedNewToTMACVAlue } = event.target;
+
+    onUpdateMemberForm({
+      ...memberForm,
+      NewToTMAC: updatedNewToTMACVAlue,
     });
   };
 
-  if (isAuthenticated) {
+  if (!authenticatedUserId) {
     navigate('/members');
   }
 
-  if (hasCompletedRegisterInfoForm) {
-    return <LoadingContainer step={3} title="Information Form Complete" />;
+  if (hasCompletedMemberRegisterForm) {
+    return (
+      <LoadingContainer
+        step={3}
+        title="Member Information Form Complete"
+      />
+    );
   }
 
   return (
     <div className="login-form">
       <Formik
-        initialValues={initialFormValues}
+        initialValues={initialMemberFormValues}
         validationSchema={registerMemberSchema}
         onSubmit={handleClickSubmitButton}
       >
@@ -173,7 +164,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.FirstName}
                   hasError={Boolean(errors.FirstName)}
                   isTouched={touched.FirstName}
-                  label="First Name"
+                  label="First Name*"
                   name="FirstName"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -186,7 +177,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.LastName}
                   hasError={Boolean(errors.LastName)}
                   isTouched={touched.LastName}
-                  label="Last Name"
+                  label="Last Name*"
                   name="LastName"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -199,7 +190,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.Title}
                   hasError={Boolean(errors.Title)}
                   isTouched={touched.Title}
-                  label="Title"
+                  label="Title*"
                   name="Title"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -212,7 +203,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.District}
                   hasError={Boolean(errors.District)}
                   isTouched={touched.District}
-                  label="District"
+                  label="District*"
                   name="District"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -225,7 +216,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.Address1}
                   hasError={Boolean(errors.Address1)}
                   isTouched={touched.Address1}
-                  label="Address 1"
+                  label="Address 1*"
                   name="Address1"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -255,7 +246,7 @@ const RegisterForm: FC<Props> = ({
                     errorMessage={errors.City}
                     hasError={Boolean(errors.City)}
                     isTouched={touched.City}
-                    label="City"
+                    label="City*"
                     name="City"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -272,7 +263,7 @@ const RegisterForm: FC<Props> = ({
                     errorMessage={errors.State}
                     hasError={Boolean(errors.State)}
                     isTouched={touched.State}
-                    label="State"
+                    label="State*"
                     name="State"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -286,7 +277,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.ZipCode}
                   hasError={Boolean(errors.ZipCode)}
                   isTouched={touched.ZipCode}
-                  label="Zip Code"
+                  label="Zip Code*"
                   name="ZipCode"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -299,7 +290,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.Email}
                   hasError={Boolean(errors.Email)}
                   isTouched={touched.Email}
-                  label="Email"
+                  label="Email*"
                   name="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -312,7 +303,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.OfficePhone}
                   hasError={Boolean(errors.OfficePhone)}
                   isTouched={touched.OfficePhone}
-                  label="Office Phone"
+                  label="Office Phone*"
                   name="OfficePhone"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -326,7 +317,7 @@ const RegisterForm: FC<Props> = ({
                   errorMessage={errors.CellPhone}
                   hasError={Boolean(errors.CellPhone)}
                   isTouched={touched.CellPhone}
-                  label="Cell Phone"
+                  label="Cell Phone*"
                   name="CellPhone"
                   onBlur={handleBlur}
                   // onChange={handleChange}
@@ -404,10 +395,4 @@ const RegisterForm: FC<Props> = ({
   );
 };
 
-const RegisterFormWithContext: FC<ContextProps> = (props) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => <RegisterForm {...props} authUser={authUser} />}
-  </AuthUserContext.Consumer>
-);
-
-export default RegisterFormWithContext;
+export default RegisterMemberForm;

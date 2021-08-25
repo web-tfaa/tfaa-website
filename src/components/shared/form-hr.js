@@ -19,9 +19,8 @@ const useStyles = makeStyles({
 });
 
 // Component Definition
-const FormHr = (props) => {
-  const { red } = props;
-  const classes = useStyles(props);
+const FormHr = ({ red }) => {
+  const classes = useStyles();
 
   return (
     <hr

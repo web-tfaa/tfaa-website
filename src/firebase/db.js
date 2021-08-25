@@ -4,7 +4,8 @@ import { currentSchoolYearShort } from '../utils/helpers';
 import { logError } from '../utils/logError';
 
 // Local Variables
-const getFirebaseCollectionName = (collection) => `${collection}_${currentSchoolYearShort}`;
+const getFirebaseCollectionName = (collection) =>
+  `${collection}_${currentSchoolYearShort}`;
 
 // Create/Update user entry in Firestore
 export const doCreateEntry = (
@@ -71,12 +72,12 @@ export const doGetUsers = (collection, userList, callback) => {
       querySnapshot.forEach((doc) => {
         const userObject = doc.data();
 
-        // The doc.id is the userId
-        updatedUserList[doc.id] = {
-          ...userObject,
-          userId: doc.id,
-        };
+        // The doc.userId is the userId
+        if (userObject.userId) {
+          updatedUserList.push(userObject);
+        }
       });
+
       return callback(updatedUserList);
     })
     .catch((error) => {

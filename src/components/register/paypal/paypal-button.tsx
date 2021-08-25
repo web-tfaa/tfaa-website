@@ -12,15 +12,21 @@ import ReactDOM from 'react-dom';
 // Local Dependencies
 import usePrevious from '../../../utils/hooks/usePrevious';
 import { logError } from '../../../utils/logError';
+import {
+  PaypalPayment,
+  PaypalPaymentCancel,
+} from './paypal-button-wrapper';
 
 // Local Typings
 interface Props {
-  client: string;
-  currency: string;
+  client: {
+    sandbox: string | undefined;
+    production: string | undefined;
+  };
   env: 'production' | 'sandbox';
-  onCancel: (data: unknown) => void;
+  onCancel: (data: PaypalPaymentCancel) => void;
   onError: (error: unknown) => void;
-  onSuccess: (data: unknown) => void;
+  onSuccess: (data: PaypalPayment) => void;
   total: number;
 }
 
@@ -53,10 +59,12 @@ interface PaypalGlobalObject {
   }
 }
 
+// Local Variables
+const CURRENCY = 'USD';
+
 // Component Definition
 const PaypalButton: FC<Props> = ({
   client,
-  currency,
   env,
   onCancel,
   onError,
@@ -64,7 +72,6 @@ const PaypalButton: FC<Props> = ({
   total,
 }) => {
   const paypalRef = useRef<PaypalGlobalObject | null>(null);
-  console.log('paypalRef', paypalRef.current);
 
   const [showButton, setShowButton] = useState(false);
   const previousShowButton = usePrevious(showButton);
@@ -93,7 +100,7 @@ const PaypalButton: FC<Props> = ({
         {
           amount: {
             total,
-            currency,
+            currency: CURRENCY,
           },
         },
       ],
