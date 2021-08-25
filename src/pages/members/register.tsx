@@ -5,7 +5,9 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 // import { navigate } from 'gatsby';
-import React, { FC, useEffect, useReducer } from 'react';
+import React, {
+  FC, useEffect, useReducer, useState
+} from 'react';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -32,28 +34,28 @@ interface Props {
 export interface MemberFormValues {
   Address1: string;
   Address2?: string;
-  AmountPaid: 0;
+  AmountPaid: 0 | 30 | 50;
   CellPhone: string;
   City: string;
   District: string;
   Email: string;
   FirstName: string;
   LastName: string;
-  MemberType: string;
+  MemberType: 'Active' | 'Retired';
   NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
-  PaymentOption: string;
-  PaypalPayerID: string;
-  PaypalPaymentID: string;
+  PaymentOption?: 'Invoiced' | 'Paypal';
+  PaypalPayerID?: string;
+  PaypalPaymentID?: string;
   State: string;
   Title: string;
   ZipCode: string;
   honeypot?: string;
   invoiceDate: string;
   invoiceId: number;
-  isAuthenticated: boolean;
   receiptDate: string;
   receiptId: number;
+  userId?: string;
 }
 type Steps = 0 | 1 | 2;
 export type HandleCompleteMemberStepType = (
@@ -76,7 +78,7 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   Email: '',
   FirstName: '',
   LastName: '',
-  MemberType: '',
+  MemberType: 'Active',
   NewToTMAC: 'Yes',
   OfficePhone: '',
   PaymentOption: 'Invoiced',
@@ -85,12 +87,11 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   State: '',
   Title: '',
   ZipCode: '',
-  honeypot: '',
   invoiceDate: '',
   invoiceId: 0,
-  isAuthenticated: false,
   receiptDate: '',
   receiptId: 0,
+  userId: '',
 };
 
 const initialMemberReducerState = {
@@ -123,8 +124,6 @@ function createMemberFormReducerState({
 function memberFormReducer(state, { type, payload }) {
   switch (type) {
     case MEMBER_FORM_ACTIONS.COMPLETE_MEMBER_STEP: {
-      console.log('COMPLETE_MEMBER_STEP : payload', payload);
-
       const {
         completedStep,
         updatedMemberForm,
@@ -144,8 +143,6 @@ function memberFormReducer(state, { type, payload }) {
       };
     }
     case MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP: {
-      console.log('UPDATE_ACTIVE_MEMBER_STEP : payload', payload);
-
       const { newMemberStep } = payload;
       return {
         ...state,
@@ -159,8 +156,6 @@ function memberFormReducer(state, { type, payload }) {
       };
     }
     case MEMBER_FORM_ACTIONS.UPDATE_MEMBER_FORM: {
-      console.log('UPDATE_MEMBER_FORM : payload', payload);
-
       const { updatedMemberForm } = payload;
 
       return {
@@ -275,9 +270,9 @@ const RegisterMemberContent: FC<Props> = ({
         {[2, 3].includes(activeMemberStep) && (
           <RegisterMemberPayment
             authenticatedUserId={authUser?.uid}
-            onCompleteSponsorStep={handleCompleteMemberStep}
-            onUpdateSponsorForm={handleUpdateMemberForm}
-            sponsorForm={memberForm}
+            onCompleteMemberStep={handleCompleteMemberStep}
+            onUpdateMemberForm={handleUpdateMemberForm}
+            memberForm={memberForm}
           />
         )}
 

@@ -14,7 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
-import { removeErrorKeys } from '../../utils/helpers';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
@@ -77,14 +76,11 @@ const RegisterMemberForm: FC<Props> = ({
     return null;
   }
 
-  const {
-    NewToTMAC,
-    isAuthenticated,
-  } = memberForm;
+  const { NewToTMAC } = memberForm;
 
   const handleCompleteMemberInfoStep = (updatedMemberForm: MemberFormValues) => {
     setHasCompletedMemberRegisterForm(true);
-    onCompleteMemberStep(0, updatedMemberForm);
+    onCompleteMemberStep(1, updatedMemberForm);
   };
 
   const handleClickSubmitButton = async (values: MemberFormValues) => {
@@ -130,7 +126,7 @@ const RegisterMemberForm: FC<Props> = ({
     });
   };
 
-  if (isAuthenticated) {
+  if (!authenticatedUserId) {
     navigate('/members');
   }
 
@@ -138,7 +134,7 @@ const RegisterMemberForm: FC<Props> = ({
     return (
       <LoadingContainer
         step={3}
-        title="Information Form Complete"
+        title="Member Information Form Complete"
       />
     );
   }

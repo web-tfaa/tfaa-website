@@ -11,20 +11,14 @@ import {
   RadioGroup,
   Typography,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import React, {
   FC, ReactInstance, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
-import FormHr from '../shared/form-hr';
-import Invoice from './invoice';
-import PaypalButtonWrapper, {
-  PaypalPayment,
-} from './paypal/paypal-button-wrapper';
-import RegisterButton from './register-button';
 import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
@@ -38,6 +32,12 @@ import {
 } from '../../firebase/db';
 import { currentSchoolYearLong } from '../../utils/helpers';
 import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
+import FormHr from '../shared/form-hr';
+import Invoice from './invoice';
+import PaypalButtonWrapper, {
+  PaypalPayment,
+} from './paypal/paypal-button-wrapper';
+import RegisterButton from './register-button';
 import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
@@ -111,7 +111,6 @@ const RegisterSponsorPayment: FC<Props> = ({
     showSponsorLevelOptions,
     setShowSponsorLevelOptions,
   ] = useState(false);
-
   const [hasCompletedPayment, setHasCompletedPayment] = useState<boolean>();
 
   const handleToggleSponsorLevelOptions = () => {
@@ -205,7 +204,7 @@ const RegisterSponsorPayment: FC<Props> = ({
     }
   }, [previousReceiptId, receiptId]);
 
-  const handleUpdateCompletedStep = async (payment: PaypalPayment) => {
+  const handleUpdateCompletedStep = (payment: PaypalPayment) => {
     doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompletePaymentStep(payment);
@@ -444,7 +443,7 @@ const RegisterSponsorPayment: FC<Props> = ({
               <li>Click the button below to print an invoice.</li>
               <li>
                 Send the invoice and payment directly to the TMAC
-                Executive Security as detailed on the invoice.
+                Executive Secretary as detailed on the invoice.
               </li>
             </ol>
           </Box>
@@ -492,7 +491,7 @@ const RegisterSponsorPayment: FC<Props> = ({
 
       <FormHr />
 
-      {hasCompletedPayment ? successfulPaymentElement : invoiceElement }
+      {hasCompletedPayment ? successfulPaymentElement : invoiceElement}
     </section>
   );
 };

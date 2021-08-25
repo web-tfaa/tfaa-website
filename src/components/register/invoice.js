@@ -21,10 +21,6 @@ const propTypes = {
   invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isActive: PropTypes.bool,
   isInvoice: PropTypes.bool.isRequired,
-  // paymentDetails: PropTypes.shape({
-  //   payerId: PropTypes.string,
-  //   paymentId: PropTypes.string,
-  // }),
   receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sponsorLevel: PropTypes.string,
   sponsorOrganizationName: PropTypes.string,
@@ -33,7 +29,6 @@ const propTypes = {
 const defaultProps = {
   invoiceId: 1,
   isActive: true,
-  // paymentDetails: {},
   receiptId: 1,
   sponsorLevel: '',
   sponsorOrganizationName: '',
@@ -51,7 +46,6 @@ class Invoice extends Component {
       invoiceId,
       isActive,
       isInvoice,
-      // paymentDetails,
       receiptId,
       sponsorLevel,
       sponsorOrganizationName,
@@ -84,10 +78,12 @@ class Invoice extends Component {
           />
           <h2 css={{ margin: 0, textAlign: 'right' }}>{isInvoice ? 'INVOICE' : 'RECEIPT'}</h2>
         </header>
+
         <FormHr red />
 
         <div css={{ fontSize: 14, margin: '0 32px' }}>
           <h3>Texas Music Administrators Conference</h3>
+
           <p css={{ fontSize: 14 }}>
             <em>&quot;...promoting and supporting music education&quot;</em>
           </p>
