@@ -66,9 +66,8 @@ const Sponsors: FC<Props> = ({ location }) => {
           >
             <SponsorCard
               sponsorData={sponsorData?.filter((sponsor) =>
-                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
-              subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
-              title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
+                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
+              title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
             />
             <SponsorCard
               sponsorData={sponsorData?.filter((sponsor) =>
@@ -78,8 +77,9 @@ const Sponsors: FC<Props> = ({ location }) => {
             />
             <SponsorCard
               sponsorData={sponsorData?.filter((sponsor) =>
-                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
-              title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
+                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
+              subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
+              title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
             />
           </Box>
         </Container>

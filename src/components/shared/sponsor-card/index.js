@@ -287,12 +287,12 @@ const SponsorCard = ({
           <CardContent className={classes.cardContent}>
             <h5 className={classes.titleFive}>Sponsorship perks:</h5>
             <ul className={classes.list}>
-              {title === SPONSORSHIP_LEVELS.SILVER_MEDAL
-                && silverMedalPerksListItems}
-              {title === SPONSORSHIP_LEVELS.GOLD_MEDAL
-                && goldMedalPerksListItems}
               {title === SPONSORSHIP_LEVELS.CLASS_CHAMPION
                 && classChampionPerksListItems}
+              {title === SPONSORSHIP_LEVELS.GOLD_MEDAL
+                && goldMedalPerksListItems}
+              {title === SPONSORSHIP_LEVELS.SILVER_MEDAL
+                  && silverMedalPerksListItems}
             </ul>
           </CardContent>
         </Card>
