@@ -136,15 +136,14 @@ const silverMedalPerksListItems = (
 
 const goldMedalPerksListItems = (
   <>
-    <li>Name recognition in all printed programs</li>
-    <li>Company name and link to company website on the TMAC website</li>
+    <li>Company name recognition in all printed materials</li>
+    <li>Company name and website link on TMAC website</li>
     <li>Attendance to Fall Retreat (Nov) and TMEA Roundtable (Feb)</li>
     <ul>
       <li>
-        Each &quot;Gold Medal&quot; sponsor will have a designated space
-        around the banquet room for tables during the Fall Retreat.
-        TMAC members in attendance at the Fall Retreat will have time
-        to visit the tables and vendors.
+        Tables will be placed around the banquet hall/hallway
+        for TMAC members to visit with sponsors during the
+        Fall Retreat.  Time will be scheduled to visit the vendor tables.
       </li>
     </ul>
     <li>
@@ -240,7 +239,7 @@ const SponsorCard = ({
                 className={classes.perkNote}
                 variant="body2"
               >
-                All costs are paid to TMAC. TMAC is a tax exempt organization now.
+                All costs are paid to TMAC. TMAC is a tax exempt organization.
               </Typography>
 
               <Box mt={1.5}>
