@@ -36,6 +36,7 @@ const SponsorInfo = (props) => {
         }}
       >
         <Status />
+
         <Container>
           <Helmet>
             <title>TMAC | Sponsor Information</title>
@@ -49,21 +50,25 @@ const SponsorInfo = (props) => {
             }}
           >
             <CardHeadline>Sponsor TMAC</CardHeadline>
+
             <FuturaDiv>
               To become a TMAC sponsor please complete these three steps:
             </FuturaDiv>
+
             <FuturaDiv>
               <span css={boldStyles}>
                 1.{' '}
               </span>
               Sign up for a TMAC website login.
             </FuturaDiv>
+
             <FuturaDiv>
               <span css={boldStyles}>
                 2.{' '}
               </span>
               Complete the Sponsor Registration Form.
             </FuturaDiv>
+
             <FuturaDiv>
               <span css={boldStyles}>
                 3.{' '}

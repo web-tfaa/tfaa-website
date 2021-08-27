@@ -13,7 +13,7 @@ import EnhancedAlert from '../../shared/EnhancedAlert';
 import { logError } from '../../../utils/logError';
 
 // Local Typings
-interface PaypalPayment {
+export interface PaypalPayment {
   cancelled: boolean;
   paid: boolean;
   payerID: string;
@@ -22,7 +22,7 @@ interface PaypalPayment {
   returnUrl: string;
 }
 
-interface PaypalPaymentCancel {
+export interface PaypalPaymentCancel {
   billingID: string;
   // eslint-disable-next-line camelcase
   button_version: string;
@@ -63,7 +63,10 @@ const PaypalButtonWrapper: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  const [paymentError, setPaymentError] = useState<ReactElement | null>(null);
+  const [
+    paymentError,
+    setPaymentError,
+  ] = useState<ReactElement | null>(null);
 
   const errorText = (
     <>
@@ -74,7 +77,6 @@ const PaypalButtonWrapper: FC<Props> = ({
   );
 
   const handleSuccess = (payment: PaypalPayment) => {
-    console.log('Successful payment', payment);
     onSuccessfulPayment(payment);
   };
 
@@ -92,17 +94,18 @@ const PaypalButtonWrapper: FC<Props> = ({
 
   return (
     <>
-      <Box mt={2}>
-        <PaypalButton
-          client={CLIENT}
-          currency="USD"
-          env={ENV}
-          onCancel={handleCancel}
-          onError={handleError}
-          onSuccess={handleSuccess}
-          total={amount}
-        />
-      </Box>
+      <Collapse in={amount}>
+        <Box mt={2}>
+          <PaypalButton
+            client={CLIENT}
+            env={ENV}
+            onCancel={handleCancel}
+            onError={handleError}
+            onSuccess={handleSuccess}
+            total={amount}
+          />
+        </Box>
+      </Collapse>
 
       <Collapse in={Boolean(paymentError)}>
         <Box mt={2}>

@@ -1,19 +1,21 @@
 /*
-  Main container for the Registration process
+  Main container for the Member Registration process
 */
 
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import { navigate } from 'gatsby';
-import React, { FC, useEffect, useState } from 'react';
+// import { navigate } from 'gatsby';
+import React, {
+  FC, useEffect, useReducer
+} from 'react';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
-import RegisterFormWrapper from '../../components/register/register-form-wrapper';
-import RegisterPayment from '../../components/register/register-payment';
+import RegisterMemberFormWrapper from '../../components/register/register-member-form-wrapper';
+import RegisterMemberPayment from '../../components/register/register-member-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
 import presets from '../../utils/presets';
@@ -29,156 +31,192 @@ interface Props {
   } | null;
   isAuthenticated: boolean;
 }
-export interface IRegisterForm {
+export interface MemberFormValues {
   Address1: string;
-  Address1Error: string;
   Address2?: string;
-  AmountPaid: 0;
+  AmountPaid: 0 | 30 | 50;
   CellPhone: string;
-  CellPhoneError: string;
   City: string;
-  CityError: string;
   District: string;
-  DistrictError: string;
   Email: string;
-  EmailError: string;
   FirstName: string;
-  FirstNameError: string;
   LastName: string;
-  LastNameError: string;
-  MemberType: string;
+  MemberType: 'Active' | 'Retired';
   NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
-  OfficePhoneError: string;
-  PaymentOption: string;
-  PaypalPayerID: string;
-  PaypalPaymentID: string;
+  PaymentOption?: 'Invoiced' | 'Paypal';
+  PaypalPayerID?: string;
+  PaypalPaymentID?: string;
   State: string;
-  StateError: string;
   Title: string;
-  TitleError: string;
   ZipCode: string;
-  ZipCodeError: string;
-  hasCompletedRegisterInfoForm: boolean;
-  honeypot: string;
+  honeypot?: string;
   invoiceDate: string;
   invoiceId: number;
-  isAuthenticated: boolean;
   receiptDate: string;
   receiptId: number;
+  userId?: string;
 }
 type Steps = 0 | 1 | 2;
-export type HandleCompleteStepType = (step: Steps) => void;
+export type HandleCompleteMemberStepType = (
+  step: Steps,
+  updatedMemberForm: MemberFormValues,
+) => void;
 
 // Local Variables
-const COMPLETED_STEPS_INITIAL_STATE: Steps[] = [];
+const COMPLETED_MEMBER_STEPS_INITIAL_STATE: Steps[] = [];
 
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
-const intialFormValues: IRegisterForm = {
+const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   Address1: '',
-  Address1Error: '',
-  // Address2 is not required, so cannot have an error
   Address2: '',
   AmountPaid: 0,
   CellPhone: '',
-  CellPhoneError: '',
   City: '',
-  CityError: '',
   District: '',
-  DistrictError: '',
   Email: '',
-  EmailError: '',
   FirstName: '',
-  FirstNameError: '',
   LastName: '',
-  LastNameError: '',
-  MemberType: '',
+  MemberType: 'Active',
   NewToTMAC: 'Yes',
   OfficePhone: '',
-  OfficePhoneError: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
   PaypalPaymentID: '',
   State: '',
-  StateError: '',
   Title: '',
-  TitleError: '',
   ZipCode: '',
-  ZipCodeError: '',
-  hasCompletedRegisterInfoForm: false,
-  honeypot: '',
   invoiceDate: '',
   invoiceId: 0,
-  isAuthenticated: false,
   receiptDate: '',
   receiptId: 0,
+  userId: '',
 };
 
+const initialMemberReducerState = {
+  activeMemberStep: 0,
+  completedMemberSteps: COMPLETED_MEMBER_STEPS_INITIAL_STATE,
+  memberForm: INITIAL_MEMBER_FORM_VALUES,
+};
+
+// Local Reducers
+// actions
+const MEMBER_FORM_ACTIONS = {
+  COMPLETE_MEMBER_STEP: 'COMPLETE_MEMBER_STEP',
+  UPDATE_ACTIVE_MEMBER_STEP: 'UPDATE_ACTIVE_MEMBER_STEP',
+  UPDATE_MEMBER_FORM: 'UPDATE_MEMBER_FORM',
+};
+
+function memberFormReducer(state, { type, payload }) {
+  switch (type) {
+    case MEMBER_FORM_ACTIONS.COMPLETE_MEMBER_STEP: {
+      const {
+        completedStep,
+        updatedMemberForm,
+      } = payload;
+
+      return {
+        ...state,
+        activeMemberStep: state.activeMemberStep + 1,
+        completedMemberSteps: [
+          ...state.completedMemberSteps,
+          completedStep,
+        ],
+        memberForm: {
+          ...state.memberForm,
+          ...updatedMemberForm,
+        }
+      };
+    }
+    case MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP: {
+      const { newMemberStep } = payload;
+      return {
+        ...state,
+        activeMemberStep: newMemberStep,
+        completedMemberSteps: [
+          ...state.completedMemberSteps,
+          // We add the previous step to the completed
+          //  list when switching to a new step
+          newMemberStep - 1,
+        ],
+      };
+    }
+    case MEMBER_FORM_ACTIONS.UPDATE_MEMBER_FORM: {
+      const { updatedMemberForm } = payload;
+
+      return {
+        ...state,
+        memberForm: {
+          ...state.memberForm,
+          ...updatedMemberForm,
+        },
+      };
+    }
+    default: {
+      throw new Error(
+        `Unexpected memberFormReducer reducer action: ${type}`
+      );
+    }
+  }
+}
+
 // Component Definition
-const RegisterContent: FC<Props> = ({
+const RegisterMemberContent: FC<Props> = ({
   authUser,
   isAuthenticated,
 }) => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [form, setForm] = useState(intialFormValues);
-  const [completedSteps, setCompletedSteps] = useState(COMPLETED_STEPS_INITIAL_STATE);
+  const [
+    memberFormState,
+    dispatch,
+  ] = useReducer(
+    memberFormReducer,
+    initialMemberReducerState,
+  );
+
+  const {
+    activeMemberStep,
+    memberForm,
+    completedMemberSteps,
+  } = memberFormState;
+
+  const handleUpdateActiveMemberStep = (newMemberStep: number) => {
+    dispatch({
+      type: MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP,
+      payload: { newMemberStep },
+    });
+  };
+
+  const handleCompleteMemberStep = (
+    step: number,
+    updatedMemberForm: MemberFormValues,
+  ) => {
+    dispatch({
+      type: MEMBER_FORM_ACTIONS.COMPLETE_MEMBER_STEP,
+      payload: {
+        completedStep: step,
+        updatedMemberForm,
+      },
+    });
+  };
+
+  const handleUpdateMemberForm = (updatedMemberForm: MemberFormValues) => {
+    dispatch({
+      type: MEMBER_FORM_ACTIONS.UPDATE_MEMBER_FORM,
+      payload: {
+        updatedMemberForm,
+      },
+    });
+  };
 
   useEffect(() => {
-    if (activeStep === 0 && isAuthenticated) {
-      setActiveStep(1);
+    // The user can skip the "sign in" step if they are already signed in
+    if (activeMemberStep === 0 && isAuthenticated) {
+      handleUpdateActiveMemberStep(1);
     }
   }, []);
 
-  const handleCompleteStep: HandleCompleteStepType = (step) => {
-    setActiveStep(activeStep + 1);
-    setCompletedSteps([...completedSteps, step]);
-  };
-
-  const getCurrentStepContent = () => {
-    const stepOneContent = (
-      <RegisterEmail
-        isAuthenticated={isAuthenticated}
-        onCompleteStep={handleCompleteStep}
-      />
-    );
-
-    const stepTwoContent = (
-      <RegisterFormWrapper
-        initialFormValues={intialFormValues}
-        registerForm={form}
-        onCompleteStep={handleCompleteStep}
-        onSetForm={setForm}
-      />
-    );
-
-    const stepThreeContent = (
-      <RegisterPayment
-        authenticatedUserId={authUser?.uid}
-        form={form}
-        onCompleteStep={handleCompleteStep}
-      />
-    );
-
-    let currentStepContent;
-    switch (activeStep) {
-      case 0:
-        currentStepContent = stepOneContent;
-        break;
-      case 1:
-        currentStepContent = stepTwoContent;
-        break;
-      case 2: case 3:
-        currentStepContent = stepThreeContent;
-        break;
-      default:
-        currentStepContent = stepOneContent;
-        break;
-    }
-    return currentStepContent;
-  };
-
-  const hasCompletedAllSteps = completedSteps.length >= 3;
+  const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
   /* Children change depending on which step is active */
   return (
@@ -192,17 +230,39 @@ const RegisterContent: FC<Props> = ({
 
       <Container>
         <Helmet>
-          <title>TMAC | Register</title>
+          <title>TMAC | Member Register</title>
         </Helmet>
 
         <RegisterStepper
           isAuthenticated={isAuthenticated}
-          activeStep={activeStep}
+          activeStep={activeMemberStep}
         />
 
-        {getCurrentStepContent()}
+        {activeMemberStep === 0 && (
+          <RegisterEmail
+            isAuthenticated={isAuthenticated}
+            onCompleteStep={handleCompleteMemberStep}
+          />
+        )}
+        {activeMemberStep === 1 && (
+          <RegisterMemberFormWrapper
+            authenticatedUserId={authUser?.uid}
+            initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
+            memberForm={memberForm}
+            onCompleteMemberStep={handleCompleteMemberStep}
+            onUpdateMemberForm={handleUpdateMemberForm}
+          />
+        )}
+        {[2, 3].includes(activeMemberStep) && (
+          <RegisterMemberPayment
+            authenticatedUserId={authUser?.uid}
+            onCompleteMemberStep={handleCompleteMemberStep}
+            onUpdateMemberForm={handleUpdateMemberForm}
+            memberForm={memberForm}
+          />
+        )}
 
-        {!hasCompletedAllSteps && (
+        {!hasCompletedAllMemberSteps && (
           <div style={{ marginTop: '1.5rem' }}>
             * Registration is not complete until payment is received.
           </div>
@@ -230,10 +290,10 @@ const RegisterContent: FC<Props> = ({
   );
 };
 
-const RegisterWithContext: FC = (props) => (
+const RegisterMemberWithContext: FC = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
-      <RegisterContent
+      <RegisterMemberContent
         {...props}
         authUser={authUser}
         isAuthenticated={!!authUser}
@@ -242,13 +302,13 @@ const RegisterWithContext: FC = (props) => (
   </AuthUserContext.Consumer>
 );
 
-const Register: FC<{
+const RegisterMember: FC<{
   location: unknown,
 }> = (props) => (
-  // eslint-disable-next-line
+  // eslint-disable-next-line react/destructuring-assignment
   <Layout location={props.location}>
-    <RegisterWithContext {...props} />
+    <RegisterMemberWithContext {...props} />
   </Layout>
 );
 
-export default Register;
+export default RegisterMember;

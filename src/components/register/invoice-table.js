@@ -1,12 +1,14 @@
 // External Dependencies
-import Paper from '@material-ui/core/Paper';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
@@ -16,12 +18,13 @@ import { currentSchoolYearLong } from '../../utils/helpers';
 // Local Variables
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '75%',
     marginLeft: 32,
     marginRight: 32,
     marginTop: theme.spacing(2),
+    width: '75%',
   },
   table: {
+    border: `2px solid ${theme.palette.grey[600]}`,
     marginBottom: 0,
     minWidth: 200,
     paddingRight: theme.spacing(1),
@@ -63,7 +66,10 @@ const InvoiceTable = ({
   );
 
   return (
-    <TableContainer className={classes.root} component={Paper}>
+    <TableContainer
+      className={classes.root}
+      component={Paper}
+    >
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -73,6 +79,7 @@ const InvoiceTable = ({
             </CustomTableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           <TableRow className={classes.row}>
             <CustomTableCell component="th" scope="row">
@@ -96,8 +103,8 @@ InvoiceTable.propTypes = {
     PropTypes.number,
   ]).isRequired,
   form: PropTypes.shape({}).isRequired,
-  isInvoice: PropTypes.bool.isRequired,
   isActive: PropTypes.bool,
+  isInvoice: PropTypes.bool.isRequired,
   sponsorLevel: PropTypes.string,
 };
 InvoiceTable.defaultProps = {

@@ -21,13 +21,12 @@ function getSteps(
   isViewingSponsors = false,
 ): string[] {
   return [
-    // We show a different message if the user is already logged in
     isAuthenticated
       ? 'Sign in to the TMAC members area'
       : 'Sign up for TMAC website login',
     'Complete registration form',
     isViewingSponsors
-      ? 'Choose Sponsorship level and make payment'
+      ? 'Choose Sponsor level and make payment'
       : 'Pay TMAC dues',
   ];
 }
@@ -36,8 +35,9 @@ function getSteps(
 const useStyles = makeStyles((theme) => ({
   stepLabel: {
     [theme.breakpoints.down('xs')]: {
-      fontSize: '0.9rem',
+      fontSize: '0.8rem',
     },
+    fontSize: '0.9rem',
   },
 }));
 
@@ -56,19 +56,17 @@ const RegisterStepper: FC<Props> = ({
         activeStep={activeStep}
         alternativeLabel
       >
-        {steps.map((label) => {
-          return (
-            <Step key={label}>
-              <StepLabel
-                classes={{
-                  label: classes.stepLabel,
-                }}
-              >
-                {label}
-              </StepLabel>
-            </Step>
-          );
-        })}
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel
+              classes={{
+                label: classes.stepLabel,
+              }}
+            >
+              {label}
+            </StepLabel>
+          </Step>
+        ))}
       </Stepper>
     </Card>
   );

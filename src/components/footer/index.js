@@ -49,7 +49,12 @@ export default () => (
     >
       <div>
         Built by
-        <a css={{ marginLeft: 5 }} href="http://www.drumsensei.com">
+        <a
+          css={{ marginLeft: 5 }}
+          href="https://www.mikemathew.com/"
+          rel="noreferrer nopener"
+          target="_blank"
+        >
           Drumsensei Media
         </a>
       </div>
