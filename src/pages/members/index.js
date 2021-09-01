@@ -64,6 +64,7 @@ const MembersHome = ({
         <Helmet>
           <title>TMAC | Members</title>
         </Helmet>
+
         {isAuthenticated ? (
           <MemberContent
             authUser={authUser}

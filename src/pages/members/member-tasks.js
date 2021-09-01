@@ -77,7 +77,7 @@ const MemberTasks = ({
       <div className={classes.buttonContainer}>
         <ReactToPrint
           content={() => printInvoiceRef.current}
-          trigger={() => <RegisterButton isRed>Print Invoice</RegisterButton>}
+          trigger={() => <RegisterButton green>Print Invoice</RegisterButton>}
         />
       </div>
 
@@ -106,7 +106,7 @@ const MemberTasks = ({
         <ReactToPrint
           content={() => printReceiptRef.current}
           trigger={() => (
-            <RegisterButton>
+            <RegisterButton green>
               Print Receipt
             </RegisterButton>
           )}
