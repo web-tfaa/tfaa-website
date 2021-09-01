@@ -4,7 +4,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 // Internal Dependencies
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
@@ -42,30 +42,6 @@ const defaultProps = {
   userId: null,
 };
 
-const MEMBER_CONTENT_REDUCER_INITIAL_STATE = {
-  currentUser: null,
-  isRegisteredForCurrentYear: false,
-};
-
-function memberContentReducer(state, { type, payload }) {
-  switch (type) {
-    case 'setCurrentUser':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'setIsRegisteredForCurrentYear':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'clearState':
-      return MEMBER_CONTENT_REDUCER_INITIAL_STATE;
-    default:
-      return MEMBER_CONTENT_REDUCER_INITIAL_STATE;
-  }
-}
-
 // Component Definition
 const MemberContent = ({
   authUser,
@@ -76,53 +52,23 @@ const MemberContent = ({
   setShouldRefetchUserList,
   userId,
 }) => {
-  const [state, dispatchState] = useReducer(
-    memberContentReducer,
-    MEMBER_CONTENT_REDUCER_INITIAL_STATE,
+  const [isLoadingUserData, setIsLoadingUserData] = useState(true);
+
+  useEffect(() => {
+    if (authUser) {
+      setIsLoadingUserData(!isLoadingUserData);
+    }
+  }, [authUser]);
+
+  const isRegisteredForCurrentYear = useMemo(() =>
+    currentMemberList?.some(
+      (member) => member.userId === userId,
+    ),
+  [currentMemberList, userId]);
+
+  const currentUser = currentMemberList?.find(
+    (member) => member.userId === userId,
   );
-
-  const {
-    currentUser,
-    isLoadingUserData,
-    isRegisteredForCurrentYear,
-  } = state;
-
-  useEffect(() => {
-    // Find if the current user is among the registerd users
-    if (currentMemberList
-      && Object.keys(currentMemberList).length > 0
-      && Object.keys(currentMemberList).includes(userId)
-    ) {
-      dispatchState({
-        type: 'setIsRegisteredForCurrentYear',
-        payload: {
-          isRegisteredForCurrentYear: true,
-        },
-      });
-    }
-  }, [currentMemberList, userId]);
-
-  useEffect(() => {
-    if (
-      !isRegisteredForCurrentYear
-      && currentMemberList
-      && Object.keys(currentMemberList).length > 0
-    ) {
-      // Find the current user's index
-      const indexOfUser = Object.keys(currentMemberList).indexOf(userId);
-
-      // Separate the values into an array
-      const valuesOnly = Object.values(currentMemberList);
-
-      // Set the current user's data
-      dispatchState({
-        type: 'setCurrentUser',
-        payload: {
-          currentUser: valuesOnly[indexOfUser],
-        },
-      });
-    }
-  }, [isRegisteredForCurrentYear, currentMemberList, userId]);
 
   if (isLoadingUserData) {
     return <CircularProgress size={64} thickness={4} />;
@@ -143,6 +89,7 @@ const MemberContent = ({
       <Cards>
         <MemberInfo
           currentUser={currentUser}
+          isRegisteredForCurrentYear={isRegisteredForCurrentYear}
           setShouldRefetchUserList={setShouldRefetchUserList}
         />
 
