@@ -40,6 +40,7 @@ const propTypes = {
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
   }),
+  isRegisteredForCurrentYear: PropTypes.bool.isRequired,
   setShouldRefetchUserList: PropTypes.func.isRequired,
 };
 
@@ -90,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
 // Component Definition
 const MemberInfo = ({
   currentUser,
+  isRegisteredForCurrentYear,
   setShouldRefetchUserList,
 }) => {
   const classes = useStyles();
@@ -199,7 +201,7 @@ const MemberInfo = ({
                 }}
                 primary={(
                   <>
-                    {!currentUser ? 'Inactive' : currentUser?.MemberType || 'Active'} member
+                    {!isRegisteredForCurrentYear ? 'Inactive' : currentUser?.MemberType || 'Active'} member
                   </>
                 )}
                 secondary={`for the ${currentSchoolYearLong} school year`}
