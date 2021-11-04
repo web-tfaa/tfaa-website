@@ -12,6 +12,9 @@ import { Link } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 import green from '@material-ui/core/colors/green';
 
+// Internal Dependencies
+import { options } from '../../../utils/typography';
+
 // Local Variables
 const propTypes = {
   sponsorData: PropTypes.arrayOf(PropTypes.shape({})),
@@ -36,6 +39,11 @@ export const SPONSORSHIP_PRICE = {
   [SPONSORSHIP_LEVELS.GOLD_MEDAL]: '$2000',
 };
 
+const MEAL_AVAILABILITY = {
+  AVAILABLE: 'Available',
+  SECURED: 'Already Secured',
+};
+
 const useStyles = makeStyles((theme) => ({
   alert: {
     borderTop: `1px solid ${theme.palette.divider}`,
@@ -58,13 +66,16 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '90%',
   },
   chip: {
-    border: `1px solid ${theme.palette.grey[500]}`,
-    fontSize: '0.8rem',
+    backgroundColor: theme.palette.grey[200],
+    border: `1px solid ${theme.palette.grey[400]}`,
+    fontFamily: options.headerFontFamily.join(','),
+    fontSize: '0.7rem',
   },
   chipAvailable: {
     backgroundColor: green.A400,
-    border: `1px solid ${theme.palette.grey[500]}`,
-    fontSize: '0.8rem',
+    border: `1px solid ${theme.palette.grey[400]}`,
+    fontFamily: options.headerFontFamily.join(','),
+    fontSize: '0.7rem',
   },
   deadlineText: {
     marginBottom: 16,
@@ -114,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 6,
   },
   strongText: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   titleFour: {
     color: TITLE_BLUE,
@@ -253,27 +264,27 @@ const SponsorCard = ({
 
               <ul className={classes.list}>
                 <li>
-                  The cost of lunch at the Fall Retreat{' '}
+                  The cost of lunch at the <span className={classes.strongText}>Fall Retreat</span>{' '}
                   <Chip
                     className={classes.chip}
-                    label="Already Secured"
+                    label={MEAL_AVAILABILITY.SECURED}
                     size="small"
                   />
 
                 </li>
                 <li>
-                  The cost of lunch at the TMEA TMAC Roundtable{' '}
+                  The cost of lunch at the <span className={classes.strongText}>TMEA TMAC Roundtable</span>{' '}
                   <Chip
-                    className={classes.chipAvailable}
-                    label="Available"
+                    className={classes.chip}
+                    label={MEAL_AVAILABILITY.SECURED}
                     size="small"
                   />
                 </li>
                 <li>
-                  The cost of a reception at the Fall Retreat{' '}
+                  The cost of a reception at the <span className={classes.strongText}>Fall Retreat</span>{' '}
                   <Chip
                     className={classes.chip}
-                    label="Already Secured"
+                    label={MEAL_AVAILABILITY.SECURED}
                     size="small"
                   />
                 </li>
