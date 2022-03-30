@@ -64,24 +64,27 @@ const Home = (props) => {
       <Helmet>
         <title>TMAC | Home</title>
       </Helmet>
+
       <MastheadBg />
+
       <div className={classes.root}>
         <MastheadContent />
+
         <Cards>
           <Card>
             <FuturaParagraph>
-              Greetings from the Texas Music Administrators Conference! The Texas
-              Music Administrators Conference (TMAC) is an organization of
-              music/fine arts administrators with a common goal&mdash;the
-              continued pursuit of excellence in music education in Texas for all
+              <strong>Greetings from the Texas Music Administrators Conference!</strong>{' '}
+              The Texas Music Administrators Conference (TMAC) is an organization of
+              fine arts administrators with a common goal&mdash;the
+              continued pursuit of excellence in fine arts education in Texas for all
               students. While our roles may be varied in our individual school
               districts we stand together to create a supportive environment so
-              that all children in Texas are offered a quality music education.
+              that all children in Texas are offered a quality fine arts education.
             </FuturaParagraph>
             <FuturaParagraph>
-              If you are a music/fine arts administrator, an aspiring
+              If you are a fine arts administrator, an aspiring
               administrator, or if you are responsible for the organizing or
-              supervision of music activities in your district, we encourage you
+              supervision of fine arts activities in your district, we encourage you
               to become a member of TMAC. We meet as a group three times per year and everyone is invited to attend.  We just ask that you first register to be a member of TMAC.  We meet in July in San Antonio during the summer TBA/TODA/TCDA conference, in November in Austin, and in February as part of the TMEA All-State Music Conference. If you would like more information regarding any of these events, please <Link to="/events/fall-retreat/">visit the events page</Link>.
             </FuturaParagraph>
           </Card>

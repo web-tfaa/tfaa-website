@@ -78,7 +78,7 @@ class Payment extends Component {
             <div>Radio buttons for active/retired</div>
 
             <div style={{ marginTop: '1.5rem' }}>
-              * Registration is not complete until payment is received.
+              * Membership is not complete until payment is received.
             </div>
           </Container>
 
