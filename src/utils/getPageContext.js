@@ -3,7 +3,7 @@
 import { SheetsRegistry } from 'jss';
 import {
   createGenerateClassName,
-  createMuiTheme,
+  createTheme,
 } from '@material-ui/core/styles';
 import {
   indigo,
@@ -12,7 +12,7 @@ import {
 
 // A theme with custom primary and secondary color.
 // It's optional.
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       light: indigo[300],
