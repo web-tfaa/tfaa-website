@@ -1,7 +1,7 @@
 // External Dependencies
 import {
   Box,
-  // Typography,
+  CircularProgress,
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import React, {
@@ -29,8 +29,6 @@ const Sponsors: FC<Props> = ({ location }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [sponsorData, setSponsorData] = useState<SponsorFormValues[] | null>(null);
   const previousSponsorData = usePrevious(sponsorData);
-
-  console.log('isLoading', isLoading);
 
   const handleUpdateSponsorData = (newSponsorData: SponsorFormValues[] | null) => {
     setSponsorData(newSponsorData);
@@ -64,23 +62,28 @@ const Sponsors: FC<Props> = ({ location }) => {
             display="flex"
             flexDirection="column"
           >
-            <SponsorCard
-              sponsorData={sponsorData?.filter((sponsor) =>
-                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
-              title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
-            />
-            <SponsorCard
-              sponsorData={sponsorData?.filter((sponsor) =>
-                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.GOLD_MEDAL)}
-              subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.GOLD_MEDAL]}
-              title={SPONSORSHIP_LEVELS.GOLD_MEDAL}
-            />
-            <SponsorCard
-              sponsorData={sponsorData?.filter((sponsor) =>
-                sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
-              subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
-              title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
-            />
+            {isLoading ? <CircularProgress size={64} thickness={4} />
+              : (
+                <>
+                  <SponsorCard
+                    sponsorData={sponsorData?.filter((sponsor) =>
+                      sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
+                    title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
+                  />
+                  <SponsorCard
+                    sponsorData={sponsorData?.filter((sponsor) =>
+                      sponsor.SponsorLevel === SPONSORSHIP_LEVELS.GOLD_MEDAL)}
+                    subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.GOLD_MEDAL]}
+                    title={SPONSORSHIP_LEVELS.GOLD_MEDAL}
+                  />
+                  <SponsorCard
+                    sponsorData={sponsorData?.filter((sponsor) =>
+                      sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
+                    subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
+                    title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
+                  />
+                </>
+              )}
           </Box>
         </Container>
       </Box>
