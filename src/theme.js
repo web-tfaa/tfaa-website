@@ -1,11 +1,11 @@
 // External Dependencies
 import { amber, cyan, lightBlue } from '@material-ui/core/colors';
 import {
-  createMuiTheme,
+  createTheme,
   responsiveFontSizes,
 } from '@material-ui/core/styles';
 
-const baseTheme = createMuiTheme({
+const baseTheme = createTheme({
   palette: {
     alert: {
       info: lightBlue['500'],
