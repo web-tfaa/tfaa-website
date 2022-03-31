@@ -79,7 +79,7 @@ const JoinContainer = (props) => {
                 2.
                 {' '}
               </span>
-              Complete the Registration Form.
+              Complete the Membership Form.
             </FuturaDiv>
 
             <FuturaDiv>
@@ -91,9 +91,9 @@ const JoinContainer = (props) => {
             </FuturaDiv>
 
             <p>
-              Note: Sponsors should register at the
+              Note: Sponsors should complete the
               {' '}
-              <Link to="/sponsors">Sponsors page</Link>
+              <Link to="/sponsors">Sponsor Form</Link>
               .
             </p>
           </div>
@@ -108,13 +108,13 @@ const JoinContainer = (props) => {
               buttonColor="blue"
               to="/members/register"
             >
-              Begin Registration
+              Begin Membership
               <ArrowForwardIcon />
             </CtaButton>
           </div>
 
           <div style={{ marginTop: '1.5rem' }}>
-            * Registration is not complete until payment is received.
+            * Membership is not complete until payment is received.
           </div>
         </Container>
 

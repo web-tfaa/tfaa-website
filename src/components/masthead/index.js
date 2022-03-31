@@ -1,7 +1,5 @@
 // External Dependencies
 import hex2rgba from 'hex2rgba';
-import React from 'react';
-// import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import ArrowForwardIcon from '../shared/ArrowForwardIcon';
@@ -13,13 +11,6 @@ import {
 } from '../../utils/gutters';
 
 // Local Variables
-// const useStyles = makeStyles({
-//   icon: {
-//     transform: 'translateY(8px)',
-//     marginLeft: '0.5em',
-//   },
-// });
-
 const texasFlagBlue = '#002868';
 
 // Component Definition
@@ -99,6 +90,7 @@ const Masthead = () => {
         >
           Texas Music Administrators Conference
         </h1>
+
         <div
           css={{
             color: `${hex2rgba(texasFlagBlue, 0.9)}`,
@@ -106,15 +98,16 @@ const Masthead = () => {
             fontSize: 20,
             marginBottom: '1.5em',
             padding: 0,
-            width: rhythm(5),
+            width: rhythm(7),
             [presets.Tablet]: {
               display: 'block',
-              width: rhythm(12),
+              width: rhythm(13),
             },
           }}
         >
-          Supporting Music Education in Texas
+          Supporting Fine Arts Education in Texas
         </div>
+
         <CtaButton
           buttonColor="blue"
           to="/about/"
