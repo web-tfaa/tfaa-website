@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 // import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
+import { isTodayAfterJune30th } from '../../utils/helpers';
 import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import CtaButton from '../../components/masthead/cta-button';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import Status from './status';
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import { isTodayAfterJune30th } from '../../utils/helpers';
+import presets from '../../utils/presets';
 
 // Sidebar Data
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';

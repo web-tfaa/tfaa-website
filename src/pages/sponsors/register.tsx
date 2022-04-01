@@ -1,6 +1,6 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import React, {
+import {
   FC, useEffect, useReducer
 } from 'react';
 
