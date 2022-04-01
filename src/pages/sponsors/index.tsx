@@ -2,6 +2,7 @@
 import {
   Box,
   CircularProgress,
+  Collapse,
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import React, {
@@ -59,31 +60,32 @@ const Sponsors: FC<Props> = ({ location }) => {
           <h1>Sponsors</h1>
 
           <Box
+            alignItems={isLoading ? 'center' : 'inherit'}
             display="flex"
             flexDirection="column"
+            width={isLoading ? 600 : 'inherit'}
           >
-            {isLoading ? <CircularProgress size={64} thickness={4} />
-              : (
-                <>
-                  <SponsorCard
-                    sponsorData={sponsorData?.filter((sponsor) =>
-                      sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
-                    title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
-                  />
-                  <SponsorCard
-                    sponsorData={sponsorData?.filter((sponsor) =>
-                      sponsor.SponsorLevel === SPONSORSHIP_LEVELS.GOLD_MEDAL)}
-                    subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.GOLD_MEDAL]}
-                    title={SPONSORSHIP_LEVELS.GOLD_MEDAL}
-                  />
-                  <SponsorCard
-                    sponsorData={sponsorData?.filter((sponsor) =>
-                      sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
-                    subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
-                    title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
-                  />
-                </>
-              )}
+            {isLoading && <CircularProgress size={64} thickness={4} />}
+
+            <Collapse in={!isLoading}>
+              <SponsorCard
+                sponsorData={sponsorData?.filter((sponsor) =>
+                  sponsor.SponsorLevel === SPONSORSHIP_LEVELS.CLASS_CHAMPION)}
+                title={SPONSORSHIP_LEVELS.CLASS_CHAMPION}
+              />
+              <SponsorCard
+                sponsorData={sponsorData?.filter((sponsor) =>
+                  sponsor.SponsorLevel === SPONSORSHIP_LEVELS.GOLD_MEDAL)}
+                subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.GOLD_MEDAL]}
+                title={SPONSORSHIP_LEVELS.GOLD_MEDAL}
+              />
+              <SponsorCard
+                sponsorData={sponsorData?.filter((sponsor) =>
+                  sponsor.SponsorLevel === SPONSORSHIP_LEVELS.SILVER_MEDAL)}
+                subtitle={SPONSORSHIP_PRICE[SPONSORSHIP_LEVELS.SILVER_MEDAL]}
+                title={SPONSORSHIP_LEVELS.SILVER_MEDAL}
+              />
+            </Collapse>
           </Box>
         </Container>
       </Box>
