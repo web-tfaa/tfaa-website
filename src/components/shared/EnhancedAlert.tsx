@@ -5,7 +5,8 @@ import {
   AlertTitle,
 } from '@material-ui/lab';
 import { Collapse } from '@material-ui/core';
-import React, { FC } from 'react';
+import { FC } from 'react';
+import { makeStyles } from '@material-ui/styles';
 
 // Local Typings
 interface Props extends AlertProps {
@@ -13,6 +14,13 @@ interface Props extends AlertProps {
   onClose?: () => void;
   title?: string;
 }
+
+// Local Variables
+const useStyles = makeStyles((theme) => ({
+  root: {
+    border: `1px solid ${theme.palette.grey['300']}`
+  },
+}));
 
 // Set up for future work to allow clicking a close icon to remove the alert
 
@@ -25,8 +33,11 @@ const EnhancedAlert: FC<Props> = ({
   title,
   ...other
 }) => {
+  const classes = useStyles();
+
   const alertElement = (
     <Alert
+      className={classes.root}
       onClose={onClose}
       severity={severity}
       {...other}
