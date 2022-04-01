@@ -40,14 +40,17 @@ export const currentYearLong = format(new Date(), 'yyyy');
 // Current Year - two-digit string
 export const currentYearShort = format(new Date(), 'yy');
 
-// The "year" for TMAC starts on 4/1
-// new Date(2021, 3, 1) → 4/1/2021
-const isTodayAfterMarch31st = isAfter(new Date(), new Date(parseInt(currentYearLong, 10), 3, 1));
+// The "year" for TMAC starts on 7/1
+// new Date(2021, 6, 1) → 7/1/2021
+export const isTodayAfterJune30th = isAfter(
+  new Date(),
+  new Date(parseInt(currentYearLong, 10), 6, 1),
+);
 
-export const currentSchoolYearShort = isTodayAfterMarch31st
+export const currentSchoolYearShort = isTodayAfterJune30th
   ? `${currentYearShort}-${Number(currentYearShort) + 1}`
   : `${Number(currentYearShort) - 1}-${currentYearShort}`;
 
-export const currentSchoolYearLong = isTodayAfterMarch31st
+export const currentSchoolYearLong = isTodayAfterJune30th
   ? `${currentYearLong}-${Number(currentYearLong) + 1}`
   : `${Number(currentYearLong) - 1}-${currentYearLong}`;
