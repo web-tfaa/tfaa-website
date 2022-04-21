@@ -24,7 +24,7 @@ function getSteps(
     isAuthenticated
       ? 'Sign in to the TMAC members area'
       : 'Sign up for TMAC website login',
-    'Complete registration form',
+    'Complete membership form',
     isViewingSponsors
       ? 'Choose Sponsor level and make payment'
       : 'Pay TMAC dues',

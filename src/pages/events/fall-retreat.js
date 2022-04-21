@@ -70,11 +70,11 @@ const FallRetreat = ({ location }) => {
 
           <Box component="p" ml={2}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
-            (registered and paid). There is no separate conference registration process.
+            (joined as a member and paid). There is no separate conference registration process.
 
           </Box>
           <Box component="p" ml={2}>
-            If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.
+            If you need to join TMAC for this year, then please visit the <Link to="/members">Members</Link> page.
           </Box>
         </section>
 

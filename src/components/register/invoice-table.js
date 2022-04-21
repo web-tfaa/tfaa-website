@@ -60,7 +60,7 @@ const InvoiceTable = ({
 
   const memberInfo = (
     <span>
-      TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} registration fee{' '}
+      TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
       <br />for <strong>{form.FirstName} {form.LastName}</strong>
     </span>
   );
