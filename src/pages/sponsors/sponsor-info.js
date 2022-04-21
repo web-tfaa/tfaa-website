@@ -77,7 +77,7 @@ const SponsorInfo = (props) => {
                     <span css={boldStyles}>
                       2.{' '}
                     </span>
-                    Complete the Sponsor Registration Form.
+                    Complete the Sponsorship Form.
                   </FuturaDiv>
 
                   <FuturaDiv>
@@ -104,14 +104,14 @@ const SponsorInfo = (props) => {
                   state={{ level: location && location.state && location.state.level }}
                 >
                   <span>
-                    Begin Sponsor Registration
+                    Begin Sponsorship
                   </span>
                   <ArrowForwardIcon />
                 </CtaButton>
               </div>
 
               <div style={{ marginTop: '1.5rem' }}>
-                * Sponsor Registration is not complete until payment is received.
+                * Sponsorship is not complete until payment is received.
               </div>
             </>
           )}

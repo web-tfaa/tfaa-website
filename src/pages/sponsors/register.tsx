@@ -269,7 +269,7 @@ const RegisterSponsorContent: FC<Props> = ({
 
         {!hasCompletedAllSponsorSteps && (
           <div style={{ marginTop: '1.5rem' }}>
-            * Sponsor Registration is not complete until payment is received.
+            * Sponsorship is not complete until payment is received.
           </div>
         )}
       </Container>

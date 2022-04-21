@@ -1,12 +1,11 @@
 // External Dependencies
 import {
   Box,
-  Button,
+  // Button,
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+// import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
 
@@ -63,24 +62,24 @@ const FallRetreat = ({ location }) => {
 
         <section>
           {/* <EnhancedAlert severity="info">
-            Schedule available mid Fall 2021
+            Schedule available mid Fall 2022
           </EnhancedAlert> */}
 
           <h4>Who</h4>
 
           <Box component="p" ml={2}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
-            (registered and paid). There is no separate conference registration process.
+            (paid for membership this school year).
+            There is no separate conference registration process.
 
           </Box>
           <Box component="p" ml={2}>
-            If you need to register for this year, then please visit the <Link to="/members">Members</Link> page.
+            If you need to join TMAC for this year, then please visit the <Link to="/members">Members</Link> page.
           </Box>
         </section>
 
         <section>
           <h4>When</h4>
-          {/* <p>Fall 2021</p> */}
           <p>{fallRetreat.dateOfEvent}</p>
         </section>
 
@@ -100,7 +99,7 @@ const FallRetreat = ({ location }) => {
         <section>
           <h4>Where</h4>
           <div className={classes.text}>
-            <Button
+            {/* <Button
               className="hotel-link"
               classes={{ root: classes.hotelButton }}
               color="primary"
@@ -112,7 +111,7 @@ const FallRetreat = ({ location }) => {
             >
               For Hotel reservations click here
               <OpenInNewIcon className={classes.openInNewIcon} />
-            </Button>
+            </Button> */}
             <p>
               <a
                 href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"

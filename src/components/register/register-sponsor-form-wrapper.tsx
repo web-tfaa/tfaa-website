@@ -33,7 +33,7 @@ const RegisterSponsorFormWrapper: FC<Props> = ({
   return (
     <section>
       <h2>
-        2. Register for TMAC Sponsorship
+        2. Join TMAC as a Sponsor
       </h2>
 
       <FormHr />
