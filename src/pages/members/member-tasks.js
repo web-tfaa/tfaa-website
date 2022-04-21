@@ -140,7 +140,7 @@ const MemberTasks = ({
         render={() => (
           <div>
             {registeredIcon}
-            Register for {currentSchoolYearLong} school year
+            Join TMAC for {currentSchoolYearLong} school year
           </div>
         )}
       />

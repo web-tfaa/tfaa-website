@@ -23,14 +23,14 @@ export const doCreateEntry = (
     .doc(documentId)
     .set(form)
     .then(() => {
-      console.log(`Registration for ${documentId} in ${currentSchoolYearShort} was successful`);
+      console.log(`Membership for ${documentId} in ${currentSchoolYearShort} was successful`);
       if (callback) {
         callback(form);
       }
     })
     .catch((err) => {
-      console.log(`Error adding registration for ${documentId} document`, err);
-      logError(`Error adding registration for ${documentId} document`, err);
+      console.log(`Error adding membership for ${documentId} document`, err);
+      logError(`Error adding membership for ${documentId} document`, err);
     });
 };
 

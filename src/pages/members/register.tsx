@@ -1,5 +1,5 @@
 /*
-  Main container for the Member Registration process
+  Main container for the Membership process
 */
 
 // External Dependencies
@@ -230,7 +230,7 @@ const RegisterMemberContent: FC<Props> = ({
 
       <Container>
         <Helmet>
-          <title>TMAC | Member Register</title>
+          <title>TMAC | Membership</title>
         </Helmet>
 
         <RegisterStepper
@@ -264,7 +264,7 @@ const RegisterMemberContent: FC<Props> = ({
 
         {!hasCompletedAllMemberSteps && (
           <div style={{ marginTop: '1.5rem' }}>
-            * Registration is not complete until payment is received.
+            * Membership is not complete until payment is received.
           </div>
         )}
       </Container>

@@ -14,7 +14,7 @@ interface Props {
   authenticatedUserId?: string;
   initialMemberFormValues: MemberFormValues;
   memberForm: MemberFormValues;
-  onCompleteMemberStep: HandleCompleteMemberStepType ;
+  onCompleteMemberStep: HandleCompleteMemberStepType;
   onUpdateMemberForm: (memberForm: MemberFormValues) => void;
 }
 
@@ -33,7 +33,7 @@ const MemberFormValuesWrapper: FC<Props> = ({
   return (
     <section>
       <h2>
-        2. Register for TMAC
+        2. Join TMAC
       </h2>
 
       <FormHr />

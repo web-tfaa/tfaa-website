@@ -35,7 +35,7 @@ const SignUp = ({ location }) => {
             css={{ marginBottom: 16, maxWidth: '70%' }}
             key="signup-message"
           >
-            Registration is open to TMAC members. For information about
+            Membership is open to TMAC members. For information about
             joining TMAC, head over to the&nbsp;
             <Link to="/members">Members page</Link>.
           </div>

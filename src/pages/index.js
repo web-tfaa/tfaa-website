@@ -85,7 +85,7 @@ const Home = (props) => {
               If you are a fine arts administrator, an aspiring
               administrator, or if you are responsible for the organizing or
               supervision of fine arts activities in your district, we encourage you
-              to become a member of TMAC. We meet as a group three times per year and everyone is invited to attend.  We just ask that you first register to be a member of TMAC.  We meet in July in San Antonio during the summer TBA/TODA/TCDA conference, in November in Austin, and in February as part of the TMEA All-State Music Conference. If you would like more information regarding any of these events, please <Link to="/events/fall-retreat/">visit the events page</Link>.
+              to become a member of TMAC. We meet as a group three times per year and everyone is invited to attend.  We just ask that you first join as a member of TMAC.  We meet in July in San Antonio during the summer TBA/TODA/TCDA conference, in November in Austin, and in February as part of the TMEA All-State Music Conference. If you would like more information regarding any of these events, please <Link to="/events/fall-retreat/">visit the events page</Link>.
             </FuturaParagraph>
           </Card>
         </Cards>

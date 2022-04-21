@@ -49,7 +49,7 @@ const Events = ({ data, location }) => {
 
         <section>
           <h4>
-            Summer Round Table
+            <a href="summer-round-table/">Summer Round Table</a>
             {/* <span className={classes.updatedLabel}>(updated)</span> */}
           </h4>
 
@@ -84,7 +84,7 @@ const Events = ({ data, location }) => {
         </section>
         <section>
           <h4>
-            Fall Retreat
+            <a href="fall-retreat/">Fall Retreat</a>
             <span className={classes.updatedLabel}>updated</span>
           </h4>
 
@@ -92,36 +92,33 @@ const Events = ({ data, location }) => {
             mb={2}
             pl={1}
           >
-            The 2021 Fall Retreat will be Nov. 17-19 in Austin.
+            The 2022 Fall Retreat will be Nov. 16-18 in Austin.
           </Box>
 
-          <Box
+          {/* <Box
             mb={2}
             pl={1}
           >
-            <Link to="/events/fall-retreat/">Click here</Link> for more details and to reserve your hotel accommodations.
-          </Box>
+            <Link to="/events/fall-retreat/">Click here</Link
+             for more details and to reserve your hotel accommodations.
+          </Box> */}
 
           <Box pl={1}>
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
-            (registered and paid). There is no separate conference registration process.
+            (paid for membership this school year).
+            There is no separate conference registration process.
           </Box>
         </section>
 
         <section>
-          <h4>TMEA Round Table</h4>
+          <h4>
+            <a href="tmea-round-table/">TMEA Round Table</a>
+          </h4>
 
           <p css={{ paddingLeft: 8 }}>
             Round Table Meeting on Wednesday at noon at the{' '}
             <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
           </p>
-
-          <Box
-            mb={2}
-            pl={1}
-          >
-            <Link to="/events/tmea-round-table">Click here</Link> for more details.
-          </Box>
         </section>
 
         {/* Mobile sidebar */}
