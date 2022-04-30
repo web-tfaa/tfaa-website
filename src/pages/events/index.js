@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
   updatedLabel: {
-    color: theme.palette.success.main,
+    color: theme.palette.success.dark,
     fontSize: '0.9rem',
     marginLeft: theme.spacing(1),
   },
@@ -50,7 +50,7 @@ const Events = ({ data, location }) => {
         <section>
           <h4>
             <a href="summer-round-table/">Summer Round Table</a>
-            {/* <span className={classes.updatedLabel}>(updated)</span> */}
+            <span className={classes.updatedLabel}>updated</span>
           </h4>
 
           {/* <EnhancedAlert severity="info">
