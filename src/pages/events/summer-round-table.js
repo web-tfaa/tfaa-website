@@ -1,11 +1,12 @@
 // External Dependencies
 import { Box } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
+import { FC } from 'react';
+import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 // Internal Dependencies
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
+// import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
@@ -15,11 +16,22 @@ import { useEventData } from '../../utils/hooks/useEventData';
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
+// Local Variables
+const useStyles = makeStyles((theme) => ({
+  description: {
+    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+  },
+}));
+
 // Component Definition
 const SummerRoundTable = ({ location }) => {
+  const classes = useStyles();
+
   const { edges } = useEventData();
 
-  const summerRoundTable = edges.find((e) => e.node.titleOfEvent.includes('Summer Convention')).node;
+  const summerRoundTable = edges.find((e) =>
+    e.node.titleOfEvent.includes('Summer Convention')).node;
 
   const {
     dateOfEvent,
@@ -36,9 +48,9 @@ const SummerRoundTable = ({ location }) => {
       <Container>
         <h1>{titleOfEvent}</h1>
 
-        <EnhancedAlert severity="info">
+        {/* <EnhancedAlert severity="info">
           Details about the 2022 TMAC Summer Round Table will be available soon.
-        </EnhancedAlert>
+        </EnhancedAlert> */}
 
         <section>
           <h4>When</h4>
@@ -52,26 +64,33 @@ const SummerRoundTable = ({ location }) => {
           </Box>
         </section>
 
-        {/* <section>
+        <section>
           <h4>Where</h4>
+
           <div className={classes.description}>
-            <div>Room CC210</div>
-            <a href="http://www.sahbgcc.com/" rel="noopener noreferrer" target="_blank">
-              Henry B. Gonzalez Convention Center
-            </a>
-            <p>
+            <address>
+              <div>Room CC210</div>
               <a
-                href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
+                href="http://www.sahbgcc.com/"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                900 E. Market St
-                <br />
-                San Antonio, TX 78205
+                Henry B. Gonzalez Convention Center
               </a>
-            </p>
+              <p>
+                <a
+                  href="https://www.google.com/maps/place/Henry+B.+Gonzalez+Convention+Center/@29.4205819,-98.4839688,15z/data=!4m5!3m4!1s0x0:0x9adbeeaa9ace85f0!8m2!3d29.4205819!4d-98.4839688"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  900 E. Market St
+                  <br />
+                  San Antonio, TX 78205
+                </a>
+              </p>
+            </address>
           </div>
-        </section> */}
+        </section>
 
         <section>
           <h4>Why</h4>

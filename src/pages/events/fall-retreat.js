@@ -112,31 +112,33 @@ const FallRetreat = ({ location }) => {
               For Hotel reservations click here
               <OpenInNewIcon className={classes.openInNewIcon} />
             </Button> */}
-            <p>
-              <a
-                href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Austin Marriott South
-              </a>
-            </p>
-            <p>
-              <a
-                href="https://www.google.com/maps/place/4415+S+IH+35+Frontage+Rd,+Austin,+TX+78744/@30.2109504,-97.755463,17z/data=!3m1!4b1!4m5!3m4!1s0x8644b49cb7935da1:0x5a86d0320722c79b!8m2!3d30.2109504!4d-97.7532743"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                4415 South IH-35
+            <address>
+              <p>
+                <a
+                  href="http://www.marriott.com/hotels/travel/ausap-austin-marriott-south/?scid=45f93f1b-bd77-45c9-8dab-83b6a417f6fe"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Austin Marriott South
+                </a>
+              </p>
+              <p>
+                <a
+                  href="https://www.google.com/maps/place/4415+S+IH+35+Frontage+Rd,+Austin,+TX+78744/@30.2109504,-97.755463,17z/data=!3m1!4b1!4m5!3m4!1s0x8644b49cb7935da1:0x5a86d0320722c79b!8m2!3d30.2109504!4d-97.7532743"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  4415 South IH-35
+                  <br />
+                  Austin, TX 78744
+                </a>
+              </p>
+              <p>
+                Phone: <a href="tel:+15124418900">(512) 441-7900</a>
                 <br />
-                Austin, TX 78744
-              </a>
-            </p>
-            <p>
-              Phone: <a href="tel:+15124418900">(512) 441-7900</a>
-              <br />
-              Fax: (512) 441-7899
-            </p>
+                Fax: (512) 441-7899
+              </p>
+            </address>
           </div>
         </section>
 
