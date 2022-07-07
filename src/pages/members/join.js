@@ -3,6 +3,7 @@ import { Box } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import React from 'react';
 // import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
@@ -157,6 +158,7 @@ const JoinContainer = (props) => {
     </Layout>
   );
 };
+
 JoinContainer.propTypes = {
   // isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
