@@ -94,7 +94,7 @@ const PaypalButtonWrapper: FC<Props> = ({
 
   return (
     <>
-      <Collapse in={amount}>
+      <Collapse in={Boolean(amount)}>
         <Box mt={2}>
           <PaypalButton
             client={CLIENT}

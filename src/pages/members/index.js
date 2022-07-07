@@ -41,6 +41,7 @@ const MembersHome = ({
 
     if (authUser || shouldRefetchUserList) {
       doGetUsers('registration', userList, setUserData);
+
       if (shouldRefetchUserList) {
         setShouldRefetchUserList(false);
       }
@@ -60,6 +61,7 @@ const MembersHome = ({
       }}
     >
       <Status />
+
       <Container>
         <Helmet>
           <title>TMAC | Members</title>
