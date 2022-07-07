@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
-// import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import { isTodayAfterJune30th } from '../../utils/helpers';
@@ -24,13 +23,6 @@ import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import membersSidebar from './members-links.yml';
 
 // // Local Variables
-// const useStyles = makeStyles({
-//   icon: {
-//     transform: 'translateY(8px)',
-//     marginLeft: '0.5em',
-//   },
-// });
-
 const boldStyles = { fontWeight: 600 };
 
 // Component Definition
@@ -39,7 +31,6 @@ const JoinContainer = (props) => {
     // isAuthenticated,
     location,
   } = props;
-  // const classes = useStyles(props);
 
   return (
     <Layout location={location}>
