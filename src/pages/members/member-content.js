@@ -61,9 +61,10 @@ const MemberContent = ({
   }, [authUser]);
 
   const isRegisteredForCurrentYear = useMemo(() =>
-    currentMemberList?.some(
-      (member) => member.userId === userId,
-    ),
+    (!currentMemberList?.length ? false
+      : currentMemberList?.some(
+        (member) => member.userId === userId,
+      )),
   [currentMemberList, userId]);
 
   const currentUser = currentMemberList?.find(
