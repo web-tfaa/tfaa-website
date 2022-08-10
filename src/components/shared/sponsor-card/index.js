@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     background: 'aliceblue',
     fontSize: '0.9rem',
     marginBottom: '1rem',
-    maxWidth: '90%',
+    maxWidth: '92%',
   },
   cardContent: {
     '&:last-child': {
@@ -63,7 +63,8 @@ const useStyles = makeStyles((theme) => ({
     background: green[50],
     fontSize: '0.9rem',
     marginBottom: '1rem',
-    maxWidth: '90%',
+    maxWidth: '92%',
+    width: '100%',
   },
   chip: {
     backgroundColor: theme.palette.grey[200],
@@ -225,6 +226,14 @@ const SponsorCard = ({
       </div>
     ));
 
+  const sponsorshipSecuredChip = (
+    <Chip
+      className={classes.chip}
+      label={MEAL_AVAILABILITY.SECURED}
+      size="small"
+    />
+  );
+
   return (
     <div className={classes.root}>
       <h2>{title}</h2>
@@ -265,28 +274,16 @@ const SponsorCard = ({
               <ul className={classes.list}>
                 <li>
                   The cost of lunch at the <span className={classes.strongText}>Fall Retreat</span>{' '}
-                  <Chip
-                    className={classes.chip}
-                    label={MEAL_AVAILABILITY.SECURED}
-                    size="small"
-                  />
+                  {/* {sponsorshipSecuredChip} */}
 
                 </li>
                 <li>
                   The cost of lunch at the <span className={classes.strongText}>TMEA TMAC Roundtable</span>{' '}
-                  <Chip
-                    className={classes.chip}
-                    label={MEAL_AVAILABILITY.SECURED}
-                    size="small"
-                  />
+                  {/* {sponsorshipSecuredChip} */}
                 </li>
                 <li>
                   The cost of a reception at the <span className={classes.strongText}>Fall Retreat</span>{' '}
-                  <Chip
-                    className={classes.chip}
-                    label={MEAL_AVAILABILITY.SECURED}
-                    size="small"
-                  />
+                  {/* {sponsorshipSecuredChip} */}
                 </li>
               </ul>
             </CardContent>
