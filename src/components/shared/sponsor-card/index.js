@@ -274,16 +274,16 @@ const SponsorCard = ({
               <ul className={classes.list}>
                 <li>
                   The cost of lunch at the <span className={classes.strongText}>Fall Retreat</span>{' '}
-                  {/* {sponsorshipSecuredChip} */}
+                  {sponsorshipSecuredChip}
 
                 </li>
                 <li>
                   The cost of lunch at the <span className={classes.strongText}>TMEA TMAC Roundtable</span>{' '}
-                  {/* {sponsorshipSecuredChip} */}
+                  {sponsorshipSecuredChip}
                 </li>
                 <li>
                   The cost of a reception at the <span className={classes.strongText}>Fall Retreat</span>{' '}
-                  {/* {sponsorshipSecuredChip} */}
+                  {sponsorshipSecuredChip}
                 </li>
               </ul>
             </CardContent>

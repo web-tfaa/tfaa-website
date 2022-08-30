@@ -1,10 +1,10 @@
 // External Dependencies
 import {
   Box,
-  // Button,
+  Button,
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
-// import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.events.hotelCta,
     color: theme.palette.getContrastText(theme.palette.events.hotelCta),
     fontWeight: 600,
-    marginBottom: theme.spacing(2),
+    margin: theme.spacing(2, 0, 1),
   },
   openInNewIcon: {
     fontSize: '1em',
@@ -51,6 +51,22 @@ const FallRetreat = ({ location }) => {
 
   const fallRetreat = edges.find((e) => e.node.titleOfEvent.includes('Fall Retreat')).node;
 
+  const hotelReservationButton = (
+    <Button
+      className="hotel-link"
+      classes={{ root: classes.hotelButton }}
+      color="primary"
+      href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1661882188530&key=GRP&app=resvlink"
+      rel="noopener noreferrer"
+      size="large"
+      target="_blank"
+      variant="contained"
+    >
+      For Hotel reservations click here
+      <OpenInNewIcon className={classes.openInNewIcon} />
+    </Button>
+  );
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -59,6 +75,8 @@ const FallRetreat = ({ location }) => {
 
       <Container>
         <h1>{fallRetreat.titleOfEvent}</h1>
+
+        {hotelReservationButton}
 
         <section>
           {/* <EnhancedAlert severity="info">
@@ -99,19 +117,6 @@ const FallRetreat = ({ location }) => {
         <section>
           <h4>Where</h4>
           <div className={classes.text}>
-            {/* <Button
-              className="hotel-link"
-              classes={{ root: classes.hotelButton }}
-              color="primary"
-              href="https://urldefense.com/v3/__https:/www.marriott.com/events/start.mi?id=1628712503612&key=GRP__;!!FOfmI8qiWcWBHqypJtzENF0!jyzZPCsDM5kHUt1F35tHVI-Q0F_cAKGDBYU9DAczeJzzxyJBs2B3ScbLPIDA2HGv6w$"
-              rel="noopener noreferrer"
-              size="large"
-              target="_blank"
-              variant="contained"
-            >
-              For Hotel reservations click here
-              <OpenInNewIcon className={classes.openInNewIcon} />
-            </Button> */}
             <address>
               <p>
                 <a
@@ -122,6 +127,9 @@ const FallRetreat = ({ location }) => {
                   Austin Marriott South
                 </a>
               </p>
+
+              {hotelReservationButton}
+
               <p>
                 <a
                   href="https://www.google.com/maps/place/4415+S+IH+35+Frontage+Rd,+Austin,+TX+78744/@30.2109504,-97.755463,17z/data=!3m1!4b1!4m5!3m4!1s0x8644b49cb7935da1:0x5a86d0320722c79b!8m2!3d30.2109504!4d-97.7532743"
