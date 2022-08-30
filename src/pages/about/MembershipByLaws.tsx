@@ -26,12 +26,14 @@ const MembershipByLaws: React.FC<Props> = ({ showLinkToByLaws = false }) => {
   return (
     <>
       <CardHeadline>ARTICLE II &mdash; MEMBERSHIP</CardHeadline>
+
       {showLinkToByLaws && (
         <FuturaDiv>
           (from the Texas Music Administrators Conference&apos;s{' '}
           <Link to="/about/constitution">Constitution and Bylaws</Link>)
         </FuturaDiv>
       )}
+
       <section>
         <dl className={classes.paddingMedium}>
           <dt>Section 1 &mdash; Membership</dt>

@@ -188,7 +188,7 @@ const Constitution = ({ location }) => {
               <dt>Section 2 &mdash; Terms</dt>
               <dd className={classes.paddingMedium}>
                 {`All elected Directors shall serve a one-year term in each officer position in the
-                following sequence: Secretary, Vice-President, President and Past President.`}
+                following sequence: Secretary, Vice-President, President and Past President. Terms begin and end the day after the TMEA convention.`}
               </dd>
               <dt>Section 3 &mdash; Meetings</dt>
               <dd className={classes.paddingMedium}>
