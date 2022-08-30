@@ -419,12 +419,13 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
 
           <section>
             <em>
-              These Bylaws were originally approved at a meeting of the Texas Music
-              Administrators Conference membership on February 15, 2008. These Bylaws were
-              amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16,
-              2019; November 19, 2020; July 23, 2021; and November 18, 2021.
+              These Bylaws were originally approved at a meeting of the Texas Music Administrators
+              Conference membership on February 15, 2008. These Bylaws were amended on November 21,
+              2013; February 12, 2014; July 26, 2019; September 16, 2019;
+              November 19, 2020; July 23, 2021; November 18, 2021; and July 22, 2022.
             </em>
           </section>
+
           {/* Mobile sidebar */}
           <div
             css={{
