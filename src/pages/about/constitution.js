@@ -61,7 +61,7 @@ const Constitution = ({ location }) => {
           <Box mb={3}>
             <FuturaAnchor
               download
-              href="https://res.cloudinary.com/tmac/image/upload/v1650322843/TMAC_Bylaws_-_Updated_11-18-21.pdf"
+              href="https://res.cloudinary.com/tmac/image/upload/v1661895580/TMAC_Bylaws_-_Updated_7-22-22.pdf"
               rel="noreferrer noopener"
               target="_blank"
             >
@@ -188,7 +188,7 @@ const Constitution = ({ location }) => {
               <dt>Section 2 &mdash; Terms</dt>
               <dd className={classes.paddingMedium}>
                 {`All elected Directors shall serve a one-year term in each officer position in the
-                following sequence: Secretary, Vice-President, President and Past President.`}
+                following sequence: Secretary, Vice-President, President and Past President. Terms begin and end the day after the TMEA convention.`}
               </dd>
               <dt>Section 3 &mdash; Meetings</dt>
               <dd className={classes.paddingMedium}>
@@ -419,12 +419,13 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
 
           <section>
             <em>
-              These Bylaws were originally approved at a meeting of the Texas Music
-              Administrators Conference membership on February 15, 2008. These Bylaws were
-              amended on November 21, 2013; February 12, 2014; July 26, 2019; September 16,
-              2019; November 19, 2020; July 23, 2021; and November 18, 2021.
+              These Bylaws were originally approved at a meeting of the Texas Music Administrators
+              Conference membership on February 15, 2008. These Bylaws were amended on November 21,
+              2013; February 12, 2014; July 26, 2019; September 16, 2019;
+              November 19, 2020; July 23, 2021; November 18, 2021; and July 22, 2022.
             </em>
           </section>
+
           {/* Mobile sidebar */}
           <div
             css={{

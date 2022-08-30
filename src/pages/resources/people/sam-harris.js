@@ -46,6 +46,7 @@ const SamHarris = ({ location }) => (
         />
         <h2 css={headingNameStyles}>Sam Harris</h2>
         <CardHeadline>TMAC Past President, 2012-2013</CardHeadline>
+        <CardHeadline>2021 TMAC Outstanding Administrator</CardHeadline>
 
         <FuturaParagraph>
           Sam Harris is beginning his twenty-ninth year in public education as
