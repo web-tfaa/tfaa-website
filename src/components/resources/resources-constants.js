@@ -87,6 +87,14 @@ export const outstandingAdmin = [
     year: '2020',
     name: 'Lisa Roebuck',
   },
+  {
+    year: '2021',
+    name: 'Linda Fletcher',
+  },
+  {
+    year: '2022',
+    name: 'Sam Harris',
+  },
 ];
 
 export const pastPresidents = [
@@ -213,5 +221,9 @@ export const pastPresidents = [
   {
     year: '2020-2021',
     name: 'Jim Egger',
+  },
+  {
+    year: '2021-2022',
+    name: 'Joe Clark',
   },
 ];
