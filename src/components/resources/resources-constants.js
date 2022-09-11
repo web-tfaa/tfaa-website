@@ -89,11 +89,11 @@ export const outstandingAdmin = [
   },
   {
     year: '2021',
-    name: 'Linda Fletcher',
+    name: 'Sam Harris',
   },
   {
     year: '2022',
-    name: 'Sam Harris',
+    name: 'Linda Fletcher',
   },
 ];
 
