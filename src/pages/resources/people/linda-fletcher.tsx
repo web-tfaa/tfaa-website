@@ -42,7 +42,7 @@ const SamHarris: FC = ({ location }) => (
         <img
           alt="Linda Fletcher"
           css={imageStyles}
-          src="https://res.cloudinary.com/tmac/image/upload/ar_1:1,c_fill,g_auto,w_1000/v1661896794/fletcher.jpg"
+          src="https://res.cloudinary.com/tmac/image/upload/v1662919215/Linda_Fletcher_square.png"
         />
         <h2 css={headingNameStyles}>Linda Fletcher</h2>
         <CardHeadline>2022 TMAC Outstanding Administrator</CardHeadline>
