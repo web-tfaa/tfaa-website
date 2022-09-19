@@ -261,7 +261,6 @@ const RegisterSponsorContent: FC<Props> = ({
         {[2, 3].includes(activeStep) && (
           <RegisterSponsorPayment
             authenticatedUserId={authUser?.uid}
-            onCompleteSponsorStep={handleCompleteSponsorStep}
             onUpdateSponsorForm={handleUpdateSponsorForm}
             sponsorForm={sponsorForm}
           />

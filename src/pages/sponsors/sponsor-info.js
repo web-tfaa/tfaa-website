@@ -85,7 +85,7 @@ const SponsorInfo = (props) => {
                     <span css={boldStyles}>
                       3.{' '}
                     </span>
-                    Pay online using PayPal (or mail invoice with check to the TMAC Treasurer).
+                    To pay, mail invoice with check to the TMAC Treasurer.
                   </FuturaDiv>
                 </>
               )}
