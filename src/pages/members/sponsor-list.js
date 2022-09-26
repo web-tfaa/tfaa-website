@@ -1,8 +1,9 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 // import Alert from '../../components/shared/Alert';
@@ -13,7 +14,7 @@ import SponsorListTable from './sponsor-table';
 import Status from './status';
 import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
-import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
+import { TMAC_WEB_ADMIN_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Variables
 const propTypes = {
@@ -43,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EMPTY_ARRAY = [];
-
 // Component Definition
 const SponsorListContent = ({
   isAuthenticated,
@@ -52,7 +51,9 @@ const SponsorListContent = ({
 }) => {
   const classes = useStyles();
 
-  const [userData, setUserData] = useState(EMPTY_ARRAY);
+  const [userData, setUserData] = useState([]);
+
+  console.log('userData', userData);
 
   const handleUpdateUserList = (userList) => {
     setUserData(userList);
@@ -61,14 +62,18 @@ const SponsorListContent = ({
   useEffect(() => {
     const userList = [];
 
-    doGetUsers('registration', userList, handleUpdateUserList);
+    doGetUsers('sponsor', userList, handleUpdateUserList);
   }, []);
 
-  if (!isAuthenticated) {
+  if (!userData || !isAuthenticated) {
     return null;
   }
 
-  const isAdmin = userEmail && ADMIN_USER_EMAIL_LIST.includes(userEmail);
+  const isTMACWebAdmin = userEmail && TMAC_WEB_ADMIN_EMAIL_LIST.includes(userEmail);
+
+  if (!isTMACWebAdmin) {
+    return <Typography>This data is only available for admin users.</Typography>;
+  }
 
   return (
     <div className={classes.root}>
@@ -80,18 +85,19 @@ const SponsorListContent = ({
 
       <div className={classes.paddingContainer}>
         <h2>Sponsor list</h2>
-        {isAdmin && (
+
+        {isTMACWebAdmin && (
           <EnhancedAlert
             title="Admin View"
             severity="info"
           >
-            You can print any sponso&apos;s invoice or receipt from each row.
+            You can print any sponsor&apos;s invoice or receipt from each row.
           </EnhancedAlert>
         )}
 
         <SponsorListTable
           data={Object.values(userData)}
-          isAdmin={isAdmin}
+          isAdmin={isTMACWebAdmin}
         />
       </div>
     </div>

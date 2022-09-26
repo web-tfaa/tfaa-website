@@ -23,9 +23,9 @@ const useStyles = makeStyles({
 });
 
 const rows = [
-  { id: 'FirstName', disablePadding: true, label: 'First Name' },
-  { id: 'LastName', disablePadding: false, label: 'Last Name' },
-  { id: 'District', disablePadding: false, label: 'District' },
+  { id: 'SponsorOrganization', disablePadding: true, label: 'Organization' },
+  { id: 'SponsorLevel', disablePadding: false, label: 'Level' },
+  { id: 'OrganizationContactName', disablePadding: true, label: 'Contact Name' },
   { id: 'Title', disablePadding: false, label: 'Title' },
   { id: 'Email', disablePadding: false, label: 'Email' },
 ];

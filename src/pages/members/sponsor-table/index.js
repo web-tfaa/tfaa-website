@@ -160,25 +160,25 @@ const SponsorTable = ({
                     <TableCell
                       className={classes.cell}
                       component="th"
-                      key={user.FirstName}
+                      key={user.SponsorOrganization}
                       padding="none"
                       scope="row"
                     >
-                      {user.FirstName}
+                      {user.SponsorOrganization}
                     </TableCell>
 
                     <TableCell
                       className={classes.cell}
-                      key={user.LastName}
+                      key={user.SponsorLevel}
                     >
-                      {user.LastName}
+                      {user.SponsorLevel}
                     </TableCell>
 
                     <TableCell
                       className={classes.cell}
-                      key={user.District}
+                      key={user.OrganizationContactName}
                     >
-                      {user.District}
+                      {user.OrganizationContactName}
                     </TableCell>
 
                     <TableCell
@@ -206,7 +206,7 @@ const SponsorTable = ({
           </Table>
         ) : (
           <div className={classes.empty}>
-            No members for the current school year
+            No sponsors for the current school year
           </div>
         )}
       </div>
