@@ -88,7 +88,7 @@ const InvoiceTable = ({
               for the {currentSchoolYearLong} school year.
             </CustomTableCell>
             <CustomTableCell align="right">
-              {isString ? updatedAmount : `$${updatedAmount.toFixed(2).toLocaleString()}`}
+              {isString ? updatedAmount : `$${updatedAmount?.toFixed(2).toLocaleString()}`}
             </CustomTableCell>
           </TableRow>
         </TableBody>
