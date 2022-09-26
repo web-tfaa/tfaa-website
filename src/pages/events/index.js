@@ -3,7 +3,7 @@ import { Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies

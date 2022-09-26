@@ -24,9 +24,11 @@ function getSteps(
     isAuthenticated
       ? 'Sign in to the TMAC members area'
       : 'Sign up for TMAC website login',
-    'Complete membership form',
     isViewingSponsors
-      ? 'Choose Sponsor level and make payment'
+      ? 'Complete sponsor form'
+      : 'Complete membership form',
+    isViewingSponsors
+      ? 'Confirm Sponsor level and send payment'
       : 'Pay TMAC dues',
   ];
 }

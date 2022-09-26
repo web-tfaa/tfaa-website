@@ -3,6 +3,7 @@ import {
   Box,
   CircularProgress,
 } from '@material-ui/core';
+import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 
@@ -10,7 +11,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Cards from '../../components/shared/cards';
 import presets from '../../utils/presets';
-import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
+import { ADMIN_USER_EMAIL_LIST, TMAC_WEB_ADMIN_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Dependencies
 import MemberFileShareCard from './MemberFileShareCard';
@@ -76,6 +77,7 @@ const MemberContent = ({
   }
 
   const isAdmin = authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email);
+  const isTMACWebAdmin = authUser && TMAC_WEB_ADMIN_EMAIL_LIST.includes(authUser.email);
 
   return (
     <div>
@@ -116,6 +118,13 @@ const MemberContent = ({
             />
           ))}
       </Cards>
+
+      {isTMACWebAdmin
+        ? (
+          <Box component="p" mt={4}>
+            View the <Link to="/members/sponsor-list">Sponsors</Link> for this year.
+          </Box>
+        ) : null}
 
       <div
         css={{
