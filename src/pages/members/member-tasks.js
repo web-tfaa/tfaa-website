@@ -35,7 +35,7 @@ const propTypes = {
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
     invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    receiptId: PropTypes.number,
+    receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
   isRegisteredForCurrentYear: PropTypes.bool.isRequired,
 };
