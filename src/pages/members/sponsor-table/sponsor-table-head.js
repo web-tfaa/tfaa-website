@@ -73,7 +73,7 @@ const SponsorTableHead = ({
         {rows.map((row) => (
           <StyledTableCell
             key={`${row.id}=${row.label}`}
-            padding={row.disablePadding ? 'none' : 'default'}
+            padding={row.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === row.id ? order : false}
           >
             <Tooltip
