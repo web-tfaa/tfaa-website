@@ -3,6 +3,7 @@ import {
   Box,
   CircularProgress,
 } from '@material-ui/core';
+import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 
@@ -116,6 +117,13 @@ const MemberContent = ({
             />
           ))}
       </Cards>
+
+      {isAdmin
+        ? (
+          <Box component="p" mt={4}>
+            View the <Link to="/members/sponsor-table">Sponsors</Link> for this year.
+          </Box>
+        ) : null}
 
       <div
         css={{
