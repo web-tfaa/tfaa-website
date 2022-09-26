@@ -57,12 +57,12 @@ const MemberTableRowActionElements = ({ user }) => {
 
         <div css={{ display: 'none' }}>
           <Invoice
-            amount={user.AmountPaid}
+            amount={user.AmountDonated}
             form={user}
-            isActive={user.MemberType === 'Active'}
             isInvoice={false}
             receiptId={user.receiptId}
             ref={componentRef}
+            sponsorLevel={user.SponsorLevel}
           />
         </div>
       </Fragment>
@@ -85,12 +85,12 @@ const MemberTableRowActionElements = ({ user }) => {
 
         <div css={{ display: 'none' }}>
           <Invoice
-            amount={user.AmountPaid}
+            amount={user.AmountDonated}
             form={user}
             invoiceId={user.invoiceId || 1}
-            isActive={user.MemberType === 'Active'}
             isInvoice
             ref={componentRef}
+            sponsorLevel={user.SponsorLevel}
           />
         </div>
       </Fragment>
