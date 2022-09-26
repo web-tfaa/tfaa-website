@@ -53,8 +53,6 @@ const SponsorListContent = ({
 
   const [userData, setUserData] = useState([]);
 
-  console.log('userData', userData);
-
   const handleUpdateUserList = (userList) => {
     setUserData(userList);
   };
@@ -65,7 +63,7 @@ const SponsorListContent = ({
     doGetUsers('sponsor', userList, handleUpdateUserList);
   }, []);
 
-  if (!userData || !isAuthenticated) {
+  if (!isAuthenticated) {
     return null;
   }
 

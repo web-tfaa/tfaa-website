@@ -115,15 +115,15 @@ const SponsorTable = ({
     return null;
   }
 
-  function handleChangePage(event, newPage) {
+  const handleChangePage = (_event, newPage) => {
     setPage(newPage);
-  }
+  };
 
-  function handleChangeRowsPerPage(event) {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(event.target.value);
-  }
+  };
 
-  function handleRequestSort(event, property) {
+  const handleRequestSort = (_event, property) => {
     let newOrder = 'desc';
 
     if (orderBy === property && order === 'desc') {
@@ -132,7 +132,7 @@ const SponsorTable = ({
 
     setOrder(newOrder);
     setOrderBy(property);
-  }
+  };
 
   return (
     <Paper
@@ -228,8 +228,8 @@ const SponsorTable = ({
             id: 'pager-button-right',
             size: 'small',
           }}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
           page={page}
           rowsPerPage={rowsPerPage}
         />
