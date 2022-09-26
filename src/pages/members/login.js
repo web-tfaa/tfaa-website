@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 
 // Internal Dependencies
+import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
@@ -34,37 +35,39 @@ class Login extends Component {
       ? this.handleRedirectToMembers
       : (
         <Layout location={location}>
-          <div
-            css={{
-              paddingLeft: 0,
-              [presets.Tablet]: {
-                paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-              },
-            }}
-          >
-            <Container className="login">
-              <Helmet>
-                <title>TMAC | Log In</title>
-              </Helmet>
-              <h2
-                css={{
-                  margin: '1rem 0',
-                }}
-              >
-                Login
-              </h2>
+          <ReCaptchaProvider>
+            <div
+              css={{
+                paddingLeft: 0,
+                [presets.Tablet]: {
+                  paddingLeft: !isAuthenticated ? '1.5rem' : 0,
+                },
+              }}
+            >
+              <Container className="login">
+                <Helmet>
+                  <title>TMAC | Log In</title>
+                </Helmet>
+                <h2
+                  css={{
+                    margin: '1rem 0',
+                  }}
+                >
+                  Login
+                </h2>
 
-              <FormHr />
+                <FormHr />
 
-              <LoginForm />
+                <LoginForm />
 
-              <FormHr />
+                <FormHr />
 
-              <p>
-                <Link to="/members/pw-forget">Forgot Password?</Link>
-              </p>
-            </Container>
-          </div>
+                <p>
+                  <Link to="/members/pw-forget">Forgot Password?</Link>
+                </p>
+              </Container>
+            </div>
+          </ReCaptchaProvider>
         </Layout>
       );
   }

@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies
+import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
@@ -84,77 +85,79 @@ class PasswordForgetForm extends Component {
 
     return (
       <Layout location={location}>
-        <div
-          css={{
-            paddingLeft: 0,
-            [presets.Tablet]: {
-              paddingLeft: '1.5rem',
-            },
-          }}
-        >
-          <Container className="password-forget">
-            <Helmet>
-              <title>TMAC | Forgot Password</title>
-            </Helmet>
-            <h2
-              css={{
-                margin: '1rem 0',
-              }}
-            >
-              Password Reset
-            </h2>
-
-            <FormHr />
-
-            {showSuccessMessage && (
-              <div
+        <ReCaptchaProvider>
+          <div
+            css={{
+              paddingLeft: 0,
+              [presets.Tablet]: {
+                paddingLeft: '1.5rem',
+              },
+            }}
+          >
+            <Container className="password-forget">
+              <Helmet>
+                <title>TMAC | Forgot Password</title>
+              </Helmet>
+              <h2
                 css={{
-                  background: colors.status,
-                  color: texasFlagBlue,
-                  fontWeight: 500,
-                  marginBottom: 16,
-                  padding: '0.5rem',
+                  margin: '1rem 0',
                 }}
               >
-                Check your email to reset your password!
-              </div>
-            )}
-            <form onSubmit={this.onSubmit}>
-              <input
-                css={{
-                  display: 'block',
-                  fontFamily: options.headerFontFamily.join(','),
-                  fontSize: '1rem',
-                  marginBottom: 24,
-                  padding: '0.2rem',
-                  width: 288,
-                }}
-                onChange={(event) =>
-                  this.setState(
-                    updateByPropertyName('email', event.target.value),
-                  )}
-                placeholder="Email Address"
-                type="text"
-                value={email}
-              />
-              <button disabled={isInvalid} type="submit">
-                Reset My Password
-              </button>
-              {error && (
+                Password Reset
+              </h2>
+
+              <FormHr />
+
+              {showSuccessMessage && (
                 <div
                   css={{
-                    color: 'red',
-                    fontFamily: options.headerFontFamily.join(','),
+                    background: colors.status,
+                    color: texasFlagBlue,
                     fontWeight: 500,
-                    margin: '16px 0',
+                    marginBottom: 16,
+                    padding: '0.5rem',
                   }}
                 >
-                  {error.message}
+                  Check your email to reset your password!
                 </div>
               )}
-            </form>
-          </Container>
-        </div>
+              <form onSubmit={this.onSubmit}>
+                <input
+                  css={{
+                    display: 'block',
+                    fontFamily: options.headerFontFamily.join(','),
+                    fontSize: '1rem',
+                    marginBottom: 24,
+                    padding: '0.2rem',
+                    width: 288,
+                  }}
+                  onChange={(event) =>
+                    this.setState(
+                      updateByPropertyName('email', event.target.value),
+                    )}
+                  placeholder="Email Address"
+                  type="text"
+                  value={email}
+                />
+                <button disabled={isInvalid} type="submit">
+                  Reset My Password
+                </button>
+                {error && (
+                  <div
+                    css={{
+                      color: 'red',
+                      fontFamily: options.headerFontFamily.join(','),
+                      fontWeight: 500,
+                      margin: '16px 0',
+                    }}
+                  >
+                    {error.message}
+                  </div>
+                )}
+              </form>
+            </Container>
+          </div>
+        </ReCaptchaProvider>
       </Layout>
     );
   }

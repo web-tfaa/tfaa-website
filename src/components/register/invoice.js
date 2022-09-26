@@ -52,6 +52,12 @@ class Invoice extends Component {
       ...otherProps
     } = this.props;
 
+    const dateToShow = typeof form.invoiceDate !== 'object' && isInvoice
+      ? form.invoiceDate
+      : typeof form.receiptDate !== 'object' && !isInvoice
+        ? form.receiptDate
+        : currentDate;
+
     return (
       <section
         css={{
@@ -93,7 +99,7 @@ class Invoice extends Component {
           </div>
           <div>
             <strong>Date:</strong>{' '}
-            {(isInvoice ? form.invoiceDate : form.receiptDate) || currentDate}
+            {dateToShow}
           </div>
 
           {!isInvoice && form.PaypalPayerID && (
