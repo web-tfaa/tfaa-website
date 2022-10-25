@@ -14,7 +14,10 @@ import SponsorListTable from './sponsor-table';
 import Status from './status';
 import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
-import { TMAC_WEB_ADMIN_EMAIL_LIST } from '../../utils/member-constants';
+import {
+  TMAC_WEB_EXECUTIVE_SECRETARY,
+  TMAC_WEB_ADMIN_EMAIL_LIST,
+} from '../../utils/member-constants';
 
 // Local Variables
 const propTypes = {
@@ -67,9 +70,11 @@ const SponsorListContent = ({
     return null;
   }
 
-  const isTMACWebAdmin = userEmail && TMAC_WEB_ADMIN_EMAIL_LIST.includes(userEmail);
+  const shouldSeeSponsorListLink = userEmail
+    && (TMAC_WEB_ADMIN_EMAIL_LIST.includes(userEmail)
+    || userEmail === TMAC_WEB_EXECUTIVE_SECRETARY);
 
-  if (!isTMACWebAdmin) {
+  if (!shouldSeeSponsorListLink) {
     return <Typography>This data is only available for admin users.</Typography>;
   }
 
@@ -84,7 +89,7 @@ const SponsorListContent = ({
       <div className={classes.paddingContainer}>
         <h2>Sponsor list</h2>
 
-        {isTMACWebAdmin && (
+        {shouldSeeSponsorListLink && (
           <EnhancedAlert
             title="Admin View"
             severity="info"
@@ -95,7 +100,7 @@ const SponsorListContent = ({
 
         <SponsorListTable
           data={Object.values(userData)}
-          isAdmin={isTMACWebAdmin}
+          isAdmin={shouldSeeSponsorListLink}
         />
       </div>
     </div>
