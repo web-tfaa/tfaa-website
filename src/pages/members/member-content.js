@@ -11,7 +11,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Cards from '../../components/shared/cards';
 import presets from '../../utils/presets';
-import { ADMIN_USER_EMAIL_LIST, TMAC_WEB_ADMIN_EMAIL_LIST } from '../../utils/member-constants';
+import {
+  ADMIN_USER_EMAIL_LIST,
+  TMAC_WEB_EXECUTIVE_SECRETARY,
+  TMAC_WEB_ADMIN_EMAIL_LIST,
+} from '../../utils/member-constants';
 
 // Local Dependencies
 import MemberFileShareCard from './MemberFileShareCard';
@@ -77,7 +81,10 @@ const MemberContent = ({
   }
 
   const isAdmin = authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email);
-  const isTMACWebAdmin = authUser && TMAC_WEB_ADMIN_EMAIL_LIST.includes(authUser.email);
+
+  const shouldSeeSponsorListLink = authUser
+    && (TMAC_WEB_ADMIN_EMAIL_LIST.includes(authUser.email)
+    || authUser.email === TMAC_WEB_EXECUTIVE_SECRETARY);
 
   return (
     <div>
@@ -119,7 +126,7 @@ const MemberContent = ({
           ))}
       </Cards>
 
-      {isTMACWebAdmin
+      {shouldSeeSponsorListLink
         ? (
           <Box component="p" mt={4}>
             View the <Link to="/members/sponsor-list">Sponsors</Link> for this year.
