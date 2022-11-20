@@ -5,7 +5,7 @@ import {
   format,
   parseISO,
 } from 'date-fns';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';

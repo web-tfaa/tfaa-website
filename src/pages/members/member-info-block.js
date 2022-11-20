@@ -1,7 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Local Variables
 const propTypes = {

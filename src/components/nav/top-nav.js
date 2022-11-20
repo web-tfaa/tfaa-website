@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import hex2rgba from 'hex2rgba';
-import { Link } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';

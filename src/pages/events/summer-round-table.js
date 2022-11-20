@@ -1,8 +1,8 @@
 // External Dependencies
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { FC } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 
 // Internal Dependencies

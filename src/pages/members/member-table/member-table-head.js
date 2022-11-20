@@ -1,12 +1,14 @@
 // External Dependencies
+import {
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Tooltip,
+} from '@mui/material';
+import { makeStyles, withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles, withStyles } from '@material-ui/styles';
 
 // Local Variables
 const propTypes = {

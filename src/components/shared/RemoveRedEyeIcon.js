@@ -1,8 +1,8 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
-import { makeStyles } from '@material-ui/styles';
+import RemoveRedEye from '@mui/icons-material/RemoveRedEye';
+import { makeStyles } from '@mui/styles';
 
 // Local Variables
 const propTypes = {

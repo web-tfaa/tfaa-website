@@ -7,10 +7,10 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { FC, useState } from 'react';
 import { Form, Formik } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { navigate } from 'gatsby';
 
 // Internal Dependencies

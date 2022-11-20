@@ -4,9 +4,9 @@ import {
   Step,
   StepLabel,
   Stepper,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 // Local Typings
 interface Props {

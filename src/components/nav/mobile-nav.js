@@ -1,9 +1,9 @@
 // External Dependencies
-// import CardGiftCardIcon from '@material-ui/icons/CardGiftCard';
-import GradeIcon from '@material-ui/icons/Grade';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
+// import CardGiftCardIcon from '@mui/icons-material/CardGiftCard';
+import GradeIcon from '@mui/icons-material/Grade';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import React from 'react';
 
 // Internal Dependencies

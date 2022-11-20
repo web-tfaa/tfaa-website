@@ -1,7 +1,7 @@
 // External Dependencies
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import CardHeadline from '../../../components/shared/cards/card-headline';

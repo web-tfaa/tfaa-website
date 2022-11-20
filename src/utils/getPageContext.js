@@ -4,11 +4,11 @@ import { SheetsRegistry } from 'jss';
 import {
   createGenerateClassName,
   createTheme,
-} from '@material-ui/core/styles';
+} from '@mui/styles';
 import {
   indigo,
   pink,
-} from '@material-ui/core/colors';
+} from '@mui/material/colors';
 
 // A theme with custom primary and secondary color.
 // It's optional.

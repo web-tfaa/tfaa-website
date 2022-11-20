@@ -1,10 +1,10 @@
 // External Dependencies
-import { Box } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';

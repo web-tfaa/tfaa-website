@@ -1,9 +1,9 @@
 // External Dependencies
-import Button from '@material-ui/core/Button';
+import { Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer, useState } from 'react';
-import { navigate } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';

@@ -1,8 +1,8 @@
 // External Dependencies
 import React from 'react';
-import Face from '@material-ui/icons/Face';
-import LocationCity from '@material-ui/icons/LocationCity';
-import School from '@material-ui/icons/School';
+import Face from '@mui/icons-material/Face';
+import LocationCity from '@mui/icons-material/LocationCity';
+import School from '@mui/icons-material/School';
 
 // Internal Dependencies
 import presets, { colors } from '../../../utils/presets';

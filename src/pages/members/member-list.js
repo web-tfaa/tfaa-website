@@ -1,8 +1,8 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 // import Alert from '../../components/shared/Alert';

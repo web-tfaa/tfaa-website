@@ -3,10 +3,10 @@ import {
   Alert,
   AlertProps,
   AlertTitle,
-} from '@material-ui/lab';
-import { Collapse } from '@material-ui/core';
+  Collapse,
+} from '@mui/material';
 import { FC } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Local Typings
 interface Props extends AlertProps {

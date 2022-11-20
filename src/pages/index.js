@@ -1,12 +1,10 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { graphql } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  graphql,
-  Link,
-} from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';

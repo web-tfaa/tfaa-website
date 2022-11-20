@@ -2,7 +2,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
 
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';

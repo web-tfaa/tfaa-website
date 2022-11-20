@@ -2,13 +2,13 @@
 import {
   IconButton,
   Tooltip,
-} from '@material-ui/core';
-import PrintIcon from '@material-ui/icons/Print';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import PrintIcon from '@mui/icons-material/Print';
 import PropTypes from 'prop-types';
 import React, { Fragment, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import { makeStyles } from '@material-ui/styles';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 // Internal Dependencies
 import Invoice from '../../../components/register/invoice';

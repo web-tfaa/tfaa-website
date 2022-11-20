@@ -1,8 +1,8 @@
 // External Dependencies
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@mui/styles';
+import { CssBaseline } from '@mui/material';
 import JssProvider from 'react-jss/lib/JssProvider';
+import React from 'react';
 
 // Local Dependencies
 import getPageContext from './getPageContext';
