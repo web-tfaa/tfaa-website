@@ -1,5 +1,8 @@
 // Give gatsby access to env keys
-require('dotenv').config({
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require('dotenv');
+
+dotenv.config({
   path: '.env',
 });
 
@@ -28,7 +31,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-emotion',
       options: {
-        // Accepts the following options, all of which are defined by `@emotion/babel-plugin` plugin.
+        // Accepts the following options,
+        //  all of which are defined by `@emotion/babel-plugin` plugin.
         // The values for each key in this example are the defaults the plugin uses.
         sourceMap: true,
         autoLabel: 'dev-only',
