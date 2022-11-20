@@ -1,7 +1,7 @@
 // External Dependencies
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import { options } from '../../utils/typography';

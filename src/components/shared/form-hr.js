@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import { colors } from '../../utils/presets';

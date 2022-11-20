@@ -1,6 +1,6 @@
 // External Dependencies
 import React, { FC } from 'react';
-import { Link } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
 
 // Internal Dependencies
 import { rhythm, scale, options } from '../../../utils/typography';
@@ -116,7 +116,7 @@ const SectionLink: FC = (props) => {
       color: colors.gray.text,
       fontStyle: false,
       '&:before': {
-        content: ' ',
+        content: '""',
         height: 4,
         width: 4,
         borderRadius: '100%',

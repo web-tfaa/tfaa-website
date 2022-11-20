@@ -1,7 +1,7 @@
 // External Dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
 
 // Internal Dependencies
 import { colors } from '../../utils/presets';

@@ -3,9 +3,9 @@
 import {
   Box,
   Collapse,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { FC, ReactElement, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 // Local Dependencies
 import PaypalButton from './paypal-button';

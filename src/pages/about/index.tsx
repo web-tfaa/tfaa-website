@@ -1,8 +1,9 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import { FC } from 'react';
-import { graphql, Link } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+import { graphql } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';

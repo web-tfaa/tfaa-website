@@ -2,8 +2,8 @@
 import {
   Box,
   CircularProgress,
-} from '@material-ui/core';
-import { Link } from 'gatsby';
+} from '@mui/material';
+import { Link } from 'gatsby-theme-material-ui';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 

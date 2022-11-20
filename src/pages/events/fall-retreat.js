@@ -2,12 +2,12 @@
 import {
   Box,
   Button,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Helmet } from 'react-helmet';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { makeStyles } from '@mui/styles';
+import { Link } from 'gatsby-theme-material-ui';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'gatsby';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';

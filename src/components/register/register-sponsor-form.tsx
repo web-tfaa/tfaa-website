@@ -6,10 +6,10 @@ import {
   Radio,
   RadioGroup,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { FC, useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import {

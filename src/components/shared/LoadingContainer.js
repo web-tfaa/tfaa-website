@@ -1,6 +1,6 @@
 // External Dependencies
-import { CircularProgress } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { CircularProgress } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 

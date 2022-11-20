@@ -1,9 +1,9 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';

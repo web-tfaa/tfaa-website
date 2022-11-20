@@ -1,13 +1,15 @@
 // External Dependencies
-import Paper from '@material-ui/core/Paper';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TablePagination,
+  TableRow,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import MemberTableHead from './member-table-head';
@@ -109,7 +111,7 @@ const MemberTable = ({
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('LastName');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
   if (!data) {
     return null;

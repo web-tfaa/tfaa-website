@@ -1,7 +1,7 @@
 // External Dependencies
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { Link } from 'gatsby';
+import { Link } from 'gatsby-theme-material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 

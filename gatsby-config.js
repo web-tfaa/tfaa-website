@@ -10,18 +10,7 @@ module.exports = {
     description: 'Website for the Texas Music Administrators Conference',
   },
   plugins: [
-    'gatsby-plugin-top-layout',
-    {
-      resolve: 'gatsby-plugin-material-ui',
-      // If you want to use styled components, in conjunction to Material-UI, you should:
-      // - Change the injection order
-      // - Add the plugin
-      options: {
-        // stylesProvider: {
-        //   injectFirst: true,
-        // },
-      },
-    },
+    'gatsby-theme-material-ui',
     {
       resolve: '@sentry/gatsby',
       options: {
@@ -36,7 +25,17 @@ module.exports = {
         accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    'gatsby-plugin-glamor',
+    {
+      resolve: 'gatsby-plugin-emotion',
+      options: {
+        // Accepts the following options, all of which are defined by `@emotion/babel-plugin` plugin.
+        // The values for each key in this example are the defaults the plugin uses.
+        sourceMap: true,
+        autoLabel: 'dev-only',
+        labelFormat: '[local]',
+        cssPropOptimization: true,
+      },
+    },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
@@ -51,6 +50,7 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-typescript',
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
   ],
 };

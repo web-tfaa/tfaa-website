@@ -5,12 +5,12 @@ import {
   CardContent,
   Chip,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import { Link } from 'gatsby-theme-material-ui';
+import { makeStyles } from '@mui/styles';
+import { green } from '@mui/material/colors';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
-import green from '@material-ui/core/colors/green';
 
 // Internal Dependencies
 import { options } from '../../../utils/typography';

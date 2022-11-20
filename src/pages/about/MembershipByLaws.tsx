@@ -1,7 +1,7 @@
 // External Dependencies
 import React from 'react';
-import { Link } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+import { Link } from 'gatsby-theme-material-ui';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import CardHeadline from '../../components/shared/cards/card-headline';

@@ -2,8 +2,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import hex2rgba from 'hex2rgba';
-import { css } from 'glamor';
-import { green, red } from '@material-ui/core/colors';
+import { green, red } from '@mui/material/colors';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -32,11 +31,6 @@ const defaultProps = {
 
 const texasFlagRed = '#BF0A30';
 const green500 = '#4caf50';
-
-const stripeAnimation = css.keyframes({
-  '0%': { backgroundPosition: '0 0' },
-  '100%': { backgroundPosition: '30px 60px' },
-});
 
 // Component Definition
 const RegisterButton = ({
@@ -74,7 +68,6 @@ const RegisterButton = ({
         textDecoration: 'none',
         transition: `all ${presets.animation.speedDefault} ${presets.animation.curveDefault}`,
         ':hover, &:focus': {
-          animation: !isDisabled && `${stripeAnimation} 2.8s linear infinite`,
           backgroundColor: isRed || isDisabled ? texasFlagRed : green500,
           backgroundImage:
             !isDisabled
@@ -88,7 +81,7 @@ const RegisterButton = ({
           outline: 0,
         },
         ':after': {
-          content: '',
+          content: '""',
           display: 'block',
         },
       },

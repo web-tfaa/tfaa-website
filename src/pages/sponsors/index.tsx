@@ -3,7 +3,7 @@ import {
   Box,
   CircularProgress,
   Collapse,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Helmet } from 'react-helmet';
 import React, {
   FC, useEffect, useState

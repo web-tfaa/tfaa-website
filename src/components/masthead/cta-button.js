@@ -2,9 +2,9 @@
 import hex2rgba from 'hex2rgba';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { css } from 'glamor';
-import { Link } from 'gatsby';
-import { blue, green, red } from '@material-ui/core/colors';
+import { Link } from 'gatsby-theme-material-ui';
+import { blue, green, red } from '@mui/material/colors';
+import { css } from '@emotion/react';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -14,11 +14,6 @@ import { rhythm, scale, options } from '../../utils/typography';
 const texasFlagBlue = '#002868';
 const texasFlagRed = '#BF0A30';
 const green500 = '#4caf50';
-
-const stripeAnimation = css.keyframes({
-  '0%': { backgroundPosition: '0 0' },
-  '100%': { backgroundPosition: '30px 60px' },
-});
 
 const getButtonColor = (buttonColor) => {
   let background = red['50'];
@@ -82,14 +77,13 @@ const CtaButton = ({
           backgroundImage:
             'linear-gradient(135deg, rgba(0,0,0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0, 0.1) 50%, rgba(0,0,0, 0.1) 75%, transparent 75%, transparent)',
           color: buttonColor === 'green' ? '#222' : '#fff',
-          animation: `${stripeAnimation} 2.8s linear infinite`,
         },
         ':focus': {
           outline: 0,
           boxShadow: `0 0 0 0.2rem ${hex2rgba(getButtonColor(buttonColor).background, 0.25)}`,
         },
         ':after': {
-          content: '',
+          content: '""',
           display: 'block',
         },
       },

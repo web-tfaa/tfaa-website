@@ -1,7 +1,7 @@
 // External Dependencies
-import ArrowForward from '@material-ui/icons/ArrowForward';
+import ArrowForward from '@mui/icons-material/ArrowForward';
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Local Variables
 const useStyles = makeStyles({

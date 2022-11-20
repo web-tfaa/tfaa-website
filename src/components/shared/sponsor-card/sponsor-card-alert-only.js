@@ -1,6 +1,6 @@
 // External Dependencies
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 import EnhancedAlert from '../EnhancedAlert';

@@ -1,11 +1,11 @@
 // External Dependencies
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import CheckIcon from '@material-ui/icons/Check';
+import { green, red } from '@mui/material/colors';
+import { makeStyles } from '@mui/styles';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import CheckIcon from '@mui/icons-material/Check';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
-import { green, red } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/styles';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
