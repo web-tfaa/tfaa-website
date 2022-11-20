@@ -1,8 +1,8 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@mui/styles';
 
 // Internal Dependencies
 // import Alert from '../../components/shared/Alert';
@@ -26,7 +26,7 @@ const defaultProps = {
   userEmail: '',
 };
 
-const useStyles = makeStyles((theme) => !console.log('theme', theme) && ({
+const useStyles = makeStyles((theme) => ({
   adminCard: {
     borderLeft: `4px solid ${theme.palette.alert.info}`,
     maxWidth: '75%',
