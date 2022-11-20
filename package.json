@@ -61,7 +61,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha-v3": "^1.10.0",
-    "react-helmet": "^6.0.0",
+    "react-helmet": "^6.1.0",
     "react-jss": "^10.9.2",
     "react-to-print": "^2.14.10",
     "react-typography": "^1.0.0-alpha.4",
