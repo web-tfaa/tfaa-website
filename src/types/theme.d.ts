@@ -16,26 +16,35 @@ interface PaletteEvents {
   hotelCta: string;
 }
 
+interface PaletteTable {
+  background: string;
+  header: string;
+}
+
 declare module '@mui/material/styles' {
-  interface Theme extends MuiTheme { }
+  export type Theme = MuiTheme
 
   interface Palette extends MuiPalette {
     alert: PaletteAlert;
     events: PaletteEvents;
+    table: PaletteTable;
   }
 
   interface PaletteOptions extends MuiPaletteOptions {
     alert: PaletteAlert;
     events: PaletteEvents;
+    table: PaletteTable;
   }
 
   interface PaletteColor extends MuiPaletteColor {
     alert?: PaletteAlert;
     events?: PaletteEvents;
+    table?: PaletteTable;
   }
 
   interface SimplePaletteColorOptions extends MuiSimplePaletteColorOptions {
     alert?: PaletteAlert;
     events?: PaletteEvents;
+    table?: PaletteTable;
   }
 }

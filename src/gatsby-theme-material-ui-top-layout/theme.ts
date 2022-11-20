@@ -1,4 +1,6 @@
-import { amber, cyan, lightBlue, red } from '@mui/material/colors';
+import {
+  amber, cyan, lightBlue, red
+} from '@mui/material/colors';
 import { createTheme } from '@mui/material';
 
 // A custom theme for this app, smartly merged with the default MUI theme
@@ -6,16 +8,16 @@ import { createTheme } from '@mui/material';
 const theme = createTheme({
   palette: {
     primary: {
-      main: `#556cd6`,
+      main: '#556cd6',
     },
     secondary: {
-      main: `#19857b`,
+      main: '#19857b',
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: `#fff`,
+      default: '#fff',
     },
     alert: {
       info: lightBlue['500'],
@@ -24,6 +26,10 @@ const theme = createTheme({
     events: {
       hotelCta: cyan['200'],
     },
+    table: {
+      background: 'linear-gradient(180deg, #B8CCE3, #EDF2F8)',
+      header: '#EDF2F8',
+    }
   },
   typography: {
     fontFamily: ['Spectral', 'Georgia', 'Times New Roman', 'Times', 'serif'].join(','),

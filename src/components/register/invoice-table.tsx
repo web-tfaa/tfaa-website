@@ -1,4 +1,5 @@
 // External Dependencies
+import { FC, useMemo } from 'react';
 import {
   Paper,
   Table,
@@ -8,12 +9,24 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 
 // Internal Dependencies
 import { currentSchoolYearLong } from '../../utils/helpers';
+
+// Local Typings
+interface Props {
+  amount: number | string;
+  form: {
+    FirstName: string;
+    LastName: string;
+    MemberType: string;
+    SponsorOrganization: string;
+  };
+  isActive?: boolean;
+  isInvoice: boolean;
+  sponsorLevel?: string,
+}
 
 // Local Variables
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
@@ -27,7 +40,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     },
   },
   '.header-cell': {
-    backgroundColor: '#EDF2F8',
+    backgroundColor: theme.palette.table.header,
     color: theme.palette.common.black,
     fontWeight: 600,
     '&:first-child': {
@@ -57,7 +70,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 }));
 
 // Component Definition
-const InvoiceTable = ({
+const InvoiceTable: FC<Props> = ({
   amount,
   form,
   isActive,
@@ -67,6 +80,7 @@ const InvoiceTable = ({
   // Work out the correct amount
   const isString = typeof amount === 'string';
   const updatedAmount = amount === 0 ? 50 : amount;
+  const formattedAmount = isString ? updatedAmount : `$${Number(updatedAmount)?.toFixed(2).toLocaleString()}`;
 
   const sponsorInfo = useMemo(() => (
     <span>
@@ -114,28 +128,13 @@ const InvoiceTable = ({
               align="right"
               className="body-cell"
             >
-              {isString ? updatedAmount : `$${updatedAmount?.toFixed(2).toLocaleString()}`}
+              {formattedAmount}
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
     </StyledTableContainer>
   );
-};
-
-InvoiceTable.propTypes = {
-  amount: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
-  form: PropTypes.shape({}).isRequired,
-  isActive: PropTypes.bool,
-  isInvoice: PropTypes.bool.isRequired,
-  sponsorLevel: PropTypes.string,
-};
-InvoiceTable.defaultProps = {
-  isActive: false,
-  sponsorLevel: '',
 };
 
 export default InvoiceTable;

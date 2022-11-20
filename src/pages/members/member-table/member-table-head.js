@@ -35,7 +35,7 @@ const rows = [
 // Local Components
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: '#EDF2F8',
+    backgroundColor: theme.palette.table.header,
     color: theme.palette.common.black,
     fontWeight: 500,
     '&:first-child': {

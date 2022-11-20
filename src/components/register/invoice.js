@@ -9,6 +9,7 @@ import InvoiceTable from './invoice-table';
 import {
   currentSchoolYearLong,
 } from '../../utils/helpers';
+import theme from '../../gatsby-theme-material-ui-top-layout/theme';
 
 // Local Variables
 const propTypes = {
@@ -71,7 +72,7 @@ class Invoice extends Component {
       >
         <header
           css={{
-            background: 'linear-gradient(180deg, #B8CCE3, #EDF2F8)',
+            background: theme.palette.table.background,
             height: 110,
             padding: 16,
           }}
