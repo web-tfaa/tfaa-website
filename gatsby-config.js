@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-theme-material-ui',
+    'gatsby-plugin-styled-components',
     {
       resolve: '@sentry/gatsby',
       options: {

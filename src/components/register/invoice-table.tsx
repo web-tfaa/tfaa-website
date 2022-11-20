@@ -9,7 +9,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { currentSchoolYearLong } from '../../utils/helpers';
@@ -29,7 +29,9 @@ interface Props {
 }
 
 // Local Variables
-const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+const StyledTableContainer = styled(TableContainer)(({
+  theme,
+}) => ({
   '.body-cell': {
     fontSize: 14,
     '&:first-child': {
