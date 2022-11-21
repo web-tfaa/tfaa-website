@@ -162,9 +162,6 @@ const _options = {
       '.main-body input:focus :not(.MuiInputBase-input)': {
         border: `2px solid ${texasFlagBlue}`,
       },
-      '.main-body .MuiInputBase-input': {
-        paddingTop: '32px',
-      },
       '::-webkit-input-placeholder': {
         color: colors.gray.calm,
         opacity: 0.55,

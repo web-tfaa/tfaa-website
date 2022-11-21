@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -100,17 +100,17 @@ const MemberInfo = ({
   const [newEmailValue, setNewEmailValue] = useState('');
   const [newEmailError, setNewEmailError] = useState('');
 
-  const handleOpenChangeEmailDialog = () => {
+  const handleOpenChangeEmailDialog = useCallback(() => {
     setIsChangeEmailDialogOpen(true);
-  };
+  }, []);
 
-  const handleCloseChangeEmailDialog = () => {
+  const handleCloseChangeEmailDialog = useCallback(() => {
     setIsChangeEmailDialogOpen(false);
     setNewEmailValue('');
     setNewEmailError('');
-  };
+  }, []);
 
-  const handleUpdateNewEmailValue = (event) => {
+  const handleUpdateNewEmailValue = useCallback((event) => {
     const { value } = event.target;
 
     if (!value) {
@@ -122,9 +122,9 @@ const MemberInfo = ({
     }
 
     setNewEmailValue(value);
-  };
+  }, []);
 
-  function handleSubmitChangeEmail() {
+  const handleSubmitChangeEmail = useCallback(() => {
     if (!newEmailError) {
       doUpdateEmail(newEmailValue)
         .then(() => {
@@ -145,7 +145,7 @@ const MemberInfo = ({
           setNewEmailError(errorMessage);
         });
     }
-  }
+  }, [newEmailError, newEmailValue, setShouldRefetchUserList]);
 
   return (
     <>
@@ -165,18 +165,16 @@ const MemberInfo = ({
                       </>
                     )}
                     secondary={(
-                      <>
-                        <address className={classes.address}>
-                          <div>{currentUser.Address1}</div>
-                          <div>{currentUser.Address2}</div>
-                          <div>
-                            {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
-                          </div>
-                          <div>Office: {currentUser.OfficePhone}</div>
-                          <div>Cell: {currentUser.CellPhone}</div>
-                          <div>{currentUser.Email}</div>
-                        </address>
-                      </>
+                      <address className={classes.address}>
+                        <div>{currentUser.Address1}</div>
+                        <div>{currentUser.Address2}</div>
+                        <div>
+                          {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
+                        </div>
+                        <div>Office: {currentUser.OfficePhone}</div>
+                        <div>Cell: {currentUser.CellPhone}</div>
+                        <div>{currentUser.Email}</div>
+                      </address>
                     )}
                     secondaryTypographyProps={{
                       component: 'div',
