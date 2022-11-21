@@ -85,67 +85,6 @@ const _options = {
       hr: {
         backgroundColor: colors.ui.lilac,
       },
-      'tt,code': {
-        // background: `hsla(23, 60%, 97%, 1)`,
-        background: colors.a[0],
-        fontFamily: options.monospaceFontFamily.join(','),
-        fontSize: '80%',
-        // Disable ligatures as they look funny w/ Space Mono as code.
-        fontVariant: 'none',
-        WebkitFontFeatureSettings: '"clig" 0, "calt" 0',
-        fontFeatureSettings: '"clig" 0, "calt" 0',
-        paddingTop: '0.1em',
-        paddingBottom: '0.1em',
-      },
-      '.gatsby-highlight': {
-        // background: colors.a[0],
-        background: '#fdfaf6',
-        // boxShadow: `inset 0 0 0 1px ${colors.a[1]}`,
-        boxShadow: 'inset 0 0 0 1px #faede5',
-        borderRadius: `${presets.radius}px`,
-        padding: rhythm(options.blockMarginBottom),
-        marginBottom: rhythm(options.blockMarginBottom),
-        overflow: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        position: 'relative',
-      },
-      ".gatsby-highlight pre[class*='language-']": {
-        padding: 0,
-        marginTop: 0,
-        marginBottom: 0,
-        backgroundColor: 'transparent',
-        border: 0,
-        float: 'left',
-        minWidth: '100%',
-        overflow: 'initial',
-      },
-      '.gatsby-highlight pre code': {
-        display: 'block',
-        fontSize: '95%',
-        lineHeight: options.baseLineHeight,
-      },
-      '.gatsby-highlight-code-line': {
-        // background: colors.a[1],
-        background: '#faede5',
-        marginRight: `${rhythm(-options.blockMarginBottom)}`,
-        marginLeft: `${rhythm(-options.blockMarginBottom)}`,
-        paddingRight: rhythm(options.blockMarginBottom),
-        paddingLeft: `${rhythm((options.blockMarginBottom / 5) * 4)}`,
-        borderLeft: `${rhythm((options.blockMarginBottom / 5) * 1)} solid ${colors.a[3]}`,
-        display: 'block',
-      },
-      '.gatsby-highlight::-webkit-scrollbar': {
-        width: '6px',
-        height: '6px',
-      },
-      '.gatsby-highlight::-webkit-scrollbar-thumb': {
-        background: colors.a[2],
-      },
-      '.gatsby-highlight::-webkit-scrollbar-track': {
-        // background: colors.a[1],
-        background: '#faede5',
-        borderRadius: `0 0 ${presets.radiusLg}px ${presets.radiusLg}px`,
-      },
       // Target image captions. This is kind of a fragile selector...
       '.gatsby-resp-image-link + em': {
         ...scale(-1 / 5),
@@ -174,8 +113,6 @@ const _options = {
       },
       '.main-body .hotel-link': {
         fontFamily: options.headerFontFamily.join(','),
-        // color: 'inherit',
-        // background: 'inherit',
       },
       '.post-body a': {
         fontSize: '102%',
@@ -254,20 +191,12 @@ const _options = {
           borderLeft: 0,
           borderRight: 0,
         },
-        '.gatsby-highlight': {
-          // boxShadow: `inset 0 1px 0 0 ${colors.a[1]}, inset 0 -1px 0 0 ${colors.a[1]}`,
-          boxShadow: 'inset 0 1px 0 0 #faede5, inset 0 -1px 0 0 #faede5',
-        },
       },
       [`${presets.Tablet} and (max-width:980px)`]: {
         '.has-sidebar .gatsby-highlight': {
           marginLeft: 0,
           marginRight: 0,
         },
-      },
-      video: {
-        width: '100%',
-        marginBottom: rhythm(options.blockMarginBottom),
       },
       [MOBILE_MEDIA_QUERY]: {
         // Make baseFontSize on mobile 16px.
@@ -301,39 +230,6 @@ const _options = {
         html: {
           fontSize: `${(21 / 16) * 100}%`,
         },
-      },
-      '.token.comment,.token.block-comment,.token.prolog,.token.doctype,.token.cdata': {
-        // color: `#52ad9f`,
-        color: colors.c[8],
-      },
-      '.token.punctuation': {
-        // color: `#5F6364`,
-        // color: `blue`,
-        color: colors.c[12],
-      },
-      '.token.property,.token.tag,.token.boolean,.token.number,.token.function-name,.token.constant,.token.symbol,.token.deleted': {
-        // color: `#a285d8`,
-        color: colors.b[9],
-      },
-      '.token.selector,.token.attr-name,.token.string,.token.char,.token.function,.token.builtin,.token.inserted': {
-        // color: `#a2466c`,
-        color: colors.a[9],
-      },
-      '.token.operator, .token.entity, .token.url, .token.variable': {
-        // color: `#c18b99`,
-        // color: `blue`,
-      },
-      '.token.atrule, .token.attr-value, .token.keyword, .token.class-name': {
-        // color: `#a285d8`,
-        // color: `blue`,
-        color: colors.b[8],
-      },
-      // Fancy external links in posts, borrowed from
-      // https://github.com/comfusion/after-dark/
-      // @see https://github.com/comfusion/after-dark/blob/8fdbe2f480ac40315cf0e01cece785d2b5c4b0c3/layouts/partials/critical-theme.css#L36-L39
-      ".gatsby-resp-image-link + em a[href*='//']:after": {
-        content:
-          "\" \" url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%23744C9E'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E\")",
       },
     };
   },
