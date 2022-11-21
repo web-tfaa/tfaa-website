@@ -114,7 +114,11 @@ const SummerRoundTable = ({ location }) => {
         <section>
           <h4>Who</h4>
 
-          <Box component="p" ml={2}>New music administrators are encouraged to attend!</Box>
+          <Box
+            component="p"
+            ml={2}
+          >New music administrators are encouraged to attend!
+          </Box>
         </section>
 
         <div
@@ -132,7 +136,10 @@ const SummerRoundTable = ({ location }) => {
               marginTop: 10,
             }}
           />
-          <SidebarBody inline yaml={eventsSidebar} />
+          <SidebarBody
+            inline
+            yaml={eventsSidebar}
+          />
         </div>
       </Container>
     </Layout>

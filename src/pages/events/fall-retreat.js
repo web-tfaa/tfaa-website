@@ -85,13 +85,19 @@ const FallRetreat = ({ location }) => {
 
           <h4>Who</h4>
 
-          <Box component="p" ml={2}>
+          <Box
+            component="p"
+            ml={2}
+          >
             The TMAC Fall Retreat is open to all current TMAC members who are in good standing
             (paid for membership this school year).
             There is no separate conference registration process.
 
           </Box>
-          <Box component="p" ml={2}>
+          <Box
+            component="p"
+            ml={2}
+          >
             If you need to join TMAC for this year, then please visit the <Link to="/members">Members</Link> page.
           </Box>
         </section>
@@ -165,7 +171,10 @@ const FallRetreat = ({ location }) => {
               marginTop: 10,
             }}
           />
-          <SidebarBody inline yaml={eventsSidebar} />
+          <SidebarBody
+            inline
+            yaml={eventsSidebar}
+          />
         </div>
       </Container>
     </Layout>

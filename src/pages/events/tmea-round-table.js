@@ -86,7 +86,10 @@ const TmeaRoundTable = ({ location }) => {
               marginTop: 10,
             }}
           />
-          <SidebarBody inline yaml={eventsSidebar} />
+          <SidebarBody
+            inline
+            yaml={eventsSidebar}
+          />
         </div>
       </Container>
     </Layout>

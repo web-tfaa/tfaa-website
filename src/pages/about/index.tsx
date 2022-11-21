@@ -144,7 +144,10 @@ const About: FC<Props> = ({ data, location }) => {
               marginTop: 10,
             }}
           />
-          <SidebarBody inline yaml={aboutSidebar} />
+          <SidebarBody
+            inline
+            yaml={aboutSidebar}
+          />
         </div>
       </Container>
     </Layout>

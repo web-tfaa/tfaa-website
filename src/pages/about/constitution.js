@@ -54,7 +54,10 @@ const Constitution = ({ location }) => {
   const classes = useStyles();
 
   return (
-    <Layout location={location} pageTitle="Constitution and Bylaws">
+    <Layout
+      location={location}
+      pageTitle="Constitution and Bylaws"
+    >
       <div className={classes.root}>
         <Container>
           <h1>BYLAWS OF TEXAS MUSIC ADMINISTRATORS CONFERENCE, INC.</h1>
@@ -436,7 +439,10 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
             }}
           >
             <hr className={classes.mobileHr} />
-            <SidebarBody inline yaml={aboutSidebar} />
+            <SidebarBody
+              inline
+              yaml={aboutSidebar}
+            />
           </div>
         </Container>
       </div>

@@ -143,7 +143,10 @@ const JoinContainer = (props) => {
               marginTop: 10,
             }}
           />
-          <SidebarBody inline yaml={membersSidebar} />
+          <SidebarBody
+            inline
+            yaml={membersSidebar}
+          />
         </div>
       </div>
     </Layout>
@@ -157,7 +160,12 @@ JoinContainer.propTypes = {
 
 const JoinContainerWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => <JoinContainer {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => (
+      <JoinContainer
+        {...props}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 

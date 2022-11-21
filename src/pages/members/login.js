@@ -22,7 +22,7 @@ const propTypes = {
 
 // Component Definition
 class Login extends Component {
-  handleRedirectToMembers = () => {
+  static handleRedirectToMembers = () => {
     navigate('/members/login');
   };
 
@@ -78,7 +78,12 @@ Login.propTypes = propTypes;
 
 const LoginWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => <Login {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => (
+      <Login
+        {...props}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 

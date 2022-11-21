@@ -140,7 +140,10 @@ const Officers = ({ location }) => {
                 marginTop: 10,
               }}
             />
-            <SidebarBody inline yaml={aboutSidebar} />
+            <SidebarBody
+              inline
+              yaml={aboutSidebar}
+            />
           </div>
         </div>
       </Container>
