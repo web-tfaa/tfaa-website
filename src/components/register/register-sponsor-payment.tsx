@@ -9,12 +9,12 @@ import {
   Typography,
 } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
-import { makeStyles } from '@mui/styles';
 import React, {
   FC, ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { SponsorFormValues } from '../../pages/sponsors/register';
@@ -38,22 +38,22 @@ interface Props {
 }
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  changeLevelLink: {
+const StyledRoot = styled.section({
+  '.changeLevelLink': {
     cursor: 'pointer',
   },
-  classChampionRadioLabelRoot: {
+  '.classChampionRadioLabelRoot': {
     alignItems: 'flex-start',
     display: 'flex',
   },
-  radioButtonLabel: {
+  '.radioButtonLabel': {
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
     marginTop: '0.3rem',
     marginBottom: 0,
   },
-}));
+});
 
 const currentDate = format(new Date(), 'M/d/yyyy');
 
@@ -66,8 +66,6 @@ const RegisterSponsorPayment: FC<Props> = ({
   onUpdateSponsorForm,
   sponsorForm,
 }) => {
-  const classes = useStyles();
-
   const {
     invoiceId,
     receiptId,
@@ -175,7 +173,7 @@ const RegisterSponsorPayment: FC<Props> = ({
   }, [authenticatedUserId, onUpdateSponsorForm, sponsorForm]);
 
   return (
-    <section>
+    <StyledRoot>
       <h2>3. Confirm Sponsor Level and send payment</h2>
 
       <FormHr />
@@ -211,7 +209,7 @@ const RegisterSponsorPayment: FC<Props> = ({
               mb={showSponsorLevelOptions ? 2 : 0}
             >
               <Link
-                className={classes.changeLevelLink}
+                className="changeLevelLink"
                 onClick={handleToggleSponsorLevelOptions}
                 underline="always"
               >
@@ -226,7 +224,7 @@ const RegisterSponsorPayment: FC<Props> = ({
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                 <label
-                  className={classes.radioButtonLabel}
+                  className="radioButtonLabel"
                   htmlFor="SponsorLevel"
                 >
                   Sponsor Level*
@@ -271,7 +269,7 @@ const RegisterSponsorPayment: FC<Props> = ({
                       value={SPONSORSHIP_LEVELS.GOLD_MEDAL}
                     />
                     <FormControlLabel
-                      className={classes.classChampionRadioLabelRoot}
+                      className="classChampionRadioLabelRoot"
                       control={(
                         <Box mb={4}>
                           <Radio size="small" />
@@ -355,7 +353,7 @@ const RegisterSponsorPayment: FC<Props> = ({
           </Box>
         </div>
       </div>
-    </section>
+    </StyledRoot>
   );
 };
 
