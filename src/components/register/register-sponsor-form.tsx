@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import React, { FC, useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
-import { makeStyles } from '@mui/styles';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import {
@@ -36,24 +36,24 @@ interface Props {
 }
 
 // Local Variables
-const useStyles = makeStyles({
-  classChampionRadioLabelRoot: {
+const StyledRoot = styled.div({
+  '.classChampionRadioLabelRoot': {
     alighItems: 'flex-start',
     display: 'flex',
   },
-  honey: {
+  '.honey': {
     height: 1,
     opacity: 0,
     width: 1,
   },
-  radioButtonLabel: {
+  '.radioButtonLabel': {
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
     marginTop: '0.3rem',
     marginBottom: 0,
   },
-  websiteAddressSubText: {
+  '.websiteAddressSubText': {
     fontSize: '0.8rem',
     textTransform: 'none',
   },
@@ -70,18 +70,16 @@ const RegisterSponsorForm: FC<Props> = ({
   onUpdateSponsorForm,
   sponsorForm,
 }) => {
-  const classes = useStyles();
-
   // We use this to show a loading indicator when switching to Step 3
   const [
     hasCompletedRegisterSponsorForm,
     setHasCompletedRegisterSponsorForm,
   ] = useState(false);
 
-  const handleCompleteInfoStep = (updatedForm: SponsorFormValues) => {
+  const handleCompleteInfoStep = useCallback((updatedForm: SponsorFormValues) => {
     setHasCompletedRegisterSponsorForm(true);
     onCompleteSponsorStep(1, updatedForm);
-  };
+  }, [onCompleteSponsorStep]);
 
   const handleClickSubmitButton = async (values: SponsorFormValues) => {
     if (!authenticatedUserId) {
@@ -151,7 +149,7 @@ const RegisterSponsorForm: FC<Props> = ({
   }
 
   return (
-    <div className="login-form">
+    <StyledRoot className="login-form">
       <Formik
         initialValues={initialSponsorFormValues}
         validationSchema={registerSponsorSchema}
@@ -185,7 +183,10 @@ const RegisterSponsorForm: FC<Props> = ({
 
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
-                <label className={classes.radioButtonLabel} htmlFor="SponsorLevel">
+                <label
+                  className="radioButtonLabel"
+                  htmlFor="SponsorLevel"
+                >
                   Sponsor Level*
                   <RadioGroup
                     aria-label="SponsorLevel"
@@ -228,7 +229,7 @@ const RegisterSponsorForm: FC<Props> = ({
                       value={SPONSORSHIP_LEVELS.GOLD_MEDAL}
                     />
                     <FormControlLabel
-                      className={classes.classChampionRadioLabelRoot}
+                      className="classChampionRadioLabelRoot"
                       control={(
                         <Box marginBottom={4}>
                           <Radio size="small" />
@@ -397,7 +398,7 @@ const RegisterSponsorForm: FC<Props> = ({
               {/* Hidden input to help curtail spam */}
               <input
                 aria-label="hidden input"
-                className={classes.honey}
+                className="honey"
                 id="honeypot"
                 name="honeypot"
                 onChange={handleChange}
@@ -434,7 +435,7 @@ const RegisterSponsorForm: FC<Props> = ({
           );
         }}
       </Formik>
-    </div>
+    </StyledRoot>
   );
 };
 

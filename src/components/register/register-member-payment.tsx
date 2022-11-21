@@ -9,12 +9,12 @@ import {
   RadioGroup,
   Typography,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import React, {
+import {
   FC, ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import {
@@ -47,34 +47,31 @@ interface Props {
 type ActiveMemberRadioOptions = 'active' | 'retired';
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  // changeLevelLink: {
-  //   cursor: 'pointer',
-  // },
-  classChampionRadioLabelRoot: {
+const StyledRoot = styled.section(({ theme }) => ({
+  '.classChampionRadioLabelRoot': {
     alighItems: 'flex-start',
     display: 'flex',
   },
-  memberLevelAmount: {
+  '.memberLevelAmount': {
     marginLeft: theme.spacing(1),
   },
-  memberLevelHeading: {
+  '.memberLevelHeading': {
     fontSize: '1.5rem',
     marginTop: '1rem',
   },
-  memberName: {
+  '.memberName': {
     fontSize: '1.25rem',
     fontWeight: 600,
     marginTop: theme.spacing(1.5),
   },
-  radioButtonLabel: {
+  '.radioButtonLabel': {
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
     marginTop: '0.3rem',
     marginBottom: theme.spacing(1.5),
   },
-  successMemberInfoCard: {
+  '.successMemberInfoCard': {
     padding: theme.spacing(0, 2, 3),
   },
 }));
@@ -91,8 +88,6 @@ const RegisterMemberPayment: FC<Props> = ({
   onCompleteMemberStep,
   onUpdateMemberForm,
 }) => {
-  const classes = useStyles();
-
   const {
     invoiceId,
     receiptId,
@@ -235,13 +230,13 @@ const RegisterMemberPayment: FC<Props> = ({
       </Box>
 
       <Card
-        className={classes.successMemberInfoCard}
+        className="successMemberInfoCard"
         variant="outlined"
       >
-        <h3 className={classes.memberLevelHeading}>
+        <h3 className="memberLevelHeading">
           {isActive ? 'Active' : 'Retired'} Member
           <Typography
-            className={classes.memberLevelAmount}
+            className="memberLevelAmount"
             component="span"
             variant="h6"
           >
@@ -252,7 +247,7 @@ const RegisterMemberPayment: FC<Props> = ({
         <Divider />
 
         <Typography
-          className={classes.memberName}
+          className="memberName"
           variant="body2"
         >
           {memberForm.FirstName} {memberForm.LastName}
@@ -311,7 +306,7 @@ const RegisterMemberPayment: FC<Props> = ({
           component="fieldset"
           style={{ marginLeft: 32 }}
         >
-          <h2 className={classes.memberLevelHeading}>
+          <h2 className="memberLevelHeading">
             {memberForm.MemberType} Member
           </h2>
 
@@ -421,7 +416,7 @@ const RegisterMemberPayment: FC<Props> = ({
   );
 
   return (
-    <section>
+    <StyledRoot>
       <h2>3. Pay TMAC Dues</h2>
 
       <FormHr />
@@ -429,7 +424,7 @@ const RegisterMemberPayment: FC<Props> = ({
       {hasCompletedPayment
         ? successfulMemberPaymentElement
         : invoiceMemberElement}
-    </section>
+    </StyledRoot>
   );
 };
 
