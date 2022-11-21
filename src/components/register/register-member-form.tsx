@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import { FC, useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
-import { makeStyles } from '@mui/styles';
 import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import {
@@ -37,13 +37,13 @@ interface Props {
 }
 
 // Local Variables
-const useStyles = makeStyles({
-  honey: {
+const StyledRoot = styled.div({
+  '.honey': {
     height: 1,
     opacity: 0,
     width: 1,
   },
-  radioButtonLabel: {
+  '.radioButtonLabel': {
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
@@ -64,8 +64,6 @@ const RegisterMemberForm: FC<Props> = ({
   onCompleteMemberStep,
   onUpdateMemberForm,
 }) => {
-  const classes = useStyles();
-
   // We use this to show a loading indicator when switching to Step 3
   const [
     hasCompletedMemberRegisterForm,
@@ -136,7 +134,7 @@ const RegisterMemberForm: FC<Props> = ({
   }
 
   return (
-    <div className="login-form">
+    <StyledRoot className="login-form">
       <Formik
         initialValues={initialMemberFormValues}
         validationSchema={registerMemberSchema}
@@ -316,7 +314,6 @@ const RegisterMemberForm: FC<Props> = ({
                   label="Cell Phone*"
                   name="CellPhone"
                   onBlur={handleBlur}
-                  // onChange={handleChange}
                   type="tel"
                   value={values.CellPhone}
                 />
@@ -324,7 +321,10 @@ const RegisterMemberForm: FC<Props> = ({
 
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line */}
-                <label className={classes.radioButtonLabel} htmlFor="NewToTMAC">
+                <label
+                  className="radioButtonLabel"
+                  htmlFor="NewToTMAC"
+                >
                   New To TMAC*
                   <RadioGroup
                     aria-label="NewToTMAC"
@@ -349,7 +349,7 @@ const RegisterMemberForm: FC<Props> = ({
               {/* Hidden input to help curtail spam */}
               <input
                 aria-label="hidden input"
-                className={classes.honey}
+                className="honey"
                 id="honeypot"
                 name="honeypot"
                 onChange={handleChange}
@@ -386,7 +386,7 @@ const RegisterMemberForm: FC<Props> = ({
           );
         }}
       </Formik>
-    </div>
+    </StyledRoot>
   );
 };
 
