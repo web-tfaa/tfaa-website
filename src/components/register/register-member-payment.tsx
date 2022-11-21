@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, {
-  FC, ReactInstance, useEffect, useRef, useState
+  FC, ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
@@ -110,21 +110,21 @@ const RegisterMemberPayment: FC<Props> = ({
     setIsActiveMember,
   ] = useState<ActiveMemberRadioOptions>('active');
 
-  const handleGetCurrentInvoiceId = (currentInvoiceId: number) => {
+  const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
     onUpdateMemberForm({
       ...memberForm,
       invoiceId: currentInvoiceId,
     });
-  };
+  }, [memberForm, onUpdateMemberForm]);
 
-  const handleGetCurrentReceiptId = (currentReceiptId: number) => {
+  const handleGetCurrentReceiptId = useCallback((currentReceiptId: number) => {
     onUpdateMemberForm({
       ...memberForm,
       receiptId: currentReceiptId,
     });
-  };
+  }, [memberForm, onUpdateMemberForm]);
 
-  const handleCompleteMemberPaymentStep = (payment: PaypalPayment) => {
+  const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
       AmountPaid: isActiveMember === 'active' ? 50 : 30,
@@ -143,7 +143,7 @@ const RegisterMemberPayment: FC<Props> = ({
       authenticatedUserId,
     );
     onCompleteMemberStep(2, updatedMemberForm);
-  };
+  }, [authenticatedUserId, isActiveMember, memberForm, onCompleteMemberStep]);
 
   useEffect(() => {
     doGetInvoiceId(handleGetCurrentInvoiceId);
@@ -160,7 +160,7 @@ const RegisterMemberPayment: FC<Props> = ({
         updateFirestoreInvoiceId();
       }
     };
-  }, []);
+  }, [handleGetCurrentInvoiceId, handleGetCurrentReceiptId, hasCompletedPayment]);
 
   // We want to record the newest invoiceId in the Firestore database
   useEffect(() => {
@@ -186,15 +186,23 @@ const RegisterMemberPayment: FC<Props> = ({
       );
       onUpdateMemberForm(updatedMemberForm);
     }
-  }, [invoiceId, previousInvoiceId]);
+  }, [
+    authenticatedUserId,
+    handleGetCurrentInvoiceId,
+    hasCompletedPayment,
+    invoiceId,
+    memberForm,
+    onUpdateMemberForm,
+    previousInvoiceId,
+  ]);
 
-  const handleUpdateCompletedStep = (payment: PaypalPayment) => {
+  const handleUpdateCompletedStep = useCallback((payment: PaypalPayment) => {
     doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompleteMemberPaymentStep(payment);
-  };
+  }, [handleCompleteMemberPaymentStep, handleGetCurrentReceiptId]);
 
-  const handleChangeRadioSelection = (event) => {
+  const handleChangeRadioSelection = useCallback((event) => {
     const { value: updatedActiveMemberSelection } = event.target;
 
     const isActive = updatedActiveMemberSelection === 'active';
@@ -215,7 +223,7 @@ const RegisterMemberPayment: FC<Props> = ({
       FIRESTORE_MEMBER_COLLECTION,
       authenticatedUserId,
     );
-  };
+  }, [authenticatedUserId, invoiceId, memberForm, onUpdateMemberForm, receiptId]);
 
   const isActive = isActiveMember === 'active';
   const amount = isActive ? 50 : 30;
@@ -299,7 +307,10 @@ const RegisterMemberPayment: FC<Props> = ({
           <h3>Pay now with Paypal</h3>
         </Box>
 
-        <FormControl component="fieldset" style={{ marginLeft: 32 }}>
+        <FormControl
+          component="fieldset"
+          style={{ marginLeft: 32 }}
+        >
           <h2 className={classes.memberLevelHeading}>
             {memberForm.MemberType} Member
           </h2>

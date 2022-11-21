@@ -8,7 +8,7 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { navigate } from 'gatsby';
@@ -72,16 +72,12 @@ const RegisterMemberForm: FC<Props> = ({
     setHasCompletedMemberRegisterForm,
   ] = useState(false);
 
-  if (!authenticatedUserId) {
-    return null;
-  }
-
   const { NewToTMAC } = memberForm;
 
-  const handleCompleteMemberInfoStep = (updatedMemberForm: MemberFormValues) => {
+  const handleCompleteMemberInfoStep = useCallback((updatedMemberForm: MemberFormValues) => {
     setHasCompletedMemberRegisterForm(true);
     onCompleteMemberStep(1, updatedMemberForm);
-  };
+  }, [onCompleteMemberStep]);
 
   const handleClickSubmitButton = async (values: MemberFormValues) => {
     if (!authenticatedUserId) {
@@ -117,14 +113,14 @@ const RegisterMemberForm: FC<Props> = ({
     }
   };
 
-  const handleChangeNewToTMAC = (event) => {
+  const handleChangeNewToTMAC = useCallback((event) => {
     const { value: updatedNewToTMACVAlue } = event.target;
 
     onUpdateMemberForm({
       ...memberForm,
       NewToTMAC: updatedNewToTMACVAlue,
     });
-  };
+  }, [memberForm, onUpdateMemberForm]);
 
   if (!authenticatedUserId) {
     navigate('/members');
@@ -370,7 +366,6 @@ const RegisterMemberForm: FC<Props> = ({
                 }}
               >
                 <Box
-                  clone
                   mb={2.5}
                   mt={1}
                   width="100%"

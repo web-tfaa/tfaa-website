@@ -254,6 +254,7 @@ const MemberInfo = ({
       <Dialog
         onClose={handleCloseChangeEmailDialog}
         open={isChangeEmailDialogOpen}
+        maxWidth="xs"
       >
         <DialogTitle>Change Email Address</DialogTitle>
 

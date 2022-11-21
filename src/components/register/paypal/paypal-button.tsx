@@ -45,7 +45,7 @@ interface PaypalGlobalObject {
   Button: {
     driver: (
       type: string,
-      packages: any,
+      packages: unknown,
     ) => void;
   }
   rest: {
@@ -88,7 +88,7 @@ const PaypalButton: FC<Props> = ({
     if (paypalRef.current && !previousShowButton) {
       setShowButton(true);
     }
-  }, [paypalRef.current, previousShowButton]);
+  }, [previousShowButton]);
 
   if (!showButton) {
     return null;

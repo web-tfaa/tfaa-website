@@ -5,7 +5,7 @@ import {
   Collapse,
 } from '@mui/material';
 import React, { FC, ReactElement, useState } from 'react';
-import { makeStyles } from '@mui/styles';
+import styled from 'styled-components';
 
 // Local Dependencies
 import PaypalButton from './paypal-button';
@@ -38,11 +38,9 @@ interface Props {
 }
 
 // Local Variables
-const useStyles = makeStyles({
-  errorSpan: {
-    fontWeight: 500,
-    whiteSpace: 'nowrap',
-  },
+const StyledSpan = styled.span({
+  fontWeight: 500,
+  whiteSpace: 'nowrap',
 });
 
 const CLIENT = {
@@ -61,8 +59,6 @@ const PaypalButtonWrapper: FC<Props> = ({
   amount,
   onSuccessfulPayment,
 }) => {
-  const classes = useStyles();
-
   const [
     paymentError,
     setPaymentError,
@@ -71,7 +67,7 @@ const PaypalButtonWrapper: FC<Props> = ({
   const errorText = (
     <>
       There was an issue using PayPal. Please try clicking the{' '}
-      <span className={classes.errorSpan}>"Pay with PayPal"</span>{' '}
+      <StyledSpan>"Pay with PayPal"</StyledSpan>{' '}
       button again or print an invoice and send payment to the TMAC Treasurer.
     </>
   );

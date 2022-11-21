@@ -78,10 +78,6 @@ const RegisterSponsorForm: FC<Props> = ({
     setHasCompletedRegisterSponsorForm,
   ] = useState(false);
 
-  if (!authenticatedUserId) {
-    return null;
-  }
-
   const handleCompleteInfoStep = (updatedForm: SponsorFormValues) => {
     setHasCompletedRegisterSponsorForm(true);
     onCompleteSponsorStep(1, updatedForm);
@@ -139,7 +135,11 @@ const RegisterSponsorForm: FC<Props> = ({
       AmountDonated: amountDonated,
       SponsorLevel: newSponsorLevel,
     });
-  }, []);
+  }, [onUpdateSponsorForm, sponsorForm]);
+
+  if (!authenticatedUserId) {
+    return null;
+  }
 
   if (hasCompletedRegisterSponsorForm) {
     return (
@@ -230,7 +230,7 @@ const RegisterSponsorForm: FC<Props> = ({
                     <FormControlLabel
                       className={classes.classChampionRadioLabelRoot}
                       control={(
-                        <Box clone mb={4}>
+                        <Box marginBottom={4}>
                           <Radio size="small" />
                         </Box>
                       )}
@@ -414,7 +414,6 @@ const RegisterSponsorForm: FC<Props> = ({
                 }}
               >
                 <Box
-                  clone
                   mb={2.5}
                   mt={1}
                   width="100%"
