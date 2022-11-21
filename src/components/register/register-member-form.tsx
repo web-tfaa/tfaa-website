@@ -8,7 +8,7 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { navigate } from 'gatsby';
