@@ -269,9 +269,6 @@ const _options = {
         width: '100%',
         marginBottom: rhythm(options.blockMarginBottom),
       },
-      '.twitter-tweet-rendered': {
-        margin: `${rhythm(options.blockMarginBottom * 2)} auto !important`,
-      },
       [MOBILE_MEDIA_QUERY]: {
         // Make baseFontSize on mobile 16px.
         html: {

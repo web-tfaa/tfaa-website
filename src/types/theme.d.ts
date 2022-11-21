@@ -21,30 +21,68 @@ interface PaletteTable {
   header: string;
 }
 
+interface PaletteTexasFlag {
+  blue: string;
+  red: string;
+}
+
+interface PaletteLegacyGray {
+  calm: string;
+  copy: string;
+  dark: string;
+}
+
+interface PaletteUi {
+  bright: string;
+  light: string;
+  lilac: string;
+  whisper: string;
+}
+
 declare module '@mui/material/styles' {
   export type Theme = MuiTheme
 
   interface Palette extends MuiPalette {
     alert: PaletteAlert;
     events: PaletteEvents;
+    gatsby: string;
+    legacyGray: PaletteLegacyGray;
+    loginStatus: string;
     table: PaletteTable;
+    texasFlag: PaletteTexasFlag;
+    ui: PaletteUi;
   }
 
   interface PaletteOptions extends MuiPaletteOptions {
     alert: PaletteAlert;
     events: PaletteEvents;
+    gatsby: string;
+    legacyGray: PaletteLegacyGray;
+    loginStatus: string;
     table: PaletteTable;
+    texasFlag: PaletteTexasFlag;
+    ui: PaletteUi;
   }
 
   interface PaletteColor extends MuiPaletteColor {
     alert?: PaletteAlert;
     events?: PaletteEvents;
+    gatsby?: string;
+    legacyGray?: PaletteLegacyGray;
+    loginStatus?: string;
     table?: PaletteTable;
+    texasFlag?: PaletteTexasFlag;
+    ui?: PaletteUi;
   }
 
   interface SimplePaletteColorOptions extends MuiSimplePaletteColorOptions {
     alert?: PaletteAlert;
     events?: PaletteEvents;
+    gatsby?: string;
+    legacyGray?: PaletteLegacyGray;
+    loginStatus?: string;
     table?: PaletteTable;
+    texasFlag?: PaletteTexasFlag;
+    ui?: PaletteUi;
   }
 }
