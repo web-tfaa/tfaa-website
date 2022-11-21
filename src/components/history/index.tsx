@@ -1,20 +1,29 @@
 // External Dependencies
-import React from 'react';
+import { FC } from 'react';
+import styled from 'styled-components';
+
+// Local Variables
+const StyledRoot = styled.div({
+  '.history-content': {
+    display: 'flex'
+  },
+  '.history-title': {
+    display: 'inline-block',
+    borderBottom: 'solid 1px',
+  },
+});
 
 // Component Definition
-export default () => (
-  <div>
-    <h3
-      css={{
-        display: 'inline-block',
-        borderBottom: 'solid 1px',
-      }}
-    >
-      History
-    </h3>
-    <div css={{ display: 'flex' }}>
+const History: FC = () => (
+  <StyledRoot>
+    <h3 className="history-title">History</h3>
+
+    <div className="history-content">
       <div>
-        <img alt="woody schober" src="https://res.cloudinary.com/tmac/image/upload/v1523131020/history_woody-schober.jpg" />
+        <img
+          alt="woody schober"
+          src="https://res.cloudinary.com/tmac/image/upload/v1523131020/history_woody-schober.jpg"
+        />
       </div>
       <div>
         In the early 1970s a small group of music supervisors from the
@@ -47,5 +56,7 @@ export default () => (
         Irving ISD, Irving, Texas
       </div>
     </div>
-  </div>
+  </StyledRoot>
 );
+
+export default History;
