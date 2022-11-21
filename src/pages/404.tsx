@@ -1,7 +1,8 @@
 // External Dependencies
-import PropTypes from 'prop-types';
-import React from 'react';
+import { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Card from '../components/shared/cards/card';
@@ -11,19 +12,29 @@ import FuturaParagraph from '../components/shared/futura-paragraph';
 import Layout from '../components/layout';
 import MastheadBg from '../components/masthead/masthead-bg';
 
+// Local Typings
+interface Props {
+  location: Location;
+}
+
+// Local Variables
+const StyledCard = styled(Card)({
+  width: '100%'
+});
+
 // Component Definition
-const FourOhFour = ({ location }) => (
+const FourOhFour: FC<Props> = ({ location }) => (
   <Layout location={location}>
     <MastheadBg />
     <Container hasSideBar={false}>
       <Cards>
-        <Card css={{ width: '100%' }}>
+        <StyledCard>
           <h2>This is not the page you are looking for</h2>
           <FuturaParagraph>
             Try heading back to our <Link to="/">main page</Link> to find out
             more about TMAC!
           </FuturaParagraph>
-        </Card>
+        </StyledCard>
       </Cards>
     </Container>
   </Layout>

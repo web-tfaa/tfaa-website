@@ -66,10 +66,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Component Definition
-const Card = ({ children }) => {
+const Card = ({ children, ...otherProps }) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      {...otherProps}
+    >
       <div className={classes.innerContainer}>
         {children}
       </div>

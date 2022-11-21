@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 // Internal Dependencies
 import presets from '../../../utils/presets';
