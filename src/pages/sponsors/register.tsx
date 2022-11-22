@@ -215,7 +215,7 @@ const RegisterSponsorContent: FC<Props> = ({
     if (activeStep === 0 && isAuthenticated) {
       handleUpdateActiveStep(1);
     }
-  }, []);
+  }, [activeStep, isAuthenticated]);
 
   const hasCompletedAllSponsorSteps = completedSponsorSteps?.length >= 3;
 
@@ -289,7 +289,7 @@ const RegisterSponsorWithContext: FC = (props) => (
 );
 
 const RegisterSponsor: FC<{
-  location: unknown,
+  location: Location,
 }> = (props) => (
   // eslint-disable-next-line react/destructuring-assignment
   <Layout location={props.location}>

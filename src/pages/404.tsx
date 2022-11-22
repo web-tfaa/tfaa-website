@@ -1,7 +1,6 @@
 // External Dependencies
 import { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -40,7 +39,4 @@ const FourOhFour: FC<Props> = ({ location }) => (
   </Layout>
 );
 
-FourOhFour.propTypes = {
-  location: PropTypes.shape({}).isRequired,
-};
 export default FourOhFour;

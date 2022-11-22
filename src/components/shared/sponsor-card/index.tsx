@@ -332,7 +332,7 @@ const SponsorCard: FC<Props> = ({
 
         <Link
           className="payLink"
-          state={{ level: title }}
+          // state={{ level: title }}
           to="/sponsors/sponsor-info"
         >
           {`Register and pay for ${title} sponsorship`}

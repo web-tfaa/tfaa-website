@@ -16,7 +16,7 @@ import SidebarBody from './sidebar/SidebarBody';
 interface Props {
   children: React.ReactNode;
   imgSrc?: string;
-  location: string | unknown;
+  location: Location;
   name: string;
 }
 

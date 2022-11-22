@@ -15,7 +15,7 @@ import MastheadContent from '../components/masthead';
 
 // Local Typings
 interface Props {
-  location: object;
+  location: Location;
 }
 
 // Local Variables
@@ -46,9 +46,7 @@ const StyledRoot = styled.div({
 // }
 
 // Component Definition
-const Home: FC<Props> = ({
-  location,
-}) => (
+const Home: FC<Props> = ({ location }) => (
   <Layout location={location}>
     <Helmet>
       <title>TMAC | Home</title>

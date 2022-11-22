@@ -5,7 +5,7 @@ import {
   Collapse,
 } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import React, {
+import {
   FC, useEffect, useState
 } from 'react';
 
@@ -18,12 +18,12 @@ import SponsorCard, {
   SPONSORSHIP_PRICE,
 } from '../../components/shared/sponsor-card';
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
-import usePrevious from '../../utils/hooks/usePrevious';
 import { SponsorFormValues } from './register';
+import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
 interface Props {
-  location: unknown;
+  location: Location;
 }
 
 // Component Definition

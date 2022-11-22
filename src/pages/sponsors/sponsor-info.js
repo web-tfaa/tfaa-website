@@ -16,6 +16,7 @@ import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
 import Status from '../members/status';
+import MobileDivider from '../../components/shared/MobileDivider';
 
 // Local Variables
 const boldStyles = { fontWeight: 600 };
@@ -118,22 +119,7 @@ const SponsorInfo = (props) => {
           )}
         </Container>
 
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
-        </div>
+        <MobileDivider />
       </div>
     </Layout>
   );

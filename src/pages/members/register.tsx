@@ -284,7 +284,10 @@ const RegisterMemberContent: FC<Props> = ({
             marginTop: 10,
           }}
         />
-        <SidebarBody inline yaml={membersSidebar} />
+        <SidebarBody
+          inline
+          yaml={membersSidebar}
+        />
       </div>
     </div>
   );
@@ -303,7 +306,7 @@ const RegisterMemberWithContext: FC = (props) => (
 );
 
 const RegisterMember: FC<{
-  location: unknown,
+  location: Location,
 }> = (props) => (
   // eslint-disable-next-line react/destructuring-assignment
   <Layout location={props.location}>
