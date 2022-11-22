@@ -25,11 +25,11 @@ const StyledRoot = styled.div({
 });
 
 // Component Definition
-const MobileSidebar: FC<Props> = ({ children }) => (
+const MobileDivider: FC<Props> = ({ children }) => (
   <StyledRoot>
     <hr className="mobileHr" />
     {children}
   </StyledRoot>
 );
 
-export default MobileSidebar;
+export default MobileDivider;

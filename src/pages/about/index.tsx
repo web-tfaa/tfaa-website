@@ -8,7 +8,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import MobileSidebar from '../../components/shared/MobileSidebar';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
@@ -126,12 +126,12 @@ const About: FC<Props> = ({ data, location }) => (
       </section>
 
       {/* Mobile sidebar */}
-      <MobileSidebar>
+      <MobileDivider>
         <SidebarBody
           inline
           yaml={aboutSidebar}
         />
-      </MobileSidebar>
+      </MobileDivider>
     </StyledContainer>
   </Layout>
 );

@@ -50,6 +50,8 @@ const Sponsors: FC<Props> = ({ location }) => {
     }
   }, [previousSponsorData, sponsorData]);
 
+  console.log('sponsorData', sponsorData);
+
   return (
     <Layout location={location}>
       <ReCaptchaProvider>
@@ -67,7 +69,12 @@ const Sponsors: FC<Props> = ({ location }) => {
               flexDirection="column"
               width={isLoading ? 600 : 'inherit'}
             >
-              {isLoading && <CircularProgress size={64} thickness={4} />}
+              {isLoading && (
+                <CircularProgress
+                  size={64}
+                  thickness={4}
+                />
+              )}
 
               <Collapse in={!isLoading}>
                 <SponsorCard

@@ -16,9 +16,12 @@ import { options } from '../../../utils/typography';
 
 // Local Typings
 interface Props {
-  sponsorData: object[];
+  sponsorData: Sponsor[];
   subtitle?: string;
   title: string;
+}
+interface Sponsor {
+  name: string;
 }
 
 // Local Variables

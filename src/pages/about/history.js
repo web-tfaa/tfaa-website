@@ -8,7 +8,7 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
-import MobileSidebar from '../../components/shared/MobileSidebar';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
@@ -75,12 +75,12 @@ const History = ({ location }) => (
         <div>Director of Fine Arts, Retired</div>
         <div>Irving ISD, Irving, Texas</div>
 
-        <MobileSidebar>
+        <MobileDivider>
           <SidebarBody
             inline
             yaml={aboutSidebar}
           />
-        </MobileSidebar>
+        </MobileDivider>
       </Container>
     </div>
   </Layout>

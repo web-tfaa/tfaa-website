@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import MobileSidebar from '../../components/shared/MobileSidebar';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import { useEventData } from '../../utils/hooks/useEventData';
 
@@ -154,12 +154,12 @@ const FallRetreat = ({ location }) => {
           </div>
         </section>
 
-        <MobileSidebar>
+        <MobileDivider>
           <SidebarBody
             inline
             yaml={eventsSidebar}
           />
-        </MobileSidebar>
+        </MobileDivider>
       </StyledContainer>
     </Layout>
   );

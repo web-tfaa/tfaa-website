@@ -6,7 +6,7 @@ import React from 'react';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import MobileSidebar from '../../components/shared/MobileSidebar';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import { useEventData } from '../../utils/hooks/useEventData';
 
@@ -72,12 +72,12 @@ const TmeaRoundTable = ({ location }) => {
           </p>
         </section>
 
-        <MobileSidebar>
+        <MobileDivider>
           <SidebarBody
             inline
             yaml={eventsSidebar}
           />
-        </MobileSidebar>
+        </MobileDivider>
       </Container>
     </Layout>
   );

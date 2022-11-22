@@ -9,7 +9,7 @@ import Container from './container';
 // Sidebar data
 import Layout from '../layout';
 import resourcesSidebar from '../../pages/resources/resources-links.yml';
-import MobileSidebar from './MobileSidebar';
+import MobileDivider from './MobileDivider';
 import SidebarBody from './sidebar/SidebarBody';
 
 // Local Typings
@@ -61,12 +61,12 @@ const PeoplePage: FC<Props> = ({
 
         {children}
 
-        <MobileSidebar>
+        <MobileDivider>
           <SidebarBody
             inline
             yaml={resourcesSidebar}
           />
-        </MobileSidebar>
+        </MobileDivider>
       </Container>
     </StyledRoot>
   </Layout>

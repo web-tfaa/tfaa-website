@@ -9,7 +9,7 @@ import Container from '../../components/shared/container';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
 import MembershipByLaws from './MembershipByLaws';
-import MobileSidebar from '../../components/shared/MobileSidebar';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
@@ -423,12 +423,12 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           </em>
         </section>
 
-        <MobileSidebar>
+        <MobileDivider>
           <SidebarBody
             inline
             yaml={aboutSidebar}
           />
-        </MobileSidebar>
+        </MobileDivider>
       </Container>
     </StyledRoot>
   </Layout>

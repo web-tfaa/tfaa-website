@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import Container from '../../components/shared/container';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
-import MobileSidebar from '../../components/shared/MobileSidebar';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
@@ -119,12 +119,12 @@ const Events = ({ data, location }) => (
         </Box>
       </section>
 
-      <MobileSidebar>
+      <MobileDivider>
         <SidebarBody
           inline
           yaml={eventsSidebar}
         />
-      </MobileSidebar>
+      </MobileDivider>
     </StyledContainer>
   </Layout>
 );
