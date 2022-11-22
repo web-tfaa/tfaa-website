@@ -12,21 +12,19 @@ interface Props {
 }
 
 // Local Variables
-const name = 'Joe Clark';
+const name = 'Dean Muths';
 
 // Component Definition
-const JoeClark: FC<Props> = ({ location }) => (
+const DeanMuths: FC<Props> = ({ location }) => (
   <PeoplePage
-    imgSrc="v1566826627/joe-clark.jpg"
+    imgSrc="v1523153280/dean-muths.jpg"
     location={location}
     name={name}
   >
-    <CardHeadline>TMAC Past President, 2020-2021</CardHeadline>
+    <CardHeadline>TMAC Past President, 2016-2017</CardHeadline>
 
-    <FuturaParagraph>
-      More info coming soon...
-    </FuturaParagraph>
+    <FuturaParagraph>Dean Muth&apos;s bio coming soon!</FuturaParagraph>
   </PeoplePage>
 );
 
-export default JoeClark;
+export default DeanMuths;

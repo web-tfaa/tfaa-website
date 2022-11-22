@@ -2,28 +2,36 @@
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
+import MobileSidebar from '../../components/shared/MobileSidebar';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import resourcesSidebar from './resources-links.yml';
 
+const StyledAnchor = styled.a(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    fontSize: 18,
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: 16,
+  },
+  display: 'inline-block',
+  marginBottom: theme.spacing(1.5),
+}));
+
 const ExternalLink = ({ children, to }) => (
-  <a
-    css={{
-      display: 'inline-block',
-      marginBottom: 10,
-    }}
+  <StyledAnchor
     href={to}
     rel="noopener noreferrer"
     target="_blank"
   >
     {children}
-  </a>
+  </StyledAnchor>
 );
 ExternalLink.propTypes = {
   children: PropTypes.string.isRequired,
@@ -174,23 +182,12 @@ const Resources = ({ location }) => {
             — November 2009
           </div>
         </section> */}
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
+        <MobileSidebar>
+          <SidebarBody
+            inline
+            yaml={resourcesSidebar}
           />
-          <SidebarBody inline yaml={resourcesSidebar} />
-        </div>
+        </MobileSidebar>
       </Container>
     </Layout>
   );
