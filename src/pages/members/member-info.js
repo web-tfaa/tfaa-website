@@ -13,9 +13,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -48,20 +48,20 @@ const defaultProps = {
   currentUser: null,
 };
 
-const useStyles = makeStyles((theme) => ({
-  address: {
+const StyledRoot = styled.div(({ theme }) => ({
+  '.address': {
     fontStyle: 'normal',
   },
-  contentText: {
+  '.contentText': {
     marginBottom: theme.spacing(2),
   },
-  divider: {
+  '.divider': {
     marginBottom: theme.spacing(2),
   },
-  emailContainer: {
+  '.emailContainer': {
     marginLeft: theme.spacing(2),
   },
-  listItemText: {
+  '.listItemText': {
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.9rem',
       maxWidth: '70%',
@@ -77,13 +77,13 @@ const useStyles = makeStyles((theme) => ({
     },
     fontSize: '1rem',
   },
-  subheader: {
+  '.subheader': {
     marginTop: theme.spacing(3),
   },
-  subtitle: {
+  '.subtitle': {
     fontWeight: 600,
   },
-  textField: {
+  '.textField': {
     width: '75%',
   },
 }));
@@ -94,8 +94,6 @@ const MemberInfo = ({
   isRegisteredForCurrentYear,
   setShouldRefetchUserList,
 }) => {
-  const classes = useStyles();
-
   const [isChangeEmailDialogOpen, setIsChangeEmailDialogOpen] = useState(false);
   const [newEmailValue, setNewEmailValue] = useState('');
   const [newEmailError, setNewEmailError] = useState('');
@@ -148,7 +146,7 @@ const MemberInfo = ({
   }, [newEmailError, newEmailValue, setShouldRefetchUserList]);
 
   return (
-    <>
+    <StyledRoot>
       <Card>
         <section>
           {currentUser && (
@@ -165,7 +163,7 @@ const MemberInfo = ({
                       </>
                     )}
                     secondary={(
-                      <address className={classes.address}>
+                      <address className="address">
                         <div>{currentUser.Address1}</div>
                         <div>{currentUser.Address2}</div>
                         <div>
@@ -183,7 +181,7 @@ const MemberInfo = ({
                 </ListItem>
               </List>
 
-              <Divider className={classes.divider} />
+              <Divider className="divider" />
             </>
           )}
         </section>
@@ -192,10 +190,10 @@ const MemberInfo = ({
           <CardSubtitle>Membership status</CardSubtitle>
 
           <List>
-            <ListItem className={classes.listItem}>
+            <ListItem className="listItem">
               <ListItemText
                 classes={{
-                  primary: classes.listItemText,
+                  primary: 'listItemText',
                 }}
                 primary={(
                   <>
@@ -207,17 +205,17 @@ const MemberInfo = ({
             </ListItem>
           </List>
 
-          <Divider className={classes.divider} />
+          <Divider className="divider" />
         </section>
 
         <section>
           <CardSubtitle>Member actions</CardSubtitle>
 
           <List>
-            <ListItem className={classes.listItem}>
+            <ListItem className="listItem">
               <ListItemText
                 classes={{
-                  primary: classes.listItemText,
+                  primary: 'listItemText',
                 }}
                 primary="Update email for TMAC website login"
               />
@@ -234,10 +232,10 @@ const MemberInfo = ({
               </ListItemSecondaryAction>
             </ListItem>
 
-            <ListItem className={classes.listItem}>
+            <ListItem className="listItem">
               <ListItemText
                 classes={{
-                  primary: classes.listItemText,
+                  primary: 'listItemText',
                 }}
                 primary="Need to update any information?"
                 secondary={(
@@ -260,7 +258,7 @@ const MemberInfo = ({
 
         <DialogContent>
           <Typography
-            className={classes.contentText}
+            className="contentText"
             variant="body2"
           >
             This email is used to sign in to the TMAC website. Make sure you have access to the new
@@ -268,7 +266,7 @@ const MemberInfo = ({
           </Typography>
 
           <TextField
-            className={classes.textField}
+            className="textField"
             error={Boolean(newEmailError)}
             helperText={newEmailError}
             label="New Email"
@@ -296,7 +294,7 @@ const MemberInfo = ({
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </StyledRoot>
   );
 };
 

@@ -1,8 +1,8 @@
 // External Dependencies
 import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // Internal Dependencies
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
@@ -16,16 +16,14 @@ import { useEventData } from '../../utils/hooks/useEventData';
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  description: {
+const StyledContainer = styled(Container)(({ theme }) => ({
+  '.description': {
     marginLeft: theme.spacing(2),
   },
 }));
 
 // Component Definition
 const SummerRoundTable = ({ location }) => {
-  const classes = useStyles();
-
   const { edges } = useEventData();
 
   const summerRoundTable = edges.find((e) =>
@@ -43,7 +41,7 @@ const SummerRoundTable = ({ location }) => {
         <title>TMAC | Summer Round Table</title>
       </Helmet>
 
-      <Container>
+      <StyledContainer>
         <h1>{titleOfEvent}</h1>
 
         {/* <EnhancedAlert severity="info">
@@ -65,7 +63,7 @@ const SummerRoundTable = ({ location }) => {
         <section>
           <h4>Where</h4>
 
-          <div className={classes.description}>
+          <div className="description">
             <address>
               <div>Room CC210</div>
               <a
@@ -125,7 +123,7 @@ const SummerRoundTable = ({ location }) => {
             yaml={eventsSidebar}
           />
         </MobileSidebar>
-      </Container>
+      </StyledContainer>
     </Layout>
   );
 };

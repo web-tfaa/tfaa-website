@@ -17,13 +17,11 @@ const StyledRoot = styled.div({
     height: 2,
     marginTop: 10,
   },
-  '.mobileSidebar': {
-    [presets.Tablet]: {
-      display: 'none',
-    },
-
-    display: 'block',
+  [presets.Tablet]: {
+    display: 'none',
   },
+
+  display: 'block',
 });
 
 // Component Definition

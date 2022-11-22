@@ -8,7 +8,6 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import MobileSidebar from '../../components/shared/MobileSidebar';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
