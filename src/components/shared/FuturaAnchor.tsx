@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { options } from '../../utils/typography';
 
 // Local Typings
-interface Props {
+interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   href: string;
 }

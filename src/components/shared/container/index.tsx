@@ -31,8 +31,12 @@ const StyledRoot = styled.div<StyledRootProps>(({ $hasSideBar }) => ({
 const Container: FC<Props> = ({
   children,
   hasSideBar = true,
+  ...otherProps
 }) => (
-  <StyledRoot $hasSideBar={hasSideBar}>
+  <StyledRoot
+    $hasSideBar={hasSideBar}
+    {...otherProps}
+  >
     {children}
   </StyledRoot>
 );

@@ -4,49 +4,47 @@ import {
   Button,
 } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { makeStyles } from '@mui/styles';
 import { Link } from 'gatsby-theme-material-ui';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
+import MobileSidebar from '../../components/shared/MobileSidebar';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-import presets from '../../utils/presets';
 import { useEventData } from '../../utils/hooks/useEventData';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  headerFive: {
+const StyledContainer = styled(Container)(({ theme }) => ({
+  '.headerFive': {
     margin: theme.spacing(1, 2),
   },
-  hotelButton: {
+  '.hotelButton': {
     backgroundColor: theme.palette.events.hotelCta,
     color: theme.palette.getContrastText(theme.palette.events.hotelCta),
     fontWeight: 600,
     margin: theme.spacing(2, 0, 1),
   },
-  openInNewIcon: {
+  '.openInNewIcon': {
     fontSize: '1em',
     marginLeft: theme.spacing(1.5),
   },
-  schedule: {
+  '.schedule': {
     marginLeft: theme.spacing(4),
   },
-  text: {
+  '.text': {
     marginLeft: theme.spacing(2),
   },
 }));
 
 // Component Definition
 const FallRetreat = ({ location }) => {
-  const classes = useStyles();
-
   const { edges } = useEventData();
 
   const fallRetreat = edges.find((e) => e.node.titleOfEvent.includes('Fall Retreat')).node;
@@ -54,7 +52,7 @@ const FallRetreat = ({ location }) => {
   const hotelReservationButton = (
     <Button
       className="hotel-link"
-      classes={{ root: classes.hotelButton }}
+      classes={{ root: 'hotelButton' }}
       color="primary"
       href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1661882188530&key=GRP&app=resvlink"
       rel="noopener noreferrer"
@@ -63,7 +61,7 @@ const FallRetreat = ({ location }) => {
       variant="contained"
     >
       For Hotel reservations click here
-      <OpenInNewIcon className={classes.openInNewIcon} />
+      <OpenInNewIcon className="openInNewIcon" />
     </Button>
   );
 
@@ -73,7 +71,7 @@ const FallRetreat = ({ location }) => {
         <title>TMAC | Fall Retreat</title>
       </Helmet>
 
-      <Container>
+      <StyledContainer>
         <h1>{fallRetreat.titleOfEvent}</h1>
 
         {hotelReservationButton}
@@ -110,19 +108,19 @@ const FallRetreat = ({ location }) => {
         <section>
           <h4>Schedule</h4>
 
-          <h5 className={classes.headerFive}>Wednesday</h5>
-          <p className={classes.schedule}>7:00pm start</p>
+          <h5 className="headerFive">Wednesday</h5>
+          <p className="schedule">7:00pm start</p>
 
-          <h5 className={classes.headerFive}>Thursday</h5>
-          <p className={classes.schedule}>8:00am-5:00pm</p>
+          <h5 className="headerFive">Thursday</h5>
+          <p className="schedule">8:00am-5:00pm</p>
 
-          <h5 className={classes.headerFive}>Friday</h5>
-          <p className={classes.schedule}>8:00am-Noon</p>
+          <h5 className="headerFive">Friday</h5>
+          <p className="schedule">8:00am-Noon</p>
         </section>
 
         <section>
           <h4>Where</h4>
-          <div className={classes.text}>
+          <div className="text">
             <address>
               <p>
                 <a
@@ -156,27 +154,13 @@ const FallRetreat = ({ location }) => {
           </div>
         </section>
 
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
+        <MobileSidebar>
           <SidebarBody
             inline
             yaml={eventsSidebar}
           />
-        </div>
-      </Container>
+        </MobileSidebar>
+      </StyledContainer>
     </Layout>
   );
 };

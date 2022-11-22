@@ -1,7 +1,6 @@
 // External Dependencies
 import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { FC } from 'react';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 
@@ -9,8 +8,8 @@ import PropTypes from 'prop-types';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
+import MobileSidebar from '../../components/shared/MobileSidebar';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-import presets from '../../utils/presets';
 import { useEventData } from '../../utils/hooks/useEventData';
 
 // Sidebar data
@@ -19,7 +18,6 @@ import eventsSidebar from './events-links.yml';
 // Local Variables
 const useStyles = makeStyles((theme) => ({
   description: {
-    marginLeft: theme.spacing(2),
     marginLeft: theme.spacing(2),
   },
 }));
@@ -121,26 +119,12 @@ const SummerRoundTable = ({ location }) => {
           </Box>
         </section>
 
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
+        <MobileSidebar>
           <SidebarBody
             inline
             yaml={eventsSidebar}
           />
-        </div>
+        </MobileSidebar>
       </Container>
     </Layout>
   );

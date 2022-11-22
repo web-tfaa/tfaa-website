@@ -10,7 +10,7 @@ import React from 'react';
 import Container from '../../components/shared/container';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
+import MobileSidebar from '../../components/shared/MobileSidebar';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
@@ -21,11 +21,6 @@ const useStyles = makeStyles((theme) => ({
   alert: {
     marginBottom: theme.spacing(2),
     marginLeft: theme.spacing(2),
-  },
-  mobileHr: {
-    border: 0,
-    height: 2,
-    marginTop: 10,
   },
   updatedLabel: {
     color: theme.palette.success.dark,
@@ -66,7 +61,10 @@ const Events = ({ data, location }) => {
             conventions. New music administrators are encouraged to attend!
           </p> */}
 
-          <Box mt={3} pl={1}>
+          <Box
+            mt={3}
+            pl={1}
+          >
             Held in conjunction with these summer conventions:
             <ul>
               <li>
@@ -80,8 +78,8 @@ const Events = ({ data, location }) => {
               </li>
             </ul>
           </Box>
-
         </section>
+
         <section>
           <h4>
             <a href="fall-retreat/">Fall Retreat</a>
@@ -121,18 +119,12 @@ const Events = ({ data, location }) => {
           </p>
         </section>
 
-        {/* Mobile sidebar */}
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr className={classes.mobileHr} />
-          <SidebarBody inline yaml={eventsSidebar} />
-        </div>
+        <MobileSidebar>
+          <SidebarBody
+            inline
+            yaml={eventsSidebar}
+          />
+        </MobileSidebar>
       </Container>
     </Layout>
   );
