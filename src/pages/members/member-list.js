@@ -1,6 +1,5 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
