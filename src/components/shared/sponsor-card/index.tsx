@@ -6,26 +6,22 @@ import {
   Chip,
   Typography,
 } from '@mui/material';
+import { FC, useCallback, useMemo } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
-import { makeStyles } from '@mui/styles';
 import { green } from '@mui/material/colors';
-import PropTypes from 'prop-types';
-import React from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { options } from '../../../utils/typography';
 
+// Local Typings
+interface Props {
+  sponsorData: object[];
+  subtitle?: string;
+  title: string;
+}
+
 // Local Variables
-const propTypes = {
-  sponsorData: PropTypes.arrayOf(PropTypes.shape({})),
-  subtitle: PropTypes.string,
-  title: PropTypes.string.isRequired,
-};
-
-const defaultProps = {
-  sponsorData: [],
-};
-
 const TITLE_BLUE = '#32456B';
 
 export const SPONSORSHIP_LEVELS = {
@@ -44,79 +40,71 @@ const MEAL_AVAILABILITY = {
   SECURED: 'Already Secured',
 };
 
-const useStyles = makeStyles((theme) => ({
-  alert: {
+const StyledRoot = styled.div(({ theme }) => ({
+  '.alert': {
     borderTop: `1px solid ${theme.palette.divider}`,
   },
-  card: {
+  '.card': {
     background: 'aliceblue',
     fontSize: '0.9rem',
     marginBottom: '1rem',
     maxWidth: '92%',
   },
-  cardContent: {
+  '.cardContent': {
     '&:last-child': {
       paddingBottom: 0,
     },
   },
-  championPriceCard: {
+  '.championPriceCard': {
     background: green[50],
     fontSize: '0.9rem',
     marginBottom: '1rem',
     maxWidth: '92%',
     width: '100%',
   },
-  chip: {
+  '.chip': {
     backgroundColor: theme.palette.grey[200],
     border: `1px solid ${theme.palette.grey[400]}`,
     fontFamily: options.headerFontFamily.join(','),
     fontSize: '0.7rem',
   },
-  chipAvailable: {
+  '.chipAvailable': {
     backgroundColor: green.A400,
     border: `1px solid ${theme.palette.grey[400]}`,
     fontFamily: options.headerFontFamily.join(','),
     fontSize: '0.7rem',
   },
-  deadlineText: {
+  '.deadlineText': {
     marginBottom: 16,
     maxWidth: '75%',
   },
-  deadlineTextBottom: {
+  '.deadlineTextBottom': {
     maxWidth: '75%',
   },
-  divider: {
+  '.divider': {
     height: 3,
     marginTop: 32,
   },
-  list: {
+  '.list': {
     textAlign: 'justify',
   },
-  payLink: {
+  '.payLink': {
     fontSize: 20,
     fontWeight: '600',
     margin: '24px 0',
   },
-  perkNote: {
+  '.perkNote': {
     fontSize: '0.8rem',
   },
-  root: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 4,
-    boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
-    marginBottom: '1em',
-    padding: '0.5rem 1rem',
-  },
-  sponsorInfo: {
+  '.sponsorInfo': {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
   },
-  sponsorLink: {
+  '.sponsorLink': {
     margin: '0 8px',
   },
-  sponsorLinktText: {
+  '.sponsorLinktText': {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -125,18 +113,25 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginBottom: 6,
   },
-  strongText: {
+  '.strongText': {
     fontWeight: 500,
   },
-  titleFour: {
+  '.titleFour': {
     color: TITLE_BLUE,
     fontSize: '1.25rem',
     marginTop: '1.25rem',
   },
-  titleFive: {
+  '.titleFive': {
     color: TITLE_BLUE,
     marginTop: '0.5rem',
   },
+
+  alignItems: 'center',
+  backgroundColor: 'white',
+  borderRadius: 4,
+  boxShadow: 'rgba(25, 17, 34, 0.05) 0px 3px 10px',
+  marginBottom: '1em',
+  padding: '0.5rem 1rem',
 }));
 
 const silverMedalPerksListItems = (
@@ -196,23 +191,22 @@ const classChampionPerksListItems = (
 );
 
 // Component Definition
-const SponsorCard = ({
-  sponsorData,
+const SponsorCard: FC<Props> = ({
+  sponsorData = [],
   subtitle,
   title,
 }) => {
-  const classes = useStyles();
-
   // TODO: Can this live outside of the component?
-  const renderSponsors = (sponsorData) =>
-    sponsorData.length > 0
+  const renderSponsors = useCallback(
+    (sponsorData) =>
+      sponsorData.length > 0
     && sponsorData.map((sponsor) => (
       <div
-        className={classes.sponsorLinktText}
+        className="sponsorLinktText"
         key={sponsor.SponsorOrganization}
       >
         <a
-          className={classes.sponsorLink}
+          className="sponsorLink"
           href={
             sponsor.OrganizationWebsiteAddress.startsWith('http')
               ? sponsor.OrganizationWebsiteAddress
@@ -224,39 +218,41 @@ const SponsorCard = ({
           {sponsor.SponsorOrganization}
         </a>
       </div>
-    ));
+    )),
+    []
+  );
 
-  const sponsorshipSecuredChip = (
+  const sponsorshipSecuredChip = useMemo(() => (
     <Chip
-      className={classes.chip}
+      className="chip"
       label={MEAL_AVAILABILITY.SECURED}
       size="small"
     />
-  );
+  ), []);
 
   return (
-    <div className={classes.root}>
+    <StyledRoot>
       <h2>{title}</h2>
 
-      <h4 className={classes.titleFour}>{subtitle}</h4>
+      <h4 className="titleFour">{subtitle}</h4>
 
-      {sponsorData.length > 0 && <hr className={classes.divider} />}
+      {sponsorData.length > 0 && <hr className="divider" />}
 
       {renderSponsors(sponsorData)}
 
-      {sponsorData.length > 0 && <hr className={classes.divider} />}
+      {sponsorData.length > 0 && <hr className="divider" />}
 
-      <div className={classes.sponsorInfo}>
+      <div className="sponsorInfo">
         {title === SPONSORSHIP_LEVELS.CLASS_CHAMPION && (
           <Card
-            className={classes.championPriceCard}
+            className="championPriceCard"
             variant="outlined"
           >
-            <CardContent className={classes.cardContent}>
-              <h5 className={classes.titleFive}>Sponsor a Meal</h5>
+            <CardContent className="cardContent">
+              <h5 className="titleFive">Sponsor a Meal</h5>
 
               <Typography
-                className={classes.perkNote}
+                className="perkNote"
                 variant="body2"
               >
                 All costs are paid to TMAC. TMAC is a tax exempt organization.
@@ -264,25 +260,25 @@ const SponsorCard = ({
 
               <Box mt={1.5}>
                 <Typography
-                  className={classes.perkNote}
+                  className="perkNote"
                   variant="body2"
                 >
                   Secure sponsorship by paying for:
                 </Typography>
               </Box>
 
-              <ul className={classes.list}>
+              <ul className="list">
                 <li>
-                  The cost of lunch at the <span className={classes.strongText}>Fall Retreat</span>{' '}
+                  The cost of lunch at the <span className="strongText">Fall Retreat</span>{' '}
                   {sponsorshipSecuredChip}
 
                 </li>
                 <li>
-                  The cost of lunch at the <span className={classes.strongText}>TMEA TMAC Roundtable</span>{' '}
+                  The cost of lunch at the <span className="strongText">TMEA TMAC Roundtable</span>{' '}
                   {sponsorshipSecuredChip}
                 </li>
                 <li>
-                  The cost of a reception at the <span className={classes.strongText}>Fall Retreat</span>{' '}
+                  The cost of a reception at the <span className="strongText">Fall Retreat</span>{' '}
                   {sponsorshipSecuredChip}
                 </li>
               </ul>
@@ -290,10 +286,13 @@ const SponsorCard = ({
           </Card>
         )}
 
-        <Card className={classes.card} variant="outlined">
-          <CardContent className={classes.cardContent}>
-            <h5 className={classes.titleFive}>Sponsorship perks:</h5>
-            <ul className={classes.list}>
+        <Card
+          className="card"
+          variant="outlined"
+        >
+          <CardContent className="cardContent">
+            <h5 className="titleFive">Sponsorship perks:</h5>
+            <ul className="list">
               {title === SPONSORSHIP_LEVELS.CLASS_CHAMPION
                 && classChampionPerksListItems}
               {title === SPONSORSHIP_LEVELS.GOLD_MEDAL
@@ -307,7 +306,7 @@ const SponsorCard = ({
         {title === SPONSORSHIP_LEVELS.SILVER_MEDAL && (
           <Box mx={5}>
             <Typography
-              className={classes.perkNote}
+              className="perkNote"
               variant="body2"
             >
               Please note that admission/attendance at the
@@ -320,7 +319,7 @@ const SponsorCard = ({
         {title === SPONSORSHIP_LEVELS.GOLD_MEDAL && (
           <Box mx={5}>
             <Typography
-              className={classes.perkNote}
+              className="perkNote"
               variant="body2"
             >
               There is no presentation to the membership with this sponsor level.
@@ -329,18 +328,15 @@ const SponsorCard = ({
         )}
 
         <Link
-          className={classes.payLink}
+          className="payLink"
           state={{ level: title }}
           to="/sponsors/sponsor-info"
         >
           {`Register and pay for ${title} sponsorship`}
         </Link>
       </div>
-    </div>
+    </StyledRoot>
   );
 };
-
-SponsorCard.propTypes = propTypes;
-SponsorCard.defaultProps = defaultProps;
 
 export default SponsorCard;
