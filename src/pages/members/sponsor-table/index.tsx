@@ -7,20 +7,32 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import SponsorTableHead from './sponsor-table-head';
 import SponsorTableRowActionElements from './SponsorTableRowActionElements';
 
-// Local Variables
-const propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  isAdmin: PropTypes.bool.isRequired,
-};
+// Local Typings
+interface Props {
+  isAdmin: boolean;
+  data: Sponsor[];
+}
+export interface Sponsor {
+  userId: string;
+  SponsorOrganization: string;
+  SponsorLevel: string;
+  OrganizationContactName: string;
+  Title: string;
+  Email: string;
+  LastName: string;
+  FirstName: string;
+}
 
+export type Order = 'asc' | 'desc';
+
+// Local Variables
 const StyledRoot = styled(Paper)(({ theme }) => ({
   '.cell': {
     '&:first-child': {
@@ -66,7 +78,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 }));
 
 // Local Functions
-function desc(a, b, orderBy) {
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -76,19 +88,16 @@ function desc(a, b, orderBy) {
   return 0;
 }
 
-function stableSort(array, cmp) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = cmp(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  return stabilizedThis.map((el) => el[0]);
-}
-
-function getSorting(order, orderBy) {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+function getComparator<Key extends keyof Sponsor>(
+  order: Order,
+  orderBy: Key,
+): (
+  a: { [key in Key]: number | string },
+  b: { [key in Key]: number | string },
+) => number {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
 function uglifyEmail(email) {
@@ -106,37 +115,36 @@ function uglifyEmail(email) {
 }
 
 // Component Definition
-const SponsorTable = ({
+const SponsorTable: FC<Props> = ({
   data,
   isAdmin,
 }) => {
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('LastName');
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<keyof Sponsor>('LastName');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+
+  const handleChangePage = (_event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleRequestSort = (
+    _event: React.MouseEvent<unknown>,
+    property: keyof Sponsor,
+  ) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
 
   if (!data) {
     return null;
   }
-
-  const handleChangePage = (_event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(event.target.value);
-  };
-
-  const handleRequestSort = (_event, property) => {
-    let newOrder = 'desc';
-
-    if (orderBy === property && order === 'desc') {
-      newOrder = 'asc';
-    }
-
-    setOrder(newOrder);
-    setOrderBy(property);
-  };
 
   return (
     <StyledRoot variant="outlined">
@@ -151,7 +159,7 @@ const SponsorTable = ({
             />
 
             <TableBody>
-              {stableSort(data, getSorting(order, orderBy))
+              {data.sort(getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user) => (
                   <TableRow
@@ -238,7 +246,5 @@ const SponsorTable = ({
     </StyledRoot>
   );
 };
-
-SponsorTable.propTypes = propTypes;
 
 export default SponsorTable;

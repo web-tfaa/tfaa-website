@@ -6,18 +6,21 @@ import {
   TableSortLabel,
   Tooltip,
 } from '@mui/material';
-import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import styled from 'styled-components';
 
-// Local Variables
-const propTypes = {
-  isAdmin: PropTypes.bool.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-};
+// Internal Dependencies
+import { Order, Sponsor } from '.';
 
+// Local Typings
+interface Props {
+  isAdmin: boolean;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Sponsor) => void;
+  order: Order;
+  orderBy: string;
+}
+
+// Local Variables
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   '.active': {
     fontWeight: 700,
@@ -41,7 +44,7 @@ const rows = [
 ];
 
 // Component Definition
-const SponsorTableHead = ({
+const SponsorTableHead: FC<Props> = ({
   isAdmin,
   onRequestSort,
   order,
@@ -87,7 +90,5 @@ const SponsorTableHead = ({
     </TableHead>
   );
 };
-
-SponsorTableHead.propTypes = propTypes;
 
 export default SponsorTableHead;

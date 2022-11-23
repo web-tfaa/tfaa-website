@@ -128,7 +128,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
     [presets.Tablet]: {
       margin: '0 auto',
     },
-    backgroundColor: theme.palette.background.alt,
+    backgroundColor: theme.palette.altBackground,
   },
 
   display: 'flex',

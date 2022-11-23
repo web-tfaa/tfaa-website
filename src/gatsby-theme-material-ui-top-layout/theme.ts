@@ -17,14 +17,11 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
-    background: {
-      alt: '#f5f5f5',
-      default: '#fff',
-    },
     alert: {
       info: lightBlue['500'],
       warning: amber['700'],
     },
+    altBackground: '#f5f5f5',
     events: {
       hotelCta: cyan['200'],
     },
