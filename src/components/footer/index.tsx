@@ -12,16 +12,24 @@ const StyledRoot = styled.footer({
   '.footer-left': {
     maxWidth: '60%',
 
-    '&:a': {
-      marginLeft: 5
+    '& a': {
+      marginLeft: 5,
+
+      '&:visited': {
+        color: 'black',
+      },
     },
   },
 
   '.footer-right': {
     textAlign: 'right',
 
-    '&:a': {
-      marginLeft: 5
+    '& a': {
+      marginLeft: 5,
+
+      '&:visited': {
+        color: 'black',
+      },
     },
   },
 
