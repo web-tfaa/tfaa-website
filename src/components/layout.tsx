@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet';
 import { FC, ReactElement } from 'react';
 import styled, {
-  ThemeProvider as StyledComponentsThemeProvider,
+  ThemeProvider,
 } from 'styled-components';
 import clsx from 'clsx';
 import hex2rgba from 'hex2rgba';
@@ -155,28 +155,27 @@ const DefaultLayout: FC<Props> = ({
     || (isAuthenticated && isMembers);
 
   return (
-    <StyledComponentsThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Helmet defaultTitle="Texas Music Administrators Conference">
+        <meta
+          name="twitter:site"
+          content="@TXMusicLeaders"
+        />
+        <meta
+          name="og:type"
+          content="website"
+        />
+        <meta
+          name="og:site_name"
+          content="TMAC"
+        />
+        <html lang="en" />
+        {pageTitle && <title>TMAC | {pageTitle}</title>}
+      </Helmet>
       <StyledRoot
         $hasSidebar={hasSidebar}
         className={isHome ? 'is-homepage' : ''}
       >
-        <Helmet defaultTitle="Texas Music Administrators Conference">
-          <meta
-            name="twitter:site"
-            content="@TXMusicLeaders"
-          />
-          <meta
-            name="og:type"
-            content="website"
-          />
-          <meta
-            name="og:site_name"
-            content="TMAC"
-          />
-          <html lang="en" />
-          {pageTitle && <title>TMAC | {pageTitle}</title>}
-        </Helmet>
-
         <TopNav />
 
         <div
@@ -233,7 +232,7 @@ const DefaultLayout: FC<Props> = ({
 
         <Footer />
       </StyledRoot>
-    </StyledComponentsThemeProvider>
+    </ThemeProvider>
   );
 };
 

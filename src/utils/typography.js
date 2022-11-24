@@ -125,7 +125,7 @@ const _options = {
         background: 'rgba(128, 222, 234, 0.5)',
       },
       '.main-body a.anchor': {
-        color: 'inherit',
+        color: 'black',
         fill: texasFlagBlue,
         textDecoration: 'none',
         borderBottom: 'none',

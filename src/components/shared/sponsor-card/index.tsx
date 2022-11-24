@@ -6,7 +6,7 @@ import {
   Chip,
   Typography,
 } from '@mui/material';
-import { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import { green } from '@mui/material/colors';
 import styled from 'styled-components';
