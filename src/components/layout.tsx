@@ -1,9 +1,9 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import { FC, ReactElement } from 'react';
 import styled, {
   ThemeProvider,
 } from 'styled-components';
+import React, { FC, ReactElement } from 'react';
 import clsx from 'clsx';
 import hex2rgba from 'hex2rgba';
 

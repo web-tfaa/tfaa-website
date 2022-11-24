@@ -7,7 +7,7 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies

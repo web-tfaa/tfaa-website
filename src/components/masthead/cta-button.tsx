@@ -1,6 +1,6 @@
 // External Dependencies
 import hex2rgba from 'hex2rgba';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import { blue, green } from '@mui/material/colors';
 import styled from 'styled-components';

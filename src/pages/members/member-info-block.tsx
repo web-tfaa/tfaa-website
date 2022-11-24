@@ -1,6 +1,6 @@
 // External Dependencies
 import { Box } from '@mui/material';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 // Local Typings
 interface Props {

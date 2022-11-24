@@ -8,7 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies

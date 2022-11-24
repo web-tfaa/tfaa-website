@@ -1,7 +1,7 @@
 // External Dependencies
 import { Link } from 'gatsby-theme-material-ui';
 import { Typography } from '@mui/material';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies

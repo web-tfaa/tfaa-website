@@ -1,6 +1,6 @@
 // External Dependencies
 import { Box, SvgIconProps } from '@mui/material';
-import { FC, ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import styled, { useTheme } from 'styled-components';
 

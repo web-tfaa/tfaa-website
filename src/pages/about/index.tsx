@@ -1,6 +1,6 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { graphql } from 'gatsby';
 import { Link } from 'gatsby-theme-material-ui';
 import styled from 'styled-components';

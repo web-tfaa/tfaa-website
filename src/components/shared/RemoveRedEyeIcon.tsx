@@ -1,5 +1,5 @@
 // External Dependencies
-import { FC } from 'react';
+import React, { FC } from 'react';
 import RemoveRedEye from '@mui/icons-material/RemoveRedEye';
 import styled from 'styled-components';
 

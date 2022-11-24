@@ -5,7 +5,7 @@ import {
   Collapse,
 } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import {
+import React, {
   FC, useEffect, useState
 } from 'react';
 

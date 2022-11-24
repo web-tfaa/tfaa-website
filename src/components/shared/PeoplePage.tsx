@@ -1,5 +1,5 @@
 // External Dependencies
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 

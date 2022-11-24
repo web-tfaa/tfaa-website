@@ -1,5 +1,5 @@
 // External Dependencies
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 // Internal Dependencies
 import CardHeadline from '../../../components/shared/cards/card-headline';

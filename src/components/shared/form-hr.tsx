@@ -1,7 +1,7 @@
 // External Dependencies
 import clsx from 'clsx';
 import styled from 'styled-components';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 // Local Typings
 interface Props {

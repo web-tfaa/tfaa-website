@@ -9,7 +9,7 @@ import {
   RadioGroup,
   Typography,
 } from '@mui/material';
-import {
+import React, {
   FC, ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';

@@ -1,5 +1,5 @@
 // External Dependencies
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import clsx from 'clsx';
 import styled from 'styled-components';

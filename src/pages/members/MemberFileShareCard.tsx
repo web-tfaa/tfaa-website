@@ -1,6 +1,6 @@
 // External Dependencies
 import PropTypes from 'prop-types';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import {
   format,
   parseISO,

@@ -6,7 +6,7 @@ import {
   TableSortLabel,
   Tooltip,
 } from '@mui/material';
-import { FC, useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies

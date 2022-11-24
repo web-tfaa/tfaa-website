@@ -1,5 +1,5 @@
 // External Dependencies
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 // Local Typings
