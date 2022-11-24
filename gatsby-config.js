@@ -15,13 +15,6 @@ module.exports = {
   plugins: [
     'gatsby-theme-material-ui',
     'gatsby-plugin-styled-components',
-    // {
-    //   resolve: '@sentry/gatsby',
-    //   options: {
-    //     dsn: process.env.GATSBY_SENTRY_DSN,
-    //     tracesSampleRate: 0.7,
-    //   },
-    // },
     {
       resolve: 'gatsby-source-contentful',
       options: {
