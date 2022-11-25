@@ -1,5 +1,6 @@
 // External Dependencies
 import styled from 'styled-components';
+import { FC } from 'react';
 
 // Internal Dependencies
 import EnhancedAlert from '../EnhancedAlert';

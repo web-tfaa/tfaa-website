@@ -24,6 +24,7 @@ export interface Sponsor {
   SponsorOrganization: string;
   SponsorLevel: string;
   OrganizationContactName: string;
+  OrganizationWebsiteAddress: string;
   Title: string;
   Email: string;
   LastName: string;

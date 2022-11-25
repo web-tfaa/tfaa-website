@@ -6,22 +6,20 @@ import {
   Chip,
   Typography,
 } from '@mui/material';
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import { green } from '@mui/material/colors';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { options } from '../../../utils/typography';
+import { Sponsor } from '../../../pages/members/sponsor-table';
 
 // Local Typings
 interface Props {
   sponsorData: Sponsor[];
   subtitle?: string;
   title: string;
-}
-interface Sponsor {
-  name: string;
 }
 
 // Local Variables
@@ -103,9 +101,6 @@ const StyledRoot = styled.div(({ theme }) => ({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-  },
-  '.sponsorLink': {
-    margin: '0 8px',
   },
   '.sponsorLinktText': {
     alignItems: 'center',
@@ -200,16 +195,14 @@ const SponsorCard: FC<Props> = ({
   title,
 }) => {
   // TODO: Can this live outside of the component?
-  const renderSponsors = useCallback(
-    (sponsorData) =>
-      sponsorData.length > 0
+  const renderSponsors = (sponsorData: Sponsor[]) =>
+    sponsorData.length > 0
     && sponsorData.map((sponsor) => (
       <div
         className="sponsorLinktText"
         key={sponsor.SponsorOrganization}
       >
         <a
-          className="sponsorLink"
           href={
             sponsor.OrganizationWebsiteAddress.startsWith('http')
               ? sponsor.OrganizationWebsiteAddress
@@ -221,9 +214,7 @@ const SponsorCard: FC<Props> = ({
           {sponsor.SponsorOrganization}
         </a>
       </div>
-    )),
-    []
-  );
+    ));
 
   const sponsorshipSecuredChip = useMemo(() => (
     <Chip
@@ -332,7 +323,6 @@ const SponsorCard: FC<Props> = ({
 
         <Link
           className="payLink"
-          // state={{ level: title }}
           to="/sponsors/sponsor-info"
         >
           {`Register and pay for ${title} sponsorship`}
