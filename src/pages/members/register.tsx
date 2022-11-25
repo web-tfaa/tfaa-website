@@ -3,8 +3,8 @@
 */
 
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-// import { navigate } from 'gatsby';
 import React, {
   FC, useEffect, useReducer
 } from 'react';
@@ -42,7 +42,7 @@ export interface MemberFormValues {
   FirstName: string;
   LastName: string;
   MemberType: 'Active' | 'Retired';
-  NewToTMAC: 'Yes' | 'No';
+  NewToTMAC: boolean;
   OfficePhone: string;
   PaymentOption?: 'Invoiced' | 'Paypal';
   PaypalPayerID?: string;
@@ -79,7 +79,7 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   FirstName: '',
   LastName: '',
   MemberType: 'Active',
-  NewToTMAC: 'Yes',
+  NewToTMAC: false,
   OfficePhone: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
@@ -214,7 +214,7 @@ const RegisterMemberContent: FC<Props> = ({
     if (activeMemberStep === 0 && isAuthenticated) {
       handleUpdateActiveMemberStep(1);
     }
-  }, []);
+  }, [activeMemberStep, isAuthenticated]);
 
   const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
@@ -248,9 +248,7 @@ const RegisterMemberContent: FC<Props> = ({
           <RegisterMemberFormWrapper
             authenticatedUserId={authUser?.uid}
             initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
-            memberForm={memberForm}
             onCompleteMemberStep={handleCompleteMemberStep}
-            onUpdateMemberForm={handleUpdateMemberForm}
           />
         )}
         {[2, 3].includes(activeMemberStep) && (
@@ -263,9 +261,9 @@ const RegisterMemberContent: FC<Props> = ({
         )}
 
         {!hasCompletedAllMemberSteps && (
-          <div style={{ marginTop: '1.5rem' }}>
+          <Box marginTop={2}>
             * Membership is not complete until payment is received.
-          </div>
+          </Box>
         )}
       </Container>
 

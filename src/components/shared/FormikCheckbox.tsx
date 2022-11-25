@@ -32,8 +32,6 @@ const FormikCheckbox: FC<Props> = ({
 }) => {
   const [field, meta] = useField(name);
 
-  console.log('field', field);
-
   const hasError = !!meta.error;
   const isTouched = !!meta.touched;
 
@@ -54,7 +52,6 @@ const FormikCheckbox: FC<Props> = ({
             inputProps={{
               ...inputProps,
             }}
-            onChange={field.onChange}
           />
         )}
         label={label}

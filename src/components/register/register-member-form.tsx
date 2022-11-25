@@ -3,10 +3,6 @@
 // External Dependencies
 import {
   Box,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
 } from '@mui/material';
 import React, { FC, useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
@@ -23,6 +19,7 @@ import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
 import { registerMemberSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
+import FormikCheckbox from '../shared/FormikCheckbox';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
@@ -31,9 +28,7 @@ import RegisterButton from './register-button';
 interface Props {
   authenticatedUserId: string;
   initialMemberFormValues: MemberFormValues;
-  memberForm: MemberFormValues;
   onCompleteMemberStep: HandleCompleteMemberStepType;
-  onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
 }
 
 // Local Variables
@@ -60,17 +55,13 @@ const FIRESTORE_MEMBER_COLLECTION = 'registration';
 const RegisterMemberForm: FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
-  memberForm,
   onCompleteMemberStep,
-  onUpdateMemberForm,
 }) => {
   // We use this to show a loading indicator when switching to Step 3
   const [
     hasCompletedMemberRegisterForm,
     setHasCompletedMemberRegisterForm,
   ] = useState(false);
-
-  const { NewToTMAC } = memberForm;
 
   const handleCompleteMemberInfoStep = useCallback((updatedMemberForm: MemberFormValues) => {
     setHasCompletedMemberRegisterForm(true);
@@ -85,19 +76,21 @@ const RegisterMemberForm: FC<Props> = ({
     // Make copy of values
     const updatedValues = values;
 
-    // Right here we should delete any values that we
-    //  don't need in the synced Google Sheet
-    delete updatedValues.honeypot;
-
-    // Send phone values in formatted
+    // Format phone values
     updatedValues.OfficePhone = formatPhone(updatedValues.OfficePhone);
     updatedValues.CellPhone = formatPhone(updatedValues.CellPhone);
 
-    // The userId is needed to sync the Google Sheet with the Firestore DB
     const updatedMemberFormWithUserId = {
       ...updatedValues,
+      // Convert NewToTMAC to Yes/No string
+      NewToTMAC: values.NewToTMAC ? 'Yes' : 'No',
+      // The userId is needed to sync the Google Sheet with the Firestore DB
       userId: authenticatedUserId,
     };
+
+    // We delete any values that we
+    //  don't need in the synced Google Sheet
+    delete updatedValues.honeypot;
 
     try {
       await doCreateEntry(
@@ -110,15 +103,6 @@ const RegisterMemberForm: FC<Props> = ({
       logError('handleClickSubmitButton error in RegisterMemberForm', error);
     }
   };
-
-  const handleChangeNewToTMAC = useCallback((event) => {
-    const { value: updatedNewToTMACVAlue } = event.target;
-
-    onUpdateMemberForm({
-      ...memberForm,
-      NewToTMAC: updatedNewToTMACVAlue,
-    });
-  }, [memberForm, onUpdateMemberForm]);
 
   if (!authenticatedUserId) {
     navigate('/members');
@@ -136,9 +120,10 @@ const RegisterMemberForm: FC<Props> = ({
   return (
     <StyledRoot className="login-form">
       <Formik
+        enableReinitialize
         initialValues={initialMemberFormValues}
-        validationSchema={registerMemberSchema}
         onSubmit={handleClickSubmitButton}
+        validationSchema={registerMemberSchema}
       >
         {({
           errors,
@@ -319,32 +304,14 @@ const RegisterMemberForm: FC<Props> = ({
                 />
               </Box>
 
-              <FormControl component="fieldset">
-                {/* eslint-disable-next-line */}
-                <label
-                  className="radioButtonLabel"
-                  htmlFor="NewToTMAC"
-                >
-                  New To TMAC*
-                  <RadioGroup
-                    aria-label="NewToTMAC"
-                    name="NewToTMAC"
-                    onChange={handleChangeNewToTMAC}
-                    value={NewToTMAC}
-                  >
-                    <FormControlLabel
-                      control={<Radio size="small" />}
-                      label="Yes"
-                      value="Yes"
-                    />
-                    <FormControlLabel
-                      control={<Radio size="small" />}
-                      label="No"
-                      value="No"
-                    />
-                  </RadioGroup>
-                </label>
-              </FormControl>
+              <FormikCheckbox
+                inputProps={{
+                  'aria-label': 'New To TMAC',
+                }}
+                label="New To TMAC?"
+                name="NewToTMAC"
+                onChange={handleChange}
+              />
 
               {/* Hidden input to help curtail spam */}
               <input
@@ -370,7 +337,7 @@ const RegisterMemberForm: FC<Props> = ({
                   mt={1}
                   width="100%"
                 >
-                  <EnhancedAlert severity={hasTouchedform && hasErrors ? 'error' : 'info'}>
+                  <EnhancedAlert severity={hasTouchedform && hasErrors ? 'warning' : 'info'}>
                     Please make sure all required fields above are completed.
                   </EnhancedAlert>
                 </Box>

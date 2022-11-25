@@ -106,6 +106,7 @@ const RegisterMemberPayment: FC<Props> = ({
   ] = useState<ActiveMemberRadioOptions>('active');
 
   const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
+    console.log('handleGetCurrentInvoiceId : currentInvoiceId', currentInvoiceId);
     onUpdateMemberForm({
       ...memberForm,
       invoiceId: currentInvoiceId,
@@ -155,7 +156,9 @@ const RegisterMemberPayment: FC<Props> = ({
         updateFirestoreInvoiceId();
       }
     };
-  }, [handleGetCurrentInvoiceId, handleGetCurrentReceiptId, hasCompletedPayment]);
+    // Ignoring this b/c we only want to run this on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // We want to record the newest invoiceId in the Firestore database
   useEffect(() => {

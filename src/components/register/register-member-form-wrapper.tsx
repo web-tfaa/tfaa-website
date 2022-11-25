@@ -13,18 +13,14 @@ import RegisterForm from './register-member-form';
 interface Props {
   authenticatedUserId?: string;
   initialMemberFormValues: MemberFormValues;
-  memberForm: MemberFormValues;
   onCompleteMemberStep: HandleCompleteMemberStepType;
-  onUpdateMemberForm: (memberForm: MemberFormValues) => void;
 }
 
 // Component Definition
 const MemberFormValuesWrapper: FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
-  memberForm,
   onCompleteMemberStep,
-  onUpdateMemberForm,
 }) => {
   if (!authenticatedUserId) {
     return null;
@@ -41,9 +37,7 @@ const MemberFormValuesWrapper: FC<Props> = ({
       <RegisterForm
         authenticatedUserId={authenticatedUserId}
         initialMemberFormValues={initialMemberFormValues}
-        memberForm={memberForm}
         onCompleteMemberStep={onCompleteMemberStep}
-        onUpdateMemberForm={onUpdateMemberForm}
       />
     </section>
   );

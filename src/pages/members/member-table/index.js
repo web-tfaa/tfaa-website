@@ -110,6 +110,7 @@ const MemberTable = ({
   data,
   isAdmin,
 }) => {
+  console.log('data', data);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('LastName');
   const [page, setPage] = useState(0);
