@@ -50,8 +50,6 @@ const Sponsors: FC<Props> = ({ location }) => {
     }
   }, [previousSponsorData, sponsorData]);
 
-  console.log('sponsorData', sponsorData);
-
   return (
     <Layout location={location}>
       <ReCaptchaProvider>

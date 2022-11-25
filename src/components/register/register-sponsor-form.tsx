@@ -25,6 +25,7 @@ import CustomTextField from '../shared/CustomTextField';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
+import theme from '../../gatsby-theme-material-ui-top-layout/theme';
 
 // Local Typings
 interface Props {
@@ -40,6 +41,9 @@ const StyledRoot = styled.div({
   '.classChampionRadioLabelRoot': {
     alighItems: 'flex-start',
     display: 'flex',
+  },
+  '.disabledText': {
+    color: theme.palette.text.disabled,
   },
   '.honey': {
     height: 1,
@@ -61,6 +65,8 @@ const StyledRoot = styled.div({
 
 // This will tell the Firestore database action where to put the new record
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
+
+const classChampionAlreadySecured = true;
 
 // Component Definition
 const RegisterSponsorForm: FC<Props> = ({
@@ -232,15 +238,22 @@ const RegisterSponsorForm: FC<Props> = ({
                       className="classChampionRadioLabelRoot"
                       control={(
                         <Box marginBottom={4}>
-                          <Radio size="small" />
+                          <Radio
+                            disabled={classChampionAlreadySecured}
+                            size="small"
+                          />
                         </Box>
                       )}
                       label={(
                         <>
-                          <Typography component="span">
+                          <Typography
+                            className={classChampionAlreadySecured ? 'disabledText' : ''}
+                            component="span"
+                          >
                             {SPONSORSHIP_LEVELS.CLASS_CHAMPION}
                           </Typography>
                           <Typography
+                            className={classChampionAlreadySecured ? 'disabledText' : ''}
                             color="textSecondary"
                             component="span"
                             variant="body2"
