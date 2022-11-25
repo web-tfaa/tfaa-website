@@ -34,13 +34,15 @@ function getSteps(
 }
 
 // Local Variables
-const StyledStepLabel = styled(StepLabel)(({ theme }) => ({
+const StyledCard = styled(Card)(({ theme }) => ({
   '.stepLabel': {
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.8rem',
     },
     fontSize: '0.9rem',
   },
+
+  padding: theme.spacing(1, 0),
 }));
 
 // Component Definition
@@ -52,24 +54,24 @@ const RegisterStepper: FC<Props> = ({
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
-    <Card variant="outlined">
+    <StyledCard variant="outlined">
       <Stepper
         activeStep={activeStep}
         alternativeLabel
       >
         {steps.map((label) => (
           <Step key={label}>
-            <StyledStepLabel
+            <StepLabel
               classes={{
                 label: 'stepLabel',
               }}
             >
               {label}
-            </StyledStepLabel>
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
-    </Card>
+    </StyledCard>
   );
 };
 
