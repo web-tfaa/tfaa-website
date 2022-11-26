@@ -1,11 +1,11 @@
 // External Dependencies
 import {
   Box,
-  Button,
+  // Button,
 } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby-theme-material-ui';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+// import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -49,21 +49,22 @@ const FallRetreat = ({ location }) => {
 
   const fallRetreat = edges.find((e) => e.node.titleOfEvent.includes('Fall Retreat')).node;
 
-  const hotelReservationButton = (
-    <Button
-      className="hotel-link"
-      classes={{ root: 'hotelButton' }}
-      color="primary"
-      href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1661882188530&key=GRP&app=resvlink"
-      rel="noopener noreferrer"
-      size="large"
-      target="_blank"
-      variant="contained"
-    >
-      For Hotel reservations click here
-      <OpenInNewIcon className="openInNewIcon" />
-    </Button>
-  );
+  const hotelReservationButton = null;
+  // (
+  //   <Button
+  //     className="hotel-link"
+  //     classes={{ root: 'hotelButton' }}
+  //     color="primary"
+  //     href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1661882188530&key=GRP&app=resvlink"
+  //     rel="noopener noreferrer"
+  //     size="large"
+  //     target="_blank"
+  //     variant="contained"
+  //   >
+  //     For Hotel reservations click here
+  //     <OpenInNewIcon className="openInNewIcon" />
+  //   </Button>
+  // );
 
   return (
     <Layout location={location}>
