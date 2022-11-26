@@ -121,10 +121,7 @@ class Invoice extends Component {
 
         <FormHr red />
 
-        <Box
-          component="div"
-          sx={{ fontSize: 16, margin: '0 32px' }}
-        >
+        <Box sx={{ fontSize: 16, margin: '0 32px' }}>
           <h3>Texas Music Administrators Conference</h3>
 
           <Box
