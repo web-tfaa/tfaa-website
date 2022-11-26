@@ -72,7 +72,10 @@ const MastheadBg = () => (
         height: '100%',
       }}
     >
-      <polygon fill={colors.ui.light} points="-5,-5 15,15 -5,15 " />
+      <polygon
+        fill={colors.ui.light}
+        points="-5,-5 15,15 -5,15 "
+      />
     </svg>
     <style>
       {`

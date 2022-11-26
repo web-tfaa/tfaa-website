@@ -1,31 +1,32 @@
 // External Dependencies
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
-import { makeStyles } from '@mui/styles';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { options } from '../../utils/typography';
 
+// Local Typings
+interface Props {
+  children: string;
+}
+
 // Local Variables
-const useStyles = makeStyles({
-  subtitle: {
+const StyledTypography = styled(Typography)({
+  '&': {
     fontFamily: options.headerFontFamily.join(','),
     fontWeight: 600,
   },
-});
+}) as typeof Typography;
 
 // Component Definition
-const CardSubtitle: FC = ({ children }) => {
-  const classes = useStyles();
-
-  return (
-    <Typography
-      className={classes.subtitle}
-      component="h3"
-    >
-      {children}
-    </Typography>
-  );
-};
+const CardSubtitle: FC<Props> = ({ children }) => (
+  <StyledTypography
+    component="h3"
+    variant="subtitle"
+  >
+    {children}
+  </StyledTypography>
+);
 
 export default CardSubtitle;

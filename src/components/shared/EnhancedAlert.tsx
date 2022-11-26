@@ -5,8 +5,8 @@ import {
   AlertTitle,
   Collapse,
 } from '@mui/material';
-import { FC } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
 // Local Typings
 interface Props extends AlertProps {
@@ -16,10 +16,8 @@ interface Props extends AlertProps {
 }
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  root: {
-    border: `1px solid ${theme.palette.grey['300']}`
-  },
+const StyledAlert = styled(Alert)(({ theme }) => ({
+  border: `1px solid ${theme.palette.grey['300']}`
 }));
 
 // Set up for future work to allow clicking a close icon to remove the alert
@@ -33,18 +31,15 @@ const EnhancedAlert: FC<Props> = ({
   title,
   ...other
 }) => {
-  const classes = useStyles();
-
   const alertElement = (
-    <Alert
-      className={classes.root}
+    <StyledAlert
       onClose={onClose}
       severity={severity}
       {...other}
     >
       {Boolean(title) && <AlertTitle>{title}</AlertTitle>}
       {children}
-    </Alert>
+    </StyledAlert>
   );
 
   return onClose ? (

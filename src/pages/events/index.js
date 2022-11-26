@@ -2,32 +2,27 @@
 import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
-import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  alert: {
+const StyledContainer = styled(Container)(({ theme }) => ({
+  '.alert': {
     marginBottom: theme.spacing(2),
     marginLeft: theme.spacing(2),
   },
-  mobileHr: {
-    border: 0,
-    height: 2,
-    marginTop: 10,
-  },
-  updatedLabel: {
+  '.updatedLabel': {
     color: theme.palette.success.dark,
     fontSize: '0.9rem',
     marginLeft: theme.spacing(1),
@@ -35,108 +30,104 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Component Definition
-const Events = ({ data, location }) => {
-  const classes = useStyles();
+const Events = ({ data, location }) => (
+  <Layout location={location}>
+    <Helmet>
+      <title>TMAC | Events</title>
+    </Helmet>
 
-  return (
-    <Layout location={location}>
-      <Helmet>
-        <title>TMAC | Events</title>
-      </Helmet>
+    <StyledContainer>
+      <h1>{data.site.siteMetadata.title} Events</h1>
 
-      <Container>
-        <h1>{data.site.siteMetadata.title} Events</h1>
+      <section>
+        <h4>
+          <a href="summer-round-table/">Summer Round Table</a>
+          <span className="updatedLabel">updated</span>
+        </h4>
 
-        <section>
-          <h4>
-            <a href="summer-round-table/">Summer Round Table</a>
-            <span className={classes.updatedLabel}>updated</span>
-          </h4>
+        {/* <EnhancedAlert severity="info">
+          Details about the 2021 Summer Round Table will be available soon.
+        </EnhancedAlert> */}
 
-          {/* <EnhancedAlert severity="info">
-            Details about the 2021 Summer Round Table will be available soon.
-          </EnhancedAlert> */}
+        {/* <p css={{ marginTop: 24, paddingLeft: 8 }}>
+          Held in conjunction with the&nbsp;
+          <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
+          ,&nbsp;
+          <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
+          <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer
+          conventions. New music administrators are encouraged to attend!
+        </p> */}
 
-          {/* <p css={{ marginTop: 24, paddingLeft: 8 }}>
-            Held in conjunction with the&nbsp;
-            <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
-            ,&nbsp;
-            <a href="https://www.tcda.net/">Texas Choral Directors Association</a>, and&nbsp;
-            <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a> summer
-            conventions. New music administrators are encouraged to attend!
-          </p> */}
-
-          <Box mt={3} pl={1}>
-            Held in conjunction with these summer conventions:
-            <ul>
-              <li>
-                <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
-              </li>
-              <li>
-                <a href="https://www.tcda.net/">Texas Choral Directors Association</a>
-              </li>
-              <li>
-                <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a>
-              </li>
-            </ul>
-          </Box>
-
-        </section>
-        <section>
-          <h4>
-            <a href="fall-retreat/">Fall Retreat</a>
-            <span className={classes.updatedLabel}>updated</span>
-          </h4>
-
-          <Box
-            mb={2}
-            pl={1}
-          >
-            The 2022 Fall Retreat will be Nov. 16-18 in Austin.
-          </Box>
-
-          {/* <Box
-            mb={2}
-            pl={1}
-          >
-            <Link to="/events/fall-retreat/">Click here</Link
-             for more details and to reserve your hotel accommodations.
-          </Box> */}
-
-          <Box pl={1}>
-            The TMAC Fall Retreat is open to all current TMAC members who are in good standing
-            (paid for membership this school year).
-            There is no separate conference registration process.
-          </Box>
-        </section>
-
-        <section>
-          <h4>
-            <a href="tmea-round-table/">TMEA Round Table</a>
-          </h4>
-
-          <p css={{ paddingLeft: 8 }}>
-            Round Table Meeting on Wednesday at noon at the{' '}
-            <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
-          </p>
-        </section>
-
-        {/* Mobile sidebar */}
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
+        <Box
+          mt={3}
+          pl={1}
         >
-          <hr className={classes.mobileHr} />
-          <SidebarBody inline yaml={eventsSidebar} />
-        </div>
-      </Container>
-    </Layout>
-  );
-};
+          Held in conjunction with these summer conventions:
+          <ul>
+            <li>
+              <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
+            </li>
+            <li>
+              <a href="https://www.tcda.net/">Texas Choral Directors Association</a>
+            </li>
+            <li>
+              <a href="https://www.todaweb.org/">Texas Orchestra Directors Association</a>
+            </li>
+          </ul>
+        </Box>
+      </section>
+
+      <section>
+        <h4>
+          <a href="fall-retreat/">Fall Retreat</a>
+          <span className="updatedLabel">updated</span>
+        </h4>
+
+        <Box
+          mb={2}
+          pl={1}
+        >
+          The 2022 Fall Retreat will be Nov. 16-18 in Austin.
+        </Box>
+
+        {/* <Box
+          mb={2}
+          pl={1}
+        >
+          <Link to="/events/fall-retreat/">Click here</Link
+            for more details and to reserve your hotel accommodations.
+        </Box> */}
+
+        <Box pl={1}>
+          The TMAC Fall Retreat is open to all current TMAC members who are in good standing
+          (paid for membership this school year).
+          There is no separate conference registration process.
+        </Box>
+      </section>
+
+      <section>
+        <h4>
+          <a href="tmea-round-table/">TMEA Round Table</a>
+        </h4>
+
+        <Box
+          mb={2}
+          pl={1}
+        >
+          Round Table Meeting on Wednesday at noon at the{' '}
+          <a href="https://www.tmea.org/">Texas Music Educators Association</a> convention.
+        </Box>
+      </section>
+
+      <MobileDivider>
+        <SidebarBody
+          inline
+          yaml={eventsSidebar}
+        />
+      </MobileDivider>
+    </StyledContainer>
+  </Layout>
+);
 
 Events.propTypes = {
   data: PropTypes.shape({

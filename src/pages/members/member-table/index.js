@@ -7,9 +7,9 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import MemberTableHead from './member-table-head';
@@ -21,23 +21,22 @@ const propTypes = {
   isAdmin: PropTypes.bool.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
-  cell: {
+const StyledRoot = styled(Paper)(({ theme }) => ({
+  '.cell': {
     '&:first-child': {
       paddingLeft: theme.spacing(3),
     },
   },
-  empty: {
+
+  '.empty': {
     padding: theme.spacing(4),
   },
-  overflowWrapper: {
+
+  '.overflowWrapper': {
     overflowX: 'auto',
   },
-  paper: {
-    marginTop: theme.spacing(3),
-    width: '100%',
-  },
-  pagerButton: {
+
+  '.pagerButton': {
     backgroundColor: theme.palette.grey['300'],
     color: theme.palette.grey['600'],
     marginRight: theme.spacing(1),
@@ -46,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.action.disabled,
     },
   },
+
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: 'rgba(0, 0, 0, 0,.87)',
@@ -55,10 +55,14 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: theme.spacing(3),
     }
   },
-  table: {
+
+  '.table': {
     marginBottom: 0,
     minWidth: 200,
   },
+
+  marginTop: theme.spacing(3),
+  width: '100%',
 }));
 
 // Local Functions
@@ -106,8 +110,7 @@ const MemberTable = ({
   data,
   isAdmin,
 }) => {
-  const classes = useStyles();
-
+  console.log('data', data);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('LastName');
   const [page, setPage] = useState(0);
@@ -117,15 +120,15 @@ const MemberTable = ({
     return null;
   }
 
-  function handleChangePage(event, newPage) {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  }
+  };
 
-  function handleChangeRowsPerPage(event) {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(event.target.value);
-  }
+  };
 
-  function handleRequestSort(event, property) {
+  const handleRequestSort = (event, property) => {
     let newOrder = 'desc';
 
     if (orderBy === property && order === 'desc') {
@@ -134,16 +137,13 @@ const MemberTable = ({
 
     setOrder(newOrder);
     setOrderBy(property);
-  }
+  };
 
   return (
-    <Paper
-      className={classes.paper}
-      variant="outlined"
-    >
-      <div className={classes.overflowWrapper}>
+    <StyledRoot variant="outlined">
+      <div className="overflowWrapper">
         {data.length > 0 ? (
-          <Table className={classes.table}>
+          <Table className="table">
             <MemberTableHead
               isAdmin={isAdmin}
               onRequestSort={handleRequestSort}
@@ -156,11 +156,11 @@ const MemberTable = ({
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user) => (
                   <TableRow
-                    className={classes.row}
+                    className="row"
                     key={user.userId}
                   >
                     <TableCell
-                      className={classes.cell}
+                      className="cell"
                       component="th"
                       key={user.FirstName}
                       padding="none"
@@ -170,44 +170,44 @@ const MemberTable = ({
                     </TableCell>
 
                     <TableCell
-                      className={classes.cell}
+                      className="cell"
                       key={user.LastName}
                     >
                       {user.LastName}
                     </TableCell>
 
                     <TableCell
-                      className={classes.cell}
+                      className="cell"
                       key={user.District}
                     >
                       {user.District}
                     </TableCell>
 
                     <TableCell
-                      className={classes.cell}
+                      className="cell"
                       key={user.Title}
                     >
                       {user.Title}
                     </TableCell>
 
                     <TableCell
-                      className={classes.cell}
+                      className="cell"
                       key={user.Email}
                     >
                       {uglifyEmail(user.Email)}
                     </TableCell>
 
                     {isAdmin && (
-                      <TableCell className={classes.cell}>
-                        <MemberTableRowActionElements user={user} />
-                      </TableCell>
+                    <TableCell className="cell">
+                      <MemberTableRowActionElements user={user} />
+                    </TableCell>
                     )}
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
         ) : (
-          <div className={classes.empty}>
+          <div className="empty">
             No members for the current school year
           </div>
         )}
@@ -218,7 +218,7 @@ const MemberTable = ({
           backIconButtonProps={{
             'aria-label': 'Previous Page',
             disabled: page === 1,
-            classes: { root: classes.pagerButton },
+            classes: { root: 'pagerButton' },
             id: 'pager-button-left',
             size: 'small',
           }}
@@ -226,7 +226,7 @@ const MemberTable = ({
           count={data ? data.length : 0}
           nextIconButtonProps={{
             'aria-label': 'Next Page',
-            classes: { root: classes.pagerButton },
+            classes: { root: 'pagerButton' },
             id: 'pager-button-right',
             size: 'small',
           }}
@@ -236,7 +236,7 @@ const MemberTable = ({
           rowsPerPage={rowsPerPage}
         />
       )}
-    </Paper>
+    </StyledRoot>
   );
 };
 

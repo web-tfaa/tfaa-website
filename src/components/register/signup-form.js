@@ -1,9 +1,11 @@
 // External Dependencies
 import { Button } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, {
+  useCallback, useEffect, useReducer, useState
+} from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
@@ -23,11 +25,11 @@ const defaultProps = {
   onRegisterSignUp: null,
 };
 
-const useStyles = makeStyles({
-  button: {
+const StyledForm = styled.form({
+  '.button': {
     fontFamily: 'Futura PT, Roboto',
   },
-  buttonContainer: {
+  '.buttonContainer': {
     display: 'flex',
     justifyContent: 'flex-end',
     maxWidth: '70%',
@@ -83,8 +85,6 @@ function signupFormReducer(state, { type, payload }) {
 
 // Component Definition
 const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
-  const classes = useStyles();
-
   const isMounted = useIsMounted();
 
   const [registerError, setRegisterError] = useState('');
@@ -103,7 +103,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         dispatchState({ type: 'clearForm' });
       }
     };
-  }, []);
+  }, [isMounted]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -142,7 +142,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
     }
   };
 
-  const handleUpdateErrors = () => {
+  const handleUpdateErrors = useCallback(() => {
     if (isMounted) {
       const hasInput = passwordOne !== '' && passwordTwo !== '';
 
@@ -156,15 +156,15 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         setRegisterError('');
       }
     }
-  };
+  }, [isMounted, passwordOne, passwordTwo]);
 
   useEffect(() => {
     if (isMounted && previousState !== state) {
       handleUpdateErrors();
     }
-  }, [state]);
+  }, [handleUpdateErrors, isMounted, previousState, state]);
 
-  const handleUpdate = (event) => {
+  const handleUpdate = useCallback((event) => {
     if (isMounted) {
       dispatchState({
         type: 'updateForm',
@@ -173,7 +173,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         },
       });
     }
-  };
+  }, [isMounted]);
 
   const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
   const isInvalid = !hasInput || Boolean(registerError || emailError);
@@ -183,8 +183,14 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
   };
 
   return (
-    <form key="signup-form" onSubmit={handleSubmit}>
-      <label css={labelStyles} htmlFor="email">
+    <StyledForm
+      key="signup-form"
+      onSubmit={handleSubmit}
+    >
+      <label
+        css={labelStyles}
+        htmlFor="email"
+      >
         Email Address
         <input
           css={inputStyles}
@@ -203,7 +209,10 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
           marginBottom: 16,
         }}
       >
-        <label css={bottomLabelStyles} htmlFor="passwordOne">
+        <label
+          css={bottomLabelStyles}
+          htmlFor="passwordOne"
+        >
           Password
           <input
             css={inputStyles}
@@ -226,7 +235,10 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
           marginBottom: 16,
         }}
       >
-        <label css={bottomLabelStyles} htmlFor="passwordTwo">
+        <label
+          css={bottomLabelStyles}
+          htmlFor="passwordTwo"
+        >
           Confirm Password
           <input
             css={inputStyles}
@@ -255,9 +267,9 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
       )}
 
       {/* SUBMIT BUTTON */}
-      <div className={classes.buttonContainer}>
+      <div className="buttonContainer">
         <Button
-          className={classes.button}
+          className="button"
           color="primary"
           disabled={isInvalid}
           onClick={handleClickSignUpButton}
@@ -267,7 +279,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
           Sign Up
         </Button>
       </div>
-    </form>
+    </StyledForm>
   );
 };
 
@@ -276,7 +288,12 @@ SignUpForm.defaultProps = defaultProps;
 
 const SignUpFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => <SignUpForm {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => (
+      <SignUpForm
+        {...props}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 

@@ -23,7 +23,7 @@ export const doCreateEntry = (
     .doc(documentId)
     .set(form)
     .then(() => {
-      console.log(`Membership for ${documentId} in ${currentSchoolYearShort} was successful`);
+      console.log(`Membership for ${documentId} in ${currentSchoolYearShort} was successful`, form);
       if (callback) {
         callback(form);
       }

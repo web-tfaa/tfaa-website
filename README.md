@@ -22,6 +22,7 @@ This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Ad
   - This provides up-to-date MUI components and theming. Some components like `Link` have been updated to work with Gatsby.
 - `@sentry/gatsby`
   - Adds ability for Sentry to catch exceptions that users encounter on the site. Check the attached Sentry account for info on specific errors.
+  - All Sentry packages need to be on the same version.
 - `gatsby-source-contentful`
   - These parts of the site fetch data from Contentful at build time:
     - Officers
