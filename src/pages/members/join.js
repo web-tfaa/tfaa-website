@@ -28,7 +28,6 @@ const boldStyles = { fontWeight: 600 };
 // Component Definition
 const JoinContainer = (props) => {
   const {
-    // isAuthenticated,
     location,
   } = props;
 
@@ -154,7 +153,6 @@ const JoinContainer = (props) => {
 };
 
 JoinContainer.propTypes = {
-  // isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
 };
 
