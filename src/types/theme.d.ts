@@ -33,6 +33,7 @@ interface PaletteLegacyGray {
 }
 
 interface PaletteUi {
+  borderBlue: string;
   bright: string;
   light: string;
   lilac: string;

@@ -1,7 +1,9 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import FormHr from '../shared/form-hr';
@@ -9,9 +11,47 @@ import InvoiceTable from './invoice-table';
 import {
   currentSchoolYearLong,
 } from '../../utils/helpers';
-import theme from '../../gatsby-theme-material-ui-top-layout/theme';
 
 // Local Variables
+const StyledRoot = styled.section(({ theme }) => ({
+  '.bodyMessage': {
+    margin: theme.spacing(8, 4, 6),
+    textAlign: 'center',
+  },
+
+  '.invoiceContentWrapper': {
+    display: 'flex',
+    fontSize: 14,
+    justifyContent: 'space-around',
+    margin: theme.spacing(0, 3),
+  },
+
+  '.tableContainer': {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    margin: theme.spacing(4, 2, 0),
+  },
+
+  footer: {
+    fontSize: 12,
+    margin: theme.spacing(1.5, 6),
+    textAlign: 'center',
+  },
+
+  header: {
+    background: theme.palette.table.background,
+    height: 96,
+    padding: theme.spacing(1),
+  },
+
+  border: `1px solid ${theme.palette.ui.borderBlue}`,
+  height: 980,
+  margin: 24,
+  width: 776,
+}));
+
 const propTypes = {
   amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   form: PropTypes.shape({
@@ -60,44 +100,45 @@ class Invoice extends Component {
         : currentDate;
 
     return (
-      <section
-        css={{
-          border: '1px solid #2D456F',
-          height: 980,
-          margin: 24,
-          width: 750,
-        }}
+      <StyledRoot
         id="invoice-container"
         {...otherProps}
       >
-        <header
-          css={{
-            background: theme.palette.table.background,
-            height: 110,
-            padding: 16,
-          }}
-        >
+        <header>
           <img
             alt="TMAC logo"
             height="80px"
             src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
             style={{ position: 'absolute' }}
           />
-          <h2 css={{ margin: 0, textAlign: 'right' }}>{isInvoice ? 'INVOICE' : 'RECEIPT'}</h2>
+          <Box
+            component="h2"
+            sx={{ margin: 0, textAlign: 'right' }}
+          >
+            {isInvoice ? 'INVOICE' : 'RECEIPT'}
+          </Box>
         </header>
 
         <FormHr red />
 
-        <div css={{ fontSize: 14, margin: '0 32px' }}>
+        <Box
+          component="div"
+          sx={{ fontSize: 16, margin: '0 32px' }}
+        >
           <h3>Texas Music Administrators Conference</h3>
 
-          <p css={{ fontSize: 14 }}>
+          <Box
+            marginBottom={1.5}
+            sx={{ fontSize: 14 }}
+          >
             <em>&quot;...promoting and supporting music education&quot;</em>
-          </p>
+          </Box>
+
           <div>
             <strong>{isInvoice ? 'Invoice' : 'Receipt'}#:</strong> {currentSchoolYearLong}_
             {isInvoice ? invoiceId : receiptId}
           </div>
+
           <div>
             <strong>Date:</strong>{' '}
             {dateToShow}
@@ -117,27 +158,26 @@ class Invoice extends Component {
               )}
             </>
           )}
-        </div>
+        </Box>
 
         {isInvoice && (
-          <div
-            css={{
-              display: 'flex',
-              fontSize: 14,
-              justifyContent: 'space-around',
-              margin: '0 32px',
-            }}
-          >
+          <div className="invoiceContentWrapper">
             <div>
               <h4>FROM</h4>
-              <div css={{ marginBottom: 12 }}>
+
+              <Box
+                component="p"
+                marginBottom={1.5}
+              >
                 Upon receipt of this invoice,
                 <br />
                 please kindly remit payment to:
-              </div>
+              </Box>
+
               <div>
                 <strong>Texas Music Administrators Conference</strong>
               </div>
+
               <div>c/o Jeff Turner</div>
               <div>Allen ISD</div>
               <div>Fine Arts Dept.</div>
@@ -153,15 +193,7 @@ class Invoice extends Component {
           </div>
         )}
 
-        <div
-          css={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            marginTop: 32,
-          }}
-        >
+        <div className="tableContainer">
           <InvoiceTable
             amount={amount}
             form={form}
@@ -170,12 +202,7 @@ class Invoice extends Component {
             sponsorLevel={sponsorLevel}
           />
 
-          <div
-            css={{
-              margin: '64px 32px',
-              textAlign: 'center',
-            }}
-          >
+          <div className="bodyMessage">
             {isInvoice ? (
               <span>
                 Make all checks payable to:
@@ -191,18 +218,12 @@ class Invoice extends Component {
           </div>
         </div>
 
-        <footer
-          css={{
-            fontSize: 12,
-            margin: '12px 48px',
-            textAlign: 'center',
-          }}
-        >
+        <footer>
           The Texas Music Administrators Conference is an organization supporting music educators,
           music administrators, and Texas schools in the quest to deliver music and arts education
           to all students.
         </footer>
-      </section>
+      </StyledRoot>
     );
   }
 }

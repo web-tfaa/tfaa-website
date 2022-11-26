@@ -41,6 +41,7 @@ const theme = createTheme({
       red: '#BF0A30',
     },
     ui: {
+      borderBlue: '#2D456F',
       bright: '#ccd4e0',
       light: '#f5f3f7',
       lilac: '#9D7CBF',
