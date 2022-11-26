@@ -1,4 +1,5 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -20,13 +21,12 @@ const History = ({ location }) => (
     <Helmet>
       <title>TMAC | History</title>
     </Helmet>
-    <div
-      css={{
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-      }}
+
+    <Box
+      display="flex"
+      flexDirection="row"
+      flexWrap="wrap"
+      justifyContent="space-between"
     >
       <Container>
         <img
@@ -82,7 +82,7 @@ const History = ({ location }) => (
           />
         </MobileDivider>
       </Container>
-    </div>
+    </Box>
   </Layout>
 );
 
