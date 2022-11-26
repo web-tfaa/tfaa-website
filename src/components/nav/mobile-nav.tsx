@@ -3,7 +3,7 @@ import GradeIcon from '@mui/icons-material/Grade';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -32,7 +32,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const MobileNav = () => (
+const MobileNav: FC = () => (
   <StyledRoot>
     <MobileNavItem
       linkTo="/about/"
