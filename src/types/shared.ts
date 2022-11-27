@@ -19,7 +19,7 @@ export interface GatsbyContextProps {
     }
     staticQueryResults: {
       [key: string]: {
-        data: any;
+        data: unknown;
         id: string;
         name: string;
         page: {

@@ -79,14 +79,14 @@ const Login: FC<Props> = ({
   );
 };
 
-const LoginWithContext = ({ navigate, ...otherProps }: GatsbyContextProps) => (
+const LoginWithContext = (props: GatsbyContextProps) => (
   <AuthUserContext.Consumer>
     {(authUser) => {
       const isAuthenticated = Boolean(authUser);
 
       return (
         <Login
-          {...otherProps}
+          {...props}
           isAuthenticated={isAuthenticated}
         />
       );
