@@ -1,8 +1,9 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { graphql } from 'gatsby';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -28,6 +29,14 @@ const defaultProps = {
   authUser: null,
 };
 
+const StyledRoot = styled.div(({ $isAuthenticated, theme }) => ({
+  paddingLeft: 0,
+  width: '0 auto',
+  [presets.Tablet]: {
+    paddingLeft: !$isAuthenticated ? theme.spacing(3) : 0,
+  },
+}));
+
 // Component Definition
 const MembersHome = ({
   authUser,
@@ -51,15 +60,7 @@ const MembersHome = ({
   const isAuthenticated = Boolean(authUser);
 
   return (
-    <div
-      css={{
-        paddingLeft: 0,
-        width: '0 auto',
-        [presets.Tablet]: {
-          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-        },
-      }}
-    >
+    <StyledRoot $isAuthenticated={isAuthenticated}>
       <Status />
 
       <Container>
@@ -85,7 +86,7 @@ const MembersHome = ({
           <NonMemberContent />
         )}
       </Container>
-    </div>
+    </StyledRoot>
   );
 };
 
