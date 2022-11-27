@@ -29,8 +29,6 @@ This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Ad
     - Area Representatives
     - Some Events
   - If the Contentful data is updated, a TMAC dev needs to re-deploy the site on Netliy for the changes to go live.
-- `gatsby-plugin-emotion`
-  - This allowed an easy way to switch from the old `glamor` way of using `css={{}}` passed to component props. The `glamor` plugin stopped working with Gatsby v4.
 - `gatsby-plugin-typography`
   - Allows adding custom fonts
 - `gatsby-plugin-canonical-urls`
