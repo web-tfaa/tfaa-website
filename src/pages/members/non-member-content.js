@@ -1,4 +1,5 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import React from 'react';
 
 // Internal Dependencies
@@ -9,31 +10,20 @@ import Cards from '../../components/shared/cards';
 import CtaButton from '../../components/masthead/cta-button';
 import MembershipByLaws from '../about/MembershipByLaws';
 
-// Local Styles
-const constitutionStyles = {
-  marginTop: 36,
-};
-
-const contentStyles = {
-  display: 'flex',
-  marginBottom: '1rem',
-};
-
 // Component Definition
 const NonMemberContent = () => (
   <>
-    <div
-      css={{
-        paddingBottom: '1.5rem',
-      }}
-    >
+    <Box paddingBottom={3}>
       <CardHeadline>Membership</CardHeadline>
 
-      <div css={contentStyles}>
+      <Box
+        display="flex"
+        marginBottom={2}
+      >
         Our members promote and support music education and music educators through collaboration,
         networking, and the sharing of best practices so that every child in Texas is assured of
         receiving quality instruction in the understanding, appreciation, and performance of music.
-      </div>
+      </Box>
 
       <CtaButton
         buttonColor="green"
@@ -43,15 +33,14 @@ const NonMemberContent = () => (
 
         <ArrowForwardIcon />
       </CtaButton>
-    </div>
+    </Box>
 
     <Cards>
-      <Card
-        className="members-constitution"
-        css={constitutionStyles}
-      >
-        <MembershipByLaws showLinkToByLaws />
-      </Card>
+      <Box marginTop={4}>
+        <Card className="members-constitution">
+          <MembershipByLaws showLinkToByLaws />
+        </Card>
+      </Box>
     </Cards>
   </>
 );
