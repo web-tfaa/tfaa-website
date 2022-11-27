@@ -3,7 +3,7 @@ import {
   Box,
   CircularProgress,
   Collapse,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Helmet } from 'react-helmet';
 import React, {
   FC, useEffect, useState
@@ -18,12 +18,12 @@ import SponsorCard, {
   SPONSORSHIP_PRICE,
 } from '../../components/shared/sponsor-card';
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
-import usePrevious from '../../utils/hooks/usePrevious';
 import { SponsorFormValues } from './register';
+import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
 interface Props {
-  location: unknown;
+  location: Location;
 }
 
 // Component Definition
@@ -67,7 +67,12 @@ const Sponsors: FC<Props> = ({ location }) => {
               flexDirection="column"
               width={isLoading ? 600 : 'inherit'}
             >
-              {isLoading && <CircularProgress size={64} thickness={4} />}
+              {isLoading && (
+                <CircularProgress
+                  size={64}
+                  thickness={4}
+                />
+              )}
 
               <Collapse in={!isLoading}>
                 <SponsorCard

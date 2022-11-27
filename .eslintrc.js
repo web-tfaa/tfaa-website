@@ -3,7 +3,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'airbnb',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'react-app',
   ],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -31,8 +32,15 @@ module.exports = {
     'no-shadow': 0,
     'no-underscore-dangle': 0,
     'react/forbid-prop-types': 1,
+    'react/function-component-definition': 'off',
     'react/jsx-filename-extension': 'off',
     'react/jsx-one-expression-per-line': 0,
+    'react/jsx-max-props-per-line': [
+      2,
+      {
+        maximum: 1,
+      },
+    ],
     'react/jsx-props-no-spreading': 0,
     'react/jsx-uses-vars': [2],
     'react/no-did-mount-set-state': 0,
@@ -40,6 +48,8 @@ module.exports = {
     'react/prop-types': 'off', // Disable prop-types as we use TypeScript for type checking
     'react/react-in-jsx-scope': 0,
     'react/require-default-props': 0,
+    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react-hooks/rules-of-hooks': 'warn', // Checks rules of Hooks
   },
   settings: {
     // 'import/core-modules': ['react', 'prop-types']
@@ -48,7 +58,8 @@ module.exports = {
     }
   },
   globals: {
-    graphql: true
+    __PATH_PREFIX__: true,
+    graphql: true,
   },
   overrides: [
     {

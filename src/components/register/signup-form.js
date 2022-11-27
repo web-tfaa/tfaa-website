@@ -1,9 +1,11 @@
 // External Dependencies
-import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
-import React, { useEffect, useReducer, useState } from 'react';
+import { Box, Button } from '@mui/material';
 import { navigate } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+import PropTypes from 'prop-types';
+import React, {
+  useCallback, useEffect, useReducer, useState
+} from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import AuthUserContext from '../session/AuthUserContext';
@@ -23,41 +25,52 @@ const defaultProps = {
   onRegisterSignUp: null,
 };
 
-const useStyles = makeStyles({
-  button: {
+const StyledForm = styled.form(({ theme }) => ({
+  '.bottomLabel': {
+    marginTop: theme.spacing(2),
+  },
+
+  '.button': {
     fontFamily: 'Futura PT, Roboto',
   },
-  buttonContainer: {
+
+  '.buttonContainer': {
     display: 'flex',
     justifyContent: 'flex-end',
     maxWidth: '70%',
   },
-});
 
-const labelStyles = {
-  display: 'block',
-  fontSize: '67.5%',
-  letterSpacing: '0.125em',
-  textTransform: 'uppercase',
-};
+  '.error': {
+    color: theme.palette.error.main,
+    fontFamily: options.headerFontFamily.join(','),
+    marginTop: '0.5rem',
+  },
 
-const bottomLabelStyles = {
-  ...labelStyles,
-  marginTop: 16,
-};
+  '.regsiterError': {
+    color: theme.palette.error.main,
+    fontFamily: options.headerFontFamily.join(','),
+    fontWeight: 500,
+    margin: theme.spacing(2, 0),
+  },
 
-const inputStyles = {
-  display: 'block',
-  fontSize: '1rem',
-  minWidth: '70%',
-  padding: '0.3rem',
-};
+  '.visibilityIcon': {
+    margin: '27px 0 0 12px',
+  },
 
-const baseErrorStyles = {
-  color: 'red',
-  fontFamily: options.headerFontFamily.join(','),
-  marginTop: '0.5rem',
-};
+  input: {
+    display: 'block',
+    fontSize: '1rem',
+    minWidth: '70%',
+    padding: '0.3rem',
+  },
+
+  label: {
+    display: 'block',
+    fontSize: '67.5%',
+    letterSpacing: '0.125em',
+    textTransform: 'uppercase',
+  },
+}));
 
 const SIGNUP_FORM_REDUCER_INITIAL_STATE = {
   email: '',
@@ -83,8 +96,6 @@ function signupFormReducer(state, { type, payload }) {
 
 // Component Definition
 const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
-  const classes = useStyles();
-
   const isMounted = useIsMounted();
 
   const [registerError, setRegisterError] = useState('');
@@ -103,7 +114,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         dispatchState({ type: 'clearForm' });
       }
     };
-  }, []);
+  }, [isMounted]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -142,7 +153,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
     }
   };
 
-  const handleUpdateErrors = () => {
+  const handleUpdateErrors = useCallback(() => {
     if (isMounted) {
       const hasInput = passwordOne !== '' && passwordTwo !== '';
 
@@ -156,15 +167,15 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         setRegisterError('');
       }
     }
-  };
+  }, [isMounted, passwordOne, passwordTwo]);
 
   useEffect(() => {
     if (isMounted && previousState !== state) {
       handleUpdateErrors();
     }
-  }, [state]);
+  }, [handleUpdateErrors, isMounted, previousState, state]);
 
-  const handleUpdate = (event) => {
+  const handleUpdate = useCallback((event) => {
     if (isMounted) {
       dispatchState({
         type: 'updateForm',
@@ -173,7 +184,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         },
       });
     }
-  };
+  }, [isMounted]);
 
   const hasInput = passwordOne !== '' && passwordTwo !== '' && email !== '';
   const isInvalid = !hasInput || Boolean(registerError || emailError);
@@ -183,11 +194,15 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
   };
 
   return (
-    <form key="signup-form" onSubmit={handleSubmit}>
-      <label css={labelStyles} htmlFor="email">
+    <StyledForm
+      key="signup-form"
+      onSubmit={handleSubmit}
+    >
+      <label
+        htmlFor="email"
+      >
         Email Address
         <input
-          css={inputStyles}
           name="email"
           onChange={handleUpdate}
           placeholder="Email Address"
@@ -195,18 +210,20 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
           value={email}
         />
       </label>
-      <div css={baseErrorStyles}>{emailError}</div>
-      <div
-        css={{
-          alignItems: 'center',
-          display: 'flex',
-          marginBottom: 16,
-        }}
+
+      <div className="error">{emailError}</div>
+
+      <Box
+        alignItems="center"
+        display="flex"
+        marginBottom={2}
       >
-        <label css={bottomLabelStyles} htmlFor="passwordOne">
+        <label
+          className="bottomLabel"
+          htmlFor="passwordOne"
+        >
           Password
           <input
-            css={inputStyles}
             id="passwordOne"
             name="passwordOne"
             onChange={handleUpdate}
@@ -215,21 +232,22 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
             value={passwordOne}
           />
         </label>
-        <div css={{ margin: '27px 0 0 12px' }}>
+        <div className="visibilityIcon">
           <RemoveRedEyeIcon onClick={toggleRegisterPasswordInput} />
         </div>
-      </div>
-      <div
-        css={{
-          alignItems: 'center',
-          display: 'flex',
-          marginBottom: 16,
-        }}
+      </Box>
+
+      <Box
+        alignItems="center"
+        display="flex"
+        marginBottom={2}
       >
-        <label css={bottomLabelStyles} htmlFor="passwordTwo">
+        <label
+          className="bottomLabel"
+          htmlFor="passwordTwo"
+        >
           Confirm Password
           <input
-            css={inputStyles}
             id="passwordTwo"
             name="passwordTwo"
             onChange={handleUpdate}
@@ -238,26 +256,20 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
             value={passwordTwo}
           />
         </label>
-      </div>
-      <div css={baseErrorStyles}>{registerError}</div>
+      </Box>
+
+      <div className="error">{registerError}</div>
 
       {error && (
-        <div
-          css={{
-            color: 'red',
-            fontFamily: options.headerFontFamily.join(','),
-            fontWeight: 500,
-            margin: '16px 0',
-          }}
-        >
+        <div className="regsiterError">
           {error.message}
         </div>
       )}
 
       {/* SUBMIT BUTTON */}
-      <div className={classes.buttonContainer}>
+      <div className="buttonContainer">
         <Button
-          className={classes.button}
+          className="button"
           color="primary"
           disabled={isInvalid}
           onClick={handleClickSignUpButton}
@@ -267,7 +279,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
           Sign Up
         </Button>
       </div>
-    </form>
+    </StyledForm>
   );
 };
 
@@ -276,7 +288,12 @@ SignUpForm.defaultProps = defaultProps;
 
 const SignUpFormWithContext = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => <SignUpForm {...props} isAuthenticated={!!authUser} />}
+    {(authUser) => (
+      <SignUpForm
+        {...props}
+        isAuthenticated={!!authUser}
+      />
+    )}
   </AuthUserContext.Consumer>
 );
 

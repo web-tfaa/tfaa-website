@@ -4,17 +4,17 @@ import {
   Collapse,
   FormControl,
   FormControlLabel,
-  Link,
   Radio,
   RadioGroup,
   Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+} from '@mui/material';
+import { Link } from 'gatsby-theme-material-ui';
 import React, {
-  FC, ReactInstance, useEffect, useRef, useState
+  FC, ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { SponsorFormValues } from '../../pages/sponsors/register';
@@ -24,6 +24,7 @@ import {
   doUpdateInvoiceId as updateFirestoreInvoiceId,
 } from '../../firebase/db';
 import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
+import { classChampionAlreadySecured } from './register-sponsor-form';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import FormHr from '../shared/form-hr';
 import Invoice from './invoice';
@@ -38,15 +39,18 @@ interface Props {
 }
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  changeLevelLink: {
+const StyledRoot = styled.section(({ theme }) => ({
+  '.changeLevelLink': {
     cursor: 'pointer',
   },
-  classChampionRadioLabelRoot: {
+  '.disabledText': {
+    color: theme.palette.text.disabled,
+  },
+  '.classChampionRadioLabelRoot': {
     alignItems: 'flex-start',
     display: 'flex',
   },
-  radioButtonLabel: {
+  '.radioButtonLabel': {
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
@@ -66,8 +70,6 @@ const RegisterSponsorPayment: FC<Props> = ({
   onUpdateSponsorForm,
   sponsorForm,
 }) => {
-  const classes = useStyles();
-
   const {
     invoiceId,
     receiptId,
@@ -84,16 +86,16 @@ const RegisterSponsorPayment: FC<Props> = ({
     setShowSponsorLevelOptions,
   ] = useState(false);
 
-  const handleToggleSponsorLevelOptions = () => {
+  const handleToggleSponsorLevelOptions = useCallback(() => {
     setShowSponsorLevelOptions(!showSponsorLevelOptions);
-  };
+  }, [showSponsorLevelOptions]);
 
-  const handleGetCurrentInvoiceId = (currentInvoiceId: number) => {
+  const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
     onUpdateSponsorForm({
       ...sponsorForm,
       invoiceId: currentInvoiceId,
     });
-  };
+  }, [onUpdateSponsorForm, sponsorForm]);
 
   useEffect(() => {
     // On unmount
@@ -121,7 +123,14 @@ const RegisterSponsorPayment: FC<Props> = ({
       );
       onUpdateSponsorForm(updatedForm);
     }
-  }, [invoiceId, previousInvoiceId]);
+  }, [
+    authenticatedUserId,
+    handleGetCurrentInvoiceId,
+    invoiceId,
+    onUpdateSponsorForm,
+    previousInvoiceId,
+    sponsorForm,
+  ]);
 
   // We want to record the newest receiptId in the Firestore database
   useEffect(() => {
@@ -139,9 +148,9 @@ const RegisterSponsorPayment: FC<Props> = ({
       );
       onUpdateSponsorForm(updatedForm);
     }
-  }, [previousReceiptId, receiptId]);
+  }, [authenticatedUserId, onUpdateSponsorForm, previousReceiptId, receiptId, sponsorForm]);
 
-  const handleChangeSponsorLevelOnPaymentStep = (event) => {
+  const handleChangeSponsorLevelOnPaymentStep = useCallback((event) => {
     const {
       value: newSponsorLevel,
     } = event.target;
@@ -165,10 +174,10 @@ const RegisterSponsorPayment: FC<Props> = ({
       authenticatedUserId,
     );
     onUpdateSponsorForm(updatedForm);
-  };
+  }, [authenticatedUserId, onUpdateSponsorForm, sponsorForm]);
 
   return (
-    <section>
+    <StyledRoot>
       <h2>3. Confirm Sponsor Level and send payment</h2>
 
       <FormHr />
@@ -179,7 +188,10 @@ const RegisterSponsorPayment: FC<Props> = ({
             <h3>Sponsor Level</h3>
           </Box>
 
-          <FormControl component="fieldset" style={{ marginLeft: 24 }}>
+          <FormControl
+            component="fieldset"
+            style={{ marginLeft: 24 }}
+          >
             <EnhancedAlert>
               <strong>{sponsorForm.SponsorLevel}</strong>
 
@@ -196,9 +208,12 @@ const RegisterSponsorPayment: FC<Props> = ({
               </Typography>
             </EnhancedAlert>
 
-            <Box mt={2} mb={showSponsorLevelOptions ? 2 : 0}>
+            <Box
+              mt={2}
+              mb={showSponsorLevelOptions ? 2 : 0}
+            >
               <Link
-                className={classes.changeLevelLink}
+                className="changeLevelLink"
                 onClick={handleToggleSponsorLevelOptions}
                 underline="always"
               >
@@ -213,7 +228,7 @@ const RegisterSponsorPayment: FC<Props> = ({
               <FormControl component="fieldset">
                 {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                 <label
-                  className={classes.radioButtonLabel}
+                  className="radioButtonLabel"
                   htmlFor="SponsorLevel"
                 >
                   Sponsor Level*
@@ -258,18 +273,25 @@ const RegisterSponsorPayment: FC<Props> = ({
                       value={SPONSORSHIP_LEVELS.GOLD_MEDAL}
                     />
                     <FormControlLabel
-                      className={classes.classChampionRadioLabelRoot}
+                      className="classChampionRadioLabelRoot"
                       control={(
-                        <Box clone mb={4}>
-                          <Radio size="small" />
+                        <Box mb={4}>
+                          <Radio
+                            disabled={classChampionAlreadySecured}
+                            size="small"
+                          />
                         </Box>
                       )}
                       label={(
                         <>
-                          <Typography component="span">
+                          <Typography
+                            className={classChampionAlreadySecured ? 'disabledText' : ''}
+                            component="span"
+                          >
                             {SPONSORSHIP_LEVELS.CLASS_CHAMPION}
                           </Typography>
                           <Typography
+                            className={classChampionAlreadySecured ? 'disabledText' : ''}
                             color="textSecondary"
                             component="span"
                             variant="body2"
@@ -314,7 +336,7 @@ const RegisterSponsorPayment: FC<Props> = ({
               )}
             />
 
-            <div css={{ display: 'none' }}>
+            <Box display="none">
               <Invoice
                 amount={sponsorForm.AmountDonated}
                 form={sponsorForm}
@@ -324,7 +346,7 @@ const RegisterSponsorPayment: FC<Props> = ({
                 sponsorLevel={sponsorForm.SponsorLevel}
                 sponsorOrganizationName={sponsorForm.SponsorOrganization}
               />
-            </div>
+            </Box>
 
             <Box mt={3}>
               If your organization requires the IRS W-9 Form for TMAC,
@@ -342,7 +364,7 @@ const RegisterSponsorPayment: FC<Props> = ({
           </Box>
         </div>
       </div>
-    </section>
+    </StyledRoot>
   );
 };
 

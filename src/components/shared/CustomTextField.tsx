@@ -1,6 +1,6 @@
 // External Dependencies
 import { FormikHandlers, useField, useFormikContext } from 'formik';
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 import React, { FC, useEffect } from 'react';
 
 // Internal Dependencies

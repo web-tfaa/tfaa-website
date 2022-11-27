@@ -34,6 +34,9 @@ export const registerMemberSchema = yup.object({
     .string()
     .trim()
     .required('Last Name is required'),
+  NewToTMAC: yup
+    .boolean()
+    .required(),
   OfficePhone: yup
     .string()
     .trim()

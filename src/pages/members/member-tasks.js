@@ -1,11 +1,11 @@
 // External Dependencies
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import CheckIcon from '@material-ui/icons/Check';
+import { green, red } from '@mui/material/colors';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import CheckIcon from '@mui/icons-material/Check';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
-import { green, red } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/styles';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Card from '../../components/shared/cards/card';
@@ -44,11 +44,11 @@ const defaultProps = {
   currentUser: null,
 };
 
-const useStyles = makeStyles((theme) => ({
-  buttonContainer: {
+const StyledCard = styled(Card)(({ theme }) => ({
+  '.buttonContainer': {
     marginTop: theme.spacing(2),
   },
-  hidden: {
+  '.hidden': {
     display: 'none',
   },
 }));
@@ -58,8 +58,6 @@ const MemberTasks = ({
   currentUser,
   isRegisteredForCurrentYear,
 }) => {
-  const classes = useStyles();
-
   const printInvoiceRef = useRef();
   const printReceiptRef = useRef();
 
@@ -74,7 +72,7 @@ const MemberTasks = ({
       <h5>Need a copy of your invoice?</h5>
       If you need to pay via invoice please send payment to the TMAC Treasurer as indicated on your
       invoice.
-      <div className={classes.buttonContainer}>
+      <div className="buttonContainer">
         <ReactToPrint
           content={() => printInvoiceRef.current}
           trigger={() => <RegisterButton green>Print Invoice</RegisterButton>}
@@ -102,7 +100,7 @@ const MemberTasks = ({
 
       <h5>Need a copy of your receipt?</h5>
 
-      <div className={classes.buttonContainer}>
+      <div className="buttonContainer">
         <ReactToPrint
           content={() => printReceiptRef.current}
           trigger={() => (
@@ -113,7 +111,7 @@ const MemberTasks = ({
         />
       </div>
 
-      <div className={classes.hidden}>
+      <div className="hidden">
         <Invoice
           amount={currentUser.AmountPaid}
           form={currentUser}
@@ -131,7 +129,7 @@ const MemberTasks = ({
   const isPaypal = currentUser && currentUser.PaymentOption.toLowerCase() === 'paypal';
 
   return (
-    <Card>
+    <StyledCard>
       <CardSubtitle>
         Tasks for {currentSchoolYearLong} school year
       </CardSubtitle>
@@ -172,7 +170,7 @@ const MemberTasks = ({
           </FuturaAnchor>
         </>
       )}
-    </Card>
+    </StyledCard>
   );
 };
 

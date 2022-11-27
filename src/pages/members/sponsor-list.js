@@ -1,9 +1,9 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 // import Alert from '../../components/shared/Alert';
@@ -30,21 +30,21 @@ const defaultProps = {
   userEmail: '',
 };
 
-const useStyles = makeStyles((theme) => ({
-  adminCard: {
+const StyledRoot = styled.div(({ theme }) => ({
+  '.adminCard': {
     borderLeft: `4px solid ${theme.palette.alert.info}`,
     maxWidth: '75%',
   },
-  paddingContainer: {
+  '.paddingContainer': {
     paddingLeft: 24,
   },
-  root: {
+
+  [presets.Tablet]: {
     paddingLeft: 0,
-    width: '0 auto',
-    [presets.Tablet]: {
-      paddingLeft: 0,
-    },
   },
+
+  paddingLeft: 0,
+  width: '0 auto',
 }));
 
 // Component Definition
@@ -52,8 +52,6 @@ const SponsorListContent = ({
   isAuthenticated,
   userEmail,
 }) => {
-  const classes = useStyles();
-
   const [userData, setUserData] = useState([]);
 
   const handleUpdateUserList = (userList) => {
@@ -79,14 +77,14 @@ const SponsorListContent = ({
   }
 
   return (
-    <div className={classes.root}>
+    <StyledRoot>
       <Status />
 
       <Helmet>
         <title>TMAC | Sponsor List</title>
       </Helmet>
 
-      <div className={classes.paddingContainer}>
+      <div className="paddingContainer">
         <h2>Sponsor list</h2>
 
         {shouldSeeSponsorListLink && (
@@ -103,7 +101,7 @@ const SponsorListContent = ({
           isAdmin={shouldSeeSponsorListLink}
         />
       </div>
-    </div>
+    </StyledRoot>
   );
 };
 

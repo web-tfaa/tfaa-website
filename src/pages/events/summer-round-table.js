@@ -1,33 +1,30 @@
 // External Dependencies
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { FC } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // Internal Dependencies
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-import presets from '../../utils/presets';
 import { useEventData } from '../../utils/hooks/useEventData';
 
 // Sidebar data
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  description: {
-    marginLeft: theme.spacing(2),
+const StyledContainer = styled(Container)(({ theme }) => ({
+  '.description': {
     marginLeft: theme.spacing(2),
   },
 }));
 
 // Component Definition
 const SummerRoundTable = ({ location }) => {
-  const classes = useStyles();
-
   const { edges } = useEventData();
 
   const summerRoundTable = edges.find((e) =>
@@ -45,7 +42,7 @@ const SummerRoundTable = ({ location }) => {
         <title>TMAC | Summer Round Table</title>
       </Helmet>
 
-      <Container>
+      <StyledContainer>
         <h1>{titleOfEvent}</h1>
 
         {/* <EnhancedAlert severity="info">
@@ -67,7 +64,7 @@ const SummerRoundTable = ({ location }) => {
         <section>
           <h4>Where</h4>
 
-          <div className={classes.description}>
+          <div className="description">
             <address>
               <div>Room CC210</div>
               <a
@@ -114,27 +111,20 @@ const SummerRoundTable = ({ location }) => {
         <section>
           <h4>Who</h4>
 
-          <Box component="p" ml={2}>New music administrators are encouraged to attend!</Box>
+          <Box
+            component="p"
+            ml={2}
+          >New music administrators are encouraged to attend!
+          </Box>
         </section>
 
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
+        <MobileDivider>
+          <SidebarBody
+            inline
+            yaml={eventsSidebar}
           />
-          <SidebarBody inline yaml={eventsSidebar} />
-        </div>
-      </Container>
+        </MobileDivider>
+      </StyledContainer>
     </Layout>
   );
 };

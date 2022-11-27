@@ -2,15 +2,14 @@
 import {
   Box,
   CircularProgress,
-} from '@material-ui/core';
-import { Link } from 'gatsby';
+} from '@mui/material';
+import { Link } from 'gatsby-theme-material-ui';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 
 // Internal Dependencies
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Cards from '../../components/shared/cards';
-import presets from '../../utils/presets';
 import {
   ADMIN_USER_EMAIL_LIST,
   TMAC_WEB_EXECUTIVE_SECRETARY,
@@ -24,6 +23,7 @@ import MemberTasks from './member-tasks';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Variables
@@ -65,19 +65,26 @@ const MemberContent = ({
     }
   }, [authUser]);
 
-  const isRegisteredForCurrentYear = useMemo(() =>
-    (!currentMemberList?.length ? false
-      : currentMemberList?.some(
-        (member) => member.userId === userId,
-      )),
-  [currentMemberList, userId]);
+  const isRegisteredForCurrentYear = useMemo(
+    () =>
+      (!currentMemberList?.length ? false
+        : currentMemberList?.some(
+          (member) => member.userId === userId,
+        )),
+    [currentMemberList, userId]
+  );
 
   const currentUser = currentMemberList?.find(
     (member) => member.userId === userId,
   );
 
   if (isLoadingUserData) {
-    return <CircularProgress size={64} thickness={4} />;
+    return (
+      <CircularProgress
+        size={64}
+        thickness={4}
+      />
+    );
   }
 
   const isAdmin = authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email);
@@ -128,28 +135,20 @@ const MemberContent = ({
 
       {shouldSeeSponsorListLink
         ? (
-          <Box component="p" mt={4}>
+          <Box
+            component="p"
+            mt={4}
+          >
             View the <Link to="/members/sponsor-list">Sponsors</Link> for this year.
           </Box>
         ) : null}
 
-      <div
-        css={{
-          display: 'block',
-          [presets.Tablet]: {
-            display: 'none',
-          },
-        }}
-      >
-        <hr
-          css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }}
+      <MobileDivider>
+        <SidebarBody
+          inline
+          yaml={membersSidebar}
         />
-        <SidebarBody inline yaml={membersSidebar} />
-      </div>
+      </MobileDivider>
     </div>
   );
 };

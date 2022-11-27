@@ -1,5 +1,8 @@
 // Give gatsby access to env keys
-require('dotenv').config({
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require('dotenv');
+
+dotenv.config({
   path: '.env',
 });
 
@@ -10,25 +13,8 @@ module.exports = {
     description: 'Website for the Texas Music Administrators Conference',
   },
   plugins: [
-    'gatsby-plugin-top-layout',
-    {
-      resolve: 'gatsby-plugin-material-ui',
-      // If you want to use styled components, in conjunction to Material-UI, you should:
-      // - Change the injection order
-      // - Add the plugin
-      options: {
-        // stylesProvider: {
-        //   injectFirst: true,
-        // },
-      },
-    },
-    {
-      resolve: '@sentry/gatsby',
-      options: {
-        dsn: 'https://91ab83b9f539459bb8a11d56ad3bbf2e@o619843.ingest.sentry.io/5751393',
-        sampleRate: 0.7,
-      },
-    },
+    'gatsby-theme-material-ui',
+    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-source-contentful',
       options: {
@@ -36,7 +22,6 @@ module.exports = {
         accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    'gatsby-plugin-glamor',
     {
       resolve: 'gatsby-plugin-typography',
       options: {
@@ -51,6 +36,10 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-typescript',
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
+    {
+      resolve: '@sentry/gatsby',
+    },
   ],
 };

@@ -1,12 +1,14 @@
 // External Dependencies
+import {
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Tooltip,
+} from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles, withStyles } from '@material-ui/styles';
+import React, { useCallback } from 'react';
+import styled from 'styled-components';
 
 // Local Variables
 const propTypes = {
@@ -16,11 +18,19 @@ const propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const useStyles = makeStyles({
-  active: {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  '.active': {
     fontWeight: 700,
   },
-});
+
+  '&:first-child': {
+    paddingLeft: 24,
+  },
+
+  backgroundColor: theme.palette.table.header,
+  color: theme.palette.common.black,
+  fontWeight: 500,
+}));
 
 const rows = [
   { id: 'FirstName', disablePadding: true, label: 'First Name' },
@@ -30,24 +40,6 @@ const rows = [
   { id: 'Email', disablePadding: false, label: 'Email' },
 ];
 
-// Local Components
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: '#EDF2F8',
-    color: theme.palette.common.black,
-    fontWeight: 500,
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-  body: {
-    fontSize: 14,
-    '&:first-child': {
-      paddingLeft: 24,
-    },
-  },
-}))(TableCell);
-
 // Component Definition
 const MemberTableHead = ({
   isAdmin,
@@ -55,11 +47,9 @@ const MemberTableHead = ({
   order,
   orderBy,
 }) => {
-  const classes = useStyles();
-
-  const createSortHandler = (property) => (event) => {
+  const createSortHandler = useCallback((property) => (event) => {
     onRequestSort(event, property);
-  };
+  }, [onRequestSort]);
 
   if (isAdmin && rows.length === 5) {
     rows.push(
@@ -83,7 +73,7 @@ const MemberTableHead = ({
             >
               <TableSortLabel
                 active={orderBy === row.id}
-                classes={{ active: classes.active }}
+                classes={{ active: 'active' }}
                 direction={order}
                 disabled={row.id === 'Actions'}
                 onClick={createSortHandler(row.id)}

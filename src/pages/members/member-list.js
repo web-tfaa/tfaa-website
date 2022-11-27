@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import styled from 'styled-components';
 
 // Internal Dependencies
 // import Alert from '../../components/shared/Alert';
@@ -26,22 +26,18 @@ const defaultProps = {
   userEmail: '',
 };
 
-const useStyles = makeStyles((theme) => ({
-  adminCard: {
-    borderLeft: `4px solid ${theme.palette.alert.info}`,
-    maxWidth: '75%',
-  },
-  paddingContainer: {
+const StyledRoot = styled.div({
+  '.paddingContainer': {
     paddingLeft: 24,
   },
-  root: {
+
+  [presets.Tablet]: {
     paddingLeft: 0,
-    width: '0 auto',
-    [presets.Tablet]: {
-      paddingLeft: 0,
-    },
   },
-}));
+
+  paddingLeft: 0,
+  width: '0 auto',
+});
 
 const EMPTY_ARRAY = [];
 
@@ -50,8 +46,6 @@ const MemberListContent = ({
   isAuthenticated,
   userEmail,
 }) => {
-  const classes = useStyles();
-
   const [userData, setUserData] = useState(EMPTY_ARRAY);
 
   const handleUpdateUserList = (userList) => {
@@ -71,14 +65,14 @@ const MemberListContent = ({
   const isAdmin = userEmail && ADMIN_USER_EMAIL_LIST.includes(userEmail);
 
   return (
-    <div className={classes.root}>
+    <StyledRoot>
       <Status />
 
       <Helmet>
         <title>TMAC | Member List</title>
       </Helmet>
 
-      <div className={classes.paddingContainer}>
+      <div className="paddingContainer">
         <h2>Member list</h2>
         {isAdmin && (
           <EnhancedAlert
@@ -94,7 +88,7 @@ const MemberListContent = ({
           isAdmin={isAdmin}
         />
       </div>
-    </div>
+    </StyledRoot>
   );
 };
 

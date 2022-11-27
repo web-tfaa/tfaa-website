@@ -3,15 +3,11 @@
 // External Dependencies
 import {
   Box,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from '@material-ui/core';
-import React, { FC, useState } from 'react';
+} from '@mui/material';
+import React, { FC, useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
 import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import {
@@ -23,6 +19,7 @@ import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
 import { registerMemberSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
+import FormikCheckbox from '../shared/FormikCheckbox';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
 import RegisterButton from './register-button';
@@ -31,19 +28,17 @@ import RegisterButton from './register-button';
 interface Props {
   authenticatedUserId: string;
   initialMemberFormValues: MemberFormValues;
-  memberForm: MemberFormValues;
   onCompleteMemberStep: HandleCompleteMemberStepType;
-  onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
 }
 
 // Local Variables
-const useStyles = makeStyles({
-  honey: {
+const StyledRoot = styled.div({
+  '.honey': {
     height: 1,
     opacity: 0,
     width: 1,
   },
-  radioButtonLabel: {
+  '.radioButtonLabel': {
     display: 'block',
     fontSize: '90%',
     letterSpacing: '0.05rem',
@@ -60,28 +55,18 @@ const FIRESTORE_MEMBER_COLLECTION = 'registration';
 const RegisterMemberForm: FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
-  memberForm,
   onCompleteMemberStep,
-  onUpdateMemberForm,
 }) => {
-  const classes = useStyles();
-
   // We use this to show a loading indicator when switching to Step 3
   const [
     hasCompletedMemberRegisterForm,
     setHasCompletedMemberRegisterForm,
   ] = useState(false);
 
-  if (!authenticatedUserId) {
-    return null;
-  }
-
-  const { NewToTMAC } = memberForm;
-
-  const handleCompleteMemberInfoStep = (updatedMemberForm: MemberFormValues) => {
+  const handleCompleteMemberInfoStep = useCallback((updatedMemberForm: MemberFormValues) => {
     setHasCompletedMemberRegisterForm(true);
     onCompleteMemberStep(1, updatedMemberForm);
-  };
+  }, [onCompleteMemberStep]);
 
   const handleClickSubmitButton = async (values: MemberFormValues) => {
     if (!authenticatedUserId) {
@@ -91,19 +76,21 @@ const RegisterMemberForm: FC<Props> = ({
     // Make copy of values
     const updatedValues = values;
 
-    // Right here we should delete any values that we
-    //  don't need in the synced Google Sheet
-    delete updatedValues.honeypot;
-
-    // Send phone values in formatted
+    // Format phone values
     updatedValues.OfficePhone = formatPhone(updatedValues.OfficePhone);
     updatedValues.CellPhone = formatPhone(updatedValues.CellPhone);
 
-    // The userId is needed to sync the Google Sheet with the Firestore DB
     const updatedMemberFormWithUserId = {
       ...updatedValues,
+      // Convert NewToTMAC to Yes/No string
+      NewToTMAC: values.NewToTMAC ? 'Yes' : 'No',
+      // The userId is needed to sync the Google Sheet with the Firestore DB
       userId: authenticatedUserId,
     };
+
+    // We delete any values that we
+    //  don't need in the synced Google Sheet
+    delete updatedValues.honeypot;
 
     try {
       await doCreateEntry(
@@ -115,15 +102,6 @@ const RegisterMemberForm: FC<Props> = ({
     } catch (error) {
       logError('handleClickSubmitButton error in RegisterMemberForm', error);
     }
-  };
-
-  const handleChangeNewToTMAC = (event) => {
-    const { value: updatedNewToTMACVAlue } = event.target;
-
-    onUpdateMemberForm({
-      ...memberForm,
-      NewToTMAC: updatedNewToTMACVAlue,
-    });
   };
 
   if (!authenticatedUserId) {
@@ -140,11 +118,12 @@ const RegisterMemberForm: FC<Props> = ({
   }
 
   return (
-    <div className="login-form">
+    <StyledRoot className="login-form">
       <Formik
+        enableReinitialize
         initialValues={initialMemberFormValues}
-        validationSchema={registerMemberSchema}
         onSubmit={handleClickSubmitButton}
+        validationSchema={registerMemberSchema}
       >
         {({
           errors,
@@ -320,40 +299,24 @@ const RegisterMemberForm: FC<Props> = ({
                   label="Cell Phone*"
                   name="CellPhone"
                   onBlur={handleBlur}
-                  // onChange={handleChange}
                   type="tel"
                   value={values.CellPhone}
                 />
               </Box>
 
-              <FormControl component="fieldset">
-                {/* eslint-disable-next-line */}
-                <label className={classes.radioButtonLabel} htmlFor="NewToTMAC">
-                  New To TMAC*
-                  <RadioGroup
-                    aria-label="NewToTMAC"
-                    name="NewToTMAC"
-                    onChange={handleChangeNewToTMAC}
-                    value={NewToTMAC}
-                  >
-                    <FormControlLabel
-                      control={<Radio size="small" />}
-                      label="Yes"
-                      value="Yes"
-                    />
-                    <FormControlLabel
-                      control={<Radio size="small" />}
-                      label="No"
-                      value="No"
-                    />
-                  </RadioGroup>
-                </label>
-              </FormControl>
+              <FormikCheckbox
+                inputProps={{
+                  'aria-label': 'New To TMAC',
+                }}
+                label="New To TMAC?"
+                name="NewToTMAC"
+                onChange={handleChange}
+              />
 
               {/* Hidden input to help curtail spam */}
               <input
                 aria-label="hidden input"
-                className={classes.honey}
+                className="honey"
                 id="honeypot"
                 name="honeypot"
                 onChange={handleChange}
@@ -370,12 +333,11 @@ const RegisterMemberForm: FC<Props> = ({
                 }}
               >
                 <Box
-                  clone
                   mb={2.5}
                   mt={1}
                   width="100%"
                 >
-                  <EnhancedAlert severity={hasTouchedform && hasErrors ? 'error' : 'info'}>
+                  <EnhancedAlert severity={hasTouchedform && hasErrors ? 'warning' : 'info'}>
                     Please make sure all required fields above are completed.
                   </EnhancedAlert>
                 </Box>
@@ -391,7 +353,7 @@ const RegisterMemberForm: FC<Props> = ({
           );
         }}
       </Formik>
-    </div>
+    </StyledRoot>
   );
 };
 

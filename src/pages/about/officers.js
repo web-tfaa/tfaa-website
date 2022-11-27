@@ -1,4 +1,5 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,8 +12,8 @@ import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-import presets from '../../utils/presets';
 import { useOfficerData } from '../../utils/hooks/useOfficerData';
 
 // Sidebar data
@@ -34,14 +35,14 @@ const Officers = ({ location }) => {
         <Helmet>
           <title>TMAC | Officers</title>
         </Helmet>
+
         <h2>TMAC Officers</h2>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}
+
+        <Box
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="space-between"
         >
           <Cards>
             <Card>
@@ -124,25 +125,14 @@ const Officers = ({ location }) => {
               </FuturaParagraph>
             </Card>
           </Cards>
-          {/* Mobile sidebar */}
-          <div
-            css={{
-              display: 'block',
-              [presets.Tablet]: {
-                display: 'none',
-              },
-            }}
-          >
-            <hr
-              css={{
-                border: 0,
-                height: 2,
-                marginTop: 10,
-              }}
+
+          <MobileDivider>
+            <SidebarBody
+              inline
+              yaml={aboutSidebar}
             />
-            <SidebarBody inline yaml={aboutSidebar} />
-          </div>
-        </div>
+          </MobileDivider>
+        </Box>
       </Container>
     </Layout>
   );

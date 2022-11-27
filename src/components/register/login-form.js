@@ -1,12 +1,17 @@
 // External Dependencies
-import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
-import React, { useEffect, useReducer, useState } from 'react';
+import {
+  Button, IconButton, InputAdornment, TextField,
+} from '@mui/material';
 import { navigate } from 'gatsby';
-import { makeStyles } from '@material-ui/styles';
+import PropTypes from 'prop-types';
+import React, {
+  useCallback, useEffect, useReducer, useState
+} from 'react';
+import styled from 'styled-components';
+import VisiblityIcon from '@mui/icons-material/Visibility';
+import VisiblityOffIcon from '@mui/icons-material/VisibilityOff';
 
 // Internal Dependencies
-import RemoveRedEyeIcon from '../shared/RemoveRedEyeIcon';
 import useIsMounted from '../../utils/hooks/useIsMounted';
 import usePrevious from '../../utils/hooks/usePrevious';
 import { auth } from '../../firebase';
@@ -21,42 +26,47 @@ const defaultProps = {
   onRegisterLogin: null,
 };
 
-const useStyles = makeStyles({
-  button: {
+const StyledRoot = styled.div(({ theme }) => ({
+  '.button': {
     fontFamily: 'Futura PT, Roboto',
   },
-  buttonContainer: {
+
+  '.buttonContainer': {
     display: 'flex',
     justifyContent: 'flex-end',
     maxWidth: '70%',
   },
-});
 
-const labelStyles = {
-  display: 'block',
-  fontSize: '90%',
-  letterSpacing: '0.1rem',
-  marginTop: 16,
-  textTransform: 'uppercase',
-};
+  '.error-message': {
+    color: theme.palette.error.main,
+    fontFamily: options.headerFontFamily.join(','),
+    margin: theme.spacing(2, 0),
+  },
 
-const bottomLabelStyles = {
-  ...labelStyles,
-  marginTop: 16,
-};
+  '.icon-button-container': {
+    margin: '30px 0 0 12px',
+  },
 
-const inputStyles = {
-  display: 'block',
-  fontSize: '1rem',
-  minWidth: '70%',
-  padding: '0.3rem',
-};
+  '.password-container': {
+    alignItems: 'center',
+    display: 'flex',
+    marginBottom: theme.spacing(2),
+  },
 
-const baseErrorStyles = {
-  color: 'red',
-  fontFamily: options.headerFontFamily.join(','),
-  marginTop: '0.5rem',
-};
+  '.input': {
+    display: 'block',
+    fontSize: '1rem',
+    minWidth: '70%',
+  },
+
+  '.label': {
+    display: 'block',
+    fontSize: '90%',
+    letterSpacing: '0.1rem',
+    marginTop: theme.spacing(2),
+    textTransform: 'uppercase',
+  },
+}));
 
 const LOGIN_FORM_REDUCER_INITIAL_STATE = {
   email: '',
@@ -82,12 +92,11 @@ function loginFormReducer(state, { type, payload }) {
 
 // Component Definition
 const LoginForm = ({ onRegisterLogin }) => {
-  const classes = useStyles();
-
   const isMounted = useIsMounted();
 
   const [passwordError, setPasswordError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [state, dispatchState] = useReducer(loginFormReducer, LOGIN_FORM_REDUCER_INITIAL_STATE);
 
@@ -106,7 +115,7 @@ const LoginForm = ({ onRegisterLogin }) => {
         dispatchState({ type: 'clearForm' });
       }
     };
-  }, []);
+  }, [isMounted]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -114,7 +123,7 @@ const LoginForm = ({ onRegisterLogin }) => {
     }
   }, [isAuthenticated, onRegisterLogin]);
 
-  const handleClickSubmitButton = () => {
+  const handleClickSubmitButton = useCallback(() => {
     if (isMounted && typeof window !== 'undefined') {
       auth
         .doSignInWithEmailAndPassword(email, password)
@@ -131,16 +140,9 @@ const LoginForm = ({ onRegisterLogin }) => {
           });
         });
     }
-  };
+  }, [email, isMounted, password]);
 
-  const togglePasswordInput = () => {
-    const pass = document.getElementById('showhide');
-
-    if (pass.type === 'password') pass.setAttribute('type', 'text');
-    else pass.setAttribute('type', 'password');
-  };
-
-  const handleUpdateLoginPasswordError = () => {
+  const handleUpdateLoginPasswordError = useCallback(() => {
     if (isMounted) {
       const hasInput = password !== '';
 
@@ -152,15 +154,15 @@ const LoginForm = ({ onRegisterLogin }) => {
         setPasswordError('');
       }
     }
-  };
+  }, [isMounted, password]);
 
   useEffect(() => {
     if (isMounted && previousState !== state) {
       handleUpdateLoginPasswordError();
     }
-  }, [state]);
+  }, [handleUpdateLoginPasswordError, isMounted, previousState, state]);
 
-  const handleUpdate = (event) => {
+  const handleUpdate = useCallback((event) => {
     if (isMounted) {
       dispatchState({
         type: 'updateForm',
@@ -169,67 +171,71 @@ const LoginForm = ({ onRegisterLogin }) => {
         },
       });
     }
-  };
+  }, [isMounted]);
 
   const hasLoginInput = password !== '' && email !== '';
   const isLoginInvalid = !hasLoginInput || Boolean(emailError);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleClickShowPassword = () => {
+    setShowPassword((state) => !state);
   };
 
+  const handleSubmit = useCallback((event) => {
+    event.preventDefault();
+  }, []);
+
   return (
-    <div className="login-form">
+    <StyledRoot className="login-form">
       <form onSubmit={handleSubmit}>
-        <label css={labelStyles} htmlFor="email">
-          Email Address
-          <input
-            css={inputStyles}
-            name="email"
-            onChange={handleUpdate}
-            placeholder="Email Address"
-            type="email"
-            value={email}
-          />
-        </label>
-        <div
-          css={{
-            color: 'red',
-            fontFamily: options.headerFontFamily.join(','),
-            marginTop: 16,
-          }}
-        >
+        <TextField
+          autoComplete="username"
+          className="input"
+          id="username-login"
+          label="Email"
+          name="email"
+          onChange={handleUpdate}
+          placeholder="Email Address"
+          type="email"
+          value={email}
+          variant="outlined"
+        />
+        <div className="error-message">
           {emailError}
         </div>
-        <div
-          css={{
-            alignItems: 'center',
-            display: 'flex',
-            marginBottom: 16,
-          }}
-        >
-          <label css={bottomLabelStyles} htmlFor="password">
-            Password
-            <input
-              css={inputStyles}
-              id="showhide"
-              name="password"
-              onChange={handleUpdate}
-              placeholder="Password"
-              type="password"
-              value={password}
-            />
-          </label>
-          <div css={{ margin: '30px 0 0 12px' }}>
-            <RemoveRedEyeIcon onClick={togglePasswordInput} />
-          </div>
+
+        <div className="password-container">
+          <TextField
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    size="large"
+                  >
+                    {showPassword ? <VisiblityIcon /> : <VisiblityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            autoComplete="current-password"
+            className="input"
+            error={Boolean(passwordError)}
+            helperText={passwordError}
+            id="password-login"
+            name="password"
+            label="Password"
+            onChange={handleUpdate}
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            variant="outlined"
+          />
         </div>
-        <div css={baseErrorStyles}>{passwordError}</div>
 
         {/* SUBMIT BUTTON */}
-        <div className={classes.buttonContainer}>
+        <div className="buttonContainer">
           <Button
-            className={classes.button}
+            className="button"
             color="primary"
             disabled={isLoginInvalid}
             onClick={handleClickSubmitButton}
@@ -241,19 +247,12 @@ const LoginForm = ({ onRegisterLogin }) => {
         </div>
 
         {error && (
-          <div
-            css={{
-              color: 'red',
-              fontFamily: options.headerFontFamily.join(','),
-              fontWeight: 500,
-              margin: '16px 0',
-            }}
-          >
+          <div className="error-message">
             {error.message}
           </div>
         )}
       </form>
-    </div>
+    </StyledRoot>
   );
 };
 

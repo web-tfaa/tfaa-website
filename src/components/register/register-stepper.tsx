@@ -4,9 +4,9 @@ import {
   Step,
   StepLabel,
   Stepper,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
 // Local Typings
 interface Props {
@@ -34,13 +34,15 @@ function getSteps(
 }
 
 // Local Variables
-const useStyles = makeStyles((theme) => ({
-  stepLabel: {
+const StyledCard = styled(Card)(({ theme }) => ({
+  '.stepLabel': {
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.8rem',
     },
     fontSize: '0.9rem',
   },
+
+  padding: theme.spacing(1, 0),
 }));
 
 // Component Definition
@@ -49,11 +51,10 @@ const RegisterStepper: FC<Props> = ({
   isAuthenticated,
   isViewingSponsors = false,
 }) => {
-  const classes = useStyles();
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   return (
-    <Card variant="outlined">
+    <StyledCard variant="outlined">
       <Stepper
         activeStep={activeStep}
         alternativeLabel
@@ -62,7 +63,7 @@ const RegisterStepper: FC<Props> = ({
           <Step key={label}>
             <StepLabel
               classes={{
-                label: classes.stepLabel,
+                label: 'stepLabel',
               }}
             >
               {label}
@@ -70,7 +71,7 @@ const RegisterStepper: FC<Props> = ({
           </Step>
         ))}
       </Stepper>
-    </Card>
+    </StyledCard>
   );
 };
 

@@ -1,18 +1,19 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
-import Container from '../../components/shared/container';
-import FormHr from '../../components/shared/form-hr';
-import Layout from '../../components/layout';
-import presets, { colors } from '../../utils/presets';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 import { emailRegex } from '../../utils/helpers';
+import Container from '../../components/shared/container';
+import FormHr from '../../components/shared/form-hr';
+import Layout from '../../components/layout';
+import presets from '../../utils/presets';
 
 // Local Variables
 const propTypes = {
@@ -22,7 +23,41 @@ const propTypes = {
   ]).isRequired,
 };
 
-const texasFlagBlue = '#002868';
+const StyledRoot = styled.div(({ theme }) => ({
+  '.errorMessage': {
+    color: 'red',
+    fontFamily: options.headerFontFamily.join(','),
+    fontWeight: 500,
+    margin: theme.spacing(2, 0),
+  },
+
+  '.successMessage': {
+    background: theme.palette.loginStatus,
+    color: theme.palette.texasFlag.blue,
+    fontWeight: 500,
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(1),
+  },
+
+  '.title': {
+    margin: theme.spacing(3, 0),
+  },
+
+  input: {
+    display: 'block',
+    fontFamily: options.headerFontFamily.join(','),
+    fontSize: '1rem',
+    marginBottom: theme.spacing(3),
+    padding: '0.2rem',
+    width: 288,
+  },
+
+  [presets.Tablet]: {
+    paddingLeft: theme.spacing(3),
+  },
+
+  paddingLeft: 0,
+}));
 
 const INITIAL_STATE = {
   email: '',
@@ -45,6 +80,10 @@ class PasswordForgetForm extends Component {
     };
   }
 
+  handleRedirectToMembers = () => {
+    navigate('/members/login');
+  };
+
   onSubmit = (event) => {
     event.preventDefault();
 
@@ -66,10 +105,6 @@ class PasswordForgetForm extends Component {
       });
   };
 
-  handleRedirectToMembers = () => {
-    navigate('/members/login');
-  };
-
   render() {
     const {
       location,
@@ -86,51 +121,25 @@ class PasswordForgetForm extends Component {
     return (
       <Layout location={location}>
         <ReCaptchaProvider>
-          <div
-            css={{
-              paddingLeft: 0,
-              [presets.Tablet]: {
-                paddingLeft: '1.5rem',
-              },
-            }}
-          >
+          <StyledRoot>
             <Container className="password-forget">
               <Helmet>
                 <title>TMAC | Forgot Password</title>
               </Helmet>
-              <h2
-                css={{
-                  margin: '1rem 0',
-                }}
-              >
+
+              <h2 className="title">
                 Password Reset
               </h2>
 
               <FormHr />
 
               {showSuccessMessage && (
-                <div
-                  css={{
-                    background: colors.status,
-                    color: texasFlagBlue,
-                    fontWeight: 500,
-                    marginBottom: 16,
-                    padding: '0.5rem',
-                  }}
-                >
+                <div className="successMessage">
                   Check your email to reset your password!
                 </div>
               )}
               <form onSubmit={this.onSubmit}>
                 <input
-                  css={{
-                    display: 'block',
-                    fontFamily: options.headerFontFamily.join(','),
-                    fontSize: '1rem',
-                    marginBottom: 24,
-                    padding: '0.2rem',
-                    width: 288,
-                  }}
                   onChange={(event) =>
                     this.setState(
                       updateByPropertyName('email', event.target.value),
@@ -139,24 +148,22 @@ class PasswordForgetForm extends Component {
                   type="text"
                   value={email}
                 />
-                <button disabled={isInvalid} type="submit">
+
+                <button
+                  disabled={isInvalid}
+                  type="submit"
+                >
                   Reset My Password
                 </button>
+
                 {error && (
-                  <div
-                    css={{
-                      color: 'red',
-                      fontFamily: options.headerFontFamily.join(','),
-                      fontWeight: 500,
-                      margin: '16px 0',
-                    }}
-                  >
+                  <div className="errorMessage">
                     {error.message}
                   </div>
                 )}
               </form>
             </Container>
-          </div>
+          </StyledRoot>
         </ReCaptchaProvider>
       </Layout>
     );

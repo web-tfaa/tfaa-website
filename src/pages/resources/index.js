@@ -1,29 +1,38 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Sidebar data
 import resourcesSidebar from './resources-links.yml';
 
+const StyledAnchor = styled.a(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    fontSize: 18,
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: 16,
+  },
+  display: 'inline-block',
+  marginBottom: theme.spacing(1.5),
+}));
+
 const ExternalLink = ({ children, to }) => (
-  <a
-    css={{
-      display: 'inline-block',
-      marginBottom: 10,
-    }}
+  <StyledAnchor
     href={to}
     rel="noopener noreferrer"
     target="_blank"
   >
     {children}
-  </a>
+  </StyledAnchor>
 );
 ExternalLink.propTypes = {
   children: PropTypes.string.isRequired,
@@ -93,7 +102,7 @@ const Resources = ({ location }) => {
             </ExternalLink>
           </div>
         </section>
-        {/* <section css={{ marginBottom: 32 }}>
+        {/* <Box component="section" marginBottom={4}>
           <h2>Archived Files</h2>
           <div>
             <ExternalLink to="https://res.cloudinary.com/tmac/image/upload/v1523127306/Abilene-ISD-Supplemental-Music-Lesson-Manual.pdf">
@@ -174,23 +183,12 @@ const Resources = ({ location }) => {
             — November 2009
           </div>
         </section> */}
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
+        <MobileDivider>
+          <SidebarBody
+            inline
+            yaml={resourcesSidebar}
           />
-          <SidebarBody inline yaml={resourcesSidebar} />
-        </div>
+        </MobileDivider>
       </Container>
     </Layout>
   );

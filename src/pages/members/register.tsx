@@ -3,11 +3,12 @@
 */
 
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-// import { navigate } from 'gatsby';
 import React, {
   FC, useEffect, useReducer
 } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -18,17 +19,16 @@ import RegisterMemberFormWrapper from '../../components/register/register-member
 import RegisterMemberPayment from '../../components/register/register-member-payment';
 import RegisterStepper from '../../components/register/register-stepper';
 import Status from './status';
-import presets from '../../utils/presets';
+import { GatsbyContextProps } from '../../types/shared';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 
 // Local Typings
 interface Props {
-  authUser: {
-    uid: string;
-  } | null;
+  authUserId?: string;
   isAuthenticated: boolean;
 }
 export interface MemberFormValues {
@@ -42,7 +42,7 @@ export interface MemberFormValues {
   FirstName: string;
   LastName: string;
   MemberType: 'Active' | 'Retired';
-  NewToTMAC: 'Yes' | 'No';
+  NewToTMAC: boolean;
   OfficePhone: string;
   PaymentOption?: 'Invoiced' | 'Paypal';
   PaypalPayerID?: string;
@@ -64,6 +64,11 @@ export type HandleCompleteMemberStepType = (
 ) => void;
 
 // Local Variables
+const StyledRoot = styled.div({
+  paddingLeft: 0,
+  width: '0 auto',
+});
+
 const COMPLETED_MEMBER_STEPS_INITIAL_STATE: Steps[] = [];
 
 // All form values here must exactly match the column header names in the
@@ -79,7 +84,7 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   FirstName: '',
   LastName: '',
   MemberType: 'Active',
-  NewToTMAC: 'Yes',
+  NewToTMAC: false,
   OfficePhone: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
@@ -163,7 +168,7 @@ function memberFormReducer(state, { type, payload }) {
 
 // Component Definition
 const RegisterMemberContent: FC<Props> = ({
-  authUser,
+  authUserId,
   isAuthenticated,
 }) => {
   const [
@@ -214,18 +219,13 @@ const RegisterMemberContent: FC<Props> = ({
     if (activeMemberStep === 0 && isAuthenticated) {
       handleUpdateActiveMemberStep(1);
     }
-  }, []);
+  }, [activeMemberStep, isAuthenticated]);
 
   const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
   /* Children change depending on which step is active */
   return (
-    <div
-      css={{
-        paddingLeft: 0,
-        width: '0 auto',
-      }}
-    >
+    <StyledRoot>
       <Status />
 
       <Container>
@@ -246,16 +246,14 @@ const RegisterMemberContent: FC<Props> = ({
         )}
         {activeMemberStep === 1 && (
           <RegisterMemberFormWrapper
-            authenticatedUserId={authUser?.uid}
+            authenticatedUserId={authUserId}
             initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
-            memberForm={memberForm}
             onCompleteMemberStep={handleCompleteMemberStep}
-            onUpdateMemberForm={handleUpdateMemberForm}
           />
         )}
         {[2, 3].includes(activeMemberStep) && (
           <RegisterMemberPayment
-            authenticatedUserId={authUser?.uid}
+            authenticatedUserId={authUserId}
             onCompleteMemberStep={handleCompleteMemberStep}
             onUpdateMemberForm={handleUpdateMemberForm}
             memberForm={memberForm}
@@ -263,51 +261,44 @@ const RegisterMemberContent: FC<Props> = ({
         )}
 
         {!hasCompletedAllMemberSteps && (
-          <div style={{ marginTop: '1.5rem' }}>
+          <Box marginTop={2}>
             * Membership is not complete until payment is received.
-          </div>
+          </Box>
         )}
       </Container>
 
-      <div
-        css={{
-          display: 'block',
-          [presets.Tablet]: {
-            display: 'none',
-          },
-        }}
-      >
-        <hr
-          css={{
-            border: 0,
-            height: 2,
-            marginTop: 10,
-          }}
+      <MobileDivider>
+        <SidebarBody
+          inline
+          yaml={membersSidebar}
         />
-        <SidebarBody inline yaml={membersSidebar} />
-      </div>
-    </div>
+      </MobileDivider>
+    </StyledRoot>
   );
 };
 
 const RegisterMemberWithContext: FC = (props) => (
   <AuthUserContext.Consumer>
-    {(authUser) => (
-      <RegisterMemberContent
-        {...props}
-        authUser={authUser}
-        isAuthenticated={!!authUser}
-      />
-    )}
+    {(authUser) => {
+      const isAuthenticated = Boolean(authUser);
+      const authUserId = authUser ? authUser.email : undefined;
+
+      return (
+        <RegisterMemberContent
+          {...props}
+          authUserId={authUserId}
+          isAuthenticated={isAuthenticated}
+        />
+      );
+    }}
   </AuthUserContext.Consumer>
 );
 
 const RegisterMember: FC<{
-  location: unknown,
-}> = (props) => (
-  // eslint-disable-next-line react/destructuring-assignment
-  <Layout location={props.location}>
-    <RegisterMemberWithContext {...props} />
+  location: Location,
+}> = ({ location, ...otherProps }: GatsbyContextProps) => (
+  <Layout location={location}>
+    <RegisterMemberWithContext {...otherProps} />
   </Layout>
 );
 
