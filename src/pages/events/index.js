@@ -49,7 +49,7 @@ const Events = ({ data, location }) => (
           Details about the 2021 Summer Round Table will be available soon.
         </EnhancedAlert> */}
 
-        {/* <p css={{ marginTop: 24, paddingLeft: 8 }}>
+        {/* <Box component="p" marginTop={3} paddingLeft={1}>
           Held in conjunction with the&nbsp;
           <a href="http://www.texasbandmasters.org/">Texas Bandmasters Association</a>
           ,&nbsp;

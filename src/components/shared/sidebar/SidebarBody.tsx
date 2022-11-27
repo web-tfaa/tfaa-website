@@ -9,11 +9,11 @@ import presets, { colors } from '../../../utils/presets';
 // Local Typings
 interface SidebarBodyProps {
   inline?: boolean;
-  yaml: any;
+  yaml: unknown;
 }
 
 interface SectionProps {
-  headerStyles: any;
+  headerStyles: unknown;
   index: number;
   isInline: boolean;
   title: string;
@@ -21,7 +21,7 @@ interface SectionProps {
 
 interface SectionLinksProps {
   isInline: boolean;
-  items: any;
+  items: unknown;
 }
 
 // Component Definitions
