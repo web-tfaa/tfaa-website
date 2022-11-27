@@ -45,7 +45,7 @@ class RegisterEmail extends Component {
     this.setState({
       hasCompletedRegisterEmail: true,
     }, this.handleCompleteEmailStep);
-  }
+  };
 
   render() {
     const { isAuthenticated } = this.props;

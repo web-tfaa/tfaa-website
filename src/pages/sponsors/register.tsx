@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import React, {
   FC, useEffect, useReducer
 } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import AuthUserContext from '../../components/session/AuthUserContext';
@@ -51,8 +52,22 @@ export type HandleCompleteSponsorStepType = (
   step: Steps,
   updatedForm: SponsorFormValues,
 ) => void;
+interface StyledRootProps {
+  $isAuthenticated: boolean;
+}
 
 // Local Variables
+const StyledRoot = styled.div<StyledRootProps>(({
+  $isAuthenticated,
+}) => ({
+  [presets.Tablet]: {
+    paddingLeft: !$isAuthenticated ? '1.5rem' : 0,
+  },
+
+  paddingLeft: 0,
+  width: '0 auto',
+}));
+
 const COMPLETED_SPONSOR_STEPS_INITIAL_STATE: Steps[] = [];
 
 // All form values here must exactly match the column header names in the
@@ -221,15 +236,7 @@ const RegisterSponsorContent: FC<Props> = ({
 
   /* Children change depending on which step is active */
   return (
-    <div
-      css={{
-        paddingLeft: 0,
-        width: '0 auto',
-        [presets.Tablet]: {
-          paddingLeft: !isAuthenticated ? '1.5rem' : 0,
-        },
-      }}
-    >
+    <StyledRoot $isAuthenticated={isAuthenticated}>
       <Status />
 
       <Container>
@@ -272,7 +279,7 @@ const RegisterSponsorContent: FC<Props> = ({
           </div>
         )}
       </Container>
-    </div>
+    </StyledRoot>
   );
 };
 

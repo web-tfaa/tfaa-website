@@ -1,6 +1,7 @@
 // External Dependencies
 import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 

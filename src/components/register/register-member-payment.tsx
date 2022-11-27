@@ -285,7 +285,7 @@ const RegisterMemberPayment: FC<Props> = ({
         </h2>
       </Box>
 
-      <div css={{ display: 'none' }}>
+      <Box display="none">
         <Invoice
           amount={amount}
           form={memberForm}
@@ -293,7 +293,7 @@ const RegisterMemberPayment: FC<Props> = ({
           receiptId={memberForm.receiptId}
           ref={printReceiptIdRef}
         />
-      </div>
+      </Box>
     </div>
   );
 
@@ -389,7 +389,7 @@ const RegisterMemberPayment: FC<Props> = ({
               </RegisterButton>
             )}
           />
-          <div css={{ display: 'none' }}>
+          <Box display="none">
             <Invoice
               amount={amount}
               form={memberForm}
@@ -398,7 +398,7 @@ const RegisterMemberPayment: FC<Props> = ({
               isInvoice
               ref={printInvoiceRef}
             />
-          </div>
+          </Box>
 
           <Box mt={3}>
             If your organization requires the IRS W-9 Form for TMAC,

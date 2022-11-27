@@ -325,7 +325,7 @@ const RegisterSponsorPayment: FC<Props> = ({
               )}
             />
 
-            <div css={{ display: 'none' }}>
+            <Box display="none">
               <Invoice
                 amount={sponsorForm.AmountDonated}
                 form={sponsorForm}
@@ -335,7 +335,7 @@ const RegisterSponsorPayment: FC<Props> = ({
                 sponsorLevel={sponsorForm.SponsorLevel}
                 sponsorOrganizationName={sponsorForm.SponsorOrganization}
               />
-            </div>
+            </Box>
 
             <Box mt={3}>
               If your organization requires the IRS W-9 Form for TMAC,

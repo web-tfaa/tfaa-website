@@ -1,4 +1,5 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -34,14 +35,14 @@ const Officers = ({ location }) => {
         <Helmet>
           <title>TMAC | Officers</title>
         </Helmet>
+
         <h2>TMAC Officers</h2>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}
+
+        <Box
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="space-between"
         >
           <Cards>
             <Card>
@@ -131,7 +132,7 @@ const Officers = ({ location }) => {
               yaml={aboutSidebar}
             />
           </MobileDivider>
-        </div>
+        </Box>
       </Container>
     </Layout>
   );

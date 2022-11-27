@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby-theme-material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { isTodayAfterJune30th } from '../../utils/helpers';
@@ -16,145 +17,125 @@ import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
 import Status from './status';
-import presets from '../../utils/presets';
 
 // Sidebar Data
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import membersSidebar from './members-links.yml';
 
-// // Local Variables
-const boldStyles = { fontWeight: 600 };
+// Local Variables
+const StyledRoot = styled.div(({ theme }) => ({
+  '.bottomContent': {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+
+  '.strong': {
+    fontWeight: 600,
+  },
+
+  '.topContent': {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(4),
+  },
+
+  paddingLeft: 0,
+  width: '0 auto',
+}));
 
 // Component Definition
-const JoinContainer = (props) => {
-  const {
-    // isAuthenticated,
-    location,
-  } = props;
+const JoinContainer = ({ location }) => (
+  <Layout location={location}>
+    <StyledRoot>
+      <Status />
 
-  return (
-    <Layout location={location}>
-      <div
-        css={{
-          paddingLeft: 0,
-          width: '0 auto',
-        }}
-      >
-        <Status />
+      <Container>
+        <Helmet>
+          <title>TMAC | Join TMAC</title>
+        </Helmet>
 
-        <Container>
-          <Helmet>
-            <title>TMAC | Join TMAC</title>
-          </Helmet>
+        <div className="topContent">
+          <CardHeadline>Join TMAC</CardHeadline>
 
-          <div
-            css={{
-              display: 'flex',
-              flexDirection: 'column',
-              padding: 32,
-            }}
-          >
-            <CardHeadline>Join TMAC</CardHeadline>
+          {!isTodayAfterJune30th
+            ? (
+              <Box mt={3}>
+                <EnhancedAlert title="Membership Notice">
+                  TMAC Membership will open up again on July 1st.
+                </EnhancedAlert>
+              </Box>
+            ) : (
+              <>
+                <FuturaDiv>
+                  To join TMAC please complete these three steps:
+                </FuturaDiv>
 
-            {!isTodayAfterJune30th
-              ? (
-                <Box mt={3}>
-                  <EnhancedAlert title="Membership Notice">
-                    TMAC Membership will open up again on July 1st.
-                  </EnhancedAlert>
-                </Box>
-              ) : (
-                <>
-                  <FuturaDiv>
-                    To join TMAC please complete these three steps:
-                  </FuturaDiv>
-
-                  <FuturaDiv>
-                    <span css={boldStyles}>
-                      1.
-                      {' '}
-                    </span>
-                    Sign up for a TMAC website login.
-                  </FuturaDiv>
-
-                  <FuturaDiv>
-                    <span css={boldStyles}>
-                      2.
-                      {' '}
-                    </span>
-                    Complete the Membership Form.
-                  </FuturaDiv>
-
-                  <FuturaDiv>
-                    <span css={boldStyles}>
-                      3.
-                      {' '}
-                    </span>
-                    Pay dues online using PayPal (or mail invoice with check via mail).
-                  </FuturaDiv>
-
-                  <p>
-                    Note: Sponsors should complete the
+                <FuturaDiv>
+                  <span className="strong">
+                    1.
                     {' '}
-                    <Link to="/sponsors">Sponsor Form</Link>
-                    .
-                  </p>
-                </>
-              )}
+                  </span>
+                  Sign up for a TMAC website login.
+                </FuturaDiv>
 
-          </div>
+                <FuturaDiv>
+                  <span className="strong">
+                    2.
+                    {' '}
+                  </span>
+                  Complete the Membership Form.
+                </FuturaDiv>
 
-          {isTodayAfterJune30th && (
-            <>
-              <div
-                css={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <CtaButton
-                  buttonColor="blue"
-                  to="/members/register"
-                >
-                  Begin Membership
-                  <ArrowForwardIcon />
-                </CtaButton>
-              </div>
+                <FuturaDiv>
+                  <span className="strong">
+                    3.
+                    {' '}
+                  </span>
+                  Pay dues online using PayPal (or mail invoice with check via mail).
+                </FuturaDiv>
 
-              <div style={{ marginTop: '1.5rem' }}>
-                * Membership is not complete until payment is received.
-              </div>
-            </>
-          )}
-        </Container>
+                <p>
+                  Note: Sponsors should complete the
+                  {' '}
+                  <Link to="/sponsors">Sponsor Form</Link>
+                  .
+                </p>
+              </>
+            )}
 
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
-          />
-          <SidebarBody
-            inline
-            yaml={membersSidebar}
-          />
         </div>
-      </div>
-    </Layout>
-  );
-};
+
+        {isTodayAfterJune30th && (
+          <>
+            <div className="bottomContent">
+              <CtaButton
+                buttonColor="blue"
+                to="/members/register"
+              >
+                Begin Membership
+                <ArrowForwardIcon />
+              </CtaButton>
+            </div>
+
+            <div style={{ marginTop: '1.5rem' }}>
+              * Membership is not complete until payment is received.
+            </div>
+          </>
+        )}
+      </Container>
+
+      <MobileDivider>
+        <SidebarBody
+          inline
+          yaml={membersSidebar}
+        />
+      </MobileDivider>
+    </StyledRoot>
+  </Layout>
+);
 
 JoinContainer.propTypes = {
-  // isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
 };
 
