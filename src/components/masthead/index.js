@@ -1,4 +1,5 @@
 // External Dependencies
+import React from 'react';
 import hex2rgba from 'hex2rgba';
 import styled from 'styled-components';
 

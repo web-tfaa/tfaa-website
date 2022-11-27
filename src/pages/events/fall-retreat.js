@@ -6,6 +6,7 @@ import {
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby-theme-material-ui';
 // import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
