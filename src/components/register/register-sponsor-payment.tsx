@@ -24,6 +24,7 @@ import {
   doUpdateInvoiceId as updateFirestoreInvoiceId,
 } from '../../firebase/db';
 import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
+import { classChampionAlreadySecured } from './register-sponsor-form';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import FormHr from '../shared/form-hr';
 import Invoice from './invoice';
@@ -38,9 +39,12 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.section({
+const StyledRoot = styled.section(({ theme }) => ({
   '.changeLevelLink': {
     cursor: 'pointer',
+  },
+  '.disabledText': {
+    color: theme.palette.text.disabled,
   },
   '.classChampionRadioLabelRoot': {
     alignItems: 'flex-start',
@@ -53,7 +57,7 @@ const StyledRoot = styled.section({
     marginTop: '0.3rem',
     marginBottom: 0,
   },
-});
+}));
 
 const currentDate = format(new Date(), 'M/d/yyyy');
 
@@ -272,15 +276,22 @@ const RegisterSponsorPayment: FC<Props> = ({
                       className="classChampionRadioLabelRoot"
                       control={(
                         <Box mb={4}>
-                          <Radio size="small" />
+                          <Radio
+                            disabled={classChampionAlreadySecured}
+                            size="small"
+                          />
                         </Box>
                       )}
                       label={(
                         <>
-                          <Typography component="span">
+                          <Typography
+                            className={classChampionAlreadySecured ? 'disabledText' : ''}
+                            component="span"
+                          >
                             {SPONSORSHIP_LEVELS.CLASS_CHAMPION}
                           </Typography>
                           <Typography
+                            className={classChampionAlreadySecured ? 'disabledText' : ''}
                             color="textSecondary"
                             component="span"
                             variant="body2"
