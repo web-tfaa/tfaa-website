@@ -1,4 +1,5 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,8 +12,8 @@ import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
+import MobileDivider from '../../components/shared/MobileDivider';
 import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-import presets from '../../utils/presets';
 import { useAreaRepsData } from '../../utils/hooks/useAreaRepsData';
 
 // Sidebar data
@@ -34,13 +35,11 @@ const AreaReps = ({ location }) => {
         <Helmet>
           <title>TMAC | Area Reps</title>
         </Helmet>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}
+
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          justifyContent="space-between"
         >
           <Cards>
             <Card>
@@ -123,24 +122,14 @@ const AreaReps = ({ location }) => {
               </FuturaParagraph>
             </Card>
           </Cards>
-        </div>
-        <div
-          css={{
-            display: 'block',
-            [presets.Tablet]: {
-              display: 'none',
-            },
-          }}
-        >
-          <hr
-            css={{
-              border: 0,
-              height: 2,
-              marginTop: 10,
-            }}
+        </Box>
+
+        <MobileDivider>
+          <SidebarBody
+            inline
+            yaml={resourcesSidebar}
           />
-          <SidebarBody inline yaml={resourcesSidebar} />
-        </div>
+        </MobileDivider>
       </Container>
     </Layout>
   );
