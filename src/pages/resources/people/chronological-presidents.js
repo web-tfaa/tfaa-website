@@ -1,8 +1,9 @@
 // External Dependencies
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby-theme-material-ui';
+import PropTypes from 'prop-types';
+import React, { useMemo } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import CardHeadline from '../../../components/shared/cards/card-headline';
@@ -11,8 +12,8 @@ import { pastPresidents } from '../../../components/resources/resources-constant
 
 // Sidebar data
 import Layout from '../../../components/layout';
+import MobileDivider from '../../../components/shared/MobileDivider';
 import SidebarBody from '../../../components/shared/sidebar/SidebarBody';
-import presets from '../../../utils/presets';
 import resourcesSidebar from '../resources-links.yml';
 import { options } from '../../../utils/typography';
 
@@ -21,24 +22,23 @@ const propTypes = {
   location: PropTypes.shape({}).isRequired,
 };
 
-const rootStyles = {
+const StyledRoot = styled.div({
+  '.tableContainer': {
+    fontFamily: options.headerFontFamily.join(','),
+    lineHeight: '1.6',
+  },
+
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
   justifyContent: 'space-between',
-};
-
-const tableContainerStyles = {
-  fontFamily: options.headerFontFamily.join(','),
-  lineHeight: '1.6',
-};
+});
 
 // Component Definition
-class ChronologicalPresidents extends Component {
-  renderTableRows = () =>
-    pastPresidents.map((pres, index) => (
-      // eslint-disable-next-line
-      <tr key={`${pres.name}-${index}`}>
+const ChronologicalPresidents = ({ location }) => {
+  const presidentsList = useMemo(() =>
+    pastPresidents.map((pres) => (
+      <tr key={pres.year}>
         <th>{pres.year}</th>
         <th>
           <Link to={`/resources/people/${pres.name.toLowerCase().split(' ').join('-')}`}>
@@ -46,55 +46,42 @@ class ChronologicalPresidents extends Component {
           </Link>
         </th>
       </tr>
-    ));
+    )), []);
 
-  render() {
-    const { location } = this.props;
-    return (
-      <Layout location={location}>
-        <Helmet>
-          <title>TMAC | Past Presidents</title>
-        </Helmet>
-        <div css={rootStyles}>
-          <Container>
-            <CardHeadline>Past Presidents</CardHeadline>
+  return (
+    <Layout location={location}>
+      <Helmet>
+        <title>TMAC | Past Presidents</title>
+      </Helmet>
 
-            <div css={tableContainerStyles}>
-              Chronological listing of all past TMAC Presidents
-              <table>
-                <thead>
-                  <tr>
-                    <th>Year</th>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody>{this.renderTableRows()}</tbody>
-              </table>
-            </div>
-            {/* Mobile sidebar */}
-            <div
-              css={{
-                display: 'block',
-                [presets.Tablet]: {
-                  display: 'none',
-                },
-              }}
-            >
-              <hr
-                css={{
-                  border: 0,
-                  height: 2,
-                  marginTop: 10,
-                }}
-              />
-              <SidebarBody inline yaml={resourcesSidebar} />
-            </div>
-          </Container>
-        </div>
-      </Layout>
-    );
-  }
-}
+      <StyledRoot>
+        <Container>
+          <CardHeadline>Past Presidents</CardHeadline>
+
+          <div className="tableContainer">
+            Chronological listing of all past TMAC Presidents
+            <table>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>{presidentsList}</tbody>
+            </table>
+          </div>
+
+          <MobileDivider>
+            <SidebarBody
+              inline
+              yaml={resourcesSidebar}
+            />
+          </MobileDivider>
+        </Container>
+      </StyledRoot>
+    </Layout>
+  );
+};
 
 ChronologicalPresidents.propTypes = propTypes;
 
