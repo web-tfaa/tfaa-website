@@ -2,6 +2,7 @@
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
@@ -14,9 +15,11 @@ import { useEventData } from '../../utils/hooks/useEventData';
 import eventsSidebar from './events-links.yml';
 
 // Local Variables
-const indentStyles = {
-  marginLeft: 16,
-};
+const StyledContainer = styled(Container)(({ theme }) => ({
+  '.leftSpacing': {
+    marginLeft: theme.spacing(2),
+  },
+}));
 
 // Component Definition
 const TmeaRoundTable = ({ location }) => {
@@ -29,17 +32,18 @@ const TmeaRoundTable = ({ location }) => {
       <Helmet>
         <title>TMAC | TMEA Round Table</title>
       </Helmet>
-      <Container>
+
+      <StyledContainer>
         <h1>{tmeaRoundTable.titleOfEvent}</h1>
         <section>
           <h4>When</h4>
-          <p css={indentStyles}>{tmeaRoundTable.dateOfEvent}</p>
-          <p css={indentStyles}>{tmeaRoundTable.timeOfEvent}</p>
+          <p className="leftSpacing">{tmeaRoundTable.dateOfEvent}</p>
+          <p className="leftSpacing">{tmeaRoundTable.timeOfEvent}</p>
         </section>
 
         <section>
           <h4>Where</h4>
-          <div css={indentStyles}>
+          <div className="leftSpacing">
             <p>Details coming soon</p>
             {/* <a
               href="http://www.marriott.com/hotels/travel/satdt-san-antonio-marriott-riverwalk/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
@@ -63,7 +67,7 @@ const TmeaRoundTable = ({ location }) => {
 
         <section>
           <h4>Why</h4>
-          <p css={indentStyles}>
+          <p className="leftSpacing">
             Held in conjunction with the&nbsp;
             <a href="https://www.tmea.org/">
               Texas Music Educators Association
@@ -78,7 +82,7 @@ const TmeaRoundTable = ({ location }) => {
             yaml={eventsSidebar}
           />
         </MobileDivider>
-      </Container>
+      </StyledContainer>
     </Layout>
   );
 };
