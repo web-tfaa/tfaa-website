@@ -66,7 +66,7 @@ const StyledRoot = styled.div({
 // This will tell the Firestore database action where to put the new record
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
 
-const classChampionAlreadySecured = true;
+export const classChampionAlreadySecured = true;
 
 // Component Definition
 const RegisterSponsorForm: FC<Props> = ({
