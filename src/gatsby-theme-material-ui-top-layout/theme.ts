@@ -22,6 +22,10 @@ const theme = createTheme({
       warning: amber['700'],
     },
     altBackground: '#f5f5f5',
+    cta: {
+      cyan: '#009FAE',
+      orange: '#F05B21'
+    },
     events: {
       hotelCta: cyan['200'],
     },
