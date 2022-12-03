@@ -89,7 +89,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
             <img
               alt="TFAA logo"
               className="logoImage"
-              src="./tfaa-logo-svg.svg"
+              src="/tfaa-logo-svg.svg"
             />
           </div>
         </NavItem>
