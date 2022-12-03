@@ -36,6 +36,9 @@ const theme = createTheme({
       dark: gray(8, 270),
     },
     loginStatus: '#f5eefe',
+    shapes: {
+      topNavHeight: 128,
+    },
     table: {
       background: 'linear-gradient(180deg, #B8CCE3, #EDF2F8)',
       header: '#EDF2F8',

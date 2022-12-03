@@ -1,14 +1,16 @@
 // External Dependencies
+import { Box } from '@mui/material';
 import React, { FC, KeyboardEventHandler, useCallback } from 'react';
 import hex2rgba from 'hex2rgba';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import AuthUserContext from '../session/AuthUserContext';
-import presets from '../../utils/presets';
 import { auth } from '../../firebase';
 import { rhythm, options } from '../../utils/typography';
+import AuthUserContext from '../session/AuthUserContext';
+import presets from '../../utils/presets';
 import NavItem from './NavItem';
+import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
@@ -16,9 +18,10 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.div(({ theme }) => ({
+const StyledRoot = styled.nav(({ theme }) => ({
   '.list': {
     [presets.Tablet]: {
+      alignItems: 'center',
       display: 'flex',
       flexGrow: 1,
       listStyle: 'none',
@@ -27,22 +30,19 @@ const StyledRoot = styled.div(({ theme }) => ({
         1 / 8,
       )}, white 98%, transparent)`,
       overflowX: 'auto',
-      padding: 0,
+      padding: theme.spacing(0, 2),
     },
 
     display: 'none',
   },
 
   '.logoImage': {
-    marginBottom: 0,
   },
 
   '.logoImageWrapper': {
-    alignItems: 'center',
-    color: 'inherit',
     display: 'flex',
-    marginRight: rhythm(1 / 2),
-    textDecoration: 'none',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   '.logoNavItem': {
@@ -52,24 +52,15 @@ const StyledRoot = styled.div(({ theme }) => ({
     },
   },
 
-  '.logoText': {
-    fontSize: 24,
-    marginLeft: '0.8em',
-    textDecoration: 'none',
-  },
-
   '.logoWrapper': {
-    alignItems: 'flex-end',
-    borderBottom: '4px solid #2D456F',
-    boxShadow: '3px 0 5px #2D456F',
-    boxSizing: 'border-box',
+    alignItems: 'center',
     display: 'flex',
     fontFamily: options.headerFontFamily.join(','),
-    height: '100%',
-    margin: '0 auto',
-    paddingLeft: rhythm(3 / 4),
-    paddingRight: rhythm(3 / 4),
-    width: '100%',
+    // height: '100%',
+    justifyContent: 'center',
+    // margin: '0 auto',
+    padding: theme.spacing(0, 2),
+    // width: '100%',
   },
 
   '.signOutLinkWrapper': {
@@ -81,12 +72,15 @@ const StyledRoot = styled.div(({ theme }) => ({
   },
 
   background: `${hex2rgba('#fbfafc', 0.95)}`,
+  borderBottom: '4px solid #2D456F',
+  boxShadow: '3px 0 5px #2D456F',
+  boxSizing: 'border-box',
   display: 'flex',
+  justifyContent: 'center',
   flex: 1,
-  height: presets.headerHeight,
-  left: 0,
-  right: 0,
-  zIndex: '2',
+  height: theme.palette.shapes.topNavHeight,
+  width: '100%',
+  zIndex: 2,
 }));
 
 // Component Definition
@@ -98,7 +92,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   }, []);
 
   return (
-    <StyledRoot role="navigation">
+    <StyledRoot>
       <div className="logoWrapper">
         <NavItem
           className="logoNavItem"
@@ -106,14 +100,10 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
         >
           <div className="logoImageWrapper">
             <img
-              alt="TMAC logo"
+              alt="TFAA logo"
               className="logoImage"
-              height="30px"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+              src="./tfaa-logo-svg.svg"
             />
-            <div className="logoText">
-              TMAC
-            </div>
           </div>
         </NavItem>
 
@@ -123,7 +113,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
           <NavItem linkTo="/resources/">Resources</NavItem>
           <NavItem linkTo="/members/">Membership</NavItem>
           <NavItem linkTo="/sponsors/">Sponsors</NavItem>
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <div
               className="signOutLinkWrapper"
               onClick={auth.doSignOut}
@@ -133,6 +123,14 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
             >
               <NavItem linkTo="/">Sign Out</NavItem>
             </div>
+          ) : (
+            <Box
+              display="flex"
+              alignItems="center"
+              marginLeft={2}
+            >
+              <CtaButton color="orange">Members Login</CtaButton>
+            </Box>
           )}
         </ul>
       </div>

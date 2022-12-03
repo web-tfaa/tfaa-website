@@ -59,16 +59,16 @@ const StyledRoot = styled.div<StyledRootProps>(({
   },
   '.main-body': {
     [presets.Desktop]: {
-      minHeight: 'calc(100vh - 4rem)',
+      minHeight: 'calc(100vh - 5rem)',
     },
     [presets.Tablet]: {
       margin: 'inherit',
-      paddingTop: presets.headerHeight,
+      paddingTop: theme.palette.shapes.topNavHeight,
     },
     display: 'flex',
     flex: 1,
     paddingTop: 0,
-    minHeight: 'calc(100vh - 4rem)',
+    minHeight: 'calc(100vh - 5rem)',
   },
 
   '.main-content': {
