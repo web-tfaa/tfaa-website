@@ -23,62 +23,52 @@ const StyledRoot = styled.nav(({ theme }) => ({
     [presets.Tablet]: {
       alignItems: 'center',
       display: 'flex',
-      flexGrow: 1,
-      listStyle: 'none',
       margin: 0,
-      maskImage: `linear-gradient(to right, transparent, white ${rhythm(
-        1 / 8,
-      )}, white 98%, transparent)`,
-      overflowX: 'auto',
       padding: theme.spacing(0, 2),
     },
 
     display: 'none',
   },
 
-  '.logoImage': {
-  },
-
   '.logoImageWrapper': {
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      width: '100%',
+    },
+    [presets.Tablet]: {
+      height: '80%',
+      width: '80%',
+    },
+
+    alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  '.logoNavItem': {
-    '&:hover': {
-      opacity: 1,
-      textDecoration: 'none',
-    },
+    height: 72,
+    width: 132,
   },
 
   '.logoWrapper': {
     alignItems: 'center',
     display: 'flex',
     fontFamily: options.headerFontFamily.join(','),
-    // height: '100%',
     justifyContent: 'center',
-    // margin: '0 auto',
     padding: theme.spacing(0, 2),
-    // width: '100%',
   },
 
-  '.signOutLinkWrapper': {
-    float: 'right',
+  [theme.breakpoints.up('md')]: {
+    height: theme.palette.shapes.topNavHeight,
   },
-
   [presets.Tablet]: {
     position: 'fixed',
+    height: theme.palette.shapes.topNavHeight - 16,
   },
 
-  background: `${hex2rgba('#fbfafc', 0.95)}`,
-  borderBottom: '4px solid #2D456F',
-  boxShadow: '3px 0 5px #2D456F',
+  background: theme.palette.common.white,
   boxSizing: 'border-box',
   display: 'flex',
   justifyContent: 'center',
   flex: 1,
-  height: theme.palette.shapes.topNavHeight,
+  height: '100%',
   width: '100%',
   zIndex: 2,
 }));
@@ -94,10 +84,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   return (
     <StyledRoot>
       <div className="logoWrapper">
-        <NavItem
-          className="logoNavItem"
-          linkTo="/"
-        >
+        <NavItem linkTo="/">
           <div className="logoImageWrapper">
             <img
               alt="TFAA logo"
@@ -115,7 +102,6 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
           <NavItem linkTo="/sponsors/">Sponsors</NavItem>
           {isAuthenticated ? (
             <div
-              className="signOutLinkWrapper"
               onClick={auth.doSignOut}
               onKeyDown={handlePressKeyDown}
               role="button"

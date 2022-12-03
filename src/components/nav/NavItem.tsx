@@ -17,7 +17,7 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.li({
+const StyledRoot = styled.li(({ theme }) => ({
   '.active': {
     fontWeight: 600,
   },
@@ -28,13 +28,17 @@ const StyledRoot = styled.li({
       textDecoration: 'underline',
     },
 
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 16,
+      padding: theme.spacing(0, 1.5),
+    },
+
     ...scale(-1 / 3),
     boxSizing: 'border-box',
     color: 'inherit',
     display: 'inline-block',
-    fontSize: 16,
+    fontSize: 18,
     letterSpacing: '0.03em',
-    // lineHeight: `calc(${presets.headerHeight} - 6px)`,
     padding: theme.spacing(0, 2),
     position: 'relative',
     textDecoration: 'none',
@@ -45,7 +49,7 @@ const StyledRoot = styled.li({
 
   display: 'inline-block',
   margin: 0,
-});
+}));
 
 // Component Definition
 const NavItem: FC<Props> = ({ linkTo, children, ...otherProps }) => (
