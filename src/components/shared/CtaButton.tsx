@@ -10,14 +10,14 @@ interface Props extends ButtonProps {
   colorVariant: CtaColor;
   to?: string;
 }
-type CtaColor = 'cyan' | 'orange';
+type CtaColor = 'resources' | 'signIn';
 interface StyledButtonProps {
   $colorVariant: CtaColor;
 }
 
 // Local Variables
 const StyledButton = styled(Button)<StyledButtonProps>(({
-  $colorVariant = 'cyan',
+  $colorVariant = 'resources',
   theme,
 }) => ({
   '&.MuiButtonBase-root': {
@@ -26,10 +26,10 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
     },
 
     '&:hover': {
-      backgroundColor: darken(theme.palette.cta[$colorVariant], 0.15),
+      backgroundColor: darken(theme.palette.tfaa[$colorVariant], 0.15),
     },
 
-    backgroundColor: theme.palette.cta[$colorVariant],
+    backgroundColor: theme.palette.tfaa[$colorVariant],
     borderRadius: 25,
     fontFamily: 'sans-serif',
     fontSize: 18,

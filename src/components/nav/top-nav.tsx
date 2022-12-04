@@ -110,7 +110,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
           >
             {isAuthenticated ? (
               <CtaButton
-                colorVariant="orange"
+                colorVariant="signIn"
                 onClick={auth.doSignOut}
                 onKeyDown={handlePressKeyDown}
                 to="/members/login"
@@ -119,7 +119,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
               </CtaButton>
             ) : (
               <CtaButton
-                colorVariant="orange"
+                colorVariant="signIn"
                 onKeyDown={handlePressKeyDown}
                 to="/members/login"
               >

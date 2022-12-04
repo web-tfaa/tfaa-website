@@ -12,11 +12,6 @@ interface PaletteAlert {
   warning: string;
 }
 
-interface PaletteCta {
-  cyan: string;
-  orange: string;
-}
-
 interface PaletteEvents {
   hotelCta: string;
 }
@@ -65,7 +60,6 @@ declare module '@mui/material/styles' {
   interface Palette extends MuiPalette {
     alert: PaletteAlert;
     altBackground: string;
-    cta: PaletteCta;
     events: PaletteEvents;
     gatsby: string;
     legacyGray: PaletteLegacyGray;
@@ -80,7 +74,6 @@ declare module '@mui/material/styles' {
   interface PaletteOptions extends MuiPaletteOptions {
     alert: PaletteAlert;
     altBackground: string;
-    cta: PaletteCta;
     events: PaletteEvents;
     gatsby: string;
     legacyGray: PaletteLegacyGray;
@@ -95,7 +88,6 @@ declare module '@mui/material/styles' {
   interface PaletteColor extends MuiPaletteColor {
     alert?: PaletteAlert;
     altBackground?: string;
-    cta?: PaletteCta;
     events?: PaletteEvents;
     gatsby?: string;
     legacyGray?: PaletteLegacyGray;
@@ -110,7 +102,6 @@ declare module '@mui/material/styles' {
   interface SimplePaletteColorOptions extends MuiSimplePaletteColorOptions {
     alert?: PaletteAlert;
     altBackground?: string;
-    cta?: PaletteCta;
     events?: PaletteEvents;
     gatsby?: string;
     legacyGray?: PaletteLegacyGray;
