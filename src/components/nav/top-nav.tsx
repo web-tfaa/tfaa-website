@@ -1,12 +1,12 @@
 // External Dependencies
 import { Box } from '@mui/material';
-import React, { FC, KeyboardEventHandler, useCallback } from 'react';
-import hex2rgba from 'hex2rgba';
+import { navigate } from 'gatsby';
+import React, { FC, KeyboardEvent, useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { auth } from '../../firebase';
-import { rhythm, options } from '../../utils/typography';
+import { options } from '../../utils/typography';
 import AuthUserContext from '../session/AuthUserContext';
 import presets from '../../utils/presets';
 import NavItem from './NavItem';
@@ -75,11 +75,13 @@ const StyledRoot = styled.nav(({ theme }) => ({
 
 // Component Definition
 const TopNav: FC<Props> = ({ isAuthenticated }) => {
-  const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLDivElement>) => {
+  const handlePressKeyDown = useCallback((event: KeyboardEvent<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
-      auth.doSignOut();
+      return isAuthenticated
+        ? auth.doSignOut()
+        : navigate('/members/login');
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <StyledRoot>
@@ -100,24 +102,31 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
           <NavItem linkTo="/resources/">Resources</NavItem>
           <NavItem linkTo="/members/">Membership</NavItem>
           <NavItem linkTo="/sponsors/">Sponsors</NavItem>
-          {isAuthenticated ? (
-            <div
-              onClick={auth.doSignOut}
-              onKeyDown={handlePressKeyDown}
-              role="button"
-              tabIndex={0}
-            >
-              <NavItem linkTo="/">Sign Out</NavItem>
-            </div>
-          ) : (
-            <Box
-              display="flex"
-              alignItems="center"
-              marginLeft={2}
-            >
-              <CtaButton color="orange">Members Login</CtaButton>
-            </Box>
-          )}
+
+          <Box
+            display="flex"
+            alignItems="center"
+            marginLeft={2}
+          >
+            {isAuthenticated ? (
+              <CtaButton
+                colorVariant="orange"
+                onClick={auth.doSignOut}
+                onKeyDown={handlePressKeyDown}
+                to="/members/login"
+              >
+                Sign Out
+              </CtaButton>
+            ) : (
+              <CtaButton
+                colorVariant="orange"
+                onKeyDown={handlePressKeyDown}
+                to="/members/login"
+              >
+                Members Login
+              </CtaButton>
+            )}
+          </Box>
         </ul>
       </div>
     </StyledRoot>

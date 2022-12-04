@@ -1,37 +1,36 @@
 // External Dependencies
-import { Button, darken } from '@mui/material';
+import { Button } from 'gatsby-theme-material-ui';
+import { ButtonProps, darken } from '@mui/material';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Local Typings
-interface Props {
+interface Props extends ButtonProps {
   children: React.ReactNode;
-  color: CtaColor;
+  colorVariant: CtaColor;
+  to?: string;
 }
 type CtaColor = 'cyan' | 'orange';
 interface StyledButtonProps {
-  $color: CtaColor;
+  $colorVariant: CtaColor;
 }
 
 // Local Variables
 const StyledButton = styled(Button)<StyledButtonProps>(({
-  $color,
+  $colorVariant = 'cyan',
   theme,
 }) => ({
   '&.MuiButtonBase-root': {
-    // [theme.breakpoints.down('md')]: {
-    //   fontSize: 14,
-    // },
     [theme.breakpoints.down('lg')]: {
       fontSize: 14,
     },
 
     '&:hover': {
-      backgroundColor: darken(theme.palette.cta[$color], 0.15),
+      backgroundColor: darken(theme.palette.cta[$colorVariant], 0.15),
     },
 
-    backgroundColor: theme.palette.cta[$color],
-    borderRadius: 8,
+    backgroundColor: theme.palette.cta[$colorVariant],
+    borderRadius: 25,
     fontFamily: 'sans-serif',
     fontSize: 18,
     fontWeight: theme.typography.fontWeightBold,
@@ -41,10 +40,14 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
 }));
 
 // Component Definition
-const CtaButton: FC<Props> = ({ children, color }) => (
+const CtaButton: FC<Props> = ({
+  children, colorVariant, to, ...otherProps
+}) => (
   <StyledButton
-    $color={color}
+    $colorVariant={colorVariant}
+    to={to}
     variant="contained"
+    {...otherProps}
   >
     {children}
   </StyledButton>
