@@ -10,7 +10,6 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
-import Status from './status';
 import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
@@ -66,8 +65,6 @@ const MemberListContent = ({
 
   return (
     <StyledRoot>
-      <Status />
-
       <Helmet>
         <title>TMAC | Member List</title>
       </Helmet>

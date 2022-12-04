@@ -16,7 +16,6 @@ import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
-import Status from '../members/status';
 import MobileDivider from '../../components/shared/MobileDivider';
 
 // Local Variables
@@ -40,8 +39,6 @@ const SponsorInfo = ({
 }) => (
   <Layout location={location}>
     <StyledRoot $isAuthenticated={isAuthenticated}>
-      <Status />
-
       <Container>
         <Helmet>
           <title>TMAC | Sponsor Information</title>

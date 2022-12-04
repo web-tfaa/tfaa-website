@@ -172,6 +172,7 @@ const DefaultLayout: FC<Props> = ({
         <html lang="en" />
         {pageTitle && <title>TMAC | {pageTitle}</title>}
       </Helmet>
+
       <StyledRoot
         $hasSidebar={hasSidebar}
         className={isHome ? 'is-homepage' : ''}

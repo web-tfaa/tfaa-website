@@ -13,7 +13,6 @@ import RegisterEmail from '../../components/register/register-email';
 import RegisterSponsorFormWrapper from '../../components/register/register-sponsor-form-wrapper';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
-import Status from '../members/status';
 import presets from '../../utils/presets';
 
 // Local Typings
@@ -237,8 +236,6 @@ const RegisterSponsorContent: FC<Props> = ({
   /* Children change depending on which step is active */
   return (
     <StyledRoot $isAuthenticated={isAuthenticated}>
-      <Status />
-
       <Container>
         <Helmet>
           <title>TMAC | Register Sponsor</title>
