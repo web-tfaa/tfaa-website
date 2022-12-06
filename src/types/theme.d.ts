@@ -32,6 +32,20 @@ interface PaletteLegacyGray {
   dark: string;
 }
 
+interface PaletteShapes {
+  topNavHeight: number;
+}
+
+interface PaletteTFAA {
+  about: string;
+  events: string;
+  grey: string;
+  membership: string;
+  resources: string;
+  signIn: string;
+  text: string;
+}
+
 interface PaletteUi {
   borderBlue: string;
   bright: string;
@@ -50,8 +64,10 @@ declare module '@mui/material/styles' {
     gatsby: string;
     legacyGray: PaletteLegacyGray;
     loginStatus: string;
+    shapes: PaletteShapes;
     table: PaletteTable;
     texasFlag: PaletteTexasFlag;
+    tfaa: PaletteTFAA;
     ui: PaletteUi;
   }
 
@@ -62,8 +78,10 @@ declare module '@mui/material/styles' {
     gatsby: string;
     legacyGray: PaletteLegacyGray;
     loginStatus: string;
+    shapes: PaletteShapes;
     table: PaletteTable;
     texasFlag: PaletteTexasFlag;
+    tfaa: PaletteTFAA;
     ui: PaletteUi;
   }
 
@@ -74,8 +92,10 @@ declare module '@mui/material/styles' {
     gatsby?: string;
     legacyGray?: PaletteLegacyGray;
     loginStatus?: string;
+    shapes?: PaletteShapes;
     table?: PaletteTable;
     texasFlag?: PaletteTexasFlag;
+    tfaa?: PaletteTFAA;
     ui?: PaletteUi;
   }
 
@@ -86,8 +106,10 @@ declare module '@mui/material/styles' {
     gatsby?: string;
     legacyGray?: PaletteLegacyGray;
     loginStatus?: string;
+    shapes?: PaletteShapes;
     table?: PaletteTable;
     texasFlag?: PaletteTexasFlag;
+    tfaa?: PaletteTFAA;
     ui?: PaletteUi;
   }
 }

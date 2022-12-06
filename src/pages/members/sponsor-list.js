@@ -11,7 +11,6 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import SponsorListTable from './sponsor-table';
-import Status from './status';
 import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 import {
@@ -78,8 +77,6 @@ const SponsorListContent = ({
 
   return (
     <StyledRoot>
-      <Status />
-
       <Helmet>
         <title>TMAC | Sponsor List</title>
       </Helmet>

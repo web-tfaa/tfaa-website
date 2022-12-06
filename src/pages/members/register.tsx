@@ -18,7 +18,6 @@ import RegisterEmail from '../../components/register/register-email';
 import RegisterMemberFormWrapper from '../../components/register/register-member-form-wrapper';
 import RegisterMemberPayment from '../../components/register/register-member-payment';
 import RegisterStepper from '../../components/register/register-stepper';
-import Status from './status';
 import { GatsbyContextProps } from '../../types/shared';
 
 // Sidebar Data
@@ -226,8 +225,6 @@ const RegisterMemberContent: FC<Props> = ({
   /* Children change depending on which step is active */
   return (
     <StyledRoot>
-      <Status />
-
       <Container>
         <Helmet>
           <title>TMAC | Membership</title>

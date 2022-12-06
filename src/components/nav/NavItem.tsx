@@ -7,6 +7,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import presets from '../../utils/presets';
 import { rhythm, scale } from '../../utils/typography';
+import theme from '../../gatsby-theme-material-ui-top-layout/theme';
 
 // Local Typings
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.li({
+const StyledRoot = styled.li(({ theme }) => ({
   '.active': {
     fontWeight: 600,
   },
@@ -27,23 +28,28 @@ const StyledRoot = styled.li({
       textDecoration: 'underline',
     },
 
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 16,
+      padding: theme.spacing(0, 1.5),
+    },
+
     ...scale(-1 / 3),
     boxSizing: 'border-box',
     color: 'inherit',
     display: 'inline-block',
+    fontSize: 18,
     letterSpacing: '0.03em',
-    lineHeight: `calc(${presets.headerHeight} - 6px)`,
-    padding: `6px ${rhythm(1 / 2)} 0`,
+    padding: theme.spacing(0, 2),
     position: 'relative',
     textDecoration: 'none',
-    textTransform: 'uppercase',
+    textTransform: 'none',
     top: 0,
     transition: 'color .15s ease-out',
   },
 
   display: 'inline-block',
   margin: 0,
-});
+}));
 
 // Component Definition
 const NavItem: FC<Props> = ({ linkTo, children, ...otherProps }) => (

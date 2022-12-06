@@ -32,6 +32,9 @@ const theme = createTheme({
       dark: gray(8, 270),
     },
     loginStatus: '#f5eefe',
+    shapes: {
+      topNavHeight: 128,
+    },
     table: {
       background: 'linear-gradient(180deg, #B8CCE3, #EDF2F8)',
       header: '#EDF2F8',
@@ -39,6 +42,15 @@ const theme = createTheme({
     texasFlag: {
       blue: '#002868',
       red: '#BF0A30',
+    },
+    tfaa: {
+      about: '#CF0025',
+      events: '#032A56',
+      grey: '#DEDEDE',
+      membership: '#005897',
+      resources: '#009FAE',
+      signIn: '#F05B21',
+      text: '#333333',
     },
     ui: {
       borderBlue: '#2D456F',

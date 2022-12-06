@@ -16,7 +16,6 @@ import CtaButton from '../../components/masthead/cta-button';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
-import Status from './status';
 
 // Sidebar Data
 import MobileDivider from '../../components/shared/MobileDivider';
@@ -48,8 +47,6 @@ const StyledRoot = styled.div(({ theme }) => ({
 const JoinContainer = ({ location }) => (
   <Layout location={location}>
     <StyledRoot>
-      <Status />
-
       <Container>
         <Helmet>
           <title>TMAC | Join TMAC</title>

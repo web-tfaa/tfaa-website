@@ -10,8 +10,7 @@ import Cards from '../components/shared/cards';
 import FeaturedStat from '../components/shared/featured-stat';
 import FuturaParagraph from '../components/shared/futura-paragraph';
 import Layout from '../components/layout';
-import MastheadBg from '../components/masthead/masthead-bg';
-import MastheadContent from '../components/masthead';
+import HomeBanner from '../components/home/HomeBanner';
 
 // Local Typings
 interface Props {
@@ -52,10 +51,8 @@ const Home: FC<Props> = ({ location }) => (
       <title>TMAC | Home</title>
     </Helmet>
 
-    <MastheadBg />
-
     <StyledRoot>
-      <MastheadContent />
+      <HomeBanner />
 
       <Cards>
         <Card>

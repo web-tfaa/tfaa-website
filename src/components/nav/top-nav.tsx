@@ -1,14 +1,16 @@
 // External Dependencies
-import React, { FC, KeyboardEventHandler, useCallback } from 'react';
-import hex2rgba from 'hex2rgba';
+import { Box } from '@mui/material';
+import { navigate } from 'gatsby';
+import React, { FC, KeyboardEvent, useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { auth } from '../../firebase';
+import { options } from '../../utils/typography';
 import AuthUserContext from '../session/AuthUserContext';
 import presets from '../../utils/presets';
-import { auth } from '../../firebase';
-import { rhythm, options } from '../../utils/typography';
 import NavItem from './NavItem';
+import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
@@ -16,104 +18,81 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.div(({ theme }) => ({
+const StyledRoot = styled.nav(({ theme }) => ({
   '.list': {
     [presets.Tablet]: {
+      alignItems: 'center',
       display: 'flex',
-      flexGrow: 1,
-      listStyle: 'none',
       margin: 0,
-      maskImage: `linear-gradient(to right, transparent, white ${rhythm(
-        1 / 8,
-      )}, white 98%, transparent)`,
-      overflowX: 'auto',
-      padding: 0,
+      padding: theme.spacing(0, 2),
     },
 
     display: 'none',
   },
 
-  '.logoImage': {
-    marginBottom: 0,
-  },
-
   '.logoImageWrapper': {
-    alignItems: 'center',
-    color: 'inherit',
-    display: 'flex',
-    marginRight: rhythm(1 / 2),
-    textDecoration: 'none',
-  },
-
-  '.logoNavItem': {
-    '&:hover': {
-      opacity: 1,
-      textDecoration: 'none',
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      width: '100%',
     },
-  },
+    [presets.Tablet]: {
+      height: '80%',
+      width: '80%',
+    },
 
-  '.logoText': {
-    fontSize: 24,
-    marginLeft: '0.8em',
-    textDecoration: 'none',
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    height: 72,
+    width: 132,
   },
 
   '.logoWrapper': {
-    alignItems: 'flex-end',
-    borderBottom: '4px solid #2D456F',
-    boxShadow: '3px 0 5px #2D456F',
-    boxSizing: 'border-box',
+    alignItems: 'center',
     display: 'flex',
     fontFamily: options.headerFontFamily.join(','),
-    height: '100%',
-    margin: '0 auto',
-    paddingLeft: rhythm(3 / 4),
-    paddingRight: rhythm(3 / 4),
-    width: '100%',
+    justifyContent: 'center',
+    padding: theme.spacing(0, 2),
   },
 
-  '.signOutLinkWrapper': {
-    float: 'right',
+  [theme.breakpoints.up('md')]: {
+    height: theme.palette.shapes.topNavHeight,
   },
-
   [presets.Tablet]: {
     position: 'fixed',
+    height: theme.palette.shapes.topNavHeight - 16,
   },
 
-  background: `${hex2rgba('#fbfafc', 0.95)}`,
+  background: theme.palette.common.white,
+  boxSizing: 'border-box',
   display: 'flex',
+  justifyContent: 'center',
   flex: 1,
-  height: presets.headerHeight,
-  left: 0,
-  right: 0,
-  zIndex: '2',
+  height: '100%',
+  width: '100%',
+  zIndex: 2,
 }));
 
 // Component Definition
 const TopNav: FC<Props> = ({ isAuthenticated }) => {
-  const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLDivElement>) => {
+  const handlePressKeyDown = useCallback((event: KeyboardEvent<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
-      auth.doSignOut();
+      return isAuthenticated
+        ? auth.doSignOut()
+        : navigate('/members/login');
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
-    <StyledRoot role="navigation">
+    <StyledRoot>
       <div className="logoWrapper">
-        <NavItem
-          className="logoNavItem"
-          linkTo="/"
-        >
+        <NavItem linkTo="/">
           <div className="logoImageWrapper">
             <img
-              alt="TMAC logo"
+              alt="TFAA logo"
               className="logoImage"
-              height="30px"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+              src="/tfaa-logo-svg.svg"
             />
-            <div className="logoText">
-              TMAC
-            </div>
           </div>
         </NavItem>
 
@@ -123,17 +102,31 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
           <NavItem linkTo="/resources/">Resources</NavItem>
           <NavItem linkTo="/members/">Membership</NavItem>
           <NavItem linkTo="/sponsors/">Sponsors</NavItem>
-          {isAuthenticated && (
-            <div
-              className="signOutLinkWrapper"
-              onClick={auth.doSignOut}
-              onKeyDown={handlePressKeyDown}
-              role="button"
-              tabIndex={0}
-            >
-              <NavItem linkTo="/">Sign Out</NavItem>
-            </div>
-          )}
+
+          <Box
+            display="flex"
+            alignItems="center"
+            marginLeft={2}
+          >
+            {isAuthenticated ? (
+              <CtaButton
+                colorVariant="signIn"
+                onClick={auth.doSignOut}
+                onKeyDown={handlePressKeyDown}
+                to="/members/login"
+              >
+                Sign Out
+              </CtaButton>
+            ) : (
+              <CtaButton
+                colorVariant="signIn"
+                onKeyDown={handlePressKeyDown}
+                to="/members/login"
+              >
+                Members Login
+              </CtaButton>
+            )}
+          </Box>
         </ul>
       </div>
     </StyledRoot>
