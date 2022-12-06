@@ -15,8 +15,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '#bannerBackgroundVideo': {
-    // width: 100vw,
-    // height: 100vh,
+    [theme.breakpoints.down('lg')]: {
+      display: 'none',
+    },
     width: '100%',
     height: '100%',
     objectFit: 'cover',
@@ -47,6 +48,11 @@ const StyledRoot = styled.section(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
     width: '50%',
+  },
+
+  [theme.breakpoints.down('lg')]: {
+    background: 'url("https://res.cloudinary.com/tmac/image/upload/v1670299970/tfaa-banner-video-poster--tablet.png") no-repeat',
+    backgroundSize: 'cover',
   },
 
   alignItems: 'center',
