@@ -22,7 +22,7 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
 }) => ({
   '&.MuiButtonBase-root': {
     [theme.breakpoints.down('lg')]: {
-      fontSize: 14,
+      fontSize: 13,
     },
 
     '&:hover': {
@@ -32,7 +32,7 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
     backgroundColor: theme.palette.tfaa[$colorVariant],
     borderRadius: 25,
     fontFamily: 'sans-serif',
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: theme.typography.fontWeightBold,
     textTransform: 'none',
     whiteSpace: 'pre',
