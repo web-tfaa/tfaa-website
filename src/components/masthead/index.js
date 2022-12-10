@@ -15,7 +15,7 @@ import {
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   '.tagline': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       display: 'block',
       width: theme.spacing(39),
     },
@@ -36,7 +36,7 @@ const StyledRoot = styled.div(({ theme }) => ({
       fontSize: scale(1).fontSize,
       width: theme.spacing(36),
     },
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       fontSize: scale(1.1).fontSize,
       width: theme.spacing(36),
     },
@@ -68,7 +68,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   [presets.Phablet]: {
     paddingRight: 0,
   },
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingTop: theme.spacing(12),
   },
   [presets.Desktop]: {

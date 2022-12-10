@@ -53,7 +53,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
   theme,
 }) => ({
   '.hide-header': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       paddingTop: 0,
     },
   },
@@ -61,7 +61,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
     [presets.Desktop]: {
       minHeight: 'calc(100vh - 5rem)',
     },
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       margin: 'inherit',
       paddingTop: theme.palette.shapes.topNavHeight,
     },
@@ -72,7 +72,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
   },
 
   '.main-content': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       paddingLeft: $hasSidebar ? theme.spacing(25) : 0,
     },
     [presets.Desktop]: {
@@ -119,13 +119,13 @@ const StyledRoot = styled.div<StyledRootProps>(({
   },
 
   '.sidebar.show-sidebar': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       display: 'block',
     },
   },
 
   '.sponsors': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       margin: '0 auto',
     },
     backgroundColor: theme.palette.altBackground,

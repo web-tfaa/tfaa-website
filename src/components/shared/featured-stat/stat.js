@@ -42,7 +42,7 @@ const StyledRoot = styled.div(({ $color, $hasTitle, theme }) => ({
     transform: 'translateZ(0)',
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     flex: '0 0 15%',
     width: '90%',
     boxShadow: '1px 3px 5px 0 #aaa',

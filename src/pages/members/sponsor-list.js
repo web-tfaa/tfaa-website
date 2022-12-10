@@ -11,7 +11,6 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import SponsorListTable from './sponsor-table';
-import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 import {
   TMAC_WEB_EXECUTIVE_SECRETARY,
@@ -38,7 +37,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     paddingLeft: 24,
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: 0,
   },
 

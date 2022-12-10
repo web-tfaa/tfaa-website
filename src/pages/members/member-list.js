@@ -10,7 +10,6 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
-import presets from '../../utils/presets';
 import { doGetUsers } from '../../firebase/db';
 import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
@@ -25,18 +24,18 @@ const defaultProps = {
   userEmail: '',
 };
 
-const StyledRoot = styled.div({
+const StyledRoot = styled.div(({ theme }) => ({
   '.paddingContainer': {
     paddingLeft: 24,
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: 0,
   },
 
   paddingLeft: 0,
   width: '0 auto',
-});
+}));
 
 const EMPTY_ARRAY = [];
 

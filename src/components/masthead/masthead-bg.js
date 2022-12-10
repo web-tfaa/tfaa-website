@@ -112,7 +112,7 @@ const MastheadBg = () => {
                 fill: ${theme.palette.texasFlag.red};
               }
             }
-            ${presets.Tablet} {
+            ${theme.breakpoints.up('mobile')} {
               .masthead-bg-right {
                 width: calc(125% + 4vh);
               }

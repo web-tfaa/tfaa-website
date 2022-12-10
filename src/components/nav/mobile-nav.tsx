@@ -8,11 +8,10 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import MobileNavItem from './MobileNavItem';
-import presets from '../../utils/presets';
 import { options } from '../../utils/typography';
 
 const StyledRoot = styled.div(({ theme }) => ({
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     display: 'none',
   },
 

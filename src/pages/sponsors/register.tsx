@@ -13,7 +13,6 @@ import RegisterEmail from '../../components/register/register-email';
 import RegisterSponsorFormWrapper from '../../components/register/register-sponsor-form-wrapper';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/register-stepper';
-import presets from '../../utils/presets';
 
 // Local Typings
 interface Props {
@@ -58,8 +57,9 @@ interface StyledRootProps {
 // Local Variables
 const StyledRoot = styled.div<StyledRootProps>(({
   $isAuthenticated,
+  theme,
 }) => ({
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: !$isAuthenticated ? '1.5rem' : 0,
   },
 

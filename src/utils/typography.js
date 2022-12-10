@@ -9,6 +9,7 @@ import {
   TABLET_MEDIA_QUERY,
 } from 'typography-breakpoint-constants';
 import presets, { colors } from './presets';
+import theme from '../gatsby-theme-material-ui-top-layout/theme';
 
 const texasFlagBlue = '#002868';
 
@@ -189,7 +190,7 @@ const _options = {
           borderRight: 0,
         },
       },
-      [`${presets.Tablet} and (max-width:980px)`]: {
+      [`${theme.breakpoints.up('mobile')} and (max-width:980px)`]: {
         '.has-sidebar .gatsby-highlight': {
           marginLeft: 0,
           marginRight: 0,

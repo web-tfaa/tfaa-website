@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 import AuthUserContext from '../session/AuthUserContext';
-import presets from '../../utils/presets';
 import NavItem from './NavItem';
 import CtaButton from '../shared/CtaButton';
 
@@ -20,7 +19,7 @@ interface Props {
 // Local Variables
 const StyledRoot = styled.nav(({ theme }) => ({
   '.list': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       alignItems: 'center',
       display: 'flex',
       margin: 0,
@@ -35,7 +34,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
       height: '100%',
       width: '100%',
     },
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       height: '80%',
       width: '80%',
     },
@@ -58,7 +57,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     height: theme.palette.shapes.topNavHeight,
   },
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     position: 'fixed',
     height: theme.palette.shapes.topNavHeight - 16,
   },

@@ -25,7 +25,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     height: 140,
     width: 140,
   },
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     height: 160,
     width: 160,
   },
