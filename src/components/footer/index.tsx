@@ -86,15 +86,13 @@ const StyledRoot = styled.footer(({ theme }) => {
           order: 3,
         },
 
-        justifySelf: 'center',
-        flex: 2,
-
-        display: 'flex',
-        justifyContent: 'center',
-        gap: theme.spacing(12),
-
-
         color: theme.palette.grey['700'],
+        display: 'flex',
+        flex: 2,
+        flexWrap: 'wrap',
+        gap: theme.spacing(12),
+        justifyContent: 'center',
+        justifySelf: 'center',
       },
 
       '.footerTopRight': {
