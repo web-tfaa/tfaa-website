@@ -1,14 +1,18 @@
 // External Dependencies
+import { Box } from '@mui/material';
+import { Link } from 'gatsby-theme-material-ui';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // Internal Dependencies
-import NavItem from '../nav/NavItem';
-import presets from '../../utils/presets';
 import { currentYearLong } from '../../utils/helpers';
 import { anchorStyles } from '../../utils/sharedStyles';
 import { Typography } from '@mui/material';
+import { appName, mailingAddress } from '../../utils/app-constants';
+import Address from '../shared/Address';
+import NavItem from '../nav/NavItem';
+import presets from '../../utils/presets';
 
 // Local Variables
 const StyledOpenInNewIcon = styled(OpenInNewIcon)({
@@ -36,7 +40,18 @@ const StyledRoot = styled.footer(({ theme }) => {
 
   return {
     '.footerBottom': {
+      [theme.breakpoints.down('lg')]: {
+        fontSize: 15,
+      },
+      [theme.breakpoints.down('md')]: {
+        fontSize: 14,
+      },
+
       '& a': linkStyles,
+
+      '& > div:not(:first-child)': {
+        marginTop: theme.spacing(0.5),
+      },
 
       alignItems: 'center',
       display: 'flex',
@@ -56,15 +71,19 @@ const StyledRoot = styled.footer(({ theme }) => {
       },
 
       '.footerTopMiddle': {
+        [theme.breakpoints.down('lg')]: {
+          fontSize: 15,
+          columnGap: theme.spacing(3),
+        },
+
         justifySelf: 'center', // Alignment for parent grid
 
         display: 'grid', // Grid for the top middle section
         gridTemplateColumns: '1fr 1fr 1fr',
         gridTemplateRows: '1fr',
-        columnGap: theme.spacing(3),
+        columnGap: theme.spacing(4),
 
-        color: theme.palette.text.secondary,
-
+        color: theme.palette.grey['700'],
       },
 
       '.footerTopRight': {
@@ -72,7 +91,7 @@ const StyledRoot = styled.footer(({ theme }) => {
 
         '.forEveryone': {
           [theme.breakpoints.down('lg')]: {
-            fontSize: theme.spacing(3),
+            fontSize: 24,
           },
 
           color: theme.palette.tfaa.about,
@@ -80,6 +99,26 @@ const StyledRoot = styled.footer(({ theme }) => {
           textAlign: 'right',
         },
       },
+    },
+
+    '.linkList': {
+      '.MuiBox-root': {
+        '& > a': {
+          ...linkStyles,
+          color: theme.palette.grey['700'],
+          marginLeft: 0,
+
+          '&:visited': {
+            color: theme.palette.grey['700'],
+          },
+        },
+
+        marginBottom: theme.spacing(0.5),
+      },
+    },
+
+    hr: {
+      marginBottom: theme.spacing(1.5),
     },
 
     [presets.Tablet]: {
@@ -95,6 +134,15 @@ const StyledRoot = styled.footer(({ theme }) => {
 
 // Component Definition
 const Footer: FC = () => {
+  const addressElement = (
+    <Address
+      addressOne={mailingAddress.addressOne}
+      city={mailingAddress.city}
+      state={mailingAddress.state}
+      zipCode={mailingAddress.zip}
+    />
+  );
+
   return (
     <StyledRoot className="footer">
       <div className="footerTop">
@@ -114,11 +162,30 @@ const Footer: FC = () => {
           <div>
             Location &amp; Contact
             <hr />
+            Mailing Address
+            {addressElement}
+
+            <Box marginTop={1}>
+              Physical Address
+              {addressElement}
+            </Box>
           </div>
 
-          <div>
+          <div className="linkList">
             LINKS
             <hr />
+            <Box>
+              <Link to="/about">The issue</Link>
+            </Box>
+            <Box>
+              <Link to="/about">How we help</Link>
+            </Box>
+            <Box>
+              <Link to="/about">Get involved</Link>
+            </Box>
+            <Box>
+              <Link to="/about">Latest news</Link>
+            </Box>
           </div>
 
           <div>
@@ -137,8 +204,8 @@ const Footer: FC = () => {
 
       <div className="footerBottom">
         <div>
-          &copy; {currentYearLong} |
-          Texas Fine Arts Administrators. All rights reserved.
+          &copy; {currentYearLong} |{' '}
+          {appName}. All rights reserved.
         </div>
 
         <div>
