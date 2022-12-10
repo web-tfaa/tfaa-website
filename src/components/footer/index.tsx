@@ -77,6 +77,9 @@ const StyledRoot = styled.footer(({ theme }) => {
       },
 
       '.footerTopMiddle': {
+        [theme.breakpoints.down('xl')]: {
+          gap: theme.spacing(8),
+        },
         [theme.breakpoints.down('lg')]: {
           fontSize: 15,
           gap: theme.spacing(5),
@@ -88,7 +91,7 @@ const StyledRoot = styled.footer(({ theme }) => {
 
         display: 'flex',
         justifyContent: 'center',
-        gap: theme.spacing(8),
+        gap: theme.spacing(12),
 
 
         color: theme.palette.grey['700'],
@@ -97,6 +100,7 @@ const StyledRoot = styled.footer(({ theme }) => {
       '.footerTopRight': {
         [theme.breakpoints.down('lg')]: {
           order: 2,
+          width: 440,
         },
 
         justifySelf: 'end',
@@ -147,6 +151,9 @@ const StyledRoot = styled.footer(({ theme }) => {
       marginBottom: theme.spacing(1.5),
     },
 
+    [theme.breakpoints.down('xl')]: {
+      padding: theme.spacing(4),
+    },
     [theme.breakpoints.down('lg')]: {
       fontSize: 15,
       padding: theme.spacing(3),
@@ -155,9 +162,13 @@ const StyledRoot = styled.footer(({ theme }) => {
       fontSize: 14,
       padding: theme.spacing(2),
     },
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 14,
+      padding: theme.spacing(2, 2, 12),
+    },
 
     fontSize: 16,
-    padding: theme.spacing(4),
+    padding: theme.spacing(8, 8, 4),
     position: 'static',
     background: theme.palette.common.white,
     borderTop: `2px solid ${theme.palette.grey['200']}`,
