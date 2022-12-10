@@ -1,15 +1,18 @@
 // External Dependencies
-import { Box } from '@mui/material';
+import { Avatar, Box, IconButton } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 // Internal Dependencies
 import { currentYearLong } from '../../utils/helpers';
 import { anchorStyles } from '../../utils/sharedStyles';
 import { Typography } from '@mui/material';
-import { appName, mailingAddress } from '../../utils/app-constants';
+import { appName, facebookUrl, mailingAddress, twitterUrl } from '../../utils/app-constants';
 import Address from '../shared/Address';
 import NavItem from '../nav/NavItem';
 import presets from '../../utils/presets';
@@ -73,7 +76,7 @@ const StyledRoot = styled.footer(({ theme }) => {
       '.footerTopMiddle': {
         [theme.breakpoints.down('lg')]: {
           fontSize: 15,
-          columnGap: theme.spacing(3),
+          columnGap: theme.spacing(5),
         },
 
         justifySelf: 'center', // Alignment for parent grid
@@ -81,7 +84,7 @@ const StyledRoot = styled.footer(({ theme }) => {
         display: 'grid', // Grid for the top middle section
         gridTemplateColumns: '1fr 1fr 1fr',
         gridTemplateRows: '1fr',
-        columnGap: theme.spacing(4),
+        columnGap: theme.spacing(8),
 
         color: theme.palette.grey['700'],
       },
@@ -98,6 +101,15 @@ const StyledRoot = styled.footer(({ theme }) => {
           fontSize: 34,
           textAlign: 'right',
         },
+
+        '.followUsIconList': {
+          '.MuiAvatar-root': {
+            backgroundColor: theme.palette.tfaa.resources,
+          },
+
+          marginTop: theme.spacing(2),
+          textAlign: 'left',
+        }
       },
     },
 
@@ -188,9 +200,30 @@ const Footer: FC = () => {
             </Box>
           </div>
 
-          <div>
+          <div className="linkList">
             FOLLOW US
             <hr />
+            <Box>
+              <a
+                href={facebookUrl}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Facebook
+              </a>
+            </Box>
+            <Box>
+              <a
+                href={twitterUrl}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Twitter
+              </a>
+            </Box>
+            <Box>
+              <Link to="/about">Instagram</Link>
+            </Box>
           </div>
         </div>
 
@@ -198,6 +231,40 @@ const Footer: FC = () => {
           <Typography className="forEveryone">
             Fine Arts is for Everyone
           </Typography>
+
+          <div className="followUsIconList">
+            <Typography sx={{ fontSize: 14 }}>
+              FOLLOW US
+            </Typography>
+
+            <div>
+              <IconButton
+                href={facebookUrl}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <Avatar>
+                  <FacebookIcon fontSize="small" />
+                </Avatar>
+              </IconButton>
+
+              <IconButton
+                href={twitterUrl}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <Avatar>
+                  <TwitterIcon fontSize="small" />
+                </Avatar>
+              </IconButton>
+
+              <IconButton>
+                <Avatar>
+                  <InstagramIcon fontSize="small" />
+                </Avatar>
+              </IconButton>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -209,18 +276,6 @@ const Footer: FC = () => {
         </div>
 
         <div>
-          Built by{' '}
-          <a
-            href="https://www.mikemathew.com/"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
-            Drumsensei Media
-            <StyledOpenInNewIcon />
-          </a>
-        </div>
-
-        <div>
           Made with love by{' '}
           <a
             href="https://www.lvbranding.com/"
@@ -228,6 +283,18 @@ const Footer: FC = () => {
             target="_blank"
           >
             LV Branding
+            <StyledOpenInNewIcon />
+          </a>
+        </div>
+
+        <div>
+          Built by{' '}
+          <a
+            href="https://www.mikemathew.com/"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            Drumsensei Media
             <StyledOpenInNewIcon />
           </a>
         </div>

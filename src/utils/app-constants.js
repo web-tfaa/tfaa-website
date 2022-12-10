@@ -9,3 +9,6 @@ export const mailingAddress = {
   state: 'TX',
   zip: '75025',
 };
+
+export const facebookUrl = 'https://www.facebook.com/profile.php?id=100075503299708';
+export const twitterUrl = 'https://twitter.com/TMACFINEARTS';
