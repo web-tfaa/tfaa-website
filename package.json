@@ -54,6 +54,7 @@
     "gatsby-plugin-typography": "4.24.0",
     "gatsby-source-contentful": "7.22.0",
     "gatsby-theme-material-ui": "^5.3.0",
+    "gatsby-theme-material-ui-top-layout": "^5.2.0",
     "gray-percentage": "^2.0.0",
     "hex2rgba": "0.0.1",
     "jss": "^10.9.2",

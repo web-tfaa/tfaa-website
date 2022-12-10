@@ -1,7 +1,7 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import styled, {
-  ThemeProvider,
+  ThemeProvider as StyledComponentsThemeProvider,
 } from 'styled-components';
 import React, { FC, ReactElement } from 'react';
 import clsx from 'clsx';
@@ -155,7 +155,7 @@ const DefaultLayout: FC<Props> = ({
     || (isAuthenticated && isMembers);
 
   return (
-    <ThemeProvider theme={theme}>
+    <StyledComponentsThemeProvider theme={theme}>
       <Helmet defaultTitle="Texas Music Administrators Conference">
         <meta
           name="twitter:site"
@@ -233,7 +233,7 @@ const DefaultLayout: FC<Props> = ({
 
         <Footer />
       </StyledRoot>
-    </ThemeProvider>
+    </StyledComponentsThemeProvider>
   );
 };
 
