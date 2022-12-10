@@ -1,6 +1,5 @@
 // External Dependencies
 import { Box } from '@mui/material';
-import { navigate } from 'gatsby';
 import React, { FC, KeyboardEvent, useCallback } from 'react';
 import styled from 'styled-components';
 
@@ -78,7 +77,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
         ? auth.doSignOut()
-        : navigate('/members/login');
+        : null;
     }
   }, [isAuthenticated]);
 
@@ -132,7 +131,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   );
 };
 
-const TopNavWithContext = (props) => (
+const TopNavWithContext = (props: any) => (
   <AuthUserContext.Consumer>
     {(authUser) => (
       <TopNav

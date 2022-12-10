@@ -47,9 +47,13 @@ const StyledRoot = styled.footer(({ theme }) => {
     '.footerBottom': {
       [theme.breakpoints.down('lg')]: {
         fontSize: 15,
+        textAlign: 'center',
       },
       [theme.breakpoints.down('md')]: {
         fontSize: 14,
+      },
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 13,
       },
 
       '& a': linkStyles,
