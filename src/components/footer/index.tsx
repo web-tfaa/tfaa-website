@@ -102,6 +102,9 @@ const StyledRoot = styled.footer(({ theme }) => {
           order: 2,
           width: 440,
         },
+        [theme.breakpoints.down('mobile')]: {
+          alignItems: 'center',
+        },
 
         justifySelf: 'end',
         display: 'flex',
@@ -120,6 +123,11 @@ const StyledRoot = styled.footer(({ theme }) => {
         },
 
         '.followUsIconList': {
+          [theme.breakpoints.down('mobile')]: {
+            textAlign: 'center',
+            marginBottom: theme.spacing(1.5),
+          },
+
           '.MuiAvatar-root': {
             backgroundColor: theme.palette.tfaa.resources,
           },
