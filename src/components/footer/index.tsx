@@ -15,7 +15,6 @@ import { Typography } from '@mui/material';
 import { appName, facebookUrl, mailingAddress, twitterUrl } from '../../utils/app-constants';
 import Address from '../shared/Address';
 import NavItem from '../nav/NavItem';
-import presets from '../../utils/presets';
 
 // Local Variables
 const StyledOpenInNewIcon = styled(OpenInNewIcon)({
@@ -42,6 +41,9 @@ const StyledRoot = styled.footer(({ theme }) => {
   };
 
   return {
+    '.addressData': {
+      minWidth: 160,
+    },
     '.footerBottom': {
       [theme.breakpoints.down('lg')]: {
         fontSize: 15,
@@ -64,33 +66,44 @@ const StyledRoot = styled.footer(({ theme }) => {
     },
 
     '.footerTop': {
-      display: 'grid',
-      gridTemplateColumns: '1fr 3fr 1fr',
-      gridTemplateRows: '1fr',
-      columnGap: theme.spacing(2),
+      display: 'flex',
+      justifyContent: 'space-around',
+      flexWrap: 'wrap',
+      gap: theme.spacing(2),
 
       '.footerTopLeft': {
         alignSelf: 'center',
+        width: 240,
       },
 
       '.footerTopMiddle': {
         [theme.breakpoints.down('lg')]: {
           fontSize: 15,
-          columnGap: theme.spacing(5),
+          gap: theme.spacing(5),
+          order: 3,
         },
 
-        justifySelf: 'center', // Alignment for parent grid
+        justifySelf: 'center',
+        flex: 2,
 
-        display: 'grid', // Grid for the top middle section
-        gridTemplateColumns: '1fr 1fr 1fr',
-        gridTemplateRows: '1fr',
-        columnGap: theme.spacing(8),
+        display: 'flex',
+        justifyContent: 'center',
+        gap: theme.spacing(8),
+
 
         color: theme.palette.grey['700'],
       },
 
       '.footerTopRight': {
+        [theme.breakpoints.down('lg')]: {
+          order: 2,
+        },
+
         justifySelf: 'end',
+        display: 'flex',
+        alignItems: 'flex-end',
+        flexDirection: 'column',
+        width: 300,
 
         '.forEveryone': {
           [theme.breakpoints.down('lg')]: {
@@ -126,6 +139,7 @@ const StyledRoot = styled.footer(({ theme }) => {
         },
 
         marginBottom: theme.spacing(0.5),
+        minWidth: 100,
       },
     },
 
@@ -133,12 +147,18 @@ const StyledRoot = styled.footer(({ theme }) => {
       marginBottom: theme.spacing(1.5),
     },
 
-    [presets.Tablet]: {
-      fontSize: 16,
-      padding: '2em',
-      position: 'static',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 15,
+      padding: theme.spacing(3),
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 14,
+      padding: theme.spacing(2),
     },
 
+    fontSize: 16,
+    padding: theme.spacing(4),
+    position: 'static',
     background: theme.palette.common.white,
     borderTop: `2px solid ${theme.palette.grey['200']}`,
   };
@@ -171,7 +191,7 @@ const Footer: FC = () => {
         </div>
 
         <div className="footerTopMiddle">
-          <div>
+          <div className="addressData">
             Location &amp; Contact
             <hr />
             Mailing Address

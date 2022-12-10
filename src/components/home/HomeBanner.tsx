@@ -56,8 +56,6 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   alignItems: 'center',
-
-  // backgroundColor: theme.palette.grey['900'],
   display: 'flex',
   gap: theme.spacing(8),
   height: 800,
