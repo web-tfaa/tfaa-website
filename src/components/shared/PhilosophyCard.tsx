@@ -19,7 +19,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     transform: 'translateZ(0)',
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     boxShadow: `0 1px 0 0 ${theme.palette.ui.light}`,
     '&:nth-child(5),&:nth-child(6)': {
       boxShadow: 'none',

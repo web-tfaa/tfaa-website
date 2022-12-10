@@ -57,6 +57,15 @@ interface PaletteUi {
 declare module '@mui/material/styles' {
   export type Theme = MuiTheme
 
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    mobile: true; // adds the `mobile` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+
   interface Palette extends MuiPalette {
     alert: PaletteAlert;
     altBackground: string;

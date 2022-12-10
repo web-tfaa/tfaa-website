@@ -7,11 +7,25 @@ import { Link } from 'gatsby-theme-material-ui';
 const StyledRoot = styled.section(({ theme }) => ({
   '.bannerLeft': {
     a: {
+      [theme.breakpoints.down('lg')]: {
+        fontSize: 18
+      },
+      [theme.breakpoints.down('mobile')]: {
+        fontSize: 16
+      },
       color: theme.palette.common.white,
       fontWeight: theme.typography.fontWeightMedium,
     },
 
+    [theme.breakpoints.down('lg')]: {
+      paddingRight: theme.spacing(2),
+    },
+    [theme.breakpoints.down('mobile')]: {
+      paddingRight: theme.spacing(1),
+    },
+
     maxWidth: 400,
+    paddingRight: theme.spacing(3),
   },
 
   '#bannerBackgroundVideo': {
@@ -36,10 +50,26 @@ const StyledRoot = styled.section(({ theme }) => ({
     margin: 0,
   },
   h1: {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 64,
+      lineHeight: '64px',
+    },
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 42,
+      lineHeight: '42px',
+    },
     fontSize: 92,
     lineHeight: '92px',
   },
   h2: {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 32,
+      lineHeight: '32px',
+    },
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 24,
+      lineHeight: '24px',
+    },
     fontSize: 40,
     lineHeight: '40px',
   },
@@ -53,11 +83,19 @@ const StyledRoot = styled.section(({ theme }) => ({
   [theme.breakpoints.down('lg')]: {
     background: 'url("https://res.cloudinary.com/tmac/image/upload/v1670299970/tfaa-banner-video-poster--tablet.png") no-repeat',
     backgroundSize: 'cover',
+    gap: 0,
+    height: 600,
+    padding: theme.spacing(6),
+    position: 'static',
+  },
+  [theme.breakpoints.down('mobile')]: {
+    background: 'url("https://res.cloudinary.com/tmac/image/upload/v1670695411/tfaa-banner-video-poster--mobile.png") no-repeat',
+    backgroundSize: 'cover',
+    height: 540,
+    padding: theme.spacing(4),
   },
 
   alignItems: 'center',
-
-  // backgroundColor: theme.palette.grey['900'],
   display: 'flex',
   gap: theme.spacing(8),
   height: 800,

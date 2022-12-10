@@ -1,6 +1,6 @@
 // External Dependencies
 import { Box, SvgIconProps } from '@mui/material';
-import React, { FC, ReactElement } from 'react';
+import React, { FC, KeyboardEvent, ReactElement } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import styled, { useTheme } from 'styled-components';
 
@@ -11,7 +11,9 @@ import { rhythm, scale, options } from '../../utils/typography';
 interface Props {
   icon: (props: SvgIconProps) => ReactElement<SvgIconProps>;
   label: string;
-  linkTo: string;
+  linkTo?: string;
+  onClick?: () => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
 }
 
 // Local Variables
@@ -36,14 +38,25 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 // Component Definition
-const MobileNavItem: FC<Props> = ({ linkTo, label, icon: Icon }) => {
+const MobileNavItem: FC<Props> = ({
+  icon: Icon,
+  label,
+  linkTo,
+  onClick,
+  onKeyDown,
+}) => {
   const theme = useTheme();
 
   return (
-    <StyledLink to={linkTo}>
+    <StyledLink
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      to={linkTo}
+    >
       <div className="iconWrapper">
         <Icon htmlColor={theme.palette.texasFlag.blue} />
       </div>
+
       <Box
         className="label"
         marginTop={1}

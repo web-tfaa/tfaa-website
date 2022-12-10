@@ -4,9 +4,24 @@ import {
 import { createTheme } from '@mui/material';
 import gray from 'gray-percentage';
 
+// Local Variables
+const defaultTheme = createTheme();
+
 // A custom theme for this app, smartly merged with the default MUI theme
 // The plugin 'gatsby-theme-material-ui' will use this theme
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      ...defaultTheme.breakpoints.values,
+      // as of 2022-12-10, the default breakpoints are:
+      // xs: 0,
+      // sm: 600,
+      mobile: 768,
+      // md: 900,
+      // lg: 1200,
+      // xl: 1536,
+    },
+  },
   palette: {
     primary: {
       main: '#556cd6',

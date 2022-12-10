@@ -9,7 +9,6 @@ import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import SignupForm from '../../components/register/signup-form';
-import presets from '../../utils/presets';
 
 // Local Typings
 interface Props {
@@ -17,7 +16,7 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.div({
+const StyledRoot = styled.div(({ theme }) => ({
   '.signup-h2': {
     margin: '1rem 0',
   },
@@ -27,11 +26,11 @@ const StyledRoot = styled.div({
     maxWidth: '70%',
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: '1.5rem',
   },
   paddingLeft: 0,
-});
+}));
 
 // Component Definition
 const SignUp: FC<Props> = ({ location }) => (

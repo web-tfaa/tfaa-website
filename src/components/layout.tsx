@@ -1,7 +1,7 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import styled, {
-  ThemeProvider,
+  ThemeProvider as StyledComponentsThemeProvider,
 } from 'styled-components';
 import React, { FC, ReactElement } from 'react';
 import clsx from 'clsx';
@@ -53,7 +53,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
   theme,
 }) => ({
   '.hide-header': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       paddingTop: 0,
     },
   },
@@ -61,7 +61,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
     [presets.Desktop]: {
       minHeight: 'calc(100vh - 5rem)',
     },
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       margin: 'inherit',
       paddingTop: theme.palette.shapes.topNavHeight,
     },
@@ -72,8 +72,9 @@ const StyledRoot = styled.div<StyledRootProps>(({
   },
 
   '.main-content': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       paddingLeft: $hasSidebar ? theme.spacing(25) : 0,
+      width: '100%',
     },
     [presets.Desktop]: {
       paddingLeft: $hasSidebar ? theme.spacing(31.5) : 0,
@@ -119,13 +120,13 @@ const StyledRoot = styled.div<StyledRootProps>(({
   },
 
   '.sidebar.show-sidebar': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       display: 'block',
     },
   },
 
   '.sponsors': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       margin: '0 auto',
     },
     backgroundColor: theme.palette.altBackground,
@@ -155,7 +156,7 @@ const DefaultLayout: FC<Props> = ({
     || (isAuthenticated && isMembers);
 
   return (
-    <ThemeProvider theme={theme}>
+    <StyledComponentsThemeProvider theme={theme}>
       <Helmet defaultTitle="Texas Music Administrators Conference">
         <meta
           name="twitter:site"
@@ -233,7 +234,7 @@ const DefaultLayout: FC<Props> = ({
 
         <Footer />
       </StyledRoot>
-    </ThemeProvider>
+    </StyledComponentsThemeProvider>
   );
 };
 

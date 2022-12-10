@@ -30,7 +30,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     padding: rhythm(1),
     paddingBottom: 96,
   },
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     display: 'block',
   },
 

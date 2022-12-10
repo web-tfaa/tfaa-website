@@ -13,7 +13,6 @@ import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
-import presets from '../../utils/presets';
 import { GatsbyContextProps } from '../../types/shared';
 
 // Local Typings
@@ -27,10 +26,11 @@ interface StyledRootProps {
 
 // Local Variables
 const StyledRoot = styled.div<StyledRootProps>(({ $isAuthenticated, theme }) => ({
-  paddingLeft: 0,
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: !$isAuthenticated ? theme.spacing(3) : 0,
   },
+
+  paddingLeft: 0,
 }));
 
 // Component Definition

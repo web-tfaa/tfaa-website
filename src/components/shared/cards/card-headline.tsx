@@ -11,14 +11,17 @@ interface Props {
   children: React.ReactNode;
   gutterBottom?: boolean;
 }
+interface StyledH2Props {
+  $gutterBottom: boolean;
+}
 
 // Local Variables
-const StyledH2 = styled.h2(({ $gutterBottom }) => ({
+const StyledH2 = styled.h2<StyledH2Props>(({ $gutterBottom, theme }) => ({
   ...scale(2 / 5),
   lineHeight: 1.2,
   marginTop: 0,
   marginBottom: $gutterBottom ? 'inherit' : 0,
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     fontSize: scale(1 / 10).fontSize,
   },
   [presets.Desktop]: {

@@ -29,7 +29,7 @@ const defaultProps = {
 };
 
 const StyledButton = styled.button(({ $isDisabled, $isRed, theme }) => ({
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     ...scale(2 / 5),
     padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
   },

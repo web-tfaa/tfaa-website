@@ -13,7 +13,6 @@ import { emailRegex } from '../../utils/helpers';
 import Container from '../../components/shared/container';
 import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 
 // Local Variables
 const propTypes = {
@@ -52,7 +51,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     width: 288,
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: theme.spacing(3),
   },
 

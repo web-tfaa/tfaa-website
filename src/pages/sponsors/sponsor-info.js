@@ -15,16 +15,15 @@ import CtaButton from '../../components/masthead/cta-button';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 import MobileDivider from '../../components/shared/MobileDivider';
 
 // Local Variables
-const StyledRoot = styled.div(({ $isAuthenticated }) => ({
+const StyledRoot = styled.div(({ $isAuthenticated, theme }) => ({
   '.strong': {
     fontWeight: 600,
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: !$isAuthenticated ? '1.5rem' : 0,
   },
 

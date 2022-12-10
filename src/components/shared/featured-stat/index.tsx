@@ -6,7 +6,6 @@ import School from '@mui/icons-material/School';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import presets from '../../../utils/presets';
 import Stat from './stat';
 
 // Icon colors
@@ -17,7 +16,7 @@ const faceIconColor = '#b96af7';
 
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     marginBottom: 0,
   },
 

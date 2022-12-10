@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import { blue, green } from '@mui/material/colors';
 import styled from 'styled-components';
+import { Theme } from '@mui/material/styles';
 
 // Internal Dependencies
 import presets from '../../utils/presets';
@@ -11,9 +12,13 @@ import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Typings
 interface Props {
-  buttonColor: 'blue' | 'green';
+  buttonColor: ButtonColor;
   children: React.ReactNode;
   to?: string;
+}
+type ButtonColor = 'blue' | 'green';
+interface StyledLinkProps {
+  $buttonColor: ButtonColor;
 }
 
 // Local Variables
@@ -22,6 +27,9 @@ const green500 = '#4caf50';
 const getButtonColor = ({
   buttonColor,
   theme
+}: {
+  buttonColor: ButtonColor;
+  theme: Theme;
 }) => {
   let background: string = blue['50'];
   let hover: string = blue['800'];
@@ -40,14 +48,14 @@ const getButtonColor = ({
   };
 };
 
-const StyledLink = styled(Link)(({ $buttonColor, theme }) => {
+const StyledLink = styled(Link)<StyledLinkProps>(({ $buttonColor, theme }) => {
   const color = getButtonColor({
     buttonColor: $buttonColor,
     theme
   });
 
   return {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       ...scale(2 / 5),
       padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
     },

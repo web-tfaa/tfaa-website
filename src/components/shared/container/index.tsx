@@ -9,6 +9,7 @@ import { rhythm, options } from '../../../utils/typography';
 // Local Typings
 interface Props {
   children: React.ReactNode;
+  className?: string;
   hasSideBar?: boolean;
 }
 interface StyledRootProps {
@@ -16,25 +17,28 @@ interface StyledRootProps {
 }
 
 // Local Variables
-const StyledRoot = styled.div<StyledRootProps>(({ $hasSideBar }) => ({
+const StyledRoot = styled.div<StyledRootProps>(({ $hasSideBar, theme }) => ({
+  [theme.breakpoints.up('mobile')]: {
+    paddingBottom: rhythm(1.5),
+  },
+
   margin: '0 auto',
   maxWidth: $hasSideBar ? rhythm(presets.maxWidthWithSidebar) : rhythm(presets.maxWidth),
   padding: `${rhythm(1.5)} ${rhythm(options.blockMarginBottom)}`,
   paddingBottom: rhythm(3.5),
   position: 'relative',
-  [presets.Tablet]: {
-    paddingBottom: rhythm(1.5),
-  },
 }));
 
 // Component Definition
 const Container: FC<Props> = ({
   children,
+  className,
   hasSideBar = true,
   ...otherProps
 }) => (
   <StyledRoot
     $hasSideBar={hasSideBar}
+    className={className}
     {...otherProps}
   >
     {children}
