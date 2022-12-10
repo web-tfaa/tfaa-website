@@ -3,20 +3,17 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import NavItem from '../nav/NavItem';
 import presets from '../../utils/presets';
-import { options } from '../../utils/typography';
 import { currentYearLong } from '../../utils/helpers';
+import { anchorStyles } from '../../utils/sharedStyles';
+import { Typography } from '@mui/material';
 
 // Local Variables
 const StyledRoot = styled.footer(({ theme }) => {
   const linkStyles = {
-    color: 'inherit',
-    textDecoration: 'none',
-    transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
-    borderBottom: `1px solid ${theme.palette.ui.bright}`,
-    boxShadow: `inset 0 -2px 0px 0px ${theme.palette.ui.bright}`,
-    fontFamily: options.headerFontFamily.join(','),
-    fontWeight: 'bold',
+    ...anchorStyles(theme),
+    fontWeight: theme.typography.fontWeightMedium,
     marginLeft: 5,
 
     '&:hover': {
@@ -29,16 +26,42 @@ const StyledRoot = styled.footer(({ theme }) => {
   };
 
   return {
-    '.footer-left': {
-      maxWidth: '60%',
-
+    '.footerBottom': {
       '& a': linkStyles,
+
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      marginTop: theme.spacing(3),
     },
 
-    '.footer-right': {
-      textAlign: 'right',
+    '.footerTop': {
+      display: 'grid',
+      gridTemplateColumns: '1fr 3fr 1fr',
+      gridTemplateRows: '1fr',
 
-      '& a': linkStyles,
+      '.footerTopLeft': {
+        alignSelf: 'center',
+      },
+
+      '.footerTopMiddle': {
+        justifySelf: 'center',
+      },
+
+      '.footerTopRight': {
+        justifySelf: 'end',
+
+        '.forEveryone': {
+          [theme.breakpoints.down('lg')]: {
+            fontSize: theme.spacing(3),
+          },
+
+          color: theme.palette.tfaa.about,
+          fontSize: 34,
+          textAlign: 'right',
+        },
+      },
     },
 
     [presets.Tablet]: {
@@ -47,42 +70,61 @@ const StyledRoot = styled.footer(({ theme }) => {
       position: 'static',
     },
 
-    alignItems: 'center',
-    background: '#fbfafc',
-    borderTop: '4px solid #2D456F',
-    bottom: 68,
-    boxShadow: '-2px 0 5px #444',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flex: 1,
-    fontFamily: options.headerFontFamily.join('/'),
-    fontSize: 12,
-    justifyContent: 'space-between',
-    padding: '1.25em',
-    position: 'relative',
-    zIndex: 10,
+    background: theme.palette.common.white,
+    borderTop: `2px solid ${theme.palette.grey['200']}`,
   };
 });
 
 // Component Definition
 const Footer: FC = () => (
   <StyledRoot className="footer">
-    <div className="footer-left">
-      &copy; {currentYearLong} |
-      <a href="https://www.texasmusicadmin.com/">
-        Texas Music Administrators Conference
-      </a>
+    <div className="footerTop">
+      <div className="footerTopLeft">
+        <NavItem linkTo="/">
+          <div className="logoImageWrapper">
+            <img
+              alt="TFAA logo"
+              className="logoImage"
+              src="/tfaa-logo-svg.svg"
+            />
+          </div>
+        </NavItem>
+      </div>
+
+      <div className="footerTopMiddle">
+        middle links
+      </div>
+
+      <div className="footerTopRight">
+        <Typography className="forEveryone">
+          Fine Arts is for Everyone
+        </Typography>
+      </div>
     </div>
 
-    <div className="footer-right">
+
+    <div className="footerBottom">
       <div>
-        Built by
+        &copy; {currentYearLong} |
+        Texas Fine Arts Administrators. All rights reserved.
+      </div>
+      <div>
+        Built by{' '}
         <a
           href="https://www.mikemathew.com/"
           rel="noreferrer noopener"
           target="_blank"
         >
           Drumsensei Media
+        </a>
+      </div>
+      <div>Made with love by{' '}
+        <a
+          href="https://www.lvbranding.com/"
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          LV Branding
         </a>
       </div>
     </div>
