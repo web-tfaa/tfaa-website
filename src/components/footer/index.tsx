@@ -89,11 +89,13 @@ const StyledRoot = styled.footer(({ theme }) => {
           gap: theme.spacing(5),
           order: 3,
         },
+        [theme.breakpoints.down('mobile')]: {
+          flexWrap: 'wrap',
+        },
 
         color: theme.palette.grey['700'],
         display: 'flex',
         flex: 2,
-        flexWrap: 'wrap',
         gap: theme.spacing(12),
         justifyContent: 'center',
         justifySelf: 'center',
