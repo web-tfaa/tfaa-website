@@ -41,8 +41,6 @@ const StyledRoot = styled.div(({ theme }) => ({
 
 // Component Definition
 const MobileNav: FC<Props> = ({ isAuthenticated }) => {
-  console.log('MobileNav : isAuthenticated', isAuthenticated);
-
   const handlePressKeyDown = useCallback((event: KeyboardEvent<Element>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated

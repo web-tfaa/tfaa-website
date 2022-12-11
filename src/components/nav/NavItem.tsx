@@ -37,6 +37,7 @@ const StyledRoot = styled.li(({ theme }) => ({
     boxSizing: 'border-box',
     color: 'inherit',
     display: 'inline-block',
+    // fontFamily: 'RNS_Sanz, sans-serif',
     fontSize: 18,
     letterSpacing: '0.03em',
     padding: theme.spacing(0, 2),

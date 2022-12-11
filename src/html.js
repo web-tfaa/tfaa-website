@@ -30,7 +30,10 @@ export default class HTML extends React.Component {
           />
           {this.props.headComponents}
           <meta charSet="utf-8" />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta
+            content="IE=edge"
+            httpEquiv="X-UA-Compatible"
+          />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -57,12 +60,18 @@ export default class HTML extends React.Component {
             href="/safari-pinned-tab.svg"
             color={colors.gatsby}
           />
-          <meta name="msapplication-config" content="/browserconfig.xml" />
+          <meta
+            name="msapplication-config"
+            content="/browserconfig.xml"
+          />
           <script
             src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"
             defer
           />
-          <meta name="google-site-verification" content="zatUmTHTSD3gJPg0iwPub6EGhF5De-kqJHy826gYNh0" />
+          <meta
+            name="google-site-verification"
+            content="zatUmTHTSD3gJPg0iwPub6EGhF5De-kqJHy826gYNh0"
+          />
         </head>
         <body {...this.props.bodyAttributes}>
           <div

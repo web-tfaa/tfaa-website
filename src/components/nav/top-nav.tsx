@@ -48,7 +48,6 @@ const StyledRoot = styled.nav(({ theme }) => ({
   '.logoWrapper': {
     alignItems: 'center',
     display: 'flex',
-    fontFamily: options.headerFontFamily.join(','),
     justifyContent: 'center',
     padding: theme.spacing(0, 2),
   },
