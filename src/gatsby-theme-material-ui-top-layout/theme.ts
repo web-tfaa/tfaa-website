@@ -60,6 +60,8 @@ const theme = createTheme({
     },
     tfaa: {
       about: '#CF0025',
+      background: '#FAFAFA',
+      backgroundLight: '#F7F7F7',
       events: '#032A56',
       grey: '#DEDEDE',
       membership: '#005897',

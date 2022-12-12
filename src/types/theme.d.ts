@@ -38,6 +38,8 @@ interface PaletteShapes {
 
 interface PaletteTFAA {
   about: string;
+  background: string;
+  backgroundLight: string;
   events: string;
   grey: string;
   membership: string;

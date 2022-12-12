@@ -8,6 +8,7 @@ import Layout from '../components/layout';
 import Greetings from '../components/home/Greetings';
 import HomeBanner from '../components/home/HomeBanner';
 import TakeAction from '../components/home/TakeAction';
+import WhatWeDo from '../components/home/WhatWeDo';
 
 // Local Typings
 interface Props {
@@ -19,7 +20,7 @@ const StyledRoot = styled.div({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  justifyContent: 'space-between',
+  justifyContent: 'space-around',
 });
 
 // Component Definition
@@ -35,6 +36,8 @@ const Home: FC<Props> = ({ location }) => (
       <TakeAction />
 
       <Greetings />
+
+      <WhatWeDo />
 
     </StyledRoot>
   </Layout>
