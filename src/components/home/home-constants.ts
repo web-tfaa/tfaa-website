@@ -4,27 +4,32 @@ import theme from '../../gatsby-theme-material-ui-top-layout/theme';
 export const TAKE_ACTION_DATA = [
   {
     color: theme.palette.tfaa.about,
-    title: 'About TFAA',
     subtitle: "Learn how we're helping Texas Fine Arts leaders",
+    title: 'About TFAA',
+    to: '/about',
   },
   {
     color: theme.palette.tfaa.events,
-    title: 'Events',
     subtitle: 'Find out about upcoming events and how to participate',
+    title: 'Events',
+    to: '/events',
   },
   {
     color: theme.palette.tfaa.resources,
-    title: 'Resources',
     subtitle: 'Enhance your leadership and management skills',
+    title: 'Resources',
+    to: '/resources',
   },
   {
     color: theme.palette.tfaa.membership,
-    title: 'Membership',
     subtitle: 'Be a part of the most influential Fine Arts organization in Texas',
+    title: 'Membership',
+    to: '/members',
   },
   {
     color: theme.palette.tfaa.signIn,
-    title: 'Sign In',
     subtitle: 'Access to your account and resources.',
+    title: 'Sign In',
+    to: '/members/login',
   },
 ]

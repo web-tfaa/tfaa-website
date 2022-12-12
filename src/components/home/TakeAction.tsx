@@ -25,6 +25,7 @@ const TakeAction: FC = () => {
           key={item.title}
           subtitle={item.subtitle}
           title={item.title}
+          to={item.to}
         />
       ))}
     </StyledRoot>

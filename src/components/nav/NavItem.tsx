@@ -1,13 +1,11 @@
 // External Dependencies
-import React, { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
+import React, { FC } from 'react';
 import clsx from 'clsx';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import presets from '../../utils/presets';
-import { rhythm, scale } from '../../utils/typography';
-import theme from '../../gatsby-theme-material-ui-top-layout/theme';
+import { scale } from '../../utils/typography';
 
 // Local Typings
 interface Props {

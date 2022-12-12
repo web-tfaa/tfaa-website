@@ -1,4 +1,5 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ interface Props {
   color: string;
   subtitle: string;
   title: string;
+  to: string;
 }
 interface StyledRootProps {
   $color: string;
@@ -46,17 +48,13 @@ const StyledRoot = styled.section<StyledRootProps>(({ $color, theme }) => ({
   },
 
   [theme.breakpoints.down('lg')]: {
-    // height: 170,
     padding: theme.spacing(4, 2, 4),
   },
   [theme.breakpoints.down('md')]: {
-    // height: 160,
     padding: theme.spacing(3, 2, 3),
   },
   [theme.breakpoints.down('mobile')]: {
-    // width: 'calc(100vw / 3)',
     width: 'calc(100vw / 3)',
-    // width: 120,
   },
 
   alignItems: 'center',
@@ -65,7 +63,7 @@ const StyledRoot = styled.section<StyledRootProps>(({ $color, theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
-  // height: 180,
+  height: '100%',
   justifyContent: 'flex-start',
   padding: theme.spacing(5, 3, 5),
   textAlign: 'center',
@@ -77,17 +75,20 @@ const TakeActionItem: FC<Props> = ({
   color,
   subtitle,
   title,
+  to,
 }) => {
   return (
-    <StyledRoot $color={color}>
-      <Typography variant="h3">
-        {title}
-      </Typography>
+    <Link to={to}>
+      <StyledRoot $color={color}>
+        <Typography variant="h3">
+          {title}
+        </Typography>
 
-      <Typography variant="body2">
-        {subtitle}
-      </Typography>
-    </StyledRoot>
+        <Typography variant="body2">
+          {subtitle}
+        </Typography>
+      </StyledRoot>
+    </Link>
   );
 };
 
