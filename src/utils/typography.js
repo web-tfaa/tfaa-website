@@ -15,7 +15,7 @@ const texasFlagBlue = '#002868';
 
 const _options = {
   headerFontFamily: [
-    'RNS_Sanz',
+    'RNS Sanz',
     '-apple-system',
     'BlinkMacSystemFont',
     'Segoe UI',
@@ -30,7 +30,7 @@ const _options = {
     'sans-serif',
   ],
   bodyFontFamily: [
-    'RNS_Sanz',
+    'RNS Sanz',
     'sans-serif',
   ],
   monospaceFontFamily: [
@@ -44,7 +44,7 @@ const _options = {
     'monospace',
   ],
   muiFontFamily: [
-    'RNS_Sanz',
+    'RNS Sanz',
     'Helvetica Neue',
     'Arial',
     'sans-serif',

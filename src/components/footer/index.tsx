@@ -123,7 +123,7 @@ const StyledRoot = styled.footer(({ theme }) => {
           color: theme.palette.tfaa.about,
           fontSize: 34,
           textAlign: 'right',
-          fontWeight: 300,
+          fontWeight: 500,
         },
 
         '.followUsIconList': {

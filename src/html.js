@@ -13,21 +13,6 @@ export default class HTML extends React.Component {
     return (
       <html {...this.props.htmlAttributes}>
         <head>
-          <link
-            href="/static/ftn45-webfont.c2439033.woff2"
-            as="font"
-            crossOrigin="anonymous"
-          />
-          <link
-            href="/static/spectral-latin-400.d9fdfd34.woff2"
-            as="font"
-            crossOrigin="anonymous"
-          />
-          <link
-            href="/static/ftn65-webfont.0ddc10d2.woff2"
-            as="font"
-            crossOrigin="anonymous"
-          />
           {this.props.headComponents}
           <meta charSet="utf-8" />
           <meta

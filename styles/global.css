@@ -1,10 +1,10 @@
 body {
-  font-family: 'RNS_Sanz, sans-serif';
+  font-family: RNS Sanz, sans-serif;
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 900;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Black';
@@ -12,8 +12,8 @@ body {
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 700;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Bold';
@@ -21,8 +21,8 @@ body {
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 800;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'ExtraBold';
@@ -30,8 +30,8 @@ body {
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 300;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Light';
@@ -39,8 +39,8 @@ body {
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 500;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Medium';
@@ -48,8 +48,8 @@ body {
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 400;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Normal';
@@ -57,8 +57,8 @@ body {
 }
 
 @font-face {
-  font-family: 'RNS_Sanz';
-  font-weight: 100 900;
+  font-family: 'RNS Sanz';
+  font-weight: 600;
   font-display: swap;
   font-style: normal;
   font-named-instance: 'SemiBold';

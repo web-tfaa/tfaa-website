@@ -76,7 +76,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: ['RNS_Sanz', 'sans-serif'].join(','),
+    fontFamily: ['RNS Sanz', 'sans-serif'].join(','),
     fontSize: 16,
   },
 });
