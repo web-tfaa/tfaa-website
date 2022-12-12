@@ -80,8 +80,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
 
   '.sidebar': {
     [presets.Desktop]: {
-      padding: rhythm(1),
-      paddingBottom: rhythm(3.5),
+      padding: theme.spacing(6, 3, 12),
       width: rhythm(10),
     },
     backgroundColor: theme.palette.ui.whisper,
