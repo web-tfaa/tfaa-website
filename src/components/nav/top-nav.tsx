@@ -48,7 +48,6 @@ const StyledRoot = styled.nav(({ theme }) => ({
   '.logoWrapper': {
     alignItems: 'center',
     display: 'flex',
-    fontFamily: options.headerFontFamily.join(','),
     justifyContent: 'center',
     padding: theme.spacing(0, 2),
   },
@@ -62,8 +61,10 @@ const StyledRoot = styled.nav(({ theme }) => ({
   },
 
   background: theme.palette.common.white,
+  borderBottom: `2px solid ${theme.palette.grey['200']}`,
   boxSizing: 'border-box',
   display: 'flex',
+  fontFamily: theme.typography.fontFamily,
   justifyContent: 'center',
   flex: 1,
   height: '100%',

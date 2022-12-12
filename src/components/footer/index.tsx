@@ -29,7 +29,6 @@ const StyledRoot = styled.footer(({ theme }) => {
   const linkStyles = {
     ...anchorStyles(theme),
     fontWeight: theme.typography.fontWeightMedium,
-    marginLeft: 5,
 
     '&:hover': {
       background: theme.palette.ui.bright,
@@ -124,6 +123,7 @@ const StyledRoot = styled.footer(({ theme }) => {
           color: theme.palette.tfaa.about,
           fontSize: 34,
           textAlign: 'right',
+          fontWeight: 500,
         },
 
         '.followUsIconList': {
@@ -176,14 +176,16 @@ const StyledRoot = styled.footer(({ theme }) => {
     },
     [theme.breakpoints.down('mobile')]: {
       fontSize: 14,
-      padding: theme.spacing(2, 2, 12),
+      padding: theme.spacing(2, 2, 13),
     },
 
+    fontFamily: theme.typography.fontFamily,
     fontSize: 16,
     padding: theme.spacing(8, 8, 4),
     position: 'static',
     background: theme.palette.common.white,
     borderTop: `2px solid ${theme.palette.grey['200']}`,
+    zIndex: 1,
   };
 });
 

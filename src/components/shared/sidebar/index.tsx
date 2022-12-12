@@ -27,7 +27,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   },
   [presets.Desktop]: {
     width: rhythm(12),
-    padding: rhythm(1),
+    padding: theme.spacing(3),
     paddingBottom: 96,
   },
   [theme.breakpoints.up('mobile')]: {
@@ -49,10 +49,10 @@ const StyledRoot = styled.div(({ theme }) => ({
   width: rhythm(10),
   display: 'none',
   position: 'fixed',
-  top: `calc(${presets.headerHeight} - 1px)`,
+  top: `calc(${theme.shapes.headerHeight} - 1px)`,
   paddingBottom: 96,
   overflowY: 'auto',
-  height: `calc(100vh - ${presets.headerHeight} + 1px)`,
+  height: `calc(100vh - ${theme.shapes.headerHeight} + 1px)`,
   WebkitOverflowScrolling: 'touch',
 }));
 

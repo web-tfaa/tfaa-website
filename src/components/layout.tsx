@@ -26,11 +26,8 @@ import resourcesSidebar from '../pages/resources/resources-links.yml';
 import { rhythm } from '../utils/typography';
 import presets, { colors } from '../utils/presets';
 
-// Import Futura PT typeface
-import '../fonts/Webfonts/futurapt_book_macroman/stylesheet.css';
-import '../fonts/Webfonts/futurapt_bookitalic_macroman/stylesheet.css';
-import '../fonts/Webfonts/futurapt_demi_macroman/stylesheet.css';
-import '../fonts/Webfonts/futurapt_demiitalic_macroman/stylesheet.css';
+// Import global styles, including custom fonts
+import '../../styles/global.css';
 
 // Other fonts
 import 'typeface-spectral';
@@ -61,9 +58,8 @@ const StyledRoot = styled.div<StyledRootProps>(({
     [presets.Desktop]: {
       minHeight: 'calc(100vh - 5rem)',
     },
-    [theme.breakpoints.up('mobile')]: {
+    [theme.breakpoints.down('lg')]: {
       margin: 'inherit',
-      paddingTop: theme.palette.shapes.topNavHeight,
     },
     display: 'flex',
     flex: 1,
@@ -83,8 +79,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
 
   '.sidebar': {
     [presets.Desktop]: {
-      padding: rhythm(1),
-      paddingBottom: rhythm(3.5),
+      padding: theme.spacing(6, 3, 12),
       width: rhythm(10),
     },
     backgroundColor: theme.palette.ui.whisper,
