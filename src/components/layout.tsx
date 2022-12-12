@@ -60,7 +60,6 @@ const StyledRoot = styled.div<StyledRootProps>(({
     },
     [theme.breakpoints.down('lg')]: {
       margin: 'inherit',
-      paddingTop: theme.palette.shapes.topNavHeight - 20,
     },
     display: 'flex',
     flex: 1,
