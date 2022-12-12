@@ -123,6 +123,7 @@ const StyledRoot = styled.footer(({ theme }) => {
           color: theme.palette.tfaa.about,
           fontSize: 34,
           textAlign: 'right',
+          fontWeight: 300,
         },
 
         '.followUsIconList': {
@@ -178,6 +179,7 @@ const StyledRoot = styled.footer(({ theme }) => {
       padding: theme.spacing(2, 2, 13),
     },
 
+    fontFamily: theme.typography.fontFamily,
     fontSize: 16,
     padding: theme.spacing(8, 8, 4),
     position: 'static',

@@ -4,7 +4,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-Black.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Black.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
@@ -12,7 +12,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-Bold.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Bold.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
@@ -20,7 +20,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-ExtraBold.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-ExtraBold.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
@@ -28,7 +28,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-Light.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Light.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
@@ -36,7 +36,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-Medium.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Medium.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
@@ -44,7 +44,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-Normal.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Normal.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
@@ -52,7 +52,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     <link
       rel="preload"
-      href="/fonts/RNS_Sanz-WOOF2/RNS_Sanz-SemiBold.woff2"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-SemiBold.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"

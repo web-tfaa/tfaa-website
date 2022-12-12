@@ -76,7 +76,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: ['Spectral', 'Georgia', 'Times New Roman', 'Times', 'serif'].join(','),
+    fontFamily: ['RNS_Sanz', 'sans-serif'].join(','),
     fontSize: 16,
   },
 });

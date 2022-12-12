@@ -61,9 +61,9 @@ const StyledRoot = styled.div<StyledRootProps>(({
     [presets.Desktop]: {
       minHeight: 'calc(100vh - 5rem)',
     },
-    [theme.breakpoints.up('mobile')]: {
+    [theme.breakpoints.down('lg')]: {
       margin: 'inherit',
-      paddingTop: theme.palette.shapes.topNavHeight,
+      paddingTop: theme.palette.shapes.topNavHeight - 20,
     },
     display: 'flex',
     flex: 1,
