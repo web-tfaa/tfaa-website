@@ -110,7 +110,6 @@ const MemberTable = ({
   data,
   isAdmin,
 }) => {
-  console.log('data', data);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('LastName');
   const [page, setPage] = useState(0);
@@ -120,15 +119,16 @@ const MemberTable = ({
     return null;
   }
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (_event, property) => {
     let newOrder = 'desc';
 
     if (orderBy === property && order === 'desc') {
