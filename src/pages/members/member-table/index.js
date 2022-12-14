@@ -76,18 +76,21 @@ function desc(a, b, orderBy) {
   return 0;
 }
 
-function stableSort(array, cmp) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = cmp(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
+// function stableSort(array, cmp) {
+//   const stabilizedThis = array.map((el, index) => [el, index]);
+//   stabilizedThis.sort((a, b) => {
+//     const order = cmp(a[0], b[0]);
+//     if (order !== 0) return order;
+//     return a[1] - b[1];
+//   });
 
-  return stabilizedThis.map((el) => el[0]);
-}
+//   return stabilizedThis.map((el) => el[0]);
+// }
 
-function getSorting(order, orderBy) {
+function getComparator(
+  order,
+  orderBy,
+) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
@@ -152,7 +155,7 @@ const MemberTable = ({
             />
 
             <TableBody>
-              {stableSort(data, getSorting(order, orderBy))
+              {data.sort(getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user) => (
                   <TableRow
