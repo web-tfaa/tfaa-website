@@ -76,7 +76,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
       paddingLeft: $hasSidebar ? theme.spacing(25) : 0,
     },
     [presets.Desktop]: {
-      paddingLeft: $hasSidebar ? theme.spacing(31.5) : 0,
+      paddingLeft: $hasSidebar ? theme.spacing(38) : 0,
     },
   },
 
