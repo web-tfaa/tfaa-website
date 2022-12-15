@@ -26,9 +26,13 @@ const defaultProps = {
   userEmail: '',
 };
 
-const StyledRoot = styled.div({
+const StyledRoot = styled.div(({ theme }) => ({
+  '.adminCard': {
+    maxWidth: '75%',
+  },
+
   '.paddingContainer': {
-    paddingLeft: 24,
+    padding: theme.spacing(0, 3, 3),
   },
 
   [presets.Tablet]: {
@@ -37,7 +41,7 @@ const StyledRoot = styled.div({
 
   paddingLeft: 0,
   width: '0 auto',
-});
+}));
 
 const EMPTY_ARRAY = [];
 
@@ -74,10 +78,12 @@ const MemberListContent = ({
 
       <div className="paddingContainer">
         <h2>Member list</h2>
+
         {isAdmin && (
           <EnhancedAlert
-            title="Admin View"
+            className="adminCard"
             severity="info"
+            title="Admin View"
           >
             You can print any member&apos;s invoice or receipt from each row.
           </EnhancedAlert>
