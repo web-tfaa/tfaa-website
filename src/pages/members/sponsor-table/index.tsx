@@ -1,12 +1,10 @@
 // External Dependencies
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TablePagination,
-  TableRow,
-} from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
@@ -16,8 +14,8 @@ import SponsorTableRowActionElements from './SponsorTableRowActionElements';
 
 // Local Typings
 interface Props {
-  isAdmin: boolean;
   data: Sponsor[];
+  isAdmin: boolean;
 }
 export interface Sponsor {
   userId: string;
@@ -30,11 +28,15 @@ export interface Sponsor {
   LastName: string;
   FirstName: string;
 }
-
 export type Order = 'asc' | 'desc';
 
 // Local Variables
 const StyledRoot = styled(Paper)(({ theme }) => ({
+  '.MuiToolbar-root': {
+    display: 'flex',
+    alignItems: 'baseline',
+  },
+
   '.cell': {
     '&:first-child': {
       paddingLeft: theme.spacing(3),
@@ -50,13 +52,8 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
   },
 
   '.pagerButton': {
-    backgroundColor: theme.palette.grey['300'],
     color: theme.palette.grey['600'],
     marginRight: theme.spacing(1),
-
-    '&:disabled': {
-      backgroundColor: theme.palette.action.disabled,
-    },
   },
 
   row: {
@@ -101,7 +98,7 @@ function getComparator<Key extends keyof Sponsor>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function uglifyEmail(email) {
+function uglifyEmail(email: string) {
   if (!email) {
     return '';
   }
@@ -225,18 +222,17 @@ const SponsorTable: FC<Props> = ({
         <TablePagination
           backIconButtonProps={{
             'aria-label': 'Previous Page',
-            disabled: page === 1,
+            disabled: page === 0,
             classes: { root: 'pagerButton' },
             id: 'pager-button-left',
-            size: 'small',
           }}
           component="div"
           count={data ? data.length : 0}
           nextIconButtonProps={{
             'aria-label': 'Next Page',
             classes: { root: 'pagerButton' },
+            disabled: page - 1 === Math.ceil(data.length / rowsPerPage),
             id: 'pager-button-right',
-            size: 'small',
           }}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}

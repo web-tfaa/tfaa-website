@@ -1,5 +1,7 @@
 // External Dependencies
-import React, { FC, KeyboardEventHandler, useCallback } from 'react';
+import React, {
+  FC, KeyboardEventHandler, useCallback, useMemo
+} from 'react';
 import hex2rgba from 'hex2rgba';
 import styled from 'styled-components';
 
@@ -97,25 +99,29 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
     }
   }, []);
 
+  const logoElement = useMemo(() => (
+    <NavItem
+      className="logoNavItem"
+      linkTo="/"
+    >
+      <div className="logoImageWrapper">
+        <img
+          alt="TMAC logo"
+          className="logoImage"
+          height="30px"
+          src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+        />
+        <div className="logoText">
+          TMAC
+        </div>
+      </div>
+    </NavItem>
+  ), []);
+
   return (
     <StyledRoot role="navigation">
       <div className="logoWrapper">
-        <NavItem
-          className="logoNavItem"
-          linkTo="/"
-        >
-          <div className="logoImageWrapper">
-            <img
-              alt="TMAC logo"
-              className="logoImage"
-              height="30px"
-              src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
-            />
-            <div className="logoText">
-              TMAC
-            </div>
-          </div>
-        </NavItem>
+        {logoElement}
 
         <ul className="list">
           <NavItem linkTo="/about/">About</NavItem>
