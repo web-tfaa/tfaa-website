@@ -75,6 +75,7 @@ const StyledRoot = styled.div<StyledRootProps>(({
       paddingLeft: $hasSidebar ? theme.spacing(38) : 0,
       paddingRight: theme.spacing(3),
     },
+    width: '100vw',
   },
 
   '.sidebar': {

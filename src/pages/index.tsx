@@ -23,6 +23,7 @@ const StyledRoot = styled.div({
   flexDirection: 'row',
   flexWrap: 'wrap',
   justifyContent: 'space-around',
+  width: '100vw',
 });
 
 // Component Definition
