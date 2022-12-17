@@ -34,6 +34,22 @@ const StyledRoot = styled.section(({ theme }) => ({
     justifyContent: 'center',
   },
 
+  '.redMotif': {
+    height: 200,
+    position: 'relative',
+    right: -660,
+    top: -104,
+    width: 494,
+  },
+
+  '.tealMotif': {
+    height: 533,
+    position: 'relative',
+    left: -240,
+    top: -54,
+    width: 335,
+  },
+
   h4: {
     [theme.breakpoints.down('mobile')]: {
       fontSize: 36,
@@ -69,6 +85,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   color: theme.palette.common.white,
   display: 'flex',
   justifyContent: 'flex-end',
+  overflow: 'hidden',
   padding: theme.spacing(5, 0, 2.5),
   width: '100%',
 }));
@@ -77,6 +94,19 @@ const StyledRoot = styled.section(({ theme }) => ({
 const FineArtsPriority: FC = () => {
   return (
     <StyledRoot>
+      <img
+        alt="Teal motif."
+        aria-hidden="true"
+        className="tealMotif"
+        src="/teal-motif.svg"
+      />
+      <img
+        alt="Red motif."
+        aria-hidden="true"
+        className="redMotif"
+        src="/red-motif.svg"
+      />
+
       <div className="priorityRight">
         <Typography variant="h4">
           Making Fine Arts a Priority
