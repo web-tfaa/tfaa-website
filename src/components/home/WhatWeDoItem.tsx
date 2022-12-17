@@ -9,7 +9,6 @@ import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
-  altText: string;
   imgSrc: string;
   subtitle: string;
   title: string;
@@ -41,7 +40,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
     [theme.breakpoints.down('md')]: {
       padding: theme.spacing(3, 2, 3),
     },
-    padding: theme.spacing(5, 3, 5),
+    padding: theme.spacing(0, 3, 5),
   },
 
   h3: {
@@ -59,6 +58,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
     fontWeight: 700,
     marginBottom: theme.spacing(1),
     textAlign: 'left',
+    textTransform: 'uppercase',
   },
 
   p: {
@@ -89,7 +89,6 @@ const StyledRoot = styled.section<StyledRootProps>(({
 
 // Component Definition
 const WhatWeDoItem: FC<Props> = ({
-  altText,
   imgSrc,
   subtitle,
   title,
@@ -97,12 +96,7 @@ const WhatWeDoItem: FC<Props> = ({
 }) => {
   return (
     <StyledRoot $imgSrc={imgSrc}>
-      <div className="whatWeDoImageContainer">
-        {/* <img
-          alt={altText}
-          src={imgSrc}
-        /> */}
-      </div>
+      <div className="whatWeDoImageContainer" />
 
       <Box
         className="whatWeDoItemContent"
@@ -127,7 +121,7 @@ const WhatWeDoItem: FC<Props> = ({
           </Typography>
         </Box>
 
-        <Box marginTop={1.5}>
+        <Box marginTop={4}>
           <CtaButton
             to={to}
             width={160}

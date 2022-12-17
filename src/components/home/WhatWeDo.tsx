@@ -15,7 +15,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   columnGap: theme.spacing(6),
   display: 'flex',
   justifyContent: 'space-between',
-  padding: theme.spacing(5, 20),
+  padding: theme.spacing(12, 20),
   width: '100%',
 }));
 
@@ -25,7 +25,6 @@ const WhatWeDo: FC = () => {
     <StyledRoot className="whatWeDo">
       {WHAT_WE_DO_DATA.map((item) => (
         <WhatWeDoItem
-          altText={item.altText}
           imgSrc={item.imgSrc}
           key={item.title}
           subtitle={item.subtitle}
