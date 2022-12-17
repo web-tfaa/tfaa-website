@@ -55,3 +55,22 @@ export const WHAT_WE_DO_DATA = [
     to: '/about',
   },
 ];
+
+export const STATISTICS_DATA = [
+  {
+    statLabel: '52 years dedicated to Fine Arts education',
+    statValue: '52',
+  },
+  {
+    statLabel: 'Board committee Voluntary members',
+    statValue: '18',
+  },
+  {
+    statLabel: 'over 3,000 schools',
+    statValue: '3,000',
+  },
+  {
+    statLabel: '5+ million students served',
+    statValue: '5+',
+  },
+];

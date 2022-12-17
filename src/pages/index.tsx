@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import FineArtsPriority from '../components/home/FineArtsPriority';
 import Greetings from '../components/home/Greetings';
 import HomeBanner from '../components/home/HomeBanner';
+import HomeStatistics from '../components/home/HomeStatistics';
 import Layout from '../components/layout';
 import TakeAction from '../components/home/TakeAction';
 import WhatWeDo from '../components/home/WhatWeDo';
@@ -41,6 +42,8 @@ const Home: FC<Props> = ({ location }) => (
       <WhatWeDo />
 
       <FineArtsPriority />
+
+      <HomeStatistics />
 
     </StyledRoot>
   </Layout>

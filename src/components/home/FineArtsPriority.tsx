@@ -72,7 +72,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   // The following breakpoint is outside of the theme breakpoints
-  [theme.breakpoints.down('1260')]: {
+  [theme.breakpoints.down('1450')]: {
     backgroundSize: 'cover',
   },
   [theme.breakpoints.down('mobile')]: {
