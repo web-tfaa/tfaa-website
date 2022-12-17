@@ -18,6 +18,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.statisticsValue': {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 54,
+    },
     color: theme.palette.tfaa.about,
     fontSize: 60,
     margin: 0,

@@ -10,12 +10,18 @@ import HomeStatisticsItem from './HomeStatisticsItem';
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   h5: {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 36,
+    },
     fontSize: 40,
     fontWeight: 500,
     margin: theme.spacing(0, 14, 2),
   },
 
   p: {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 26,
+    },
     fontSize: 30,
     fontWeight: 700,
     margin: theme.spacing(0, 20, 2),
