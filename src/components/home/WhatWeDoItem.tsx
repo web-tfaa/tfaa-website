@@ -1,5 +1,6 @@
 // External Dependencies
-import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
@@ -19,7 +20,7 @@ interface Props {
 const StyledRoot = styled.section(({ theme }) => ({
   h3: {
     [theme.breakpoints.down('lg')]: {
-      fontSize: 24,
+      fontSize: 20,
     },
     [theme.breakpoints.down('md')]: {
       fontSize: 22,
@@ -31,6 +32,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontSize: 20,
     fontWeight: 700,
     marginBottom: theme.spacing(1),
+    textAlign: 'left',
   },
 
   p: {
@@ -44,6 +46,7 @@ const StyledRoot = styled.section(({ theme }) => ({
       fontSize: 14,
     },
     fontSize: 16,
+    textAlign: 'left',
   },
 
   [theme.breakpoints.down('lg')]: {
@@ -56,15 +59,14 @@ const StyledRoot = styled.section(({ theme }) => ({
     width: 'calc(100vw / 3)',
   },
 
+  alignItems: 'center',
   backgroundColor: theme.palette.common.white,
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
-  height: '100%',
-  justifyContent: 'flex-start',
   padding: theme.spacing(5, 3, 5),
   textAlign: 'center',
-  width: 320,
+  width: 200,
 }));
 
 // Component Definition
@@ -78,20 +80,43 @@ const WhatWeDoItem: FC<Props> = ({
   return (
     <StyledRoot>
       <div>
-        <img alt={altText} src={imgSrc}/>
+        <img
+          alt={altText}
+          src={imgSrc}
+        />
       </div>
 
-      <Typography variant="h3">
-        {title}
-      </Typography>
+      <Box
+        display="flex"
+        flex={1}
+        flexDirection="column"
+        justifyContent="space-around"
+      >
+        <Box
+          alignItems="flex-start"
+          display="flex"
+          flexDirection="column"
+          height="100%"
+          width="100%"
+        >
+          <Typography variant="h3">
+            {title}
+          </Typography>
 
-      <Typography variant="body2">
-        {subtitle}
-      </Typography>
+          <Typography variant="body2">
+            {subtitle}
+          </Typography>
+        </Box>
 
-      <CtaButton to={to}>
-        Read more
-      </CtaButton>
+        <Box marginTop={1.5}>
+          <CtaButton
+            to={to}
+            width={160}
+          >
+            Read more
+          </CtaButton>
+        </Box>
+      </Box>
     </StyledRoot>
   );
 };

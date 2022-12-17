@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import WhatWeDoItem from './WhatWeDoItem';
-import { WHAT_WE_DO_DATA } from './home-constants'
+import { WHAT_WE_DO_DATA } from './home-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -14,14 +14,14 @@ const StyledRoot = styled.section(({ theme }) => ({
   background: theme.palette.tfaa.background,
   display: 'flex',
   justifyContent: 'space-between',
-  padding: theme.spacing(5, 25),
+  padding: theme.spacing(5, 20),
   width: '100%',
 }));
 
 // Component Definition
 const WhatWeDo: FC = () => {
   return (
-    <StyledRoot>
+    <StyledRoot className="whatWeDo">
       {WHAT_WE_DO_DATA.map((item) => (
         <WhatWeDoItem
           altText={item.altText}
