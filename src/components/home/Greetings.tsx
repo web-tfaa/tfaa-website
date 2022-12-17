@@ -45,7 +45,10 @@ const Greetings: FC = () => {
   return (
     <StyledRoot>
       <div className="greetingLeft">
-        <img src="https://res.cloudinary.com/tmac/image/upload/v1670822566/greetings.png"/>
+        <img
+          alt="Greetings from TFAA."
+          src="https://res.cloudinary.com/tmac/image/upload/v1670822566/greetings.png"
+        />
       </div>
 
       <div className="greetingRight">
