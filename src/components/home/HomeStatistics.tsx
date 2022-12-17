@@ -28,6 +28,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.statisticsItemsContainer': {
+    [theme.breakpoints.down('lg')]: {
+      flexWrap: 'wrap',
+    },
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
