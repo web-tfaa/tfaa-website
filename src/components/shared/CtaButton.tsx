@@ -31,6 +31,7 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
 
     backgroundColor: theme.palette.tfaa[$colorVariant],
     borderRadius: 25,
+    boxShadow: 'none',
     fontFamily: 'sans-serif',
     fontSize: 14,
     fontWeight: theme.typography.fontWeightBold,
