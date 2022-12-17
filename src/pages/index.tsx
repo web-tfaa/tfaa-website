@@ -4,9 +4,10 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import Layout from '../components/layout';
+import FineArtsPriority from '../components/home/FineArtsPriority';
 import Greetings from '../components/home/Greetings';
 import HomeBanner from '../components/home/HomeBanner';
+import Layout from '../components/layout';
 import TakeAction from '../components/home/TakeAction';
 import WhatWeDo from '../components/home/WhatWeDo';
 
@@ -38,6 +39,8 @@ const Home: FC<Props> = ({ location }) => (
       <Greetings />
 
       <WhatWeDo />
+
+      <FineArtsPriority />
 
     </StyledRoot>
   </Layout>
