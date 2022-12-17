@@ -70,12 +70,12 @@ const StyledRoot = styled.div<StyledRootProps>(({
   '.main-content': {
     [theme.breakpoints.up('mobile')]: {
       paddingLeft: $hasSidebar ? theme.spacing(25) : 0,
-      width: '100%',
     },
     [presets.Desktop]: {
       paddingLeft: $hasSidebar ? theme.spacing(38) : 0,
       paddingRight: theme.spacing(3),
     },
+    width: '100vw',
   },
 
   '.sidebar': {
