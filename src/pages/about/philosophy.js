@@ -98,6 +98,7 @@ const Philosophy = ({ location }) => (
               </ul>
             </FuturaDiv>
           </PhilosophyCard>
+
           <PhilosophyCard>
             <CardHeadline>UIL MARCHING BAND PHILOSOPHY STATEMENT</CardHeadline>
 

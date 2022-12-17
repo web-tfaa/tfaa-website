@@ -8,6 +8,9 @@ import { appName } from '../../utils/app-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
+  '.greetingLeft': {
+    width: '100%',
+  },
   '.greetingRight': {
     padding: theme.spacing(8, 15, 8, 8),
   },
@@ -31,9 +34,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   [theme.breakpoints.down('mobile')]: {
     flexWrap: 'wrap',
   },
-  backgroundColor: theme.palette.common.white,
+  background: theme.palette.tfaa.backgroundLight,
   display: 'flex',
-  padding: theme.spacing(5, 0),
+  padding: theme.spacing(5, 0, 2.5),
   width: '100%',
 }));
 
@@ -41,8 +44,11 @@ const StyledRoot = styled.section(({ theme }) => ({
 const Greetings: FC = () => {
   return (
     <StyledRoot>
-      <div>
-        <img src="https://res.cloudinary.com/tmac/image/upload/v1670822566/greetings.png"/>
+      <div className="greetingLeft">
+        <img
+          alt="Greetings from TFAA."
+          src="https://res.cloudinary.com/tmac/image/upload/v1670822566/greetings.png"
+        />
       </div>
 
       <div className="greetingRight">

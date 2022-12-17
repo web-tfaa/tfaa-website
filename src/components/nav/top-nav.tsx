@@ -1,11 +1,12 @@
 // External Dependencies
-import { Box } from '@mui/material';
-import React, { FC, KeyboardEvent, useCallback } from 'react';
+import Box from '@mui/material/Box';
+import React, {
+  FC, KeyboardEventHandler, useCallback, useMemo
+} from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { auth } from '../../firebase';
-import { options } from '../../utils/typography';
 import AuthUserContext from '../session/AuthUserContext';
 import NavItem from './NavItem';
 import CtaButton from '../shared/CtaButton';
@@ -74,7 +75,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
 
 // Component Definition
 const TopNav: FC<Props> = ({ isAuthenticated }) => {
-  const handlePressKeyDown = useCallback((event: KeyboardEvent<HTMLButtonElement>) => {
+  const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
         ? auth.doSignOut()
@@ -82,18 +83,22 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
     }
   }, [isAuthenticated]);
 
+  const logoElement = useMemo(() => (
+    <NavItem linkTo="/">
+      <div className="logoImageWrapper">
+        <img
+          alt="TFAA logo"
+          className="logoImage"
+          src="/tfaa-logo-svg.svg"
+        />
+      </div>
+    </NavItem>
+  ), []);
+
   return (
     <StyledRoot>
       <div className="logoWrapper">
-        <NavItem linkTo="/">
-          <div className="logoImageWrapper">
-            <img
-              alt="TFAA logo"
-              className="logoImage"
-              src="/tfaa-logo-svg.svg"
-            />
-          </div>
-        </NavItem>
+        {logoElement}
 
         <ul className="list">
           <NavItem linkTo="/about/">About</NavItem>

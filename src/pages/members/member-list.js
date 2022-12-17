@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-// import Alert from '../../components/shared/Alert';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
@@ -25,8 +24,12 @@ const defaultProps = {
 };
 
 const StyledRoot = styled.div(({ theme }) => ({
+  '.adminCard': {
+    maxWidth: '75%',
+  },
+
   '.paddingContainer': {
-    paddingLeft: 24,
+    padding: theme.spacing(0, 3, 3),
   },
 
   [theme.breakpoints.up('mobile')]: {
@@ -70,10 +73,12 @@ const MemberListContent = ({
 
       <div className="paddingContainer">
         <h2>Member list</h2>
+
         {isAdmin && (
           <EnhancedAlert
-            title="Admin View"
+            className="adminCard"
             severity="info"
+            title="Admin View"
           >
             You can print any member&apos;s invoice or receipt from each row.
           </EnhancedAlert>

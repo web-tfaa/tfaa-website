@@ -30,11 +30,11 @@ const defaultProps = {
 
 const StyledRoot = styled.div(({ theme }) => ({
   '.adminCard': {
-    borderLeft: `4px solid ${theme.palette.alert.info}`,
     maxWidth: '75%',
   },
+
   '.paddingContainer': {
-    paddingLeft: 24,
+    padding: theme.spacing(0, 3, 3),
   },
 
   [theme.breakpoints.up('mobile')]: {
@@ -85,8 +85,9 @@ const SponsorListContent = ({
 
         {shouldSeeSponsorListLink && (
           <EnhancedAlert
-            title="Admin View"
+            className="adminCard"
             severity="info"
+            title="Admin View"
           >
             You can print any sponsor&apos;s invoice or receipt from each row.
           </EnhancedAlert>

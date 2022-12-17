@@ -7,17 +7,20 @@ import styled from 'styled-components';
 // Local Typings
 interface Props extends ButtonProps {
   children: React.ReactNode;
-  colorVariant: CtaColor;
+  colorVariant?: CtaColor;
   to?: string;
+  width?: number;
 }
 type CtaColor = 'resources' | 'signIn';
 interface StyledButtonProps {
   $colorVariant: CtaColor;
+  $width: number | string;
 }
 
 // Local Variables
 const StyledButton = styled(Button)<StyledButtonProps>(({
-  $colorVariant = 'resources',
+  $colorVariant,
+  $width,
   theme,
 }) => ({
   '&.MuiButtonBase-root': {
@@ -31,22 +34,32 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
 
     backgroundColor: theme.palette.tfaa[$colorVariant],
     borderRadius: 25,
+    boxShadow: 'none',
+    color: theme.palette.common.white,
     fontFamily: 'sans-serif',
     fontSize: 14,
-    fontWeight: theme.typography.fontWeightBold,
+    fontWeight: $colorVariant === 'signIn'
+      ? theme.typography.fontWeightBold
+      : theme.typography.fontWeightMedium,
     textTransform: 'none',
     whiteSpace: 'pre',
+    width: $width,
   }
 }));
 
 // Component Definition
 const CtaButton: FC<Props> = ({
-  children, colorVariant, to, ...otherProps
+  children,
+  colorVariant = 'resources',
+  to,
+  width = '100%',
+  ...otherProps
 }) => (
   <StyledButton
     $colorVariant={colorVariant}
     to={to}
     variant="contained"
+    $width={width}
     {...otherProps}
   >
     {children}
