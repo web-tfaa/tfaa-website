@@ -38,6 +38,7 @@ interface PaletteTFAA {
   about: string;
   background: string;
   backgroundLight: string;
+  backgroundMediumLight: string;
   backgroundDark: string;
   events: string;
   grey: string;

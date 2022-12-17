@@ -62,6 +62,7 @@ const theme = createTheme({
       about: '#CF0025',
       background: '#FAFAFA',
       backgroundLight: '#F7F7F7',
+      backgroundMediumLight: '#F8F8F8',
       backgroundDark: '#111113',
       events: '#032A56',
       grey: '#DEDEDE',
