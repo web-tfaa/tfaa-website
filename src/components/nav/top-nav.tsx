@@ -1,4 +1,5 @@
 // External Dependencies
+import Box from '@mui/material/Box';
 import React, {
   FC, KeyboardEventHandler, useCallback, useMemo
 } from 'react';
