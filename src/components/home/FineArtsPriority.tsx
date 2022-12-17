@@ -55,12 +55,17 @@ const StyledRoot = styled.section(({ theme }) => ({
     marginBottom: theme.spacing(2),
   },
 
+  // The following breakpoint is outside of the theme breakpoints
+  [theme.breakpoints.down('1260')]: {
+    backgroundSize: 'cover',
+  },
   [theme.breakpoints.down('mobile')]: {
     padding: theme.spacing(4, 0, 2),
   },
 
   background: "url('https://res.cloudinary.com/tmac/image/upload/v1671285382/symphony-orchestra-performing-on-stage.png') no-repeat",
-  backgroundSize: 'cover',
+  backgroundSize: 'contain',
+  backgroundColor: theme.palette.tfaa.backgroundDark,
   color: theme.palette.common.white,
   display: 'flex',
   justifyContent: 'flex-end',

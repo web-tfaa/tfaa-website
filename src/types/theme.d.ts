@@ -1,9 +1,7 @@
 // External Dependencies
 import {
   Palette as MuiPalette,
-  PaletteColor as MuiPaletteColor,
   PaletteOptions as MuiPaletteOptions,
-  SimplePaletteColorOptions as MuiSimplePaletteColorOptions,
   Theme as MuiTheme,
 } from '@mui/material/styles';
 
@@ -40,6 +38,7 @@ interface PaletteTFAA {
   about: string;
   background: string;
   backgroundLight: string;
+  backgroundDark: string;
   events: string;
   grey: string;
   membership: string;
@@ -94,33 +93,5 @@ declare module '@mui/material/styles' {
     texasFlag: PaletteTexasFlag;
     tfaa: PaletteTFAA;
     ui: PaletteUi;
-  }
-
-  interface PaletteColor extends MuiPaletteColor {
-    alert?: PaletteAlert;
-    altBackground?: string;
-    events?: PaletteEvents;
-    gatsby?: string;
-    legacyGray?: PaletteLegacyGray;
-    loginStatus?: string;
-    shapes?: PaletteShapes;
-    table?: PaletteTable;
-    texasFlag?: PaletteTexasFlag;
-    tfaa?: PaletteTFAA;
-    ui?: PaletteUi;
-  }
-
-  interface SimplePaletteColorOptions extends MuiSimplePaletteColorOptions {
-    alert?: PaletteAlert;
-    altBackground?: string;
-    events?: PaletteEvents;
-    gatsby?: string;
-    legacyGray?: PaletteLegacyGray;
-    loginStatus?: string;
-    shapes?: PaletteShapes;
-    table?: PaletteTable;
-    texasFlag?: PaletteTexasFlag;
-    tfaa?: PaletteTFAA;
-    ui?: PaletteUi;
   }
 }
