@@ -84,20 +84,13 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   }, [isAuthenticated]);
 
   const logoElement = useMemo(() => (
-    <NavItem
-      className="logoNavItem"
-      linkTo="/"
-    >
+    <NavItem linkTo="/">
       <div className="logoImageWrapper">
         <img
-          alt="TMAC logo"
+          alt="TFAA logo"
           className="logoImage"
-          height="30px"
-          src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
+          src="/tfaa-logo-svg.svg"
         />
-        <div className="logoText">
-          TMAC
-        </div>
       </div>
     </NavItem>
   ), []);
