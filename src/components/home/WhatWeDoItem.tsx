@@ -15,9 +15,35 @@ interface Props {
   title: string;
   to: string;
 }
+interface StyledRootProps {
+  $imgSrc: string;
+}
 
 // Local Variables
-const StyledRoot = styled.section(({ theme }) => ({
+const StyledRoot = styled.section<StyledRootProps>(({
+  $imgSrc,
+  theme,
+}) => ({
+  '.whatWeDoImageContainer': {
+    background: `url(${$imgSrc}) no-repeat`,
+    backgroundSize: 'cover',
+    minHeight: 224,
+    minWidth: 320,
+    position: 'relative',
+    top: -24,
+    left: 24,
+  },
+
+  '.whatWeDoItemContent': {
+    [theme.breakpoints.down('lg')]: {
+      padding: theme.spacing(4, 2, 4),
+    },
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(3, 2, 3),
+    },
+    padding: theme.spacing(5, 3, 5),
+  },
+
   h3: {
     [theme.breakpoints.down('lg')]: {
       fontSize: 20,
@@ -48,13 +74,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontSize: 16,
     textAlign: 'left',
   },
-
-  [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(4, 2, 4),
-  },
-  [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(3, 2, 3),
-  },
   [theme.breakpoints.down('mobile')]: {
     width: 'calc(100vw / 3)',
   },
@@ -64,7 +83,6 @@ const StyledRoot = styled.section(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
-  padding: theme.spacing(5, 3, 5),
   textAlign: 'center',
   width: 200,
 }));
@@ -78,15 +96,16 @@ const WhatWeDoItem: FC<Props> = ({
   to,
 }) => {
   return (
-    <StyledRoot>
-      <div>
-        <img
+    <StyledRoot $imgSrc={imgSrc}>
+      <div className="whatWeDoImageContainer">
+        {/* <img
           alt={altText}
           src={imgSrc}
-        />
+        /> */}
       </div>
 
       <Box
+        className="whatWeDoItemContent"
         display="flex"
         flex={1}
         flexDirection="column"

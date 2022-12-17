@@ -12,6 +12,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     flexWrap: 'wrap',
   },
   background: theme.palette.tfaa.background,
+  columnGap: theme.spacing(6),
   display: 'flex',
   justifyContent: 'space-between',
   padding: theme.spacing(5, 20),
