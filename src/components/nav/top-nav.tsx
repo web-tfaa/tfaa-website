@@ -1,9 +1,10 @@
 // External Dependencies
 import Box from '@mui/material/Box';
+import MenuIcon from '@mui/icons-material/Menu';
 import React, {
   FC, KeyboardEventHandler, useCallback, useMemo
 } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
 import { auth } from '../../firebase';
@@ -30,6 +31,10 @@ const StyledRoot = styled.nav(({ theme }) => ({
   },
 
   '.logoImageWrapper': {
+    img: {
+      marginBottom: 0,
+    },
+
     [theme.breakpoints.up('md')]: {
       height: '100%',
       width: '100%',
@@ -47,10 +52,25 @@ const StyledRoot = styled.nav(({ theme }) => ({
   },
 
   '.logoWrapper': {
+    [theme.breakpoints.down('mobile')]: {
+      padding: 0,
+    },
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
     padding: theme.spacing(0, 2),
+  },
+
+  '.mobileNav': {
+    [theme.breakpoints.up('mobile')]: {
+      display: 'none',
+    },
+  },
+
+  '.menuIcon': {
+    position: 'absolute',
+    top: theme.spacing(1.5),
+    right: theme.spacing(2),
   },
 
   [theme.breakpoints.up('md')]: {
@@ -75,6 +95,8 @@ const StyledRoot = styled.nav(({ theme }) => ({
 
 // Component Definition
 const TopNav: FC<Props> = ({ isAuthenticated }) => {
+  const theme = useTheme();
+
   const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
@@ -84,7 +106,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   }, [isAuthenticated]);
 
   const logoElement = useMemo(() => (
-    <NavItem linkTo="/">
+    <a href="/">
       <div className="logoImageWrapper">
         <img
           alt="TFAA logo"
@@ -92,15 +114,26 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
           src="/tfaa-logo-svg.svg"
         />
       </div>
-    </NavItem>
+    </a>
   ), []);
 
   return (
     <StyledRoot>
-      <div className="logoWrapper">
+      <section className="mobileNav">
         {logoElement}
 
+        <MenuIcon
+          className="menuIcon"
+          fontSize="large"
+          htmlColor={theme.palette.tfaa.about}
+        />
+      </section>
+
+      <div className="logoWrapper">
         <ul className="list">
+          <NavItem linkTo="/">
+            {logoElement}
+          </NavItem>
           <NavItem linkTo="/about/">About</NavItem>
           <NavItem linkTo="/events/">Events</NavItem>
           <NavItem linkTo="/resources/">Resources</NavItem>

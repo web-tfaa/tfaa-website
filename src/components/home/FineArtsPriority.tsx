@@ -17,7 +17,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontWeight: theme.typography.fontWeightRegular,
   },
 
-  '.priorityRight': {
+  '.priorityContent': {
     [theme.breakpoints.down('mobile')]: {
       padding: theme.spacing(4, 10, 4, 4),
       width: '70%',
@@ -35,6 +35,12 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.redMotif': {
+    [theme.breakpoints.down('sm')]: {
+      height: 100,
+      right: -220,
+      top: -44,
+      width: 360,
+    },
     height: 200,
     position: 'relative',
     right: -660,
@@ -43,6 +49,12 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.tealMotif': {
+    [theme.breakpoints.down('sm')]: {
+      height: 400,
+      left: 140,
+      top: -44,
+      width: 240,
+    },
     height: 533,
     position: 'relative',
     left: -240,
@@ -107,7 +119,7 @@ const FineArtsPriority: FC = () => {
         src="/red-motif.svg"
       />
 
-      <div className="priorityRight">
+      <div className="priorityContent">
         <Typography variant="h4">
           Making Fine Arts a Priority
         </Typography>

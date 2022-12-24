@@ -78,6 +78,10 @@ const StyledRoot = styled.section<StyledRootProps>(({
     width: 'calc(100vw / 3)',
   },
 
+  [theme.breakpoints.down('md')]: {
+    width: 300,
+  },
+
   alignItems: 'center',
   backgroundColor: theme.palette.common.white,
   display: 'flex',
