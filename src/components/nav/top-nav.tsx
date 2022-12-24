@@ -1,5 +1,6 @@
 // External Dependencies
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import React, {
   FC, KeyboardEventHandler, useCallback, useMemo
@@ -9,6 +10,7 @@ import styled, { useTheme } from 'styled-components';
 // Internal Dependencies
 import { auth } from '../../firebase';
 import AuthUserContext from '../session/AuthUserContext';
+import MobileNavMenu from './MobileNavMenu';
 import NavItem from './NavItem';
 import CtaButton from '../shared/CtaButton';
 
@@ -67,12 +69,6 @@ const StyledRoot = styled.nav(({ theme }) => ({
     },
   },
 
-  '.menuIcon': {
-    position: 'absolute',
-    top: theme.spacing(1.5),
-    right: theme.spacing(2),
-  },
-
   [theme.breakpoints.up('md')]: {
     height: theme.palette.shapes.topNavHeight,
   },
@@ -122,11 +118,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
       <section className="mobileNav">
         {logoElement}
 
-        <MenuIcon
-          className="menuIcon"
-          fontSize="large"
-          htmlColor={theme.palette.tfaa.about}
-        />
+        <MobileNavMenu />
       </section>
 
       <div className="logoWrapper">

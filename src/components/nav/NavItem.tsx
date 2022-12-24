@@ -1,6 +1,6 @@
 // External Dependencies
 import { Link } from 'gatsby-theme-material-ui';
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import clsx from 'clsx';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ import { scale } from '../../utils/typography';
 
 // Local Typings
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   linkTo: string;
 }
