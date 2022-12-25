@@ -1,11 +1,9 @@
 // External Dependencies
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import React, {
   FC, KeyboardEventHandler, useCallback, useMemo
 } from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { auth } from '../../firebase';
@@ -91,8 +89,6 @@ const StyledRoot = styled.nav(({ theme }) => ({
 
 // Component Definition
 const TopNav: FC<Props> = ({ isAuthenticated }) => {
-  const theme = useTheme();
-
   const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
@@ -102,23 +98,26 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   }, [isAuthenticated]);
 
   const logoElement = useMemo(() => (
-    <a href="/">
-      <div className="logoImageWrapper">
-        <img
-          alt="TFAA logo"
-          className="logoImage"
-          src="/tfaa-logo-svg.svg"
-        />
-      </div>
-    </a>
+    <div className="logoImageWrapper">
+      <img
+        alt="TFAA logo"
+        className="logoImage"
+        src="/tfaa-logo-svg.svg"
+      />
+    </div>
   ), []);
 
   return (
     <StyledRoot>
       <section className="mobileNav">
-        {logoElement}
+        <a href="/">
+          {logoElement}
+        </a>
 
-        <MobileNavMenu />
+        <MobileNavMenu
+          isSignedIn={isAuthenticated}
+          onSignOut={auth.doSignOut}
+        />
       </section>
 
       <div className="logoWrapper">
