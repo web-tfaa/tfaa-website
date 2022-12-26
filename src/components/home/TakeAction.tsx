@@ -9,7 +9,7 @@ import { TAKE_ACTION_DATA } from './home-constants'
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   [theme.breakpoints.down('mobile')]: {
-    flexWrap: 'wrap',
+    display: 'none',
   },
   display: 'flex',
   width: '100%',
