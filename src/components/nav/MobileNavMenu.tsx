@@ -1,6 +1,7 @@
 // External Dependencies
 import { PopoverOrigin } from '@mui/material/Popover';
 import { navigate } from 'gatsby';
+import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -37,6 +38,11 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
     lineHeight: 1,
   },
 
+  '.isActive': {
+    backgroundColor: theme.palette.action.selected,
+    // backgroundColor: theme.palette.altBackground,
+  },
+
   '#aboutBullet, #sponsorsBullet': {
     color: theme.palette.tfaa.about,
   },
@@ -71,7 +77,7 @@ const MobileNavMenu: FC<Props> = ({
   const isAboutPage = pathname.includes('/about');
   const isEventsPage = pathname.includes('/events');
   const isResourcesPage = pathname.includes('/resources');
-  const isMembershipPage = pathname.includes('/membership');
+  const isMembershipPage = pathname.includes('/members');
   const isSponsorsPage = pathname.includes('/sponsors');
 
   // Menu logic
@@ -107,7 +113,7 @@ const MobileNavMenu: FC<Props> = ({
 
   const handlePressMembership = () => {
     if (!isMembershipPage) {
-      navigate('/membership');
+      navigate('/members');
     }
     handleClose();
   };
@@ -153,7 +159,10 @@ const MobileNavMenu: FC<Props> = ({
         anchorOrigin={anchorOrigin}
         transformOrigin={transformOrigin}
       >
-        <MenuItem onClick={handlePressAbout}>
+        <MenuItem
+          className={clsx(isAboutPage ? 'isActive' : '')}
+          onClick={handlePressAbout}
+        >
           <ListItemIcon
             className="bullet"
             id="aboutBullet"
@@ -166,7 +175,10 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handlePressEvents}>
+        <MenuItem
+          className={clsx(isEventsPage ? 'isActive' : '')}
+          onClick={handlePressEvents}
+        >
           <ListItemIcon
             className="bullet"
             id="eventsBullet"
@@ -179,7 +191,10 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handlePressResources}>
+        <MenuItem
+          className={clsx(isResourcesPage ? 'isActive' : '')}
+          onClick={handlePressResources}
+        >
           <ListItemIcon
             className="bullet"
             id="resourcesBullet"
@@ -192,7 +207,10 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handlePressMembership}>
+        <MenuItem
+          className={clsx(isMembershipPage ? 'isActive' : '')}
+          onClick={handlePressMembership}
+        >
           <ListItemIcon
             className="bullet"
             id="membershipBullet"
@@ -205,7 +223,10 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handlePressSponsors}>
+        <MenuItem
+          className={clsx(isSponsorsPage ? 'isActive' : '')}
+          onClick={handlePressSponsors}
+        >
           <ListItemIcon
             className="bullet"
             id="sponsorsBullet"
