@@ -66,6 +66,10 @@ const StyledRoot = styled.nav(({ theme }) => ({
     [theme.breakpoints.up('mobile')]: {
       display: 'none',
     },
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -108,12 +112,29 @@ const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
     </div>
   ), []);
 
+  const membersSignInButtonElement = useMemo(() => (
+    <CtaButton
+      colorVariant="signIn"
+      onKeyDown={handlePressKeyDown}
+      to="/members/login"
+    >
+      Members Login
+    </CtaButton>
+  ), [handlePressKeyDown]);
+
   return (
     <StyledRoot>
       <section className="mobileNav">
         <a href="/">
           {logoElement}
         </a>
+
+        <Box
+          paddingY={1.5}
+          width={256}
+        >
+          {membersSignInButtonElement}
+        </Box>
 
         <MobileNavMenu
           isSignedIn={isAuthenticated}
@@ -147,15 +168,7 @@ const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
               >
                 Sign Out
               </CtaButton>
-            ) : (
-              <CtaButton
-                colorVariant="signIn"
-                onKeyDown={handlePressKeyDown}
-                to="/members/login"
-              >
-                Members Login
-              </CtaButton>
-            )}
+            ) : membersSignInButtonElement}
           </Box>
         </ul>
       </div>
