@@ -28,11 +28,26 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
     top: theme.spacing(1),
     right: theme.spacing(1.5),
   },
+}));
 
-  '&&.bullet': {
-    fontSize: 32,
+const StyledMenu = styled(Menu)(({ theme }) => ({
+  '.bullet': {
+    fontSize: 36,
     lineHeight: 1,
   },
+
+  '#aboutBullet': {
+    color: theme.palette.tfaa.about,
+  },
+  '#eventsBullet': {
+    color: theme.palette.tfaa.events,
+  },
+  '#membershipBullet': {
+    color: theme.palette.tfaa.membership,
+  },
+  '#resourcesBullet': {
+    color: theme.palette.tfaa.resources,
+  }
 }));
 
 const anchorOrigin: PopoverOrigin = {
@@ -86,7 +101,7 @@ const MobileNavMenu: FC<Props> = ({
         />
       </StyledIconButton>
 
-      <Menu
+      <StyledMenu
         id="mobile-menu"
         aria-labelledby="mobile-menu-button"
         anchorEl={anchorEl}
@@ -96,7 +111,12 @@ const MobileNavMenu: FC<Props> = ({
         transformOrigin={transformOrigin}
       >
         <MenuItem onClick={handleClose}>
-          <ListItemIcon className="bullet">•</ListItemIcon>
+          <ListItemIcon
+            className="bullet"
+            id="aboutBullet"
+          >
+            •
+          </ListItemIcon>
 
           <ListItemText>
             About {appNameShort}
@@ -104,7 +124,12 @@ const MobileNavMenu: FC<Props> = ({
         </MenuItem>
 
         <MenuItem onClick={handleClose}>
-          <ListItemIcon className="bullet">•</ListItemIcon>
+          <ListItemIcon
+            className="bullet"
+            id="eventsBullet"
+          >
+            •
+          </ListItemIcon>
 
           <ListItemText>
             Events
@@ -112,7 +137,12 @@ const MobileNavMenu: FC<Props> = ({
         </MenuItem>
 
         <MenuItem onClick={handleClose}>
-          <ListItemIcon className="bullet">•</ListItemIcon>
+          <ListItemIcon
+            className="bullet"
+            id="resourcesBullet"
+          >
+            •
+          </ListItemIcon>
 
           <ListItemText>
             Resources
@@ -120,7 +150,12 @@ const MobileNavMenu: FC<Props> = ({
         </MenuItem>
 
         <MenuItem onClick={handleClose}>
-          <ListItemIcon className="bullet">•</ListItemIcon>
+          <ListItemIcon
+            className="bullet"
+            id="membershipBullet"
+          >
+            •
+          </ListItemIcon>
 
           <ListItemText>
             Membership
@@ -139,7 +174,7 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
 
         </MenuItem>
-      </Menu>
+      </StyledMenu>
     </>
   );
 };
