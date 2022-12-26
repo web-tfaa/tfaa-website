@@ -15,6 +15,7 @@ import CtaButton from '../shared/CtaButton';
 // Local Typings
 interface Props {
   isAuthenticated: boolean;
+  pathname: string;
 }
 
 // Local Variables
@@ -88,7 +89,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
 }));
 
 // Component Definition
-const TopNav: FC<Props> = ({ isAuthenticated }) => {
+const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
   const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
@@ -117,6 +118,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
         <MobileNavMenu
           isSignedIn={isAuthenticated}
           onSignOut={auth.doSignOut}
+          pathname={pathname}
         />
       </section>
 

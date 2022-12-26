@@ -19,6 +19,7 @@ import { appNameShort } from '../../utils/app-constants';
 interface Props {
   isSignedIn: boolean;
   onSignOut: () => void;
+  pathname: string;
 }
 
 // Local Variables
@@ -36,7 +37,7 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
     lineHeight: 1,
   },
 
-  '#aboutBullet': {
+  '#aboutBullet, #sponsorsBullet': {
     color: theme.palette.tfaa.about,
   },
   '#eventsBullet': {
@@ -63,8 +64,15 @@ const transformOrigin: PopoverOrigin = {
 const MobileNavMenu: FC<Props> = ({
   isSignedIn,
   onSignOut,
+  pathname,
 }) => {
   const theme = useTheme();
+
+  const isAboutPage = pathname.includes('/about');
+  const isEventsPage = pathname.includes('/events');
+  const isResourcesPage = pathname.includes('/resources');
+  const isMembershipPage = pathname.includes('/membership');
+  const isSponsorsPage = pathname.includes('/sponsors');
 
   // Menu logic
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -74,6 +82,41 @@ const MobileNavMenu: FC<Props> = ({
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handlePressAbout = () => {
+    if (!isAboutPage) {
+      navigate('/about');
+    }
+    handleClose();
+  };
+
+  const handlePressEvents = () => {
+    if (!isEventsPage) {
+      navigate('/events');
+    }
+    handleClose();
+  };
+
+  const handlePressResources = () => {
+    if (!isResourcesPage) {
+      navigate('/resources');
+    }
+    handleClose();
+  };
+
+  const handlePressMembership = () => {
+    if (!isMembershipPage) {
+      navigate('/membership');
+    }
+    handleClose();
+  };
+
+  const handlePressSponsors = () => {
+    if (!isSponsorsPage) {
+      navigate('/sponsors');
+    }
+    handleClose();
   };
 
   const handlePressSignInOut = () => {
@@ -110,7 +153,7 @@ const MobileNavMenu: FC<Props> = ({
         anchorOrigin={anchorOrigin}
         transformOrigin={transformOrigin}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handlePressAbout}>
           <ListItemIcon
             className="bullet"
             id="aboutBullet"
@@ -123,7 +166,7 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handlePressEvents}>
           <ListItemIcon
             className="bullet"
             id="eventsBullet"
@@ -136,7 +179,7 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handlePressResources}>
           <ListItemIcon
             className="bullet"
             id="resourcesBullet"
@@ -149,7 +192,7 @@ const MobileNavMenu: FC<Props> = ({
           </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handlePressMembership}>
           <ListItemIcon
             className="bullet"
             id="membershipBullet"
@@ -159,6 +202,19 @@ const MobileNavMenu: FC<Props> = ({
 
           <ListItemText>
             Membership
+          </ListItemText>
+        </MenuItem>
+
+        <MenuItem onClick={handlePressSponsors}>
+          <ListItemIcon
+            className="bullet"
+            id="sponsorsBullet"
+          >
+            •
+          </ListItemIcon>
+
+          <ListItemText>
+            Sponsors
           </ListItemText>
         </MenuItem>
 

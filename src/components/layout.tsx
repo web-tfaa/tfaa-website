@@ -7,7 +7,7 @@ import React, { FC, ReactElement } from 'react';
 import clsx from 'clsx';
 
 // Internal Dependencies
-import AuthUserContext from './session/AuthUserContext';
+import { appName, appNameShort } from '../utils/app-constants';
 import Footer from './footer';
 import TopNav from './nav/top-nav';
 import withAuthentication from './session/withAuthentication';
@@ -30,20 +30,9 @@ interface Props {
   location: Location;
   pageTitle?: string;
 }
-interface StyledRootProps {
-  $hasSidebar: boolean;
-}
 
 // Local Variables
-const StyledRoot = styled.div<StyledRootProps>(({
-  $hasSidebar,
-  theme,
-}) => ({
-  '.hide-header': {
-    [theme.breakpoints.up('mobile')]: {
-      paddingTop: 0,
-    },
-  },
+const StyledRoot = styled.div(({ theme }) => ({
   '.main-body': {
     [presets.Desktop]: {
       minHeight: 'calc(100vh - 5rem)',
@@ -59,10 +48,10 @@ const StyledRoot = styled.div<StyledRootProps>(({
 
   '.main-content': {
     [theme.breakpoints.up('mobile')]: {
-      paddingLeft: $hasSidebar ? theme.spacing(25) : 0,
+      paddingLeft: 0,
     },
     [presets.Desktop]: {
-      paddingLeft: $hasSidebar ? theme.spacing(38) : 0,
+      paddingLeft: 0,
       paddingRight: theme.spacing(3),
     },
     width: '100vw',
@@ -83,25 +72,14 @@ const StyledRoot = styled.div<StyledRootProps>(({
 // Component Definition
 const DefaultLayout: FC<Props> = ({
   children,
-  isAuthenticated,
   location: {
-    pathname: path,
+    pathname,
   },
   pageTitle,
 }) => {
-  const isHome = path === '/';
-  // const isSponsors = path.slice(0, 9) === '/sponsors';
-  const isAbout = path.slice(0, 6) === '/about';
-  const isEvents = path.slice(0, 7) === '/events';
-  const isResources = path.slice(0, 10) === '/resources';
-  const isMembers = path.slice(0, 8) === '/members';
-
-  const hasSidebar = isAbout || isEvents || isResources
-    || (isAuthenticated && isMembers);
-
   return (
     <StyledComponentsThemeProvider theme={theme}>
-      <Helmet defaultTitle="Texas Music Administrators Conference">
+      <Helmet defaultTitle={appName}>
         <meta
           name="twitter:site"
           content="@TXMusicLeaders"
@@ -112,17 +90,14 @@ const DefaultLayout: FC<Props> = ({
         />
         <meta
           name="og:site_name"
-          content="TMAC"
+          content={appName}
         />
         <html lang="en" />
-        {pageTitle && <title>TMAC | {pageTitle}</title>}
+        {pageTitle && <title>{appNameShort} | {pageTitle}</title>}
       </Helmet>
 
-      <StyledRoot
-        $hasSidebar={hasSidebar}
-        className={isHome ? 'is-homepage' : ''}
-      >
-        <TopNav />
+      <StyledRoot>
+        <TopNav pathname={pathname} />
 
         <div
           className={
@@ -142,15 +117,4 @@ const DefaultLayout: FC<Props> = ({
   );
 };
 
-const DefaultLayoutWithContext = (props: unknown) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (
-      <DefaultLayout
-        {...props}
-        isAuthenticated={!!authUser}
-      />
-    )}
-  </AuthUserContext.Consumer>
-);
-
-export default withAuthentication(DefaultLayoutWithContext);
+export default withAuthentication(DefaultLayout);
