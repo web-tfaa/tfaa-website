@@ -104,7 +104,6 @@ const StyledRoot = styled.section(({ theme }) => ({
   [theme.breakpoints.down('mobile')]: {
     backgroundSize: 'auto',
     padding: theme.spacing(4, 0, 2),
-    overflow: 'scroll',
     alignItems: 'flex-end',
   },
 

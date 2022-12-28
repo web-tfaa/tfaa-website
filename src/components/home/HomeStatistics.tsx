@@ -12,25 +12,27 @@ const StyledRoot = styled.section(({ theme }) => ({
   h5: {
     [theme.breakpoints.down('lg')]: {
       fontSize: 36,
+      margin: theme.spacing(0, 6, 2),
     },
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 30,
+      margin: 0,
+      textAlign: 'left',
+    },
+
     fontSize: 40,
     fontWeight: 500,
     margin: theme.spacing(0, 14, 2),
-  },
-
-  p: {
-    [theme.breakpoints.down('lg')]: {
-      fontSize: 26,
-    },
-    fontSize: 30,
-    fontWeight: 700,
-    margin: theme.spacing(0, 20, 2),
   },
 
   '.statisticsItemsContainer': {
     [theme.breakpoints.down('lg')]: {
       flexWrap: 'wrap',
     },
+    [theme.breakpoints.down('mobile')]: {
+      padding: theme.spacing(0),
+    },
+
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
@@ -38,11 +40,23 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.statisticsText': {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 26,
+      margin: theme.spacing(0, 10, 2),
+    },
+    [theme.breakpoints.down('mobile')]: {
+      display: 'none',
+    },
+
+    fontSize: 30,
+    fontWeight: 700,
+    margin: theme.spacing(0, 20, 2),
     textAlign: 'center',
   },
 
   [theme.breakpoints.down('mobile')]: {
     flexWrap: 'wrap',
+    padding: theme.spacing(4),
   },
   background: theme.palette.tfaa.backgroundMediumLight,
   display: 'flex',
@@ -55,10 +69,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 const HomeStatistics: FC = () => {
   return (
     <StyledRoot>
-      <Typography
-        className="statisticsText"
-        variant="h5"
-      >
+      <Typography variant="h5">
         We invest in leadership development because we believe every Texas
         child deserves to actively engage in creating and performing
         great works of art.
