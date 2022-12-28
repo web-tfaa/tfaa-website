@@ -58,11 +58,11 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
 }));
 
 const anchorOrigin: PopoverOrigin = {
-  horizontal: 'left',
+  horizontal: 'right',
   vertical: 'bottom',
 };
 const transformOrigin: PopoverOrigin = {
-  horizontal: 'left',
+  horizontal: 'right',
   vertical: 'top',
 };
 
