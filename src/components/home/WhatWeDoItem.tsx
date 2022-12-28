@@ -30,7 +30,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
     minWidth: 320,
     position: 'relative',
     top: -24,
-    left: 24,
+    right: -24,
   },
 
   '.whatWeDoItemContent': {
@@ -74,11 +74,18 @@ const StyledRoot = styled.section<StyledRootProps>(({
     fontSize: 16,
     textAlign: 'left',
   },
-  [theme.breakpoints.down('mobile')]: {
-    width: 'calc(100vw / 3)',
-  },
 
   [theme.breakpoints.down('md')]: {
+    '&:not(:first-child)': {
+      marginTop: theme.spacing(8),
+    },
+    width: 500,
+  },
+  [theme.breakpoints.down('mobile')]: {
+    '&:not(:first-child)': {
+      marginTop: theme.spacing(5),
+    },
+    marginRight: theme.spacing(3),
     width: 300,
   },
 

@@ -8,22 +8,13 @@ import { WHAT_WE_DO_DATA } from './home-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  [theme.breakpoints.down('mobile')]: {
-    flexWrap: 'wrap',
-    // padding: theme.spacing(8),
-    padding: theme.spacing(8, 2),
-    // columnGap: theme.spacing(3),
-  },
   [theme.breakpoints.down('md')]: {
-    // flexWrap: 'wrap',
-    // padding: theme.spacing(8),
-    // columnGap: theme.spacing(3),
-    // marginBottom: theme.spacing(3),
-    // flexDirection: 'column',
-    // justifyContent: 'center',
+    flexDirection: 'column',
+    padding: theme.spacing(8, 6),
   },
-  // border: '1px solid hotpink',
-  // backgroundColor: 'aliceblue',
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(3, 2),
+  },
 
   background: theme.palette.tfaa.background,
   columnGap: theme.spacing(6),
