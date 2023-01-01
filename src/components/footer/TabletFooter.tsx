@@ -1,11 +1,11 @@
 // External Dependencies
 import { Link } from 'gatsby-theme-material-ui';
+import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { anchorStyles } from '../../utils/sharedStyles';
-import { Typography } from '@mui/material';
 import { appNameShort } from '../../utils/app-constants';
 import FooterBottomRow from './FooterBottomRow';
 import FooterContactUs from './FooterContactUs';
