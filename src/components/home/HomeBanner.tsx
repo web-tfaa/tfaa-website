@@ -21,11 +21,18 @@ const StyledRoot = styled.section(({ theme }) => ({
       paddingRight: theme.spacing(2),
     },
     [theme.breakpoints.down('mobile')]: {
-      paddingRight: theme.spacing(1),
+      order: 2,
     },
 
     maxWidth: 400,
     paddingRight: theme.spacing(3),
+  },
+
+  '.bannerRight': {
+    [theme.breakpoints.down('mobile')]: {
+      order: 1,
+      marginBottom: theme.spacing(1),
+    },
   },
 
   '#bannerBackgroundVideo': {
@@ -69,12 +76,19 @@ const StyledRoot = styled.section(({ theme }) => ({
     [theme.breakpoints.down('mobile')]: {
       fontSize: 24,
       lineHeight: '24px',
+      marginBottom: theme.spacing(8),
     },
     fontSize: 40,
     lineHeight: '40px',
   },
 
   '& > div': {
+    [theme.breakpoints.down('mobile')]: {
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      width: '100%',
+    },
+
     display: 'flex',
     justifyContent: 'center',
     width: '50%',
@@ -93,6 +107,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     backgroundSize: 'cover',
     height: 540,
     padding: theme.spacing(4),
+    flexDirection: 'column',
   },
 
   alignItems: 'center',
@@ -106,34 +121,36 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const HomeBanner: React.FC = () => (
-  <StyledRoot>
-    <video
-      autoPlay
-      id="bannerBackgroundVideo"
-      loop
-      muted
-      poster="https://res.cloudinary.com/tmac/image/upload/v1670299501/tfaa-banner-video-poster.png"
-    >
-      <source
-        src="https://res.cloudinary.com/tmac/video/upload/v1670134429/woman-fine-artist-2022-07-21-07-22-28-utc_1.mp4"
-        type="video/mp4"
-      />
-    </video>
+const HomeBanner: React.FC = () => {
+  return (
+    <StyledRoot>
+      <video
+        autoPlay
+        id="bannerBackgroundVideo"
+        loop
+        muted
+        poster="https://res.cloudinary.com/tmac/image/upload/v1670299501/tfaa-banner-video-poster.png"
+      >
+        <source
+          src="https://res.cloudinary.com/tmac/video/upload/v1670134429/woman-fine-artist-2022-07-21-07-22-28-utc_1.mp4"
+          type="video/mp4"
+        />
+      </video>
 
-    <div className="bannerLeft">
-      <div>
-        <h2>We nurture and grow leaders in Fine Arts Education</h2>
-        <Link>
-          Read more about how TFAA can help you
-        </Link>
+      <div className="bannerLeft">
+        <div>
+          <h2>We nurture and grow leaders in Fine Arts Education</h2>
+          <Link>
+            Read more about how TFAA can help you
+          </Link>
+        </div>
       </div>
-    </div>
 
-    <div className="bannerRight">
-      <h1>Fine Arts for Everyone!</h1>
-    </div>
-  </StyledRoot>
-);
+      <div className="bannerRight">
+        <h1>Fine Arts for Everyone!</h1>
+      </div>
+    </StyledRoot>
+  );
+};
 
 export default HomeBanner;

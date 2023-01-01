@@ -8,12 +8,14 @@ import styled from 'styled-components';
 // Internal Dependencies
 import { auth } from '../../firebase';
 import AuthUserContext from '../session/AuthUserContext';
+import MobileNavMenu from './MobileNavMenu';
 import NavItem from './NavItem';
 import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
   isAuthenticated: boolean;
+  pathname: string;
 }
 
 // Local Variables
@@ -30,6 +32,10 @@ const StyledRoot = styled.nav(({ theme }) => ({
   },
 
   '.logoImageWrapper': {
+    img: {
+      marginBottom: 0,
+    },
+
     [theme.breakpoints.up('md')]: {
       height: '100%',
       width: '100%',
@@ -47,10 +53,23 @@ const StyledRoot = styled.nav(({ theme }) => ({
   },
 
   '.logoWrapper': {
+    [theme.breakpoints.down('mobile')]: {
+      padding: 0,
+    },
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
     padding: theme.spacing(0, 2),
+  },
+
+  '.mobileNav': {
+    [theme.breakpoints.up('mobile')]: {
+      display: 'none',
+    },
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   [theme.breakpoints.up('md')]: {
@@ -74,7 +93,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
 }));
 
 // Component Definition
-const TopNav: FC<Props> = ({ isAuthenticated }) => {
+const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
   const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
@@ -84,23 +103,51 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
   }, [isAuthenticated]);
 
   const logoElement = useMemo(() => (
-    <NavItem linkTo="/">
-      <div className="logoImageWrapper">
-        <img
-          alt="TFAA logo"
-          className="logoImage"
-          src="/tfaa-logo-svg.svg"
-        />
-      </div>
-    </NavItem>
+    <div className="logoImageWrapper">
+      <img
+        alt="TFAA logo"
+        className="logoImage"
+        src="/tfaa-logo-svg.svg"
+      />
+    </div>
   ), []);
+
+  const membersSignInButtonElement = useMemo(() => (
+    <CtaButton
+      colorVariant="signIn"
+      onKeyDown={handlePressKeyDown}
+      to="/members/login"
+    >
+      Members Login
+    </CtaButton>
+  ), [handlePressKeyDown]);
 
   return (
     <StyledRoot>
-      <div className="logoWrapper">
-        {logoElement}
+      <section className="mobileNav">
+        <a href="/">
+          {logoElement}
+        </a>
 
+        <Box
+          paddingY={1.5}
+          width={256}
+        >
+          {membersSignInButtonElement}
+        </Box>
+
+        <MobileNavMenu
+          isSignedIn={isAuthenticated}
+          onSignOut={auth.doSignOut}
+          pathname={pathname}
+        />
+      </section>
+
+      <div className="logoWrapper">
         <ul className="list">
+          <NavItem linkTo="/">
+            {logoElement}
+          </NavItem>
           <NavItem linkTo="/about/">About</NavItem>
           <NavItem linkTo="/events/">Events</NavItem>
           <NavItem linkTo="/resources/">Resources</NavItem>
@@ -121,15 +168,7 @@ const TopNav: FC<Props> = ({ isAuthenticated }) => {
               >
                 Sign Out
               </CtaButton>
-            ) : (
-              <CtaButton
-                colorVariant="signIn"
-                onKeyDown={handlePressKeyDown}
-                to="/members/login"
-              >
-                Members Login
-              </CtaButton>
-            )}
+            ) : membersSignInButtonElement}
           </Box>
         </ul>
       </div>

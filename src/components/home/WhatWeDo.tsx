@@ -8,9 +8,14 @@ import { WHAT_WE_DO_DATA } from './home-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  [theme.breakpoints.down('mobile')]: {
-    flexWrap: 'wrap',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    padding: theme.spacing(8, 6),
   },
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(3, 2),
+  },
+
   background: theme.palette.tfaa.background,
   columnGap: theme.spacing(6),
   display: 'flex',

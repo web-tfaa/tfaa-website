@@ -12,6 +12,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     width: '100%',
   },
   '.greetingRight': {
+    [theme.breakpoints.down('mobile')]: {
+      padding: theme.spacing(0, 4),
+    },
     padding: theme.spacing(8, 15, 8, 8),
   },
 
@@ -22,6 +25,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   img: {
+    [theme.breakpoints.down('mobile')]: {
+      position: 'static',
+    },
     left: theme.spacing(-5),
     position: 'relative',
   },
@@ -31,8 +37,15 @@ const StyledRoot = styled.section(({ theme }) => ({
     marginBottom: theme.spacing(2),
   },
 
+  '#allPriority': {
+    [theme.breakpoints.down('mobile')]: {
+      display: 'none',
+    },
+  },
+
   [theme.breakpoints.down('mobile')]: {
     flexWrap: 'wrap',
+    paddingTop: 0,
   },
   background: theme.palette.tfaa.backgroundLight,
   display: 'flex',
@@ -67,7 +80,7 @@ const Greetings: FC = () => {
           children in Texas are offered a high-quality fine arts education.
         </Typography>
 
-        <Typography variant="h4">
+        <Typography id="allPriority" variant="h4">
           Fine Arts Education for All Is Our Priority
         </Typography>
       </div>

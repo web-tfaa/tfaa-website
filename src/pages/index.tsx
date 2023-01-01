@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { appNameShort } from '../utils/app-constants';
 import FineArtsPriority from '../components/home/FineArtsPriority';
 import Greetings from '../components/home/Greetings';
 import HomeBanner from '../components/home/HomeBanner';
@@ -30,7 +31,7 @@ const StyledRoot = styled.div({
 const Home: FC<Props> = ({ location }) => (
   <Layout location={location}>
     <Helmet>
-      <title>TMAC | Home</title>
+      <title>{appNameShort} | Home</title>
     </Helmet>
 
     <StyledRoot>
