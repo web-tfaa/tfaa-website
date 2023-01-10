@@ -43,7 +43,6 @@ const Login: FC<Props> = ({
   }, []);
 
   if (isAuthenticated) {
-    console.log('redirect #2');
     return handleRedirectToMembers();
   }
 
