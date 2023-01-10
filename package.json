@@ -1,7 +1,7 @@
 {
   "name": "tmac-website",
   "description": "Website for the Texas Music Administrators Conference",
-  "version": "2.15.1",
+  "version": "2.16.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/m2mathew/tmac-website"
