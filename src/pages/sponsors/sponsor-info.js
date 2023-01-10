@@ -6,13 +6,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { isTodayAfterJune30th } from '../../utils/helpers';
+// import { isTodayAfterJune30th } from '../../utils/helpers';
 import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import CtaButton from '../../components/masthead/cta-button';
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
+// import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
 import presets from '../../utils/presets';
@@ -54,7 +54,7 @@ const SponsorInfo = ({
         >
           <CardHeadline>Sponsor TMAC</CardHeadline>
 
-          {!isTodayAfterJune30th
+          {/* {!isTodayAfterJune30th
             ? (
               <Box mt={3}>
                 <EnhancedAlert title="Sponsorship Notice">
@@ -62,58 +62,58 @@ const SponsorInfo = ({
                 </EnhancedAlert>
               </Box>
             ) : (
-              <>
-                <FuturaDiv>
-                  To become a TMAC sponsor please complete these three steps:
-                </FuturaDiv>
+              <> */}
+          <FuturaDiv>
+            To become a TMAC sponsor please complete these three steps:
+          </FuturaDiv>
 
-                <FuturaDiv>
-                  <span className="strong">
-                    1.{' '}
-                  </span>
-                  Sign up for a TMAC website login.
-                </FuturaDiv>
+          <FuturaDiv>
+            <span className="strong">
+              1.{' '}
+            </span>
+            Sign up for a TMAC website login.
+          </FuturaDiv>
 
-                <FuturaDiv>
-                  <span className="strong">
-                    2.{' '}
-                  </span>
-                  Complete the Sponsorship Form.
-                </FuturaDiv>
+          <FuturaDiv>
+            <span className="strong">
+              2.{' '}
+            </span>
+            Complete the Sponsorship Form.
+          </FuturaDiv>
 
-                <FuturaDiv>
-                  <span className="strong">
-                    3.{' '}
-                  </span>
-                  To pay, mail invoice with check to the TMAC Treasurer.
-                </FuturaDiv>
-              </>
-            )}
+          <FuturaDiv>
+            <span className="strong">
+              3.{' '}
+            </span>
+            To pay, mail invoice with check to the TMAC Treasurer.
+          </FuturaDiv>
+          {/* </>
+            )} */}
         </Box>
 
-        {isTodayAfterJune30th && (
-        <>
-          <Box
-            display="flex"
-            justifyContent="flex-end"
+        {/* {isTodayAfterJune30th && (
+        <> */}
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+        >
+          <CtaButton
+            buttonColor="blue"
+            to="/sponsors/register"
+            state={{ level: location && location.state && location.state.level }}
           >
-            <CtaButton
-              buttonColor="blue"
-              to="/sponsors/register"
-              state={{ level: location && location.state && location.state.level }}
-            >
-              <span>
-                Begin Sponsorship
-              </span>
-              <ArrowForwardIcon />
-            </CtaButton>
-          </Box>
+            <span>
+              Begin Sponsorship
+            </span>
+            <ArrowForwardIcon />
+          </CtaButton>
+        </Box>
 
-          <div style={{ marginTop: '1.5rem' }}>
-            * Sponsorship is not complete until payment is received.
-          </div>
-        </>
-        )}
+        <div style={{ marginTop: '1.5rem' }}>
+          * Sponsorship is not complete until payment is received.
+        </div>
+        {/* </>
+        )} */}
       </Container>
 
       <MobileDivider />
