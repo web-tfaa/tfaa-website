@@ -46,7 +46,6 @@ const Home: FC<Props> = ({ location }) => (
       <FineArtsPriority />
 
       <HomeStatistics />
-
     </StyledRoot>
   </Layout>
 );
