@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { isTodayAfterJune30th } from '../../utils/helpers';
+// import { isTodayAfterJune30th } from '../../utils/helpers';
 import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
@@ -55,7 +55,7 @@ const JoinContainer = ({ location }) => (
         <div className="topContent">
           <CardHeadline>Join TMAC</CardHeadline>
 
-          {!isTodayAfterJune30th
+          {/* {!isTodayAfterJune30th
             ? (
               <Box mt={3}>
                 <EnhancedAlert title="Membership Notice">
@@ -63,63 +63,62 @@ const JoinContainer = ({ location }) => (
                 </EnhancedAlert>
               </Box>
             ) : (
-              <>
-                <FuturaDiv>
-                  To join TMAC please complete these three steps:
-                </FuturaDiv>
+              <> */}
+          <FuturaDiv>
+            To join TMAC please complete these three steps:
+          </FuturaDiv>
 
-                <FuturaDiv>
-                  <span className="strong">
-                    1.
-                    {' '}
-                  </span>
-                  Sign up for a TMAC website login.
-                </FuturaDiv>
+          <FuturaDiv>
+            <span className="strong">
+              1.
+              {' '}
+            </span>
+            Sign up for a TMAC website login.
+          </FuturaDiv>
 
-                <FuturaDiv>
-                  <span className="strong">
-                    2.
-                    {' '}
-                  </span>
-                  Complete the Membership Form.
-                </FuturaDiv>
+          <FuturaDiv>
+            <span className="strong">
+              2.
+              {' '}
+            </span>
+            Complete the Membership Form.
+          </FuturaDiv>
 
-                <FuturaDiv>
-                  <span className="strong">
-                    3.
-                    {' '}
-                  </span>
-                  Pay dues online using PayPal (or mail invoice with check via mail).
-                </FuturaDiv>
+          <FuturaDiv>
+            <span className="strong">
+              3.
+              {' '}
+            </span>
+            Pay dues online using PayPal (or mail invoice with check via mail).
+          </FuturaDiv>
 
-                <p>
-                  Note: Sponsors should complete the
-                  {' '}
-                  <Link to="/sponsors">Sponsor Form</Link>
-                  .
-                </p>
-              </>
-            )}
-
+          <p>
+            Note: Sponsors should complete the
+            {' '}
+            <Link to="/sponsors">Sponsor Form</Link>
+            .
+          </p>
+          {/* </>
+            )} */}
         </div>
 
-        {isTodayAfterJune30th && (
-          <>
-            <div className="bottomContent">
-              <CtaButton
-                buttonColor="blue"
-                to="/members/register"
-              >
-                Begin Membership
-                <ArrowForwardIcon />
-              </CtaButton>
-            </div>
+        {/* {isTodayAfterJune30th && (
+          <> */}
+        <div className="bottomContent">
+          <CtaButton
+            buttonColor="blue"
+            to="/members/register"
+          >
+            Begin Membership
+            <ArrowForwardIcon />
+          </CtaButton>
+        </div>
 
-            <div style={{ marginTop: '1.5rem' }}>
-              * Membership is not complete until payment is received.
-            </div>
-          </>
-        )}
+        <div style={{ marginTop: '1.5rem' }}>
+          * Membership is not complete until payment is received.
+        </div>
+        {/* </>
+        )} */}
       </Container>
 
       <MobileDivider>
