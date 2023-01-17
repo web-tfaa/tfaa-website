@@ -357,6 +357,13 @@ const RegisterMemberPayment: FC<Props> = ({
             </RadioGroup>
           </FormControl>
 
+          <Typography
+            sx={{ marginTop: 1.5 }}
+            variant="body2"
+          >
+            Click on the PayPal button below to pay with credit card.
+          </Typography>
+
           <PaypalButtonWrapper
             amount={amount}
             onSuccessfulPayment={handleUpdateCompletedStep}
