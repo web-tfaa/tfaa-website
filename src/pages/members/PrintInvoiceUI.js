@@ -2,8 +2,6 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
-import { useMediaQuery } from '@mui/material';
-import { useTheme } from 'styled-components';
 
 // Internal Dependencies
 import Invoice from '../../components/register/invoice';
@@ -37,16 +35,11 @@ const defaultProps = {
 
 // Component Definition
 const PrintInvoiceUI = ({ currentUser }) => {
-  const theme = useTheme();
   const printInvoiceRef = useRef();
-
-  const isTabletOrSmallerScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   if (!currentUser) {
     return null;
   }
-
-  const buttonText = `View${!isTabletOrSmallerScreen ? ' Invoice' : ''}`;
 
   return (
     <div>
@@ -55,7 +48,7 @@ const PrintInvoiceUI = ({ currentUser }) => {
           content={() => printInvoiceRef.current}
           trigger={() => (
             <RegisterButton green>
-              {buttonText}
+              Print Invoice
             </RegisterButton>
           )}
         />

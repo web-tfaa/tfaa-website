@@ -1,19 +1,23 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
+import { Theme } from '@mui/material/styles';
+import { blue, green } from '@mui/material/colors';
 import hex2rgba from 'hex2rgba';
 import React, { FC } from 'react';
-import { Link } from 'gatsby-theme-material-ui';
-import { blue, green } from '@mui/material/colors';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { options } from '../../utils/typography';
 import presets from '../../utils/presets';
-import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Typings
 interface Props {
   buttonColor: 'blue' | 'green';
   children: React.ReactNode;
   to?: string;
+}
+interface StyledLinkProps {
+  $buttonColor: 'blue' | 'green';
 }
 
 // Local Variables
@@ -22,6 +26,9 @@ const green500 = '#4caf50';
 const getButtonColor = ({
   buttonColor,
   theme
+}: {
+  buttonColor: 'blue' | 'green';
+  theme: Theme;
 }) => {
   let background: string = blue['50'];
   let hover: string = blue['800'];
@@ -40,28 +47,20 @@ const getButtonColor = ({
   };
 };
 
-const StyledLink = styled(Link)(({ $buttonColor, theme }) => {
+const StyledLink = styled(Link)<StyledLinkProps>(({ $buttonColor, theme }) => {
   const color = getButtonColor({
     buttonColor: $buttonColor,
     theme
   });
 
   return {
-    [presets.Tablet]: {
-      ...scale(2 / 5),
-      padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
-    },
-    [presets.VHd]: {
-      padding: `${rhythm(1 / 2)} ${rhythm(1)}`,
-    },
+    padding: '3px 9px',
 
     // Increase specificity
     '&&': {
-      ...scale(1 / 5),
       display: 'inline-block',
       fontFamily: options.headerFontFamily.join(','),
-      padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
-      borderRadius: presets.radiusLg,
+      borderRadius: theme.shape.borderRadius,
       backgroundColor: color.background,
       boxShadow: 'none',
       border: `2px solid ${color.primary}`,

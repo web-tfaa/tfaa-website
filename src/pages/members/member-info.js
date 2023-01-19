@@ -92,6 +92,9 @@ const StyledRoot = styled.div(({ theme }) => ({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  '.paymentList': {
+    marginBottom: theme.spacing(1),
+  },
   '.paymentListItem': {
     '&:not(:first-child)': {
       marginTop: theme.spacing(1),
@@ -110,6 +113,14 @@ const StyledRoot = styled.div(({ theme }) => ({
   width: '100%',
 }));
 
+export const StyledStrong = styled.strong(({ theme }) => ({
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.1rem',
+  },
+  fontSize: '1.2rem',
+  whiteSpace: 'pre',
+}));
+
 // Component Definition
 const MemberInfo = ({
   currentUser,
@@ -117,8 +128,6 @@ const MemberInfo = ({
   memberEmail,
   setShouldRefetchUserList,
 }) => {
-  // console.log('MemberInfo : currentUser', currentUser);
-
   const [isChangeEmailDialogOpen, setIsChangeEmailDialogOpen] = useState(false);
   const [newEmailValue, setNewEmailValue] = useState('');
   const [newEmailError, setNewEmailError] = useState('');
@@ -172,6 +181,8 @@ const MemberInfo = ({
 
   const isInvoiced = currentUser?.PaymentOption.toLowerCase() === 'invoiced';
 
+  const needsToPay = !currentUser?.AmountPaid;
+
   const amountToPay = currentUser?.MemberType === 'Active' ? 50.00 : 30.00;
 
   return (
@@ -188,7 +199,15 @@ const MemberInfo = ({
                 }}
                 primary={(
                   <>
-                    {!isRegisteredForCurrentYear ? 'Inactive' : currentUser?.MemberType || 'Active'} member
+                    {!isRegisteredForCurrentYear && 'Not registered'}
+
+                    {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
+
+                    {isRegisteredForCurrentYear && !needsToPay && (
+                      <>
+                        {currentUser?.MemberType || 'Active'} member
+                      </>
+                    )}
                   </>
                 )}
                 secondary={`for the ${currentSchoolYearLong} school year`}
@@ -203,13 +222,11 @@ const MemberInfo = ({
                 paragraph
                 variant="body2"
               >
-                You have a{' '}
-                <strong>
-                  {currentUser?.MemberType === 'Active' ? '$50.00' : '$30.00'}
-                </strong>
+                Outstanding balance:
                 {' '}
-                outstanding balance for the{' '}
-                {currentSchoolYearLong} school year.
+                <StyledStrong>
+                  {currentUser?.MemberType === 'Active' ? '$50.00' : '$30.00'}
+                </StyledStrong>
               </Typography>
 
               <Typography
@@ -222,24 +239,7 @@ const MemberInfo = ({
                 Payment Options
               </Typography>
 
-              <List>
-                <ListItem className="paymentListItem">
-                  <ListItemText
-                    classes={{
-                      primary: 'listItemText',
-                      secondary: 'listItemSecondaryText',
-                    }}
-                    primary="Send invoice with payment"
-                    secondary="Please send payment
-                    to the TMAC Treasurer as indicated on your
-                    invoice."
-                  />
-                </ListItem>
-
-                <div className="paymentActionContainer">
-                  <PrintInvoiceUI currentUser={currentUser} />
-                </div>
-
+              <List className="paymentList">
                 <ListItem className="paymentListItem">
                   <ListItemText
                     classes={{
@@ -257,6 +257,23 @@ const MemberInfo = ({
                     noMargin
                     onSuccessfulPayment={() => console.log('you did it!')}
                   />
+                </div>
+
+                <ListItem className="paymentListItem">
+                  <ListItemText
+                    classes={{
+                      primary: 'listItemText',
+                      secondary: 'listItemSecondaryText',
+                    }}
+                    primary="Send invoice with payment"
+                    secondary="Mail invoice with payment
+                    to the TMAC Treasurer as indicated on your
+                    invoice."
+                  />
+                </ListItem>
+
+                <div className="paymentActionContainer">
+                  <PrintInvoiceUI currentUser={currentUser} />
                 </div>
               </List>
             </>
@@ -313,7 +330,13 @@ const MemberInfo = ({
                   primary: 'listItemText',
                 }}
                 primary="Update email for TMAC website login"
-                secondary={`Current sign-in email: ${memberEmail}`}
+                secondary={(
+                  <>
+                    Current sign-in email:
+                    <br />
+                    {memberEmail}
+                  </>
+                )}
               />
 
               <ListItemSecondaryAction>

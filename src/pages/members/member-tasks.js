@@ -1,5 +1,8 @@
 // External Dependencies
-import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
@@ -44,12 +47,32 @@ const defaultProps = {
   currentUser: null,
 };
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledRoot = styled(Card)(({ theme }) => ({
   '.buttonContainer': {
     marginTop: theme.spacing(2),
   },
   '.hidden': {
     display: 'none',
+  },
+  '.listItemSecondaryText': {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.9rem',
+    },
+    maxWidth: '80%',
+  },
+  '.listItemText': {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.9rem',
+      maxWidth: '70%',
+    },
+    fontSize: '1rem',
+    fontWeight: 500,
+  },
+  '.paymentListItem': {
+    '&:not(:first-child)': {
+      marginTop: theme.spacing(1),
+    },
+    marginBottom: 0,
   },
 }));
 
@@ -97,21 +120,54 @@ const MemberTasks = ({
   const isPaypal = currentUser?.PaymentOption.toLowerCase() === 'paypal';
 
   return (
-    <StyledCard>
+    <StyledRoot>
       <CardSubtitle>
         Tasks for {currentSchoolYearLong} school year
       </CardSubtitle>
 
-      {!isRegisteredForCurrentYear && !isInvoiced && (
-        <Box marginTop={4}>
-          <CtaButton
-            buttonColor="blue"
-            to="/members/join"
-          >
-            Join TMAC
-          </CtaButton>
-        </Box>
-      )}
+      <List sx={{ marginTop: 4 }}>
+        <ListItem className="paymentListItem">
+          <ListItemText
+            classes={{
+              primary: 'listItemText',
+              secondary: 'listItemSecondaryText',
+            }}
+            primary="Register"
+            secondary="Become a member for the current school year."
+          />
+
+          {!isRegisteredForCurrentYear && (
+            <ListItemSecondaryAction>
+              <CtaButton
+                buttonColor="blue"
+                to="/members/join"
+              >
+                Register
+              </CtaButton>
+            </ListItemSecondaryAction>
+          )}
+        </ListItem>
+
+        <ListItem className="paymentListItem">
+          <ListItemText
+            classes={{
+              primary: 'listItemText',
+              secondary: 'listItemSecondaryText',
+            }}
+            primary="Pay Membership Dues"
+            secondary="Pay online using credit card or send payment with invoice."
+          />
+
+          <ListItemSecondaryAction>
+            <CtaButton
+              buttonColor="blue"
+              to="/members/join"
+            >
+              Register
+            </CtaButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </List>
 
       {isInvoiced && (
         <>
@@ -120,6 +176,7 @@ const MemberTasks = ({
             to the TMAC Treasurer as indicated on your
             invoice.
           </Typography>
+
           <PrintInvoiceUI currentUser={currentUser} />
         </>
       )}
@@ -140,7 +197,7 @@ const MemberTasks = ({
           </FuturaAnchor>
         </>
       )}
-    </StyledCard>
+    </StyledRoot>
   );
 };
 

@@ -80,7 +80,6 @@ const MembersHome = ({
             currentMemberList={userData}
             memberEmail={authUser.email}
             setShouldRefetchUserList={setShouldRefetchUserList}
-            userId={authUser.uid}
           />
         ) : (
           <NonMemberContent />

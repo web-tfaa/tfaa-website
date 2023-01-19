@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Internal Dependencies
 import {
@@ -13,7 +13,6 @@ import {
   TMAC_WEB_EXECUTIVE_SECRETARY,
   TMAC_WEB_ADMIN_EMAIL_LIST,
 } from '../../utils/member-constants';
-import { doGetUsers } from '../../firebase/db';
 import Cards from '../../components/shared/cards';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 
@@ -38,7 +37,6 @@ const propTypes = {
   currentMemberList: PropTypes.arrayOf(PropTypes.shape({})),
   memberEmail: PropTypes.string,
   setShouldRefetchUserList: PropTypes.func.isRequired,
-  userId: PropTypes.string,
 };
 
 const defaultProps = {
@@ -46,7 +44,6 @@ const defaultProps = {
   contentfulFileShareData: null,
   contentfulFileShareDescriptionData: null,
   currentMemberList: null,
-  userId: null,
 };
 
 // Component Definition
@@ -57,25 +54,9 @@ const MemberContent = ({
   currentMemberList,
   memberEmail,
   setShouldRefetchUserList,
-  userId,
 }) => {
   const [isLoadingUserData, setIsLoadingUserData] = useState(true);
-  const [allUsersData, setAllUsersData] = useState([]);
   const [currentMemberData, setCurrentMemberData] = useState(null);
-
-  console.log('MemberContent : currentMemberData', currentMemberData);
-
-  const handleUpdateUserList = (userList) => {
-    setAllUsersData(userList);
-  };
-
-  useEffect(() => {
-    if (allUsersData.length < 1) {
-      const userList = [];
-
-      doGetUsers('registration', userList, handleUpdateUserList);
-    }
-  }, [allUsersData.length]);
 
   useEffect(() => {
     if (authUser && isLoadingUserData) {
@@ -84,8 +65,8 @@ const MemberContent = ({
   }, [authUser, isLoadingUserData]);
 
   useEffect(() => {
-    if (allUsersData.length > 0 && !currentMemberData) {
-      const currentMember = allUsersData.find(
+    if (currentMemberList?.length > 0 && !currentMemberData) {
+      const currentMember = currentMemberList.find(
         // We used to use authUser.uid as the unique key in the Firestore
         // Now we use authUser.email
         // We have to search for both for backwards compatibility
@@ -94,16 +75,14 @@ const MemberContent = ({
 
       setCurrentMemberData(currentMember);
     }
-  }, [allUsersData, authUser.email, authUser.uid, currentMemberData]);
+  }, [
+    authUser.email,
+    authUser.uid,
+    currentMemberData,
+    currentMemberList,
+  ]);
 
-  const isRegisteredForCurrentYear = useMemo(
-    () =>
-      (!currentMemberList?.length ? false
-        : currentMemberList?.some(
-          (member) => member.userId === userId || member.email === userId,
-        )),
-    [currentMemberList, userId]
-  );
+  const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
   if (isLoadingUserData) {
     return (
