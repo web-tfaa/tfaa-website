@@ -16,7 +16,7 @@ export const doCreateEntry = (
 ) => {
   const collectionName = getFirebaseCollectionName(collection);
 
-  console.log('doCreateEntry : creating...', `${collection}_${currentSchoolYearShort}`);
+  console.log('creating data...', `${collection}_${currentSchoolYearShort}`);
 
   return db
     .collection(collectionName)
@@ -41,7 +41,7 @@ export const doUpdateEntry = (
 ) => {
   const collectionName = getFirebaseCollectionName(collection);
 
-  console.log('doUpdateEntry : updating...', collectionName);
+  console.log('updating data...', collectionName);
 
   return db
     .collection(collectionName)
@@ -62,7 +62,7 @@ export const doUpdateEntry = (
 export const doGetUsers = (collection, userList, callback) => {
   const collectionName = getFirebaseCollectionName(collection);
 
-  console.log('doGetUsers : getting...', collectionName);
+  console.log('getting data...', collectionName);
 
   const updatedUserList = userList;
   return db
