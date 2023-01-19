@@ -6,18 +6,16 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
-import Typography from '@mui/material/Typography';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Internal Dependencies
 import { currentSchoolYearLong } from '../../utils/helpers';
 import Card from '../../components/shared/cards/card';
 import CardSubtitle from '../../components/shared/CardSubtitle';
 import CtaButton from '../../components/masthead/cta-button';
-import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
-import PrintInvoiceUI from './PrintInvoiceUI';
 import RegisterButton from '../../components/register/register-button';
 
 // Local Variables
@@ -51,6 +49,12 @@ const StyledRoot = styled(Card)(({ theme }) => ({
   '.buttonContainer': {
     marginTop: theme.spacing(2),
   },
+  '.checkCircleIcon': {
+    height: 20,
+    marginLeft: theme.spacing(1),
+    transform: 'translateY(4px)',
+    width: 20,
+  },
   '.hidden': {
     display: 'none',
   },
@@ -77,10 +81,11 @@ const StyledRoot = styled(Card)(({ theme }) => ({
 }));
 
 // Component Definition
-const MemberTasks = ({
+const RegistrationTasks = ({
   currentUser,
   isRegisteredForCurrentYear,
 }) => {
+  const theme = useTheme();
   const printReceiptRef = useRef();
 
   const receiptInfo = currentUser && (
@@ -115,25 +120,38 @@ const MemberTasks = ({
     </FuturaDiv>
   );
 
-  const isInvoiced = currentUser?.PaymentOption.toLowerCase() === 'invoiced';
-
   const isPaypal = currentUser?.PaymentOption.toLowerCase() === 'paypal';
 
   return (
     <StyledRoot>
       <CardSubtitle>
-        Tasks for {currentSchoolYearLong} school year
+        Registration tasks
       </CardSubtitle>
 
-      <List sx={{ marginTop: 4 }}>
+      <List sx={{ marginTop: 1.5 }}>
         <ListItem className="paymentListItem">
           <ListItemText
             classes={{
               primary: 'listItemText',
               secondary: 'listItemSecondaryText',
             }}
-            primary="Register"
-            secondary="Become a member for the current school year."
+            primary={(
+              <>
+                Register
+                {isRegisteredForCurrentYear && (
+                  <CheckCircleIcon
+                    className="checkCircleIcon"
+                    fontSize="small"
+                    htmlColor={theme.palette.success.main}
+                  />
+                )}
+              </>
+            )}
+            secondary={
+              isRegisteredForCurrentYear
+                ? 'You are registered — thanks for being a member!'
+                : 'Become a member for the current school year.'
+}
           />
 
           {!isRegisteredForCurrentYear && (
@@ -157,51 +175,37 @@ const MemberTasks = ({
             primary="Pay Membership Dues"
             secondary="Pay online using credit card or send payment with invoice."
           />
-
-          <ListItemSecondaryAction>
-            <CtaButton
-              buttonColor="blue"
-              to="/members/join"
-            >
-              Register
-            </CtaButton>
-          </ListItemSecondaryAction>
         </ListItem>
+
+        {isRegisteredForCurrentYear && (
+          <ListItem className="paymentListItem">
+            <ListItemText
+              classes={{
+                primary: 'listItemText',
+                secondary: 'listItemSecondaryText',
+              }}
+              primary="Download W-9 Form"
+              secondary="If your district requires an IRS W-9 Form for TMAC, download or print a copy."
+            />
+
+            <ListItemSecondaryAction>
+              <CtaButton
+                buttonColor="blue"
+                to="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
+              >
+                Download
+              </CtaButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        )}
       </List>
 
-      {isInvoiced && (
-        <>
-          <Typography variant="body2">
-            If you need to pay via invoice, please send payment
-            to the TMAC Treasurer as indicated on your
-            invoice.
-          </Typography>
-
-          <PrintInvoiceUI currentUser={currentUser} />
-        </>
-      )}
-
       {isPaypal && receiptInfo}
-
-      {isRegisteredForCurrentYear && (
-        <>
-          <FuturaDiv>
-            If your district requires the IRS W-9 Form for TMAC, download or print a copy below.
-          </FuturaDiv>
-
-          <FuturaAnchor
-            download
-            href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
-          >
-            Download W-9
-          </FuturaAnchor>
-        </>
-      )}
     </StyledRoot>
   );
 };
 
-MemberTasks.propTypes = propTypes;
-MemberTasks.defaultProps = defaultProps;
+RegistrationTasks.propTypes = propTypes;
+RegistrationTasks.defaultProps = defaultProps;
 
-export default MemberTasks;
+export default RegistrationTasks;

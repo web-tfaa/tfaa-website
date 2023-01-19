@@ -17,10 +17,11 @@ import Cards from '../../components/shared/cards';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 
 // Local Dependencies
+import MemberActions from './MemberActions';
 import MemberFileShareCard from './MemberFileShareCard';
 import MemberInfo from './member-info';
 import MemberStatus from './MemberStatus';
-import MemberTasks from './member-tasks';
+import RegistrationTasks from './RegistrationTasks';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -116,15 +117,22 @@ const MemberContent = ({
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
         />
 
-        <MemberInfo
-          currentUser={currentMemberData}
-          memberEmail={memberEmail}
-          setShouldRefetchUserList={setShouldRefetchUserList}
-        />
+        {currentMemberData && (
+          <MemberInfo
+            currentUser={currentMemberData}
+            memberEmail={memberEmail}
+            setShouldRefetchUserList={setShouldRefetchUserList}
+          />
+        )}
 
-        <MemberTasks
+        <RegistrationTasks
           currentUser={currentMemberData}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+        />
+
+        <MemberActions
+          memberEmail={memberEmail}
+          setShouldRefetchUserList={setShouldRefetchUserList}
         />
       </Cards>
 

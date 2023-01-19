@@ -90,7 +90,7 @@ const StyledRoot = styled(Card)(({ theme }) => ({
   width: '100%',
 }));
 
-export const StyledStrong = styled.strong(({ theme }) => ({
+const StyledStrong = styled.strong(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     fontSize: '1.1rem',
   },
@@ -131,74 +131,74 @@ const MemberStatus = ({
                 </>
                 )}
               </>
-                )}
+            )}
             secondary={`for the ${currentSchoolYearLong} school year`}
           />
         </ListItem>
       </List>
 
       {!isRegisteredForCurrentYear && isInvoiced && (
-      <>
-        <Typography
-          className="contentText"
-          paragraph
-          variant="body2"
-        >
-          Outstanding balance:
-          {' '}
-          <StyledStrong>
-            {currentMemberData?.MemberType === 'Active' ? '$50.00' : '$30.00'}
-          </StyledStrong>
-        </Typography>
+        <>
+          <Typography
+            className="contentText"
+            paragraph
+            variant="body2"
+          >
+            Outstanding balance:
+            {' '}
+            <StyledStrong>
+              {currentMemberData?.MemberType === 'Active' ? '$50.00' : '$30.00'}
+            </StyledStrong>
+          </Typography>
 
-        <Typography
-          sx={{
-            fontFamily: options.headerFontFamily.join(','),
-            fontWeight: 600,
-          }}
-          variant="subtitle"
-        >
-          Payment Options
-        </Typography>
+          <Typography
+            sx={{
+              fontFamily: options.headerFontFamily.join(','),
+              fontWeight: 600,
+            }}
+            variant="subtitle"
+          >
+            Payment Options
+          </Typography>
 
-        <List className="paymentList">
-          <ListItem className="paymentListItem">
-            <ListItemText
-              classes={{
-                primary: 'listItemText',
-                secondary: 'listItemSecondaryText',
-              }}
-              primary="Pay online with credit card"
-              secondary="TMAC uses PayPal to securely process online credit card payments."
-            />
-          </ListItem>
+          <List className="paymentList">
+            <ListItem className="paymentListItem">
+              <ListItemText
+                classes={{
+                  primary: 'listItemText',
+                  secondary: 'listItemSecondaryText',
+                }}
+                primary="Pay online with credit card"
+                secondary="TMAC uses PayPal to securely process online credit card payments."
+              />
+            </ListItem>
 
-          <div className="paymentActionContainer">
-            <PaypalButtonWrapper
-              amount={amountToPay}
-              noMargin
-              onSuccessfulPayment={() => console.log('you did it!')}
-            />
-          </div>
+            <div className="paymentActionContainer">
+              <PaypalButtonWrapper
+                amount={amountToPay}
+                noMargin
+                onSuccessfulPayment={() => console.log('you did it!')}
+              />
+            </div>
 
-          <ListItem className="paymentListItem">
-            <ListItemText
-              classes={{
-                primary: 'listItemText',
-                secondary: 'listItemSecondaryText',
-              }}
-              primary="Send invoice with payment"
-              secondary="Mail invoice with payment
-                    to the TMAC Treasurer as indicated on your
-                    invoice."
-            />
-          </ListItem>
+            <ListItem className="paymentListItem">
+              <ListItemText
+                classes={{
+                  primary: 'listItemText',
+                  secondary: 'listItemSecondaryText',
+                }}
+                primary="Send invoice with payment"
+                secondary="Mail invoice with payment
+                      to the TMAC Treasurer as indicated on your
+                      invoice."
+              />
+            </ListItem>
 
-          <div className="paymentActionContainer">
-            <PrintInvoiceUI currentUser={currentMemberData} />
-          </div>
-        </List>
-      </>
+            <div className="paymentActionContainer">
+              <PrintInvoiceUI currentUser={currentMemberData} />
+            </div>
+          </List>
+        </>
       )}
     </StyledRoot>
   );
