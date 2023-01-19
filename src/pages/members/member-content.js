@@ -19,6 +19,7 @@ import EnhancedAlert from '../../components/shared/EnhancedAlert';
 // Local Dependencies
 import MemberFileShareCard from './MemberFileShareCard';
 import MemberInfo from './member-info';
+import MemberStatus from './MemberStatus';
 import MemberTasks from './member-tasks';
 
 // Sidebar Data
@@ -110,9 +111,13 @@ const MemberContent = ({
       </Box>
 
       <Cards>
+        <MemberStatus
+          currentMemberData={currentMemberData}
+          isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+        />
+
         <MemberInfo
           currentUser={currentMemberData}
-          isRegisteredForCurrentYear={isRegisteredForCurrentYear}
           memberEmail={memberEmail}
           setShouldRefetchUserList={setShouldRefetchUserList}
         />

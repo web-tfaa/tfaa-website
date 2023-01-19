@@ -19,12 +19,9 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { doUpdateEmail } from '../../firebase/auth';
-import { emailRegex, currentSchoolYearLong } from '../../utils/helpers';
-import { options } from '../../utils/typography';
+import { emailRegex } from '../../utils/helpers';
 import Card from '../../components/shared/cards/card';
 import CardSubtitle from '../../components/shared/CardSubtitle';
-import PaypalButtonWrapper from '../../components/register/paypal/paypal-button-wrapper';
-import PrintInvoiceUI from './PrintInvoiceUI';
 import presets from '../../utils/presets';
 
 // Local Variables
@@ -44,7 +41,6 @@ const propTypes = {
     ZipCode: PropTypes.string,
   }),
   memberEmail: PropTypes.string.isRequired,
-  isRegisteredForCurrentYear: PropTypes.bool.isRequired,
   setShouldRefetchUserList: PropTypes.func.isRequired,
 };
 
@@ -124,7 +120,6 @@ export const StyledStrong = styled.strong(({ theme }) => ({
 // Component Definition
 const MemberInfo = ({
   currentUser,
-  isRegisteredForCurrentYear,
   memberEmail,
   setShouldRefetchUserList,
 }) => {
@@ -179,109 +174,9 @@ const MemberInfo = ({
     }
   }, [newEmailError, newEmailValue, setShouldRefetchUserList]);
 
-  const isInvoiced = currentUser?.PaymentOption.toLowerCase() === 'invoiced';
-
-  const needsToPay = !currentUser?.AmountPaid;
-
-  const amountToPay = currentUser?.MemberType === 'Active' ? 50.00 : 30.00;
-
   return (
     <StyledRoot>
       <Card>
-        <section>
-          <CardSubtitle>Membership status</CardSubtitle>
-
-          <List>
-            <ListItem className="listItem">
-              <ListItemText
-                classes={{
-                  primary: 'listItemText',
-                }}
-                primary={(
-                  <>
-                    {!isRegisteredForCurrentYear && 'Not registered'}
-
-                    {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
-
-                    {isRegisteredForCurrentYear && !needsToPay && (
-                      <>
-                        {currentUser?.MemberType || 'Active'} member
-                      </>
-                    )}
-                  </>
-                )}
-                secondary={`for the ${currentSchoolYearLong} school year`}
-              />
-            </ListItem>
-          </List>
-
-          {!isRegisteredForCurrentYear && isInvoiced && (
-            <>
-              <Typography
-                className="contentText"
-                paragraph
-                variant="body2"
-              >
-                Outstanding balance:
-                {' '}
-                <StyledStrong>
-                  {currentUser?.MemberType === 'Active' ? '$50.00' : '$30.00'}
-                </StyledStrong>
-              </Typography>
-
-              <Typography
-                sx={{
-                  fontFamily: options.headerFontFamily.join(','),
-                  fontWeight: 600,
-                }}
-                variant="subtitle"
-              >
-                Payment Options
-              </Typography>
-
-              <List className="paymentList">
-                <ListItem className="paymentListItem">
-                  <ListItemText
-                    classes={{
-                      primary: 'listItemText',
-                      secondary: 'listItemSecondaryText',
-                    }}
-                    primary="Pay online with credit card"
-                    secondary="TMAC uses PayPal to securely process online credit card payments."
-                  />
-                </ListItem>
-
-                <div className="paymentActionContainer">
-                  <PaypalButtonWrapper
-                    amount={amountToPay}
-                    noMargin
-                    onSuccessfulPayment={() => console.log('you did it!')}
-                  />
-                </div>
-
-                <ListItem className="paymentListItem">
-                  <ListItemText
-                    classes={{
-                      primary: 'listItemText',
-                      secondary: 'listItemSecondaryText',
-                    }}
-                    primary="Send invoice with payment"
-                    secondary="Mail invoice with payment
-                    to the TMAC Treasurer as indicated on your
-                    invoice."
-                  />
-                </ListItem>
-
-                <div className="paymentActionContainer">
-                  <PrintInvoiceUI currentUser={currentUser} />
-                </div>
-              </List>
-            </>
-          )}
-
-          <Divider className="divider" />
-        </section>
-
         <section>
           {currentUser && (
             <>
