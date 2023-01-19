@@ -8,13 +8,14 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 
 // Internal Dependencies
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import Cards from '../../components/shared/cards';
 import {
   ADMIN_USER_EMAIL_LIST,
   TMAC_WEB_EXECUTIVE_SECRETARY,
   TMAC_WEB_ADMIN_EMAIL_LIST,
 } from '../../utils/member-constants';
+import { doGetUsers } from '../../firebase/db';
+import Cards from '../../components/shared/cards';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 
 // Local Dependencies
 import MemberFileShareCard from './MemberFileShareCard';
@@ -30,6 +31,7 @@ import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 const propTypes = {
   authUser: PropTypes.shape({
     email: PropTypes.string.isRequired,
+    uid: PropTypes.string.isRequired,
   }),
   contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
   contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
@@ -58,24 +60,49 @@ const MemberContent = ({
   userId,
 }) => {
   const [isLoadingUserData, setIsLoadingUserData] = useState(true);
+  const [allUsersData, setAllUsersData] = useState([]);
+  const [currentMemberData, setCurrentMemberData] = useState(null);
+
+  console.log('MemberContent : currentMemberData', currentMemberData);
+
+  const handleUpdateUserList = (userList) => {
+    setAllUsersData(userList);
+  };
 
   useEffect(() => {
-    if (authUser) {
+    if (allUsersData.length < 1) {
+      const userList = [];
+
+      doGetUsers('registration', userList, handleUpdateUserList);
+    }
+  }, [allUsersData.length]);
+
+  useEffect(() => {
+    if (authUser && isLoadingUserData) {
       setIsLoadingUserData(!isLoadingUserData);
     }
-  }, [authUser]);
+  }, [authUser, isLoadingUserData]);
+
+  useEffect(() => {
+    if (allUsersData.length > 0 && !currentMemberData) {
+      const currentMember = allUsersData.find(
+        // We used to use authUser.uid as the unique key in the Firestore
+        // Now we use authUser.email
+        // We have to search for both for backwards compatibility
+        (user) => user.userId === authUser.uid || user.userId === authUser.email,
+      );
+
+      setCurrentMemberData(currentMember);
+    }
+  }, [allUsersData, authUser.email, authUser.uid, currentMemberData]);
 
   const isRegisteredForCurrentYear = useMemo(
     () =>
       (!currentMemberList?.length ? false
         : currentMemberList?.some(
-          (member) => member.userId === userId,
+          (member) => member.userId === userId || member.email === userId,
         )),
     [currentMemberList, userId]
-  );
-
-  const currentUser = currentMemberList?.find(
-    (member) => member.userId === userId,
   );
 
   if (isLoadingUserData) {
@@ -105,13 +132,14 @@ const MemberContent = ({
 
       <Cards>
         <MemberInfo
-          currentUser={currentUser}
+          currentUser={currentMemberData}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+          memberEmail={memberEmail}
           setShouldRefetchUserList={setShouldRefetchUserList}
         />
 
         <MemberTasks
-          currentUser={currentUser}
+          currentUser={currentMemberData}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
         />
       </Cards>

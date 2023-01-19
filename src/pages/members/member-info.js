@@ -18,11 +18,14 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import Card from '../../components/shared/cards/card';
-import CardSubtitle from '../../components/shared/CardSubtitle';
-import presets from '../../utils/presets';
 import { doUpdateEmail } from '../../firebase/auth';
 import { emailRegex, currentSchoolYearLong } from '../../utils/helpers';
+import { options } from '../../utils/typography';
+import Card from '../../components/shared/cards/card';
+import CardSubtitle from '../../components/shared/CardSubtitle';
+import PaypalButtonWrapper from '../../components/register/paypal/paypal-button-wrapper';
+import PrintInvoiceUI from './PrintInvoiceUI';
+import presets from '../../utils/presets';
 
 // Local Variables
 const propTypes = {
@@ -40,6 +43,7 @@ const propTypes = {
     Title: PropTypes.string,
     ZipCode: PropTypes.string,
   }),
+  memberEmail: PropTypes.string.isRequired,
   isRegisteredForCurrentYear: PropTypes.bool.isRequired,
   setShouldRefetchUserList: PropTypes.func.isRequired,
 };
@@ -56,10 +60,16 @@ const StyledRoot = styled.div(({ theme }) => ({
     marginBottom: theme.spacing(2),
   },
   '.divider': {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(3),
   },
   '.emailContainer': {
     marginLeft: theme.spacing(2),
+  },
+  '.listItemSecondaryText': {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.9rem',
+    },
+    maxWidth: '80%',
   },
   '.listItemText': {
     [theme.breakpoints.down('xs')]: {
@@ -76,6 +86,17 @@ const StyledRoot = styled.div(({ theme }) => ({
       maxWidth: '80%',
     },
     fontSize: '1rem',
+    fontWeight: 500,
+  },
+  '.paymentActionContainer': {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  '.paymentListItem': {
+    '&:not(:first-child)': {
+      marginTop: theme.spacing(1),
+    },
+    marginBottom: 0,
   },
   '.subheader': {
     marginTop: theme.spacing(3),
@@ -86,14 +107,18 @@ const StyledRoot = styled.div(({ theme }) => ({
   '.textField': {
     width: '75%',
   },
+  width: '100%',
 }));
 
 // Component Definition
 const MemberInfo = ({
   currentUser,
   isRegisteredForCurrentYear,
+  memberEmail,
   setShouldRefetchUserList,
 }) => {
+  // console.log('MemberInfo : currentUser', currentUser);
+
   const [isChangeEmailDialogOpen, setIsChangeEmailDialogOpen] = useState(false);
   const [newEmailValue, setNewEmailValue] = useState('');
   const [newEmailError, setNewEmailError] = useState('');
@@ -145,9 +170,101 @@ const MemberInfo = ({
     }
   }, [newEmailError, newEmailValue, setShouldRefetchUserList]);
 
+  const isInvoiced = currentUser?.PaymentOption.toLowerCase() === 'invoiced';
+
+  const amountToPay = currentUser?.MemberType === 'Active' ? 50.00 : 30.00;
+
   return (
     <StyledRoot>
       <Card>
+        <section>
+          <CardSubtitle>Membership status</CardSubtitle>
+
+          <List>
+            <ListItem className="listItem">
+              <ListItemText
+                classes={{
+                  primary: 'listItemText',
+                }}
+                primary={(
+                  <>
+                    {!isRegisteredForCurrentYear ? 'Inactive' : currentUser?.MemberType || 'Active'} member
+                  </>
+                )}
+                secondary={`for the ${currentSchoolYearLong} school year`}
+              />
+            </ListItem>
+          </List>
+
+          {!isRegisteredForCurrentYear && isInvoiced && (
+            <>
+              <Typography
+                className="contentText"
+                paragraph
+                variant="body2"
+              >
+                You have a{' '}
+                <strong>
+                  {currentUser?.MemberType === 'Active' ? '$50.00' : '$30.00'}
+                </strong>
+                {' '}
+                outstanding balance for the{' '}
+                {currentSchoolYearLong} school year.
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontFamily: options.headerFontFamily.join(','),
+                  fontWeight: 600,
+                }}
+                variant="subtitle"
+              >
+                Payment Options
+              </Typography>
+
+              <List>
+                <ListItem className="paymentListItem">
+                  <ListItemText
+                    classes={{
+                      primary: 'listItemText',
+                      secondary: 'listItemSecondaryText',
+                    }}
+                    primary="Send invoice with payment"
+                    secondary="Please send payment
+                    to the TMAC Treasurer as indicated on your
+                    invoice."
+                  />
+                </ListItem>
+
+                <div className="paymentActionContainer">
+                  <PrintInvoiceUI currentUser={currentUser} />
+                </div>
+
+                <ListItem className="paymentListItem">
+                  <ListItemText
+                    classes={{
+                      primary: 'listItemText',
+                      secondary: 'listItemSecondaryText',
+                    }}
+                    primary="Pay online with credit card"
+                    secondary="TMAC uses PayPal to securely process online credit card payments."
+                  />
+                </ListItem>
+
+                <div className="paymentActionContainer">
+                  <PaypalButtonWrapper
+                    amount={amountToPay}
+                    noMargin
+                    onSuccessfulPayment={() => console.log('you did it!')}
+                  />
+                </div>
+              </List>
+            </>
+          )}
+
+          <Divider className="divider" />
+        </section>
+
         <section>
           {currentUser && (
             <>
@@ -187,28 +304,6 @@ const MemberInfo = ({
         </section>
 
         <section>
-          <CardSubtitle>Membership status</CardSubtitle>
-
-          <List>
-            <ListItem className="listItem">
-              <ListItemText
-                classes={{
-                  primary: 'listItemText',
-                }}
-                primary={(
-                  <>
-                    {!isRegisteredForCurrentYear ? 'Inactive' : currentUser?.MemberType || 'Active'} member
-                  </>
-                )}
-                secondary={`for the ${currentSchoolYearLong} school year`}
-              />
-            </ListItem>
-          </List>
-
-          <Divider className="divider" />
-        </section>
-
-        <section>
           <CardSubtitle>Member actions</CardSubtitle>
 
           <List>
@@ -218,6 +313,7 @@ const MemberInfo = ({
                   primary: 'listItemText',
                 }}
                 primary="Update email for TMAC website login"
+                secondary={`Current sign-in email: ${memberEmail}`}
               />
 
               <ListItemSecondaryAction>

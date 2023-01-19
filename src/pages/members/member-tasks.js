@@ -1,21 +1,21 @@
 // External Dependencies
-import { green, red } from '@mui/material/colors';
-import AnnouncementIcon from '@mui/icons-material/Announcement';
-import CheckIcon from '@mui/icons-material/Check';
+import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
+import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { currentSchoolYearLong } from '../../utils/helpers';
 import Card from '../../components/shared/cards/card';
 import CardSubtitle from '../../components/shared/CardSubtitle';
 import CtaButton from '../../components/masthead/cta-button';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import FuturaDiv from '../../components/shared/futura-div';
 import Invoice from '../../components/register/invoice';
+import PrintInvoiceUI from './PrintInvoiceUI';
 import RegisterButton from '../../components/register/register-button';
-import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const propTypes = {
@@ -58,39 +58,7 @@ const MemberTasks = ({
   currentUser,
   isRegisteredForCurrentYear,
 }) => {
-  const printInvoiceRef = useRef();
   const printReceiptRef = useRef();
-
-  const registeredIcon = isRegisteredForCurrentYear ? (
-    <CheckIcon htmlColor={green[700]} />
-  ) : (
-    <AnnouncementIcon htmlColor={red[500]} />
-  );
-
-  const invoiceInfo = currentUser && (
-    <FuturaDiv>
-      <h5>Need a copy of your invoice?</h5>
-      If you need to pay via invoice please send payment to the TMAC Treasurer as indicated on your
-      invoice.
-      <div className="buttonContainer">
-        <ReactToPrint
-          content={() => printInvoiceRef.current}
-          trigger={() => <RegisterButton green>Print Invoice</RegisterButton>}
-        />
-      </div>
-
-      <div style={{ display: 'none' }}>
-        <Invoice
-          amount={currentUser.AmountPaid}
-          form={currentUser}
-          invoiceId={currentUser.invoiceId}
-          isActive={currentUser.MemberType === 'Active'}
-          isInvoice
-          ref={printInvoiceRef}
-        />
-      </div>
-    </FuturaDiv>
-  );
 
   const receiptInfo = currentUser && (
     <FuturaDiv>
@@ -124,9 +92,9 @@ const MemberTasks = ({
     </FuturaDiv>
   );
 
-  const isInvoiced = currentUser && currentUser.PaymentOption.toLowerCase() === 'invoiced';
+  const isInvoiced = currentUser?.PaymentOption.toLowerCase() === 'invoiced';
 
-  const isPaypal = currentUser && currentUser.PaymentOption.toLowerCase() === 'paypal';
+  const isPaypal = currentUser?.PaymentOption.toLowerCase() === 'paypal';
 
   return (
     <StyledCard>
@@ -134,25 +102,27 @@ const MemberTasks = ({
         Tasks for {currentSchoolYearLong} school year
       </CardSubtitle>
 
-      <FuturaDiv
-        render={() => (
-          <div>
-            {registeredIcon}
-            Join TMAC for {currentSchoolYearLong} school year
-          </div>
-        )}
-      />
-
-      {!isRegisteredForCurrentYear && (
-        <CtaButton
-          buttonColor="blue"
-          to="/members/join"
-        >
-          Join TMAC
-        </CtaButton>
+      {!isRegisteredForCurrentYear && !isInvoiced && (
+        <Box marginTop={4}>
+          <CtaButton
+            buttonColor="blue"
+            to="/members/join"
+          >
+            Join TMAC
+          </CtaButton>
+        </Box>
       )}
 
-      {isInvoiced && invoiceInfo}
+      {isInvoiced && (
+        <>
+          <Typography variant="body2">
+            If you need to pay via invoice, please send payment
+            to the TMAC Treasurer as indicated on your
+            invoice.
+          </Typography>
+          <PrintInvoiceUI currentUser={currentUser} />
+        </>
+      )}
 
       {isPaypal && receiptInfo}
 

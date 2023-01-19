@@ -112,6 +112,8 @@ Members.propTypes = {
 const MembersWithContext = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => {
+      console.log('MembersWithContext : authUser', authUser);
+
       return (
         <MembersHome
           {...props}
