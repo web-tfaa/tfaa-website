@@ -164,7 +164,7 @@ const RegistrationTasks = ({
               isRegisteredForCurrentYear
                 ? 'You are registered — thanks for being a member!'
                 : 'Become a member for the current school year.'
-}
+              }
           />
 
           {!isRegisteredForCurrentYear && (
@@ -196,7 +196,7 @@ const RegistrationTasks = ({
               isRegisteredForCurrentYear && !needsToPay
                 ? 'You have already paid your dues for the current school year.'
                 : 'Pay online using credit card or send payment with invoice.'
-}
+              }
           />
         </ListItem>
 

@@ -50,8 +50,6 @@ const MemberListContent = ({
 }) => {
   const [userData, setUserData] = useState([]);
 
-  console.log('MemberListContent : userData', userData);
-
   const handleUpdateUserList = (userList) => {
     setUserData(userList);
   };
