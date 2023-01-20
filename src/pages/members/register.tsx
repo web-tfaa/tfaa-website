@@ -281,12 +281,12 @@ const RegisterMemberWithContext: FC = (props) => (
   <AuthUserContext.Consumer>
     {(authUser) => {
       const isAuthenticated = Boolean(authUser);
-      const authUserId = authUser ? authUser.email : undefined;
+      const authUserEmail = authUser ? authUser.email : undefined;
 
       return (
         <RegisterMemberContent
           {...props}
-          authUserId={authUserId}
+          authUserId={authUserEmail}
           isAuthenticated={isAuthenticated}
         />
       );

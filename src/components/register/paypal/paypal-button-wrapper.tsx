@@ -34,6 +34,7 @@ export interface PaypalPaymentCancel {
 
 interface Props {
   amount: number;
+  noMargin?: boolean;
   onSuccessfulPayment: (payment: PaypalPayment) => void;
 }
 
@@ -57,6 +58,7 @@ const ENV = process.env.NODE_ENV === 'production'
 // Component Definition
 const PaypalButtonWrapper: FC<Props> = ({
   amount,
+  noMargin,
   onSuccessfulPayment,
 }) => {
   const [
@@ -64,11 +66,18 @@ const PaypalButtonWrapper: FC<Props> = ({
     setPaymentError,
   ] = useState<ReactElement | null>(null);
 
+  if (!amount) {
+    return null;
+  }
+
   const errorText = (
     <>
       There was an issue using PayPal. Please try clicking the{' '}
       <StyledSpan>"Pay with PayPal"</StyledSpan>{' '}
-      button again or print an invoice and send payment to the TMAC Treasurer.
+      button again.
+      <br />
+      You can also print an invoice and
+      send payment to the TMAC Treasurer.
     </>
   );
 
@@ -89,9 +98,13 @@ const PaypalButtonWrapper: FC<Props> = ({
   };
 
   return (
-    <>
+    <Box
+      alignItems={noMargin ? 'flex-end' : 'inherit'}
+      display="flex"
+      flexDirection="column"
+    >
       <Collapse in={Boolean(amount)}>
-        <Box mt={2}>
+        <Box mt={noMargin ? 0 : 2}>
           <PaypalButton
             client={CLIENT}
             env={ENV}
@@ -110,7 +123,7 @@ const PaypalButtonWrapper: FC<Props> = ({
           </EnhancedAlert>
         </Box>
       </Collapse>
-    </>
+    </Box>
   );
 };
 
