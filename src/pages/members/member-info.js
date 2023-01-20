@@ -68,6 +68,10 @@ const StyledRoot = styled(Card)(({ theme }) => ({
 
 // Component Definition
 const MemberInfo = ({ currentMemberData }) => {
+  if (!currentMemberData) {
+    return null;
+  }
+
   return (
     <StyledRoot>
       <CardSubtitle>Member Info</CardSubtitle>

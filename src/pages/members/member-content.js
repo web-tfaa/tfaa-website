@@ -61,7 +61,7 @@ const MemberContent = ({
   const [currentMemberData, setCurrentMemberData] = useState(null);
 
   useEffect(() => {
-    if (currentMemberList?.length > 0 && !currentMemberData) {
+    if (authUser && currentMemberList?.length > 0 && !currentMemberData) {
       const currentMember = currentMemberList.find(
         // We used to use authUser.uid as the unique key in the Firestore
         // Now we use authUser.email
@@ -71,13 +71,7 @@ const MemberContent = ({
 
       setCurrentMemberData(currentMember);
     }
-  }, [
-    authUser.email,
-    authUser.uid,
-    currentMemberData,
-    currentMemberList,
-    isLoading,
-  ]);
+  }, [authUser, currentMemberData, currentMemberList, isLoading]);
 
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 

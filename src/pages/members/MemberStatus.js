@@ -150,7 +150,7 @@ const MemberStatus = ({
 
     // Instead of trying to update all of the data,
     //  it's easier to reload the Members page
-    if (window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       window.location.reload();
     }
   }, [currentMemberData]);
