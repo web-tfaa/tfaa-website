@@ -46,12 +46,12 @@ const MembersHome = ({
   const [isLoading, setIsLoading] = useState(true);
   const [shouldRefetchUserList, setShouldRefetchUserList] = useState(false);
 
-  const handleUpdateUserData = useCallback((updatedUserData) => {
-    setUserData(updatedUserData);
-    setIsLoading(false);
-  }, []);
-
   useEffect(() => {
+    const handleUpdateUserData = (updatedUserData) => {
+      setUserData(updatedUserData);
+      setIsLoading(false);
+    };
+
     const userList = [];
 
     if (authUser || shouldRefetchUserList) {
@@ -64,9 +64,8 @@ const MembersHome = ({
   }, [
     authUser,
     setUserData,
-    shouldRefetchUserList,
     setShouldRefetchUserList,
-    handleUpdateUserData,
+    shouldRefetchUserList,
   ]);
 
   const isAuthenticated = Boolean(authUser);

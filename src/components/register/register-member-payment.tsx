@@ -23,7 +23,9 @@ import {
   doUpdateEntry,
   doUpdateInvoiceId as updateFirestoreInvoiceId,
   doUpdateReceiptId as updateFirestoreReceiptId,
+  FIRESTORE_MEMBER_COLLECTION,
 } from '../../firebase/db';
+import { currentDate } from '../../utils/dateHelpers';
 import { currentSchoolYearLong } from '../../utils/helpers';
 import {
   HandleCompleteMemberStepType,
@@ -75,11 +77,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     padding: theme.spacing(0, 2, 3),
   },
 }));
-
-const currentDate = format(new Date(), 'M/d/yyyy');
-
-// This will tell the Firestore database action where to put the new record
-const FIRESTORE_MEMBER_COLLECTION = 'registration';
 
 // Component Definition
 const RegisterMemberPayment: FC<Props> = ({

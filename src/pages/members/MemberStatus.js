@@ -1,17 +1,28 @@
 // External Dependencies
+// import { navigate } from 'gatsby';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { currentSchoolYearLong } from '../../utils/helpers';
+import {
+  doUpdateEntry,
+  FIRESTORE_MEMBER_COLLECTION,
+} from '../../firebase/db';
+import { currentDate } from '../../utils/dateHelpers';
+import {
+  currentSchoolYearEnding,
+  currentSchoolYearLong,
+} from '../../utils/helpers';
 import { options } from '../../utils/typography';
 import Card from '../../components/shared/cards/card';
 import CardSubtitle from '../../components/shared/CardSubtitle';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import PaypalButtonWrapper from '../../components/register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from './PrintInvoiceUI';
 import presets from '../../utils/presets';
@@ -40,6 +51,9 @@ const defaultProps = {
 };
 
 const StyledRoot = styled(Card)(({ theme }) => ({
+  '.balanceText': {
+    marginTop: theme.spacing(3),
+  },
   '.contentText': {
     marginBottom: theme.spacing(2),
   },
@@ -109,6 +123,33 @@ const MemberStatus = ({
 
   const amountToPay = currentMemberData?.MemberType === 'Active' ? 50.00 : 30.00;
 
+  const handleSuccessfulPayment = useCallback((payment) => {
+    const updatedMemberData = {
+      ...currentMemberData,
+      AmountPaid: currentMemberData?.MemberType === 'Active' ? 50 : 30,
+      PaypalPayerID: payment?.payerID,
+      PaypalPaymentID: payment?.paymentID,
+      PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
+      invoiceDate: currentDate,
+      invoiceId: currentMemberData.invoiceId,
+      receiptDate: currentMemberData.receiptId ? currentDate : '',
+      receiptId: currentMemberData.receiptId,
+    };
+
+    // Update the member's payment data in the Firestore database
+    // This shape should be the same as register-membmer-payment
+    //  in the handleCompleteMemberPaymentStep function
+    doUpdateEntry(
+      updatedMemberData,
+      FIRESTORE_MEMBER_COLLECTION,
+      currentMemberData?.userId,
+    );
+
+    // Instead of trying to update all of the data,
+    //  it's easier to reload the Members page
+    window.location.reload();
+  }, [currentMemberData]);
+
   return (
     <StyledRoot>
       <CardSubtitle>Membership status</CardSubtitle>
@@ -132,25 +173,51 @@ const MemberStatus = ({
                 )}
               </>
             )}
-            secondary={`for the ${currentSchoolYearLong} school year`}
+            secondary={(
+              <>
+                for the {currentSchoolYearLong} school year
+                {!needsToPay && (
+                  <>
+                    <br />
+                    through 6/30/{currentSchoolYearEnding}
+                  </>
+                )}
+              </>
+            )}
           />
         </ListItem>
       </List>
 
-      {!isRegisteredForCurrentYear && isInvoiced && (
-        <>
-          <Typography
-            className="contentText"
-            paragraph
-            variant="body2"
-          >
-            Outstanding balance:
+      {needsToPay && (
+        <Box marginTop={2}>
+          <EnhancedAlert severity="warning">
+            To become an active member, please
             {' '}
-            <StyledStrong>
-              {currentMemberData?.MemberType === 'Active' ? '$50.00' : '$30.00'}
-            </StyledStrong>
-          </Typography>
+            {!isRegisteredForCurrentYear && 'register and '}
+            {' '}
+            pay
+            dues for this school year.
+          </EnhancedAlert>
+        </Box>
+      )}
 
+      <Typography
+        className="contentText balanceText"
+        paragraph
+        variant="body2"
+      >
+        Outstanding balance:
+        {' '}
+        <StyledStrong>
+          {!isRegisteredForCurrentYear && '$50.00'}
+          {needsToPay && currentMemberData?.MemberType === 'Active' && '$50.00'}
+          {currentMemberData?.MemberType === 'Retired' && '$30.00'}
+          {!needsToPay && '$0.00'}
+        </StyledStrong>
+      </Typography>
+
+      {isRegisteredForCurrentYear && isInvoiced && (
+        <>
           <Typography
             sx={{
               fontFamily: options.headerFontFamily.join(','),
@@ -177,7 +244,7 @@ const MemberStatus = ({
               <PaypalButtonWrapper
                 amount={amountToPay}
                 noMargin
-                onSuccessfulPayment={() => console.log('you did it!')}
+                onSuccessfulPayment={handleSuccessfulPayment}
               />
             </div>
 

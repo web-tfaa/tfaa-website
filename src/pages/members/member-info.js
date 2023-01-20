@@ -13,7 +13,7 @@ import presets from '../../utils/presets';
 
 // Local Variables
 const propTypes = {
-  currentUser: PropTypes.shape({
+  currentMemberData: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
     CellPhone: PropTypes.string,
@@ -67,7 +67,7 @@ const StyledRoot = styled(Card)(({ theme }) => ({
 }));
 
 // Component Definition
-const MemberInfo = ({ currentUser }) => {
+const MemberInfo = ({ currentMemberData }) => {
   return (
     <StyledRoot>
       <CardSubtitle>Member Info</CardSubtitle>
@@ -77,20 +77,20 @@ const MemberInfo = ({ currentUser }) => {
           <ListItemText
             primary={(
               <>
-                <div>{currentUser.FirstName} {currentUser.LastName}</div>
-                <div>{currentUser.Title}, {currentUser.District}</div>
+                <div>{currentMemberData.FirstName} {currentMemberData.LastName}</div>
+                <div>{currentMemberData.Title}, {currentMemberData.District}</div>
               </>
             )}
             secondary={(
               <address className="address">
-                <div>{currentUser.Address1}</div>
-                <div>{currentUser.Address2}</div>
+                <div>{currentMemberData.Address1}</div>
+                <div>{currentMemberData.Address2}</div>
                 <div>
-                  {currentUser.City}, {currentUser.State} {currentUser.ZipCode}
+                  {currentMemberData.City}, {currentMemberData.State} {currentMemberData.ZipCode}
                 </div>
-                <div>Office: {currentUser.OfficePhone}</div>
-                <div>Cell: {currentUser.CellPhone}</div>
-                <div>{currentUser.Email}</div>
+                <div>Office: {currentMemberData.OfficePhone}</div>
+                <div>Cell: {currentMemberData.CellPhone}</div>
+                <div>{currentMemberData.Email}</div>
               </address>
             )}
             secondaryTypographyProps={{

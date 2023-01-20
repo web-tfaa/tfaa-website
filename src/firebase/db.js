@@ -7,6 +7,9 @@ import { logError } from '../utils/logError';
 const getFirebaseCollectionName = (collection) =>
   `${collection}_${currentSchoolYearShort}`;
 
+// This will tell the Firestore database action where to put the new record
+export const FIRESTORE_MEMBER_COLLECTION = 'registration';
+
 // Create/Update user entry in Firestore
 export const doCreateEntry = (
   form,

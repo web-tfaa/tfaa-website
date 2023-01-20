@@ -8,6 +8,7 @@ import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import styled, { useTheme } from 'styled-components';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
 
 // Internal Dependencies
 import { currentSchoolYearLong } from '../../utils/helpers';
@@ -20,7 +21,7 @@ import RegisterButton from '../../components/register/register-button';
 
 // Local Variables
 const propTypes = {
-  currentUser: PropTypes.shape({
+  currentMemberData: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
     AmountPaid: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -42,14 +43,14 @@ const propTypes = {
 };
 
 const defaultProps = {
-  currentUser: null,
+  currentMemberData: null,
 };
 
 const StyledRoot = styled(Card)(({ theme }) => ({
   '.buttonContainer': {
     marginTop: theme.spacing(2),
   },
-  '.checkCircleIcon': {
+  '.listItemIcon': {
     height: 20,
     marginLeft: theme.spacing(1),
     transform: 'translateY(4px)',
@@ -82,13 +83,31 @@ const StyledRoot = styled(Card)(({ theme }) => ({
 
 // Component Definition
 const RegistrationTasks = ({
-  currentUser,
+  currentMemberData,
   isRegisteredForCurrentYear,
 }) => {
   const theme = useTheme();
   const printReceiptRef = useRef();
 
-  const receiptInfo = currentUser && (
+  const needsToPay = !currentMemberData?.AmountPaid;
+
+  const successIconElement = (
+    <CheckCircleIcon
+      className="listItemIcon"
+      fontSize="small"
+      htmlColor={theme.palette.success.main}
+    />
+  );
+
+  const warningIconElement = (
+    <ErrorIcon
+      className="listItemIcon"
+      fontSize="small"
+      htmlColor={theme.palette.warning.light}
+    />
+  );
+
+  const receiptInfo = currentMemberData && (
     <FuturaDiv>
       <p>
         Thank you for joining TMAC for the {currentSchoolYearLong} school year!
@@ -109,18 +128,18 @@ const RegistrationTasks = ({
 
       <div className="hidden">
         <Invoice
-          amount={currentUser.AmountPaid}
-          form={currentUser}
-          isActive={currentUser.MemberType === 'Active'}
+          amount={currentMemberData.AmountPaid}
+          form={currentMemberData}
+          isActive={currentMemberData.MemberType === 'Active'}
           isInvoice={false}
-          receiptId={currentUser.receiptId}
+          receiptId={currentMemberData.receiptId}
           ref={printReceiptRef}
         />
       </div>
     </FuturaDiv>
   );
 
-  const isPaypal = currentUser?.PaymentOption.toLowerCase() === 'paypal';
+  const isPaypal = currentMemberData?.PaymentOption.toLowerCase() === 'paypal';
 
   return (
     <StyledRoot>
@@ -138,13 +157,7 @@ const RegistrationTasks = ({
             primary={(
               <>
                 Register
-                {isRegisteredForCurrentYear && (
-                  <CheckCircleIcon
-                    className="checkCircleIcon"
-                    fontSize="small"
-                    htmlColor={theme.palette.success.main}
-                  />
-                )}
+                {isRegisteredForCurrentYear && successIconElement}
               </>
             )}
             secondary={
@@ -172,8 +185,18 @@ const RegistrationTasks = ({
               primary: 'listItemText',
               secondary: 'listItemSecondaryText',
             }}
-            primary="Pay Membership Dues"
-            secondary="Pay online using credit card or send payment with invoice."
+            primary={(
+              <>
+                Pay Membership Dues
+                {isRegisteredForCurrentYear && !needsToPay && successIconElement}
+                {isRegisteredForCurrentYear && needsToPay && warningIconElement}
+              </>
+            )}
+            secondary={
+              isRegisteredForCurrentYear && !needsToPay
+                ? 'You have already paid your dues for the current school year.'
+                : 'Pay online using credit card or send payment with invoice.'
+}
           />
         </ListItem>
 

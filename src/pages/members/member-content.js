@@ -71,7 +71,13 @@ const MemberContent = ({
 
       setCurrentMemberData(currentMember);
     }
-  }, [authUser.email, authUser.uid, currentMemberData, currentMemberList, isLoading]);
+  }, [
+    authUser.email,
+    authUser.uid,
+    currentMemberData,
+    currentMemberList,
+    isLoading,
+  ]);
 
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
@@ -108,14 +114,13 @@ const MemberContent = ({
 
         {currentMemberData && (
           <MemberInfo
-            currentUser={currentMemberData}
+            currentMemberData={currentMemberData}
             memberEmail={memberEmail}
-            setShouldRefetchUserList={setShouldRefetchUserList}
           />
         )}
 
         <RegistrationTasks
-          currentUser={currentMemberData}
+          currentMemberData={currentMemberData}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
         />
 
