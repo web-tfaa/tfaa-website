@@ -1,9 +1,8 @@
 // External Dependencies
-import {
-  Box,
-  CircularProgress,
-} from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import Collapse from '@mui/material/Collapse';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
@@ -37,6 +36,7 @@ const propTypes = {
   contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
   contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
   currentMemberList: PropTypes.arrayOf(PropTypes.shape({})),
+  isLoading: PropTypes.bool.isRequired,
   memberEmail: PropTypes.string,
   setShouldRefetchUserList: PropTypes.func.isRequired,
 };
@@ -54,17 +54,11 @@ const MemberContent = ({
   contentfulFileShareData,
   contentfulFileShareDescriptionData,
   currentMemberList,
+  isLoading,
   memberEmail,
   setShouldRefetchUserList,
 }) => {
-  const [isLoadingUserData, setIsLoadingUserData] = useState(true);
   const [currentMemberData, setCurrentMemberData] = useState(null);
-
-  useEffect(() => {
-    if (authUser && isLoadingUserData) {
-      setIsLoadingUserData(!isLoadingUserData);
-    }
-  }, [authUser, isLoadingUserData]);
 
   useEffect(() => {
     if (currentMemberList?.length > 0 && !currentMemberData) {
@@ -77,16 +71,11 @@ const MemberContent = ({
 
       setCurrentMemberData(currentMember);
     }
-  }, [
-    authUser.email,
-    authUser.uid,
-    currentMemberData,
-    currentMemberList,
-  ]);
+  }, [authUser.email, authUser.uid, currentMemberData, currentMemberList, isLoading]);
 
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
-  if (isLoadingUserData) {
+  if (isLoading) {
     return (
       <CircularProgress
         size={64}
@@ -102,7 +91,7 @@ const MemberContent = ({
     || authUser.email === TMAC_WEB_EXECUTIVE_SECRETARY);
 
   return (
-    <div>
+    <Collapse in={!isLoading}>
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
 
       <Box mb={2}>
@@ -169,7 +158,7 @@ const MemberContent = ({
           yaml={membersSidebar}
         />
       </MobileDivider>
-    </div>
+    </Collapse>
   );
 };
 

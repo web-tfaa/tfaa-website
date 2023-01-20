@@ -65,6 +65,7 @@ export const doGetUsers = (collection, userList, callback) => {
   console.log('getting data...', collectionName);
 
   const updatedUserList = userList;
+
   return db
     .collection(collectionName)
     .get()
