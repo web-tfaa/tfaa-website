@@ -1,6 +1,6 @@
 // External Dependencies
-// import { navigate } from 'gatsby';
 import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -53,6 +53,8 @@ const defaultProps = {
 const StyledRoot = styled(Card)(({ theme }) => ({
   '.balanceText': {
     marginTop: theme.spacing(3),
+    display: 'flex',
+    alignItems: 'center',
   },
   '.contentText': {
     marginBottom: theme.spacing(2),
@@ -109,6 +111,7 @@ const StyledStrong = styled.strong(({ theme }) => ({
     fontSize: '1.1rem',
   },
   fontSize: '1.2rem',
+  margin: theme.spacing(0, 1),
   whiteSpace: 'pre',
 }));
 
@@ -207,13 +210,22 @@ const MemberStatus = ({
         variant="body2"
       >
         Outstanding balance:
-        {' '}
         <StyledStrong>
           {!isRegisteredForCurrentYear && '$50.00'}
           {needsToPay && currentMemberData?.MemberType === 'Active' && '$50.00'}
           {currentMemberData?.MemberType === 'Retired' && '$30.00'}
           {!needsToPay && '$0.00'}
         </StyledStrong>
+        {!needsToPay && (
+          <>
+            {' '}
+            <Chip
+              color="success"
+              label="Paid in full"
+              variant="outlined"
+            />
+          </>
+        )}
       </Typography>
 
       {isRegisteredForCurrentYear && isInvoiced && (
