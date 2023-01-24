@@ -1,14 +1,14 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
+import { Theme } from '@mui/material/styles';
+import { blue, green } from '@mui/material/colors';
 import hex2rgba from 'hex2rgba';
 import React, { FC } from 'react';
-import { Link } from 'gatsby-theme-material-ui';
-import { blue, green } from '@mui/material/colors';
 import styled from 'styled-components';
-import { Theme } from '@mui/material/styles';
 
 // Internal Dependencies
+import { options } from '../../utils/typography';
 import presets from '../../utils/presets';
-import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Typings
 interface Props {
@@ -55,21 +55,13 @@ const StyledLink = styled(Link)<StyledLinkProps>(({ $buttonColor, theme }) => {
   });
 
   return {
-    [theme.breakpoints.up('mobile')]: {
-      ...scale(2 / 5),
-      padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
-    },
-    [presets.VHd]: {
-      padding: `${rhythm(1 / 2)} ${rhythm(1)}`,
-    },
+    padding: '3px 9px',
 
     // Increase specificity
     '&&': {
-      ...scale(1 / 5),
       display: 'inline-block',
       fontFamily: options.headerFontFamily.join(','),
-      padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
-      borderRadius: presets.radiusLg,
+      borderRadius: theme.shape.borderRadius,
       backgroundColor: color.background,
       boxShadow: 'none',
       border: `2px solid ${color.primary}`,

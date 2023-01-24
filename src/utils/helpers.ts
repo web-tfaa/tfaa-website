@@ -54,3 +54,7 @@ export const currentSchoolYearShort = isTodayAfterJune30th
 export const currentSchoolYearLong = isTodayAfterJune30th
   ? `${currentYearLong}-${Number(currentYearLong) + 1}`
   : `${Number(currentYearLong) - 1}-${currentYearLong}`;
+
+export const currentSchoolYearEnding = isTodayAfterJune30th
+  ? `${Number(currentYearLong) + 1}`
+  : currentYearLong;

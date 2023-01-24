@@ -137,7 +137,12 @@ const PaypalButton: FC<Props> = ({
       onCancel={onCancel}
       onError={onError}
       payment={payment}
-      style={{ label: 'pay', tagline: 'false', size: 'medium' }}
+      style={{
+        label: 'paypal',
+        shape: 'rect',
+        size: 'medium',
+        tagline: 'false',
+      }}
     />
   );
 };
