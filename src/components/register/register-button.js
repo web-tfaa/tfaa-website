@@ -2,12 +2,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import hex2rgba from 'hex2rgba';
-import { green, red } from '@mui/material/colors';
 import styled from 'styled-components';
+import { green, red } from '@mui/material/colors';
 
 // Internal Dependencies
+import { options } from '../../utils/typography';
 import presets from '../../utils/presets';
-import { rhythm, scale, options } from '../../utils/typography';
 
 // Local Variables
 const propTypes = {
@@ -29,20 +29,12 @@ const defaultProps = {
 };
 
 const StyledButton = styled.button(({ $isDisabled, $isRed, theme }) => ({
-  [theme.breakpoints.up('mobile')]: {
-    ...scale(2 / 5),
-    padding: `${rhythm(1 / 4)} ${rhythm(3 / 5)}`,
-  },
-  [presets.VHd]: {
-    padding: `${rhythm(1 / 2)} ${rhythm(1)}`,
-  },
-
-  ...scale(1 / 5),
   border: `1px solid ${$isRed ? texasFlagRed : green500}`,
-  borderRadius: presets.radius,
+  borderRadius: theme.shape.borderRadius,
   display: 'inline-block',
   fontFamily: options.headerFontFamily.join(','),
-  padding: `${rhythm(2 / 5)} ${rhythm(1 / 2)}`,
+  padding: '3px 9px',
+
   // Increase specificity
   '&&': {
     backgroundColor: $isRed || $isDisabled ? red['50'] : green['50'],

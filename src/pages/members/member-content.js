@@ -1,25 +1,26 @@
 // External Dependencies
-import {
-  Box,
-  CircularProgress,
-} from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import Collapse from '@mui/material/Collapse';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Internal Dependencies
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import Cards from '../../components/shared/cards';
 import {
   ADMIN_USER_EMAIL_LIST,
   TMAC_WEB_EXECUTIVE_SECRETARY,
   TMAC_WEB_ADMIN_EMAIL_LIST,
 } from '../../utils/member-constants';
+import Cards from '../../components/shared/cards';
+import EnhancedAlert from '../../components/shared/EnhancedAlert';
 
 // Local Dependencies
+import MemberActions from './MemberActions';
 import MemberFileShareCard from './MemberFileShareCard';
 import MemberInfo from './member-info';
-import MemberTasks from './member-tasks';
+import MemberStatus from './MemberStatus';
+import RegistrationTasks from './RegistrationTasks';
 
 // Sidebar Data
 import membersSidebar from './members-links.yml';
@@ -30,13 +31,14 @@ import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 const propTypes = {
   authUser: PropTypes.shape({
     email: PropTypes.string.isRequired,
+    uid: PropTypes.string.isRequired,
   }),
   contentfulFileShareData: PropTypes.arrayOf(PropTypes.shape({})),
   contentfulFileShareDescriptionData: PropTypes.arrayOf(PropTypes.shape({})),
   currentMemberList: PropTypes.arrayOf(PropTypes.shape({})),
+  isLoading: PropTypes.bool.isRequired,
   memberEmail: PropTypes.string,
   setShouldRefetchUserList: PropTypes.func.isRequired,
-  userId: PropTypes.string,
 };
 
 const defaultProps = {
@@ -44,7 +46,6 @@ const defaultProps = {
   contentfulFileShareData: null,
   contentfulFileShareDescriptionData: null,
   currentMemberList: null,
-  userId: null,
 };
 
 // Component Definition
@@ -53,32 +54,28 @@ const MemberContent = ({
   contentfulFileShareData,
   contentfulFileShareDescriptionData,
   currentMemberList,
+  isLoading,
   memberEmail,
   setShouldRefetchUserList,
-  userId,
 }) => {
-  const [isLoadingUserData, setIsLoadingUserData] = useState(true);
+  const [currentMemberData, setCurrentMemberData] = useState(null);
 
   useEffect(() => {
-    if (authUser) {
-      setIsLoadingUserData(!isLoadingUserData);
+    if (authUser && currentMemberList?.length > 0 && !currentMemberData) {
+      const currentMember = currentMemberList.find(
+        // We used to use authUser.uid as the unique key in the Firestore
+        // Now we use authUser.email
+        // We have to search for both for backwards compatibility
+        (user) => user.userId === authUser.uid || user.userId === authUser.email,
+      );
+
+      setCurrentMemberData(currentMember);
     }
-  }, [authUser]);
+  }, [authUser, currentMemberData, currentMemberList, isLoading]);
 
-  const isRegisteredForCurrentYear = useMemo(
-    () =>
-      (!currentMemberList?.length ? false
-        : currentMemberList?.some(
-          (member) => member.userId === userId,
-        )),
-    [currentMemberList, userId]
-  );
+  const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
-  const currentUser = currentMemberList?.find(
-    (member) => member.userId === userId,
-  );
-
-  if (isLoadingUserData) {
+  if (isLoading) {
     return (
       <CircularProgress
         size={64}
@@ -94,7 +91,7 @@ const MemberContent = ({
     || authUser.email === TMAC_WEB_EXECUTIVE_SECRETARY);
 
   return (
-    <div>
+    <Collapse in={!isLoading}>
       <h2>{`${isAdmin ? 'Admin ' : ''}Member Dashboard`}</h2>
 
       <Box mb={2}>
@@ -104,15 +101,26 @@ const MemberContent = ({
       </Box>
 
       <Cards>
-        <MemberInfo
-          currentUser={currentUser}
+        <MemberStatus
+          currentMemberData={currentMemberData}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
-          setShouldRefetchUserList={setShouldRefetchUserList}
         />
 
-        <MemberTasks
-          currentUser={currentUser}
+        {currentMemberData && (
+          <MemberInfo
+            currentMemberData={currentMemberData}
+            memberEmail={memberEmail}
+          />
+        )}
+
+        <RegistrationTasks
+          currentMemberData={currentMemberData}
           isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+        />
+
+        <MemberActions
+          memberEmail={memberEmail}
+          setShouldRefetchUserList={setShouldRefetchUserList}
         />
       </Cards>
 
@@ -149,7 +157,7 @@ const MemberContent = ({
           yaml={membersSidebar}
         />
       </MobileDivider>
-    </div>
+    </Collapse>
   );
 };
 

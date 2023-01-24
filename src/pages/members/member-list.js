@@ -40,14 +40,12 @@ const StyledRoot = styled.div(({ theme }) => ({
   width: '0 auto',
 }));
 
-const EMPTY_ARRAY = [];
-
 // Component Definition
 const MemberListContent = ({
   isAuthenticated,
   userEmail,
 }) => {
-  const [userData, setUserData] = useState(EMPTY_ARRAY);
+  const [userData, setUserData] = useState([]);
 
   const handleUpdateUserList = (userList) => {
     setUserData(userList);
