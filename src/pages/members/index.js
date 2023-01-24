@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -43,19 +43,30 @@ const MembersHome = ({
   data,
 }) => {
   const [userData, setUserData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [shouldRefetchUserList, setShouldRefetchUserList] = useState(false);
 
   useEffect(() => {
+    const handleUpdateUserData = (updatedUserData) => {
+      setUserData(updatedUserData);
+      setIsLoading(false);
+    };
+
     const userList = [];
 
     if (authUser || shouldRefetchUserList) {
-      doGetUsers('registration', userList, setUserData);
+      doGetUsers('registration', userList, handleUpdateUserData);
 
       if (shouldRefetchUserList) {
         setShouldRefetchUserList(false);
       }
     }
-  }, [authUser, shouldRefetchUserList, setShouldRefetchUserList]);
+  }, [
+    authUser,
+    setUserData,
+    setShouldRefetchUserList,
+    shouldRefetchUserList,
+  ]);
 
   const isAuthenticated = Boolean(authUser);
 
@@ -78,9 +89,9 @@ const MembersHome = ({
               data.allContentfulFileShareDescriptionTextNode.edges
             }
             currentMemberList={userData}
+            isLoading={isLoading}
             memberEmail={authUser.email}
             setShouldRefetchUserList={setShouldRefetchUserList}
-            userId={authUser.uid}
           />
         ) : (
           <NonMemberContent />
