@@ -21,13 +21,14 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontWeight: 500,
     lineHeight: 1,
     margin: theme.spacing(10),
-    position: 'relative',
   },
 
+  alignItems: 'center',
   background: "url('https://res.cloudinary.com/tmac/image/upload/v1673708433/woman-painting-on-wall.png') no-repeat",
   backgroundSize: 'cover',
   backgroundColor: theme.palette.tfaa.backgroundDark,
-  position: 'relative',
+  display: 'flex',
+  height: 400,
   width: '100%',
 }));
 
