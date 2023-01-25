@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
 import { ABOUT_VIRTUES_DATA } from './about-constants';
+import AboutVirtueItem from './AboutVirtueItem';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -18,29 +19,13 @@ const StyledRoot = styled.section(({ theme }) => ({
   '.aboutVirtuesContainer': {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    margin: theme.spacing(8, 0, 6),
   },
-
-  // '&& .MuiTypography-root': {
-  //   [theme.breakpoints.down('lg')]: {
-  //     fontSize: 40,
-  //   },
-  //   [theme.breakpoints.down('mobile')]: {
-  //     fontSize: 30,
-  //     margin: theme.spacing(25, 6, 10),
-  //   },
-  //   [theme.breakpoints.down('sm')]: {
-  //     fontSize: 28,
-  //   },
-  //   color: theme.palette.common.white,
-  //   fontSize: 60,
-  //   fontWeight: 500,
-  //   lineHeight: 1,
-  //   margin: theme.spacing(10),
-  // },
 
   backgroundColor: theme.palette.tfaa.about,
   color: theme.palette.common.white,
-  padding: theme.spacing(4, 15),
+  padding: theme.spacing(4, 12),
   width: '100%',
 }));
 
@@ -48,10 +33,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 const AboutInfo: FC = () => {
   return (
     <StyledRoot>
-      <Typography
-        className="aboutDescription"
-        variant="body1"
-      >
+      <Typography className="aboutDescription">
         {appNameShort} is an organization dedicated to empowering
         leaders in the Fine Arts educational community. We provide
         conferences, workshops, trainings, and resources for
@@ -62,7 +44,12 @@ const AboutInfo: FC = () => {
 
       <div className="aboutVirtuesContainer">
         {ABOUT_VIRTUES_DATA.map((virtue) => (
-          <div key={virtue.title}>{virtue.title}</div>
+          <AboutVirtueItem
+            description={virtue.description}
+            icon={virtue.icon}
+            key={virtue.title}
+            title={virtue.title}
+          />
         ))}
       </div>
     </StyledRoot>
