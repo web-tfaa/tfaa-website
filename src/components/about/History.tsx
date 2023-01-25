@@ -12,33 +12,19 @@ const StyledRoot = styled.section(({ theme }) => ({
     maxWidth: '60%',
   },
 
+  address: {
+    '& > p': {
+      fontWeight: 500,
+    },
+
+    fontStyle: 'normal',
+  },
+
   '.historyTitle': {
     fontSize: 34,
     fontWeight: 900,
   },
 
-  // '&& .MuiTypography-root': {
-  //   [theme.breakpoints.down('lg')]: {
-  //     fontSize: 40,
-  //   },
-  //   [theme.breakpoints.down('mobile')]: {
-  //     fontSize: 30,
-  //     margin: theme.spacing(25, 6, 10),
-  //   },
-  //   [theme.breakpoints.down('sm')]: {
-  //     fontSize: 28,
-  //   },
-  //   color: theme.palette.common.white,
-  //   fontSize: 60,
-  //   fontWeight: 500,
-  //   lineHeight: 1,
-  //   margin: theme.spacing(10),
-  // },
-
-  // backgroundColor: theme.palette.tfaa.events,
-  // color: theme.palette.common.white,
-  // display: 'flex',
-  // justifyContent: 'flex-end',
   padding: theme.spacing(10),
   width: '100%',
 }));
@@ -102,6 +88,12 @@ const History: FC = () => {
           organization for the continued advancement of music education in our
           state.
         </Typography>
+
+        <address>
+          <Typography variant="body2">Woody Schober,</Typography>
+          <Typography variant="body2">Director of Fine Arts, Retired</Typography>
+          <Typography variant="body2">Irving ISD, Irving, Texas</Typography>
+        </address>
       </div>
     </StyledRoot>
   );
