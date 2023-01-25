@@ -28,7 +28,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontWeight: 900,
   },
 
-  padding: theme.spacing(4, 15),
+  padding: theme.spacing(10, 15, 4),
   width: '100%',
 }));
 
@@ -44,18 +44,20 @@ const Officers: FC = () => {
         Education
       </Typography>
 
-      <Typography
-        className="officersTitle"
-        variant="h6"
-      >
-        {appNameShort} Officers
-      </Typography>
+      <section>
+        <Typography
+          className="officersTitle"
+          variant="h6"
+        >
+          {appNameShort} Officers
+        </Typography>
 
-      <div className="officersContainer">
-        {ABOUT_VIRTUES_DATA.map((virtue) => (
-          <div key={virtue.title}>{virtue.title}</div>
-        ))}
-      </div>
+        <div className="officersContainer">
+          {ABOUT_VIRTUES_DATA.map((virtue) => (
+            <div key={virtue.title}>{virtue.title}</div>
+          ))}
+        </div>
+      </section>
     </StyledRoot>
   );
 };

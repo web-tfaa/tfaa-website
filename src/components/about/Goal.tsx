@@ -8,8 +8,19 @@ import { appNameShort } from '../../utils/app-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '& > div': {
-    maxWidth: '50%',
+  '.goalLeftContainer': {
+    '& > img': {
+      height: '100%',
+      width: '100%',
+    },
+
+    position: 'absolute',
+    left: '3%',
+    top: '-12%',
+  },
+
+  '.goalRightContainer': {
+    maxWidth: '55%',
   },
 
   '.goalTitle': {
@@ -29,7 +40,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   color: theme.palette.common.white,
   display: 'flex',
   justifyContent: 'flex-end',
+  overflow: 'visible',
   padding: theme.spacing(4, 15),
+  position: 'relative',
   width: '100%',
 }));
 
@@ -37,7 +50,14 @@ const StyledRoot = styled.section(({ theme }) => ({
 const Goal: FC = () => {
   return (
     <StyledRoot>
-      <div>
+      <div className="goalLeftContainer">
+        <img
+          alt="State of Texas with colorful lines"
+          src="/texas-map.png"
+        />
+      </div>
+
+      <div className="goalRightContainer">
         <Typography
           className="goalTitle"
           paragraph
