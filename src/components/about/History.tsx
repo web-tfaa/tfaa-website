@@ -20,11 +20,20 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontStyle: 'normal',
   },
 
+  '.historyImageContainer': {
+    alignItems: 'flex-start',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(8),
+    width: '100%',
+  },
+
   '.historyTitle': {
     fontSize: 34,
     fontWeight: 900,
   },
 
+  display: 'flex',
   padding: theme.spacing(10),
   width: '100%',
 }));
@@ -94,6 +103,13 @@ const History: FC = () => {
           <Typography variant="body2">Director of Fine Arts, Retired</Typography>
           <Typography variant="body2">Irving ISD, Irving, Texas</Typography>
         </address>
+      </div>
+
+      <div className="historyImageContainer">
+        <img
+          alt="Woody Schober"
+          src="https://res.cloudinary.com/tmac/image/upload/v1523131020/history_woody-schober.jpg"
+        />
       </div>
     </StyledRoot>
   );
