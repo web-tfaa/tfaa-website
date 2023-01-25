@@ -66,9 +66,9 @@ const _options = {
       'ul, ol': {
         marginTop: rhythm(options.blockMarginBottom),
       },
-      h1: {
-        ...scale(4 / 5),
-      },
+      // h1: {
+      //   ...scale(4 / 5),
+      // },
       h3: {
         ...scale(2 / 5),
         lineHeight: 1,
