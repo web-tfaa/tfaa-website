@@ -12,6 +12,11 @@ const StyledRoot = styled.section(({ theme }) => ({
     maxWidth: '50%',
   },
 
+  '.historyTitle': {
+    fontSize: 34,
+    fontWeight: 900,
+  },
+
   // '&& .MuiTypography-root': {
   //   [theme.breakpoints.down('lg')]: {
   //     fontSize: 40,
@@ -44,11 +49,11 @@ const History: FC = () => {
     <StyledRoot>
       <div>
         <Typography
-          className="aboutDescription"
+          className="historyTitle"
           paragraph
           variant="h4"
         >
-          History
+          {appNameShort} History
         </Typography>
 
         <Typography paragraph>

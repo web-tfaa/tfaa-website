@@ -12,23 +12,18 @@ const StyledRoot = styled.section(({ theme }) => ({
     maxWidth: '50%',
   },
 
-  // '&& .MuiTypography-root': {
-  //   [theme.breakpoints.down('lg')]: {
-  //     fontSize: 40,
-  //   },
-  //   [theme.breakpoints.down('mobile')]: {
-  //     fontSize: 30,
-  //     margin: theme.spacing(25, 6, 10),
-  //   },
-  //   [theme.breakpoints.down('sm')]: {
-  //     fontSize: 28,
-  //   },
-  //   color: theme.palette.common.white,
-  //   fontSize: 60,
-  //   fontWeight: 500,
-  //   lineHeight: 1,
-  //   margin: theme.spacing(10),
-  // },
+  '.goalTitle': {
+    fontSize: 40,
+    fontWeight: 900,
+  },
+
+  '.goalDescription': {
+    fontSize: 18,
+  },
+
+  '.goalFooter': {
+    fontSize: 27,
+  },
 
   backgroundColor: theme.palette.tfaa.events,
   color: theme.palette.common.white,
@@ -44,7 +39,7 @@ const Goal: FC = () => {
     <StyledRoot>
       <div>
         <Typography
-          className="aboutDescription"
+          className="goalTitle"
           paragraph
           variant="h4"
         >
@@ -52,7 +47,10 @@ const Goal: FC = () => {
           and growth within our Fine Arts community
         </Typography>
 
-        <Typography paragraph>
+        <Typography
+          className="goalDescription"
+          paragraph
+        >
           We know what an incredible opportunity it is to support artist-teachers
           who are helping students access the powerful benefits of a Fine Arts
           education. {appNameShort} believes that all students should have opportunities
@@ -61,7 +59,7 @@ const Goal: FC = () => {
           to deliver on this shared commitment.
         </Typography>
 
-        <Typography>
+        <Typography className="goalFooter">
           Your participation can help us achieve more.
         </Typography>
       </div>

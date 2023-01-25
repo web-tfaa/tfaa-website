@@ -18,7 +18,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     },
     color: theme.palette.common.white,
     fontSize: 60,
-    fontWeight: 500,
+    fontWeight: 900,
     lineHeight: 1,
     margin: theme.spacing(10),
   },

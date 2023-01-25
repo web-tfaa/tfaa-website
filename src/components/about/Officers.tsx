@@ -15,31 +15,19 @@ const StyledRoot = styled.section(({ theme }) => ({
     lineHeight: 1.1,
   },
 
-  '.aboutVirtuesContainer': {
+  '.officersContainer': {
     display: 'flex',
     flexWrap: 'wrap',
   },
 
-  // '&& .MuiTypography-root': {
-  //   [theme.breakpoints.down('lg')]: {
-  //     fontSize: 40,
-  //   },
-  //   [theme.breakpoints.down('mobile')]: {
-  //     fontSize: 30,
-  //     margin: theme.spacing(25, 6, 10),
-  //   },
-  //   [theme.breakpoints.down('sm')]: {
-  //     fontSize: 28,
-  //   },
-  //   color: theme.palette.common.white,
-  //   fontSize: 60,
-  //   fontWeight: 500,
-  //   lineHeight: 1,
-  //   margin: theme.spacing(10),
-  // },
+  '.peopleTitle': {
+    fontWeight: 900,
+    marginBottom: theme.spacing(4),
+  },
+  '.officersTitle': {
+    fontWeight: 900,
+  },
 
-  // backgroundColor: theme.palette.tfaa.about,
-  // color: theme.palette.common.white,
   padding: theme.spacing(4, 15),
   width: '100%',
 }));
@@ -49,16 +37,21 @@ const Officers: FC = () => {
   return (
     <StyledRoot>
       <Typography
-        className="aboutDescription"
-        variant="body1"
+        className="peopleTitle"
+        variant="h5"
       >
         People Dedicated to Fine Arts
-        Education:
-        <br />
+        Education
+      </Typography>
+
+      <Typography
+        className="officersTitle"
+        variant="h6"
+      >
         {appNameShort} Officers
       </Typography>
 
-      <div className="aboutVirtuesContainer">
+      <div className="officersContainer">
         {ABOUT_VIRTUES_DATA.map((virtue) => (
           <div key={virtue.title}>{virtue.title}</div>
         ))}

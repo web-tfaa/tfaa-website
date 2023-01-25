@@ -27,7 +27,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.aboutDescription': {
-    fontWeight: 600,
+    fontWeight: 900,
   },
 
   '.aboutForAll': {

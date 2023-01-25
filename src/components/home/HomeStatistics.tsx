@@ -21,8 +21,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     },
 
     fontSize: 40,
-    fontWeight: 500,
-    margin: theme.spacing(0, 14, 2),
+    fontWeight: 900,
+    margin: theme.spacing(0, 12, 2),
+    textAlign: 'center',
   },
 
   '.statisticsItemsContainer': {
@@ -50,7 +51,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 
     fontSize: 30,
     fontWeight: 700,
-    margin: theme.spacing(0, 20, 2),
+    margin: theme.spacing(2, 20),
     textAlign: 'center',
   },
 

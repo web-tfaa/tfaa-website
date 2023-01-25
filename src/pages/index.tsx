@@ -11,7 +11,7 @@ import HomeBanner from '../components/home/HomeBanner';
 import HomeStatistics from '../components/home/HomeStatistics';
 import Layout from '../components/layout';
 import TakeAction from '../components/home/TakeAction';
-import WhatWeDo from '../components/home/WhatWeDo';
+// import WhatWeDo from '../components/home/WhatWeDo';
 
 // Local Typings
 interface Props {
@@ -41,7 +41,7 @@ const Home: FC<Props> = ({ location }) => (
 
       <Greetings />
 
-      <WhatWeDo />
+      {/* <WhatWeDo /> */}
 
       <FineArtsPriority />
 
