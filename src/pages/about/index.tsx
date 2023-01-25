@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import AboutInfo from '../../components/about/AboutInfo';
 import Community from '../../components/about/Community';
 import Layout from '../../components/layout';
 
@@ -28,6 +29,8 @@ const About: FC<Props> = ({ location }) => (
   >
     <StyledRoot>
       <Community />
+
+      <AboutInfo />
     </StyledRoot>
   </Layout>
 );
