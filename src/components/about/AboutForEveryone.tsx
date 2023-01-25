@@ -10,6 +10,24 @@ import { appNameShort } from '../../utils/app-constants';
 const StyledRoot = styled.section(({ theme }) => ({
   '& > div': {
     maxWidth: '50%',
+    zIndex: 2,
+  },
+
+  '&::before': {
+    content: '""',
+    display: 'block',
+    backgroundColor: theme.palette.tfaa.backgroundDark,
+    background: 'url(https://res.cloudinary.com/tmac/image/upload/v1674660162/ballet-dancers-background.png) no-repeat',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    opacity: 0.6,
+    height: '100%',
+    width: '100%',
+  },
+
+  '.aboutDescription': {
+    fontWeight: 600,
   },
 
   '.aboutForAll': {
@@ -17,30 +35,15 @@ const StyledRoot = styled.section(({ theme }) => ({
     textAlign: 'right',
   },
 
-  // '&& .MuiTypography-root': {
-  //   [theme.breakpoints.down('lg')]: {
-  //     fontSize: 40,
-  //   },
-  //   [theme.breakpoints.down('mobile')]: {
-  //     fontSize: 30,
-  //     margin: theme.spacing(25, 6, 10),
-  //   },
-  //   [theme.breakpoints.down('sm')]: {
-  //     fontSize: 28,
-  //   },
-  //   color: theme.palette.common.white,
-  //   fontSize: 60,
-  //   fontWeight: 500,
-  //   lineHeight: 1,
-  //   margin: theme.spacing(10),
-  // },
-
   backgroundColor: theme.palette.tfaa.backgroundDark,
+  background: 'url(https://res.cloudinary.com/tmac/image/upload/v1674660162/ballet-dancers.png) no-repeat',
   color: theme.palette.common.white,
   display: 'flex',
   justifyContent: 'flex-end',
   padding: theme.spacing(15),
+  position: 'relative',
   width: '100%',
+  zIndex: 1,
 }));
 
 // Component Definition
@@ -58,11 +61,17 @@ const AboutForEveryone: FC = () => {
           for Everyone
         </Typography>
 
-        <Typography paragraph>
+        <Typography
+          paragraph
+          variant="body2"
+        >
           {appNameShort} provides a powerful platform for Fine Arts leaders.
         </Typography>
 
-        <Typography paragraph>
+        <Typography
+          paragraph
+          variant="body2"
+        >
           We provide advocacy, training, and resources to transform
           schools into vibrant communities of learners and artists.
         </Typography>
