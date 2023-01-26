@@ -9,6 +9,7 @@ import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
+  buttonText?: string;
   imgSrc: string;
   subtitle: string;
   title: string;
@@ -43,7 +44,11 @@ const StyledRoot = styled.section<StyledRootProps>(({
     padding: theme.spacing(0, 3, 5),
   },
 
-  h3: {
+  '.itemSubtitle': {
+    color: theme.palette.text.primary,
+  },
+
+  '.itemTitle': {
     [theme.breakpoints.down('lg')]: {
       fontSize: 20,
     },
@@ -100,6 +105,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
 
 // Component Definition
 const WhatWeDoItem: FC<Props> = ({
+  buttonText = 'Read more',
   imgSrc,
   subtitle,
   title,
@@ -123,11 +129,17 @@ const WhatWeDoItem: FC<Props> = ({
           height="100%"
           width="100%"
         >
-          <Typography variant="h3">
+          <Typography
+            className="itemTitle"
+            variant="h3"
+          >
             {title}
           </Typography>
 
-          <Typography variant="body2">
+          <Typography
+            className="itemSubtitle"
+            variant="body2"
+          >
             {subtitle}
           </Typography>
         </Box>
@@ -137,7 +149,7 @@ const WhatWeDoItem: FC<Props> = ({
             to={to}
             width={160}
           >
-            Read more
+            {buttonText}
           </CtaButton>
         </Box>
       </Box>

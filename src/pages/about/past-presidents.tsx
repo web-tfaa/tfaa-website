@@ -3,14 +3,8 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import AboutForEveryone from '../../components/about/AboutForEveryone';
-import AboutInfo from '../../components/about/AboutInfo';
-import Community from '../../components/about/Community';
-import Goal from '../../components/about/Goal';
-import History from '../../components/about/History';
+import { appNameShort } from '../../utils/app-constants';
 import Layout from '../../components/layout';
-import People from '../../components/about/People';
-import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -30,22 +24,10 @@ const StyledRoot = styled.div({
 const About: FC<Props> = ({ location }) => (
   <Layout
     location={location}
-    pageTitle="About"
+    pageTitle={`${appNameShort} Past Presidents`}
   >
     <StyledRoot>
-      <Community />
-
-      <AboutInfo />
-
-      <AboutForEveryone />
-
-      <History />
-
-      <Goal />
-
-      <People />
-
-      <WhereWeHaveBeen />
+      <h1>Past Presidents</h1>
     </StyledRoot>
   </Layout>
 );
