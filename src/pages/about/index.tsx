@@ -9,7 +9,7 @@ import Community from '../../components/about/Community';
 import Goal from '../../components/about/Goal';
 import History from '../../components/about/History';
 import Layout from '../../components/layout';
-import Officers from '../../components/about/Officers';
+import Officers from '../../components/about/People';
 
 // Local Typings
 interface Props {

@@ -1,17 +1,13 @@
 // External Dependencies
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-// Internal Dependencies
-import presets from '../../utils/presets';
+interface Props {
+  alt: string;
+  src: string;
+}
 
 // Local Variables
-const propTypes = {
-  alt: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-};
-
 const StyledRoot = styled.div(({ theme }) => ({
   img: {
     height: '100%',
@@ -21,7 +17,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     // objectFit: 'cover',
   },
 
-  [presets.Phablet]: {
+  [theme.breakpoints.up('md')]: {
     height: 140,
     width: 140,
   },
@@ -43,7 +39,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const Avatar = ({ alt, src }) => (
+const Avatar: FC<Props> = ({ alt, src }) => (
   <StyledRoot>
     <img
       alt={alt}
@@ -51,7 +47,5 @@ const Avatar = ({ alt, src }) => (
     />
   </StyledRoot>
 );
-
-Avatar.propTypes = propTypes;
 
 export default Avatar;
