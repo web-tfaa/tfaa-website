@@ -5,8 +5,10 @@ import styled from 'styled-components';
 
 // Local Variables
 const StyledSvgIcon = styled(SvgIcon)({
-  height: 60,
-  width: 60,
+  '&&': {
+    height: 60,
+    width: 60,
+  },
 });
 
 // Component Definition

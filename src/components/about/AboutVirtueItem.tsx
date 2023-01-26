@@ -21,12 +21,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     margin: theme.spacing(2, 0),
   },
 
-  // backgroundColor: theme.palette.tfaa.about,
   color: theme.palette.common.white,
   display: 'flex',
   flexDirection: 'column',
-  // padding: theme.spacing(4, 15),
-  // width: '100%',
   width: 200,
 }));
 
