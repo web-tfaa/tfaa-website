@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import AboutForEveryone from '../../components/about/AboutForEveryone';
 import AboutInfo from '../../components/about/AboutInfo';
-import Community from '../../components/about/Community';
+import AboutCommunity from '../../components/about/AboutCommunity';
 import Goal from '../../components/about/Goal';
 import History from '../../components/about/History';
 import Layout from '../../components/layout';
@@ -33,7 +33,7 @@ const About: FC<Props> = ({ location }) => (
     pageTitle="About"
   >
     <StyledRoot>
-      <Community />
+      <AboutCommunity />
 
       <AboutInfo />
 

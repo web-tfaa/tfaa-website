@@ -33,7 +33,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const Community: FC = () => {
+const AboutCommunity: FC = () => {
   return (
     <StyledRoot>
       <Typography component="h1">
@@ -45,4 +45,4 @@ const Community: FC = () => {
   );
 };
 
-export default Community;
+export default AboutCommunity;
