@@ -141,8 +141,6 @@ const MemberTable: FC<Props> = ({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  console.log('data', data);
-
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
