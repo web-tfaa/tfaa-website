@@ -58,29 +58,29 @@ const _options = {
   scaleRatio: 2,
   overrideStyles: ({ rhythm, scale }, options) => {
     return {
-      'h1,h2,h4,h5,h6': {
-        marginTop: rhythm(options.blockMarginBottom * 2),
-        marginBottom: rhythm(options.blockMarginBottom),
-        letterSpacing: '-0.0075em',
-      },
+      // 'h1,h2,h4,h5,h6': {
+      //   marginTop: rhythm(options.blockMarginBottom * 2),
+      //   marginBottom: rhythm(options.blockMarginBottom),
+      //   letterSpacing: '-0.0075em',
+      // },
       'ul, ol': {
         marginTop: rhythm(options.blockMarginBottom),
       },
-      h1: {
-        ...scale(4 / 5),
-      },
-      h3: {
-        ...scale(2 / 5),
-        lineHeight: 1,
-        marginTop: rhythm(options.blockMarginBottom),
-        marginBottom: rhythm(options.blockMarginBottom / 2),
-      },
-      h4: {
-        ...scale(1 / 5),
-      },
-      h5: {
-        ...scale(0),
-      },
+      // h1: {
+      //   ...scale(4 / 5),
+      // },
+      // h3: {
+      //   ...scale(2 / 5),
+      //   lineHeight: 1,
+      //   marginTop: rhythm(options.blockMarginBottom),
+      //   marginBottom: rhythm(options.blockMarginBottom / 2),
+      // },
+      // h4: {
+      //   ...scale(1 / 5),
+      // },
+      // h5: {
+      //   ...scale(0),
+      // },
       blockquote: {
         paddingLeft: rhythm(options.blockMarginBottom),
         marginLeft: 0,

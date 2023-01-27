@@ -15,13 +15,13 @@ const StyledRoot = styled.section(({ theme }) => ({
     [theme.breakpoints.down('mobile')]: {
       padding: theme.spacing(0, 4),
     },
-    padding: theme.spacing(8, 15, 8, 8),
+    padding: theme.spacing(8, 15, 8, 0),
   },
 
   h4: {
     fontSize: 30,
     marginBottom: theme.spacing(2),
-    fontWeight: 500,
+    fontWeight: 900,
   },
 
   img: {
@@ -80,7 +80,10 @@ const Greetings: FC = () => {
           children in Texas are offered a high-quality fine arts education.
         </Typography>
 
-        <Typography id="allPriority" variant="h4">
+        <Typography
+          id="allPriority"
+          variant="h4"
+        >
           Fine Arts Education for All Is Our Priority
         </Typography>
       </div>

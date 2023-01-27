@@ -66,6 +66,7 @@ const StyledRoot = styled.section(({ theme }) => ({
       lineHeight: '42px',
     },
     fontSize: 92,
+    fontWeight: 900,
     lineHeight: '92px',
   },
   h2: {
@@ -79,6 +80,7 @@ const StyledRoot = styled.section(({ theme }) => ({
       marginBottom: theme.spacing(8),
     },
     fontSize: 40,
+    fontWeight: 900,
     lineHeight: '40px',
   },
 
@@ -139,7 +141,10 @@ const HomeBanner: React.FC = () => {
 
       <div className="bannerLeft">
         <div>
-          <h2>We nurture and grow leaders in Fine Arts Education</h2>
+          <h2>
+            We nurture and grow leaders in Fine Arts Education
+          </h2>
+
           <Link>
             Read more about how TFAA can help you
           </Link>
@@ -147,7 +152,11 @@ const HomeBanner: React.FC = () => {
       </div>
 
       <div className="bannerRight">
-        <h1>Fine Arts for Everyone!</h1>
+        <h1>
+          Fine Arts
+          <br />
+          for Everyone!
+        </h1>
       </div>
     </StyledRoot>
   );

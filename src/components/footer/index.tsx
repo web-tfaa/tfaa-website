@@ -3,10 +3,10 @@ import { Link } from 'gatsby-theme-material-ui';
 import React, { FC, useMemo } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { useMediaQuery } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
 import { anchorStyles } from '../../utils/sharedStyles';
-import { Typography } from '@mui/material';
 import { appNameShort } from '../../utils/app-constants';
 import FooterBottomRow from './FooterBottomRow';
 import FooterContactUs from './FooterContactUs';
@@ -74,7 +74,7 @@ const StyledRoot = styled.footer(({ theme }) => {
           fontSize: 34,
           lineHeight: 1,
           textAlign: 'right',
-          fontWeight: 500,
+          fontWeight: 900,
         },
 
         '.followUsIconList': {

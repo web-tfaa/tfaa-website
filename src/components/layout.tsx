@@ -47,13 +47,14 @@ const StyledRoot = styled.div(({ theme }) => ({
   },
 
   '.main-content': {
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.palette.shapes.topNavHeight,
+    },
     [theme.breakpoints.up('mobile')]: {
       paddingLeft: 0,
+      paddingTop: theme.palette.shapes.topNavHeight - 16,
     },
-    [presets.Desktop]: {
-      paddingLeft: 0,
-      paddingRight: theme.spacing(3),
-    },
+
     width: '100vw',
   },
 
