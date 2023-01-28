@@ -34,7 +34,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     flexWrap: 'wrap',
   },
 
-  '.peopleTitle': {
+  '.peopleSectionTitle': {
     fontWeight: 900,
     marginBottom: theme.spacing(4),
   },
@@ -62,7 +62,7 @@ const People: FC = () => {
   return (
     <StyledRoot>
       <Typography
-        className="peopleTitle"
+        className="peopleSectionTitle"
         variant="h5"
       >
         People Dedicated to Fine Arts

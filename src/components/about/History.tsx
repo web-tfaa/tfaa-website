@@ -49,7 +49,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   [theme.breakpoints.down('mobile')]: {
-    padding: theme.spacing(4, 6, 18),
+    padding: theme.spacing(18, 6),
   },
 
   display: 'flex',

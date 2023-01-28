@@ -27,6 +27,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     marginLeft: theme.spacing(6),
   },
   '.peopleTitle': {
+    [theme.breakpoints.down('mobile')]: {
+      marginBottom: theme.spacing(1),
+    },
     fontWeight: 700,
     marginBottom: theme.spacing(1),
   },

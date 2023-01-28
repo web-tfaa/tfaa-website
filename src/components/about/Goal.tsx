@@ -18,7 +18,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     },
 
     [theme.breakpoints.down('mobile')]: {
-      marginBottom: -theme.spacing(4),
       position: 'static',
       left: 'initial',
       top: 'initial',

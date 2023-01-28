@@ -30,7 +30,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   [theme.breakpoints.down('mobile')]: {
-    paddingBottom: 0,
+    padding: theme.spacing(4, 6, 0),
   },
   backgroundColor: theme.palette.tfaa.about,
   color: theme.palette.common.white,
