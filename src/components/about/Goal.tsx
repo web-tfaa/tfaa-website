@@ -10,8 +10,19 @@ import { appNameShort } from '../../utils/app-constants';
 const StyledRoot = styled.section(({ theme }) => ({
   '.goalLeftContainer': {
     '& > img': {
+      [theme.breakpoints.down('md')]: {
+        marginBottom: 0,
+      },
       height: '100%',
       width: '100%',
+      marginBottom: 0,
+    },
+
+    [theme.breakpoints.down('md')]: {
+      position: 'static',
+      left: 'initial',
+      top: 'initial',
+      transform: `translateY(-${theme.spacing(15)})`,
     },
 
     position: 'absolute',
@@ -20,20 +31,52 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.goalRightContainer': {
+    [theme.breakpoints.down('lg')]: {
+      maxWidth: '45%',
+    },
+    [theme.breakpoints.down(1000)]: {
+      maxWidth: '40%',
+    },
+    [theme.breakpoints.down('md')]: {
+      maxWidth: '100%',
+      padding: theme.spacing(4, 0, 0),
+      transform: `translateY(-${theme.spacing(8)})`,
+    },
     maxWidth: '55%',
+    padding: theme.spacing(4, 10, 6, 0),
   },
 
   '.goalTitle': {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 32,
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 30,
+    },
     fontSize: 40,
     fontWeight: 900,
   },
 
   '.goalDescription': {
+    [theme.breakpoints.down('md')]: {
+      fontSize: 17,
+    },
     fontSize: 18,
   },
 
   '.goalFooter': {
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2, 3, 0),
+      textAlign: 'center',
+    },
     fontSize: 27,
+  },
+
+  [theme.breakpoints.down('md')]: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: theme.spacing(4, 5, 0),
   },
 
   backgroundColor: theme.palette.tfaa.events,
@@ -41,7 +84,6 @@ const StyledRoot = styled.section(({ theme }) => ({
   display: 'flex',
   justifyContent: 'flex-end',
   overflow: 'visible',
-  padding: theme.spacing(4, 15),
   position: 'relative',
   width: '100%',
 }));

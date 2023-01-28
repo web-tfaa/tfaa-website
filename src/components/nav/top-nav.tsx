@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import React, {
   FC, KeyboardEventHandler, useCallback, useMemo
 } from 'react';
+import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -48,8 +49,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
-    height: 72,
-    width: 132,
+    width: 175,
   },
 
   '.logoWrapper': {
@@ -88,17 +88,20 @@ const StyledRoot = styled.nav(({ theme }) => ({
   justifyContent: 'center',
   flex: 1,
   height: '100%',
+  paddingTop: theme.spacing(3),
   width: '100%',
   zIndex: 2,
 }));
 
 // Component Definition
 const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
-  const handlePressKeyDown = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
+  const handleNavigateToSignInPage = () => navigate('/members/login');
+
+  const handleSignInOrOut = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
     if (['Enter', ' '].includes(event.key)) {
       return isAuthenticated
         ? auth.doSignOut()
-        : null;
+        : handleNavigateToSignInPage;
     }
   }, [isAuthenticated]);
 
@@ -115,25 +118,36 @@ const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
   const membersSignInButtonElement = useMemo(() => (
     <CtaButton
       colorVariant="signIn"
-      onKeyDown={handlePressKeyDown}
       to="/members/login"
     >
       Members Login
     </CtaButton>
-  ), [handlePressKeyDown]);
+  ), [handleSignInOrOut]);
+
+  const membersSignOutButtonElement = useMemo(() => (
+    <CtaButton
+      colorVariant="signIn"
+      onKeyDown={handleSignInOrOut}
+      variant="outlined"
+    >
+      Sign Out
+    </CtaButton>
+  ), [handleSignInOrOut]);
 
   return (
     <StyledRoot>
       <section className="mobileNav">
-        <a href="/">
-          {logoElement}
-        </a>
+        <Box paddingBottom={3}>
+          <a href="/">
+            {logoElement}
+          </a>
+        </Box>
 
         <Box
-          paddingY={1.5}
+          paddingBottom={2}
           width={256}
         >
-          {membersSignInButtonElement}
+          {isAuthenticated ? membersSignOutButtonElement : membersSignInButtonElement}
         </Box>
 
         <MobileNavMenu
@@ -163,7 +177,7 @@ const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
               <CtaButton
                 colorVariant="signIn"
                 onClick={auth.doSignOut}
-                onKeyDown={handlePressKeyDown}
+                onKeyDown={handleSignInOrOut}
                 to="/members/login"
               >
                 Sign Out

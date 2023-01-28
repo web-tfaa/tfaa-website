@@ -87,9 +87,6 @@ const StyledRoot = styled.section<StyledRootProps>(({
     width: 500,
   },
   [theme.breakpoints.down('mobile')]: {
-    '&:not(:first-child)': {
-      marginTop: theme.spacing(5),
-    },
     marginRight: theme.spacing(3),
     width: 300,
   },

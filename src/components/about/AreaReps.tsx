@@ -27,6 +27,9 @@ export interface OfficerList {
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '.areaRepsContainer': {
+    [theme.breakpoints.down('mobile')]: {
+      paddingLeft: theme.spacing(2),
+    },
     display: 'flex',
     flexWrap: 'wrap',
   },

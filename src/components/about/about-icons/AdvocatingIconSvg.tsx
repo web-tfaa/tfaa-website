@@ -15,7 +15,7 @@ const StyledSvgIcon = styled(SvgIcon)({
 const AdvocatingIconSvg: FC = ({ ...props }) => {
   return (
     <StyledSvgIcon
-      viewBox="0 0 60 60"
+      viewBox="0 0 38.671 60"
       {...props}
     >
       <path

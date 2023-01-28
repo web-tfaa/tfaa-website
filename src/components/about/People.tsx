@@ -26,12 +26,15 @@ export interface OfficerList {
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '.officersContainer': {
+  '.officerPeopleContainer': {
+    [theme.breakpoints.down('mobile')]: {
+      paddingLeft: theme.spacing(2),
+    },
     display: 'flex',
     flexWrap: 'wrap',
   },
 
-  '.peopleTitle': {
+  '.peopleSectionTitle': {
     fontWeight: 900,
     marginBottom: theme.spacing(4),
   },
@@ -39,6 +42,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontWeight: 900,
   },
 
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(4),
+  },
   padding: theme.spacing(10, 15, 4),
   width: '100%',
 }));
@@ -56,7 +62,7 @@ const People: FC = () => {
   return (
     <StyledRoot>
       <Typography
-        className="peopleTitle"
+        className="peopleSectionTitle"
         variant="h5"
       >
         People Dedicated to Fine Arts
@@ -71,7 +77,7 @@ const People: FC = () => {
           {appNameShort} Officers
         </Typography>
 
-        <div className="officersContainer">
+        <div className="officerPeopleContainer">
           <PeopleItem peopleData={president} />
           <PeopleItem peopleData={vicePresident} />
           <PeopleItem peopleData={secretary} />

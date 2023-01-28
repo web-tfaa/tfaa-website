@@ -9,15 +9,20 @@ import { appNameShort } from '../../utils/app-constants';
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '& > div': {
+    [theme.breakpoints.down('mobile')]: {
+      maxWidth: '100%',
+    },
     maxWidth: '50%',
     zIndex: 2,
   },
 
   '&::before': {
+    [theme.breakpoints.down('mobile')]: {
+      opacity: 0.3,
+    },
     content: '""',
     display: 'block',
     backgroundColor: theme.palette.tfaa.backgroundDark,
-    background: 'url(https://res.cloudinary.com/tmac/image/upload/v1674660162/ballet-dancers-background.png) no-repeat',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -26,13 +31,26 @@ const StyledRoot = styled.section(({ theme }) => ({
     width: '100%',
   },
 
-  '.aboutDescription': {
+  '.forEveryoneTitle': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 36,
+      margin: theme.spacing(0, 0, 3, 3),
+      textAlign: 'center',
+    },
     fontWeight: 900,
   },
 
   '.aboutForAll': {
+    [theme.breakpoints.down('mobile')]: {
+      textAlign: 'center',
+    },
     fontSize: 27,
     textAlign: 'right',
+  },
+
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(8),
+    justifyContent: 'center',
   },
 
   backgroundColor: theme.palette.tfaa.backgroundDark,
@@ -52,12 +70,11 @@ const AboutForEveryone: FC = () => {
     <StyledRoot>
       <div>
         <Typography
-          className="aboutDescription"
+          className="forEveryoneTitle"
           paragraph
           variant="h3"
         >
           Fine Arts are
-          <br />
           for Everyone
         </Typography>
 

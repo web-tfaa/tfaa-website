@@ -8,6 +8,7 @@ import styled from 'styled-components';
 interface Props extends ButtonProps {
   children: React.ReactNode;
   colorVariant?: CtaColor;
+  onClick: ButtonProps['onClick'];
   to?: string;
   width?: number;
 }
