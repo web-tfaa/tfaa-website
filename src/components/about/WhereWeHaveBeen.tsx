@@ -10,12 +10,21 @@ import WhatWeDoItem from '../home/WhatWeDoItem';
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '.whereTitle': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 24,
+      marginBottom: theme.spacing(4),
+    },
     fontSize: 40,
     fontWeight: 900,
     textTransform: 'uppercase',
   },
 
   '.whereDataContainer': {
+    [theme.breakpoints.down('mobile')]: {
+      flexWrap: 'wrap',
+      padding: theme.spacing(1),
+      textAlign: 'center',
+    },
     columnGap: theme.spacing(6),
     display: 'flex',
     justifyContent: 'space-between',
@@ -23,6 +32,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     width: '100%',
   },
 
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(4),
+  },
   backgroundColor: theme.palette.tfaa.about,
   color: theme.palette.common.white,
   padding: theme.spacing(4, 12),

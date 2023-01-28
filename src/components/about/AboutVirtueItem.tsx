@@ -21,6 +21,18 @@ const StyledRoot = styled.section(({ theme }) => ({
     margin: theme.spacing(2, 0),
   },
 
+  '.virtueDescription': {
+    [theme.breakpoints.down('mobile')]: {
+      textAlign: 'center',
+    },
+  },
+
+  [theme.breakpoints.down('mobile')]: {
+    alignItems: 'center',
+    marginBottom: theme.spacing(10),
+    width: '100%',
+  },
+
   color: theme.palette.common.white,
   display: 'flex',
   flexDirection: 'column',
@@ -46,7 +58,10 @@ const AboutVirtueItem: FC<Props> = ({
         {title}
       </Typography>
 
-      <Typography variant="body2">
+      <Typography
+        className="virtueDescription"
+        variant="body2"
+      >
         {description}
       </Typography>
     </StyledRoot>

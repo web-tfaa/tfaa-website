@@ -19,11 +19,22 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontWeight: 500,
   },
   '.peopleTextContainer': {
+    [theme.breakpoints.down('mobile')]: {
+      marginLeft: 0,
+      maxWidth: '80%',
+      textAlign: 'center',
+    },
     marginLeft: theme.spacing(6),
   },
   '.peopleTitle': {
     fontWeight: 700,
     marginBottom: theme.spacing(1),
+  },
+
+  [theme.breakpoints.down('mobile')]: {
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    padding: theme.spacing(4, 2),
   },
 
   alignItems: 'center',

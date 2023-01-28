@@ -11,18 +11,27 @@ import AboutVirtueItem from './AboutVirtueItem';
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '.aboutDescription': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 20,
+    },
     fontSize: 30,
     fontWeight: 500,
     lineHeight: 1.1,
   },
 
   '.aboutVirtuesContainer': {
+    [theme.breakpoints.down('mobile')]: {
+      marginBottom: 0,
+    },
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     margin: theme.spacing(8, 0, 6),
   },
 
+  [theme.breakpoints.down('mobile')]: {
+    paddingBottom: 0,
+  },
   backgroundColor: theme.palette.tfaa.about,
   color: theme.palette.common.white,
   padding: theme.spacing(4, 12),

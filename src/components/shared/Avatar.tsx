@@ -30,12 +30,12 @@ const StyledRoot = styled.div(({ theme }) => ({
   borderRadius: '50%',
   display: 'flex',
   flexShrink: 0,
-  height: 120,
+  height: 180,
   justifyContent: 'center',
   marginBottom: theme.spacing(2),
   overflow: 'hidden',
   position: 'relative',
-  width: 120,
+  width: 180,
 }));
 
 // Component Definition

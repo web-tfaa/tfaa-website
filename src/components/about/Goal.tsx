@@ -10,8 +10,19 @@ import { appNameShort } from '../../utils/app-constants';
 const StyledRoot = styled.section(({ theme }) => ({
   '.goalLeftContainer': {
     '& > img': {
+      [theme.breakpoints.down('mobile')]: {
+        marginBottom: 0,
+      },
       height: '100%',
       width: '100%',
+    },
+
+    [theme.breakpoints.down('mobile')]: {
+      marginBottom: -theme.spacing(4),
+      position: 'static',
+      left: 'initial',
+      top: 'initial',
+      transform: `translateY(-${theme.spacing(15)})`,
     },
 
     position: 'absolute',
@@ -20,20 +31,41 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.goalRightContainer': {
+    [theme.breakpoints.down('mobile')]: {
+      maxWidth: '100%',
+      transform: `translateY(-${theme.spacing(8)})`,
+    },
     maxWidth: '55%',
   },
 
   '.goalTitle': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 30,
+    },
     fontSize: 40,
     fontWeight: 900,
   },
 
   '.goalDescription': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 17,
+    },
     fontSize: 18,
   },
 
   '.goalFooter': {
+    [theme.breakpoints.down('mobile')]: {
+      padding: theme.spacing(2, 3, 0),
+      textAlign: 'center',
+    },
     fontSize: 27,
+  },
+
+  [theme.breakpoints.down('mobile')]: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: theme.spacing(4, 5, 0),
   },
 
   backgroundColor: theme.palette.tfaa.events,
