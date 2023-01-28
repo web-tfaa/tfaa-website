@@ -3,6 +3,9 @@ import { Box } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
 import React, { FC } from 'react';
 
+// Internal Dependencies
+import { appNameShort } from '../../utils/app-constants';
+
 // Component Definition
 const FooterLearnMore: FC = () => {
   return (
@@ -10,16 +13,19 @@ const FooterLearnMore: FC = () => {
       LEARN MORE
       <hr />
       <Box>
-        <Link to="/about">The issue</Link>
+        <Link to="/about">About {appNameShort}</Link>
       </Box>
       <Box>
-        <Link to="/about">How we help</Link>
+        <Link to="/events">Events</Link>
       </Box>
       <Box>
-        <Link to="/about">Get involved</Link>
+        <Link to="/resources">Resources</Link>
       </Box>
       <Box>
-        <Link to="/about">Latest news</Link>
+        <Link to="/members">Members</Link>
+      </Box>
+      <Box>
+        <Link to="/sponsors">Sponsors</Link>
       </Box>
     </div>
   );
