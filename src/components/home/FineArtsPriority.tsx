@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
-import Motifs from './Motifs';
+import Motifs from '../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({

@@ -39,6 +39,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     },
     [theme.breakpoints.down('md')]: {
       maxWidth: '100%',
+      padding: theme.spacing(4, 0, 0),
       transform: `translateY(-${theme.spacing(8)})`,
     },
     maxWidth: '55%',

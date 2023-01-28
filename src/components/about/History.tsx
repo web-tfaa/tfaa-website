@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
+import Motifs from '../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -57,6 +58,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 
   display: 'flex',
   padding: theme.spacing(10),
+  position: 'relative',
   width: '100%',
 }));
 
@@ -64,6 +66,8 @@ const StyledRoot = styled.section(({ theme }) => ({
 const History: FC = () => {
   return (
     <StyledRoot>
+      <Motifs small />
+
       <div>
         <Typography
           className="historyTitle"

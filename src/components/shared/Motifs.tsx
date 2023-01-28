@@ -2,12 +2,20 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
+// Local Typings
+interface Props {
+  small?: boolean;
+}
+interface StyledRootProps {
+  $small?: boolean;
+}
+
 // Local Variables
-const StyledRoot = styled.section(({ theme }) => ({
+const StyledRoot = styled.section<StyledRootProps>(({ $small, theme }) => ({
   '.redMotif': {
     [theme.breakpoints.down('lg')]: {
-      right: -64,
-      top: -64,
+      right: $small ? -144 : -64,
+      top: $small ? -90 : -64,
     },
     [theme.breakpoints.down('mobile')]: {
       height: 100,
@@ -17,30 +25,30 @@ const StyledRoot = styled.section(({ theme }) => ({
 
     height: 200,
     position: 'absolute',
-    right: -20,
-    top: -44,
+    right: $small ? -116 : -20,
+    top: $small ? -80 : -44,
     width: 494,
   },
 
   '.tealMotif': {
     [theme.breakpoints.down('mobile')]: {
       height: 500,
-      left: -264,
+      left: $small ? -290 : -264,
       top: -60,
     },
 
     height: 533,
     position: 'absolute',
-    left: -240,
+    left: $small ? -290 : -240,
     top: -54,
     width: 335,
   },
 }));
 
 // Component Definition
-const Motifs: FC = () => {
+const Motifs: FC<Props> = ({ small }) => {
   return (
-    <StyledRoot>
+    <StyledRoot $small={small}>
       <img
         alt="Teal motif."
         aria-hidden="true"
