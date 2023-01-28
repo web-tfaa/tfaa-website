@@ -35,15 +35,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     top: -54,
     width: 335,
   },
-
-  backgroundSize: 'contain',
-  overflow: 'hidden',
-  padding: theme.spacing(5, 0, 2.5),
-  position: 'relative',
-  width: '100%',
-  top: 0,
-  left: 0,
-  height: 614,
 }));
 
 // Component Definition
