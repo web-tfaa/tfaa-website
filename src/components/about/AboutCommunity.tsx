@@ -10,7 +10,7 @@ const StyledRoot = styled.section(({ theme }) => ({
       fontSize: 40,
     },
     [theme.breakpoints.down('mobile')]: {
-      fontSize: 30,
+      fontSize: 36,
       margin: theme.spacing(40, 6, 10),
     },
     [theme.breakpoints.down('sm')]: {
@@ -26,6 +26,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   [theme.breakpoints.down('mobile')]: {
     background: "url('https://res.cloudinary.com/tmac/image/upload/v1674857837/woman-painting-on-wall-mobile.png') no-repeat",
     backgroundSize: 'cover',
+    justifyContent: 'center',
   },
 
   alignItems: 'center',
@@ -34,7 +35,6 @@ const StyledRoot = styled.section(({ theme }) => ({
   backgroundColor: theme.palette.tfaa.backgroundDark,
   display: 'flex',
   height: 400,
-  justifyContent: 'center',
   width: '100%',
 }));
 

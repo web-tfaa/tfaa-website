@@ -12,7 +12,6 @@ const StyledRoot = styled.section(({ theme }) => ({
   '.whereTitle': {
     [theme.breakpoints.down('mobile')]: {
       fontSize: 24,
-      marginBottom: theme.spacing(4),
     },
     fontSize: 40,
     fontWeight: 900,
@@ -20,8 +19,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.whereDataContainer': {
-    [theme.breakpoints.down('mobile')]: {
+    [theme.breakpoints.down('md')]: {
       flexWrap: 'wrap',
+      marginTop: theme.spacing(8),
       padding: theme.spacing(1),
       textAlign: 'center',
     },

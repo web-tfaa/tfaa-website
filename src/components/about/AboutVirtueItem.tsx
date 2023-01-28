@@ -27,6 +27,9 @@ const StyledRoot = styled.section(({ theme }) => ({
     },
   },
 
+  [theme.breakpoints.down('md')]: {
+    marginBottom: theme.spacing(8),
+  },
   [theme.breakpoints.down('mobile')]: {
     alignItems: 'center',
     marginBottom: theme.spacing(10),

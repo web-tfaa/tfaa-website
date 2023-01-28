@@ -19,6 +19,9 @@ const StyledRoot = styled.section(({ theme }) => ({
 
   '.historyContent': {
     '& > div': {
+      [theme.breakpoints.down('md')]: {
+        maxWidth: '50%',
+      },
       [theme.breakpoints.down('mobile')]: {
         maxWidth: '100%',
       },
