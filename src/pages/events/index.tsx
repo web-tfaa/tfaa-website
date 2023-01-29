@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import EventsBanner from '../../components/events/EventsBanner';
 import Layout from '../../components/layout';
 
 // Local Typings
@@ -26,7 +27,8 @@ const Events: FC<Props> = ({ location }) => (
     pageTitle="Events"
   >
     <StyledRoot>
-      <h1>Events</h1>
+      <EventsBanner />
+
     </StyledRoot>
   </Layout>
 );
