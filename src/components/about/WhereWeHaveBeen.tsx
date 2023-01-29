@@ -7,8 +7,20 @@ import styled from 'styled-components';
 import { WHERE_WE_HAVE_BEEN_DATA } from './about-constants';
 import WhatWeDoItem from '../home/WhatWeDoItem';
 
+// Local Typings
+type WhereWeHaveBeenColor = 'about' | 'events';
+interface Props {
+  color?: WhereWeHaveBeenColor;
+}
+interface StyledRootProps {
+  $color: WhereWeHaveBeenColor;
+}
+
 // Local Variables
-const StyledRoot = styled.section(({ theme }) => ({
+const StyledRoot = styled.section<StyledRootProps>(({
+  $color = 'about',
+  theme,
+}) => ({
   '.whereTitle': {
     [theme.breakpoints.down('mobile')]: {
       fontSize: 24,
@@ -35,16 +47,16 @@ const StyledRoot = styled.section(({ theme }) => ({
   [theme.breakpoints.down('mobile')]: {
     padding: theme.spacing(4),
   },
-  backgroundColor: theme.palette.tfaa.about,
+  backgroundColor: theme.palette.tfaa[$color],
   color: theme.palette.common.white,
   padding: theme.spacing(4, 12),
   width: '100%',
 }));
 
 // Component Definition
-const WhereWeHaveBeen: FC = () => {
+const WhereWeHaveBeen: FC<Props> = ({ color }) => {
   return (
-    <StyledRoot>
+    <StyledRoot $color={color}>
       <Typography className="whereTitle">
         Take a look back at where we&apos;ve been
       </Typography>

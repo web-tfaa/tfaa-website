@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import EventsBanner from '../../components/events/EventsBanner';
 import EventsList from '../../components/events/EventsList';
+import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 import Layout from '../../components/layout';
 
 // Local Typings
@@ -31,6 +32,8 @@ const Events: FC<Props> = ({ location }) => (
       <EventsBanner />
 
       <EventsList />
+
+      <WhereWeHaveBeen color="events" />
     </StyledRoot>
   </Layout>
 );
