@@ -29,11 +29,10 @@ const StyledRoot = styled.div({
 
 // Component Definition
 const Home: FC<Props> = ({ location }) => (
-  <Layout location={location}>
-    <Helmet>
-      <title>{appNameShort} | Home</title>
-    </Helmet>
-
+  <Layout
+    location={location}
+    pageTitle="Home"
+  >
     <StyledRoot>
       <HomeBanner />
 

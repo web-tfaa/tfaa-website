@@ -9,11 +9,6 @@ import Container from '../../components/shared/container';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
 import MembershipByLaws from './MembershipByLaws';
-import MobileDivider from '../../components/shared/MobileDivider';
-import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-
-// Sidebar data
-import aboutSidebar from './about-links.yml';
 
 // Local Typings
 interface Props {
@@ -422,13 +417,6 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
             November 19, 2020; July 23, 2021; November 18, 2021; and July 22, 2022.
           </em>
         </section>
-
-        <MobileDivider>
-          <SidebarBody
-            inline
-            yaml={aboutSidebar}
-          />
-        </MobileDivider>
       </Container>
     </StyledRoot>
   </Layout>

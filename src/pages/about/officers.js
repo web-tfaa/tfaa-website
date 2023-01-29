@@ -12,12 +12,7 @@ import Cards from '../../components/shared/cards';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
-import MobileDivider from '../../components/shared/MobileDivider';
-import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import { useOfficerData } from '../../utils/hooks/useOfficerData';
-
-// Sidebar data
-import aboutSidebar from './about-links.yml';
 
 // Component Definition
 const Officers = ({ location }) => {
@@ -125,13 +120,6 @@ const Officers = ({ location }) => {
               </FuturaParagraph>
             </Card>
           </Cards>
-
-          <MobileDivider>
-            <SidebarBody
-              inline
-              yaml={aboutSidebar}
-            />
-          </MobileDivider>
         </Box>
       </Container>
     </Layout>
