@@ -1,10 +1,8 @@
 // External Dependencies
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { appNameShort } from '../utils/app-constants';
 import FineArtsPriority from '../components/home/FineArtsPriority';
 import Greetings from '../components/home/Greetings';
 import HomeBanner from '../components/home/HomeBanner';
@@ -29,11 +27,10 @@ const StyledRoot = styled.div({
 
 // Component Definition
 const Home: FC<Props> = ({ location }) => (
-  <Layout location={location}>
-    <Helmet>
-      <title>{appNameShort} | Home</title>
-    </Helmet>
-
+  <Layout
+    location={location}
+    pageTitle="Home"
+  >
     <StyledRoot>
       <HomeBanner />
 

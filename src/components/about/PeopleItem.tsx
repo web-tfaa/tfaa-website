@@ -35,7 +35,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   [theme.breakpoints.down('mobile')]: {
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     justifyContent: 'center',
     padding: theme.spacing(4, 2),
   },

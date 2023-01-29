@@ -9,11 +9,6 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaParagraph from '../../components/shared/futura-paragraph';
 import Layout from '../../components/layout';
-import MobileDivider from '../../components/shared/MobileDivider';
-import SidebarBody from '../../components/shared/sidebar/SidebarBody';
-
-// Sidebar data
-import aboutSidebar from './about-links.yml';
 
 // Component Definition
 const History = ({ location }) => (
@@ -74,13 +69,6 @@ const History = ({ location }) => (
         <div>Woody Schober,</div>
         <div>Director of Fine Arts, Retired</div>
         <div>Irving ISD, Irving, Texas</div>
-
-        <MobileDivider>
-          <SidebarBody
-            inline
-            yaml={aboutSidebar}
-          />
-        </MobileDivider>
       </Container>
     </Box>
   </Layout>

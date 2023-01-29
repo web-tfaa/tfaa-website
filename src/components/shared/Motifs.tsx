@@ -24,6 +24,7 @@ const StyledRoot = styled.section<StyledRootProps>(({ $small, theme }) => ({
     },
 
     height: 200,
+    overflow: 'hidden',
     position: 'absolute',
     right: $small ? -116 : -20,
     top: $small ? -80 : -44,
@@ -38,8 +39,9 @@ const StyledRoot = styled.section<StyledRootProps>(({ $small, theme }) => ({
     },
 
     height: 533,
-    position: 'absolute',
     left: $small ? -290 : -240,
+    overflow: 'hidden',
+    position: 'absolute',
     top: -54,
     width: 335,
   },

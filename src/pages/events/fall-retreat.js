@@ -14,12 +14,7 @@ import styled from 'styled-components';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import MobileDivider from '../../components/shared/MobileDivider';
-import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import { useEventData } from '../../utils/hooks/useEventData';
-
-// Sidebar data
-import eventsSidebar from './events-links.yml';
 
 // Local Variables
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -155,13 +150,6 @@ const FallRetreat = ({ location }) => {
             </address>
           </div>
         </section>
-
-        <MobileDivider>
-          <SidebarBody
-            inline
-            yaml={eventsSidebar}
-          />
-        </MobileDivider>
       </StyledContainer>
     </Layout>
   );
