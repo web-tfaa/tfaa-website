@@ -25,6 +25,15 @@ const StyledRoot = styled.section<StyledRootProps>(({
   theme,
 }) => ({
   '.whatWeDoImageContainer': {
+    [theme.breakpoints.down('lg')]: {
+      minWidth: 270,
+    },
+    [theme.breakpoints.down('md')]: {
+      minWidth: 240,
+    },
+    [theme.breakpoints.down('mobile')]: {
+      minWidth: 320,
+    },
     background: `url(${$imgSrc}) no-repeat`,
     backgroundSize: 'cover',
     minHeight: 224,
@@ -80,10 +89,14 @@ const StyledRoot = styled.section<StyledRootProps>(({
     textAlign: 'left',
   },
 
+  [theme.breakpoints.down('lg')]: {
+    marginRight: theme.spacing(8),
+  },
   [theme.breakpoints.down('md')]: {
     '&:not(:first-child)': {
       marginTop: theme.spacing(8),
     },
+    marginRight: theme.spacing(4),
     width: 500,
   },
   [theme.breakpoints.down('mobile')]: {
@@ -96,6 +109,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
+  position: 'relative',
   textAlign: 'center',
   width: 200,
 }));
