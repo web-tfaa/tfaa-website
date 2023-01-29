@@ -25,6 +25,11 @@ const StyledRoot = styled.div(({ theme }) => ({
     lineHeight: '1.6',
   },
 
+  h1: {
+    fontWeight: 900,
+    marginBottom: theme.spacing(2),
+  },
+
   [theme.breakpoints.down('mobile')]: {
     padding: theme.spacing(3),
   },
@@ -57,10 +62,15 @@ const About: FC<Props> = ({ location }) => {
       pageTitle={`${appNameShort} Past Presidents`}
     >
       <StyledRoot>
-        <h1>Past Presidents</h1>
+        <Typography
+          component="h1"
+          variant="h5"
+        >
+          Past Presidents
+        </Typography>
 
         <Typography paragraph>
-          Chronological listing of all past TMAC Presidents
+          Chronological listing of all past {appNameShort} Presidents
         </Typography>
 
         <Card
