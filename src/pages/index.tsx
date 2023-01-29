@@ -1,10 +1,8 @@
 // External Dependencies
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { appNameShort } from '../utils/app-constants';
 import FineArtsPriority from '../components/home/FineArtsPriority';
 import Greetings from '../components/home/Greetings';
 import HomeBanner from '../components/home/HomeBanner';
