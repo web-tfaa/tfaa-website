@@ -16,8 +16,12 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   h1: {
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       fontSize: 64,
+      lineHeight: '64px',
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 48,
       lineHeight: '64px',
     },
     [theme.breakpoints.down('mobile')]: {

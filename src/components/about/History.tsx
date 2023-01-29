@@ -1,6 +1,6 @@
 // External Dependencies
-import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
+import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -50,6 +50,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   '.historyTitle': {
     fontSize: 34,
     fontWeight: 900,
+    marginBottom: theme.spacing(4),
   },
 
   [theme.breakpoints.down('mobile')]: {
@@ -71,7 +72,6 @@ const History: FC = () => {
       <div>
         <Typography
           className="historyTitle"
-          paragraph
           variant="h4"
         >
           {appNameShort} History
