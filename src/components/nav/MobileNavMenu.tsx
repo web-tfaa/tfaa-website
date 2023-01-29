@@ -74,11 +74,11 @@ const MobileNavMenu: FC<Props> = ({
 }) => {
   const theme = useTheme();
 
-  const isAboutPage = pathname.includes('/about');
-  const isEventsPage = pathname.includes('/events');
-  const isResourcesPage = pathname.includes('/resources');
-  const isMembershipPage = pathname.includes('/members');
-  const isSponsorsPage = pathname.includes('/sponsors');
+  const isAboutPage = pathname.endsWith('/about');
+  const isEventsPage = pathname.endsWith('/events');
+  const isResourcesPage = pathname.endsWith('/resources');
+  const isMembershipPage = pathname.endsWith('/members');
+  const isSponsorsPage = pathname.endsWith('/sponsors');
 
   // Menu logic
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

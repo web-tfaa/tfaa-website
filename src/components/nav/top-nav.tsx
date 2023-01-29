@@ -122,7 +122,7 @@ const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
     >
       Members Login
     </CtaButton>
-  ), [handleSignInOrOut]);
+  ), []);
 
   const membersSignOutButtonElement = useMemo(() => (
     <CtaButton
