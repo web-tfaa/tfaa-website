@@ -7,12 +7,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import MobileDivider from '../../components/shared/MobileDivider';
-import SidebarBody from '../../components/shared/sidebar/SidebarBody';
 import { useEventData } from '../../utils/hooks/useEventData';
-
-// Sidebar data
-import eventsSidebar from './events-links.yml';
 
 // Local Variables
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -74,14 +69,7 @@ const TmeaRoundTable = ({ location }) => {
             </a>{' '}
             convention.
           </p>
-        </section>
-
-        <MobileDivider>
-          <SidebarBody
-            inline
-            yaml={eventsSidebar}
-          />
-        </MobileDivider>
+        </section>ider>
       </StyledContainer>
     </Layout>
   );
