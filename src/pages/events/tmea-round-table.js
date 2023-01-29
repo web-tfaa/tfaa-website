@@ -69,7 +69,7 @@ const TmeaRoundTable = ({ location }) => {
             </a>{' '}
             convention.
           </p>
-        </section>ider>
+        </section>
       </StyledContainer>
     </Layout>
   );

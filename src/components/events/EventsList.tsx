@@ -1,12 +1,14 @@
 // External Dependencies
 import { Link } from 'gatsby-theme-material-ui';
 import React, { FC } from 'react';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
 import Motifs from '../shared/Motifs';
+import ViewDetailsButton from '../shared/ViewDetailsButton';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -36,6 +38,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   display: 'flex',
+  overflow: 'hidden',
   padding: theme.spacing(10),
   position: 'relative',
   width: '100%',
@@ -70,6 +73,13 @@ const EventsList: FC = () => {
               Summer Round Table
             </Typography>
 
+            <Box marginBottom={2}>
+              <ViewDetailsButton
+                context="event"
+                to="/events/summer-round-table/"
+              />
+            </Box>
+
             <Typography>
               Held in conjunction with these summer conventions:
             </Typography>
@@ -101,6 +111,13 @@ const EventsList: FC = () => {
               Fall Retreat
             </Typography>
 
+            <Box marginBottom={2}>
+              <ViewDetailsButton
+                context="event"
+                to="/events/fall-retreat/"
+              />
+            </Box>
+
             <Typography paragraph>
               The 2022 Fall Retreat will be Nov. 16-18 in Austin.
             </Typography>
@@ -121,6 +138,13 @@ const EventsList: FC = () => {
             >
               TMEA Round Table
             </Typography>
+
+            <Box marginBottom={2}>
+              <ViewDetailsButton
+                context="event"
+                to="/events/tmea-round-table/"
+              />
+            </Box>
 
             <Typography>
               Round Table Meeting on Wednesday at noon at the{' '}

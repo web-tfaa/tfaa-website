@@ -2,25 +2,31 @@
 import { Button } from 'gatsby-theme-material-ui';
 import { ButtonProps, darken } from '@mui/material';
 import React, { FC } from 'react';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import styled from 'styled-components';
 
 // Local Typings
 interface Props extends ButtonProps {
   children: React.ReactNode;
   colorVariant?: CtaColor;
-  onClick: ButtonProps['onClick'];
+  fontWeight?: number;
+  onClick?: ButtonProps['onClick'];
+  onKeyDown?: ButtonProps['onKeyDown'];
+  rightArrow?: boolean;
   to?: string;
   width?: number;
 }
 type CtaColor = 'resources' | 'signIn';
 interface StyledButtonProps {
   $colorVariant: CtaColor;
+  $fontWeight?: number;
   $width: number | string;
 }
 
 // Local Variables
 const StyledButton = styled(Button)<StyledButtonProps>(({
   $colorVariant,
+  $fontWeight,
   $width,
   theme,
 }) => ({
@@ -39,7 +45,7 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
     color: theme.palette.common.white,
     fontFamily: 'sans-serif',
     fontSize: 14,
-    fontWeight: $colorVariant === 'signIn'
+    fontWeight: $fontWeight || $colorVariant === 'signIn'
       ? theme.typography.fontWeightBold
       : theme.typography.fontWeightMedium,
     textTransform: 'none',
@@ -52,19 +58,26 @@ const StyledButton = styled(Button)<StyledButtonProps>(({
 const CtaButton: FC<Props> = ({
   children,
   colorVariant = 'resources',
+  fontWeight,
+  rightArrow,
   to,
   width = '100%',
   ...otherProps
-}) => (
-  <StyledButton
-    $colorVariant={colorVariant}
-    to={to}
-    variant="contained"
-    $width={width}
-    {...otherProps}
-  >
-    {children}
-  </StyledButton>
-);
+}) => {
+  console.log('fontWeight', fontWeight);
+  return (
+    <StyledButton
+      $colorVariant={colorVariant}
+      $fontWeight={fontWeight}
+      $width={width}
+      endIcon={rightArrow ? <ArrowForwardIcon /> : undefined}
+      to={to}
+      variant="contained"
+      {...otherProps}
+    >
+      {children}
+    </StyledButton>
+  );
+};
 
 export default CtaButton;

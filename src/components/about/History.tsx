@@ -58,6 +58,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   display: 'flex',
+  overflow: 'hidden',
   padding: theme.spacing(10),
   position: 'relative',
   width: '100%',
