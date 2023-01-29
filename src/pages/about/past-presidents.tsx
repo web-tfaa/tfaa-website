@@ -25,6 +25,10 @@ const StyledRoot = styled.div(({ theme }) => ({
     lineHeight: '1.6',
   },
 
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(3),
+  },
+
   display: 'flex',
   flexDirection: 'column',
   flexWrap: 'wrap',
