@@ -12,6 +12,14 @@ import Layout from '../../components/layout';
 interface Props {
   location: Location;
 }
+export interface TfaaEvent {
+  dateOfEvent: string;
+  timeOfEvent: string | null;
+  titleOfEvent: string;
+}
+export interface EventList {
+  node: TfaaEvent;
+}
 
 // Local Variables
 const StyledRoot = styled.div({

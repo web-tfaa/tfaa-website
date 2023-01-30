@@ -1,15 +1,20 @@
 // External Dependencies
 import { Box } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-// import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import Container from '../../components/shared/container';
-import Layout from '../../components/layout';
+import { EventList } from '.';
 import { useEventData } from '../../utils/hooks/useEventData';
+import Container from '../../components/shared/container';
+// import EnhancedAlert from '../../components/shared/EnhancedAlert';
+import Layout from '../../components/layout';
+
+// Local Typings
+interface Props {
+  location: Location;
+}
 
 // Local Variables
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -19,11 +24,11 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 // Component Definition
-const SummerRoundTable = ({ location }) => {
+const SummerRoundTable: FC<Props> = ({ location }) => {
   const { edges } = useEventData();
 
-  const summerRoundTable = edges.find((e) =>
-    e.node.titleOfEvent.includes('Summer Convention')).node;
+  const summerRoundTable = edges.find(({ node }: EventList) =>
+    node.titleOfEvent.includes('Summer Convention')).node;
 
   const {
     dateOfEvent,
@@ -115,13 +120,6 @@ const SummerRoundTable = ({ location }) => {
       </StyledContainer>
     </Layout>
   );
-};
-
-SummerRoundTable.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]).isRequired,
 };
 
 export default SummerRoundTable;
