@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import Layout from '../../components/layout';
+import ResourcesBanner from '../../components/resources/ResourcesBanner';
+import ResourcesInfo from '../../components/resources/ResourcesInfo';
 
 // Local Typings
 interface Props {
@@ -27,7 +29,9 @@ const Resources: FC<Props> = ({ location }) => {
       pageTitle="Resources"
     >
       <StyledRoot>
-        <h1>Resources</h1>
+        <ResourcesBanner />
+
+        <ResourcesInfo />
       </StyledRoot>
     </Layout>
   );
