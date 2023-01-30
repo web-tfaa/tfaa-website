@@ -8,14 +8,16 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
+import Layout from '../../components/layout';
+import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
+import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
 // import { doGetUsers } from '../../firebase/db';
 // import Container from '../../components/shared/container';
-import Layout from '../../components/layout';
 // import SponsorCard, {
 //   SPONSORSHIP_LEVELS,
 //   SPONSORSHIP_PRICE,
 // } from '../../components/shared/sponsor-card';
-import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 // import { SponsorFormValues } from './register';
 // import usePrevious from '../../utils/hooks/usePrevious';
 
@@ -64,7 +66,9 @@ const Sponsors: FC<Props> = ({ location }) => {
     >
       <ReCaptchaProvider>
         <StyledRoot>
-          <h1>Sponsors</h1>
+          <SponsorsBanner />
+
+          <SponsorsHeroBannerImage />
         </StyledRoot>
       </ReCaptchaProvider>
     </Layout>
