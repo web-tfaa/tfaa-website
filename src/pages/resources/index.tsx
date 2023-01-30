@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import Layout from '../../components/layout';
 import ResourcesBanner from '../../components/resources/ResourcesBanner';
+import ResourcesHeroBannerImage from '../../components/resources/ResourcesHeroBannerImage';
 import ResourcesList from '../../components/resources/ResourcesList';
 import ResourcesInfo from '../../components/resources/ResourcesInfo';
 import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
@@ -34,6 +35,8 @@ const Resources: FC<Props> = ({ location }) => {
         <ResourcesBanner />
 
         <ResourcesInfo />
+
+        <ResourcesHeroBannerImage />
 
         <ResourcesList />
 
