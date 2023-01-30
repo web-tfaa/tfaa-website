@@ -6,18 +6,21 @@ import styled from 'styled-components';
 // Local Typings
 interface Props {
   children: React.ReactNode | React.ReactNode[];
+  imageOpacity?: number;
   imageUrl: string;
   mobileImageUrl?: string;
   tagline: string;
   title: string;
 }
 interface HomeBannerImageStyledRootProps {
+  $imageOpacity: number;
   $imageUrl: string;
   $mobileImageUrl?: string;
 }
 
 // Local Variables
 const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
+  $imageOpacity,
   $imageUrl,
   $mobileImageUrl,
   theme,
@@ -40,21 +43,32 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
     position: 'absolute',
     top: 0,
     left: 0,
-    opacity: 0.6,
+    opacity: $imageOpacity,
     height: '100%',
     width: '100%',
   },
 
   '.title': {
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 48,
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 44,
+    },
     [theme.breakpoints.down('mobile')]: {
       fontSize: 36,
       margin: theme.spacing(0, 0, 3, 3),
       textAlign: 'center',
     },
+    color: theme.palette.common.white,
     fontWeight: 900,
+    marginBottom: theme.spacing(4),
   },
 
   '.tagline': {
+    [theme.breakpoints.down('md')]: {
+      fontSize: 24,
+    },
     [theme.breakpoints.down('mobile')]: {
       textAlign: 'center',
     },
@@ -64,12 +78,18 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
   },
 
   [theme.breakpoints.down('mobile')]: {
+    background: $mobileImageUrl
+      ? `url(${$mobileImageUrl}) no-repeat`
+      : 'inherit',
+    backgroundSize: 'cover',
+    height: '100%',
     padding: theme.spacing(8),
     justifyContent: 'center',
   },
 
-  backgroundColor: theme.palette.tfaa.backgroundDark,
   background: `url(${$imageUrl}) no-repeat`,
+  backgroundColor: theme.palette.tfaa.backgroundDark,
+  backgroundSize: 'cover',
   color: theme.palette.common.white,
   display: 'flex',
   height: 727,
@@ -83,6 +103,7 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
 // Component Definition
 const HeroBannerImage: FC<Props> = ({
   children,
+  imageOpacity = 0.6,
   imageUrl,
   mobileImageUrl,
   tagline,
@@ -90,13 +111,13 @@ const HeroBannerImage: FC<Props> = ({
 }) => {
   return (
     <StyledRoot
+      $imageOpacity={imageOpacity}
       $imageUrl={imageUrl}
       $mobileImageUrl={mobileImageUrl}
     >
       <div>
         <Typography
           className="title"
-          paragraph
           variant="h3"
         >
           {title}

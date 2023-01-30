@@ -10,7 +10,9 @@ import { appName, appNameShort } from '../../utils/app-constants';
 const ResourcesHeroBannerImage: FC = () => {
   return (
     <HeroBannerImage
+      imageOpacity={0.2}
       imageUrl="https://res.cloudinary.com/tmac/image/upload/v1675101117/violin-performer.png"
+      mobileImageUrl="https://res.cloudinary.com/tmac/image/upload/v1675101766/violin-performer-mobile.png"
       tagline="Be part of something beautiful"
       title="Fine Arts are for Everyone"
     >
