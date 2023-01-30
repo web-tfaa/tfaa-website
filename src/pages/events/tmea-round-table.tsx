@@ -1,13 +1,18 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { EventList } from '.';
+import { useEventData } from '../../utils/hooks/useEventData';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import { useEventData } from '../../utils/hooks/useEventData';
+
+// Local Typings
+interface Props {
+  location: Location;
+}
 
 // Local Variables
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -17,10 +22,10 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 // Component Definition
-const TmeaRoundTable = ({ location }) => {
+const TmeaRoundTable: FC<Props> = ({ location }) => {
   const { edges } = useEventData();
 
-  const tmeaRoundTable = edges.find((e) => e.node.titleOfEvent.includes('TMEA')).node;
+  const tmeaRoundTable = edges.find(({ node }: EventList) => node.titleOfEvent.includes('TMEA')).node;
 
   return (
     <Layout location={location}>
@@ -73,13 +78,6 @@ const TmeaRoundTable = ({ location }) => {
       </StyledContainer>
     </Layout>
   );
-};
-
-TmeaRoundTable.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]).isRequired,
 };
 
 export default TmeaRoundTable;

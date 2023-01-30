@@ -3,18 +3,22 @@ import {
   Box,
   // Button,
 } from '@mui/material';
-import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby-theme-material-ui';
 // import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import Container from '../../components/shared/container';
-import Layout from '../../components/layout';
-// import EnhancedAlert from '../../components/shared/EnhancedAlert';
+import { EventList } from '.';
 import { useEventData } from '../../utils/hooks/useEventData';
+import Container from '../../components/shared/container';
+// import EnhancedAlert from '../../components/shared/EnhancedAlert';
+import Layout from '../../components/layout';
+
+// Local Typings
+interface Props {
+  location: Location;
+}
 
 // Local Variables
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -40,10 +44,10 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 // Component Definition
-const FallRetreat = ({ location }) => {
+const FallRetreat: FC<Props> = ({ location }) => {
   const { edges } = useEventData();
 
-  const fallRetreat = edges.find((e) => e.node.titleOfEvent.includes('Fall Retreat')).node;
+  const fallRetreat = edges.find(({ node }: EventList) => node.titleOfEvent.includes('Fall Retreat')).node;
 
   const hotelReservationButton = null;
   // (
@@ -63,11 +67,10 @@ const FallRetreat = ({ location }) => {
   // );
 
   return (
-    <Layout location={location}>
-      <Helmet>
-        <title>TMAC | Fall Retreat</title>
-      </Helmet>
-
+    <Layout
+      location={location}
+      pageTitle="Fall Retreat"
+    >
       <StyledContainer>
         <h1>{fallRetreat.titleOfEvent}</h1>
 
@@ -153,13 +156,6 @@ const FallRetreat = ({ location }) => {
       </StyledContainer>
     </Layout>
   );
-};
-
-FallRetreat.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]).isRequired,
 };
 
 export default FallRetreat;

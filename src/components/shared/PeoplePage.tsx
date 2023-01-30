@@ -8,9 +8,6 @@ import Container from './container';
 
 // Sidebar data
 import Layout from '../layout';
-import resourcesSidebar from '../../pages/resources/resources-links.yml';
-import MobileDivider from './MobileDivider';
-import SidebarBody from './sidebar/SidebarBody';
 
 // Local Typings
 interface Props {
@@ -60,13 +57,6 @@ const PeoplePage: FC<Props> = ({
         <h2 className="headingName">{name}</h2>
 
         {children}
-
-        <MobileDivider>
-          <SidebarBody
-            inline
-            yaml={resourcesSidebar}
-          />
-        </MobileDivider>
       </Container>
     </StyledRoot>
   </Layout>

@@ -45,7 +45,7 @@ const About: FC<Props> = ({ location }) => (
 
       <People />
 
-      <WhereWeHaveBeen />
+      <WhereWeHaveBeen color="about" />
     </StyledRoot>
   </Layout>
 );
