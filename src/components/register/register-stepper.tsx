@@ -8,6 +8,9 @@ import {
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
+// Internal Dependencies
+import { appNameShort } from '../../utils/app-constants';
+
 // Local Typings
 interface Props {
   activeStep: number;
@@ -22,14 +25,14 @@ function getSteps(
 ): string[] {
   return [
     isAuthenticated
-      ? 'Sign in to the TMAC members area'
-      : 'Sign up for TMAC website login',
+      ? `Sign in to the ${appNameShort} members area`
+      : `Sign up for ${appNameShort} website login`,
     isViewingSponsors
       ? 'Complete sponsor form'
       : 'Complete membership form',
     isViewingSponsors
       ? 'Confirm Sponsor level and send payment'
-      : 'Pay TMAC dues',
+      : `Pay ${appNameShort} dues`,
   ];
 }
 

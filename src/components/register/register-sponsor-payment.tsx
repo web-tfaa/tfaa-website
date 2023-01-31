@@ -23,7 +23,6 @@ import {
   doUpdateEntry,
   doUpdateInvoiceId as updateFirestoreInvoiceId,
 } from '../../firebase/db';
-import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
 import { classChampionAlreadySecured } from './register-sponsor-form';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import FormHr from '../shared/form-hr';
@@ -58,6 +57,12 @@ const StyledRoot = styled.section(({ theme }) => ({
     marginBottom: 0,
   },
 }));
+
+const SPONSORSHIP_LEVELS = {
+  CLASS_CHAMPION: 'Class Champion',
+  GOLD_MEDAL: 'Gold Medal',
+  SILVER_MEDAL: 'Silver Medal',
+};
 
 const currentDate = format(new Date(), 'M/d/yyyy');
 

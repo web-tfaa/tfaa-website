@@ -49,6 +49,11 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 
   '.sponsorInfo': {
+    [theme.breakpoints.down('md')]: {
+      columnGap: theme.spacing(3),
+      flexWrap: 'wrap',
+    },
+
     columnGap: theme.spacing(4),
     display: 'flex',
     justifyContent: 'space-between',
@@ -75,6 +80,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
     '& p': {
       fontSize: 16,
     },
+    [theme.breakpoints.down('mobile')]: {
+      width: '100%',
+    },
     width: '30%',
   },
 
@@ -82,16 +90,20 @@ const StyledCard = styled(Card)(({ theme }) => ({
     '& a': {
       fontWeight: 600,
     },
+
+    [theme.breakpoints.down('md')]: {
+      marginBottom: theme.spacing(6),
+      width: '100%',
+    },
+    [theme.breakpoints.down('mobile')]: {
+      width: '100%',
+    },
     width: '33%',
   },
 
   '.sponsorLevelCost': {
     fontSize: 20,
     fontWeight: 700,
-  },
-
-  '.sponsorMealCard': {
-    width: '30%',
   },
 
   '.sponsorPerks': {
@@ -104,6 +116,14 @@ const StyledCard = styled(Card)(({ theme }) => ({
       top: 0,
       left: 0,
       height: '100%',
+      width: '100%',
+    },
+
+    [theme.breakpoints.down('md')]: {
+      width: '60%',
+    },
+    [theme.breakpoints.down('mobile')]: {
+      marginBottom: theme.spacing(2),
       width: '100%',
     },
     borderRadius: 19,
@@ -121,6 +141,10 @@ const StyledCard = styled(Card)(({ theme }) => ({
       top: 0,
       left: 0,
       height: '100%',
+      width: '100%',
+    },
+
+    [theme.breakpoints.down('mobile')]: {
       width: '100%',
     },
     borderRadius: 19,

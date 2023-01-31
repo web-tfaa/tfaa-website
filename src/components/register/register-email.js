@@ -8,6 +8,7 @@ import LoginForm from './login-form';
 import LoadingContainer from '../shared/LoadingContainer';
 import SignInUpElement from './sign-in-up-element';
 import SignUpForm from './signup-form';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Variables
 const propTypes = {
@@ -81,7 +82,7 @@ class RegisterEmail extends Component {
 
     return (
       <section>
-        <h2>1. Sign up for TMAC website login</h2>
+        <h2>1. Sign up for {appNameShort} website login</h2>
         {childrenElements}
       </section>
     );
