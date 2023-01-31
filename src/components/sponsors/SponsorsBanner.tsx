@@ -3,9 +3,6 @@ import React, { FC } from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-// Internal Dependencies
-import { appNameShort } from '../../utils/app-constants';
-
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   h1: {
