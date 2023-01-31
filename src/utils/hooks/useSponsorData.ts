@@ -10,7 +10,7 @@ interface UseSponsorDataQueryArguments {
   useTestData?: boolean;
 }
 
-export interface SponsorFormValues {
+export interface Sponsor {
   AmountDonated: number;
   City: string;
   ContactAddress1: string;
@@ -36,7 +36,7 @@ export interface SponsorFormValues {
 }
 
 // Local Variables
-const sponsorTestData: SponsorFormValues[] = [
+const sponsorTestData: Sponsor[] = [
   {
     AmountDonated: 5000,
     City: 'Dallas',
@@ -136,17 +136,17 @@ export const useSponsorData = ({
   useTestData = false,
 }: UseSponsorDataQueryArguments) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [sponsorData, setSponsorData] = useState<SponsorFormValues[] | null>(null);
+  const [sponsorData, setSponsorData] = useState<Sponsor[] | null>(null);
   const previousSponsorData = usePrevious(sponsorData);
 
-  const handleUpdateSponsorData = (newSponsorData: SponsorFormValues[] | null) => {
+  const handleUpdateSponsorData = (newSponsorData: Sponsor[] | null) => {
     setSponsorData(newSponsorData);
   };
 
   // Fetch sponsor data when component mounts
   useEffect(() => {
     if (!useTestData) {
-      const emptySponsorList: SponsorFormValues[] = [];
+      const emptySponsorList: Sponsor[] = [];
 
       setIsLoading(true);
       doGetUsers('sponsor', emptySponsorList, handleUpdateSponsorData);

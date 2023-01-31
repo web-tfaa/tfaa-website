@@ -12,6 +12,7 @@ import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import Layout from '../../components/layout';
 import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
 import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
+import SponsorsList from '../../components/sponsors/SponsorsList';
 // import { doGetUsers } from '../../firebase/db';
 // import Container from '../../components/shared/container';
 // import SponsorCard, {
@@ -69,6 +70,8 @@ const Sponsors: FC<Props> = ({ location }) => {
           <SponsorsBanner />
 
           <SponsorsHeroBannerImage />
+
+          <SponsorsList />
         </StyledRoot>
       </ReCaptchaProvider>
     </Layout>
