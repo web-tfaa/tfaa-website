@@ -64,7 +64,6 @@ const CtaButton: FC<Props> = ({
   width = '100%',
   ...otherProps
 }) => {
-  console.log('fontWeight', fontWeight);
   return (
     <StyledButton
       $colorVariant={colorVariant}

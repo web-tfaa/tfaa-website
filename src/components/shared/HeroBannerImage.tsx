@@ -8,18 +8,21 @@ interface Props {
   children: React.ReactNode | React.ReactNode[];
   imageOpacity?: number;
   imageUrl: string;
+  leftAlign?: boolean;
   mobileImageUrl?: string;
   tagline: string;
-  title: string;
+  title: string | React.ReactNode;
 }
 interface HomeBannerImageStyledRootProps {
   $imageOpacity: number;
   $imageUrl: string;
+  $leftAlign: boolean;
   $mobileImageUrl?: string;
 }
 
 // Local Variables
 const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
+  $leftAlign,
   $imageOpacity,
   $imageUrl,
   $mobileImageUrl,
@@ -74,7 +77,7 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
     },
     fontSize: 27,
     marginTop: theme.spacing(5),
-    textAlign: 'right',
+    textAlign: $leftAlign ? 'left' : 'right',
   },
 
   [theme.breakpoints.down('mobile')]: {
@@ -93,7 +96,7 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
   color: theme.palette.common.white,
   display: 'flex',
   height: 727,
-  justifyContent: 'flex-end',
+  justifyContent: $leftAlign ? 'flex-start' : 'flex-end',
   padding: theme.spacing(15),
   position: 'relative',
   width: '100%',
@@ -102,6 +105,7 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
 
 // Component Definition
 const HeroBannerImage: FC<Props> = ({
+  leftAlign = false,
   children,
   imageOpacity = 0.6,
   imageUrl,
@@ -111,6 +115,7 @@ const HeroBannerImage: FC<Props> = ({
 }) => {
   return (
     <StyledRoot
+      $leftAlign={leftAlign}
       $imageOpacity={imageOpacity}
       $imageUrl={imageUrl}
       $mobileImageUrl={mobileImageUrl}

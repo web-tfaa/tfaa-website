@@ -67,7 +67,7 @@ const SponsorInfo = ({
             <span className="strong">
               1.{' '}
             </span>
-            Sign up for a TMAC website login.
+            Sign up for a TMAC website login or sign in if you already have a website login.
           </FuturaDiv>
 
           <FuturaDiv>

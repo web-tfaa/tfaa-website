@@ -39,13 +39,20 @@ const StyledRoot = styled.section(({ theme }) => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    opacity: 0.4,
+    opacity: 0.6,
     height: '100%',
     width: '100%',
   },
 
+  [theme.breakpoints.down('mobile')]: {
+    background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675111414/violin-closeup-mobile.png") no-repeat',
+    backgroundSize: 'cover',
+    height: '100%',
+    padding: theme.spacing(12, 8),
+  },
+
   alignItems: 'center',
-  background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675087329/city-skyline.png") no-repeat',
+  background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675109950/violin-closeup.png") no-repeat',
   backgroundSize: 'cover',
   display: 'flex',
   height: 400,
@@ -55,16 +62,16 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const ResourcesBanner: FC = () => {
+const SponsorsBanner: FC = () => {
   return (
     <StyledRoot>
       <Typography component="h1">
-        {appNameShort} equips Fine Arts Directors
-        to advance high-quality fine arts
-        education for all.
+        Join. Learn.
+        <br />
+        Lead.
       </Typography>
     </StyledRoot>
   );
 };
 
-export default ResourcesBanner;
+export default SponsorsBanner;
