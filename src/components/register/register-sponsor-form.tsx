@@ -16,7 +16,6 @@ import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
 } from '../../pages/sponsors/register';
-import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
 import { doCreateEntry } from '../../firebase/db';
 import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
@@ -62,6 +61,12 @@ const StyledRoot = styled.div({
     textTransform: 'none',
   },
 });
+
+const SPONSORSHIP_LEVELS = {
+  CLASS_CHAMPION: 'Class Champion',
+  GOLD_MEDAL: 'Gold Medal',
+  SILVER_MEDAL: 'Silver Medal',
+};
 
 // This will tell the Firestore database action where to put the new record
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
