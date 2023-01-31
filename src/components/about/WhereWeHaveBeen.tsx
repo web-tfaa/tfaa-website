@@ -8,7 +8,7 @@ import { WHERE_WE_HAVE_BEEN_DATA } from './about-constants';
 import WhatWeDoItem from '../home/WhatWeDoItem';
 
 // Local Typings
-type WhereWeHaveBeenColor = 'about' | 'events' | 'resources';
+type WhereWeHaveBeenColor = 'about' | 'events' | 'membership' | 'resources';
 interface Props {
   color: WhereWeHaveBeenColor;
 }

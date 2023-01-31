@@ -1,9 +1,4 @@
 // External Dependencies
-// import {
-//   Box,
-//   CircularProgress,
-//   Collapse,
-// } from '@mui/material';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
@@ -13,14 +8,7 @@ import Layout from '../../components/layout';
 import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
 import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
 import SponsorsList from '../../components/sponsors/SponsorsList';
-// import { doGetUsers } from '../../firebase/db';
-// import Container from '../../components/shared/container';
-// import SponsorCard, {
-//   SPONSORSHIP_LEVELS,
-//   SPONSORSHIP_PRICE,
-// } from '../../components/shared/sponsor-card';
-// import { SponsorFormValues } from './register';
-// import usePrevious from '../../utils/hooks/usePrevious';
+import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -38,28 +26,6 @@ const StyledRoot = styled.div({
 
 // Component Definition
 const Sponsors: FC<Props> = ({ location }) => {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [sponsorData, setSponsorData] = useState<SponsorFormValues[] | null>(null);
-  // const previousSponsorData = usePrevious(sponsorData);
-
-  // const handleUpdateSponsorData = (newSponsorData: SponsorFormValues[] | null) => {
-  //   setSponsorData(newSponsorData);
-  // };
-
-  // // Fetch sponsor data when component mounts
-  // useEffect(() => {
-  //   const emptySponsorList = [];
-
-  //   setIsLoading(true);
-  //   doGetUsers('sponsor', emptySponsorList, handleUpdateSponsorData);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!previousSponsorData && sponsorData) {
-  //     setIsLoading(false);
-  //   }
-  // }, [previousSponsorData, sponsorData]);
-
   return (
     <Layout
       location={location}
@@ -72,6 +38,8 @@ const Sponsors: FC<Props> = ({ location }) => {
           <SponsorsHeroBannerImage />
 
           <SponsorsList />
+
+          <WhereWeHaveBeen color="membership" />
         </StyledRoot>
       </ReCaptchaProvider>
     </Layout>
