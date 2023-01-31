@@ -1,14 +1,16 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
+import { lighten } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
-import { Link } from 'gatsby-theme-material-ui';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../utils/app-constants';
 import Layout from '../components/layout';
+import FourOhFourBanner from '../components/fourOhFour/FourOhFourBanner';
 
 // Local Typings
 interface Props {
@@ -16,51 +18,67 @@ interface Props {
 }
 
 // Local Variables
-const StyledContainer = styled(Container)(({ theme }) => ({
-  '&.MuiPaper-root': {
-    display: 'flex',
-    justifyContent: 'center',
-    maxHeight: 240,
-    maxWidth: 500,
-  },
-  'h1, h2': {
-    color: theme.palette.common.black,
-    fontWeight: theme.typography.fontWeightMedium,
-  },
-  h1: {
-    [theme.breakpoints.down('mobile')]: {
-      fontSize: 42,
-    },
-    fontSize: 64,
-    lineHeight: '92px',
+const StyledRoot = styled.div(({ theme }) => ({
+  '.fourOhFourCard': {
+    backgroundColor: lighten(theme.palette.tfaa.resources, 0.8),
   },
 
-  backgroundColor: theme.palette.tfaa.backgroundLight,
+  '.fourOhFourCardContent': {
+    '&:last-child': {
+      paddingBottom: theme.spacing(6),
+    },
+    padding: theme.spacing(4, 6),
+  },
+
+  '.fourOhFourTitle': {
+    fontSize: 34,
+    fontWeight: 900,
+    marginBottom: theme.spacing(4),
+  },
+
+  section: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: theme.spacing(10),
+  },
+
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
+  width: '100vw',
 }));
 
 // Component Definition
-const FourOhFour: FC<Props> = ({ location }) => (
-  <Layout location={location}>
-    <StyledContainer
-      sx={{
-        display: 'flex',
-        height: '100%',
-        justifyContent: 'center',
-        paddingTop: 10,
-      }}
-    >
-      <Card>
-        <CardContent>
-          <h1>Page not found</h1>
+const FourOhFour: FC<Props> = ({ location }) => {
+  return (
+    <Layout location={location} pageTitle="Not Found">
+      <StyledRoot>
+        <FourOhFourBanner />
 
-          <p>
-            Try heading back to our <Link to="/">main page</Link> to find out more
-            about {appNameShort}!
-          </p>
-        </CardContent>
-      </Card>
-    </StyledContainer>
-  </Layout>
-);
+        <section>
+          <Typography
+            className="fourOhFourTitle"
+            component="h2"
+            variant="h4"
+          >
+            Page Not Found
+          </Typography>
+
+          <Card className="fourOhFourCard" variant="outlined">
+            <CardContent className="fourOhFourCardContent">
+              <Typography>
+                Try heading back to our <Link to="/">main page</Link> to find out more
+                about {appNameShort}!
+              </Typography>
+            </CardContent>
+          </Card>
+        </section>
+      </StyledRoot>
+    </Layout>
+  );
+};
 
 export default FourOhFour;

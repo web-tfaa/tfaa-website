@@ -5,9 +5,9 @@ import styled from 'styled-components';
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import Layout from '../../components/layout';
-import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
-import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
-import SponsorsList from '../../components/sponsors/SponsorsList';
+import MembersBanner from '../../components/members/MembersBanner';
+// import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
+// import SponsorsList from '../../components/sponsors/SponsorsList';
 import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
@@ -25,19 +25,19 @@ const StyledRoot = styled.div({
 });
 
 // Component Definition
-const Sponsors: FC<Props> = ({ location }) => {
+const Members: FC<Props> = ({ location }) => {
   return (
     <Layout
       location={location}
-      pageTitle="Sponsors"
+      pageTitle="Members"
     >
       <ReCaptchaProvider>
         <StyledRoot>
-          <SponsorsBanner />
+          <MembersBanner />
 
-          <SponsorsHeroBannerImage />
+          {/* <SponsorsHeroBannerImage />
 
-          <SponsorsList />
+          <SponsorsList /> */}
 
           <WhereWeHaveBeen color="membership" />
         </StyledRoot>
@@ -46,4 +46,4 @@ const Sponsors: FC<Props> = ({ location }) => {
   );
 };
 
-export default Sponsors;
+export default Members;
