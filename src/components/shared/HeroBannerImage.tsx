@@ -1,7 +1,11 @@
 // External Dependencies
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
 import styled from 'styled-components';
+
+// Internal Dependencies
+import CtaButton from './CtaButton';
 
 // Local Typings
 interface Props {
@@ -12,6 +16,7 @@ interface Props {
   mobileImageUrl?: string;
   tagline: string;
   title: string | React.ReactNode;
+  withButton?: boolean;
 }
 interface HomeBannerImageStyledRootProps {
   $imageOpacity: number;
@@ -28,6 +33,10 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
   $mobileImageUrl,
   theme,
 }) => ({
+  '& a': {
+    borderBottom: 'none',
+  },
+
   '& > div': {
     [theme.breakpoints.down('mobile')]: {
       maxWidth: '100%',
@@ -80,6 +89,9 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
     textAlign: $leftAlign ? 'left' : 'right',
   },
 
+  [theme.breakpoints.down('lg')]: {
+    padding: theme.spacing(12),
+  },
   [theme.breakpoints.down('mobile')]: {
     background: $mobileImageUrl
       ? `url(${$mobileImageUrl}) no-repeat`
@@ -112,6 +124,7 @@ const HeroBannerImage: FC<Props> = ({
   mobileImageUrl,
   tagline,
   title,
+  withButton = false,
 }) => {
   return (
     <StyledRoot
@@ -133,6 +146,23 @@ const HeroBannerImage: FC<Props> = ({
         <Typography className="tagline">
           {tagline}
         </Typography>
+
+        {withButton && (
+          <Box
+            marginTop={8}
+            textAlign="right"
+          >
+            <CtaButton
+              colorVariant="about"
+              fontWeight={400}
+              rightArrow
+              to="/members/join"
+              width={224}
+            >
+              Begin Membership
+            </CtaButton>
+          </Box>
+        )}
       </div>
     </StyledRoot>
   );

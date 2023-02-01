@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import Layout from '../../components/layout';
 import MembersBanner from '../../components/members/MembersBanner';
+import MembersHeroBannerImage from '../../components/members/MembersHeroBannerImage';
 import MembersInfoBanner from '../../components/members/MembersInfoBanner';
 import MembersOneTwoThree from '../../components/members/MembersOneTwoThree';
 import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
@@ -33,6 +34,8 @@ const Members: React.FC<Props> = ({ location }) => {
       <MembersInfoBanner />
 
       <MembersOneTwoThree />
+
+      <MembersHeroBannerImage />
 
       <WhereWeHaveBeen color="membership" />
     </>
