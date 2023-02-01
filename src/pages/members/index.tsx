@@ -1,13 +1,13 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import Layout from '../../components/layout';
 import MembersBanner from '../../components/members/MembersBanner';
-// import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
-// import SponsorsList from '../../components/sponsors/SponsorsList';
+import MembersInfoBanner from '../../components/members/MembersInfoBanner';
+import MembersOneTwoThree from '../../components/members/MembersOneTwoThree';
 import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
@@ -25,7 +25,7 @@ const StyledRoot = styled.div({
 });
 
 // Component Definition
-const Members: FC<Props> = ({ location }) => {
+const Members: React.FC<Props> = ({ location }) => {
   return (
     <Layout
       location={location}
@@ -35,9 +35,9 @@ const Members: FC<Props> = ({ location }) => {
         <StyledRoot>
           <MembersBanner />
 
-          {/* <SponsorsHeroBannerImage />
+          <MembersInfoBanner />
 
-          <SponsorsList /> */}
+          <MembersOneTwoThree />
 
           <WhereWeHaveBeen color="membership" />
         </StyledRoot>

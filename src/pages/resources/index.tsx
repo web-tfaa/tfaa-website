@@ -7,7 +7,7 @@ import Layout from '../../components/layout';
 import ResourcesBanner from '../../components/resources/ResourcesBanner';
 import ResourcesHeroBannerImage from '../../components/resources/ResourcesHeroBannerImage';
 import ResourcesList from '../../components/resources/ResourcesList';
-import ResourcesInfo from '../../components/resources/ResourcesInfo';
+import ResourcesInfoBanner from '../../components/resources/ResourcesInfoBanner';
 import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
@@ -34,7 +34,7 @@ const Resources: FC<Props> = ({ location }) => {
       <StyledRoot>
         <ResourcesBanner />
 
-        <ResourcesInfo />
+        <ResourcesInfoBanner />
 
         <ResourcesHeroBannerImage />
 
