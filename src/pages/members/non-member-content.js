@@ -8,7 +8,7 @@ import Card from '../../components/shared/cards/card';
 import CardHeadline from '../../components/shared/cards/card-headline';
 import Cards from '../../components/shared/cards';
 import CtaButton from '../../components/masthead/cta-button';
-import MembershipByLaws from '../about/MembershipByLaws';
+import MembershipByLaws from '../../components/about/MembershipByLaws';
 
 // Component Definition
 const NonMemberContent = () => (

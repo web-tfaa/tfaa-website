@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import Layout from '../../components/layout';
+import MemberInfoList from '../../components/members/MemberInfoList';
 import MembersBanner from '../../components/members/MembersBanner';
 import MembersHeroBannerImage from '../../components/members/MembersHeroBannerImage';
 import MembersInfoBanner from '../../components/members/MembersInfoBanner';
@@ -36,6 +37,8 @@ const Members: React.FC<Props> = ({ location }) => {
       <MembersOneTwoThree />
 
       <MembersHeroBannerImage />
+
+      <MemberInfoList />
 
       <WhereWeHaveBeen color="membership" />
     </>

@@ -1,6 +1,6 @@
 // External Dependencies
 import { Box } from '@mui/material';
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -8,7 +8,7 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
-import MembershipByLaws from './MembershipByLaws';
+import MembershipByLaws from '../../components/about/MembershipByLaws';
 
 // Local Typings
 interface Props {
@@ -42,7 +42,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const Constitution: FC<Props> = ({ location }) => (
+const Constitution: React.FC<Props> = ({ location }) => (
   <Layout
     location={location}
     pageTitle="Constitution and Bylaws"
