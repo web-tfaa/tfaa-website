@@ -5,7 +5,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import clsx from 'clsx';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -21,7 +20,10 @@ const StyledCard = styled(Card)(({ theme }) => ({
       fontWeight: 600,
     },
     '.joinListCardContent': {
-      padding: theme.spacing(0, 6, 4),
+      [theme.breakpoints.down('mobile')]: {
+        maxWidth: '100%',
+      },
+      padding: theme.spacing(0, 4, 2),
     },
     '.joinListFootnote': {
       fontSize: 16,
@@ -32,8 +34,12 @@ const StyledCard = styled(Card)(({ theme }) => ({
       fontSize: 34,
       fontWeight: 900,
     },
+
+    [theme.breakpoints.down('md')]: {
+      maxWidth: '100%',
+    },
     backgroundColor: theme.palette.tfaa.resources,
-    borderColor: lighten(theme.palette.tfaa.resources, 0.9),
+    borderColor: lighten(theme.palette.tfaa.resources, 0.1),
     borderRadius: 20,
     color: theme.palette.common.white,
     display: 'flex',

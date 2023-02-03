@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { appNameShort } from '../../../utils/app-constants';
 import EnhancedCard from '../../shared/EnhancedCard';
 import MembersInfoListJoin from './MembersInfoListJoin';
 import MembershipByLaws from '../../about/MembershipByLaws';
@@ -15,6 +14,10 @@ import Motifs from '../../shared/Motifs';
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '.membershipArticleCard': {
+    [theme.breakpoints.down('md')]: {
+      marginBottom: theme.spacing(3),
+      maxWidth: '100%',
+    },
     backgroundColor: lighten(theme.palette.tfaa.resources, 0.9),
     borderColor: lighten(theme.palette.tfaa.resources, 0.9),
     borderRadius: 20,
@@ -28,6 +31,9 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.memberInfoListDetails': {
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+    },
     columnGap: theme.spacing(5),
     display: 'flex',
     justifyContent: 'space-between',
@@ -35,7 +41,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   [theme.breakpoints.down('mobile')]: {
-    padding: theme.spacing(18, 6),
+    padding: theme.spacing(18, 6, 8),
   },
 
   display: 'flex',
