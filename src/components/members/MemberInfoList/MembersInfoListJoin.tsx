@@ -20,6 +20,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
       fontWeight: 600,
     },
     '.joinListCardContent': {
+      '& a': {
+        borderBottom: 'none',
+      },
       [theme.breakpoints.down('mobile')]: {
         maxWidth: '100%',
       },
@@ -103,6 +106,7 @@ const MembersInfoListJoin: React.FC = () => {
             fontWeight={600}
             rightArrow
             size="large"
+            to="/members/register"
             width={224}
           >
             Begin Membership
