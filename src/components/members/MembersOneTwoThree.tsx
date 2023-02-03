@@ -20,8 +20,8 @@ const StyledRoot = styled.div(({ theme }) => ({
   li: {
     '&::before': {
       [theme.breakpoints.down('lg')]: {
-        transform: `translateY(${theme.spacing(7)})`,
         fontSize: 104,
+        transform: `translateY(${theme.spacing(7)})`,
       },
       [theme.breakpoints.down('md')]: {
         fontSize: 96,
@@ -71,10 +71,10 @@ const StyledRoot = styled.div(({ theme }) => ({
       flexDirection: 'column',
       marginBottom: theme.spacing(6),
     },
+    counterReset: 'item',
     display: 'flex',
     justifyContent: 'space-between',
     listStyle: 'none',
-    counterReset: 'item',
     margin: 0
   },
 

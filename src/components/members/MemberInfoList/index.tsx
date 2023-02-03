@@ -1,16 +1,16 @@
 // External Dependencies
-// import { Link } from 'gatsby-theme-material-ui';
 import { lighten } from '@mui/material';
 import React from 'react';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { appNameShort } from '../../utils/app-constants';
-import MembershipByLaws from '../about/MembershipByLaws';
-import Motifs from '../shared/Motifs';
+import { appNameShort } from '../../../utils/app-constants';
+import EnhancedCard from '../../shared/EnhancedCard';
+import MembersInfoListJoin from './MembersInfoListJoin';
+import MembershipByLaws from '../../about/MembershipByLaws';
+import Motifs from '../../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -21,12 +21,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     maxWidth: '50%',
   },
 
-  '.MuiCardContent-root': {
-    '&:last-child': {
-      paddingBottom: theme.spacing(2),
-    },
-  },
-
   '.memberInfoListTitle': {
     fontSize: 34,
     fontWeight: 900,
@@ -34,6 +28,7 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.memberInfoListDetails': {
+    columnGap: theme.spacing(5),
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
@@ -66,23 +61,13 @@ const MemberInfoList: React.FC = () => {
         </Typography>
 
         <div className="memberInfoListDetails">
-          <Card
-            className="membershipCard"
-            variant="outlined"
-          >
+          <EnhancedCard className="membershipCard">
             <CardContent>
               <MembershipByLaws showLinkToByLaws />
             </CardContent>
-          </Card>
+          </EnhancedCard>
 
-          <section>
-            <Typography
-              className="sectionTitle"
-              component="h3"
-            >
-              Join {appNameShort}
-            </Typography>
-          </section>
+          <MembersInfoListJoin />
         </div>
       </div>
     </StyledRoot>
