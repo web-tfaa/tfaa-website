@@ -1,13 +1,22 @@
 // External Dependencies
 import React from 'react';
-import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-// Internal Dependencies
-import { appName, appNameShort } from '../../utils/app-constants';
+// Local Typings
+type InfoBannerColor = 'membership' | 'resources';
+interface Props {
+  children: React.ReactNode | React.ReactNode[];
+  color: InfoBannerColor;
+}
+interface InfoBannerStyledRootProps {
+  $color: InfoBannerColor;
+}
 
 // Local Variables
-const StyledRoot = styled.section(({ theme }) => ({
+const StyledRoot = styled.section<InfoBannerStyledRootProps>(({
+  $color,
+  theme,
+}) => ({
   p: {
     [theme.breakpoints.down('lg')]: {
       fontSize: 28,
@@ -39,7 +48,7 @@ const StyledRoot = styled.section(({ theme }) => ({
     padding: theme.spacing(4),
   },
 
-  backgroundColor: theme.palette.tfaa.resources,
+  backgroundColor: theme.palette.tfaa[$color],
   display: 'flex',
   flexDirection: 'column',
   height: 360,
@@ -51,26 +60,15 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const ResourcesInfo: React.FC = () => {
+const InfoBanner: React.FC<Props> = ({
+  children,
+  color,
+}) => {
   return (
-    <StyledRoot>
-      <Typography paragraph>
-        {appNameShort} provides Fine Arts Administrators the resources
-        to advance high-quality education for all Texas students.
-      </Typography>
-
-      <Typography paragraph>
-        Welcome to {appNameShort} — {appName} resources. Here you will
-        find important and relevant information about managing Texas
-        Fine Arts programs.
-      </Typography>
-
-      <Typography paragraph>
-        If you have any questions about this site or need any help,
-        please feel free to contact us at any time.
-      </Typography>
+    <StyledRoot $color={color}>
+      {children}
     </StyledRoot>
   );
 };
 
-export default ResourcesInfo;
+export default InfoBanner;

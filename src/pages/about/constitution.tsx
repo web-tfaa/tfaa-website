@@ -1,6 +1,6 @@
 // External Dependencies
 import { Box } from '@mui/material';
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -8,7 +8,7 @@ import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
 import FuturaAnchor from '../../components/shared/FuturaAnchor';
 import Layout from '../../components/layout';
-import MembershipByLaws from './MembershipByLaws';
+import MembershipByLaws from '../../components/about/MembershipByLaws';
 
 // Local Typings
 interface Props {
@@ -42,7 +42,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const Constitution: FC<Props> = ({ location }) => (
+const Constitution: React.FC<Props> = ({ location }) => (
   <Layout
     location={location}
     pageTitle="Constitution and Bylaws"
@@ -115,31 +115,42 @@ const Constitution: FC<Props> = ({ location }) => (
         <section>
           <dl className="paddingMedium">
             <dt>Section 1 &mdash; Fall Retreat</dt>
+
             <dd className="paddingMedium">
               {`A fall retreat for the members shall be held annually. The specific date, time and
               location of the retreat will be designated by the President.`}
             </dd>
+
             <dt>Section 2 &mdash; Annual meeting</dt>
+
             <dd className="paddingMedium">
               {`Meeting(s) of the membership shall take place during the Texas Music Educators
               Association Conference in the designated conference city. The specific dates, times
               and locations of these meetings will be designated by the President.`}
             </dd>
+
             <dt>Section 3 &mdash; Special meetings</dt>
+
             <dd className="paddingMedium">
               {`Special meetings may be called by the President when it is deemed to be in the best
               interest of this Corporation.`}
             </dd>
+
             <dt>Section 4 &mdash; Notice of meetings</dt>
+
             <dd className="paddingMedium">
               {` Written notice of each meeting shall be sent to the membership via e-mail, and
               posted on the web site, not less than two weeks prior to the meeting.`}
             </dd>
+
             <dt>Section 5 &mdash; Quorum</dt>
+
             <dd className="paddingMedium">
               The members present at any properly noticed meeting shall constitute a quorum.
             </dd>
+
             <dt>Section 6 &mdash; Voting</dt>
+
             <dd className="paddingMedium">
               {`All issues to be voted on shall be duly moved and seconded prior to the call for a
               vote. Each vote shall be decided by a simple majority of those present at the
@@ -147,8 +158,11 @@ const Constitution: FC<Props> = ({ location }) => (
               except the election of officers. A written ballot may be taken on any issue at the
               discretion of the chair of the Board of Directors.`}
             </dd>
+
             <dt>Section 7 &mdash; Order of Business</dt>
+
             <dd className="paddingMedium">
+
               {`The order of business for board and general membership meetings shall be conducted
               according to Robert’s Rules of Order and follow the general outline below:`}
               <ol>
@@ -165,6 +179,7 @@ const Constitution: FC<Props> = ({ location }) => (
         </section>
 
         <CardHeadline>ARTICLE IV &mdash; BOARD OF DIRECTORS</CardHeadline>
+
         <section>
           <dl className="paddingMedium">
             <dt>Section 1 &mdash; Board Role, Size, Compensation</dt>
@@ -177,50 +192,64 @@ const Constitution: FC<Props> = ({ location }) => (
               receive no compensation other than reasonable expenses, except as noted in Article
               10 below.`}
             </dd>
+
             <dt>Section 2 &mdash; Terms</dt>
+
             <dd className="paddingMedium">
               {`All elected Directors shall serve a one-year term in each officer position in the
               following sequence: Secretary, Vice-President, President and Past President. Terms begin and end the day after the TMEA convention.`}
             </dd>
+
             <dt>Section 3 &mdash; Meetings</dt>
+
             <dd className="paddingMedium">
               {`The Board of Directors shall meet at least twice per year, at a time and place set
               by the President, in conjunction with the general membership meetings.`}
             </dd>
+
             <dt>Section 4 &mdash; Board Elections</dt>
+
             <dd className="paddingMedium">
               {`New Directors and current Directors shall be elected or re-elected by the voting
               members at the annual meeting. Directors will be elected by a simple majority of
               members present at the annual meeting on a written ballot. Unopposed candidates may
               be elected through a voice vote, by consensus of the members present.`}
             </dd>
+
             <dt>Section 5 &mdash; Election Procedures</dt>
+
             <dd className="paddingMedium">
               A Nominating Committee, chaired by the Vice-President, shall be responsible for
               presenting a slate of prospective Secretary candidates to the Board of Directors
               In addition, any member may nominate a candidate for Secretary
               to the slate of nominees from the floor.
             </dd>
+
             <dt>Section 6 &mdash; Officers and Duties</dt>
+
             <dd className="paddingMedium">
               {`There shall be four officers of the Board of Directors consisting of a President,
               Vice-President, Past President, and Secretary. Their duties are as follows:`}
             </dd>
+
             <dd className="paddingLarge">
               The <em className="strong">President</em> shall convene regularly scheduled
               Board of Directors meetings, shall preside or arrange for other Directors to preside
               at each meeting as chair in the following order: Vice-President, Past President,
               Secretary.
             </dd>
+
             <dd className="paddingLarge">
               The <em className="strong">Vice-President</em> will chair the Nominating
               Committee, the Recognitions Committee and any committees on special subjects as
               designated by the Board of Directors.
             </dd>
+
             <dd className="paddingLarge">
               The <em className="strong">Past President</em> will chair any committees on
               special subjects as designated by the Board of Directors.
             </dd>
+
             <dd className="paddingLarge">
               The <em className="strong">Secretary</em> shall be responsible for keeping
               records of Board of Directors and Membership actions, including overseeing the
@@ -228,7 +257,9 @@ const Constitution: FC<Props> = ({ location }) => (
               sending out meeting announcements, distributing copies of minutes and the agenda to
               each member, and assure that membership records are accurately maintained.
             </dd>
+
             <dt>Section 7 &mdash; Vacancies</dt>
+
             <dd className="paddingMedium">
               {`When a vacancy on the Board of Directors exists, the Director in the preceding
               position shall fill the vacant position, and the remaining Directors shall have the
@@ -236,36 +267,48 @@ const Constitution: FC<Props> = ({ location }) => (
               membership. Such appointments shall last only to the end of the resigning or removed
               Director’s regular term.`}
             </dd>
+
             <dt>Section 8 &mdash; Resignation and Termination</dt>
+
             <dd className="paddingMedium">
               {`Resignation as a member of the Board of Directors must be in writing and received by
               the President. A Director may be removed for other reasons by a two-third vote of
               the remaining Directors.`}
             </dd>
+
             <dt>Section 9 &mdash; Special Meetings</dt>
+
             <dd className="paddingMedium">
               {`Special meetings of the Board of Directors shall be called at the request of the
               President as deemed necessary to conduct the business of this Corporation.`}
             </dd>
+
             <dt>Section 10 &mdash; Executive Secretary</dt>
+
             <dd className="paddingMedium">
               {`An Executive Secretary shall be appointed annually by the Board of Directors. The current Executive Secretary may be re-appointed by the Board of Directors. If the position is vacant, a new Executive Secretary may be recommended to the Board of Directors by a committee appointed by the President. The Executive Secretary reports to the Finance Committee and serves as an ex-
 officio, non-voting member of the Board of Directors. The Executive Secretary’s duties include, but are not limited to, handling financial operations of this Corporation, including assisting in the preparation of the budget, helping develop fundraising plans, executing payment for all expenses authorized by the Board of Directors, and making financial information available to members; provide an annual financial report to the general membership; provide timely and efficient communication to the membership pertaining to organizational events, and to the Executive Board pertaining to required tasks and duties; attend all meetings of the Executive Board and general membership; generate membership lists for selected events; and other duties as required for the health and benefit of this Corporation. The Executive Secretary shall receive an annual Honorarium, set by the Executive Board paid by the end of each fiscal year. The amount of such Honorarium shall not exceed compensation that is commensurate with the duties that the Executive Secretary performs for the Board of Directors.`}
             </dd>
+
             <dt>Section 11 &mdash; Powers</dt>
+
             <dd className="paddingMedium">
               {`In addition to the powers expressly conferred by these Bylaws, the Board may
               exercise such powers and do such lawful things as are not prohibited by statute or
               by these Bylaws.`}
             </dd>
+
             <dt>Section 12 &mdash; Voting</dt>
+
             <dd className="paddingMedium">
               The presence at a meeting of not less than a majority of the Directors
               then serving shall constitute a quorum. Action by a majority of votin
               Directors where a quorum is present shall constitute th
               action of the Directors of this Corporation
             </dd>
+
             <dt>Section 13 &mdash; Participation by Telephone</dt>
+
             <dd className="paddingMedium">
               Directors may participate in and hold a meeting of the Board by
               means of conference telephone or similar communications equipment
@@ -276,7 +319,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               of objecting to the transaction of any business on the grounds that
               the meeting was not lawfully called or convened.
             </dd>
+
             <dt>Section 14 &mdash; Consent</dt>
+
             <dd className="paddingMedium">
               Any action required or permitted to be taken at a meeting of
               the Board may be taken without a meeting if a consent in
@@ -285,7 +330,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               electronically transmitted copy thereof, shall be
               placed in the minutes book of the Corporation.
             </dd>
+
             <dt>Section 15 &mdash; Indemnification</dt>
+
             <dd className="paddingMedium">
               To the fullest extent allowed by, and in accordance with, the
               terms and provisions of the Texas Business Organizations Code,
@@ -304,14 +351,18 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
         </section>
 
         <CardHeadline>ARTICLE V &mdash; COMMITTEES</CardHeadline>
+
         <section>
           <dl className="paddingMedium">
             <dt>Section 1 &mdash; Committee Formation</dt>
+
             <dd className="paddingMedium">
               {`The Board may create committees as needed, such as fundraising, nominating, data
               collection, etc. The President appoints all committee chairs.`}
             </dd>
+
             <dt>Section 2 &mdash; Finance Committee</dt>
+
             <dd className="paddingMedium">
               The Finance Committee shall be appointed by the President and
               consist of two Directors and three Past Presidents. The Finance
@@ -329,7 +380,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               information and shall be made available to the
               membership, the Directors, and the public.
             </dd>
+
             <dt>Section 3 &mdash; Nominating Committee</dt>
+
             <dd className="paddingMedium">
               The Vice-President will chair the nominating committee and
               will invite active members to serve on this committee as
@@ -343,7 +396,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
               should a written ballot be taken on the election of
               the new board member.
             </dd>
+
             <dt>Section 4 &mdash; Recognitions Committee</dt>
+
             <dd className="paddingMedium">
               The Vice-President will chair the recognitions committee and
               invite no less than 2 active members to serve on this
@@ -361,9 +416,11 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
         </section>
 
         <CardHeadline>ARTICLE VI &mdash; AMENDMENTS</CardHeadline>
+
         <section>
           <dl className="paddingMedium">
             <dt>Section 1 &mdash; Amendments</dt>
+
             <dd className="paddingMedium">
               These Bylaws may be amended, when necessary, by a two-thirds
               majority of the membership in good standing who are present
@@ -375,9 +432,11 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
         </section>
 
         <CardHeadline>ARTICLE VII &mdash; STANDING RULES</CardHeadline>
+
         <section>
           <dl className="paddingMedium">
             <dt>Section 1 &mdash; Memorials</dt>
+
             <dd className="paddingMedium">
               At the passing of a current or former TMAC member, this Corporation will
               make the donation of a sum not to exceed $500 per individual, to be
@@ -389,6 +448,7 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
         </section>
 
         <CardHeadline>ARTICLE VIII &mdash; FISCAL YEAR</CardHeadline>
+
         <section>
           <dl className="paddingMedium">
             <dd className="paddingMedium">
@@ -399,6 +459,7 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
         </section>
 
         <CardHeadline>ARTICLE IX &mdash; NONDISCRIMINATION</CardHeadline>
+
         <section>
           <dl className="paddingMedium">
             <dd className="paddingMedium">

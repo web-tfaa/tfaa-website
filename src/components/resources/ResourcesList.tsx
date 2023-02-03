@@ -1,6 +1,6 @@
 // External Dependencies
 import { Link } from 'gatsby-theme-material-ui';
-import React, { FC } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ import Motifs from '../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '.resourcessTitle': {
+  '.resourcesTitle': {
     fontSize: 34,
     fontWeight: 900,
     marginBottom: theme.spacing(4),
@@ -37,14 +37,14 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const ResourcesList: FC = () => {
+const ResourcesList: React.FC = () => {
   return (
     <StyledRoot>
       <Motifs small />
 
       <div>
         <Typography
-          className="resourcessTitle"
+          className="resourcesTitle"
           component="h2"
           variant="h4"
         >

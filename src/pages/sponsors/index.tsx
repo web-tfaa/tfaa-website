@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -25,7 +25,7 @@ const StyledRoot = styled.div({
 });
 
 // Component Definition
-const Sponsors: FC<Props> = ({ location }) => {
+const Sponsors: React.FC<Props> = ({ location }) => {
   return (
     <Layout
       location={location}
