@@ -16,7 +16,7 @@ interface Props extends ButtonProps {
   to?: string;
   width?: number;
 }
-type CtaColor = 'about' | 'resources' | 'signIn';
+type CtaColor = 'about' | 'events' | 'resources' | 'signIn';
 interface StyledButtonProps {
   $colorVariant: CtaColor;
   $fontWeight?: number;

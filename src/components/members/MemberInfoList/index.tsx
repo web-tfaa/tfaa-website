@@ -14,7 +14,7 @@ import Motifs from '../../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '.MuiCard-root': {
+  '.membershipArticleCard': {
     backgroundColor: lighten(theme.palette.tfaa.resources, 0.9),
     borderColor: lighten(theme.palette.tfaa.resources, 0.9),
     borderRadius: 20,
@@ -61,7 +61,7 @@ const MemberInfoList: React.FC = () => {
         </Typography>
 
         <div className="memberInfoListDetails">
-          <EnhancedCard className="membershipCard">
+          <EnhancedCard className="membershipArticleCard">
             <CardContent>
               <MembershipByLaws showLinkToByLaws />
             </CardContent>
