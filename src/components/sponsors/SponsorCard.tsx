@@ -345,7 +345,7 @@ const SponsorCard: FC<Props> = ({
         <section className="sponsorInfo">
           <div className="sponsorList">
             {sponsorData?.map((sponsor) => (
-              <div key={sponsor.userId}>
+              <div key={`${sponsor.SponsorOrganization}-${sponsor.userId}`}>
                 <Link to={sponsor.OrganizationWebsiteAddress}>
                   {sponsor.SponsorOrganization}
                 </Link>
@@ -431,6 +431,7 @@ const SponsorCard: FC<Props> = ({
           {!isClassChampionCard && (
             <Typography
               className="sponsorLevelExemptions"
+              component="div"
             >
               {getSponsorLevelExemptions()}
             </Typography>
