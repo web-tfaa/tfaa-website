@@ -34,12 +34,12 @@ const StyledRoot = styled.div(({ theme }) => ({
 
 // Component Definition
 const SignUp: FC<Props> = ({ location }) => (
-  <Layout location={location}>
+  <Layout
+    location={location}
+    pageTitle="Sign Up"
+  >
     <StyledRoot>
       <Container className="sign-up">
-        <Helmet>
-          <title>TMAC | Sign Up</title>
-        </Helmet>
         <h2 className="signup-h2">Sign Up</h2>
 
         <FormHr />
