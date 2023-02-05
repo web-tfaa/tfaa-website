@@ -57,8 +57,6 @@ const SponsorsList: React.FC = () => {
     sponsorData,
   } = useGetSponsorData({ useTestData });
 
-  console.log('sponsorData', sponsorData);
-
   const classChampionSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Class Champion');
   const goldMedalSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Gold Medal');
   const silverMedalSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Silver Medal');

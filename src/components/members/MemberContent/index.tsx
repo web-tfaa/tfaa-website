@@ -1,10 +1,10 @@
 // External Dependencies
 import React from 'react';
-import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
 import { TfaaAuthUser } from '../../layout';
 import MemberContentBanner from './MemberContentBanner';
+import WelcomeBanner from './WelcomeBanner';
 
 // Local Typings
 interface Props {
@@ -17,9 +17,7 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
     <>
       <MemberContentBanner />
 
-      <Typography variant="h2">
-        Member Dashboard
-      </Typography>
+      <WelcomeBanner authUser={authUser} />
     </>
   );
 };
