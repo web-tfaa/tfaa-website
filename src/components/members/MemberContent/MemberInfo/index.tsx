@@ -16,14 +16,6 @@ interface Props {
 
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
-  // '.welcomeMember': {
-  //   [theme.breakpoints.down('mobile')]: {
-  //     fontSize: 20,
-  //   },
-  //   fontSize: 30,
-  //   fontWeight: 600,
-  // },
-
   [theme.breakpoints.down('md')]: {
     padding: theme.spacing(6, 8),
   },
@@ -31,12 +23,12 @@ const StyledRoot = styled.div(({ theme }) => ({
     padding: theme.spacing(4, 5),
   },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3, 4),
+    padding: theme.spacing(3),
+  },
+  [theme.breakpoints.down('xs')]: {
+    padding: theme.spacing(2),
   },
 
-  // alignItems: 'center',
-  // backgroundColor: theme.palette.tfaa.membership,
-  // color: theme.palette.common.white,
   display: 'flex',
   justifyContent: 'center',
   padding: theme.spacing(8, 18),
