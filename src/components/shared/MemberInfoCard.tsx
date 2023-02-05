@@ -1,5 +1,5 @@
 // External Dependencies
-import { alpha } from '@mui/material';
+import { alpha, lighten } from '@mui/material';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';;
@@ -13,12 +13,14 @@ interface Props {
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   '.memberInfoCardTitle': {
-
+    fontSize: 32,
+    fontWeight: 700,
   },
 
-  backgroundColor: alpha(theme.palette.tfaa.resources, 0.9),
-  borderColor: alpha(theme.palette.tfaa.resources, 0.9),
-  marginBottom: 0,
+  backgroundColor: alpha(theme.palette.tfaa.resources, 0.1),
+  border: `1px solid ${lighten(theme.palette.tfaa.resources, 0.7)}`,
+  borderRadius: 19,
+  padding: theme.spacing(3),
   width: '100%',
 }));
 

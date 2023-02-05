@@ -20,7 +20,7 @@ export interface TfaaMemberData {
   Email: string;
   FirstName: string;
   LastName: string;
-  MemberType: 'active' | 'retired';
+  MemberType: 'Active' | 'Retired';
   NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
   PaymentOption: string;
@@ -47,7 +47,7 @@ const memberTestData: TfaaMemberData[] = [
     Email: 'breff.jadford@risd.org',
     FirstName: 'Breff',
     LastName: 'Jadford',
-    MemberType: 'active',
+    MemberType: 'Active',
     NewToTMAC: 'No',
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
@@ -71,7 +71,7 @@ const memberTestData: TfaaMemberData[] = [
     Email: 'DFA@planoisd.org',
     FirstName: 'Plano',
     LastName: 'Administrator',
-    MemberType: 'active',
+    MemberType: 'Active',
     NewToTMAC: 'No',
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
@@ -95,7 +95,7 @@ const memberTestData: TfaaMemberData[] = [
     Email: 'DFA@dallasisd.org',
     FirstName: 'Head of',
     LastName: 'Fine Arts',
-    MemberType: 'active',
+    MemberType: 'Active',
     NewToTMAC: 'No',
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
@@ -119,7 +119,7 @@ const memberTestData: TfaaMemberData[] = [
     Email: 'DFA@dallasisd.org',
     FirstName: 'Director of ',
     LastName: 'Fine Arts Education',
-    MemberType: 'active',
+    MemberType: 'Active',
     NewToTMAC: 'No',
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',

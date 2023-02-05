@@ -19,7 +19,7 @@ import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import MemberActions from './MemberActions';
 import MemberFileShareCard from './MemberFileShareCard';
 import MemberInfo from './member-info';
-import MemberStatus from './MemberStatus';
+import MemberStatus from '../../components/members/MemberContent/MemberInfo/MemberStatus';
 import RegistrationTasks from './RegistrationTasks';
 
 // Sidebar Data

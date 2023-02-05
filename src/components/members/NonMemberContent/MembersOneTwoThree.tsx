@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { appNameShort } from '../../utils/app-constants';
+import { appNameShort } from '../../../utils/app-constants';
 
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({

@@ -9,6 +9,7 @@ import { TfaaMemberData, useGetAllMembers } from '../../../utils/hooks/useGetAll
 import { getFullName } from '../../../utils/getFullName';
 import MemberContentBanner from './MemberContentBanner';
 import WelcomeBanner from './WelcomeBanner';
+import MemberInfo from './MemberInfo';
 
 // Local Typings
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
 }
 
 // Flip this to test with fake Member data in local development
-const useTestData = true;
+const useTestData = false;
 
 // Component Definition
 const MemberContent: React.FC<Props> = ({ authUser }) => {
@@ -60,6 +61,11 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
       <WelcomeBanner
         authUser={authUser}
         fullName={getFullName(currentMemberData)}
+        isAdmin={isAdmin}
+      />
+
+      <MemberInfo
+        currentMemberData={currentMemberData}
         isAdmin={isAdmin}
       />
     </>

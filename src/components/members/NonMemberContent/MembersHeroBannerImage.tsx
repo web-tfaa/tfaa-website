@@ -3,8 +3,8 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
-import HeroBannerImage from '../shared/HeroBannerImage';
-import { appNameShort } from '../../utils/app-constants';
+import HeroBannerImage from '../../shared/HeroBannerImage';
+import { appNameShort } from '../../../utils/app-constants';
 
 // Component Definition
 const MembersHeroBannerImage: React.FC = () => {

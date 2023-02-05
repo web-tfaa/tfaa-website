@@ -2,11 +2,11 @@
 import React from 'react';
 
 // Internal Dependencies
-import MemberInfoList from '../MemberInfoList';
-import MembersBanner from '../MembersBanner';
-import MembersHeroBannerImage from '../MembersHeroBannerImage';
-import MembersInfoBanner from '../MembersInfoBanner';
-import MembersOneTwoThree from '../MembersOneTwoThree';
+import MemberInfoList from './MemberInfoList';
+import MembersBanner from './MembersBanner';
+import MembersHeroBannerImage from './MembersHeroBannerImage';
+import MembersInfoBanner from './MembersInfoBanner';
+import MembersOneTwoThree from './MembersOneTwoThree';
 import WhereWeHaveBeen from '../../about/WhereWeHaveBeen';
 
 // Component Definition

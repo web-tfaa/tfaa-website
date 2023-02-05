@@ -3,8 +3,8 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
-import { appName } from '../../utils/app-constants';
-import InfoBanner from '../shared/InfoBanner';
+import { appName } from '../../../utils/app-constants';
+import InfoBanner from '../../shared/InfoBanner';
 
 // Component Definition
 const MembersInfoBanner: React.FC = () => {

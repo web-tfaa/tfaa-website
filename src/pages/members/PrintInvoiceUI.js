@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 
 // Internal Dependencies
+import CtaButton from '../../components/shared/CtaButton';
 import Invoice from '../../components/register/invoice';
 import RegisterButton from '../../components/register/register-button';
 
@@ -47,9 +48,12 @@ const PrintInvoiceUI = ({ currentUser }) => {
         <ReactToPrint
           content={() => printInvoiceRef.current}
           trigger={() => (
-            <RegisterButton green>
+            <CtaButton
+              colorVariant="about"
+              fontWeight={600}
+            >
               Print Invoice
-            </RegisterButton>
+            </CtaButton>
           )}
         />
       </div>

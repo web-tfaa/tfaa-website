@@ -1,56 +1,40 @@
 // External Dependencies
+import { lighten } from '@mui/material';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
+import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import {
   doUpdateEntry,
   FIRESTORE_MEMBER_COLLECTION,
-} from '../../firebase/db';
-import { currentDate } from '../../utils/dateHelpers';
+} from '../../../../firebase/db';
+import { currentDate } from '../../../../utils/dateHelpers';
 import {
   currentSchoolYearEnding,
   currentSchoolYearLong,
-} from '../../utils/helpers';
-import { options } from '../../utils/typography';
-import Card from '../../components/shared/cards/card';
-import CardSubtitle from '../../components/shared/CardSubtitle';
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import PaypalButtonWrapper from '../../components/register/paypal/paypal-button-wrapper';
-import PrintInvoiceUI from './PrintInvoiceUI';
-import presets from '../../utils/presets';
+} from '../../../../utils/helpers';
+import EnhancedAlert from '../../../shared/EnhancedAlert';
+import MemberInfoCard from '../../../shared/MemberInfoCard';
+import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
+import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
+import presets from '../../../../utils/presets';
+
+// Local Typings
+interface Props {
+  currentMemberData: TfaaMemberData | null;
+}
 
 // Local Variables
-const propTypes = {
-  currentMemberData: PropTypes.shape({
-    Address1: PropTypes.string,
-    Address2: PropTypes.string,
-    CellPhone: PropTypes.string,
-    City: PropTypes.string,
-    District: PropTypes.string,
-    FirstName: PropTypes.string,
-    LastName: PropTypes.string,
-    MemberType: PropTypes.string,
-    OfficePhone: PropTypes.string,
-    State: PropTypes.string,
-    Title: PropTypes.string,
-    ZipCode: PropTypes.string,
-  }),
-  isRegisteredForCurrentYear: PropTypes.bool.isRequired,
-};
-
-const defaultProps = {
-  currentMemberData: null,
-};
-
-const StyledRoot = styled(Card)(({ theme }) => ({
+const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
   '.balanceText': {
     marginTop: theme.spacing(3),
     display: 'flex',
@@ -89,6 +73,10 @@ const StyledRoot = styled(Card)(({ theme }) => ({
     fontSize: '1rem',
     fontWeight: 500,
   },
+  '.memberStatusDivider': {
+    backgroundColor: lighten(theme.palette.tfaa.resources, 0.7),
+    marginBottom: theme.spacing(2),
+  },
   '.paymentActionContainer': {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -110,23 +98,22 @@ const StyledStrong = styled.strong(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     fontSize: '1.1rem',
   },
-  fontSize: '1.2rem',
+  fontSize: '1.25rem',
   margin: theme.spacing(0, 1),
   whiteSpace: 'pre',
 }));
 
 // Component Definition
-const MemberStatus = ({
-  currentMemberData,
-  isRegisteredForCurrentYear,
-}) => {
+const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
+  const isRegisteredForCurrentYear = Boolean(currentMemberData);
+
   const isInvoiced = currentMemberData?.PaymentOption.toLowerCase() === 'invoiced';
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
   const amountToPay = currentMemberData?.MemberType === 'Active' ? 50.00 : 30.00;
 
-  const handleSuccessfulPayment = useCallback((payment) => {
+  const handleSuccessfulPayment = useCallback((payment: PaypalPayment) => {
     const updatedMemberData = {
       ...currentMemberData,
       AmountPaid: currentMemberData?.MemberType === 'Active' ? 50 : 30,
@@ -134,9 +121,9 @@ const MemberStatus = ({
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
       invoiceDate: currentDate,
-      invoiceId: currentMemberData.invoiceId,
-      receiptDate: currentMemberData.receiptId ? currentDate : '',
-      receiptId: currentMemberData.receiptId,
+      invoiceId: currentMemberData?.invoiceId ?? 0,
+      receiptDate: currentMemberData?.receiptId ? currentDate : '',
+      receiptId: currentMemberData?.receiptId ?? 0,
     };
 
     // Update the member's payment data in the Firestore database
@@ -156,9 +143,7 @@ const MemberStatus = ({
   }, [currentMemberData]);
 
   return (
-    <StyledRoot>
-      <CardSubtitle>Membership status</CardSubtitle>
-
+    <StyledMemberInfoCard cardTitle="Membership status">
       <List>
         <ListItem className="listItem">
           <ListItemText
@@ -232,12 +217,13 @@ const MemberStatus = ({
 
       {isRegisteredForCurrentYear && isInvoiced && (
         <>
+          <Divider className="memberStatusDivider" />
+
           <Typography
             sx={{
-              fontFamily: options.headerFontFamily.join(','),
               fontWeight: 600,
             }}
-            variant="subtitle"
+            variant="subtitle1"
           >
             Payment Options
           </Typography>
@@ -281,11 +267,8 @@ const MemberStatus = ({
           </List>
         </>
       )}
-    </StyledRoot>
+    </StyledMemberInfoCard>
   );
 };
-
-MemberStatus.propTypes = propTypes;
-MemberStatus.defaultProps = defaultProps;
 
 export default MemberStatus;
