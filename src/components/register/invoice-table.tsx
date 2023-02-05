@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { FC, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
   Paper,
   Table,
@@ -13,6 +13,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { currentSchoolYearLong } from '../../utils/helpers';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -72,7 +73,7 @@ const StyledTableContainer = styled(TableContainer)(({
 }));
 
 // Component Definition
-const InvoiceTable: FC<Props> = ({
+const InvoiceTable: React.FC<Props> = ({
   amount,
   form,
   isActive,
@@ -86,14 +87,14 @@ const InvoiceTable: FC<Props> = ({
 
   const sponsorInfo = useMemo(() => (
     <span>
-      TMAC {sponsorLevel} Sponsor donation amount{' '}
+      {appNameShort} {sponsorLevel} Sponsor donation amount{' '}
       <br />for <strong>{form.SponsorOrganization}</strong>
     </span>
   ), [form.SponsorOrganization, sponsorLevel]);
 
   const memberInfo = useMemo(() => (
     <span>
-      TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
+      {appNameShort} {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
       <br />for <strong>{form.FirstName} {form.LastName}</strong>
     </span>
   ), [form.FirstName, form.LastName, form.MemberType, isActive]);

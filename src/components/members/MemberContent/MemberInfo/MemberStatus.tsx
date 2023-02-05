@@ -27,6 +27,7 @@ import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import presets from '../../../../utils/presets';
+import { appNameShort } from '../../../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -76,6 +77,13 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
   '.memberStatusDivider': {
     backgroundColor: lighten(theme.palette.tfaa.resources, 0.7),
     marginBottom: theme.spacing(2),
+  },
+  '.paidInFullChip': {
+    borderColor: theme.palette.tfaa.resources,
+    borderWidth: 2,
+    color: theme.palette.tfaa.resources,
+    fontWeight: 700,
+    marginLeft: theme.spacing(1),
   },
   '.paymentActionContainer': {
     display: 'flex',
@@ -207,7 +215,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
           <>
             {' '}
             <Chip
-              color="success"
+              className="paidInFullChip"
               label="Paid in full"
               variant="outlined"
             />
@@ -236,7 +244,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
                   secondary: 'listItemSecondaryText',
                 }}
                 primary="Pay online with credit card"
-                secondary="TMAC uses PayPal to securely process online credit card payments."
+                secondary={`${appNameShort} uses PayPal to securely process online credit card payments.`}
               />
             </ListItem>
 
@@ -255,9 +263,10 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
                   secondary: 'listItemSecondaryText',
                 }}
                 primary="Send invoice with payment"
-                secondary="Mail invoice with payment
-                      to the TMAC Treasurer as indicated on your
-                      invoice."
+                secondary={
+                  `Mail invoice with payment
+                      to the ${appNameShort} Executive Secretary as indicated on your
+                      invoice.`}
               />
             </ListItem>
 

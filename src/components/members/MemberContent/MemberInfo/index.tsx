@@ -24,15 +24,21 @@ const StyledRoot = styled.div(({ theme }) => ({
   //   fontWeight: 600,
   // },
 
-  // [theme.breakpoints.down('mobile')]: {
-  //   height: '100%',
-  //   padding: theme.spacing(2.5, 8),
-  // },
+  [theme.breakpoints.down('md')]: {
+    padding: theme.spacing(6, 8),
+  },
+  [theme.breakpoints.down('mobile')]: {
+    padding: theme.spacing(4, 5),
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(3, 4),
+  },
 
   // alignItems: 'center',
   // backgroundColor: theme.palette.tfaa.membership,
   // color: theme.palette.common.white,
-  // display: 'flex',
+  display: 'flex',
+  justifyContent: 'center',
   padding: theme.spacing(8, 18),
   width: '100%',
 }));

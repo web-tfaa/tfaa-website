@@ -13,6 +13,9 @@ interface Props {
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   '.memberInfoCardTitle': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 24,
+    },
     fontSize: 32,
     fontWeight: 700,
   },
@@ -20,6 +23,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   backgroundColor: alpha(theme.palette.tfaa.resources, 0.1),
   border: `1px solid ${lighten(theme.palette.tfaa.resources, 0.7)}`,
   borderRadius: 19,
+  maxWidth: 900,
   padding: theme.spacing(3),
   width: '100%',
 }));
