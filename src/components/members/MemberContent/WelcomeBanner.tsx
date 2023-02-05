@@ -14,8 +14,16 @@ interface Props {
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   '.welcomeMember': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 20,
+    },
     fontSize: 30,
     fontWeight: 600,
+  },
+
+  [theme.breakpoints.down('mobile')]: {
+    height: '100%',
+    padding: theme.spacing(2.5, 8),
   },
 
   alignItems: 'center',
