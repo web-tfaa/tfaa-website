@@ -1,6 +1,5 @@
 // External Dependencies
-// import { Link } from 'gatsby-theme-material-ui';
-import React, { FC } from 'react';
+import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
@@ -9,7 +8,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
-import { useSponsorData } from '../../utils/hooks/useSponsorData';
+import { useGetSponsorData } from '../../utils/hooks/useGetSponsorData';
 import Motifs from '../shared/Motifs';
 import SponsorCard from './SponsorCard';
 
@@ -52,11 +51,11 @@ const StyledRoot = styled.section(({ theme }) => ({
 const useTestData = true;
 
 // Component Definition
-const SponsorsList: FC = () => {
+const SponsorsList: React.FC = () => {
   const {
     isLoading,
     sponsorData,
-  } = useSponsorData({ useTestData });
+  } = useGetSponsorData({ useTestData });
 
   console.log('sponsorData', sponsorData);
 

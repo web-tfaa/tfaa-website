@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { Sponsor } from '../../utils/hooks/useSponsorData';
+import { Sponsor } from '../../utils/hooks/useGetSponsorData';
 import ClassChampionIconSvg from './sponsor-icons/ClassChampionIconSvg';
 import GoldMedalIconSvg from './sponsor-icons/GoldMedalIconSvg';
 import SilverMedalIconSvg from './sponsor-icons/SilverMedalIconSvg';
@@ -320,7 +320,10 @@ const SponsorCard: FC<Props> = ({
   };
 
   return (
-    <StyledCard variant="outlined">
+    <StyledCard
+      key={sponsorLevel}
+      variant="outlined"
+    >
       <CardContent>
         {getSponsorIcon(sponsorLevel)}
 

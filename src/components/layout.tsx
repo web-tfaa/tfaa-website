@@ -95,8 +95,6 @@ const DefaultLayout: React.FC<Props> = ({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       firebase.auth.onAuthStateChanged((authUser: AuthUserFromFirebase) => {
-        console.log('DefaultLayout : useEffect : authUser', authUser);
-
         if (authUser) {
           setAuthUser(formatAuthUser(authUser));
         } else {
