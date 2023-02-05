@@ -1,10 +1,13 @@
 // https://github.com/taming-the-state-in-react/gatsby-firebase-authentication/blob/master/src/components/Session/withAuthentication.js
 
+// External Dependencies
 import React from 'react';
 
+// Internal Dependencies
 import AuthUserContext from './AuthUserContext';
 import { firebase } from '../../firebase';
 
+// Higher-Order Component Definition
 const withAuthentication = (Component) =>
   class WithAuthentication extends React.Component {
     constructor(props) {
@@ -30,6 +33,8 @@ const withAuthentication = (Component) =>
 
     render() {
       const { authUser } = this.state;
+
+      console.log('withAuthentication HOC : authUser', authUser);
 
       return (
         <AuthUserContext.Provider value={authUser}>

@@ -1,21 +1,20 @@
 // External Dependencies
 import Box from '@mui/material/Box';
 import React, {
-  FC, KeyboardEventHandler, useCallback, useMemo
+  KeyboardEventHandler, useCallback, useMemo
 } from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { auth } from '../../firebase';
-import AuthUserContext from '../session/AuthUserContext';
+import { useIsAuthenticated } from '../../utils/hooks/useIsAuthenticated';
 import MobileNavMenu from './MobileNavMenu';
 import NavItem from './NavItem';
 import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
-  isAuthenticated: boolean;
   pathname: string;
 }
 
@@ -94,7 +93,9 @@ const StyledRoot = styled.nav(({ theme }) => ({
 }));
 
 // Component Definition
-const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
+const TopNav: React.FC<Props> = ({ pathname }) => {
+  const isAuthenticated = useIsAuthenticated();
+
   const handleNavigateToSignInPage = () => navigate('/members/login');
 
   const handleSignInOrOut = useCallback((event: KeyboardEventHandler<HTMLButtonElement>) => {
@@ -190,15 +191,4 @@ const TopNav: FC<Props> = ({ isAuthenticated, pathname }) => {
   );
 };
 
-const TopNavWithContext = (props: any) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (
-      <TopNav
-        {...props}
-        isAuthenticated={!!authUser}
-      />
-    )}
-  </AuthUserContext.Consumer>
-);
-
-export default TopNavWithContext;
+export default TopNav;
