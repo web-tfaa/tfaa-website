@@ -44,9 +44,9 @@ const memberTestData: TfaaMemberData[] = [
     CellPhone: '2145551919',
     City: 'Garland',
     District: 'Richardson ISD',
-    Email: 'DFA@risd.org',
-    FirstName: 'Fine Arts',
-    LastName: 'Admin',
+    Email: 'breff.jadford@risd.org',
+    FirstName: 'Breff',
+    LastName: 'Jadford',
     MemberType: 'active',
     NewToTMAC: 'No',
     OfficePhone: '2145551919',
@@ -55,7 +55,7 @@ const memberTestData: TfaaMemberData[] = [
     State: 'TX',
     Title: 'Director of Fine Arts',
     ZipCode: 75081,
-    userId: '6NNV339SwqO2UEVxedPu2HGsTzL4',
+    userId: 'tSOu3c33c1Yl5y29HFoHejw88HD3',
     invoiceDate: '01/26/2023',
     invoiceId: '29',
     receiptDate: '',
@@ -165,13 +165,13 @@ export const useGetAllMembers = ({
 
   if (useTestData) {
     return {
+      allMembersData: memberTestData,
       isLoading: false,
-      memberData: memberTestData,
     };
   }
 
   return {
+    allMembersData: memberData,
     isLoading,
-    memberData,
   };
 };
