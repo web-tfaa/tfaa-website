@@ -35,6 +35,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   height: 72,
   padding: theme.spacing(0, 18),
   width: '100%',
+  zIndex: 1,
 }));
 
 // Component Definition
