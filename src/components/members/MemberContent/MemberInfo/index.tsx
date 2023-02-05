@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import Motifs from '../../../shared/Motifs';
 import MemberContactInfo from './MemberContactInfo';
+import MemberRegistrationTasks from './MemberRegistrationTasks';
 import MemberStatus from './MemberStatus';
 
 // Local Typings
@@ -62,6 +63,8 @@ const MemberInfo: React.FC<Props> = ({
           currentMemberData={currentMemberData}
         />
       )}
+
+      <MemberRegistrationTasks currentMemberData={currentMemberData} />
     </StyledRoot>
   );
 };
