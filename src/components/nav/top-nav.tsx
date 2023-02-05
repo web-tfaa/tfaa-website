@@ -170,9 +170,11 @@ const TopNav: React.FC<Props> = ({ pathname }) => {
           <NavItem linkTo="/sponsors/">Sponsors</NavItem>
 
           <Box
+            component="li"
             display="flex"
             alignItems="center"
             marginLeft={2}
+            marginTop={1.5}
           >
             {isAuthenticated ? (
               <CtaButton
