@@ -33,10 +33,10 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     textAlign: 'right',
   },
   '.listItemIcon': {
-    height: 20,
+    height: 24,
     marginLeft: theme.spacing(1),
-    transform: 'translateY(4px)',
-    width: 20,
+    transform: 'translateY(6px)',
+    width: 24,
   },
   '.hidden': {
     display: 'none',
@@ -81,15 +81,13 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
   const successIconElement = useMemo(() => (
     <CheckCircleIcon
       className="listItemIcon"
-      fontSize="small"
-      htmlColor={theme.palette.success.main}
+      htmlColor={theme.palette.tfaa.resources}
     />
   ), []);
 
   const warningIconElement = useMemo(() => (
     <ErrorIcon
       className="listItemIcon"
-      fontSize="small"
       htmlColor={theme.palette.warning.light}
     />
     ), []);
