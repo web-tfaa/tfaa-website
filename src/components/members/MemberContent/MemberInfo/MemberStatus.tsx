@@ -200,6 +200,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
 
       <Typography
         className="contentText balanceText"
+        component="div"
         paragraph
         variant="body2"
       >
