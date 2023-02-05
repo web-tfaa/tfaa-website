@@ -89,7 +89,7 @@ const StyledRoot = styled.nav(({ theme }) => ({
   height: '100%',
   paddingTop: theme.spacing(3),
   width: '100%',
-  zIndex: 2,
+  zIndex: 1000,
 }));
 
 // Component Definition
