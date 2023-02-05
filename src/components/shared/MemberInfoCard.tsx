@@ -20,7 +20,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     fontWeight: 700,
   },
 
-  backgroundColor: alpha(theme.palette.tfaa.resources, 0.1),
+  backgroundColor: alpha(theme.palette.tfaa.resources, 0.09),
   border: `1px solid ${lighten(theme.palette.tfaa.resources, 0.7)}`,
   borderRadius: 19,
   maxWidth: 900,
