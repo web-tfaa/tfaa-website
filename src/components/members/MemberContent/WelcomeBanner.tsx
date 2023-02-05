@@ -10,6 +10,7 @@ import { TfaaAuthUser } from '../../layout';
 interface Props {
   authUser: TfaaAuthUser | null;
   fullName: string;
+  isAdmin: boolean;
 }
 
 // Local Variables
@@ -40,13 +41,14 @@ const StyledRoot = styled.div(({ theme }) => ({
 const WelcomeBanner: React.FC<Props> = ({
   authUser,
   fullName,
+  isAdmin,
 }) => {
   const name = fullName || authUser?.email;
 
   return (
     <StyledRoot>
       <Typography className="welcomeMember">
-        Welcome, {name}
+        Welcome, {name}{isAdmin && ' (Admin)'}
       </Typography>
     </StyledRoot>
   );

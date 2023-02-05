@@ -3,6 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import React, { useEffect, useState } from 'react';
 
 // Internal Dependencies
+import { ADMIN_USER_EMAIL_LIST } from '../../../utils/member-constants';
 import { TfaaAuthUser } from '../../layout';
 import { TfaaMemberData, useGetAllMembers } from '../../../utils/hooks/useGetAllMembers';
 import { getFullName } from '../../../utils/getFullName';
@@ -46,11 +47,11 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
     return <CircularProgress />;
   }
 
-  console.log('MemberContent : allMembersData', authUser, allMembersData);
-
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
   console.log('isRegisteredForCurrentYear', isRegisteredForCurrentYear);
+
+  const isAdmin = Boolean(authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email));
 
   return (
     <>
@@ -59,6 +60,7 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
       <WelcomeBanner
         authUser={authUser}
         fullName={getFullName(currentMemberData)}
+        isAdmin={isAdmin}
       />
     </>
   );
