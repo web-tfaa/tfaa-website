@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 // Internal Dependencies
 import { doGetUsers } from '../../firebase/db';
@@ -140,38 +140,66 @@ export const useGetAllMembers = ({
   useTestData = false,
 }: UseSponsorDataQueryArguments) => {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [shouldRefetchUserList, setShouldRefetchUserList] = React.useState(false);
   const [memberData, setMemberData] = React.useState<TfaaMemberData[] | null>(null);
   const previousMemberData = usePrevious(memberData);
 
-  const handleUpdateMemberData = (newMemberData: TfaaMemberData[] | null) => {
+  // console.log('isLoading', isLoading);
+  // console.log('shouldRefetchUserList', shouldRefetchUserList);
+  // console.log('previousMemberData', Boolean(previousMemberData));
+  // console.log('memberData', Boolean(memberData));
+
+  const handleUpdateMemberData = useCallback((newMemberData: TfaaMemberData[] | null) => {
     setMemberData(newMemberData);
-  };
+    setIsLoading(false);
+  }, [setIsLoading, setMemberData]);
+
+  const handleUpdateShouldRefetchUserList = useCallback((newShouldRefetchUserList: boolean) => {
+    setShouldRefetchUserList(newShouldRefetchUserList);
+  }, [setShouldRefetchUserList]);
 
   // Fetch member data when component mounts
   useEffect(() => {
-    if (!useTestData) {
+    if (!useTestData || shouldRefetchUserList) {
       const emptyMemberList: TfaaMemberData[] = [];
 
       setIsLoading(true);
       doGetUsers('registration', emptyMemberList, handleUpdateMemberData);
+
+      if (shouldRefetchUserList) {
+        handleUpdateShouldRefetchUserList(false);
+        setIsLoading(false);
+      }
     }
-  }, [useTestData]);
+    // We do not want to re-run this effect when other values change
+  }, [
+    useTestData,
+  ]);
 
   useEffect(() => {
-    if (!useTestData && !previousMemberData && memberData) {
+    if (!useTestData && !previousMemberData && memberData && !shouldRefetchUserList) {
+      handleUpdateShouldRefetchUserList(false);
       setIsLoading(false);
     }
-  }, [previousMemberData, memberData, useTestData]);
+  }, [
+    memberData,
+    previousMemberData,
+    setIsLoading,
+    shouldRefetchUserList,
+    useTestData,
+  ]);
 
   if (useTestData) {
     return {
       allMembersData: memberTestData,
+      handleUpdateShouldRefetchUserList: null,
       isLoading: false,
     };
   }
 
   return {
     allMembersData: memberData,
+    handleUpdateShouldRefetchUserList: handleUpdateShouldRefetchUserList,
     isLoading,
   };
 };

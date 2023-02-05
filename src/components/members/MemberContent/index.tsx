@@ -28,6 +28,7 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
 
   const {
     allMembersData,
+    handleUpdateShouldRefetchUserList,
     isLoading,
   } = useGetAllMembers({ useTestData });
 
@@ -37,8 +38,11 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
         // We used to use authUser.uid as the unique key in the Firestore
         // Now we use authUser.email
         // We have to search for both for backwards compatibility
-        (user) => user.userId === authUser.uid || user.userId === authUser.email,
-      );
+        (user) => {
+          console.log('user', user);
+
+          return user.userId === authUser.uid || user.userId === authUser.email;
+        });
 
       setCurrentMemberData(currentMember ?? null);
     }
@@ -47,10 +51,6 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
   if (isLoading) {
     return <CircularProgress />;
   }
-
-  const isRegisteredForCurrentYear = Boolean(currentMemberData);
-
-  console.log('isRegisteredForCurrentYear', isRegisteredForCurrentYear);
 
   const isAdmin = Boolean(authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email));
 
@@ -65,8 +65,10 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
       />
 
       <MemberInfo
+        authUserEmail={authUser?.email}
         currentMemberData={currentMemberData}
         isAdmin={isAdmin}
+        onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}
       />
     </>
   );

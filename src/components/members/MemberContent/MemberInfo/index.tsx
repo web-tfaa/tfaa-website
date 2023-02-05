@@ -1,19 +1,21 @@
 // External Dependencies
-import Box from '@mui/material/Box';
 import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import Motifs from '../../../shared/Motifs';
+import MemberActions from './MemberActions';
 import MemberContactInfo from './MemberContactInfo';
 import MemberRegistrationTasks from './MemberRegistrationTasks';
 import MemberStatus from './MemberStatus';
 
 // Local Typings
 interface Props {
+  authUserEmail: string | undefined;
   currentMemberData: TfaaMemberData | null;
   isAdmin: boolean;
+  onUpdateShouldRefetchUserList: ((shouldRefetchUserList: boolean) => void) | null;
 }
 
 // Local Variables
@@ -39,6 +41,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   padding: theme.spacing(8, 18),
+  position: 'relative',
   width: '100%',
 }));
 
@@ -50,7 +53,9 @@ const StyledRoot = styled.div(({ theme }) => ({
 
 // Component Definition
 const MemberInfo: React.FC<Props> = ({
+  authUserEmail,
   currentMemberData,
+  onUpdateShouldRefetchUserList,
 }) => {
   return (
     <StyledRoot>
@@ -65,6 +70,11 @@ const MemberInfo: React.FC<Props> = ({
       )}
 
       <MemberRegistrationTasks currentMemberData={currentMemberData} />
+
+      <MemberActions
+        authUserEmail={authUserEmail}
+        onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
+      />
     </StyledRoot>
   );
 };
