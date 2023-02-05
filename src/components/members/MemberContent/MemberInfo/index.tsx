@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // Internal Dependencies
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import Motifs from '../../../shared/Motifs';
+import MemberContactInfo from './MemberContactInfo';
 import MemberStatus from './MemberStatus';
 
 // Local Typings
@@ -29,8 +30,13 @@ const StyledRoot = styled.div(({ theme }) => ({
     padding: theme.spacing(2),
   },
 
+  '& > div:not(:first-child), & > div:not(:last-child)': {
+    marginBottom: theme.spacing(4),
+  },
+
+  alignItems: 'center',
   display: 'flex',
-  justifyContent: 'center',
+  flexDirection: 'column',
   padding: theme.spacing(8, 18),
   width: '100%',
 }));
@@ -49,9 +55,13 @@ const MemberInfo: React.FC<Props> = ({
     <StyledRoot>
       <Motifs small />
 
-      <Box marginBottom={3}>
-        <MemberStatus currentMemberData={currentMemberData} />
-      </Box>
+      <MemberStatus currentMemberData={currentMemberData} />
+
+      {currentMemberData && (
+        <MemberContactInfo
+          currentMemberData={currentMemberData}
+        />
+      )}
     </StyledRoot>
   );
 };

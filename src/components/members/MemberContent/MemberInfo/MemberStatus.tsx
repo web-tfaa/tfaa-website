@@ -26,7 +26,6 @@ import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
-import presets from '../../../../utils/presets';
 import { appNameShort } from '../../../../utils/app-constants';
 
 // Local Typings
@@ -62,15 +61,15 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
       fontSize: '0.9rem',
       maxWidth: '70%',
     },
-    [presets.Mobile]: {
-      maxWidth: '60%',
-    },
-    [presets.Phablet]: {
-      maxWidth: '70%',
-    },
-    [presets.Tablet]: {
-      maxWidth: '80%',
-    },
+    // [presets.Mobile]: {
+    //   maxWidth: '60%',
+    // },
+    // [presets.Phablet]: {
+    //   maxWidth: '70%',
+    // },
+    // [presets.Tablet]: {
+    //   maxWidth: '80%',
+    // },
     fontSize: '1rem',
     fontWeight: 500,
   },
