@@ -23,7 +23,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     width: '100%',
   },
   '.shieldIcon': {
-    color: theme.palette.tfaa.resources,
+    color: theme.palette.tfaa.events,
   },
   '.titleContainer': {
     display: 'flex',
