@@ -9,24 +9,14 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { Sponsor } from '../../../../utils/hooks/useGetSponsorData';;
 import SponsorTableHead from './sponsor-table-head';
 import SponsorTableRowActionElements from './SponsorTableRowActionElements';
 
 // Local Typings
 interface Props {
-  data: Sponsor[];
+  data: Sponsor[] | null;
   isAdmin: boolean;
-}
-export interface Sponsor {
-  userId: string;
-  SponsorOrganization: string;
-  SponsorLevel: string;
-  OrganizationContactName: string;
-  OrganizationWebsiteAddress: string;
-  Title: string;
-  Email: string;
-  LastName: string;
-  FirstName: string;
 }
 export type Order = 'asc' | 'desc';
 
@@ -118,7 +108,7 @@ const SponsorTable: FC<Props> = ({
   isAdmin,
 }) => {
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Sponsor>('LastName');
+  const [orderBy, setOrderBy] = useState<keyof Sponsor>('SponsorOrganization');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
 

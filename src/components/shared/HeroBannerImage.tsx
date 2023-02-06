@@ -85,6 +85,7 @@ const StyledRoot = styled.section<HomeBannerImageStyledRootProps>(({
       textAlign: 'center',
     },
     fontSize: 27,
+    fontWeight: 500,
     marginTop: theme.spacing(5),
     textAlign: $leftAlign ? 'left' : 'right',
   },
@@ -156,7 +157,8 @@ const HeroBannerImage: FC<Props> = ({
               colorVariant="about"
               fontWeight={400}
               rightArrow
-              to="/members/join"
+              size="large"
+              to="/members/register"
               width={224}
             >
               Begin Membership

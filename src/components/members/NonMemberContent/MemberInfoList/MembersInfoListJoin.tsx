@@ -8,9 +8,9 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { appNameShort } from '../../../utils/app-constants';
-import CtaButton from '../../shared/CtaButton';
-import EnhancedCardContent from '../../shared/EnhancedCardContent';
+import { appNameShort } from '../../../../utils/app-constants';
+import CtaButton from '../../../shared/CtaButton';
+import EnhancedCardContent from '../../../shared/EnhancedCardContent';
 
 // Local Variables
 const StyledCard = styled(Card)(({ theme }) => ({

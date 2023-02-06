@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 // Internal Dependencies
 import { doGetUsers } from '../../firebase/db';
@@ -132,11 +132,11 @@ const sponsorTestData: Sponsor[] = [
 ];
 
 // Hook Definition
-export const useSponsorData = ({
+export const useGetSponsorData = ({
   useTestData = false,
 }: UseSponsorDataQueryArguments) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [sponsorData, setSponsorData] = useState<Sponsor[] | null>(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [sponsorData, setSponsorData] = React.useState<Sponsor[] | null>(null);
   const previousSponsorData = usePrevious(sponsorData);
 
   const handleUpdateSponsorData = (newSponsorData: Sponsor[] | null) => {

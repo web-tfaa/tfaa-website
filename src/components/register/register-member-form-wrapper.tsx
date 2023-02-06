@@ -1,12 +1,15 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React, { useMemo } from 'react';
+import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
-} from '../../pages/members/register';
-import FormHr from '../shared/form-hr';
+} from './MemberRegisterContent';
+import { appNameShort } from '../../utils/app-constants';
+import FormDivider from '../shared/FormDivider';
 import RegisterForm from './register-member-form';
 
 // Local Typings
@@ -16,8 +19,16 @@ interface Props {
   onCompleteMemberStep: HandleCompleteMemberStepType;
 }
 
+// Local Variables
+const StyledRoot = styled.section(({ theme }) => ({
+  '.registerStep2Title': {
+    fontSize: 34,
+    fontWeight: 900,
+  },
+}));
+
 // Component Definition
-const MemberFormValuesWrapper: FC<Props> = ({
+const MemberFormValuesWrapper: React.FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
   onCompleteMemberStep,
@@ -27,19 +38,19 @@ const MemberFormValuesWrapper: FC<Props> = ({
   }
 
   return (
-    <section>
-      <h2>
-        2. Join TMAC
-      </h2>
+    <StyledRoot>
+      <Typography className="registerStep2Title">
+        2. Join {appNameShort}
+      </Typography>
 
-      <FormHr />
+      <FormDivider />
 
       <RegisterForm
         authenticatedUserId={authenticatedUserId}
         initialMemberFormValues={initialMemberFormValues}
         onCompleteMemberStep={onCompleteMemberStep}
       />
-    </section>
+    </StyledRoot>
   );
 };
 

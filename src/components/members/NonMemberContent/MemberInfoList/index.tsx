@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import EnhancedCard from '../../shared/EnhancedCard';
+import EnhancedCard from '../../../shared/EnhancedCard';
 import MembersInfoListJoin from './MembersInfoListJoin';
-import MembershipByLaws from '../../about/MembershipByLaws';
-import Motifs from '../../shared/Motifs';
+import MembershipByLaws from '../../../about/MembershipByLaws';
+import Motifs from '../../../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({

@@ -11,7 +11,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import Invoice from '../../../components/register/invoice';
+import Invoice from '../../../register/invoice';
 
 // Local Variables
 const propTypes = {

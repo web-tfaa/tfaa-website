@@ -17,6 +17,7 @@ const FooterFollowUsIconList: FC = () => {
 
       <div>
         <IconButton
+          aria-label="Facebook Link."
           href={facebookUrl}
           rel="noreferrer noopener"
           target="_blank"
@@ -27,6 +28,7 @@ const FooterFollowUsIconList: FC = () => {
         </IconButton>
 
         <IconButton
+          aria-label="Twitter Link."
           href={twitterUrl}
           rel="noreferrer noopener"
           target="_blank"

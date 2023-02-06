@@ -4,13 +4,13 @@ import { lighten } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../utils/app-constants';
 import Layout from '../components/layout';
-import FourOhFourBanner from '../components/fourOhFour/FourOhFourBanner';
+import DrumBanner from '../components/shared/DrumBanner';
 
 // Local Typings
 interface Props {
@@ -52,11 +52,11 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const FourOhFour: FC<Props> = ({ location }) => {
+const FourOhFour: React.FC<Props> = ({ location }) => {
   return (
     <Layout location={location} pageTitle="Not Found">
       <StyledRoot>
-        <FourOhFourBanner />
+        <DrumBanner drumBannerTitle="Page Not Found" />
 
         <section>
           <Typography

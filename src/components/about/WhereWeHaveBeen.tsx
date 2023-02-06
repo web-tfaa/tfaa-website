@@ -1,6 +1,6 @@
 // External Dependencies
 import Typography from '@mui/material/Typography';
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -22,6 +22,9 @@ const StyledRoot = styled.section<StyledRootProps>(({
   theme,
 }) => ({
   '.whereTitle': {
+    [theme.breakpoints.down('md')]: {
+      fontSize: 32,
+    },
     [theme.breakpoints.down('mobile')]: {
       fontSize: 24,
     },
@@ -31,6 +34,9 @@ const StyledRoot = styled.section<StyledRootProps>(({
   },
 
   '.whereDataContainer': {
+    [theme.breakpoints.down('lg')]: {
+      padding: theme.spacing(8, 5),
+    },
     [theme.breakpoints.down('md')]: {
       flexWrap: 'wrap',
       marginTop: theme.spacing(8),
@@ -54,7 +60,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
 }));
 
 // Component Definition
-const WhereWeHaveBeen: FC<Props> = ({ color }) => {
+const WhereWeHaveBeen: React.FC<Props> = ({ color }) => {
   return (
     <StyledRoot $color={color}>
       <Typography className="whereTitle">

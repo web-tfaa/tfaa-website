@@ -8,16 +8,23 @@ const StyledRoot = styled.section(({ theme }) => ({
   h1: {
     [theme.breakpoints.down('lg')]: {
       fontSize: 48,
+      marginLeft: theme.spacing(10),
     },
     [theme.breakpoints.down('md')]: {
       fontSize: 36,
+      marginLeft: theme.spacing(8),
+      maxWidth: '75%',
     },
     [theme.breakpoints.down('mobile')]: {
       fontSize: 32,
+      margin: theme.spacing(0, 4),
     },
     color: theme.palette.common.white,
     fontSize: 60,
     fontWeight: 900,
+    lineHeight: 1.1,
+    marginLeft: theme.spacing(12),
+    maxWidth: '64%',
     textAlign: 'left',
     zIndex: 2,
   },
@@ -29,37 +36,37 @@ const StyledRoot = styled.section(({ theme }) => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    opacity: 0.4,
+    opacity: 0.6,
     height: '100%',
     width: '100%',
   },
 
   [theme.breakpoints.down('mobile')]: {
-    background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675201705/drumset-closeup-stage-lighting-mobile.jpg") no-repeat',
+    background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675612405/kids-in-classroom-mobile.png") no-repeat',
     backgroundSize: 'cover',
     height: '100%',
     padding: theme.spacing(12, 8),
   },
 
   alignItems: 'center',
-  background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675201649/drumset-closeup-stage-lighting.jpg") no-repeat',
+  background: 'url("https://res.cloudinary.com/tmac/image/upload/v1675612209/kids-in-classroom.png") no-repeat',
   backgroundSize: 'cover',
   display: 'flex',
-  height: 420,
+  height: 400,
   position: 'relative',
   width: '100%',
   zIndex: 1,
 }));
 
 // Component Definition
-const FourOhFourBanner: FC = () => {
+const MemberContentBanner: FC = () => {
   return (
     <StyledRoot>
       <Typography component="h1">
-        Page Not Found
+        Member Dashboard
       </Typography>
     </StyledRoot>
   );
 };
 
-export default FourOhFourBanner;
+export default MemberContentBanner;

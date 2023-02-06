@@ -2,30 +2,22 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-// Internal Dependencies
-import presets from '../../../utils/presets';
-import { rhythm, options } from '../../../utils/typography';
-
 // Local Typings
 interface Props {
   children: React.ReactNode;
   className?: string;
-  hasSideBar?: boolean;
-}
-interface StyledRootProps {
-  $hasSideBar?: boolean;
 }
 
 // Local Variables
-const StyledRoot = styled.div<StyledRootProps>(({ $hasSideBar, theme }) => ({
+const StyledRoot = styled.div(({ theme }) => ({
   [theme.breakpoints.up('mobile')]: {
-    paddingBottom: rhythm(1.5),
+    paddingBottom: 83,
   },
 
   margin: '0 auto',
-  maxWidth: $hasSideBar ? rhythm(presets.maxWidthWithSidebar) : rhythm(presets.maxWidth),
-  padding: `${rhythm(1.5)} ${rhythm(options.blockMarginBottom)}`,
-  paddingBottom: rhythm(3.5),
+  maxWidth: 880,
+  padding: '36px 18px',
+  paddingBottom: 38,
   position: 'relative',
 }));
 
@@ -33,11 +25,9 @@ const StyledRoot = styled.div<StyledRootProps>(({ $hasSideBar, theme }) => ({
 const Container: FC<Props> = ({
   children,
   className,
-  hasSideBar = true,
   ...otherProps
 }) => (
   <StyledRoot
-    $hasSideBar={hasSideBar}
     className={className}
     {...otherProps}
   >

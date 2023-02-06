@@ -3,14 +3,15 @@ import { Helmet } from 'react-helmet';
 import styled, {
   ThemeProvider as StyledComponentsThemeProvider,
 } from 'styled-components';
-import React, { FC, ReactElement } from 'react';
-import clsx from 'clsx';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 // Internal Dependencies
+import { FirebaseAuthUser } from '../types/shared';
 import { appName, appNameShort } from '../utils/app-constants';
+import { firebase } from '../firebase';
+import AuthUserContext from '../components/session/AuthUserContext';
 import Footer from './footer';
 import TopNav from './nav/top-nav';
-import withAuthentication from './session/withAuthentication';
 import theme from '../gatsby-theme-material-ui-top-layout/theme';
 
 // Helpers
@@ -19,16 +20,16 @@ import presets from '../utils/presets';
 // Import global styles, including custom fonts
 import '../../styles/global.css';
 
-// Other fonts
-import 'typeface-spectral';
-import 'typeface-space-mono';
-
 // Local Typings
 interface Props {
   children: ReactElement;
-  isAuthenticated: boolean;
   location: Location;
   pageTitle?: string;
+}
+export type AuthUserFromFirebase = FirebaseAuthUser | null;
+export interface TfaaAuthUser {
+  email: string;
+  uid: string;
 }
 
 // Local Variables
@@ -70,14 +71,39 @@ const StyledRoot = styled.div(({ theme }) => ({
   width: '100vw',
 }));
 
+const formatAuthUser = (user: AuthUserFromFirebase): TfaaAuthUser | null => {
+  if (!user) {
+    return null;
+  }
+
+  return {
+    email: user.email ?? '',
+    uid: user.uid ?? '',
+  };
+};
+
 // Component Definition
-const DefaultLayout: FC<Props> = ({
+const DefaultLayout: React.FC<Props> = ({
   children,
   location: {
     pathname,
   },
   pageTitle,
 }) => {
+  const [authUser, setAuthUser] = useState<TfaaAuthUser | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      firebase.auth.onAuthStateChanged((authUser: AuthUserFromFirebase) => {
+        if (authUser) {
+          setAuthUser(formatAuthUser(authUser));
+        } else {
+          setAuthUser(null);
+        }
+      });
+    }
+  }, []);
+
   return (
     <StyledComponentsThemeProvider theme={theme}>
       <Helmet defaultTitle={appName}>
@@ -97,25 +123,26 @@ const DefaultLayout: FC<Props> = ({
         {pageTitle && <title>{appNameShort} | {pageTitle}</title>}
       </Helmet>
 
-      <StyledRoot>
-        <TopNav pathname={pathname} />
+      <AuthUserContext.Provider
+        value={{
+          currentAuthUser: authUser,
+          setCurrentAuthUser: setAuthUser,
+        }}
+      >
+        <StyledRoot>
+          <TopNav pathname={pathname} />
 
-        <div
-          className={
-            clsx(
-              'main-body',
-            )
-          }
-        >
-          <main className="main-content">
-            {children}
-          </main>
-        </div>
+          <div className="main-body">
+            <main className="main-content">
+              {children}
+            </main>
+          </div>
 
-        <Footer />
-      </StyledRoot>
+          <Footer />
+        </StyledRoot>
+      </AuthUserContext.Provider>
     </StyledComponentsThemeProvider>
   );
 };
 
-export default withAuthentication(DefaultLayout);
+export default DefaultLayout;

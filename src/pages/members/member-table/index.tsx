@@ -10,38 +10,16 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { TfaaMemberData } from '../../../utils/hooks/useGetAllMembers'
 import MemberTableHead from './member-table-head';
 import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Typings
 interface Props {
-  data: UserData[];
+  data: TfaaMemberData[];
   isAdmin: boolean;
 }
-export interface UserData {
-  Address1: string;
-  Address2: string;
-  AmountPaid: number;
-  CellPhone: string;
-  City: string;
-  District: string;
-  Email: string;
-  FirstName: string;
-  LastName: string;
-  MemberType: 'active' | 'retired';
-  NewToTMAC: string;
-  OfficePhone: string;
-  PaymentOption: string;
-  PaypalPaymentID: string;
-  State: string;
-  Title: string;
-  ZipCode: number;
-  userId: string;
-  invoiceDate: string;
-  invoiceId: string;
-  receiptDate: string;
-  receiptId: string;
-}
+
 export type Order = 'asc' | 'desc';
 
 // Local Variables
@@ -105,7 +83,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function getComparator<Key extends keyof UserData>(
+function getComparator<Key extends keyof TfaaMemberData>(
   order: Order,
   orderBy: Key,
 ): (
@@ -152,7 +130,7 @@ const MemberTable: FC<Props> = ({
 
   const handleRequestSort = (
     _event: React.MouseEvent<unknown>,
-    property: keyof UserData,
+    property: keyof TfaaMemberData,
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');

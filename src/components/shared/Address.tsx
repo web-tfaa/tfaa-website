@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Local Typings
@@ -7,10 +7,11 @@ interface Props {
   addressOne?: string | null;
   addressTwo?: string | null;
   city?: string | null;
+  className?: string;
   email?: string | null;
   // phoneNumber?: string | null;
   state?: string | null;
-  zipCode?: string | null;
+  zipCode?: string | number | null;
 }
 
 // Local Variables
@@ -21,7 +22,7 @@ const StyledAddress = styled.address({
 // TODO: If we add phone number here, add formatting for it
 
 // Component Definition
-const Address: FC<Props> = ({
+const Address: React.FC<Props> = ({
   addressOne,
   addressTwo,
   city = null,
@@ -29,8 +30,9 @@ const Address: FC<Props> = ({
   // phoneNumber,
   state = null,
   zipCode = null,
+  ...otherProps
 }) => (
-  <StyledAddress>
+  <StyledAddress {...otherProps}>
     {email && <div>{email}</div>}
     {addressOne && <div>{addressOne}</div>}
     {addressTwo && <div>{addressTwo}</div>}

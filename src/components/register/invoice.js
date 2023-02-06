@@ -11,6 +11,7 @@ import InvoiceTable from './invoice-table';
 import {
   currentSchoolYearLong,
 } from '../../utils/helpers';
+import { appName, appNameShort } from '../../utils/app-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -106,10 +107,10 @@ class Invoice extends Component {
       >
         <header>
           <img
-            alt="TMAC logo"
-            height="80px"
-            src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
-            style={{ position: 'absolute' }}
+            alt={`${appNameShort} logo`}
+            height="60px"
+            src="https://res.cloudinary.com/tmac/image/upload/v1670094162/tfaa-logo.png"
+            style={{ position: 'absolute', top: 40 }}
           />
           <Box
             component="h2"
@@ -122,7 +123,7 @@ class Invoice extends Component {
         <FormHr red />
 
         <Box sx={{ fontSize: 16, margin: '0 32px' }}>
-          <h3>Texas Music Administrators Conference</h3>
+          <h3>{appName}</h3>
 
           <Box
             marginBottom={1.5}
@@ -172,10 +173,11 @@ class Invoice extends Component {
               </Box>
 
               <div>
-                <strong>Texas Music Administrators Conference</strong>
+                <strong>{appName}</strong>
               </div>
 
               <div>c/o Jeff Turner</div>
+              <div>{appNameShort} Executive Secretary</div>
               <div>Allen ISD</div>
               <div>Fine Arts Dept.</div>
               <div>300 Rivercrest Blvd. </div>
@@ -204,11 +206,11 @@ class Invoice extends Component {
               <span>
                 Make all checks payable to:
                 <br />
-                <strong>Texas Music Administrators Conference (TMAC)</strong>
+                <strong>{appName} ({appNameShort})</strong>
               </span>
             ) : (
               <strong>
-                Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for the{' '}
+                Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} {appNameShort} for the{' '}
                 {currentSchoolYearLong} school year!
               </strong>
             )}
@@ -216,7 +218,7 @@ class Invoice extends Component {
         </div>
 
         <footer>
-          The Texas Music Administrators Conference is an organization supporting music educators,
+          The {appName} is an organization supporting music educators,
           music administrators, and Texas schools in the quest to deliver music and arts education
           to all students.
         </footer>
