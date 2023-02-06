@@ -3,7 +3,6 @@ import React from 'react';
 
 // Internal Dependencies
 import { auth } from './firebase';
-import { useGetAuthUser } from '../utils/hooks/useGetAuthUser';
 
 // Sign Up
 export const doCreateUserWithEmailAndPassword = (email, password) =>
@@ -24,11 +23,5 @@ export const doPasswordReset = (email) =>
 export const doPasswordUpdate = (password) =>
   auth.currentUser.updatePassword(password);
 
-export const doUpdateEmail = (newEmail) => {
-  const { setCurrentAuthUser } = useGetAuthUser();
-
-  return auth.currentUser.updateEmail(newEmail)
-    .then((res) => {
-      console.log('doUpdateEmail .. .res', res);
-    });;
-}
+export const doUpdateEmail = (newEmail) =>
+  auth.currentUser.updateEmail(newEmail);

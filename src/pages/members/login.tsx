@@ -11,7 +11,7 @@ import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import { useIsAuthenticated } from '../../utils/hooks/useIsAuthenticated';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
-import Motifs from '../../components/shared/motifs';
+import Motifs from '../../components/shared/Motifs';
 import DrumBanner from '../../components/shared/DrumBanner';
 
 // Local Typings

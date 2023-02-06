@@ -1,5 +1,4 @@
 // External Dependencies
-import Dialog from '@mui/material/Dialog';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
@@ -102,13 +101,11 @@ const MemberActions: React.FC<Props> = ({
   const handleSubmitChangeEmail = useCallback(() => {
     if (!newEmailError) {
       doUpdateEmail(newEmailValue)
-        .then((res) => {
-          console.log('update email response', res);
-
-          onUpdateShouldRefetchUserList?.(true);
-          setIsChangeEmailDialogOpen(false);
-          setNewEmailValue('');
-          setNewEmailError('');
+        .then(() => {
+          // It's easiest to refresh their page once they update the sign in email
+          if (typeof window !== 'undefined') {
+            window.location.reload();
+          }
         })
         .catch((err: any) => {
           let errorMessage;
