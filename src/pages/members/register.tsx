@@ -10,6 +10,11 @@ import styled from 'styled-components';
 import Layout from '../../components/layout';
 import MemberRegisterContent from '../../components/register/MemberRegisterContent';
 
+// Local Typings
+interface Props {
+  location: Location;
+}
+
 // Local Variables
 const StyledRoot = styled.div({
   display: 'flex',
@@ -20,7 +25,7 @@ const StyledRoot = styled.div({
 });
 
 // Component Definition
-const MembersRegister: React.FC = () => {
+const MembersRegister: React.FC<Props> = ({ location }) => {
   return (
     <Layout
       location={location}
