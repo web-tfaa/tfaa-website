@@ -10,7 +10,8 @@ import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { Order, Sponsor } from '.';
+import { Order } from '.';
+import { Sponsor } from '../../../../utils/hooks/useGetSponsorData';
 
 // Local Typings
 interface Props {

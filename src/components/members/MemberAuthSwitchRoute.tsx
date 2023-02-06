@@ -10,8 +10,6 @@ import NonMemberContent from './NonMemberContent';
 const MemberAuthSwitchRoute: React.FC = () => {
   const { currentAuthUser } = useGetAuthUser();
 
-  console.log('MemberAuthSwitchRoute: currentAuthUser', currentAuthUser);
-
   const isAuthenticated = Boolean(currentAuthUser);
 
   if (!isAuthenticated) {

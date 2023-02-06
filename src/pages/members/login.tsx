@@ -43,6 +43,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   flexDirection: 'column',
   flexWrap: 'wrap',
   justifyContent: 'space-around',
+  position: 'relative',
   width: '100vw',
 }));
 
@@ -50,8 +51,10 @@ const StyledRoot = styled.div(({ theme }) => ({
 const Login: React.FC<Props> = ({ location }) => {
   const isAuthenticated = useIsAuthenticated();
 
+  console.log('isAuthenticated', isAuthenticated);
+
   const handleRedirectToMembers = useCallback(() => {
-    navigate('/members/login');
+    navigate('/members');
   }, []);
 
   if (isAuthenticated) {
@@ -66,11 +69,11 @@ const Login: React.FC<Props> = ({ location }) => {
     >
       <ReCaptchaProvider>
         <StyledRoot>
+          <Motifs small />
 
           <DrumBanner drumBannerTitle="Member Log In" />
 
           <div className="loginContent">
-            <Motifs small />
 
             <Typography
               className="loginTitle"

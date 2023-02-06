@@ -3,11 +3,13 @@ import { alpha, lighten } from '@mui/material';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';;
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 // Local Typings
 interface Props {
   cardTitle: string;
   children: React.ReactNode | React.ReactNode[];
+  isAdmin?: boolean;
 }
 
 // Local Variables
@@ -18,6 +20,14 @@ const StyledRoot = styled.div(({ theme }) => ({
     },
     fontSize: 32,
     fontWeight: 700,
+    width: '100%',
+  },
+  '.shieldIcon': {
+    color: theme.palette.tfaa.resources,
+  },
+  '.titleContainer': {
+    display: 'flex',
+    justifyContent: 'space-around',
   },
 
   backgroundColor: alpha(theme.palette.tfaa.resources, 0.09),
@@ -32,16 +42,26 @@ const StyledRoot = styled.div(({ theme }) => ({
 const MemberInfoCard: React.FC<Props> = ({
   cardTitle,
   children,
+  isAdmin,
   ...otherProps
 }) => {
   return (
     <StyledRoot {...otherProps}>
-      <Typography
-        className="memberInfoCardTitle"
-        component="h2"
-      >
-        {cardTitle}
-      </Typography>
+      <div className="titleContainer">
+        <Typography
+          className="memberInfoCardTitle"
+          component="h2"
+        >
+          {cardTitle}
+        </Typography>
+
+        {isAdmin && (
+          <VerifiedUserIcon
+            className="shieldIcon"
+            fontSize="large"
+          />
+        )}
+      </div>
 
       {children}
     </StyledRoot>

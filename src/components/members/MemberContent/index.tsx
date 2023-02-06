@@ -66,7 +66,7 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
       />
 
       <MemberInfo
-        authUserEmail={currentAuthUser?.email}
+        authUserEmail={currentAuthUser?.email || currentMemberData?.Email}
         currentMemberData={currentMemberData}
         isAdmin={isAdmin}
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}

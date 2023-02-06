@@ -8,5 +8,5 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 export const useIsAuthenticated = () => {
   const { currentAuthUser } = React.useContext(AuthUserContext);
 
-  return useMemo(() => Boolean(currentAuthUser), [currentAuthUser]);
+  return useMemo(() => Boolean(currentAuthUser?.uid), [currentAuthUser?.uid]);
 }

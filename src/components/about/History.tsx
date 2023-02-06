@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
@@ -65,7 +65,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const History: FC = () => {
+const History: React.FC = () => {
   return (
     <StyledRoot>
       <Motifs small />

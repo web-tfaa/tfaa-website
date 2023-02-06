@@ -48,7 +48,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Flip this to test with fake Sponsor data in local development
-const useTestData = true;
+const useTestData = false;
 
 // Component Definition
 const SponsorsList: React.FC = () => {

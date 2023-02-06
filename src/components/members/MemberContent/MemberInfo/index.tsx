@@ -3,12 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import {
+  TMAC_WEB_ADMIN_EMAIL_LIST,
+  TMAC_WEB_EXECUTIVE_SECRETARY,
+} from '../../../../utils/member-constants';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import Motifs from '../../../shared/Motifs';
 import MemberActions from './MemberActions';
 import MemberContactInfo from './MemberContactInfo';
 import MemberRegistrationTasks from './MemberRegistrationTasks';
 import MemberStatus from './MemberStatus';
+import AdminActions from './AdminActions';
 
 // Local Typings
 interface Props {
@@ -39,6 +44,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 
   alignItems: 'center',
   display: 'flex',
+  overflow: 'hidden',
   flexDirection: 'column',
   padding: theme.spacing(14, 18),
   position: 'relative',
@@ -57,6 +63,12 @@ const MemberInfo: React.FC<Props> = ({
   currentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
+  const shouldSeeSponsorListLink = authUserEmail
+    && (TMAC_WEB_ADMIN_EMAIL_LIST.includes(authUserEmail)
+    || authUserEmail === TMAC_WEB_EXECUTIVE_SECRETARY);
+
+  console.log('shouldSeeSponsorListLink', shouldSeeSponsorListLink);
+
   return (
     <StyledRoot>
       <Motifs small />
@@ -75,6 +87,8 @@ const MemberInfo: React.FC<Props> = ({
         authUserEmail={authUserEmail}
         onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
       />
+
+      {shouldSeeSponsorListLink && <AdminActions />}
     </StyledRoot>
   );
 };
