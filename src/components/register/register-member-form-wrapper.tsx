@@ -5,7 +5,7 @@ import React from 'react';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
-} from '../../pages/members/register';
+} from './MemberRegisterContent';
 import FormHr from '../shared/form-hr';
 import RegisterForm from './register-member-form';
 
@@ -22,6 +22,8 @@ const MemberFormValuesWrapper: React.FC<Props> = ({
   initialMemberFormValues,
   onCompleteMemberStep,
 }) => {
+  console.log('MemberFormValuesWrapper');
+
   if (!authenticatedUserId) {
     return null;
   }

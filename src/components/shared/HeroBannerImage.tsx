@@ -158,7 +158,7 @@ const HeroBannerImage: FC<Props> = ({
               fontWeight={400}
               rightArrow
               size="large"
-              to="/members/join"
+              to="/members/register"
               width={224}
             >
               Begin Membership

@@ -6,7 +6,8 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
-import { MemberFormValues } from './MembersRegisterContent';
+import { MemberFormValues } from './MemberRegisterContent';
+import { SponsorFormValues } from '../../pages/sponsors/register';
 import LoginForm from './login-form';
 import LoadingContainer from '../shared/LoadingContainer';
 import SignInUpElement from './sign-in-up-element';
@@ -17,7 +18,7 @@ interface Props {
   isAuthenticated: boolean;
   onCompleteStep: (
     step: number,
-    updatedMemberForm?: MemberFormValues,
+    updatedMemberForm?: MemberFormValues | SponsorFormValues,
   ) => void;
 }
 
@@ -39,12 +40,14 @@ const RegisterEmail: React.FC<Props> = ({
   isAuthenticated,
   onCompleteStep,
 }) => {
+  console.log('RegisterEmail • isAuthenticated', isAuthenticated);
+
   const [viewingSignUp, setViewingSignUp] = useState(true);
   const [hasCompletedRegisterEmail, setHasCompletedRegisterEmail] = useState(false);
 
   useEffect(() => {
     if (hasCompletedRegisterEmail) {
-      setTimeout(() => onCompleteStep(0), 1500);
+      setTimeout(() => onCompleteStep(0), 2000);
     }
   }, [hasCompletedRegisterEmail]);
 
@@ -83,6 +86,7 @@ const RegisterEmail: React.FC<Props> = ({
   )), [
     handleClickSignInLink,
     hasCompletedRegisterEmail,
+    handleUpdateCompletedStep,
     isAuthenticated,
     viewingSignUp,
   ]);

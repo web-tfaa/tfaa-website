@@ -130,7 +130,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
                 colorVariant="about"
                 fontWeight={700}
                 rightArrow
-                to="/members/join"
+                to="/members/register"
               >
                 Register
               </CtaButton>

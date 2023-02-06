@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
 import Container from '../shared/container';
 import RegisterEmail from './RegisterEmail';
-import RegisterMemberFormWrapper from '../../components/register/register-member-form-wrapper';
-import RegisterMemberPayment from '../../components/register/register-member-payment';
+import RegisterMemberFormWrapper from './register-member-form-wrapper';
+import RegisterMemberPayment from './register-member-payment';
 import RegisterStepper from './RegisterStepper';
 
 // Local Typings
@@ -120,6 +120,8 @@ function memberFormReducer(state, { type, payload }) {
     }
     case MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP: {
       const { newMemberStep } = payload;
+
+      console.log('in reducer ••', newMemberStep);
       return {
         ...state,
         activeMemberStep: newMemberStep,
@@ -151,10 +153,12 @@ function memberFormReducer(state, { type, payload }) {
 }
 
 // Component Definition
-const MembersRegisterContent: React.FC = () => {
+const MemberRegisterContent: React.FC = () => {
+  console.log('MembersRegisterContent');
+
   const { currentAuthUser } = useGetAuthUser();
 
-  // console.log('currentAuthUser', currentAuthUser);
+  console.log('currentAuthUser', currentAuthUser);
 
   const isAuthenticated = Boolean(currentAuthUser);
 
@@ -173,21 +177,21 @@ const MembersRegisterContent: React.FC = () => {
     completedMemberSteps,
   } = memberFormState;
 
-  // console.log('activeMemberStep', activeMemberStep);
+  console.log('activeMemberStep', activeMemberStep);
 
   // Local Handlers
-  const handleUpdateActiveMemberStep = useCallback((newMemberStep: number) => {
+  const handleUpdateActiveMemberStep = (newMemberStep: number) => {
+    console.log('update active step', newMemberStep);
     dispatch({
       type: MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP,
       payload: { newMemberStep },
     });
-  }, []);
+  };
 
   const handleCompleteMemberStep = (
     step: number,
     updatedMemberForm?: MemberFormValues,
   ) => {
-    console.log('updating step??');
     dispatch({
       type: MEMBER_FORM_ACTIONS.COMPLETE_MEMBER_STEP,
       payload: {
@@ -207,9 +211,9 @@ const MembersRegisterContent: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('useEffect → isAuthenticated', isAuthenticated);
     // The user can skip the "sign in" step if they are already signed in
     if (activeMemberStep === 0 && isAuthenticated) {
+      console.log('skipping step 1');
       handleUpdateActiveMemberStep(1);
     }
   }, [activeMemberStep, isAuthenticated]);
@@ -226,7 +230,10 @@ const MembersRegisterContent: React.FC = () => {
 
       <Container>
         {activeMemberStep === 0 && (
-          <RegisterEmail onCompleteStep={handleCompleteMemberStep} />
+          <RegisterEmail
+            isAuthenticated={isAuthenticated}
+            onCompleteStep={handleCompleteMemberStep}
+          />
         )}
         {activeMemberStep === 1 && (
           <RegisterMemberFormWrapper
@@ -254,4 +261,4 @@ const MembersRegisterContent: React.FC = () => {
   );
 };
 
-export default MembersRegisterContent;
+export default MemberRegisterContent;

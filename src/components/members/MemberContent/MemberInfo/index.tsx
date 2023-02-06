@@ -67,8 +67,6 @@ const MemberInfo: React.FC<Props> = ({
     && (TMAC_WEB_ADMIN_EMAIL_LIST.includes(authUserEmail)
     || authUserEmail === TMAC_WEB_EXECUTIVE_SECRETARY);
 
-  console.log('shouldSeeSponsorListLink', shouldSeeSponsorListLink);
-
   return (
     <StyledRoot>
       <Motifs small />

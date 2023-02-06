@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import Layout from '../../components/layout';
-import MembersRegisterContent from '../../components/register/MembersRegisterContent';
+import MemberRegisterContent from '../../components/register/MemberRegisterContent';
 
 // Local Variables
 const StyledRoot = styled.div({
@@ -27,7 +27,7 @@ const MembersRegister: React.FC = () => {
       pageTitle="Membership Registration"
     >
       <StyledRoot>
-        <MembersRegisterContent />
+        <MemberRegisterContent />
       </StyledRoot>
     </Layout>
   );

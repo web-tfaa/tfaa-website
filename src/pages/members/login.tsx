@@ -9,10 +9,10 @@ import styled from 'styled-components';
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import { useIsAuthenticated } from '../../utils/hooks/useIsAuthenticated';
+import DrumBanner from '../../components/shared/DrumBanner';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
 import Motifs from '../../components/shared/Motifs';
-import DrumBanner from '../../components/shared/DrumBanner';
 
 // Local Typings
 interface Props {
@@ -51,15 +51,12 @@ const StyledRoot = styled.div(({ theme }) => ({
 const Login: React.FC<Props> = ({ location }) => {
   const isAuthenticated = useIsAuthenticated();
 
-  console.log('isAuthenticated', isAuthenticated);
-
   const handleRedirectToMembers = useCallback(() => {
     navigate('/members');
   }, []);
 
   if (isAuthenticated) {
     handleRedirectToMembers();
-    return null;
   }
 
   return (
