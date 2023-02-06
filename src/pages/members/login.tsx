@@ -1,30 +1,55 @@
 // External Dependencies
-import { Box } from '@mui/material';
-import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby-theme-material-ui';
 import { navigate } from 'gatsby';
+import Divider from '@mui/material/Divider';
 import React, { useCallback } from 'react';
+import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 
 // Internal Dependencies
-import { GatsbyContextProps } from '../../types/shared';
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
-import AuthUserContext from '../../components/session/AuthUserContext';
-import Container from '../../components/shared/container';
-import FormHr from '../../components/shared/form-hr';
+import { useIsAuthenticated } from '../../utils/hooks/useIsAuthenticated';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
+import Motifs from '../../components/shared/motifs';
+import DrumBanner from '../../components/shared/DrumBanner';
 
 // Local Typings
 interface Props {
   location: Location;
-  isAuthenticated: boolean;
 }
 
+// Local Variables
+const StyledRoot = styled.div(({ theme }) => ({
+  '.loginContent': {
+    [theme.breakpoints.down('mobile')]: {
+      padding: theme.spacing(6, 10),
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(8),
+    },
+    padding: theme.spacing(8, 15),
+    position: 'relative',
+  },
+  '.loginDivider': {
+    marginBottom: theme.spacing(2),
+  },
+  '.loginTitle': {
+    fontSize: 30,
+    fontWeight: 900,
+    marginBottom: theme.spacing(4),
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
+  width: '100vw',
+}));
+
 // Component Definition
-const Login: React.FC<Props> = ({
-  isAuthenticated,
-  location,
-}) => {
+const Login: React.FC<Props> = ({ location }) => {
+  const isAuthenticated = useIsAuthenticated();
+
   const handleRedirectToMembers = useCallback(() => {
     navigate('/members/login');
   }, []);
@@ -35,50 +60,37 @@ const Login: React.FC<Props> = ({
   }
 
   return (
-    <Layout location={location}>
+    <Layout
+      location={location}
+      pageTitle="Log In"
+    >
       <ReCaptchaProvider>
-        <div>
-          <Container>
-            <Helmet>
-              <title>TMAC | Log In</title>
-            </Helmet>
+        <StyledRoot>
 
-            <Box
+          <DrumBanner drumBannerTitle="Member Log In" />
+
+          <div className="loginContent">
+            <Motifs small />
+
+            <Typography
+              className="loginTitle"
               component="h2"
-              marginY={2}
             >
               Login
-            </Box>
-
-            <FormHr />
+            </Typography>
 
             <LoginForm />
 
-            <FormHr />
+            <Divider className="loginDivider" />
 
-            <p>
+            <Typography>
               <Link to="/members/pw-forget">Forgot Password?</Link>
-            </p>
-          </Container>
-        </div>
+            </Typography>
+          </div>
+        </StyledRoot>
       </ReCaptchaProvider>
     </Layout>
   );
 };
 
-const LoginWithContext = (props: GatsbyContextProps) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => {
-      const isAuthenticated = Boolean(authUser);
-
-      return (
-        <Login
-          {...props}
-          isAuthenticated={isAuthenticated}
-        />
-      );
-    }}
-  </AuthUserContext.Consumer>
-);
-
-export default LoginWithContext;
+export default Login;

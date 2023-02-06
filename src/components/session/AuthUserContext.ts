@@ -5,6 +5,19 @@ import React from 'react';
 // Internal Dependencies
 import { TfaaAuthUser } from '../layout';
 
-const AuthUserContext = React.createContext<TfaaAuthUser | null>(null);
+// Local Typings
+type CurrentUser = TfaaAuthUser | null;
+interface AuthContextValue {
+  currentAuthUser: CurrentUser;
+  setCurrentAuthUser: React.Dispatch<React.SetStateAction<CurrentUser>> | null;
+}
+
+// Local Variables
+const defaultContext = {
+  currentAuthUser: null,
+  setCurrentAuthUser: null,
+};
+
+const AuthUserContext = React.createContext<AuthContextValue>(defaultContext);
 
 export default AuthUserContext;

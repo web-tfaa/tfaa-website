@@ -1,7 +1,12 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
+
+// Local Typings
+interface Props {
+  drumBannerTitle: string;
+}
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -18,7 +23,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     color: theme.palette.common.white,
     fontSize: 60,
     fontWeight: 900,
-    textAlign: 'left',
     zIndex: 2,
   },
 
@@ -46,20 +50,21 @@ const StyledRoot = styled.section(({ theme }) => ({
   backgroundSize: 'cover',
   display: 'flex',
   height: 420,
+  justifyContent: 'center',
   position: 'relative',
   width: '100%',
   zIndex: 1,
 }));
 
 // Component Definition
-const FourOhFourBanner: FC = () => {
+const DrumBanner: React.FC<Props> = ({ drumBannerTitle }) => {
   return (
     <StyledRoot>
       <Typography component="h1">
-        Page Not Found
+        {drumBannerTitle}
       </Typography>
     </StyledRoot>
   );
 };
 
-export default FourOhFourBanner;
+export default DrumBanner;

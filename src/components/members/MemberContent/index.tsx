@@ -13,14 +13,14 @@ import MemberInfo from './MemberInfo';
 
 // Local Typings
 interface Props {
-  authUser: TfaaAuthUser | null;
+  currentAuthUser: TfaaAuthUser | null;
 }
 
 // Flip this to test with fake Member data in local development
 const useTestData = false;
 
 // Component Definition
-const MemberContent: React.FC<Props> = ({ authUser }) => {
+const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
   const [
     currentMemberData,
     setCurrentMemberData,
@@ -33,7 +33,7 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
   } = useGetAllMembers({ useTestData });
 
   useEffect(() => {
-    if (authUser && allMembersData && allMembersData.length > 0 && !currentMemberData) {
+    if (currentAuthUser && allMembersData && allMembersData.length > 0 && !currentMemberData) {
       const currentMember = allMembersData.find(
         // We used to use authUser.uid as the unique key in the Firestore
         // Now we use authUser.email
@@ -41,31 +41,31 @@ const MemberContent: React.FC<Props> = ({ authUser }) => {
         (user) => {
           console.log('user', user);
 
-          return user.userId === authUser.uid || user.userId === authUser.email;
+          return user.userId === currentAuthUser.uid || user.userId === currentAuthUser.email;
         });
 
       setCurrentMemberData(currentMember ?? null);
     }
-  }, [authUser, currentMemberData, isLoading]);
+  }, [currentAuthUser, currentMemberData, isLoading]);
 
   if (isLoading) {
     return <CircularProgress />;
   }
 
-  const isAdmin = Boolean(authUser && ADMIN_USER_EMAIL_LIST.includes(authUser.email));
+  const isAdmin = Boolean(currentAuthUser && ADMIN_USER_EMAIL_LIST.includes(currentAuthUser.email));
 
   return (
     <>
       <MemberContentBanner />
 
       <WelcomeBanner
-        authUser={authUser}
+        currentAuthUser={currentAuthUser}
         fullName={getFullName(currentMemberData)}
         isAdmin={isAdmin}
       />
 
       <MemberInfo
-        authUserEmail={authUser?.email}
+        authUserEmail={currentAuthUser?.email}
         currentMemberData={currentMemberData}
         isAdmin={isAdmin}
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}

@@ -8,7 +8,7 @@ import { TfaaAuthUser } from '../../layout';
 
 // Local Typings
 interface Props {
-  authUser: TfaaAuthUser | null;
+  currentAuthUser: TfaaAuthUser | null;
   fullName: string;
   isAdmin: boolean;
 }
@@ -40,11 +40,11 @@ const StyledRoot = styled.div(({ theme }) => ({
 
 // Component Definition
 const WelcomeBanner: React.FC<Props> = ({
-  authUser,
+  currentAuthUser,
   fullName,
   isAdmin,
 }) => {
-  const name = fullName || authUser?.email;
+  const name = fullName || currentAuthUser?.email;
 
   return (
     <StyledRoot>

@@ -1,21 +1,23 @@
 // External Dependencies
-import {
-  Button, IconButton, InputAdornment, TextField,
-} from '@mui/material';
 import { navigate } from 'gatsby';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 import PropTypes from 'prop-types';
 import React, {
   useCallback, useEffect, useReducer, useState
 } from 'react';
-import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import VisiblityIcon from '@mui/icons-material/Visibility';
 import VisiblityOffIcon from '@mui/icons-material/VisibilityOff';
+import styled from 'styled-components';
 
 // Internal Dependencies
-import useIsMounted from '../../utils/hooks/useIsMounted';
-import usePrevious from '../../utils/hooks/usePrevious';
 import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
+import CtaButton from '../../components/shared/CtaButton';
+import useIsMounted from '../../utils/hooks/useIsMounted';
+import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Variables
 const propTypes = {
@@ -27,19 +29,18 @@ const defaultProps = {
 };
 
 const StyledRoot = styled.div(({ theme }) => ({
-  '.button': {
-    fontFamily: 'Futura PT, Roboto',
-  },
-
   '.buttonContainer': {
     display: 'flex',
-    justifyContent: 'flex-end',
-    maxWidth: '70%',
+    padding: theme.spacing(4, 0, 2),
   },
 
-  '.error-message': {
+  '.className': {
+    width: '100%',
+  },
+
+  '.errorMessage': {
     color: theme.palette.error.main,
-    fontFamily: options.headerFontFamily.join(','),
+    fontWeight: 500,
     margin: theme.spacing(2, 0),
   },
 
@@ -47,25 +48,18 @@ const StyledRoot = styled.div(({ theme }) => ({
     margin: '30px 0 0 12px',
   },
 
-  '.password-container': {
-    alignItems: 'center',
+  '.textFieldInput': {
+    marginBotton: theme.spacing(6),
+  },
+
+  form: {
+    '& > div:first-child': {
+      marginBottom: theme.spacing(4),
+    },
     display: 'flex',
-    marginBottom: theme.spacing(2),
-  },
-
-  '.input': {
-    display: 'block',
-    fontSize: '1rem',
-    minWidth: '70%',
-  },
-
-  '.label': {
-    display: 'block',
-    fontSize: '90%',
-    letterSpacing: '0.1rem',
-    marginTop: theme.spacing(2),
-    textTransform: 'uppercase',
-  },
+    flexDirection: 'column',
+    maxWidth: 420,
+  }
 }));
 
 const LOGIN_FORM_REDUCER_INITIAL_STATE = {
@@ -174,7 +168,7 @@ const LoginForm = ({ onRegisterLogin }) => {
   }, [isMounted]);
 
   const hasLoginInput = password !== '' && email !== '';
-  const isLoginInvalid = !hasLoginInput || Boolean(emailError);
+  const isLoginInvalid = !hasLoginInput || Boolean(emailError) || Boolean(error?.message);
 
   const handleClickShowPassword = () => {
     setShowPassword((state) => !state);
@@ -189,8 +183,11 @@ const LoginForm = ({ onRegisterLogin }) => {
       <form onSubmit={handleSubmit}>
         <TextField
           autoComplete="username"
-          className="input"
+          className="textField"
           id="username-login"
+          inputProps={{
+            className: 'textFieldInput',
+          }}
           label="Email"
           name="email"
           onChange={handleUpdate}
@@ -199,58 +196,54 @@ const LoginForm = ({ onRegisterLogin }) => {
           value={email}
           variant="outlined"
         />
-        <div className="error-message">
-          {emailError}
-        </div>
 
-        <div className="password-container">
-          <TextField
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    size="large"
-                  >
-                    {showPassword ? <VisiblityIcon /> : <VisiblityOffIcon />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            autoComplete="current-password"
-            className="input"
-            error={Boolean(passwordError)}
-            helperText={passwordError}
-            id="password-login"
-            name="password"
-            label="Password"
-            onChange={handleUpdate}
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            variant="outlined"
-          />
-        </div>
+        <TextField
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  size="large"
+                >
+                  {showPassword ? <VisiblityIcon /> : <VisiblityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+          autoComplete="current-password"
+          className="textField"
+          error={Boolean(passwordError)}
+          helperText={passwordError}
+          id="password-login"
+          name="password"
+          label="Password"
+          onChange={handleUpdate}
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          variant="outlined"
+        />
+
+        {error && (
+          <Typography className="errorMessage">
+            {error.message}
+          </Typography>
+        )}
 
         {/* SUBMIT BUTTON */}
         <div className="buttonContainer">
-          <Button
-            className="button"
-            color="primary"
+          <CtaButton
+            colorVariant="resources"
             disabled={isLoginInvalid}
+            fontWeight={600}
             onClick={handleClickSubmitButton}
+            size="large"
             type="submit"
-            variant="contained"
+            width={200}
           >
             Sign In
-          </Button>
+          </CtaButton>
         </div>
-
-        {error && (
-          <div className="error-message">
-            {error.message}
-          </div>
-        )}
       </form>
     </StyledRoot>
   );

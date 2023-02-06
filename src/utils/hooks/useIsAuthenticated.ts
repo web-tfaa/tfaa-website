@@ -6,7 +6,7 @@ import AuthUserContext from '../../components/session/AuthUserContext';
 
 // Hook Definition
 export const useIsAuthenticated = () => {
-  const authUser = React.useContext(AuthUserContext);
+  const { currentAuthUser } = React.useContext(AuthUserContext);
 
-  return useMemo(() => Boolean(authUser), [authUser]);
+  return useMemo(() => Boolean(currentAuthUser), [currentAuthUser]);
 }

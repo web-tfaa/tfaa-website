@@ -1,6 +1,5 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
-import { firebase } from '../firebase';
 import styled, {
   ThemeProvider as StyledComponentsThemeProvider,
 } from 'styled-components';
@@ -9,6 +8,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 // Internal Dependencies
 import { FirebaseAuthUser } from '../types/shared';
 import { appName, appNameShort } from '../utils/app-constants';
+import { firebase } from '../firebase';
 import AuthUserContext from '../components/session/AuthUserContext';
 import Footer from './footer';
 import TopNav from './nav/top-nav';
@@ -26,7 +26,7 @@ interface Props {
   location: Location;
   pageTitle?: string;
 }
-type AuthUserFromFirebase = FirebaseAuthUser | null;
+export type AuthUserFromFirebase = FirebaseAuthUser | null;
 export interface TfaaAuthUser {
   email: string;
   uid: string;
@@ -123,7 +123,12 @@ const DefaultLayout: React.FC<Props> = ({
         {pageTitle && <title>{appNameShort} | {pageTitle}</title>}
       </Helmet>
 
-      <AuthUserContext.Provider value={authUser}>
+      <AuthUserContext.Provider
+        value={{
+          currentAuthUser: authUser,
+          setCurrentAuthUser: setAuthUser,
+        }}
+      >
         <StyledRoot>
           <TopNav pathname={pathname} />
 
