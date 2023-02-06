@@ -1,11 +1,12 @@
 // External Dependencies
 import Box from '@mui/material/Box';
-import React, { useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
-import RegisterEmail from '../../components/register/register-email';
+import Container from '../shared/container';
+import RegisterEmail from './RegisterEmail';
 import RegisterMemberFormWrapper from '../../components/register/register-member-form-wrapper';
 import RegisterMemberPayment from '../../components/register/register-member-payment';
 import RegisterStepper from './RegisterStepper';
@@ -153,6 +154,8 @@ function memberFormReducer(state, { type, payload }) {
 const MembersRegisterContent: React.FC = () => {
   const { currentAuthUser } = useGetAuthUser();
 
+  // console.log('currentAuthUser', currentAuthUser);
+
   const isAuthenticated = Boolean(currentAuthUser);
 
   // Local Reducers
@@ -170,20 +173,21 @@ const MembersRegisterContent: React.FC = () => {
     completedMemberSteps,
   } = memberFormState;
 
-  console.log('activeMemberStep', activeMemberStep);
+  // console.log('activeMemberStep', activeMemberStep);
 
   // Local Handlers
-  const handleUpdateActiveMemberStep = (newMemberStep: number) => {
+  const handleUpdateActiveMemberStep = useCallback((newMemberStep: number) => {
     dispatch({
       type: MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP,
       payload: { newMemberStep },
     });
-  };
+  }, []);
 
   const handleCompleteMemberStep = (
     step: number,
-    updatedMemberForm: MemberFormValues,
+    updatedMemberForm?: MemberFormValues,
   ) => {
+    console.log('updating step??');
     dispatch({
       type: MEMBER_FORM_ACTIONS.COMPLETE_MEMBER_STEP,
       payload: {
@@ -203,6 +207,7 @@ const MembersRegisterContent: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('useEffect → isAuthenticated', isAuthenticated);
     // The user can skip the "sign in" step if they are already signed in
     if (activeMemberStep === 0 && isAuthenticated) {
       handleUpdateActiveMemberStep(1);
@@ -219,33 +224,32 @@ const MembersRegisterContent: React.FC = () => {
         activeStep={activeMemberStep}
       />
 
-      {activeMemberStep === 0 && (
-        <RegisterEmail
-          isAuthenticated={isAuthenticated}
-          onCompleteStep={handleCompleteMemberStep}
-        />
-      )}
-      {activeMemberStep === 1 && (
-        <RegisterMemberFormWrapper
-          authenticatedUserId={currentAuthUser?.email}
-          initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
-          onCompleteMemberStep={handleCompleteMemberStep}
-        />
-      )}
-      {[2, 3].includes(activeMemberStep) && (
-        <RegisterMemberPayment
-          authenticatedUserId={currentAuthUser?.email}
-          onCompleteMemberStep={handleCompleteMemberStep}
-          onUpdateMemberForm={handleUpdateMemberForm}
-          memberForm={memberForm}
-        />
-      )}
+      <Container>
+        {activeMemberStep === 0 && (
+          <RegisterEmail onCompleteStep={handleCompleteMemberStep} />
+        )}
+        {activeMemberStep === 1 && (
+          <RegisterMemberFormWrapper
+            authenticatedUserId={currentAuthUser?.email}
+            initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
+            onCompleteMemberStep={handleCompleteMemberStep}
+          />
+        )}
+        {[2, 3].includes(activeMemberStep) && (
+          <RegisterMemberPayment
+            authenticatedUserId={currentAuthUser?.email}
+            onCompleteMemberStep={handleCompleteMemberStep}
+            onUpdateMemberForm={handleUpdateMemberForm}
+            memberForm={memberForm}
+          />
+        )}
 
-      {!hasCompletedAllMemberSteps && (
-        <Box marginTop={2}>
-          * Membership is not complete until payment is received.
-        </Box>
-      )}
+        {!hasCompletedAllMemberSteps && (
+          <Box marginTop={2}>
+            * Membership is not complete until payment is received.
+          </Box>
+        )}
+      </Container>
     </StyledRoot>
   );
 };

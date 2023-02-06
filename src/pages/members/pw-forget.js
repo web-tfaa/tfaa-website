@@ -95,7 +95,7 @@ class PasswordForgetForm extends Component {
           showSuccessMessage: true,
         }));
 
-        setTimeout(this.handleRedirectToMembers, 7000);
+        setTimeout(this.handleRedirectToMembers, 4000);
       })
       .catch((error) => {
         this.setState({

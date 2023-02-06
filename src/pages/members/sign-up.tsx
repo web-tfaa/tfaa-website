@@ -1,14 +1,12 @@
 // External Dependencies
-import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
+import React from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
-import SignupForm from '../../components/register/signup-form';
+// import SignupForm from '../../components/register/SignupForm';
 
 // Local Typings
 interface Props {
@@ -33,7 +31,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const SignUp: FC<Props> = ({ location }) => (
+const SignUp: React.FC<Props> = ({ location }) => (
   <Layout
     location={location}
     pageTitle="Sign Up"
@@ -41,8 +39,6 @@ const SignUp: FC<Props> = ({ location }) => (
     <StyledRoot>
       <Container className="sign-up">
         <h2 className="signup-h2">Sign Up</h2>
-
-        <FormHr />
 
         <div
           className="signup-message"
@@ -53,7 +49,7 @@ const SignUp: FC<Props> = ({ location }) => (
           <Link to="/members">Members page</Link>.
         </div>
 
-        <SignupForm />
+        {/* <SignupForm /> */}
       </Container>
     </StyledRoot>
   </Layout>

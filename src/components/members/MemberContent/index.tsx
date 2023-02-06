@@ -40,8 +40,6 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
         // Now we use authUser.email
         // We have to search for both for backwards compatibility
         (user) => {
-          console.log('user', user);
-
           return user.userId === currentAuthUser.uid || user.userId === currentAuthUser.email;
         });
 

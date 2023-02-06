@@ -1,37 +1,28 @@
 // External Dependencies
 import { Box, Button } from '@mui/material';
 import { navigate } from 'gatsby';
-import PropTypes from 'prop-types';
 import React, {
   useCallback, useEffect, useReducer, useState
 } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import AuthUserContext from '../session/AuthUserContext';
 import RemoveRedEyeIcon from '../shared/RemoveRedEyeIcon';
 import useIsMounted from '../../utils/hooks/useIsMounted';
 import usePrevious from '../../utils/hooks/usePrevious';
 import { auth } from '../../firebase';
-import { options } from '../../utils/typography';
+import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
+import CtaButton from '../shared/CtaButton';
+
+// Local Typings
+interface Props {
+  onRegisterSignUp: () => void;
+}
 
 // Local Variables
-const propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  onRegisterSignUp: PropTypes.func,
-};
-
-const defaultProps = {
-  onRegisterSignUp: null,
-};
-
 const StyledForm = styled.form(({ theme }) => ({
   '.bottomLabel': {
     marginTop: theme.spacing(2),
-  },
-
-  '.button': {
-    fontFamily: 'Futura PT, Roboto',
   },
 
   '.buttonContainer': {
@@ -42,13 +33,12 @@ const StyledForm = styled.form(({ theme }) => ({
 
   '.error': {
     color: theme.palette.error.main,
-    fontFamily: options.headerFontFamily.join(','),
-    marginTop: '0.5rem',
+    fontWeight: 500,
+    margin: theme.spacing(2, 0),
   },
 
   '.regsiterError': {
     color: theme.palette.error.main,
-    fontFamily: options.headerFontFamily.join(','),
     fontWeight: 500,
     margin: theme.spacing(2, 0),
   },
@@ -66,9 +56,7 @@ const StyledForm = styled.form(({ theme }) => ({
 
   label: {
     display: 'block',
-    fontSize: '67.5%',
-    letterSpacing: '0.125em',
-    textTransform: 'uppercase',
+    fontSize: '70%',
   },
 }));
 
@@ -95,8 +83,11 @@ function signupFormReducer(state, { type, payload }) {
 }
 
 // Component Definition
-const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
+const SignupForm: React.FC<Props> = ({ onRegisterSignUp }) => {
+  const { currentAuthUser } = useGetAuthUser();
   const isMounted = useIsMounted();
+
+  const isAuthenticated = Boolean(currentAuthUser);
 
   const [registerError, setRegisterError] = useState('');
 
@@ -118,7 +109,8 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      return onRegisterSignUp ? onRegisterSignUp() : navigate('/members');
+      onRegisterSignUp();
+      navigate('/members');
     }
   }, [isAuthenticated, onRegisterSignUp]);
 
@@ -129,7 +121,7 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
         .then(() => {
           dispatchState({ type: 'clearForm' });
         })
-        .catch((error) => {
+        .catch((error: any) => {
           dispatchState({
             type: 'updateForm',
             payload: {
@@ -268,33 +260,20 @@ const SignUpForm = ({ isAuthenticated, onRegisterSignUp }) => {
 
       {/* SUBMIT BUTTON */}
       <div className="buttonContainer">
-        <Button
+        <CtaButton
           className="button"
-          color="primary"
+          colorVariant="about"
           disabled={isInvalid}
+          fontWeight={600}
           onClick={handleClickSignUpButton}
+          size="large"
           type="submit"
-          variant="contained"
         >
           Sign Up
-        </Button>
+        </CtaButton>
       </div>
     </StyledForm>
   );
 };
 
-SignUpForm.propTypes = propTypes;
-SignUpForm.defaultProps = defaultProps;
-
-const SignUpFormWithContext = (props) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (
-      <SignUpForm
-        {...props}
-        isAuthenticated={!!authUser}
-      />
-    )}
-  </AuthUserContext.Consumer>
-);
-
-export default SignUpFormWithContext;
+export default SignupForm;

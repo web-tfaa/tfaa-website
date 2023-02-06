@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import Container from '../../components/shared/container';
 import Layout from '../../components/layout';
-import RegisterEmail from '../../components/register/register-email';
+import RegisterEmail from '../../components/register/RegisterEmail';
 import RegisterSponsorFormWrapper from '../../components/register/register-sponsor-form-wrapper';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
 import RegisterStepper from '../../components/register/RegisterStepper';
