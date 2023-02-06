@@ -2,7 +2,6 @@
 import {
   Box,
   Card,
-  Divider,
   FormControl,
   FormControlLabel,
   Radio,

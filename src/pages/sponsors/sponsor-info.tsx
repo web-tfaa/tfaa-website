@@ -1,18 +1,17 @@
 // External Dependencies
 import { Box } from '@mui/material';
-import React, { FC } from 'react';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
 // import { isTodayAfterJune30th } from '../../utils/helpers';
-import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import Container from '../../components/shared/container';
-import CtaButton from '../../components/masthead/cta-button';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
+import CtaButton from '../../components/shared/CtaButton';
 
 // Local Typings
 interface Props {
@@ -41,7 +40,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const SponsorInfo: FC<Props> = ({ location }) => (
+const SponsorInfo: React.FC<Props> = ({ location }) => (
   <Layout
     location={location}
     pageTitle="Sponsor Information"
@@ -98,14 +97,13 @@ const SponsorInfo: FC<Props> = ({ location }) => (
           justifyContent="flex-end"
         >
           <CtaButton
-            buttonColor="blue"
+            fontWeight={600}
+            rightArrow
+            size="large"
             to="/sponsors/register"
-            state={{ level: location && location.state && location.state.level }}
+            width={240}
           >
-            <span>
-              Begin Sponsorship
-            </span>
-            <ArrowForwardIcon />
+            Begin Sponsorship
           </CtaButton>
         </Box>
 
