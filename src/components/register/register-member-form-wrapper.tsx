@@ -1,7 +1,5 @@
 // External Dependencies
-import React, { useMemo } from 'react';
-import Typography from '@mui/material/Typography';
-import styled from 'styled-components';
+import React from 'react';
 
 // Internal Dependencies
 import {
@@ -10,6 +8,7 @@ import {
 } from './MemberRegisterContent';
 import { appNameShort } from '../../utils/app-constants';
 import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import RegisterForm from './register-member-form';
 
 // Local Typings
@@ -18,14 +17,6 @@ interface Props {
   initialMemberFormValues: MemberFormValues;
   onCompleteMemberStep: HandleCompleteMemberStepType;
 }
-
-// Local Variables
-const StyledRoot = styled.section(({ theme }) => ({
-  '.registerStep2Title': {
-    fontSize: 34,
-    fontWeight: 900,
-  },
-}));
 
 // Component Definition
 const MemberFormValuesWrapper: React.FC<Props> = ({
@@ -38,10 +29,10 @@ const MemberFormValuesWrapper: React.FC<Props> = ({
   }
 
   return (
-    <StyledRoot>
-      <Typography className="registerStep2Title">
+    <section>
+      <FormTitle>
         2. Join {appNameShort}
-      </Typography>
+      </FormTitle>
 
       <FormDivider />
 
@@ -50,7 +41,7 @@ const MemberFormValuesWrapper: React.FC<Props> = ({
         initialMemberFormValues={initialMemberFormValues}
         onCompleteMemberStep={onCompleteMemberStep}
       />
-    </StyledRoot>
+    </section>
   );
 };
 

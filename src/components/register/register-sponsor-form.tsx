@@ -23,8 +23,8 @@ import { registerSponsorSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
-import RegisterButton from './register-button';
 import theme from '../../gatsby-theme-material-ui-top-layout/theme';
+import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
@@ -442,12 +442,16 @@ const RegisterSponsorForm: React.FC<Props> = ({
                   </EnhancedAlert>
                 </Box>
 
-                <RegisterButton
-                  buttonType="submit"
-                  isDisabled={hasTouchedform && hasErrors}
+                <CtaButton
+                  disabled={hasTouchedform && hasErrors}
+                  fontWeight={600}
+                  rightArrow
+                  size="large"
+                  type="submit"
+                  width={220}
                 >
-                  Continue to Step 3
-                </RegisterButton>
+                  Continue
+                </CtaButton>
               </div>
             </Form>
           );

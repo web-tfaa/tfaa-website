@@ -41,16 +41,13 @@ export type HandleCompleteSponsorStepType = (
   step: Steps,
   updatedForm: SponsorFormValues,
 ) => void;
-interface StyledRootProps {
-  $isAuthenticated: boolean;
-}
 
 // Local Variables
-const StyledRoot = styled.div(({ theme }) => ({
+const StyledRoot = styled.div({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-}));
+});
 
 
 const COMPLETED_SPONSOR_STEPS_INITIAL_STATE: Steps[] = [];
@@ -82,7 +79,7 @@ const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
 };
 
 const initialSponsorReducerState = {
-  activeStep: 0,
+  activeStep: 2,
   completedSponsorSteps: COMPLETED_SPONSOR_STEPS_INITIAL_STATE,
   sponsorForm: INITIAL_SPONSOR_FORM_VALUES,
 };

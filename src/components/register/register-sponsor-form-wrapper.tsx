@@ -7,7 +7,9 @@ import {
   SponsorFormValues,
 } from './SponsorRegisterContent';
 import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import RegisterSponsorForm from './register-sponsor-form';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -32,9 +34,9 @@ const RegisterSponsorFormWrapper: React.FC<Props> = ({
 
   return (
     <section>
-      <h2>
-        2. Join TMAC as a Sponsor
-      </h2>
+      <FormTitle>
+        2. Join {appNameShort} as a Sponsor
+      </FormTitle>
 
       <FormDivider />
 

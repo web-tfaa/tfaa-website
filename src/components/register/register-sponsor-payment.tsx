@@ -23,11 +23,13 @@ import {
   doUpdateEntry,
   doUpdateInvoiceId as updateFirestoreInvoiceId,
 } from '../../firebase/db';
+import { appNameShort } from '../../utils/app-constants';
 import { classChampionAlreadySecured } from './register-sponsor-form';
+import CtaButton from '../shared/CtaButton';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import Invoice from './invoice';
-import RegisterButton from './register-button';
 import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
@@ -183,7 +185,9 @@ const RegisterSponsorPayment: React.FC<Props> = ({
 
   return (
     <StyledRoot>
-      <h2>3. Confirm Sponsor Level and send payment</h2>
+      <FormTitle>
+        3. Confirm Sponsor Level and send payment
+      </FormTitle>
 
       <FormDivider />
 
@@ -206,7 +210,7 @@ const RegisterSponsorPayment: React.FC<Props> = ({
                   : (
                     <span>
                       Contact the{' '}
-                      <a href="mailto:jeffrey.turner@allenisd.org">TMAC Executive Secretary</a>{' '}
+                      <a href="mailto:jeffrey.turner@allenisd.org">{appNameShort} Executive Secretary</a>{' '}
                       for more details
                     </span>
                   )}
@@ -315,7 +319,7 @@ const RegisterSponsorPayment: React.FC<Props> = ({
         </Box>
 
         <div>
-          <h3>Submit Payment to TMAC</h3>
+          <h3>Submit Payment to {appNameShort}</h3>
 
           <Box
             ml={3}
@@ -325,8 +329,9 @@ const RegisterSponsorPayment: React.FC<Props> = ({
               Follow these steps:
               <ol>
                 <li>Click the button below to print an invoice.</li>
+
                 <li>
-                  Send the invoice and payment directly to the TMAC
+                  Send the invoice and payment directly to the {appNameShort}{' '}
                   Executive Secretary as detailed on the invoice.
                 </li>
               </ol>
@@ -335,9 +340,13 @@ const RegisterSponsorPayment: React.FC<Props> = ({
             <ReactToPrint
               content={() => printInvoiceRef.current}
               trigger={() => (
-                <RegisterButton onClick={updateFirestoreInvoiceId}>
+                <CtaButton
+                  fontWeight={600}
+                  onClick={updateFirestoreInvoiceId}
+                  width={180}
+                >
                   Print Invoice
-                </RegisterButton>
+                </CtaButton>
               )}
             />
 
@@ -354,7 +363,7 @@ const RegisterSponsorPayment: React.FC<Props> = ({
             </Box>
 
             <Box mt={3}>
-              If your organization requires the IRS W-9 Form for TMAC,
+              If your organization requires an IRS W-9 Form from {appNameShort},
               please download or print a copy below.
             </Box>
 
