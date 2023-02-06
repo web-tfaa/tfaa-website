@@ -21,13 +21,13 @@ interface Props {
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(6, 8),
+    padding: theme.spacing(12, 8),
   },
   [theme.breakpoints.down('mobile')]: {
-    padding: theme.spacing(4, 5),
+    padding: theme.spacing(14, 5),
   },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(14, 5),
   },
   [theme.breakpoints.down('xs')]: {
     padding: theme.spacing(2),
@@ -40,7 +40,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  padding: theme.spacing(8, 18),
+  padding: theme.spacing(14, 18),
   position: 'relative',
   width: '100%',
 }));

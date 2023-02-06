@@ -25,12 +25,12 @@ interface Props {
 
 // Local Variables
 const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
-  '.buttonContainer': {
+  '.actionContainer': {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(3),
+    },
     display: 'flex',
-    marginTop: theme.spacing(2),
     justifyContent: 'flex-end',
-    width: 200,
-    textAlign: 'right',
   },
   '.listItemIcon': {
     height: 24,
@@ -42,6 +42,9 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     display: 'none',
   },
   '.listItemSecondaryText': {
+    [theme.breakpoints.down('mobile')]: {
+      maxWidth: '70%',
+    },
     [theme.breakpoints.down('sm')]: {
       fontSize: '0.9rem',
     },
@@ -157,51 +160,60 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
         </ListItem>
 
         {isRegisteredForCurrentYear && (
-          <ListItem className="paymentListItem">
-            <ListItemText
-              classes={{
-                primary: 'listItemText',
-                secondary: 'listItemSecondaryText',
-              }}
-              primary="Download W-9 Form"
-              secondary={`If your district requires an IRS W-9 Form for ${appNameShort}, download or print a copy.`}
-            />
-
-            <ListItemSecondaryAction>
-              <CtaButton
-                colorVariant="resources"
-                fontWeight={600}
-                to="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
-              >
-                Download W-9
-              </CtaButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        )}
-        {isPaypal && (
-          <ListItem className="paymentListItem">
-            <ListItemText
-              classes={{
-                primary: 'listItemText',
-                secondary: 'listItemSecondaryText',
-              }}
-              primary="Need a copy of your receipt?"
-            />
-
-            <ListItemSecondaryAction>
-              <ReactToPrint
-                content={() => printReceiptRef.current}
-                trigger={() => (
-                  <CtaButton
-                    colorVariant="resources"
-                    fontWeight={600}
-                  >
-                    Print Receipt
-                  </CtaButton>
-                )}
+          <>
+            <ListItem className="paymentListItem">
+              <ListItemText
+                classes={{
+                  primary: 'listItemText',
+                  secondary: 'listItemSecondaryText',
+                }}
+                primary="Download W-9 Form"
+                secondary={`If your district requires an IRS W-9 Form for ${appNameShort}, download or print a copy.`}
               />
-            </ListItemSecondaryAction>
-          </ListItem>
+            </ListItem>
+
+            <ListItem className="actionContainer">
+              <ListItemSecondaryAction>
+                <CtaButton
+                  colorVariant="resources"
+                  fontWeight={600}
+                  to="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
+                >
+                  Download W-9
+                </CtaButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </>
+        )}
+
+        {isPaypal && (
+          <>
+            <ListItem className="paymentListItem">
+              <ListItemText
+                classes={{
+                  primary: 'listItemText',
+                  secondary: 'listItemSecondaryText',
+                }}
+                primary="Need a copy of your receipt?"
+              />
+            </ListItem>
+
+            <ListItem className="actionContainer">
+              <ListItemSecondaryAction>
+                <ReactToPrint
+                  content={() => printReceiptRef.current}
+                  trigger={() => (
+                    <CtaButton
+                      colorVariant="resources"
+                      fontWeight={600}
+                    >
+                      Print Receipt
+                    </CtaButton>
+                  )}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          </>
         )}
       </List>
 

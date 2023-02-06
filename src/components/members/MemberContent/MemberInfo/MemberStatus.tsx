@@ -36,9 +36,10 @@ interface Props {
 // Local Variables
 const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
   '.balanceText': {
-    marginTop: theme.spacing(3),
-    display: 'flex',
     alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginTop: theme.spacing(3),
   },
   '.contentText': {
     marginBottom: theme.spacing(2),
@@ -61,15 +62,6 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
       fontSize: '0.9rem',
       maxWidth: '70%',
     },
-    // [presets.Mobile]: {
-    //   maxWidth: '60%',
-    // },
-    // [presets.Phablet]: {
-    //   maxWidth: '70%',
-    // },
-    // [presets.Tablet]: {
-    //   maxWidth: '80%',
-    // },
     fontSize: '1rem',
     fontWeight: 500,
   },

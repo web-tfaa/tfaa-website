@@ -22,6 +22,13 @@ interface Props {
 
 // Local Variables
 const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
+  '.actionContainer': {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(3),
+    },
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
   '.contentText': {
     marginBottom: theme.spacing(2),
   },
@@ -29,8 +36,12 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     paddingBottom: theme.spacing(2),
   },
   '.listItemSecondaryText': {
+    [theme.breakpoints.down('mobile')]: {
+      maxWidth: '70%',
+    },
     [theme.breakpoints.down('sm')]: {
       fontSize: '0.9rem',
+      maxWidth: '60%',
     },
     maxWidth: '80%',
   },
@@ -43,15 +54,6 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
       fontSize: '0.9rem',
       maxWidth: '70%',
     },
-    // [presets.Mobile]: {
-    //   maxWidth: '60%',
-    // },
-    // [presets.Phablet]: {
-    //   maxWidth: '70%',
-    // },
-    // [presets.Tablet]: {
-    //   maxWidth: '80%',
-    // },
     fontSize: '1rem',
     fontWeight: 500,
   },
@@ -128,6 +130,7 @@ const MemberActions: React.FC<Props> = ({
           <ListItemText
             classes={{
               primary: 'listItemText',
+              secondary: 'listItemSecondaryText',
             }}
             primary={`Update email for ${appNameShort} website login`}
             secondary={(
@@ -138,7 +141,9 @@ const MemberActions: React.FC<Props> = ({
               </>
             )}
           />
+        </ListItem>
 
+        <ListItem className="actionContainer">
           <ListItemSecondaryAction>
             <CtaButton
               colorVariant="resources"
@@ -155,6 +160,7 @@ const MemberActions: React.FC<Props> = ({
           <ListItemText
             classes={{
               primary: 'listItemText',
+              secondary: 'listItemSecondaryText',
             }}
             primary="Need to update any information?"
             secondary={(
@@ -163,6 +169,9 @@ const MemberActions: React.FC<Props> = ({
               </>
             )}
           />
+        </ListItem>
+
+        <ListItem className="actionContainer">
           <ListItemSecondaryAction>
             <CtaButton
               colorVariant="resources"

@@ -10,6 +10,7 @@ import { getFullName } from '../../../utils/getFullName';
 import MemberContentBanner from './MemberContentBanner';
 import WelcomeBanner from './WelcomeBanner';
 import MemberInfo from './MemberInfo';
+import WhereWeHaveBeen from '../../about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -70,6 +71,8 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
         isAdmin={isAdmin}
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}
       />
+
+      <WhereWeHaveBeen color="membership" />
     </>
   );
 };
