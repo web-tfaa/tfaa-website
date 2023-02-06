@@ -79,7 +79,7 @@ const INITIAL_SPONSOR_FORM_VALUES: SponsorFormValues = {
 };
 
 const initialSponsorReducerState = {
-  activeStep: 2,
+  activeStep: 0,
   completedSponsorSteps: COMPLETED_SPONSOR_STEPS_INITIAL_STATE,
   sponsorForm: INITIAL_SPONSOR_FORM_VALUES,
 };
