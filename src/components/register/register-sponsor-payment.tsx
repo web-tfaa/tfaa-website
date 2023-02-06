@@ -10,24 +10,26 @@ import {
 } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
 import React, {
-  FC, ReactInstance, useCallback, useEffect, useRef, useState
+  ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { SponsorFormValues } from '../../pages/sponsors/register';
+import { SponsorFormValues } from './SponsorRegisterContent';
 import {
   doGetInvoiceId,
   doUpdateEntry,
   doUpdateInvoiceId as updateFirestoreInvoiceId,
 } from '../../firebase/db';
+import { appNameShort } from '../../utils/app-constants';
 import { classChampionAlreadySecured } from './register-sponsor-form';
+import CtaButton from '../shared/CtaButton';
 import EnhancedAlert from '../shared/EnhancedAlert';
-import FormHr from '../shared/form-hr';
+import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import Invoice from './invoice';
-import RegisterButton from './register-button';
 import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
@@ -70,7 +72,7 @@ const currentDate = format(new Date(), 'M/d/yyyy');
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
 
 // Component Definition
-const RegisterSponsorPayment: FC<Props> = ({
+const RegisterSponsorPayment: React.FC<Props> = ({
   authenticatedUserId,
   onUpdateSponsorForm,
   sponsorForm,
@@ -183,9 +185,11 @@ const RegisterSponsorPayment: FC<Props> = ({
 
   return (
     <StyledRoot>
-      <h2>3. Confirm Sponsor Level and send payment</h2>
+      <FormTitle>
+        3. Confirm Sponsor Level and send payment
+      </FormTitle>
 
-      <FormHr />
+      <FormDivider />
 
       <div>
         <Box mb={6}>
@@ -206,7 +210,7 @@ const RegisterSponsorPayment: FC<Props> = ({
                   : (
                     <span>
                       Contact the{' '}
-                      <a href="mailto:jeffrey.turner@allenisd.org">TMAC Executive Secretary</a>{' '}
+                      <a href="mailto:jeffrey.turner@allenisd.org">{appNameShort} Executive Secretary</a>{' '}
                       for more details
                     </span>
                   )}
@@ -315,7 +319,7 @@ const RegisterSponsorPayment: FC<Props> = ({
         </Box>
 
         <div>
-          <h3>Submit Payment to TMAC</h3>
+          <h3>Submit Payment to {appNameShort}</h3>
 
           <Box
             ml={3}
@@ -325,8 +329,9 @@ const RegisterSponsorPayment: FC<Props> = ({
               Follow these steps:
               <ol>
                 <li>Click the button below to print an invoice.</li>
+
                 <li>
-                  Send the invoice and payment directly to the TMAC
+                  Send the invoice and payment directly to the {appNameShort}{' '}
                   Executive Secretary as detailed on the invoice.
                 </li>
               </ol>
@@ -335,9 +340,13 @@ const RegisterSponsorPayment: FC<Props> = ({
             <ReactToPrint
               content={() => printInvoiceRef.current}
               trigger={() => (
-                <RegisterButton onClick={updateFirestoreInvoiceId}>
+                <CtaButton
+                  fontWeight={600}
+                  onClick={updateFirestoreInvoiceId}
+                  width={180}
+                >
                   Print Invoice
-                </RegisterButton>
+                </CtaButton>
               )}
             />
 
@@ -354,7 +363,7 @@ const RegisterSponsorPayment: FC<Props> = ({
             </Box>
 
             <Box mt={3}>
-              If your organization requires the IRS W-9 Form for TMAC,
+              If your organization requires an IRS W-9 Form from {appNameShort},
               please download or print a copy below.
             </Box>
 

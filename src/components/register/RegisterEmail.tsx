@@ -1,13 +1,12 @@
 // External Dependencies
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import Typography from '@mui/material/Typography';
-import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
 import { MemberFormValues } from './MemberRegisterContent';
-import { SponsorFormValues } from '../../pages/sponsors/register';
+import { SponsorFormValues } from './SponsorRegisterContent';
 import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import LoginForm from './login-form';
 import LoadingContainer from '../shared/LoadingContainer';
 import SignInUpElement from './sign-in-up-element';
@@ -21,14 +20,6 @@ interface Props {
     updatedMemberForm?: MemberFormValues | SponsorFormValues,
   ) => void;
 }
-
-// Local Variables
-const StyledRoot = styled.section({
-  '.registerStep1Title': {
-    fontSize: 34,
-    fontWeight: 900,
-  },
-});
 
 // Component Definition
 const RegisterEmail: React.FC<Props> = ({
@@ -91,15 +82,15 @@ const RegisterEmail: React.FC<Props> = ({
   ]);
 
   return (
-    <StyledRoot>
-      <Typography className="registerStep1Title">
+    <section>
+      <FormTitle>
         1. Sign up for {appNameShort} website login
-      </Typography>
+      </FormTitle>
 
       {dividerElement}
 
       {childrenElements}
-    </StyledRoot>
+    </section>
   );
 };
 

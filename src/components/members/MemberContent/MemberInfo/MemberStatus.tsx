@@ -112,7 +112,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
 
   const amountToPay = currentMemberData?.MemberType === 'Active' ? 50.00 : 30.00;
 
-  const handleSuccessfulPayment = useCallback((payment: PaypalPayment) => {
+  const handleSuccessfulPayment = useCallback(async (payment: PaypalPayment) => {
     const updatedMemberData = {
       ...currentMemberData,
       AmountPaid: currentMemberData?.MemberType === 'Active' ? 50 : 30,
@@ -128,11 +128,15 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
     // Update the member's payment data in the Firestore database
     // This shape should be the same as register-membmer-payment
     //  in the handleCompleteMemberPaymentStep function
-    doUpdateEntry(
-      updatedMemberData,
-      FIRESTORE_MEMBER_COLLECTION,
-      currentMemberData?.userId,
-    );
+    try {
+      await doUpdateEntry(
+        updatedMemberData,
+        FIRESTORE_MEMBER_COLLECTION,
+        currentMemberData?.userId,
+      );
+    } catch (error) {
+      console.error('Error while updating after a successful payment', error);
+    }
 
     // Instead of trying to update all of the data,
     //  it's easier to reload the Members page
@@ -220,9 +224,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
           <Divider className="memberStatusDivider" />
 
           <Typography
-            sx={{
-              fontWeight: 600,
-            }}
+            sx={{ fontWeight: 600 }}
             variant="subtitle1"
           >
             Payment Options

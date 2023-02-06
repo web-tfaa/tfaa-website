@@ -84,7 +84,7 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
 };
 
 const initialMemberReducerState = {
-  activeMemberStep: 2,
+  activeMemberStep: 0,
   completedMemberSteps: COMPLETED_MEMBER_STEPS_INITIAL_STATE,
   memberForm: INITIAL_MEMBER_FORM_VALUES,
 };

@@ -1,13 +1,15 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 
 // Internal Dependencies
 import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
-} from '../../pages/sponsors/register';
-import FormHr from '../shared/form-hr';
+} from './SponsorRegisterContent';
+import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import RegisterSponsorForm from './register-sponsor-form';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -19,7 +21,7 @@ interface Props {
 }
 
 // Component Definition
-const RegisterSponsorFormWrapper: FC<Props> = ({
+const RegisterSponsorFormWrapper: React.FC<Props> = ({
   authenticatedUserId,
   initialSponsorFormValues,
   onCompleteSponsorStep,
@@ -32,11 +34,11 @@ const RegisterSponsorFormWrapper: FC<Props> = ({
 
   return (
     <section>
-      <h2>
-        2. Join TMAC as a Sponsor
-      </h2>
+      <FormTitle>
+        2. Join {appNameShort} as a Sponsor
+      </FormTitle>
 
-      <FormHr />
+      <FormDivider />
 
       <RegisterSponsorForm
         authenticatedUserId={authenticatedUserId}

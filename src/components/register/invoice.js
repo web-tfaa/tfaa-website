@@ -1,17 +1,17 @@
 // External Dependencies
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import FormHr from '../shared/form-hr';
-import InvoiceTable from './invoice-table';
+import { appName, appNameShort } from '../../utils/app-constants';
 import {
   currentSchoolYearLong,
 } from '../../utils/helpers';
-import { appName, appNameShort } from '../../utils/app-constants';
+import FormDivider from '../shared/FormDivider';
+import InvoiceTable from './invoice-table';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -120,7 +120,7 @@ class Invoice extends Component {
           </Box>
         </header>
 
-        <FormHr red />
+        <FormDivider />
 
         <Box sx={{ fontSize: 16, margin: '0 32px' }}>
           <h3>{appName}</h3>

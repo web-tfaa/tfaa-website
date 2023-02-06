@@ -2,7 +2,6 @@
 import {
   Box,
   Card,
-  Divider,
   FormControl,
   FormControlLabel,
   Radio,
@@ -33,6 +32,7 @@ import { currentSchoolYearLong } from '../../utils/helpers';
 import { appNameShort } from '../../utils/app-constants';
 import CtaButton from '../shared/CtaButton';
 import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import Invoice from './invoice';
 import PaypalButtonWrapper, {
   PaypalPayment,
@@ -74,10 +74,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     letterSpacing: '0.05rem',
     marginTop: '0.3rem',
     marginBottom: theme.spacing(1.5),
-  },
-  '.registerStep3Title': {
-    fontSize: 34,
-    fontWeight: 900,
   },
   '.successMemberInfoCard': {
     padding: theme.spacing(0, 2, 3),
@@ -445,12 +441,9 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   return (
     <StyledRoot>
-      <Typography
-        className="registerStep3Title"
-        component="h2"
-      >
+      <FormTitle component="h2">
         3. Pay {appNameShort} Dues
-      </Typography>
+      </FormTitle>
 
       <FormDivider />
 
