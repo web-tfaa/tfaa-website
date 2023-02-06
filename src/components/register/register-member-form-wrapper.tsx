@@ -1,5 +1,5 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 
 // Internal Dependencies
 import {
@@ -17,7 +17,7 @@ interface Props {
 }
 
 // Component Definition
-const MemberFormValuesWrapper: FC<Props> = ({
+const MemberFormValuesWrapper: React.FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
   onCompleteMemberStep,

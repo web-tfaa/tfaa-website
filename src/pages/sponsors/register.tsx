@@ -12,7 +12,7 @@ import Layout from '../../components/layout';
 import RegisterEmail from '../../components/register/register-email';
 import RegisterSponsorFormWrapper from '../../components/register/register-sponsor-form-wrapper';
 import RegisterSponsorPayment from '../../components/register/register-sponsor-payment';
-import RegisterStepper from '../../components/register/register-stepper';
+import RegisterStepper from '../../components/register/RegisterStepper';
 
 // Local Typings
 interface Props {
