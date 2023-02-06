@@ -10,10 +10,9 @@ import {
   Typography,
 } from '@mui/material';
 import React, {
-  FC, ReactInstance, useCallback, useEffect, useRef, useState
+  ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
-import format from 'date-fns/format';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -30,8 +29,8 @@ import { currentSchoolYearLong } from '../../utils/helpers';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
-} from '../../pages/members/register';
-import FormHr from '../shared/form-hr';
+} from './MemberRegisterContent';
+import FormDivider from '../shared/FormDivider';
 import Invoice from './invoice';
 import PaypalButtonWrapper, {
   PaypalPayment,
@@ -79,7 +78,7 @@ const StyledRoot = styled.section(({ theme }) => ({
 }));
 
 // Component Definition
-const RegisterMemberPayment: FC<Props> = ({
+const RegisterMemberPayment: React.FC<Props> = ({
   authenticatedUserId,
   memberForm,
   onCompleteMemberStep,
@@ -426,7 +425,7 @@ const RegisterMemberPayment: FC<Props> = ({
     <StyledRoot>
       <h2>3. Pay TMAC Dues</h2>
 
-      <FormHr />
+      <FormDivider />
 
       {hasCompletedPayment
         ? successfulMemberPaymentElement

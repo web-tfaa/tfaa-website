@@ -1,5 +1,4 @@
 // External Dependencies
-import Divider from '@mui/material/Divider';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
@@ -8,6 +7,7 @@ import styled from 'styled-components';
 import { appNameShort } from '../../utils/app-constants';
 import { MemberFormValues } from './MemberRegisterContent';
 import { SponsorFormValues } from '../../pages/sponsors/register';
+import FormDivider from '../shared/FormDivider';
 import LoginForm from './login-form';
 import LoadingContainer from '../shared/LoadingContainer';
 import SignInUpElement from './sign-in-up-element';
@@ -24,11 +24,6 @@ interface Props {
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '.registerStep1Divider': {
-    backgroundColor: theme.palette.tfaa.resources,
-    height: 3,
-    margin: theme.spacing(1, 0, 4),
-  },
   '.registerStep1Title': {
     fontSize: 34,
     fontWeight: 900,
@@ -62,7 +57,7 @@ const RegisterEmail: React.FC<Props> = ({
   }, []);
 
   const dividerElement = useMemo(() => (
-    <Divider className="registerStep1Divider" />
+    <FormDivider />
   ), []);
 
   const showLoadingContainer = isAuthenticated && hasCompletedRegisterEmail;
