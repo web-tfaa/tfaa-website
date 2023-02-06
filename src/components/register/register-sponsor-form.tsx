@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Typography,
 } from '@mui/material';
-import React, { FC, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ import styled from 'styled-components';
 import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
-} from '../../pages/sponsors/register';
+} from './SponsorRegisterContent';
 import { doCreateEntry } from '../../firebase/db';
 import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
@@ -74,7 +74,7 @@ const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
 export const classChampionAlreadySecured = true;
 
 // Component Definition
-const RegisterSponsorForm: FC<Props> = ({
+const RegisterSponsorForm: React.FC<Props> = ({
   authenticatedUserId,
   initialSponsorFormValues,
   onCompleteSponsorStep,

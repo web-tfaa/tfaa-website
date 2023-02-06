@@ -10,14 +10,14 @@ import {
 } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
 import React, {
-  FC, ReactInstance, useCallback, useEffect, useRef, useState
+  ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
 import ReactToPrint from 'react-to-print';
 import format from 'date-fns/format';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { SponsorFormValues } from '../../pages/sponsors/register';
+import { SponsorFormValues } from './SponsorRegisterContent';
 import {
   doGetInvoiceId,
   doUpdateEntry,
@@ -25,7 +25,7 @@ import {
 } from '../../firebase/db';
 import { classChampionAlreadySecured } from './register-sponsor-form';
 import EnhancedAlert from '../shared/EnhancedAlert';
-import FormHr from '../shared/form-hr';
+import FormDivider from '../shared/FormDivider';
 import Invoice from './invoice';
 import RegisterButton from './register-button';
 import usePrevious from '../../utils/hooks/usePrevious';
@@ -70,7 +70,7 @@ const currentDate = format(new Date(), 'M/d/yyyy');
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
 
 // Component Definition
-const RegisterSponsorPayment: FC<Props> = ({
+const RegisterSponsorPayment: React.FC<Props> = ({
   authenticatedUserId,
   onUpdateSponsorForm,
   sponsorForm,
@@ -185,7 +185,7 @@ const RegisterSponsorPayment: FC<Props> = ({
     <StyledRoot>
       <h2>3. Confirm Sponsor Level and send payment</h2>
 
-      <FormHr />
+      <FormDivider />
 
       <div>
         <Box mb={6}>

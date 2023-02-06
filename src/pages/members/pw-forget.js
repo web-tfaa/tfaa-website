@@ -11,7 +11,7 @@ import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 import { emailRegex } from '../../utils/helpers';
 import Container from '../../components/shared/container';
-import FormHr from '../../components/shared/form-hr';
+import FormDivider from '../../components/shared/FormDivider';
 import Layout from '../../components/layout';
 
 // Local Variables
@@ -130,7 +130,7 @@ class PasswordForgetForm extends Component {
                 Password Reset
               </h2>
 
-              <FormHr />
+              <FormDivider />
 
               {showSuccessMessage && (
                 <div className="successMessage">
