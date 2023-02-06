@@ -45,7 +45,7 @@ const StyledRoot = styled.section<StyledRootProps>(({
 
   '.whatWeDoItemContent': {
     [theme.breakpoints.down('lg')]: {
-      padding: theme.spacing(4, 2, 4),
+      padding: theme.spacing(1, 2, 4),
     },
     [theme.breakpoints.down('md')]: {
       padding: theme.spacing(3, 2, 3),
