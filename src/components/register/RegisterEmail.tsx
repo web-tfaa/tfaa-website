@@ -25,13 +25,13 @@ interface Props {
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '.registerStep1Divider': {
-      backgroundColor: theme.palette.tfaa.resources,
-      height: 3,
-      margin: theme.spacing(1, 0, 4),
+    backgroundColor: theme.palette.tfaa.resources,
+    height: 3,
+    margin: theme.spacing(1, 0, 4),
   },
   '.registerStep1Title': {
-      fontSize: 34,
-      fontWeight: 900,
+    fontSize: 34,
+    fontWeight: 900,
   },
 }));
 
