@@ -23,12 +23,12 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.section(({ theme }) => ({
+const StyledRoot = styled.section({
   '.registerStep1Title': {
     fontSize: 34,
     fontWeight: 900,
   },
-}));
+});
 
 // Component Definition
 const RegisterEmail: React.FC<Props> = ({

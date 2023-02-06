@@ -17,6 +17,10 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import {
+  HandleCompleteMemberStepType,
+  MemberFormValues,
+} from './MemberRegisterContent';
+import {
   doGetInvoiceId,
   doGetReceiptId,
   doUpdateEntry,
@@ -26,16 +30,13 @@ import {
 } from '../../firebase/db';
 import { currentDate } from '../../utils/dateHelpers';
 import { currentSchoolYearLong } from '../../utils/helpers';
-import {
-  HandleCompleteMemberStepType,
-  MemberFormValues,
-} from './MemberRegisterContent';
+import { appNameShort } from '../../utils/app-constants';
+import CtaButton from '../shared/CtaButton';
 import FormDivider from '../shared/FormDivider';
 import Invoice from './invoice';
 import PaypalButtonWrapper, {
   PaypalPayment,
 } from './paypal/paypal-button-wrapper';
-import RegisterButton from './register-button';
 import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
@@ -54,10 +55,12 @@ const StyledRoot = styled.section(({ theme }) => ({
     display: 'flex',
   },
   '.memberLevelAmount': {
+    fontSize: 34,
     marginLeft: theme.spacing(1),
   },
   '.memberLevelHeading': {
-    fontSize: '1.5rem',
+    fontSize: 34,
+    fontWeight: 700,
     marginTop: '1rem',
   },
   '.memberName': {
@@ -71,6 +74,10 @@ const StyledRoot = styled.section(({ theme }) => ({
     letterSpacing: '0.05rem',
     marginTop: '0.3rem',
     marginBottom: theme.spacing(1.5),
+  },
+  '.registerStep3Title': {
+    fontSize: 34,
+    fontWeight: 900,
   },
   '.successMemberInfoCard': {
     padding: theme.spacing(0, 2, 3),
@@ -237,13 +244,11 @@ const RegisterMemberPayment: React.FC<Props> = ({
           <Typography
             className="memberLevelAmount"
             component="span"
-            variant="h6"
+            variant="h4"
           >
             — {isActive ? '$50.00' : '$30.00'}
           </Typography>
         </h3>
-
-        <Divider />
 
         <Typography
           className="memberName"
@@ -267,7 +272,14 @@ const RegisterMemberPayment: React.FC<Props> = ({
         <Box mt={3}>
           <ReactToPrint
             content={() => printReceiptIdRef.current}
-            trigger={() => <RegisterButton>Print Receipt</RegisterButton>}
+            trigger={() => (
+              <CtaButton
+                fontWeight={600}
+                width={160}
+              >
+                Print Receipt
+              </CtaButton>
+            )}
           />
         </Box>
       </Card>
@@ -276,9 +288,12 @@ const RegisterMemberPayment: React.FC<Props> = ({
         mt={5}
         mx={4}
       >
-        <h2>
-          Thank you for joining TMAC for the {currentSchoolYearLong} school year!
-        </h2>
+        <Typography
+          className="registerStep3Title"
+          component="h3"
+        >
+          Thank you for joining {appNameShort} for the {currentSchoolYearLong} school year!
+        </Typography>
       </Box>
 
       <Box display="none">
@@ -323,6 +338,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
                     <Typography component="span">
                       Active
                     </Typography>
+
                     <Typography
                       color="textSecondary"
                       component="span"
@@ -340,6 +356,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
                     <Typography component="span">
                       Retired
                     </Typography>
+
                     <Typography
                       color="textSecondary"
                       component="span"
@@ -384,12 +401,17 @@ const RegisterMemberPayment: React.FC<Props> = ({
               </li>
             </ol>
           </Box>
+
           <ReactToPrint
             content={() => printInvoiceRef.current}
             trigger={() => (
-              <RegisterButton onClick={updateFirestoreInvoiceId}>
+              <CtaButton
+                fontWeight={600}
+                onClick={updateFirestoreInvoiceId}
+                width={160}
+              >
                 Print Invoice
-              </RegisterButton>
+              </CtaButton>
             )}
           />
           <Box display="none">
@@ -423,7 +445,12 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   return (
     <StyledRoot>
-      <h2>3. Pay TMAC Dues</h2>
+      <Typography
+        className="registerStep3Title"
+        component="h2"
+      >
+        3. Pay {appNameShort} Dues
+      </Typography>
 
       <FormDivider />
 
