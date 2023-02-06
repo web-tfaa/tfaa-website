@@ -40,17 +40,19 @@ const RegisterEmail: React.FC<Props> = ({
   isAuthenticated,
   onCompleteStep,
 }) => {
-  console.log('RegisterEmail • isAuthenticated', isAuthenticated);
-
   const [viewingSignUp, setViewingSignUp] = useState(true);
   const [hasCompletedRegisterEmail, setHasCompletedRegisterEmail] = useState(false);
 
   useEffect(() => {
-    if (hasCompletedRegisterEmail) {
-      setTimeout(() => onCompleteStep(0), 2000);
-    }
-  }, [hasCompletedRegisterEmail]);
+    let timer: ReturnType<typeof setTimeout>;
 
+    if (isAuthenticated && hasCompletedRegisterEmail) {
+      timer = setTimeout(() => onCompleteStep(0), 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [hasCompletedRegisterEmail, isAuthenticated]);
+
+  // Handler Functions
   const handleClickSignInLink = useCallback(() => {
     setViewingSignUp(false);
   }, []);
@@ -63,7 +65,9 @@ const RegisterEmail: React.FC<Props> = ({
     <Divider className="registerStep1Divider" />
   ), []);
 
-  const childrenElements = useMemo(() => (isAuthenticated && hasCompletedRegisterEmail ? (
+  const showLoadingContainer = isAuthenticated && hasCompletedRegisterEmail;
+
+  const childrenElements = useMemo(() => (showLoadingContainer? (
     <LoadingContainer
       step={2}
       title="Login Successful"
@@ -84,10 +88,10 @@ const RegisterEmail: React.FC<Props> = ({
       )}
     </>
   )), [
+    dividerElement,
     handleClickSignInLink,
-    hasCompletedRegisterEmail,
     handleUpdateCompletedStep,
-    isAuthenticated,
+    showLoadingContainer,
     viewingSignUp,
   ]);
 

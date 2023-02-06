@@ -22,8 +22,6 @@ const MemberFormValuesWrapper: React.FC<Props> = ({
   initialMemberFormValues,
   onCompleteMemberStep,
 }) => {
-  console.log('MemberFormValuesWrapper');
-
   if (!authenticatedUserId) {
     return null;
   }

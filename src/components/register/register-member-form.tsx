@@ -4,7 +4,7 @@
 import {
   Box,
 } from '@mui/material';
-import React, { FC, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
@@ -13,16 +13,16 @@ import styled from 'styled-components';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
-} from '../../pages/members/register';
+} from './MemberRegisterContent';
 import { doCreateEntry } from '../../firebase/db';
 import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
 import { registerMemberSchema } from './schemas';
+import CtaButton from '../shared/CtaButton';
 import CustomTextField from '../shared/CustomTextField';
 import FormikCheckbox from '../shared/FormikCheckbox';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
-import RegisterButton from './register-button';
 
 // Local Typings
 interface Props {
@@ -52,7 +52,7 @@ const StyledRoot = styled.div({
 const FIRESTORE_MEMBER_COLLECTION = 'registration';
 
 // Component Definition
-const RegisterMemberForm: FC<Props> = ({
+const RegisterMemberForm: React.FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
   onCompleteMemberStep,
@@ -105,6 +105,7 @@ const RegisterMemberForm: FC<Props> = ({
   };
 
   if (!authenticatedUserId) {
+    console.log('bye!');
     navigate('/members');
   }
 
@@ -342,12 +343,17 @@ const RegisterMemberForm: FC<Props> = ({
                   </EnhancedAlert>
                 </Box>
 
-                <RegisterButton
-                  buttonType="submit"
-                  isDisabled={hasTouchedform && hasErrors}
+                <CtaButton
+                  colorVariant="about"
+                  disabled={hasTouchedform && hasErrors}
+                  fontWeight={600}
+                  rightArrow
+                  size="large"
+                  type="submit"
+                  width={160}
                 >
-                  Continue to Step 3
-                </RegisterButton>
+                  Continue
+                </CtaButton>
               </div>
             </Form>
           );

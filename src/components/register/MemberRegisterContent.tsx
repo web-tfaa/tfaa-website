@@ -1,6 +1,6 @@
 // External Dependencies
 import Box from '@mui/material/Box';
-import React, { useCallback, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -121,7 +121,6 @@ function memberFormReducer(state, { type, payload }) {
     case MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP: {
       const { newMemberStep } = payload;
 
-      console.log('in reducer ••', newMemberStep);
       return {
         ...state,
         activeMemberStep: newMemberStep,
@@ -154,11 +153,7 @@ function memberFormReducer(state, { type, payload }) {
 
 // Component Definition
 const MemberRegisterContent: React.FC = () => {
-  console.log('MembersRegisterContent');
-
   const { currentAuthUser } = useGetAuthUser();
-
-  console.log('currentAuthUser', currentAuthUser);
 
   const isAuthenticated = Boolean(currentAuthUser);
 
@@ -177,11 +172,8 @@ const MemberRegisterContent: React.FC = () => {
     completedMemberSteps,
   } = memberFormState;
 
-  console.log('activeMemberStep', activeMemberStep);
-
   // Local Handlers
   const handleUpdateActiveMemberStep = (newMemberStep: number) => {
-    console.log('update active step', newMemberStep);
     dispatch({
       type: MEMBER_FORM_ACTIONS.UPDATE_ACTIVE_MEMBER_STEP,
       payload: { newMemberStep },
@@ -213,7 +205,6 @@ const MemberRegisterContent: React.FC = () => {
   useEffect(() => {
     // The user can skip the "sign in" step if they are already signed in
     if (activeMemberStep === 0 && isAuthenticated) {
-      console.log('skipping step 1');
       handleUpdateActiveMemberStep(1);
     }
   }, [activeMemberStep, isAuthenticated]);

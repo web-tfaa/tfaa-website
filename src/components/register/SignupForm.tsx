@@ -109,8 +109,9 @@ const SignupForm: React.FC<Props> = ({ onRegisterSignUp }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      onRegisterSignUp();
-      navigate('/members');
+      onRegisterSignUp
+        ? onRegisterSignUp()
+        : navigate('/members');
     }
   }, [isAuthenticated, onRegisterSignUp]);
 
