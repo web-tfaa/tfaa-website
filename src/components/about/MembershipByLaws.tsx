@@ -6,40 +6,52 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appName } from '../../utils/app-constants';
+import FormTitle from '../shared/FormTitle';
 
 // Local Typings
 interface Props {
   showLinkToByLaws?: boolean;
 }
+interface StyledRootProps {
+  $small: boolean;
+}
 
 // Local Variables
-const StyledRoot = styled.div(({ theme }) => ({
+const StyledRoot = styled.div<StyledRootProps>(({
+  $small,
+  theme,
+}) => ({
   '.memberByLawsTitle': {
-    fontSize: 16,
+    fontSize: $small ? 16 : 18,
     fontWeight: 700,
-    marginBottom: theme.spacing(0.5),
+    marginBottom: theme.spacing(1),
   },
   '.paddingMedium': {
     paddingLeft: theme.spacing(2),
   },
 
   p: {
-    fontSize: 16,
+    fontSize: $small ? 16 : 18,
     marginBottom: theme.spacing(2),
   },
 
-  fontSize: 16,
+  fontSize: $small ? 16 : 18,
 }));
 
+// This section of the By-laws is used in the Constitution and Membership pages.
+// The `showLinkToByLaws` prop is only used on the Membership page.
+
 // Component Definition
-const MembershipByLaws: React.FC<Props> = ({ showLinkToByLaws = false }) => (
-  <StyledRoot>
-    <Typography
+const MembershipByLaws: React.FC<Props> = ({
+  showLinkToByLaws = false,
+}) => (
+  <StyledRoot $small={showLinkToByLaws}>
+    <FormTitle
       className="memberByLawsTitle"
       component="h3"
     >
       ARTICLE II &mdash; MEMBERSHIP
-    </Typography>
+    </FormTitle>
 
     {showLinkToByLaws && (
       <Typography>
