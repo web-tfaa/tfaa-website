@@ -1,7 +1,7 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby-theme-material-ui';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -145,7 +145,7 @@ const HomeBanner: React.FC = () => {
             We nurture and grow leaders in Fine Arts Education
           </h2>
 
-          <Link>
+          <Link to="/about">
             Read more about how TFAA can help you
           </Link>
         </div>
