@@ -1,14 +1,15 @@
 // External Dependencies
-import { Box } from '@mui/material';
+import { Link } from 'gatsby-theme-material-ui';
+import Box from '@mui/material/Box';
 import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import CardHeadline from '../../components/shared/cards/card-headline';
 import Container from '../../components/shared/container';
-import FuturaAnchor from '../../components/shared/FuturaAnchor';
+import FormTitle from '../../components/shared/FormTitle';
 import Layout from '../../components/layout';
 import MembershipByLaws from '../../components/about/MembershipByLaws';
+import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
 
 // Local Typings
 interface Props {
@@ -17,6 +18,11 @@ interface Props {
 
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
+  '.articleTitle': {
+    fontSize: 18,
+    fontWeight: 700,
+    marginBottom: theme.spacing(1),
+  },
   '.paddingMedium': {
     paddingLeft: theme.spacing(2),
   },
@@ -37,6 +43,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
+  fontSize: 18,
   justifyContent: 'space-between',
   lineHeight: 1.6,
 }));
@@ -48,19 +55,27 @@ const Constitution: React.FC<Props> = ({ location }) => (
     pageTitle="Constitution and Bylaws"
   >
     <StyledRoot>
+      <SponsorsBanner />
+
       <Container>
-        <h1>BYLAWS OF TEXAS MUSIC ADMINISTRATORS CONFERENCE, INC.</h1>
+        <FormTitle component="h1">
+          BYLAWS OF TEXAS MUSIC ADMINISTRATORS CONFERENCE, INC.
+        </FormTitle>
+
         <Box mb={3}>
-          <FuturaAnchor
+          <Link
             download
-            href="https://res.cloudinary.com/tmac/image/upload/v1661895580/TMAC_Bylaws_-_Updated_7-22-22.pdf"
+            to="https://res.cloudinary.com/tmac/image/upload/v1661895580/TMAC_Bylaws_-_Updated_7-22-22.pdf"
             rel="noreferrer noopener"
             target="_blank"
           >
             Download
-          </FuturaAnchor>
+          </Link>
         </Box>
-        <CardHeadline>ARTICLE I &mdash; ORGANIZATION</CardHeadline>
+
+        <FormTitle className="articleTitle">
+          ARTICLE I &mdash; ORGANIZATION
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">
@@ -111,7 +126,10 @@ const Constitution: React.FC<Props> = ({ location }) => (
 
         <MembershipByLaws />
 
-        <CardHeadline>ARTICLE III &mdash; MEETINGS OF MEMBERS</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE III &mdash; MEETINGS OF MEMBERS
+        </FormTitle>
+
         <section>
           <dl className="paddingMedium">
             <dt>Section 1 &mdash; Fall Retreat</dt>
@@ -178,7 +196,9 @@ const Constitution: React.FC<Props> = ({ location }) => (
           </dl>
         </section>
 
-        <CardHeadline>ARTICLE IV &mdash; BOARD OF DIRECTORS</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE IV &mdash; BOARD OF DIRECTORS
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">
@@ -350,7 +370,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           </dl>
         </section>
 
-        <CardHeadline>ARTICLE V &mdash; COMMITTEES</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE V &mdash; COMMITTEES
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">
@@ -415,7 +437,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           </dl>
         </section>
 
-        <CardHeadline>ARTICLE VI &mdash; AMENDMENTS</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE VI &mdash; AMENDMENTS
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">
@@ -431,7 +455,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           </dl>
         </section>
 
-        <CardHeadline>ARTICLE VII &mdash; STANDING RULES</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE VII &mdash; STANDING RULES
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">
@@ -447,7 +473,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           </dl>
         </section>
 
-        <CardHeadline>ARTICLE VIII &mdash; FISCAL YEAR</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE VIII &mdash; FISCAL YEAR
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">
@@ -458,7 +486,9 @@ officio, non-voting member of the Board of Directors. The Executive Secretary’
           </dl>
         </section>
 
-        <CardHeadline>ARTICLE IX &mdash; NONDISCRIMINATION</CardHeadline>
+        <FormTitle className="articleTitle">
+          ARTICLE IX &mdash; NONDISCRIMINATION
+        </FormTitle>
 
         <section>
           <dl className="paddingMedium">

@@ -7,26 +7,34 @@ import styled from 'styled-components';
 interface Props extends TypographyProps {
   children: React.ReactNode;
   component?: React.ElementType;
+  fontSize?: number;
+}
+interface StyledTypographyProps extends TypographyProps {
+  $fontSize?: number;
 }
 
 // Local Variables
-const StyledTypography = styled(Typography)({
+const StyledTypography = styled(Typography)<StyledTypographyProps>(({
+  $fontSize,
+}) => ({
   '&.formTitle': {
-    fontSize: 34,
+    fontSize: $fontSize,
     fontWeight: 900,
   },
-}) as typeof Typography;
+})) as typeof Typography;
 
 // Component Definition
 const FormTitle: React.FC<Props> = ({
   children,
   component = 'h3',
+  fontSize = 34,
   ...otherProps
 }) => {
   return (
     <StyledTypography
       className="formTitle"
       component={component}
+      $fontSize={fontSize}
       {...otherProps}
     >
       {children}
