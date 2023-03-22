@@ -8,6 +8,8 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
+import { isTodayAfterJune30th } from '../../utils/helpers';
+import DrumBanner from '../shared/DrumBanner';
 import EnhancedCard from '../shared/EnhancedCard';
 
 // Local Typings
@@ -87,7 +89,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   },
 
   backgroundColor: theme.palette.tfaa.membership,
-  padding: theme.spacing(4, 8),
+  padding: theme.spacing(6, 8, 4),
   width: '100%',
 }));
 
@@ -98,6 +100,11 @@ const RegisterStepper: React.FC<Props> = ({
   isViewingSponsors = false,
 }) => {
   const steps = getSteps(isAuthenticated, isViewingSponsors);
+
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  if (!isTodayAfterJune30th) {
+    return <DrumBanner drumBannerTitle="Registration Closed" />;
+  }
 
   return (
     <StyledRoot>
