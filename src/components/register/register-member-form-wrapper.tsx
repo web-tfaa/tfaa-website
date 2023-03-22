@@ -7,9 +7,11 @@ import {
   MemberFormValues,
 } from './MemberRegisterContent';
 import { appNameShort } from '../../utils/app-constants';
+import { isTodayAfterJune30th } from '../../utils/helpers';
 import FormDivider from '../shared/FormDivider';
 import FormTitle from '../shared/FormTitle';
 import RegisterForm from './register-member-form';
+import RegistrationPausedAlert from '../shared/RegistrationPausedAlert';
 
 // Local Typings
 interface Props {
@@ -26,6 +28,13 @@ const MemberFormValuesWrapper: React.FC<Props> = ({
 }) => {
   if (!authenticatedUserId) {
     return null;
+  }
+
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  const showMembershipForm = isTodayAfterJune30th;
+
+  if (!showMembershipForm) {
+    return <RegistrationPausedAlert />;
   }
 
   return (

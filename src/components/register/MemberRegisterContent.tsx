@@ -4,6 +4,7 @@ import React, { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { isTodayAfterJune30th } from '../../utils/helpers';
 import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
 import Container from '../shared/container';
 import RegisterEmail from './RegisterEmail';
@@ -211,6 +212,9 @@ const MemberRegisterContent: React.FC = () => {
 
   const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  const showMembershipCompleteNote = isTodayAfterJune30th;
+
   /* Children change depending on which step is active */
   return (
     <StyledRoot>
@@ -242,7 +246,7 @@ const MemberRegisterContent: React.FC = () => {
           />
         )}
 
-        {!hasCompletedAllMemberSteps && (
+        {!hasCompletedAllMemberSteps && showMembershipCompleteNote && (
           <Box marginTop={2}>
             * Membership is not complete until payment is received.
           </Box>
