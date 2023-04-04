@@ -183,6 +183,30 @@ const MemberActions: React.FC<Props> = ({
             </CtaButton>
           </ListItemSecondaryAction>
         </ListItem>
+
+        <ListItem className="listItem">
+          <ListItemText
+            classes={{
+              primary: 'listItemText',
+              secondary: 'listItemSecondaryText',
+            }}
+            primary="View Members List"
+            secondary="See information for registered members for this year."
+          />
+        </ListItem>
+
+        <ListItem className="actionContainer">
+          <ListItemSecondaryAction>
+            <CtaButton
+              colorVariant="resources"
+              fontWeight={500}
+              href="/members/member-list/"
+              width={144}
+            >
+              View
+            </CtaButton>
+          </ListItemSecondaryAction>
+        </ListItem>
       </List>
 
       <DialogUpdateAuthUserEmail

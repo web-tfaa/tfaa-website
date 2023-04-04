@@ -197,7 +197,6 @@ const MemberActions = ({
             </Button>
           </ListItemSecondaryAction>
         </ListItem>
-
       </List>
 
       <StyledDialog
