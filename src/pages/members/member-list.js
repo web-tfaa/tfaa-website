@@ -5,12 +5,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
+import { appNameShort } from '../../utils/app-constants';
+import { doGetUsers } from '../../firebase/db';
+import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
-import { doGetUsers } from '../../firebase/db';
-import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 
 // Local Variables
 const propTypes = {
@@ -41,10 +43,9 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const MemberListContent = ({
-  isAuthenticated,
-  userEmail,
-}) => {
+const MemberListContent = ({ isAuthenticated }) => {
+  const { currentAuthUser } = useGetAuthUser();
+
   const [userData, setUserData] = useState([]);
 
   const handleUpdateUserList = (userList) => {
@@ -61,12 +62,12 @@ const MemberListContent = ({
     return null;
   }
 
-  const isAdmin = userEmail && ADMIN_USER_EMAIL_LIST.includes(userEmail);
+  const isAdmin = Boolean(currentAuthUser && ADMIN_USER_EMAIL_LIST.includes(currentAuthUser.email));
 
   return (
     <StyledRoot>
       <Helmet>
-        <title>TMAC | Member List</title>
+        <title>{appNameShort} | Member List</title>
       </Helmet>
 
       <div className="paddingContainer">
