@@ -44,8 +44,8 @@ const StyledRoot = styled.div(({ theme }) => ({
 
   alignItems: 'center',
   display: 'flex',
-  overflow: 'hidden',
   flexDirection: 'column',
+  overflow: 'hidden',
   padding: theme.spacing(14, 18),
   position: 'relative',
   width: '100%',

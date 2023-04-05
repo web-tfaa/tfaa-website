@@ -1,7 +1,11 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
+import { navigate } from 'gatsby';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -9,42 +13,40 @@ import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
 import { appNameShort } from '../../utils/app-constants';
 import { doGetUsers } from '../../firebase/db';
 import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
+import { useLoadCurrentMemberData } from '../../utils/hooks/useLoadCurrentMemberData';
 import AuthUserContext from '../../components/session/AuthUserContext';
+import CtaButton from '../../components/shared/CtaButton';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import MemberListTable from './member-table';
+// import Motifs from '../../components/shared/Motifs';
 
 // Local Variables
 const propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
-  userEmail: PropTypes.string,
 };
 
-const defaultProps = {
-  userEmail: '',
-};
-
-const StyledRoot = styled.div(({ theme }) => ({
-  '.adminCard': {
-    maxWidth: '75%',
-  },
-
+const StyledRoot = styled.div(({ theme }) =>({
   '.paddingContainer': {
-    padding: theme.spacing(0, 3, 3),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(5, 2, 2),
+    },
+
+    padding: theme.spacing(6, 3, 3),
   },
 
-  [theme.breakpoints.up('mobile')]: {
-    paddingLeft: 0,
-  },
-
-  paddingLeft: 0,
-  width: '0 auto',
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  width: '100%',
 }));
 
 // Component Definition
-const MemberListContent = ({ isAuthenticated }) => {
+const MemberList = () => {
   const { currentAuthUser } = useGetAuthUser();
+
+  const { currentMemberData, isLoading } = useLoadCurrentMemberData();
+  console.log('currentMemberData', currentAuthUser, currentMemberData);
 
   const [userData, setUserData] = useState([]);
 
@@ -58,62 +60,59 @@ const MemberListContent = ({ isAuthenticated }) => {
     doGetUsers('registration', userList, handleUpdateUserList);
   }, []);
 
-  if (!isAuthenticated) {
-    return null;
-  }
-
   const isAdmin = Boolean(currentAuthUser && ADMIN_USER_EMAIL_LIST.includes(currentAuthUser.email));
 
+  const handleNavigateToMemberContent = useCallback(() => {
+    navigate('/members');
+  }, []);
+
   return (
-    <StyledRoot>
-      <Helmet>
-        <title>{appNameShort} | Member List</title>
-      </Helmet>
+    <Layout
+      location={location}
+      pageTitle="Member List"
+    >
+      <StyledRoot>
+        {/* <Motifs small /> */}
 
-      <div className="paddingContainer">
-        <h2>Member list</h2>
+        <div className="paddingContainer">
+          <h2>Member list</h2>
 
-        {isAdmin && (
-          <EnhancedAlert
-            className="adminCard"
-            severity="info"
-            title="Admin View"
-          >
-            You can print any member&apos;s invoice or receipt from each row.
-          </EnhancedAlert>
-        )}
+          {isLoading ? <CircularProgress size={64} /> : (
+            <>
+              {isAdmin && (
+                <EnhancedAlert
+                  className="adminCard"
+                  severity="info"
+                  title="Admin View"
+                >
+                  You can print any member&apos;s invoice or receipt from each row.
+                </EnhancedAlert>
+              )}
 
-        <MemberListTable
-          data={Object.values(userData)}
-          isAdmin={isAdmin}
-        />
-      </div>
-    </StyledRoot>
+              <MemberListTable
+                data={Object.values(userData)}
+                isAdmin={isAdmin}
+              />
+            </>
+          )}
+
+          <Box marginTop={4}>
+            <CtaButton
+              fontWeight={300}
+              onClick={handleNavigateToMemberContent}
+              startIcon={<ArrowBackIcon />}
+              variant="outlined"
+              width={220}
+            >
+              Back to Member Content
+            </CtaButton>
+          </Box>
+        </div>
+      </StyledRoot>
+    </Layout>
   );
 };
 
-MemberListContent.propTypes = propTypes;
-MemberListContent.defaultProps = defaultProps;
-
-const MemberList = (props) => (
-  // eslint-disable-next-line
-  <Layout location={props.location}>
-    <MemberListWithContext
-      {...props}
-    />
-  </Layout>
-);
-
-const MemberListWithContext = (props) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (
-      <MemberListContent
-        {...props}
-        userEmail={authUser ? authUser.email : ''}
-        isAuthenticated={!!authUser}
-      />
-    )}
-  </AuthUserContext.Consumer>
-);
+MemberList.propTypes = propTypes;
 
 export default MemberList;

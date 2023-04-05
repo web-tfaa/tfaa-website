@@ -1,4 +1,5 @@
 // External Dependencies
+import { navigate } from 'gatsby';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
@@ -123,6 +124,10 @@ const MemberActions: React.FC<Props> = ({
     }
   }, [newEmailError, newEmailValue, onUpdateShouldRefetchUserList]);
 
+  const handleNavigateToMemberList = useCallback(() => {
+    navigate('/members/member-list');
+  }, []);
+
   return (
     <StyledMemberInfoCard cardTitle="Member actions">
       <List>
@@ -200,7 +205,7 @@ const MemberActions: React.FC<Props> = ({
             <CtaButton
               colorVariant="resources"
               fontWeight={500}
-              href="/members/member-list/"
+              onClick={handleNavigateToMemberList}
               width={144}
             >
               View

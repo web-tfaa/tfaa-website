@@ -46,6 +46,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.overflowWrapper': {
     overflowX: 'auto',
+    width: '100%',
   },
 
   '.pagerButton': {
@@ -65,11 +66,12 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.table': {
     marginBottom: 0,
-    minWidth: 200,
+    width: 1000,
+    // overflow: 'scroll',
   },
 
   margin: theme.spacing(3, 0),
-  width: '100%',
+  // width: '100%',
 }));
 
 // Local Functions
