@@ -1,31 +1,28 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import { navigate } from 'gatsby';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { ADMIN_USER_EMAIL_LIST } from '../../utils/member-constants';
-import { appNameShort } from '../../utils/app-constants';
-import { doGetUsers } from '../../firebase/db';
-import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
-import { useLoadCurrentMemberData } from '../../utils/hooks/useLoadCurrentMemberData';
-import AuthUserContext from '../../components/session/AuthUserContext';
-import CtaButton from '../../components/shared/CtaButton';
-import EnhancedAlert from '../../components/shared/EnhancedAlert';
-import Layout from '../../components/layout';
-import MemberListTable from './member-table';
-// import Motifs from '../../components/shared/Motifs';
+import { ADMIN_USER_EMAIL_LIST } from '../../../utils/member-constants';
+import { TfaaAuthUser } from '../../layout';
+import {
+  // TfaaMemberData,
+  useGetAllMembers,
+} from '../../../utils/hooks/useGetAllMembers';
+import CtaButton from '../../shared/CtaButton';
+import EnhancedAlert from '../../shared/EnhancedAlert';
+import MemberListTable from '../../../pages/members/member-table';
+
+// Local Typings
+interface Props {
+  currentAuthUser: TfaaAuthUser | null;
+}
 
 // Local Variables
-const propTypes = {
-  location: PropTypes.shape({}).isRequired,
-};
-
 const StyledRoot = styled.div(({ theme }) =>({
   '.paddingContainer': {
     [theme.breakpoints.down('sm')]: {
@@ -33,6 +30,7 @@ const StyledRoot = styled.div(({ theme }) =>({
     },
 
     padding: theme.spacing(6, 3, 3),
+    width: '100%',
   },
 
   display: 'flex',
@@ -41,24 +39,19 @@ const StyledRoot = styled.div(({ theme }) =>({
   width: '100%',
 }));
 
+const useTestData = false;
+
 // Component Definition
-const MemberList = () => {
-  const { currentAuthUser } = useGetAuthUser();
+const MembersListContent: FC<Props> = ({ currentAuthUser }) => {
+  const noAuthUser = !currentAuthUser;
 
-  const { currentMemberData, isLoading } = useLoadCurrentMemberData();
-  console.log('currentMemberData', currentAuthUser, currentMemberData);
-
-  const [userData, setUserData] = useState([]);
-
-  const handleUpdateUserList = (userList) => {
-    setUserData(userList);
-  };
-
-  useEffect(() => {
-    const userList = [];
-
-    doGetUsers('registration', userList, handleUpdateUserList);
-  }, []);
+  const {
+    isLoading,
+    allMembersData,
+  } = useGetAllMembers({
+    isAuthenticated: !noAuthUser,
+    useTestData
+  });
 
   const isAdmin = Boolean(currentAuthUser && ADMIN_USER_EMAIL_LIST.includes(currentAuthUser.email));
 
@@ -67,17 +60,21 @@ const MemberList = () => {
   }, []);
 
   return (
-    <Layout
-      location={location}
-      pageTitle="Member List"
-    >
+    <>
       <StyledRoot>
-        {/* <Motifs small /> */}
-
         <div className="paddingContainer">
           <h2>Member list</h2>
 
-          {isLoading ? <CircularProgress size={64} /> : (
+          {isLoading ? (
+            <Box
+              display="flex"
+              justifyContent="center"
+              marginY={8}
+              width="100%"
+            >
+              <CircularProgress size={64} />
+            </Box>
+          ) : (
             <>
               {isAdmin && (
                 <EnhancedAlert
@@ -90,8 +87,9 @@ const MemberList = () => {
               )}
 
               <MemberListTable
-                data={Object.values(userData)}
+                data={allMembersData}
                 isAdmin={isAdmin}
+                noAuthUser={noAuthUser}
               />
             </>
           )}
@@ -109,10 +107,8 @@ const MemberList = () => {
           </Box>
         </div>
       </StyledRoot>
-    </Layout>
+    </>
   );
 };
 
-MemberList.propTypes = propTypes;
-
-export default MemberList;
+export default MembersListContent;

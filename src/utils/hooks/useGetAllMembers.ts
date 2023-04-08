@@ -7,6 +7,7 @@ import usePrevious from './usePrevious';
 
 // Local Typings
 interface UseSponsorDataQueryArguments {
+  isAuthenticated?: boolean;
   useTestData?: boolean;
 }
 
@@ -137,9 +138,10 @@ const memberTestData: TfaaMemberData[] = [
 
 // Hook Definition
 export const useGetAllMembers = ({
+  isAuthenticated = true,
   useTestData = false,
 }: UseSponsorDataQueryArguments) => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(isAuthenticated);
   const [shouldRefetchUserList, setShouldRefetchUserList] = React.useState(false);
   const [memberData, setMemberData] = React.useState<TfaaMemberData[] | null>(null);
   const previousMemberData = usePrevious(memberData);
@@ -160,7 +162,7 @@ export const useGetAllMembers = ({
 
   // Fetch member data when component mounts
   useEffect(() => {
-    if (!useTestData || shouldRefetchUserList) {
+    if (isAuthenticated && !useTestData || shouldRefetchUserList) {
       const emptyMemberList: TfaaMemberData[] = [];
 
       setIsLoading(true);
@@ -173,15 +175,18 @@ export const useGetAllMembers = ({
     }
     // We do not want to re-run this effect when other values change
   }, [
+    isAuthenticated,
     useTestData,
   ]);
 
   useEffect(() => {
-    if (!useTestData && !previousMemberData && memberData && !shouldRefetchUserList) {
+    if (isAuthenticated && !useTestData && !previousMemberData
+      && memberData && !shouldRefetchUserList) {
       handleUpdateShouldRefetchUserList(false);
       setIsLoading(false);
     }
   }, [
+    isAuthenticated,
     memberData,
     previousMemberData,
     setIsLoading,
@@ -189,7 +194,7 @@ export const useGetAllMembers = ({
     useTestData,
   ]);
 
-  if (useTestData) {
+  if (isAuthenticated && useTestData) {
     return {
       allMembersData: memberTestData,
       handleUpdateShouldRefetchUserList: null,
