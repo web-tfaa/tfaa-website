@@ -34,6 +34,7 @@ const DavidCain: FC<Props> = ({ location }) => (
       Westminster Choir College, San Jose State, and UTSA are a few of the
       places he has had the opportunity of additional training.
     </FuturaParagraph>
+
     <FuturaParagraph>
       David has studied choral music with Dr. Arpad Darazs, Katinka Daniel,
       Robert Shaw, Sir David Willocks, Dr. Charlene Archibeque, Dr. John
@@ -43,11 +44,12 @@ const DavidCain: FC<Props> = ({ location }) => (
       Singers and UTSA Choral Ensembles. He continues to learn and teach at
       each level: children to adults, infants to senior citizens, public
       school to university classroom, All-District Elementary Honor Choir to
-      the Sanctuary Choir at St. Matthew’s United Methodist Church. He has
+      the Sanctuary Choir at St. Matthew&apos;s United Methodist Church. He has
       accompanied singers, choirs, instrumentalists and chamber ensembles on
       the piano. He has directed festivals, operas, musicals and major
       choral works with orchestras.
     </FuturaParagraph>
+
     <FuturaParagraph>
       As an educator, David has mentored many young music educators. He has
       been an officer for the Kodály Educators of Texas. Central Texas Orff
