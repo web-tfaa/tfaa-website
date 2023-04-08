@@ -5,29 +5,25 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import PropTypes from 'prop-types';
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { TfaaMemberData } from '../../../utils/hooks/useGetAllMembers'
+import EnhancedAlert from '../../../components/shared/EnhancedAlert';
 import MemberTableHead from './member-table-head';
 import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Typings
 interface Props {
-  data: TfaaMemberData[];
+  data: TfaaMemberData[] | null;
   isAdmin: boolean;
+  noAuthUser: boolean;
 }
 
 export type Order = 'asc' | 'desc';
 
 // Local Variables
-const propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  isAdmin: PropTypes.bool.isRequired,
-};
-
 const StyledRoot = styled(Paper)(({ theme }) => ({
   '.MuiToolbar-root': {
     display: 'flex',
@@ -46,6 +42,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.overflowWrapper': {
     overflowX: 'auto',
+    width: '100%',
   },
 
   '.pagerButton': {
@@ -65,11 +62,10 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.table': {
     marginBottom: 0,
-    minWidth: 200,
+    // width: 1000,
   },
 
   margin: theme.spacing(3, 0),
-  width: '100%',
 }));
 
 // Local Functions
@@ -101,7 +97,7 @@ function uglifyEmail(email: string) {
   }
   const index = email.indexOf('@');
 
-  // Remove it & insert -at- back in → Array.prototype.splice()
+  // Remove it & insert -at- back in → Array.splice()
   const uglyEmailArray = email.split('');
 
   uglyEmailArray.splice(index, 1, '-at-');
@@ -113,6 +109,7 @@ function uglifyEmail(email: string) {
 const MemberTable: FC<Props> = ({
   data,
   isAdmin,
+  noAuthUser,
 }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('LastName');
@@ -136,6 +133,17 @@ const MemberTable: FC<Props> = ({
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+
+  if (noAuthUser && !data) {
+    return (
+      <EnhancedAlert
+        severity="info"
+        title="Not Authorized"
+      >
+        Sign in to the view the current member list
+      </EnhancedAlert>
+    );
+  }
 
   if (!data) {
     return null;
@@ -240,7 +248,5 @@ const MemberTable: FC<Props> = ({
     </StyledRoot>
   );
 };
-
-MemberTable.propTypes = propTypes;
 
 export default MemberTable;

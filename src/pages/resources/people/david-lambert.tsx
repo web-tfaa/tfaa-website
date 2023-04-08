@@ -33,6 +33,7 @@ const DavidLambert: FC<Props> = ({ location }) => (
       graduate study and certification in school supervision and school
       administration at the University of Houston.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Under his leadership, Fort Bend Independent School district created a
       cadre of exemplary teachers. Over the last twelve years of his tenure
@@ -48,6 +49,7 @@ const DavidLambert: FC<Props> = ({ location }) => (
       direction, the John Foster Dulles High School Band received numerous
       awards in state and national competitions.
     </FuturaParagraph>
+
     <FuturaParagraph>
       He is an active clinician and consultant. The Texas Music
       Administrators Conference named him Texas Music Administrator of the
@@ -64,6 +66,7 @@ const DavidLambert: FC<Props> = ({ location }) => (
       (2009-2011), Executive Secretary for UIL Music Region 17 and Executive
       Secretary for Phi Beta Mu International Bandmasters Fraternity.
     </FuturaParagraph>
+
     <FuturaParagraph>
       He and his wife, Sheryl, have been married for thirty eight years
       (2010). They reside in Missouri City, Texas and have two sons, Jason

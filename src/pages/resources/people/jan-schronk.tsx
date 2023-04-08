@@ -39,11 +39,13 @@ const JanSchronk: FC<Props> = ({ location }) => (
       Smith. Playing the trombone continued during her freshman year in
       college and choir throughout her college career.
     </FuturaParagraph>
+
     <FuturaParagraph>
       At fourteen, Jan began working at a local Corpus Christi radio station
       and at fifteen, she worked in television. Her weekly program,
       Chalktalks with Jan, continued through her sophomore year in college.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Jan attended Southwestern University in Georgetown, Texas on a full
       scholarship. Theatre and English were her majors, but music continued
@@ -51,6 +53,7 @@ const JanSchronk: FC<Props> = ({ location }) => (
       Science from the University of North Texas and her Mid-Management
       Certification from Texas Women&apos;s University in Denton.
     </FuturaParagraph>
+
     <FuturaParagraph>
       After moving to Dallas, Jan accepted a contract with the Dallas
       Independent School District on a Wednesday morning. On Wednesday
@@ -62,6 +65,7 @@ const JanSchronk: FC<Props> = ({ location }) => (
       month. She learned how important it was to work with the music teacher
       during this period.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Jan&apos;s son was born in 1960. Chip works for HBO PPV in New York City as
       Manager-Operations. He has performed with Granbury Opera House and
@@ -73,6 +77,7 @@ const JanSchronk: FC<Props> = ({ location }) => (
       New Jersey. Grandsons Colin and Cooper take viola and piano lessons
       and are the most loved grandsons in the world.
     </FuturaParagraph>
+
     <FuturaParagraph>
       In 1970, Jan began her career with Hurst-Euless-Bedford ISD at Central
       Junior High School. In 1974, she transferred to Trinity High School to
@@ -80,6 +85,7 @@ const JanSchronk: FC<Props> = ({ location }) => (
       Tarrant Community College. As an actress, Jan has performed at TCC,
       Circle Theatre, Casa Manana, and various community theatres.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Jan met her husband, Stacy Schronk, in 1971, when auditioning for a
       role at TCC. Stacy was head of the theatre department at TCC for
@@ -89,6 +95,7 @@ const JanSchronk: FC<Props> = ({ location }) => (
       Opera House, and Lyric Theatre in Oklahoma City. They have been
       married since 1972.
     </FuturaParagraph>
+
     <FuturaParagraph>
       When Jerry Longwell retired as Director of Fine Arts for the HEB
       school district, Jan decided to apply for the position. From 1986 to
@@ -108,6 +115,7 @@ const JanSchronk: FC<Props> = ({ location }) => (
       during the convention. She has served on the UIL Musical Technical
       Committee., and was a member of TMEA, TCDA and TBA.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Jan would like to thank TMEA and the Texas Music Administrators
       Conference for welcoming her into the organizations and supporting her

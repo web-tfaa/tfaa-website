@@ -1,13 +1,11 @@
 // External Dependencies
-import {
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import PrintIcon from '@mui/icons-material/Print';
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import Tooltip from '@mui/material/Tooltip';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -27,8 +25,8 @@ const defaultProps = {
 
 const StyledRoot = styled.div({
   '.icon': {
-    height: 24,
-    width: 24,
+    height: 28,
+    width: 28,
   },
   '.invoiceWrapper': {
     display: 'none',
@@ -43,7 +41,10 @@ const MemberTableRowActionElements = ({ user }) => {
   const hasInvoice = user && user.PaymentOption && user.PaymentOption.toLowerCase() === 'invoiced';
 
   const handlePrintReceipt = useCallback(() => (
-    <Tooltip title="Print receipt">
+    <Tooltip
+      arrow
+      title="Print Receipt"
+    >
       <IconButton aria-label="Print receipt">
         <ReceiptIcon className="icon" />
       </IconButton>
@@ -51,7 +52,10 @@ const MemberTableRowActionElements = ({ user }) => {
   ), []);
 
   const handlePrintInvoice = useCallback(() => (
-    <Tooltip title="Print invoice">
+    <Tooltip
+      arrow
+      title="Print Invoice"
+    >
       <IconButton aria-label="Print invoice">
         <PrintIcon className="icon" />
       </IconButton>
@@ -81,7 +85,6 @@ const MemberTableRowActionElements = ({ user }) => {
   }
 
   if (hasInvoice) {
-    console.log('has invoice');
     return (
       <StyledRoot key={`print-invoice-${user.userId}`}>
         <ReactToPrint
