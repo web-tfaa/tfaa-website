@@ -277,4 +277,8 @@ export const pastPresidents = [
     year: '2021-2022',
     name: 'Joe Clark',
   },
+  {
+    year: '2022-2023',
+    name: 'Dinah Menger',
+  },
 ];

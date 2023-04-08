@@ -1,6 +1,5 @@
 // External Dependencies
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -23,7 +22,8 @@ const StyledRoot = styled.div(({ theme }) => ({
     marginBottom: theme.spacing(4),
   },
   '.image': {
-    marginBottom: 0,
+    marginBottom: theme.spacing(2),
+    maxWidth: '50%',
   },
 
   display: 'flex',
@@ -39,11 +39,10 @@ const PeoplePage: FC<Props> = ({
   location,
   name,
 }) => (
-  <Layout location={location}>
-    <Helmet>
-      <title>TMAC | {name}</title>
-    </Helmet>
-
+  <Layout
+    location={location}
+    pageTitle={name}
+  >
     <StyledRoot>
       <Container>
         {imgSrc ? (
