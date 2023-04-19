@@ -37,8 +37,10 @@ const StyledRoot = styled.div({
 const MemberTableRowActionElements = ({ user }) => {
   const componentRef = useRef();
 
-  const hasReceipt = user && user.PaymentOption && user.PaymentOption.toLowerCase() === 'paypal';
-  const hasInvoice = user && user.PaymentOption && user.PaymentOption.toLowerCase() === 'invoiced';
+  const hasReceipt = user?.PaymentOption?.toLowerCase() === 'paypal'
+    || user?.PaypalPaymentID;
+  const hasInvoice = user?.PaymentOption?.toLowerCase() === 'invoiced'
+    && !user?.PaypalPaymentID;
 
   const handlePrintReceipt = useCallback(() => (
     <Tooltip

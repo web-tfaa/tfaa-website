@@ -79,7 +79,8 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
-  const isPaypal = currentMemberData?.PaymentOption.toLowerCase() === 'paypal';
+  const canPrintReceipt = currentMemberData?.PaymentOption.toLowerCase() === 'paypal'
+    || currentMemberData?.PaypalPaymentID;
 
   const successIconElement = useMemo(() => (
     <CheckCircleIcon
@@ -186,7 +187,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
           </>
         )}
 
-        {isPaypal && (
+        {canPrintReceipt && (
           <>
             <ListItem className="paymentListItem">
               <ListItemText
@@ -201,7 +202,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
             <ListItem className="actionContainer">
               <ListItemSecondaryAction>
                 <ReactToPrint
-                  content={() => printReceiptRef.current}
+                  content={() => printReceiptRef.current as any}
                   trigger={() => (
                     <CtaButton
                       colorVariant="resources"
@@ -217,7 +218,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
         )}
       </List>
 
-      {isPaypal && (
+      {canPrintReceipt && (
         <div className="hidden">
           <Invoice
             amount={currentMemberData.AmountPaid}
@@ -225,7 +226,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
             isActive={currentMemberData.MemberType === 'Active'}
             isInvoice={false}
             receiptId={currentMemberData.receiptId}
-            ref={printReceiptRef}
+            ref={printReceiptRef as any}
           />
         </div>
       )}
