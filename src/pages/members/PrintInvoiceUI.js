@@ -6,7 +6,6 @@ import ReactToPrint from 'react-to-print';
 // Internal Dependencies
 import CtaButton from '../../components/shared/CtaButton';
 import Invoice from '../../components/register/invoice';
-import RegisterButton from '../../components/register/register-button';
 
 // Local Variables
 const propTypes = {
