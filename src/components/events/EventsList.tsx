@@ -119,7 +119,7 @@ const EventsList: FC = () => {
             </Box>
 
             <Typography paragraph>
-              The 2022 Fall Retreat will be Nov. 16-18 in Austin.
+              The 2023 Fall Retreat will be Nov. 1-3 in Austin.
             </Typography>
 
             <Typography>
