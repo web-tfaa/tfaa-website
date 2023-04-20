@@ -1,4 +1,5 @@
 // External Dependencies
+import { Link } from 'gatsby-theme-material-ui';
 import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
 import styled from 'styled-components';
@@ -64,7 +65,9 @@ const PeopleItem: FC<Props> = ({ peopleData }) => {
         </Typography>
 
         <Typography className="peopleName">
-          {peopleData.name}
+          <Link href={`mailto:${peopleData.email}`}>
+            {peopleData.name}
+          </Link>
         </Typography>
 
         <Typography variant="body2">
