@@ -14,6 +14,7 @@ import { useEventData } from '../../utils/hooks/useEventData';
 import Container from '../../components/shared/container';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -87,7 +88,7 @@ const FallRetreat: FC<Props> = ({ location }) => {
             component="p"
             ml={2}
           >
-            The TMAC Fall Retreat is open to all current TMAC members who are in good standing
+            The {appNameShort} Fall Retreat is open to all current {appNameShort} members who are in good standing
             (paid for membership this school year).
             There is no separate conference registration process.
 
@@ -96,7 +97,7 @@ const FallRetreat: FC<Props> = ({ location }) => {
             component="p"
             ml={2}
           >
-            If you need to join TMAC for this year, then please visit the <Link to="/members">Members</Link> page.
+            If you need to join {appNameShort} for this year, then please visit the <Link to="/members">Members</Link> page.
           </Box>
         </section>
 

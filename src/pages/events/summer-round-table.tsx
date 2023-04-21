@@ -1,7 +1,10 @@
 // External Dependencies
-import { Box } from '@mui/material';
-import { Helmet } from 'react-helmet';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import React, { FC } from 'react';
+import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -10,6 +13,7 @@ import { useEventData } from '../../utils/hooks/useEventData';
 import Container from '../../components/shared/container';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -30,18 +34,13 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
   const summerRoundTable = edges.find(({ node }: EventList) =>
     node.titleOfEvent.includes('Summer Convention')).node;
 
-  const {
-    dateOfEvent,
-    timeOfEvent,
-    titleOfEvent,
-  } = summerRoundTable;
+  const { titleOfEvent } = summerRoundTable;
 
   return (
-    <Layout location={location}>
-      <Helmet>
-        <title>TMAC | Summer Round Table</title>
-      </Helmet>
-
+    <Layout
+      location={location}
+      pageTitle="Summer Round Table"
+    >
       <StyledContainer>
         <h1>{titleOfEvent}</h1>
 
@@ -50,23 +49,104 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
         </EnhancedAlert> */}
 
         <section>
-          <h4>When</h4>
-
           <Box ml={2}>
-            <Box mb={2}>
-              {dateOfEvent}
-            </Box>
+            <Typography
+              component="h3"
+              gutterBottom
+              variant="h6"
+            >
+              {appNameShort} Aspiring Fine Arts Administrator Boot Camp Workshop
+            </Typography>
 
-            {timeOfEvent}
+            <div className="description">
+              <Typography gutterBottom>
+                Targeted to brand new or aspiring administrators
+              </Typography>
+
+              <Typography
+                gutterBottom
+                variant="body2"
+              >
+                CC218
+              </Typography>
+
+              <Typography
+                component="time"
+                dateTime="2023-07-21"
+                gutterBottom
+                sx={{ display: 'block' }}
+                variant="body2"
+              >
+                Friday, July 21, 2023 • 10:00 AM-12:00 PM
+              </Typography>
+            </div>
+
+            <Box marginTop={3}>
+              <Typography
+                component="h3"
+                gutterBottom
+                variant="h6"
+              >
+                {appNameShort} Summer Roundtable
+              </Typography>
+
+              <div className="description">
+                <Typography
+                  gutterBottom
+                  variant="body2"
+                >
+                  CC210
+                </Typography>
+
+                <Typography
+                  component="time"
+                  dateTime="2023-07-21"
+                  gutterBottom
+                  sx={{ display: 'block' }}
+                  variant="body2"
+                >
+                  Friday, July 21, 2023 • 1:30-4:30 PM
+                </Typography>
+
+                <List dense>
+                  <ListItem>
+                    <ListItemText
+                      primary="Keynote • 1:30-2:00 PM"
+                      secondary="Larry Livingston"
+                    />
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText
+                      primary="Updates"
+                      secondary="Mr. Floyd; Dr. Kent"
+                    />
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText primary="Roundtable" />
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText
+                      primary="TIA with Frank Ghafoor, TEA Specialist • 3:30-4:30pm"
+                      secondary="Teacher Observation Best Practices in a Fine/Performing Arts Classroom followed by Q&A"
+                    />
+                  </ListItem>
+                </List>
+              </div>
+            </Box>
           </Box>
         </section>
 
-        <section>
+        <Box
+          component="section"
+          marginTop={4}
+        >
           <h4>Where</h4>
 
           <div className="description">
             <address>
-              <div>Room CC210</div>
               <a
                 href="http://www.sahbgcc.com/"
                 rel="noopener noreferrer"
@@ -87,7 +167,7 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
               </p>
             </address>
           </div>
-        </section>
+        </Box>
 
         <section>
           <h4>Why</h4>
@@ -114,7 +194,8 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
           <Box
             component="p"
             ml={2}
-          >New music administrators are encouraged to attend!
+          >
+            New music administrators are encouraged to attend!
           </Box>
         </section>
       </StyledContainer>
