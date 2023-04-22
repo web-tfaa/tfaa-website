@@ -1,5 +1,4 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -118,14 +117,13 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '' || !emailRegex.test(email);
 
     return (
-      <Layout location={location}>
+      <Layout
+        location={location}
+        pageTitle="Forgot Password"
+      >
         <ReCaptchaProvider>
           <StyledRoot>
             <Container className="password-forget">
-              <Helmet>
-                <title>TMAC | Forgot Password</title>
-              </Helmet>
-
               <h2 className="title">
                 Password Reset
               </h2>
