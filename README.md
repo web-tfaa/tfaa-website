@@ -1,8 +1,12 @@
-# TMAC
+# TFAA
 
-Texas Music Administrators Conference ([link](https://www.texasmusicadmin.com/))
+Texas Fine Arts Administrators (TFAA) ([link](https://www.texasfineartsadmin.org/))
+
+(Formerly the Texas Music Administrators Conference (TMAC) ([link](https://www.texasmusicadmin.com/)))
 
 This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Administrators Conference. Planning began in January 2018 with building starting in mid-February 2018.
+
+Starting in November 2022, a new design was built by Luis Velasquez at [LV Branding](https://www.lvbranding.com/). The new design launched in early February 2023.
 
 ## Tools
 
@@ -28,7 +32,7 @@ This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Ad
     - Officers
     - Area Representatives
     - Some Events
-  - If the Contentful data is updated, a TMAC dev needs to re-deploy the site on Netliy for the changes to go live.
+  - If the Contentful data is updated, a TFAA dev needs to re-deploy the site on Netliy for the changes to go live.
 - `gatsby-plugin-typography`
   - Allows adding custom fonts
 - `gatsby-plugin-canonical-urls`
@@ -41,7 +45,7 @@ Heavily inspired by the Gatsby v1 documentation website.
 ## Running in development
 
 1. Clone this repo
-1. Add `.env` file based on `example.env`. Get secret values from another TMAC dev.
+1. Add `.env` file based on `example.env`. Get secret values from another TFAA dev.
 2. Install dependencies → `yarn`
 3. Start the development server → `yarn dev`
 

@@ -1,5 +1,4 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
@@ -28,11 +27,10 @@ const TmeaRoundTable: FC<Props> = ({ location }) => {
   const tmeaRoundTable = edges.find(({ node }: EventList) => node.titleOfEvent.includes('TMEA')).node;
 
   return (
-    <Layout location={location}>
-      <Helmet>
-        <title>TMAC | TMEA Round Table</title>
-      </Helmet>
-
+    <Layout
+      location={location}
+      pageTitle="TMEA Round Table"
+    >
       <StyledContainer>
         <h1>{tmeaRoundTable.titleOfEvent}</h1>
         <section>
