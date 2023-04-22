@@ -55,6 +55,15 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
               gutterBottom
               variant="h6"
             >
+              <time dateTime="10:00">
+                10:00 AM-12:00 PM
+              </time>
+            </Typography>
+
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+            >
               {appNameShort} Aspiring Fine Arts Administrator Boot Camp Workshop
             </Typography>
 
@@ -69,16 +78,6 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
               >
                 CC218
               </Typography>
-
-              <Typography
-                component="time"
-                dateTime="2023-07-21"
-                gutterBottom
-                sx={{ display: 'block' }}
-                variant="body2"
-              >
-                Friday, July 21, 2023 • 10:00 AM-12:00 PM
-              </Typography>
             </div>
 
             <Box marginTop={3}>
@@ -86,6 +85,15 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
                 component="h3"
                 gutterBottom
                 variant="h6"
+              >
+                <time dateTime="1:30">
+                  1:30-4:30 PM
+                </time>
+              </Typography>
+
+              <Typography
+                gutterBottom
+                variant="subtitle1"
               >
                 {appNameShort} Summer Roundtable
               </Typography>
@@ -96,16 +104,6 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
                   variant="body2"
                 >
                   CC210
-                </Typography>
-
-                <Typography
-                  component="time"
-                  dateTime="2023-07-21"
-                  gutterBottom
-                  sx={{ display: 'block' }}
-                  variant="body2"
-                >
-                  Friday, July 21, 2023 • 1:30-4:30 PM
                 </Typography>
 
                 <List dense>
