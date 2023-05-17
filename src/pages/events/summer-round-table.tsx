@@ -44,6 +44,16 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
       <StyledContainer>
         <h1>{titleOfEvent}</h1>
 
+        <Typography
+          component="h2"
+          sx={{ marginBottom: 3 }}
+          variant="h5"
+        >
+          <time dateTime="Friday, July 21">
+            Friday, July 21
+          </time>
+        </Typography>
+
         {/* <EnhancedAlert severity="info">
           Details about the 2022 TMAC Summer Round Table will be available soon.
         </EnhancedAlert> */}
