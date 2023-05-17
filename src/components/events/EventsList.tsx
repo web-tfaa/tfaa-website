@@ -80,6 +80,10 @@ const EventsList: FC = () => {
               />
             </Box>
 
+            <Typography paragraph>
+              The 2023 Summer Round Table will be Friday, July 21 in San Antonio.
+            </Typography>
+
             <Typography>
               Held in conjunction with these summer conventions:
             </Typography>
