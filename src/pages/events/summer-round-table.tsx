@@ -138,7 +138,7 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
                   <ListItem>
                     <ListItemText
                       primary="TIA with Frank Ghafoor, TEA Specialist • 3:30-4:30pm"
-                      secondary="Teacher Observation Best Practices in a Fine/Performing Arts Classroom followed by Q&A"
+                      secondary="An Introduction & Overview of the Teacher Incentive Allotment (TIA) Program"
                     />
                   </ListItem>
                 </List>
