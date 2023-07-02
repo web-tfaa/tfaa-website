@@ -43,6 +43,7 @@ const StyledRoot = styled.div(({ theme }) => ({
   flexDirection: 'column',
   flexWrap: 'wrap',
   justifyContent: 'space-around',
+  overflow: 'hidden',
   position: 'relative',
   width: '100vw',
 }));
@@ -66,11 +67,10 @@ const Login: React.FC<Props> = ({ location }) => {
     >
       <ReCaptchaProvider>
         <StyledRoot>
-          <Motifs small />
-
           <DrumBanner drumBannerTitle="Member Log In" />
 
           <div className="loginContent">
+            <Motifs small />
 
             <Typography
               className="loginTitle"
