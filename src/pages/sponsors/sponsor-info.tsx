@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
-import { isTodayAfterJune30th } from '../../utils/helpers';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
 import Container from '../../components/shared/container';
 import CtaButton from '../../components/shared/CtaButton';
 import Layout from '../../components/layout';
@@ -42,7 +42,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 // Component Definition
 const SponsorInfo: React.FC<Props> = ({ location }) => {
   // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
-  const showSponsorshipInfo = isTodayAfterJune30th;
+  const showSponsorshipInfo = isTodayAfterJuly31st;
 
   return (
     <Layout

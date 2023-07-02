@@ -16,7 +16,7 @@ const RegistrationPausedAlert: React.FC<Props> = ({ isMembership = true }) => {
   return (
     <Box mt={3}>
       <EnhancedAlert title={`${type} Notice`}>
-        {appNameShort} {type} will open up again on July 1st.
+        {appNameShort} {type} will open up again on August 1st.
       </EnhancedAlert>
     </Box>
   );

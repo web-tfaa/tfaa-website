@@ -4,7 +4,7 @@ import React, { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { isTodayAfterJune30th } from '../../utils/helpers';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
 import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
 import Container from '../shared/container';
 import RegisterEmail from './RegisterEmail';
@@ -212,8 +212,11 @@ const MemberRegisterContent: React.FC = () => {
 
   const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
-  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
-  const showMembershipCompleteNote = isTodayAfterJune30th;
+  console.log('isTodayAfterJuly31st', isTodayAfterJuly31st);
+
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1.
+  // This might change, so we need to talk to the Executive Secretary for the most up-to-date info.
+  const showMembershipCompleteNote = isTodayAfterJuly31st;
 
   /* Children change depending on which step is active */
   return (
