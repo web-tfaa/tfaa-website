@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
-import { isTodayAfterJune30th } from '../../utils/helpers';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
 import DrumBanner from '../shared/DrumBanner';
 import EnhancedCard from '../shared/EnhancedCard';
 
@@ -102,7 +102,7 @@ const RegisterStepper: React.FC<Props> = ({
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
-  if (!isTodayAfterJune30th) {
+  if (!isTodayAfterJuly31st) {
     return <DrumBanner drumBannerTitle="Registration Closed" />;
   }
 

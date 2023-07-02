@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { isTodayAfterJune30th } from '../../utils/helpers';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
 import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
@@ -56,11 +56,11 @@ const JoinContainer = ({ location }) => {
           <div className="topContent">
             <CardHeadline>Join TMAC</CardHeadline>
 
-            {!isTodayAfterJune30th
+            {!isTodayAfterJuly31st
               ? (
                 <Box mt={3}>
                   <EnhancedAlert title="Membership Notice">
-                    TMAC Membership will open up again on July 1st.
+                    TMAC Membership will open up again on August 1st.
                   </EnhancedAlert>
                 </Box>
               ) : (
@@ -103,7 +103,7 @@ const JoinContainer = ({ location }) => {
               )}
           </div>
 
-          {isTodayAfterJune30th && (
+          {isTodayAfterJuly31st && (
             <>
               <div className="bottomContent">
                 <CtaButton

@@ -9,7 +9,6 @@ import Motifs from '../shared/Motifs';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-
   address: {
     '& > p': {
       fontWeight: 500,

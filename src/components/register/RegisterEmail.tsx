@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Internal Dependencies
 import { appNameShort } from '../../utils/app-constants';
-import { isTodayAfterJune30th } from '../../utils/helpers';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
 import { MemberFormValues } from './MemberRegisterContent';
 import { SponsorFormValues } from './SponsorRegisterContent';
 import FormDivider from '../shared/FormDivider';
@@ -84,7 +84,7 @@ const RegisterEmail: React.FC<Props> = ({
   ]);
 
   // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
-  if (!isTodayAfterJune30th) {
+  if (!isTodayAfterJuly31st) {
     return <RegistrationPausedAlert />;
   }
 
