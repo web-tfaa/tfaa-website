@@ -2,10 +2,11 @@
 import { Avatar, IconButton, Typography } from '@mui/material';
 import React, { FC } from 'react';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 // Internal Dependencies
-import { facebookUrl, twitterUrl } from '../../utils/app-constants';
+import { facebookUrl, instragramUrl, twitterUrl } from '../../utils/app-constants';
 
 // Component Definition
 const FooterFollowUsIconList: FC = () => {
@@ -24,6 +25,17 @@ const FooterFollowUsIconList: FC = () => {
         >
           <Avatar>
             <FacebookIcon fontSize="small" />
+          </Avatar>
+        </IconButton>
+
+        <IconButton
+          aria-label="Facebook Link."
+          href={instragramUrl}
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          <Avatar>
+            <InstagramIcon fontSize="small" />
           </Avatar>
         </IconButton>
 
