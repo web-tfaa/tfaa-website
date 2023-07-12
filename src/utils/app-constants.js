@@ -11,4 +11,5 @@ export const mailingAddress = {
 };
 
 export const facebookUrl = 'https://www.facebook.com/TFAA.tmac';
+export const instragramUrl = 'https://www.instagram.com/tfaa_tmac/';
 export const twitterUrl = 'https://twitter.com/TFAA_TMAC';
