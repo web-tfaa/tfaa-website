@@ -1,19 +1,23 @@
 // External Dependencies
 import Box from '@mui/material/Box';
+import CardHeader from '@mui/material/CardHeader';
+import Chip from '@mui/material/Chip';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import React, { FC } from 'react';
+import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { EventList } from '.';
+import { appNameShort } from '../../utils/app-constants';
 import { useEventData } from '../../utils/hooks/useEventData';
 import Container from '../../components/shared/container';
+import EnhancedCard from '../../components/shared/EnhancedCard';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
-import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -22,6 +26,23 @@ interface Props {
 
 // Local Variables
 const StyledContainer = styled(Container)(({ theme }) => ({
+  '.MuiCardContent-root': {
+    padding: 0,
+  },
+  '.MuiCardHeader-root': {
+    '&.top-card-header': {
+      backgroundColor: alpha(theme.palette.ui.lilac, 0.4),
+    },
+    '&.bottom-card-header': {
+      backgroundColor: alpha(theme.palette.tfaa.membership, 0.3),
+    },
+  },
+  '.MuiChip-label': {
+    padding: theme.spacing(1.5),
+  },
+  '.MuiChip-root': {
+    backgroundColor: alpha(theme.palette.tfaa.resources, 0.6),
+  },
   '.description': {
     marginLeft: theme.spacing(2),
   },
@@ -60,90 +81,107 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
 
         <section>
           <Box ml={2}>
-            <Typography
-              component="h3"
-              gutterBottom
-              variant="h6"
-            >
-              <time dateTime="10:00">
-                10:00 AM-12:00 PM
-              </time>
-            </Typography>
+            <EnhancedCard>
+              <CardHeader
+                className="top-card-header"
+                title={(
+                  <time dateTime="10:00">
+                    10:00 AM-12:00 PM
+                  </time>
+                )}
+              />
 
-            <Typography
-              gutterBottom
-              variant="subtitle1"
-            >
-              {appNameShort} Aspiring Fine Arts Administrator Boot Camp Workshop
-            </Typography>
-
-            <div className="description">
-              <Typography gutterBottom>
-                Targeted to brand new or aspiring administrators
-              </Typography>
-
-              <Typography
-                gutterBottom
-                variant="body2"
-              >
-                CC218
-              </Typography>
-            </div>
-
-            <Box marginTop={3}>
-              <Typography
-                component="h3"
-                gutterBottom
-                variant="h6"
-              >
-                <time dateTime="1:30">
-                  1:30-4:30 PM
-                </time>
-              </Typography>
-
-              <Typography
-                gutterBottom
-                variant="subtitle1"
-              >
-                {appNameShort} Summer Roundtable
-              </Typography>
-
-              <div className="description">
+              <Box padding={2}>
                 <Typography
                   gutterBottom
-                  variant="body2"
+                  sx={{ fontWeight: 500 }}
+                  variant="subtitle1"
                 >
-                  CC210
+                  {appNameShort} Aspiring Fine Arts Administrator Boot Camp Workshop
                 </Typography>
 
-                <List dense>
-                  <ListItem>
-                    <ListItemText
-                      primary="Keynote • 1:30-2:00 PM"
-                      secondary="Larry Livingston"
-                    />
-                  </ListItem>
+                <div className="description">
+                  <Typography gutterBottom>
+                    Targeted to brand new or aspiring administrators
+                  </Typography>
 
-                  <ListItem>
-                    <ListItemText
-                      primary="Updates"
-                      secondary="Mr. Floyd; Dr. Kent"
-                    />
-                  </ListItem>
+                  <Box display="flex">
+                    <Typography
+                      gutterBottom
+                      variant="body2"
+                    >
+                      CC205
+                    </Typography>
 
-                  <ListItem>
-                    <ListItemText primary="Roundtable" />
-                  </ListItem>
-
-                  <ListItem>
-                    <ListItemText
-                      primary="TIA with Frank Ghafoor, TEA Specialist • 3:30-4:30pm"
-                      secondary="An Introduction & Overview of the Teacher Incentive Allotment (TIA) Program"
+                    <Chip
+                      label="New Location"
+                      size="small"
+                      sx={{
+                        marginLeft: 1.5,
+                        // paddingY: 1,
+                      }}
                     />
-                  </ListItem>
-                </List>
-              </div>
-            </Box>
+                  </Box>
+                </div>
+              </Box>
+            </EnhancedCard>
+
+            <EnhancedCard sx={{ marginTop: 3 }}>
+              <CardHeader
+                className="bottom-card-header"
+                title={(
+                  <time dateTime="1:30">
+                    1:30-4:30 PM
+                  </time>
+                )}
+              />
+
+              <Box padding={2}>
+                <Typography
+                  gutterBottom
+                  sx={{ fontWeight: 500 }}
+                  variant="subtitle1"
+                >
+                  {appNameShort} Summer Roundtable
+                </Typography>
+
+                <div className="description">
+                  <Typography
+                    gutterBottom
+                    variant="body2"
+                  >
+                    CC210
+                  </Typography>
+
+                  <List dense>
+                    <ListItem>
+                      <ListItemText
+                        primary="Keynote • 1:30-2:00 PM"
+                        secondary="Larry Livingston"
+                      />
+                    </ListItem>
+
+                    <ListItem>
+                      <ListItemText
+                        primary="Updates"
+                        secondary="Mr. Floyd; Dr. Kent"
+                      />
+                    </ListItem>
+
+                    <ListItem>
+                      <ListItemText primary="Roundtable" />
+                    </ListItem>
+
+                    <ListItem>
+                      <ListItemText
+                        primary="TIA with Frank Ghafoor, TEA Specialist • 3:30-4:30pm"
+                        secondary="An Introduction & Overview of the Teacher Incentive Allotment (TIA) Program"
+                      />
+                    </ListItem>
+                  </List>
+                </div>
+              </Box>
+            </EnhancedCard>
           </Box>
         </section>
 
