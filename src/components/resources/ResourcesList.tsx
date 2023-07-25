@@ -58,6 +58,23 @@ const ResourcesList: React.FC = () => {
               className="sectionTitle"
               component="h3"
             >
+              Shared Resources
+            </Typography>
+
+            <ul>
+              <li>
+                <Link to="https://drive.google.com/drive/folders/1c2_3vNy1WVILd1KnpQTTvSSbTRBArMc6?usp=drive_link">
+                  Resources Shared at TFAA Conferences and Roundtables
+                </Link>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <Typography
+              className="sectionTitle"
+              component="h3"
+            >
               Texas State Standards
             </Typography>
 
