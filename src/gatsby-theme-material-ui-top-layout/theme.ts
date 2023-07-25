@@ -4,6 +4,9 @@ import {
 import { createTheme } from '@mui/material';
 import gray from 'gray-percentage';
 
+// When using TypeScript 4.x and above
+import type {} from '@mui/x-data-grid/themeAugmentation';
+
 // Local Variables
 const defaultTheme = createTheme();
 

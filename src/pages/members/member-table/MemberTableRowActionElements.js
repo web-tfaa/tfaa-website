@@ -37,6 +37,8 @@ const StyledRoot = styled.div({
 const MemberTableRowActionElements = ({ user }) => {
   const componentRef = useRef();
 
+  console.log('MemberTableRowActionElements');
+
   const hasReceipt = user?.PaymentOption?.toLowerCase() === 'paypal'
     || user?.PaypalPaymentID;
   const hasInvoice = user?.PaymentOption?.toLowerCase() === 'invoiced'
