@@ -9,6 +9,7 @@ import { TfaaMemberData } from '../../../utils/hooks/useGetAllMembers'
 
 // Local Dependencies
 import { useColumns } from './hooks';
+import EnhancedAlert from '../../../components/shared/EnhancedAlert';
 
 // Local Typings
 interface Props {
@@ -32,6 +33,17 @@ const MemberTable: FC<Props> = ({
 }) => {
   const columns = useColumns(isAdmin);
 
+  if (noAuthUser && !data) {
+    return (
+      <EnhancedAlert
+        severity="info"
+        title="Not Signed In"
+      >
+        Sign in to the view the current member list
+      </EnhancedAlert>
+    );
+  }
+
   if (!data) {
     return null;
   }
@@ -49,6 +61,12 @@ const MemberTable: FC<Props> = ({
         disableRowSelectionOnClick
         hideFooter
         rows={dataWithId}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 300 },
+          },
+        }}
         slots={{ toolbar: GridToolbar }}
       />
     </StyledBox>
