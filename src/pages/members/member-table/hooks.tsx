@@ -39,6 +39,8 @@ export const useColumns = (isAdmin: boolean) => {
     if (isAdmin) {
       columns.push({
         field: 'Actions',
+          disableExport: true,
+          filterable: false,
           headerName: 'Actions',
           renderCell: (params: GridRenderCellParams) => {
             return (
