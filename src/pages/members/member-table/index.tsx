@@ -1,7 +1,7 @@
 // External Dependencies
 import Box from '@mui/material/Box';
 import React, { FC } from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridToolbar } from '@mui/x-data-grid';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -10,6 +10,7 @@ import { TfaaMemberData } from '../../../utils/hooks/useGetAllMembers'
 // Local Dependencies
 import { useColumns } from './hooks';
 import EnhancedAlert from '../../../components/shared/EnhancedAlert';
+import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Typings
 interface Props {
@@ -31,7 +32,20 @@ const MemberTable: FC<Props> = ({
   isAdmin,
   noAuthUser,
 }) => {
-  const columns = useColumns(isAdmin);
+  const extraActions: GridColDef<TfaaMemberData> | undefined = isAdmin ? ({
+    field: 'Actions',
+    disableExport: true,
+    filterable: false,
+    headerName: 'Actions',
+    renderCell: (params: GridRenderCellParams) => {
+      return (
+        <MemberTableRowActionElements user={params.row} />
+      );
+    },
+    width: 360,
+  }) : undefined;
+
+  const columns = useColumns(extraActions);
 
   if (noAuthUser && !data) {
     return (

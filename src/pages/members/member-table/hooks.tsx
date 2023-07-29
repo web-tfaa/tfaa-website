@@ -1,12 +1,11 @@
 // External Dependencies
 import React, { useMemo } from 'react';
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { GridColDef } from '@mui/x-data-grid';
 
 // Local Dependencies
 import { TfaaMemberData } from '../../../utils/hooks/useGetAllMembers'
-import MemberTableRowActionElements from './MemberTableRowActionElements';
 
-export const useColumns = (isAdmin: boolean) => {
+export const useColumns = (extraActions: GridColDef<TfaaMemberData> | undefined) => {
   return useMemo(() => {
     const columns: GridColDef<TfaaMemberData>[] = [
       {
@@ -34,25 +33,11 @@ export const useColumns = (isAdmin: boolean) => {
         headerName: 'Email',
         width: 360,
       },
+      ...extraActions ? [extraActions] : [],
     ];
-
-    if (isAdmin) {
-      columns.push({
-        field: 'Actions',
-        disableExport: true,
-        filterable: false,
-        headerName: 'Actions',
-        renderCell: (params: GridRenderCellParams) => {
-          return (
-            <MemberTableRowActionElements user={params.row} />
-          );
-        },
-        width: 360,
-      });
-    }
 
     return columns;
   }, [
-    isAdmin,
+    extraActions,
   ]);
 };
