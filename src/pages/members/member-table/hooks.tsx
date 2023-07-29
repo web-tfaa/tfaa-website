@@ -44,9 +44,7 @@ export const useColumns = (isAdmin: boolean) => {
         headerName: 'Actions',
         renderCell: (params: GridRenderCellParams) => {
           return (
-            <div>
-              <MemberTableRowActionElements user={params.row} />
-            </div>
+            <MemberTableRowActionElements user={params.row} />
           );
         },
         width: 360,
