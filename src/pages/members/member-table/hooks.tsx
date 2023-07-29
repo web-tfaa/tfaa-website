@@ -39,17 +39,17 @@ export const useColumns = (isAdmin: boolean) => {
     if (isAdmin) {
       columns.push({
         field: 'Actions',
-          disableExport: true,
-          filterable: false,
-          headerName: 'Actions',
-          renderCell: (params: GridRenderCellParams) => {
-            return (
-              <div>
-                <MemberTableRowActionElements user={params.row} />
-              </div>
-            );
-          },
-          width: 360,
+        disableExport: true,
+        filterable: false,
+        headerName: 'Actions',
+        renderCell: (params: GridRenderCellParams) => {
+          return (
+            <div>
+              <MemberTableRowActionElements user={params.row} />
+            </div>
+          );
+        },
+        width: 360,
       });
     }
 
