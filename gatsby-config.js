@@ -8,9 +8,9 @@ dotenv.config({
 
 module.exports = {
   siteMetadata: {
-    title: 'TMAC',
-    siteUrl: 'https://www.texasmusicadmin.com',
-    description: 'Website for the Texas Music Administrators Conference',
+    title: 'TFAA',
+    siteUrl: 'https://texasfineartsadmin.com/',
+    description: 'Website for the Texas Fine Arts Administrators',
   },
   plugins: [
     'gatsby-theme-material-ui',
@@ -31,7 +31,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://www.texasmusicadmin.com',
+        siteUrl: 'https://texasfineartsadmin.com/',
       },
     },
     'gatsby-plugin-react-helmet',
