@@ -181,7 +181,7 @@ const MemberActions: React.FC<Props> = ({
             <CtaButton
               colorVariant="resources"
               fontWeight={500}
-              href="mailto:jeffrey.turner@allenisd.org"
+              href="mailto:petwar1@yahoo.com"
               width={144}
             >
               Email {appNameShort}

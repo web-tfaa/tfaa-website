@@ -40,10 +40,10 @@ export const currentYearLong = format(new Date(), 'yyyy');
 // Current Year - two-digit string
 export const currentYearShort = format(new Date(), 'yy');
 
-// We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+// We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
 // Use the `isTodayAfterJune30th` helper
 
-// The "year" for TMAC starts on 7/1
+// The "year" for TMAC starts on 8/1
 // new Date(2021, 6, 1) → 7/1/2021
 // export const isTodayAfterJune30th = isAfter(
 //   new Date(),

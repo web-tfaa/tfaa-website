@@ -1,14 +1,12 @@
 // External Dependencies
 import React, { useMemo } from 'react';
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -70,7 +68,7 @@ const StyledTableContainer = styled(TableContainer)(({
   marginRight: 32,
   marginTop: theme.spacing(2),
   width: '75%',
-}));
+})) as typeof TableContainer;
 
 // Component Definition
 const InvoiceTable: React.FC<Props> = ({
@@ -85,6 +83,8 @@ const InvoiceTable: React.FC<Props> = ({
   const updatedAmount = amount === 0 ? 50 : amount;
   const formattedAmount = isString ? updatedAmount : `$${Number(updatedAmount)?.toFixed(2).toLocaleString()}`;
 
+  const hasAddedFallConferenceFee = Number(amount) > 100;
+
   const sponsorInfo = useMemo(() => (
     <span>
       {appNameShort} {sponsorLevel} Sponsor donation amount{' '}
@@ -95,9 +95,10 @@ const InvoiceTable: React.FC<Props> = ({
   const memberInfo = useMemo(() => (
     <span>
       {appNameShort} {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
+      {hasAddedFallConferenceFee && 'and Fall Conference registration fee'}
       <br />for <strong>{form.FirstName} {form.LastName}</strong>
     </span>
-  ), [form.FirstName, form.LastName, form.MemberType, isActive]);
+  ), [form.FirstName, form.LastName, form.MemberType, hasAddedFallConferenceFee, isActive]);
 
   return (
     <StyledTableContainer component={Paper}>

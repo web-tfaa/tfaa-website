@@ -41,7 +41,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 
 // Component Definition
 const SponsorInfo: React.FC<Props> = ({ location }) => {
-  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
   const showSponsorshipInfo = isTodayAfterJuly31st;
 
   return (
@@ -85,7 +85,7 @@ const SponsorInfo: React.FC<Props> = ({ location }) => {
                     </li>
 
                     <li>
-                      To pay, mail invoice with check to the {appNameShort} Treasurer.
+                      To pay, mail invoice with check to the {appNameShort} Executive Secretary.
                     </li>
                   </ol>
               </>

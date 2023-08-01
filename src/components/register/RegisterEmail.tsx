@@ -83,7 +83,7 @@ const RegisterEmail: React.FC<Props> = ({
     viewingSignUp,
   ]);
 
-  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
   if (!isTodayAfterJuly31st) {
     return <RegistrationPausedAlert />;
   }
@@ -91,7 +91,7 @@ const RegisterEmail: React.FC<Props> = ({
   return (
     <section>
       <FormTitle>
-        1. Sign up for {appNameShort} website login
+        Sign up for {appNameShort} website login
       </FormTitle>
 
       {dividerElement}

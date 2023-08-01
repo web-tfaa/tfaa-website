@@ -4,10 +4,10 @@ export const appNameOld = 'Texas Music Administrators Conference';
 export const appNameOldShort = 'TMAC';
 
 export const mailingAddress = {
-  addressOne: '1732 Falmouth Dr.',
-  city: 'Plano',
+  addressOne: '4107 Natural Bridge Court',
+  city: 'Round Rock',
   state: 'TX',
-  zip: '75025',
+  zip: '78681',
 };
 
 export const facebookUrl = 'https://www.facebook.com/TFAA.tmac';

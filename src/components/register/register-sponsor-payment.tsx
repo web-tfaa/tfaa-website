@@ -210,7 +210,7 @@ const RegisterSponsorPayment: React.FC<Props> = ({
                   : (
                     <span>
                       Contact the{' '}
-                      <a href="mailto:jeffrey.turner@allenisd.org">{appNameShort} Executive Secretary</a>{' '}
+                      <a href="mailto:petwar1@yahoo.com">{appNameShort} Executive Secretary</a>{' '}
                       for more details
                     </span>
                   )}

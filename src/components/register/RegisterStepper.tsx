@@ -26,14 +26,14 @@ function getSteps(
 ): string[] {
   return [
     isAuthenticated
-      ? `Sign in to the ${appNameShort} members area`
-      : `Sign up for ${appNameShort} website login`,
+      ? `${appNameShort} Website Login`
+      : `${appNameShort} Sponsor Level`,
     isViewingSponsors
-      ? 'Complete sponsor form'
-      : 'Complete membership form',
+      ? 'Sponsor Info'
+      : 'Member Info',
     isViewingSponsors
-      ? 'Confirm Sponsor level and send payment'
-      : `Pay ${appNameShort} dues`,
+      ? 'Confirm Sponsor Level & Send Payment'
+      : 'Make Payment or Get Invoice',
   ];
 }
 
@@ -101,7 +101,7 @@ const RegisterStepper: React.FC<Props> = ({
 }) => {
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
-  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
   if (!isTodayAfterJuly31st) {
     return <DrumBanner drumBannerTitle="Registration Closed" />;
   }
