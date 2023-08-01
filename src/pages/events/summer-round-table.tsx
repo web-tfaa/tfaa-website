@@ -118,7 +118,6 @@ const SummerRoundTable: FC<Props> = ({ location }) => {
                       size="small"
                       sx={{
                         marginLeft: 1.5,
-                        // paddingY: 1,
                       }}
                     />
                   </Box>

@@ -398,7 +398,10 @@ const RegisterMemberPayment: React.FC<Props> = ({
               />
             </FormControl>
 
-            <Typography variant="h6">
+            <Typography
+              sx={{ marginTop: 2.5 }}
+              variant="h6"
+            >
               Total: ${Number(amount)?.toFixed(2).toLocaleString()}
             </Typography>
 
@@ -432,7 +435,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
             <ol>
               <li>Click the button below to print an invoice.</li>
               <li>
-                Send the invoice and payment directly to the TMAC
+                Send the invoice and payment directly to the {appNameShort}{' '}
                 Executive Secretary as detailed on the invoice.
               </li>
             </ol>
@@ -462,7 +465,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
           </Box>
 
           <Box mt={3}>
-            If your organization requires the IRS W-9 Form for TMAC,
+            If your organization requires the IRS W-9 Form for {appNameShort},
             please download or print a copy below.
           </Box>
 
