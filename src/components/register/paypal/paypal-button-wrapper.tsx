@@ -78,7 +78,7 @@ const PaypalButtonWrapper: FC<Props> = ({
       button again.
       <br />
       You can also print an invoice and
-      send payment to the {appNameShort} Treasurer.
+      send payment to the {appNameShort} Executive Secretary.
     </>
   );
 

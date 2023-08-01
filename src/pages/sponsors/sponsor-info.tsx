@@ -85,7 +85,7 @@ const SponsorInfo: React.FC<Props> = ({ location }) => {
                     </li>
 
                     <li>
-                      To pay, mail invoice with check to the {appNameShort} Treasurer.
+                      To pay, mail invoice with check to the {appNameShort} Executive Secretary.
                     </li>
                   </ol>
               </>
