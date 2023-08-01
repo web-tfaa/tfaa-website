@@ -1,17 +1,18 @@
 // External Dependencies
-import {
-  Box,
-  Card,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Typography,
-} from '@mui/material';
 import React, {
   ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
+import { alpha } from '@mui/material/styles';
 import ReactToPrint from 'react-to-print';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -31,6 +32,7 @@ import { currentDate } from '../../utils/dateHelpers';
 import { currentSchoolYearLong } from '../../utils/helpers';
 import { appNameShort } from '../../utils/app-constants';
 import CtaButton from '../shared/CtaButton';
+import EnhancedCard from '../shared/EnhancedCard';
 import FormDivider from '../shared/FormDivider';
 import FormTitle from '../shared/FormTitle';
 import Invoice from './invoice';
@@ -50,6 +52,17 @@ type ActiveMemberRadioOptions = 'active' | 'retired';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
+  '.MuiCardContent-root': {
+    padding: 0,
+  },
+  '.MuiCardHeader-root': {
+    '&.top-card-header': {
+      backgroundColor: alpha(theme.palette.ui.lilac, 0.4),
+    },
+    '&.bottom-card-header': {
+      backgroundColor: alpha(theme.palette.tfaa.membership, 0.3),
+    },
+  },
   '.classChampionRadioLabelRoot': {
     alighItems: 'flex-start',
     display: 'flex',
@@ -103,6 +116,11 @@ const RegisterMemberPayment: React.FC<Props> = ({
     isActiveMember,
     setIsActiveMember,
   ] = useState<ActiveMemberRadioOptions>('active');
+  const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(false);
+
+  const handleToogleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setHasFallConferenceFee(event.target.checked);
+  }, []);
 
   const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
     console.log('handleGetCurrentInvoiceId : currentInvoiceId', currentInvoiceId);
@@ -122,7 +140,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
   const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
-      AmountPaid: isActiveMember === 'active' ? 50 : 30,
+      AmountPaid: isActiveMember === 'active' ? 75 : 30,
       PaypalPayerID: payment?.payerID,
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
@@ -223,7 +241,9 @@ const RegisterMemberPayment: React.FC<Props> = ({
   }, [authenticatedUserId, invoiceId, memberForm, onUpdateMemberForm, receiptId]);
 
   const isActive = isActiveMember === 'active';
-  const amount = isActive ? 50 : 30;
+  const membershipAmount = isActive ? 75 : 30;
+
+  const amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
 
   const successfulMemberPaymentElement = (
     <div>
@@ -242,7 +262,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
             component="span"
             variant="h4"
           >
-            — {isActive ? '$50.00' : '$30.00'}
+            — {isActive ? '$75.00' : '$30.00'}
           </Typography>
         </h3>
 
@@ -306,82 +326,102 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   // We show this if the user has not made a payment
   const invoiceMemberElement = (
-    <div>
-      <Box mb={6}>
-        <Box mb={3}>
-          <h3>Pay now with Paypal</h3>
-        </Box>
-
-        <FormControl
-          component="fieldset"
-          style={{ marginLeft: 32 }}
-        >
-          <h2 className="memberLevelHeading">
-            {memberForm.MemberType} Member
-          </h2>
-
-          <FormControl component="fieldset">
-            <RadioGroup
-              aria-label="Member Level"
-              name="MemberLevel*"
-              onChange={handleChangeRadioSelection}
-              value={isActiveMember}
-            >
-              <FormControlLabel
-                control={<Radio size="small" />}
-                label={(
-                  <>
-                    <Typography component="span">
-                      Active
-                    </Typography>
-
-                    <Typography
-                      color="textSecondary"
-                      component="span"
-                    >
-                      {' '} — $50
-                    </Typography>
-                  </>
-                )}
-                value="active"
-              />
-              <FormControlLabel
-                control={<Radio size="small" />}
-                label={(
-                  <>
-                    <Typography component="span">
-                      Retired
-                    </Typography>
-
-                    <Typography
-                      color="textSecondary"
-                      component="span"
-                    >
-                      {' '} — $30
-                    </Typography>
-                  </>
-                )}
-                value="retired"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <Typography
-            sx={{ marginTop: 1.5 }}
-            variant="body2"
+    <>
+      <EnhancedCard sx={{ marginBottom: 3 }}>
+        <CardHeader
+          className="top-card-header"
+          title="Pay now with Paypal"
+        />
+        <Box mb={6}>
+          <FormControl
+            component="fieldset"
+            style={{ marginLeft: 32 }}
           >
-            Click on the PayPal button below to pay with credit card.
-          </Typography>
+            <h2 className="memberLevelHeading">
+              {memberForm.MemberType} Member
+              {hasFallConferenceFee && ' + Fall Conference Registration'}
+            </h2>
 
-          <PaypalButtonWrapper
-            amount={amount}
-            onSuccessfulPayment={handleUpdateCompletedStep}
-          />
-        </FormControl>
-      </Box>
+            <FormControl component="fieldset">
+              <RadioGroup
+                aria-label="Member Level"
+                name="MemberLevel*"
+                onChange={handleChangeRadioSelection}
+                value={isActiveMember}
+              >
+                <FormControlLabel
+                  control={<Radio size="small" />}
+                  label={(
+                    <>
+                      <Typography component="span">
+                        Active
+                      </Typography>
 
-      <div>
-        <h3>Need to pay later?</h3>
+                      <Typography
+                        color="textSecondary"
+                        component="span"
+                      >
+                        {' '} — $75
+                      </Typography>
+                    </>
+                  )}
+                  value="active"
+                />
+                <FormControlLabel
+                  control={<Radio size="small" />}
+                  label={(
+                    <>
+                      <Typography component="span">
+                        Retired
+                      </Typography>
+
+                      <Typography
+                        color="textSecondary"
+                        component="span"
+                      >
+                        {' '} — $30
+                      </Typography>
+                    </>
+                  )}
+                  value="retired"
+                />
+              </RadioGroup>
+
+              <FormControlLabel
+                control={(
+                  <Checkbox
+                    checked={hasFallConferenceFee}
+                    onChange={handleToogleHasFallConferenceFee}
+                  />
+                )}
+                label="Add Fall Conference Registration (optional) — $75"
+              />
+            </FormControl>
+
+            <Typography variant="h6">
+              Total: ${Number(amount)?.toFixed(2).toLocaleString()}
+            </Typography>
+
+            <Typography
+              sx={{ marginTop: 4 }}
+              variant="body2"
+            >
+              Click on the PayPal button below to pay with credit card.
+            </Typography>
+
+            <PaypalButtonWrapper
+              amount={amount}
+              onSuccessfulPayment={handleUpdateCompletedStep}
+            />
+          </FormControl>
+        </Box>
+      </EnhancedCard>
+
+      <EnhancedCard>
+        <CardHeader
+          className="bottom-card-header"
+          title="Need to pay later?"
+        />
 
         <Box
           ml={4}
@@ -435,8 +475,8 @@ const RegisterMemberPayment: React.FC<Props> = ({
             </a>
           </Box>
         </Box>
-      </div>
-    </div>
+      </EnhancedCard>
+    </>
   );
 
   return (

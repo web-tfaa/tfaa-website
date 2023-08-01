@@ -16,7 +16,7 @@ import RegisterStepper from './RegisterStepper';
 export interface MemberFormValues {
   Address1: string;
   Address2?: string;
-  AmountPaid: 0 | 30 | 50;
+  AmountPaid: 0 | 30 | 75;
   CellPhone: string;
   City: string;
   District: string;
@@ -216,6 +216,8 @@ const MemberRegisterContent: React.FC = () => {
   // This might change, so we need to talk to the Executive Secretary for the most up-to-date info.
   const showMembershipCompleteNote = isTodayAfterJuly31st;
 
+  const userId = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+
   /* Children change depending on which step is active */
   return (
     <StyledRoot>
@@ -235,14 +237,14 @@ const MemberRegisterContent: React.FC = () => {
         )}
         {activeMemberStep === 1 && (
           <RegisterMemberFormWrapper
-            authenticatedUserId={`${currentAuthUser?.email}-${currentAuthUser?.uid}`}
+            authenticatedUserId={userId}
             initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
             onCompleteMemberStep={handleCompleteMemberStep}
           />
         )}
         {[2, 3].includes(activeMemberStep) && (
           <RegisterMemberPayment
-            authenticatedUserId={currentAuthUser?.email}
+            authenticatedUserId={userId}
             onCompleteMemberStep={handleCompleteMemberStep}
             onUpdateMemberForm={handleUpdateMemberForm}
             memberForm={memberForm}
