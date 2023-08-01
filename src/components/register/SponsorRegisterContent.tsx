@@ -220,11 +220,12 @@ const SponsorRegisterContent: React.FC = () => {
   /* Children change depending on which step is active */
   return (
     <StyledRoot>
-      <RegisterStepper
-        isAuthenticated={isAuthenticated}
-        isViewingSponsors
-        activeStep={activeStep}
-      />
+      {isAuthenticated && (
+        <RegisterStepper
+          isAuthenticated={isAuthenticated}
+          isViewingSponsors
+          activeStep={activeStep}
+        />)}
 
       <Container>
         {activeStep === 0 && (

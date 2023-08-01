@@ -30,7 +30,7 @@ const MemberFormValuesWrapper: React.FC<Props> = ({
     return null;
   }
 
-  // We normally shut down registration and sponsorship after TMEA each year and open it up on 7/1
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
   const showMembershipForm = isTodayAfterJuly31st;
 
   if (!showMembershipForm) {

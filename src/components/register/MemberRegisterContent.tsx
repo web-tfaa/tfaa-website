@@ -212,8 +212,6 @@ const MemberRegisterContent: React.FC = () => {
 
   const hasCompletedAllMemberSteps = completedMemberSteps.length >= 3;
 
-  console.log('isTodayAfterJuly31st', isTodayAfterJuly31st);
-
   // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1.
   // This might change, so we need to talk to the Executive Secretary for the most up-to-date info.
   const showMembershipCompleteNote = isTodayAfterJuly31st;
@@ -221,10 +219,12 @@ const MemberRegisterContent: React.FC = () => {
   /* Children change depending on which step is active */
   return (
     <StyledRoot>
-      <RegisterStepper
-        isAuthenticated={isAuthenticated}
-        activeStep={activeMemberStep}
-      />
+      {isAuthenticated && (
+        <RegisterStepper
+          isAuthenticated={isAuthenticated}
+          activeStep={activeMemberStep}
+        />
+      )}
 
       <Container>
         {activeMemberStep === 0 && (
