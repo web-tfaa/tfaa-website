@@ -54,7 +54,7 @@ export const currentYearShort = format(new Date(), 'yy');
 // new Date(2023, 7, 1) → 8/1/2023
 export const isTodayAfterJuly31st = isAfter(
   new Date(),
-  new Date(parseInt(currentYearLong, 10), 6, 1),
+  new Date(parseInt(currentYearLong, 10), 7, 1),
 );
 
 export const currentSchoolYearShort = isTodayAfterJuly31st
