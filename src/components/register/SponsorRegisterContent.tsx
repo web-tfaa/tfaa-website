@@ -225,7 +225,8 @@ const SponsorRegisterContent: React.FC = () => {
           isAuthenticated={isAuthenticated}
           isViewingSponsors
           activeStep={activeStep}
-        />)}
+        />
+      )}
 
       <Container>
         {activeStep === 0 && (
@@ -236,7 +237,7 @@ const SponsorRegisterContent: React.FC = () => {
         )}
         {activeStep === 1 && (
           <RegisterSponsorFormWrapper
-            authenticatedUserId={currentAuthUser?.uid}
+            authenticatedUserId={`${currentAuthUser?.email}-${currentAuthUser?.uid}`}
             initialSponsorFormValues={INITIAL_SPONSOR_FORM_VALUES}
             onCompleteSponsorStep={handleCompleteSponsorStep}
             onUpdateSponsorForm={handleUpdateSponsorForm}

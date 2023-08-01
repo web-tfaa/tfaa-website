@@ -235,7 +235,7 @@ const MemberRegisterContent: React.FC = () => {
         )}
         {activeMemberStep === 1 && (
           <RegisterMemberFormWrapper
-            authenticatedUserId={currentAuthUser?.email}
+            authenticatedUserId={`${currentAuthUser?.email}-${currentAuthUser?.uid}`}
             initialMemberFormValues={INITIAL_MEMBER_FORM_VALUES}
             onCompleteMemberStep={handleCompleteMemberStep}
           />
