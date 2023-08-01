@@ -176,12 +176,10 @@ class Invoice extends Component {
                 <strong>{appName}</strong>
               </div>
 
-              <div>c/o Jeff Turner</div>
+              <div>c/o Peter Warshaw</div>
               <div>{appNameShort} Executive Secretary</div>
-              <div>Allen ISD</div>
-              <div>Fine Arts Dept.</div>
-              <div>300 Rivercrest Blvd. </div>
-              <div>Allen, TX 75002</div>
+              <div>4107 Natural Bridge Court</div>
+              <div>Round Rock, TX. 78681</div>
             </div>
 
             <div>

@@ -106,7 +106,7 @@ const StyledStrong = styled.strong(({ theme }) => ({
 const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
-  // If the member paid by check, Jeff Turner TFAA Executive Secretary will manually
+  // If the member paid by check, the TFAA Executive Secretary will manually
   //  add the check number in the PaypalPaymentID field
   const isInvoiced = currentMemberData?.PaymentOption.toLowerCase() === 'invoiced'
     && !currentMemberData?.PaypalPaymentID;

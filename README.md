@@ -8,6 +8,8 @@ This website was constructed for Jeff Turner, Mario Luna, and the Texas Music Ad
 
 Starting in November 2022, a new design was built by Luis Velasquez at [LV Branding](https://www.lvbranding.com/). The new design launched in early February 2023.
 
+In July 2023 Peter Warshaw took over as the TFAA Executive Secretary.
+
 ## Tools
 
 - GatsbyJS
