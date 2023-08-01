@@ -88,20 +88,6 @@ function getComparator<Key extends keyof Sponsor>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function uglifyEmail(email: string) {
-  if (!email) {
-    return '';
-  }
-  const index = email.indexOf('@');
-
-  // Remove it & insert -at- back in → Array.prototype.splice()
-  const uglyEmailArray = email.split('');
-
-  uglyEmailArray.splice(index, 1, '-at-');
-
-  return uglyEmailArray.join('');
-}
-
 // Component Definition
 const SponsorTable: FC<Props> = ({
   data,
@@ -189,7 +175,7 @@ const SponsorTable: FC<Props> = ({
                       className="cell"
                       key={user.Email}
                     >
-                      {uglifyEmail(user.Email)}
+                      {user.Email}
                     </TableCell>
 
                     {isAdmin && (

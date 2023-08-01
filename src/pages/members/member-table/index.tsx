@@ -91,20 +91,6 @@ function getComparator<Key extends keyof TfaaMemberData>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function uglifyEmail(email: string) {
-  if (!email) {
-    return '';
-  }
-  const index = email.indexOf('@');
-
-  // Remove it & insert -at- back in → Array.splice()
-  const uglyEmailArray = email.split('');
-
-  uglyEmailArray.splice(index, 1, '-at-');
-
-  return uglyEmailArray.join('');
-}
-
 // Component Definition
 const MemberTable: FC<Props> = ({
   data,
@@ -204,7 +190,7 @@ const MemberTable: FC<Props> = ({
                       className="cell"
                       key={user.Email}
                     >
-                      {uglifyEmail(user.Email)}
+                      {user.Email}
                     </TableCell>
 
                     {isAdmin && (
