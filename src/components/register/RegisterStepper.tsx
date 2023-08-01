@@ -26,14 +26,14 @@ function getSteps(
 ): string[] {
   return [
     isAuthenticated
-      ? `${appNameShort} membership type`
-      : `Sign up for ${appNameShort} website login`,
+      ? `${appNameShort} Website Login`
+      : `${appNameShort} Sponsor Level`,
     isViewingSponsors
       ? 'Sponsor Info'
       : 'Member Info',
     isViewingSponsors
-      ? 'Confirm Sponsor level and send payment'
-      : 'Payment or Invoice',
+      ? 'Confirm Sponsor Level & Send Payment'
+      : 'Make Payment or Get Invoice',
   ];
 }
 
