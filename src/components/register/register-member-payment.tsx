@@ -120,6 +120,17 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   const handleToogleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setHasFallConferenceFee(event.target.checked);
+
+    const updatedMemberForm = {
+      ...memberForm,
+      IsRegisteredForFallConference: event.target.checked,
+    };
+
+    return doUpdateEntry(
+      updatedMemberForm,
+      FIRESTORE_MEMBER_COLLECTION,
+      authenticatedUserId,
+    );
   }, []);
 
   const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
@@ -217,7 +228,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
     handleCompleteMemberPaymentStep(payment);
   }, [handleCompleteMemberPaymentStep, handleGetCurrentReceiptId]);
 
-  const handleChangeRadioSelection = useCallback((event) => {
+  const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: updatedActiveMemberSelection } = event.target;
 
     const isActive = updatedActiveMemberSelection === 'active';
@@ -230,7 +241,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
       receiptId,
     };
 
-    setIsActiveMember(updatedActiveMemberSelection);
+    setIsActiveMember(updatedActiveMemberSelection as ActiveMemberRadioOptions);
     onUpdateMemberForm(updatedMemberForm);
 
     return doUpdateEntry(
