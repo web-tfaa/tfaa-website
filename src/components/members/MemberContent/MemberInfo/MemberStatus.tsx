@@ -128,6 +128,8 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
       receiptId: currentMemberData?.receiptId ?? 0,
     };
 
+    const userId = `${currentMemberData?.Email}-${currentMemberData?.userId}`;
+
     // Update the member's payment data in the Firestore database
     // This shape should be the same as register-membmer-payment
     //  in the handleCompleteMemberPaymentStep function
@@ -135,7 +137,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
       await doUpdateEntry(
         updatedMemberData,
         FIRESTORE_MEMBER_COLLECTION,
-        currentMemberData?.userId,
+        userId,
       );
     } catch (error) {
       console.error('Error while updating after a successful payment', error);
