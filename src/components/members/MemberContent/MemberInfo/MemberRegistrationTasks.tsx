@@ -178,7 +178,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
                 <CtaButton
                   colorVariant="resources"
                   fontWeight={600}
-                  to="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
+                  to="https://res.cloudinary.com/tmac/image/upload/v1690941409/W-9_TFAA_Inc.pdf"
                 >
                   Download W-9
                 </CtaButton>

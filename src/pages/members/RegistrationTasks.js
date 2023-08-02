@@ -214,7 +214,7 @@ const RegistrationTasks = ({
             <ListItemSecondaryAction>
               <CtaButton
                 buttonColor="blue"
-                to="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
+                to="https://res.cloudinary.com/tmac/image/upload/v1690941409/W-9_TFAA_Inc.pdf"
               >
                 Download
               </CtaButton>
