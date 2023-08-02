@@ -370,7 +370,7 @@ const RegisterSponsorPayment: React.FC<Props> = ({
             <Box mt={3}>
               <a
                 download
-                href="https://res.cloudinary.com/tmac/image/upload/v1589767111/W-9__TMAC_Inc.pdf"
+                href="https://res.cloudinary.com/tmac/image/upload/v1690941409/W-9_TFAA_Inc.pdf"
               >
                 Download W-9
               </a>
