@@ -27,9 +27,11 @@ import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import { appNameShort } from '../../../../utils/app-constants';
+import { TfaaAuthUser } from '../../../layout';
 
 // Local Typings
 interface Props {
+  currentAuthUser: TfaaAuthUser | null;
   currentMemberData: TfaaMemberData | null;
 }
 
@@ -103,7 +105,10 @@ const StyledStrong = styled.strong(({ theme }) => ({
 }));
 
 // Component Definition
-const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
+const MemberStatus: React.FC<Props> = ({
+  currentAuthUser,
+  currentMemberData,
+}) => {
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
   // If the member paid by check, the TFAA Executive Secretary will manually
@@ -128,6 +133,8 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
       receiptId: currentMemberData?.receiptId ?? 0,
     };
 
+    const userId = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+
     // Update the member's payment data in the Firestore database
     // This shape should be the same as register-membmer-payment
     //  in the handleCompleteMemberPaymentStep function
@@ -135,7 +142,7 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
       await doUpdateEntry(
         updatedMemberData,
         FIRESTORE_MEMBER_COLLECTION,
-        currentMemberData?.userId,
+        userId,
       );
     } catch (error) {
       console.error('Error while updating after a successful payment', error);

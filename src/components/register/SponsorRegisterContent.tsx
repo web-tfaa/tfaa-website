@@ -217,6 +217,8 @@ const SponsorRegisterContent: React.FC = () => {
 
   const hasCompletedAllSponsorSteps = completedSponsorSteps?.length >= 3;
 
+  const authenticatedUserId = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+
   /* Children change depending on which step is active */
   return (
     <StyledRoot>
@@ -237,7 +239,7 @@ const SponsorRegisterContent: React.FC = () => {
         )}
         {activeStep === 1 && (
           <RegisterSponsorFormWrapper
-            authenticatedUserId={`${currentAuthUser?.email}-${currentAuthUser?.uid}`}
+            authenticatedUserId={authenticatedUserId}
             initialSponsorFormValues={INITIAL_SPONSOR_FORM_VALUES}
             onCompleteSponsorStep={handleCompleteSponsorStep}
             onUpdateSponsorForm={handleUpdateSponsorForm}
@@ -246,7 +248,7 @@ const SponsorRegisterContent: React.FC = () => {
         )}
         {[2, 3].includes(activeStep) && (
           <RegisterSponsorPayment
-            authenticatedUserId={currentAuthUser?.uid}
+            authenticatedUserId={authenticatedUserId}
             onUpdateSponsorForm={handleUpdateSponsorForm}
             sponsorForm={sponsorForm}
           />
