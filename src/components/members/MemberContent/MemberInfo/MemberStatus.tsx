@@ -113,12 +113,12 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
-  const amountToPay = currentMemberData?.MemberType === 'Active' ? 50.00 : 30.00;
+  const amountToPay = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
   const handleSuccessfulPayment = useCallback(async (payment: PaypalPayment) => {
     const updatedMemberData = {
       ...currentMemberData,
-      AmountPaid: currentMemberData?.MemberType === 'Active' ? 50 : 30,
+      AmountPaid: currentMemberData?.MemberType === 'Active' ? 75 : 30,
       PaypalPayerID: payment?.payerID,
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
@@ -205,8 +205,8 @@ const MemberStatus: React.FC<Props> = ({ currentMemberData }) => {
       >
         Outstanding balance:
         <StyledStrong>
-          {!isRegisteredForCurrentYear && '$50.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Active' && '$50.00'}
+          {!isRegisteredForCurrentYear && '$75.00'}
+          {needsToPay && currentMemberData?.MemberType === 'Active' && '$75.00'}
           {currentMemberData?.MemberType === 'Retired' && '$30.00'}
           {!needsToPay && '$0.00'}
         </StyledStrong>
