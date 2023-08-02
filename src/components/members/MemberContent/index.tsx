@@ -36,11 +36,10 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
   useEffect(() => {
     if (currentAuthUser && allMembersData && allMembersData.length > 0 && !currentMemberData) {
       const currentMember = allMembersData.find(
-        // We used to use authUser.uid as the unique key in the Firestore
-        // Now we use authUser.email
-        // We have to search for both for backwards compatibility
+        // We use a combination of email and uid to uniquely identify a user.
+        // The email part makes it easier to find a user in the database.
         (user) => {
-          return user.userId === currentAuthUser.uid || user.userId === currentAuthUser.email;
+          return user.userId === `${currentAuthUser.email}-${currentAuthUser.uid}`;
         });
 
       setCurrentMemberData(currentMember ?? null);
@@ -65,6 +64,7 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
 
       <MemberInfo
         authUserEmail={currentAuthUser?.email || currentMemberData?.Email}
+        currentAuthUser={currentAuthUser}
         currentMemberData={currentMemberData}
         isAdmin={isAdmin}
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}

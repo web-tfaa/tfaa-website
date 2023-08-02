@@ -14,10 +14,12 @@ import MemberContactInfo from './MemberContactInfo';
 import MemberRegistrationTasks from './MemberRegistrationTasks';
 import MemberStatus from './MemberStatus';
 import AdminActions from './AdminActions';
+import { TfaaAuthUser } from '../../../layout';
 
 // Local Typings
 interface Props {
   authUserEmail: string | undefined;
+  currentAuthUser: TfaaAuthUser | null;
   currentMemberData: TfaaMemberData | null;
   isAdmin: boolean;
   onUpdateShouldRefetchUserList: ((shouldRefetchUserList: boolean) => void) | null;
@@ -60,6 +62,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 // Component Definition
 const MemberInfo: React.FC<Props> = ({
   authUserEmail,
+  currentAuthUser,
   currentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
@@ -71,7 +74,10 @@ const MemberInfo: React.FC<Props> = ({
     <StyledRoot>
       <Motifs small />
 
-      <MemberStatus currentMemberData={currentMemberData} />
+      <MemberStatus
+        currentAuthUser={currentAuthUser}
+        currentMemberData={currentMemberData}
+      />
 
       {currentMemberData && (
         <MemberContactInfo
