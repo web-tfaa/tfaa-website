@@ -80,7 +80,7 @@ const InvoiceTable: React.FC<Props> = ({
 }) => {
   // Work out the correct amount
   const isString = typeof amount === 'string';
-  const updatedAmount = amount === 0 ? 50 : amount;
+  const updatedAmount = amount === 0 ? 75 : amount;
   const formattedAmount = isString ? updatedAmount : `$${Number(updatedAmount)?.toFixed(2).toLocaleString()}`;
 
   const hasAddedFallConferenceFee = Number(amount) > 100;
