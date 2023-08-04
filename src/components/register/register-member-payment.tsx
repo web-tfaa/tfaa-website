@@ -2,12 +2,13 @@
 import React, {
   ReactInstance, useCallback, useEffect, useRef, useState
 } from 'react';
-import { alpha } from '@mui/material/styles';
+import { alpha, lighten } from '@mui/material/styles';
 import ReactToPrint from 'react-to-print';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
@@ -81,6 +82,11 @@ const StyledRoot = styled.section(({ theme }) => ({
     fontSize: '1.25rem',
     fontWeight: 600,
     marginTop: theme.spacing(1.5),
+  },
+  '.memberStatusDivider': {
+    backgroundColor: lighten(theme.palette.tfaa.resources, 0.7),
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2),
   },
   '.radioButtonLabel': {
     display: 'block',
@@ -280,6 +286,17 @@ const RegisterMemberPayment: React.FC<Props> = ({
             — {isActive ? '$75.00' : '$30.00'}
           </Typography>
         </h3>
+
+        {hasFallConferenceFee && (
+          <Typography
+            // className="memberName"
+            variant="h6"
+          >
+            Fall Conference Fee — $75.00
+          </Typography>
+        )}
+
+        <Divider className="memberStatusDivider" />
 
         <Typography
           className="memberName"
