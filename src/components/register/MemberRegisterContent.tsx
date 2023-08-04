@@ -16,12 +16,13 @@ import RegisterStepper from './RegisterStepper';
 export interface MemberFormValues {
   Address1: string;
   Address2?: string;
-  AmountPaid: 0 | 30 | 75;
+  AmountPaid: number;
   CellPhone: string;
   City: string;
   District: string;
   Email: string;
   FirstName: string;
+  IsRegisteredForFallConference: boolean;
   LastName: string;
   MemberType: 'Active' | 'Retired';
   NewToTMAC: boolean;
@@ -67,6 +68,7 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   District: '',
   Email: '',
   FirstName: '',
+  IsRegisteredForFallConference: false,
   LastName: '',
   MemberType: 'Active',
   NewToTMAC: false,

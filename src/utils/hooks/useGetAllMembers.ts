@@ -20,6 +20,7 @@ export interface TfaaMemberData {
   District: string;
   Email: string;
   FirstName: string;
+  IsRegisteredForFallConference: boolean;
   LastName: string;
   MemberType: 'Active' | 'Retired';
   NewToTMAC: 'Yes' | 'No';
@@ -47,6 +48,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Richardson ISD',
     Email: 'breff.jadford@risd.org',
     FirstName: 'Breff',
+    IsRegisteredForFallConference: true,
     LastName: 'Jadford',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -71,6 +73,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Plano ISD',
     Email: 'DFA@planoisd.org',
     FirstName: 'Plano',
+    IsRegisteredForFallConference: true,
     LastName: 'Administrator',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -95,6 +98,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Dallas ISD',
     Email: 'DFA@dallasisd.org',
     FirstName: 'Head of',
+    IsRegisteredForFallConference: false,
     LastName: 'Fine Arts',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -119,6 +123,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Garland ISD',
     Email: 'DFA@dallasisd.org',
     FirstName: 'Director of ',
+    IsRegisteredForFallConference: true,
     LastName: 'Fine Arts Education',
     MemberType: 'Active',
     NewToTMAC: 'No',

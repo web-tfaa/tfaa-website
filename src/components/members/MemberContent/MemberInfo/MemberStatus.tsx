@@ -118,7 +118,16 @@ const MemberStatus: React.FC<Props> = ({
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
-  const amountToPay = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
+  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference;
+
+  console.log('needsToPayForFallConference', needsToPayForFallConference);
+  console.log('currentMemberData?.MemberType === Retired', currentMemberData?.MemberType === 'Retired');
+
+  const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
+
+  const amountToPay = needsToPayForFallConference
+    ? amountToPayForMembership + 75.00
+    : amountToPayForMembership;
 
   const handleSuccessfulPayment = useCallback(async (payment: PaypalPayment) => {
     const updatedMemberData = {
@@ -133,7 +142,7 @@ const MemberStatus: React.FC<Props> = ({
       receiptId: currentMemberData?.receiptId ?? 0,
     };
 
-    const userId = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+    const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
 
     // Update the member's payment data in the Firestore database
     // This shape should be the same as register-membmer-payment
@@ -142,7 +151,7 @@ const MemberStatus: React.FC<Props> = ({
       await doUpdateEntry(
         updatedMemberData,
         FIRESTORE_MEMBER_COLLECTION,
-        userId,
+        userIdForFirestore,
       );
     } catch (error) {
       console.error('Error while updating after a successful payment', error);
@@ -170,9 +179,9 @@ const MemberStatus: React.FC<Props> = ({
                 {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
 
                 {isRegisteredForCurrentYear && !needsToPay && (
-                <>
-                  {currentMemberData?.MemberType || 'Active'} member
-                </>
+                  <>
+                    {currentMemberData?.MemberType || 'Active'} member
+                  </>
                 )}
               </>
             )}
@@ -182,7 +191,7 @@ const MemberStatus: React.FC<Props> = ({
                 {!needsToPay && (
                   <>
                     <br />
-                    through 6/30/{currentSchoolYearEnding}
+                    through 7/31/{currentSchoolYearEnding}
                   </>
                 )}
               </>
@@ -194,7 +203,7 @@ const MemberStatus: React.FC<Props> = ({
       {needsToPay && (
         <Box marginTop={2}>
           <EnhancedAlert severity="warning">
-            To become an active member, please
+            To become a registered member, please
             {' '}
             {!isRegisteredForCurrentYear && 'register and '}
             {' '}
@@ -202,6 +211,44 @@ const MemberStatus: React.FC<Props> = ({
             dues for this school year.
           </EnhancedAlert>
         </Box>
+      )}
+
+      {needsToPay && (
+        <>
+          <Typography
+            className="balanceText"
+            component="div"
+            sx={{ marginTop: 3 }}
+            variant="body2"
+          >
+            {currentMemberData?.MemberType} Membership:
+            {needsToPayForFallConference ? (
+              <Box
+                component="strong"
+                sx={{ marginLeft: 1 }}
+              >
+                ${amountToPayForMembership}.00
+              </Box>
+            ) : '—'}
+          </Typography>
+
+          <Typography
+            className="contentText"
+            component="div"
+            sx={{ marginTop: 1 }}
+            variant="body2"
+          >
+            Fall Conference Fee:
+            {needsToPayForFallConference ? (
+              <Box
+                component="strong"
+                sx={{ marginLeft: 1 }}
+              >
+                $75.00
+              </Box>
+            ) : '—'}
+          </Typography>
+        </>
       )}
 
       <Typography
@@ -213,8 +260,10 @@ const MemberStatus: React.FC<Props> = ({
         Outstanding balance:
         <StyledStrong>
           {!isRegisteredForCurrentYear && '$75.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Active' && '$75.00'}
-          {currentMemberData?.MemberType === 'Retired' && '$30.00'}
+          {needsToPay && currentMemberData?.MemberType === 'Active' && !needsToPayForFallConference && '$75.00'}
+          {needsToPay && currentMemberData?.MemberType === 'Active' && needsToPayForFallConference && '$150.00'}
+          {needsToPay && currentMemberData?.MemberType === 'Retired' && needsToPayForFallConference && '$105.00'}
+          {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
           {!needsToPay && '$0.00'}
         </StyledStrong>
         {!needsToPay && (
@@ -269,8 +318,8 @@ const MemberStatus: React.FC<Props> = ({
                 primary="Send invoice with payment"
                 secondary={
                   `Mail invoice with payment
-                      to the ${appNameShort} Executive Secretary as indicated on your
-                      invoice.`}
+                    to the ${appNameShort} Executive Secretary as indicated on your
+                    invoice.`}
               />
             </ListItem>
 

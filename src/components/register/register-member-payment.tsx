@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { getAmountPaid } from '../../utils/getAmountPaid';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
@@ -118,23 +119,28 @@ const RegisterMemberPayment: React.FC<Props> = ({
   ] = useState<ActiveMemberRadioOptions>('active');
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(false);
 
-  const handleToogleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleToggleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setHasFallConferenceFee(event.target.checked);
+
+    console.log('...memberForm', memberForm);
 
     const updatedMemberForm = {
       ...memberForm,
       IsRegisteredForFallConference: event.target.checked,
     };
 
+    console.log('updatedMemberForm', updatedMemberForm);
+
+    onUpdateMemberForm(updatedMemberForm);
+
     return doUpdateEntry(
       updatedMemberForm,
       FIRESTORE_MEMBER_COLLECTION,
       authenticatedUserId,
     );
-  }, []);
+  }, [memberForm]);
 
   const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
-    console.log('handleGetCurrentInvoiceId : currentInvoiceId', currentInvoiceId);
     onUpdateMemberForm({
       ...memberForm,
       invoiceId: currentInvoiceId,
@@ -149,9 +155,13 @@ const RegisterMemberPayment: React.FC<Props> = ({
   }, [memberForm, onUpdateMemberForm]);
 
   const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
+    const amountPaid = getAmountPaid(memberForm);
+
+    console.log('amountPaid', amountPaid);
+
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
-      AmountPaid: isActiveMember === 'active' ? 75 : 30,
+      AmountPaid: amountPaid,
       PaypalPayerID: payment?.payerID,
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
@@ -402,7 +412,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
                 control={(
                   <Checkbox
                     checked={hasFallConferenceFee}
-                    onChange={handleToogleHasFallConferenceFee}
+                    onChange={handleToggleHasFallConferenceFee}
                   />
                 )}
                 label="Add Fall Conference Registration (optional) — $75"

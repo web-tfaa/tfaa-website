@@ -17,6 +17,7 @@ const propTypes = {
     City: PropTypes.string,
     District: PropTypes.string,
     FirstName: PropTypes.string,
+    IsRegisteredForFallConference: PropTypes.bool,
     LastName: PropTypes.string,
     MemberType: PropTypes.string,
     OfficePhone: PropTypes.string,
