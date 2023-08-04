@@ -28,6 +28,7 @@ import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper'
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import { appNameShort } from '../../../../utils/app-constants';
 import { TfaaAuthUser } from '../../../layout';
+import { getAmountPaid } from '../../../../utils/getAmountPaid';
 
 // Local Typings
 interface Props {
@@ -130,9 +131,11 @@ const MemberStatus: React.FC<Props> = ({
     : amountToPayForMembership;
 
   const handleSuccessfulPayment = useCallback(async (payment: PaypalPayment) => {
+    const amountPaid = getAmountPaid(currentMemberData);
+
     const updatedMemberData = {
       ...currentMemberData,
-      AmountPaid: currentMemberData?.MemberType === 'Active' ? 75 : 30,
+      AmountPaid: amountPaid,
       PaypalPayerID: payment?.payerID,
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',

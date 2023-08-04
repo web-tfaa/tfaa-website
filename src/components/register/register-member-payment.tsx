@@ -122,14 +122,10 @@ const RegisterMemberPayment: React.FC<Props> = ({
   const handleToggleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setHasFallConferenceFee(event.target.checked);
 
-    console.log('...memberForm', memberForm);
-
     const updatedMemberForm = {
       ...memberForm,
       IsRegisteredForFallConference: event.target.checked,
     };
-
-    console.log('updatedMemberForm', updatedMemberForm);
 
     onUpdateMemberForm(updatedMemberForm);
 
@@ -156,8 +152,6 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
     const amountPaid = getAmountPaid(memberForm);
-
-    console.log('amountPaid', amountPaid);
 
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
