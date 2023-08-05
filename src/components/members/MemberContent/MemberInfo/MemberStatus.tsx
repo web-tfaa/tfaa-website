@@ -1,14 +1,15 @@
 // External Dependencies
 import { lighten } from '@mui/material';
 import Box from '@mui/material/Box';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React, { useCallback } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useMemo } from 'react';
+import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
 import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
@@ -60,6 +61,12 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     marginBottom: 0,
     paddingBottom: 0,
   },
+  '.listItemIcon': {
+    height: 24,
+    marginLeft: theme.spacing(1),
+    transform: 'translateY(6px)',
+    width: 24,
+  },
   '.listItemText': {
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.9rem',
@@ -110,6 +117,8 @@ const MemberStatus: React.FC<Props> = ({
   currentAuthUser,
   currentMemberData,
 }) => {
+  const theme = useTheme();
+
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
   // If the member paid by check, the TFAA Executive Secretary will manually
@@ -120,9 +129,6 @@ const MemberStatus: React.FC<Props> = ({
   const needsToPay = !currentMemberData?.AmountPaid;
 
   const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference;
-
-  console.log('needsToPayForFallConference', needsToPayForFallConference);
-  console.log('currentMemberData?.MemberType === Retired', currentMemberData?.MemberType === 'Retired');
 
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
@@ -166,6 +172,13 @@ const MemberStatus: React.FC<Props> = ({
       window.location.reload();
     }
   }, [currentMemberData]);
+
+  const successIconElement = useMemo(() => (
+    <CheckCircleIcon
+      className="listItemIcon"
+      htmlColor={theme.palette.tfaa.resources}
+    />
+  ), []);
 
   return (
     <StyledMemberInfoCard cardTitle="Membership status">
@@ -216,7 +229,7 @@ const MemberStatus: React.FC<Props> = ({
         </Box>
       )}
 
-      {needsToPay && (
+      {isRegisteredForCurrentYear && needsToPay && (
         <>
           <Typography
             className="balanceText"
@@ -225,32 +238,30 @@ const MemberStatus: React.FC<Props> = ({
             variant="body2"
           >
             {currentMemberData?.MemberType} Membership:
-            {needsToPayForFallConference ? (
-              <Box
-                component="strong"
-                sx={{ marginLeft: 1 }}
-              >
-                ${amountToPayForMembership}.00
-              </Box>
-            ) : '—'}
+            <Box
+              component="strong"
+              sx={{ marginLeft: 1 }}
+            >
+              ${amountToPayForMembership}.00
+            </Box>
           </Typography>
 
-          <Typography
-            className="contentText"
-            component="div"
-            sx={{ marginTop: 1 }}
-            variant="body2"
-          >
-            Fall Conference Fee:
-            {needsToPayForFallConference ? (
+          {needsToPayForFallConference && (
+            <Typography
+              className="contentText"
+              component="div"
+              sx={{ marginTop: 1 }}
+              variant="body2"
+            >
+              Fall Conference Fee:
               <Box
                 component="strong"
                 sx={{ marginLeft: 1 }}
               >
                 $75.00
               </Box>
-            ) : '—'}
-          </Typography>
+            </Typography>
+          )}
         </>
       )}
 
@@ -269,6 +280,7 @@ const MemberStatus: React.FC<Props> = ({
           {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
           {!needsToPay && '$0.00'}
         </StyledStrong>
+
         {!needsToPay && (
           <>
             {' '}
@@ -280,6 +292,17 @@ const MemberStatus: React.FC<Props> = ({
           </>
         )}
       </Typography>
+
+      {needsToPayForFallConference && !needsToPay && (
+        <>
+          <Divider className="memberStatusDivider" />
+
+          <Typography>
+            Registered for Fall Conference
+            {successIconElement}
+          </Typography>
+        </>
+      )}
 
       {isRegisteredForCurrentYear && isInvoiced && (
         <>

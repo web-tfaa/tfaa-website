@@ -73,6 +73,7 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
 // Component Definition
 const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
+  const isRegisteredForFallConference  = currentMemberData?.IsRegisteredForFallConference;
 
   const theme = useTheme();
   const printReceiptRef = useRef();
@@ -114,7 +115,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
             }}
             primary={(
               <>
-                Register
+                Register as a member
                 {isRegisteredForCurrentYear && successIconElement}
               </>
             )}
@@ -155,6 +156,27 @@ const MemberRegistrationTasks: React.FC<Props> = ({ currentMemberData }) => {
             secondary={
               isRegisteredForCurrentYear && !needsToPay
                 ? 'You have already paid your dues for the current school year.'
+                : 'Pay online using credit card or send payment with invoice.'
+              }
+          />
+        </ListItem>
+
+        <ListItem className="paymentListItem">
+          <ListItemText
+            classes={{
+              primary: 'listItemText',
+              secondary: 'listItemSecondaryText',
+            }}
+            primary={(
+              <>
+                Register for Fall Conference (optional)
+                {isRegisteredForFallConference && !needsToPay && successIconElement}
+                {isRegisteredForFallConference && needsToPay && warningIconElement}
+              </>
+            )}
+            secondary={
+              isRegisteredForCurrentYear && !needsToPay
+                ? 'You are registered for the Fall Conference.'
                 : 'Pay online using credit card or send payment with invoice.'
               }
           />

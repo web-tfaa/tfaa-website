@@ -125,6 +125,8 @@ const RegisterMemberPayment: React.FC<Props> = ({
   ] = useState<ActiveMemberRadioOptions>('active');
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(false);
 
+  // Used for the checkbox to indicate if the member will pay
+  //  for the separate Fall Conference registration fee
   const handleToggleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setHasFallConferenceFee(event.target.checked);
 
@@ -156,6 +158,8 @@ const RegisterMemberPayment: React.FC<Props> = ({
     });
   }, [memberForm, onUpdateMemberForm]);
 
+  // When the step is being completed after a successful payment,
+  //  we update the Firestore database and push the user to the payment success UI
   const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
     const amountPaid = getAmountPaid(memberForm);
 
@@ -180,6 +184,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
   }, [authenticatedUserId, isActiveMember, memberForm, onCompleteMemberStep]);
 
   useEffect(() => {
+    // Fetch the current invoice and receipt id values from Firestore
     doGetInvoiceId(handleGetCurrentInvoiceId);
     doGetReceiptId(handleGetCurrentReceiptId);
 
@@ -232,22 +237,27 @@ const RegisterMemberPayment: React.FC<Props> = ({
     previousInvoiceId,
   ]);
 
+  // Called when a payment is successfully completed via PayPal
   const handleUpdateCompletedStep = useCallback((payment: PaypalPayment) => {
     doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompleteMemberPaymentStep(payment);
   }, [handleCompleteMemberPaymentStep, handleGetCurrentReceiptId]);
 
+  // Flip between Active and Retired member types
   const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: updatedActiveMemberSelection } = event.target;
 
     const isActive = updatedActiveMemberSelection === 'active';
 
+    const memberType = isActive ? 'Active' : 'Retired' as ('Active' | 'Retired');
+
     const updatedMemberForm = {
       ...memberForm,
+      AmountPaid: 0, // probalbly not needed, but just in case
       invoiceDate: currentDate,
       invoiceId,
-      MemberType: isActive ? 'Active' : 'Retired' as ('Active' | 'Retired'),
+      MemberType: memberType,
       receiptId,
     };
 
@@ -266,6 +276,8 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   const amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
 
+  // This element is shown if the member successfully
+  //  completes an online PayPal payment
   const successfulMemberPaymentElement = (
     <div>
       <Box mb={3}>
@@ -288,10 +300,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
         </h3>
 
         {hasFallConferenceFee && (
-          <Typography
-            // className="memberName"
-            variant="h6"
-          >
+          <Typography variant="h6">
             Fall Conference Fee — $75.00
           </Typography>
         )}
@@ -356,7 +365,8 @@ const RegisterMemberPayment: React.FC<Props> = ({
     </div>
   );
 
-  // We show this if the user has not made a payment
+  // We show this if the user has not made a payment.
+  // It's assumed that they are wanting an invoice.
   const invoiceMemberElement = (
     <>
       <EnhancedCard sx={{ marginBottom: 3 }}>

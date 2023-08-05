@@ -6,8 +6,9 @@ const ACTIVE_MEMBER_DUES = 75;
 const RETIRED_MEMBER_DUES = 30;
 const FALL_CONFERENCE_FEE = 75;
 
-// When updating a member's data, we need
-//  to make sure the `AmountPaid` is accurate
+// When updating a member's data after a successful online Paypal payment,
+//  we make sure the `AmountPaid` is accurate based on the data
+//  for the `MemberType` and `IsRegisteredForFallConference` fields.
 export const getAmountPaid = (member: MemberFormValues | TfaaMemberData | null) => {
   if (!member) {
     return 0;
