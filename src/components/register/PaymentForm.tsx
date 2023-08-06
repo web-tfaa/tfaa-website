@@ -52,9 +52,9 @@ export const PaymentForm = ({
     const updatedMemberForm = {
       ...memberForm,
       AmountPaid: 0, // probalbly not needed, but just in case
+      MemberType: memberType,
       invoiceDate: currentDate,
       invoiceId: memberForm?.invoiceId,
-      MemberType: memberType,
       receiptId: memberForm?.receiptId,
     };
 

@@ -166,7 +166,7 @@ const RegisterMemberPayment: React.FC<Props> = ({
     handleUpdateFirestoreMemberData(updatedMemberForm);
 
     onCompleteMemberStep(2, updatedMemberForm);
-  }, [authenticatedUserId, isActiveMember, memberForm, onCompleteMemberStep]);
+  }, [isActiveMember, memberForm, onCompleteMemberStep]);
 
   useEffect(() => {
     // Fetch the current invoice and receipt id values from Firestore

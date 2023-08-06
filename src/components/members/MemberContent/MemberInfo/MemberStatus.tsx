@@ -148,6 +148,8 @@ const MemberStatus: React.FC<Props> = ({
 
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
+  const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+
   const amountToPay = needsToPayForFallConference
     ? amountToPayForMembership + 75.00
     : amountToPayForMembership;
@@ -166,8 +168,6 @@ const MemberStatus: React.FC<Props> = ({
       receiptDate: currentMemberData?.receiptId ? currentDate : '',
       receiptId: currentMemberData?.receiptId ?? 0,
     };
-
-    const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
 
     // Update the member's payment data in the Firestore database
     // This shape should be the same as register-membmer-payment

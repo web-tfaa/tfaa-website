@@ -21,6 +21,9 @@ import {
 } from '../../../register/MemberRegisterContent';
 import { ActiveMemberRadioOptions } from '../../../register/register-member-payment';
 import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
+import { currentDate } from '../../../../utils/dateHelpers';
+import { getAmountPaid } from '../../../../utils/getAmountPaid';
+import usePrevious from '../../../../utils/hooks/usePrevious';
 
 // Local Typings
 interface Props {
@@ -37,26 +40,27 @@ export const DialogPayment = ({
   onClose,
   userIdForFirestore
 }: Props): JSX.Element => {
+  const memberTypeFromForm = currentMemberData?.MemberType.toLowerCase();
+
+  const previousCurrentMemberData = usePrevious(currentMemberData);
+
+  /* Local State */
   // State variable used to cause a render and cause a useEffect to run
   const [hasCompletedPayment, setHasCompletedPayment] = useState<boolean>();
 
   const [
     memberPaymentForm,
     setMemberPaymentForm,
-  ] = useState<MemberFormValues | null>(currentMemberData ?? INITIAL_MEMBER_FORM_VALUES);
+  ] = useState<MemberFormValues>(currentMemberData ?? INITIAL_MEMBER_FORM_VALUES);
 
   const [
     isActiveMember,
     setIsActiveMember,
-  ] = useState<ActiveMemberRadioOptions>('active');
+  ] = useState<ActiveMemberRadioOptions>(memberTypeFromForm as ActiveMemberRadioOptions ?? 'active');
 
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(currentMemberData?.IsRegisteredForFallConference ?? false);
 
   // Local state setter functionsm
-  const handleUpdateMemberPaymentForm = useCallback((updatedMemberForm: MemberFormValues) => {
-    setMemberPaymentForm(updatedMemberForm);
-  }, []);
-
   const handleSetIsActiveMember = useCallback((isActive: ActiveMemberRadioOptions) => {
     setIsActiveMember(isActive);
   }, []);
@@ -65,40 +69,57 @@ export const DialogPayment = ({
     setHasFallConferenceFee(hasFee);
   }, []);
 
+  const handleUpdateMemberPaymentForm = (updatedMemberPaymentForm: Partial<MemberFormValues>) => {
+    setMemberPaymentForm({
+      ...memberPaymentForm,
+      ...updatedMemberPaymentForm,
+    });
+  };
+
   // Update memberPaymentForm state with invoice and receipt ids
   const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
     handleUpdateMemberPaymentForm({
-      ...(memberPaymentForm as MemberFormValues),
+      ...currentMemberData,
       invoiceId: currentInvoiceId,
     });
   }, [memberPaymentForm, handleUpdateMemberPaymentForm]);
 
   const handleGetCurrentReceiptId = useCallback((currentReceiptId: number) => {
     handleUpdateMemberPaymentForm({
-      ...(memberPaymentForm as MemberFormValues),
+      ...currentMemberData,
       receiptId: currentReceiptId,
     });
   }, [memberPaymentForm, handleUpdateMemberPaymentForm]);
 
   useEffect(() => {
-    // Fetch the current invoice and receipt id values from Firestore
-    doGetInvoiceId(handleGetCurrentInvoiceId);
-    doGetReceiptId(handleGetCurrentReceiptId);
+    if (currentMemberData) {
+      // Fetch the current invoice and receipt id values from Firestore
+      doGetInvoiceId(handleGetCurrentInvoiceId);
+      doGetReceiptId(handleGetCurrentReceiptId);
 
-    // On unmount
-    return () => {
-      // Increment receipt id value in Firestore
-      if (hasCompletedPayment) {
-        updateFirestoreReceiptId();
+      // On unmount
+      return () => {
+        // Increment receipt id value in Firestore
+        if (hasCompletedPayment) {
+          updateFirestoreReceiptId();
 
-        // If no payment is made, we increment invoice id value in Firestore
-      } else {
-        updateFirestoreInvoiceId();
-      }
-    };
-    // Ignoring this b/c we only want to run this on mount
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+          // If no payment is made, we increment invoice id value in Firestore
+        } else {
+          updateFirestoreInvoiceId();
+        }
+      };
+    }
+  }, [currentMemberData]);
+
+  useEffect(() => {
+    // If the currentMemberData was undefined and then arrives,
+    //  update the form data in the reducer and the local state
+    if (!previousCurrentMemberData && currentMemberData) {
+      handleUpdateMemberPaymentForm(currentMemberData);
+      setIsActiveMember(currentMemberData.MemberType.toLowerCase() as ActiveMemberRadioOptions);
+      setHasFallConferenceFee(currentMemberData.IsRegisteredForFallConference);
+    }
+  }, [currentMemberData, handleUpdateMemberPaymentForm, previousCurrentMemberData]);
 
   // Update Firestore database member data
   const handleUpdateFirestoreMemberData = useCallback((updatedMemberForm: MemberFormValues) => {
@@ -109,10 +130,31 @@ export const DialogPayment = ({
     );
   }, []);
 
+  // After a successful payment, we update the Firestore
+  //  database and push the user to the payment success UI
+  const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
+    const amountPaid = getAmountPaid(memberPaymentForm);
+
+    const updatedMemberForm: MemberFormValues = {
+      ...memberPaymentForm,
+      AmountPaid: amountPaid,
+      PaypalPayerID: payment?.payerID,
+      PaypalPaymentID: payment?.paymentID,
+      PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
+      invoiceDate: currentDate,
+      invoiceId: memberPaymentForm.invoiceId,
+      receiptDate: memberPaymentForm.receiptId ? currentDate : '',
+      receiptId: memberPaymentForm.receiptId,
+    };
+
+    handleUpdateFirestoreMemberData(updatedMemberForm);
+  }, [isActiveMember, memberPaymentForm]);
+
   // Called when a payment is successfully completed via PayPal
   const handleUpdateCompletedStep = useCallback((payment: PaypalPayment) => {
     doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
+    handleUpdateMemberPaymentData(payment);
   }, [handleGetCurrentReceiptId]);
 
   const isActive = isActiveMember === 'active';

@@ -23,7 +23,6 @@ export type HandleCompleteMemberStepType = (
   updatedMemberForm: MemberFormValues,
 ) => void;
 
-
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   display: 'flex',
@@ -47,7 +46,7 @@ export const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   IsRegisteredForFallConference: false,
   LastName: '',
   MemberType: 'Active',
-  NewToTMAC: 'No',
+  NewToTMAC: false,
   OfficePhone: '',
   PaymentOption: 'Invoiced',
   PaypalPayerID: '',
