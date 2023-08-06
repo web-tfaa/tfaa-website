@@ -18,6 +18,7 @@ interface Props {
   amountToPay: number;
   hasFallConferenceFee: boolean;
   isActiveMember: ActiveMemberRadioOptions;
+  isDialogOpen?: boolean;
   isDialogView?: boolean;
   memberForm: MemberFormValues | TfaaMemberData | null;
   onSetHasFallConferenceFee: (hasFee: boolean) => void;
@@ -46,6 +47,7 @@ export const PaymentForm = ({
   amountToPay,
   hasFallConferenceFee,
   isActiveMember,
+  isDialogOpen,
   isDialogView = false,
   memberForm,
   onSetHasFallConferenceFee,
@@ -188,10 +190,12 @@ export const PaymentForm = ({
         Click on the PayPal button below to pay with credit card.
       </Typography>
 
-      <PaypalButtonWrapper
-        amount={amountToPay}
-        onSuccessfulPayment={onUpdateCompletedStep}
-      />
+      {isDialogOpen && (
+        <PaypalButtonWrapper
+          amount={amountToPay}
+          onSuccessfulPayment={onUpdateCompletedStep}
+        />
+      )}
     </StyledFormControl>
   )
 };

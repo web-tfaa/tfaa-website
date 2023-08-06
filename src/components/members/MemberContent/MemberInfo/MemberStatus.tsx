@@ -121,8 +121,6 @@ const MemberStatus: React.FC<Props> = ({
   onSetRefetchCurrentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
-  console.log('MemberStatus ... currentMemberData', currentMemberData);
-
   const theme = useTheme();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -352,12 +350,14 @@ const MemberStatus: React.FC<Props> = ({
         )}
       </StyledMemberInfoCard>
 
-      <DialogPayment
-        currentMemberData={currentMemberData}
-        isOpen={isDialogOpen}
-        onClose={handleCloseDialogPayment}
-        userIdForFirestore={userIdForFirestore}
-      />
+      {isDialogOpen && (
+        <DialogPayment
+          currentMemberData={currentMemberData}
+          isOpen={isDialogOpen}
+          onClose={handleCloseDialogPayment}
+          userIdForFirestore={userIdForFirestore}
+        />
+      )}
     </>
   );
 };

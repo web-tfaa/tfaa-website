@@ -43,6 +43,9 @@ export const DialogPayment = ({
   const memberTypeFromForm = currentMemberData?.MemberType.toLowerCase();
 
   const previousCurrentMemberData = usePrevious(currentMemberData);
+  const previousIsOpen = usePrevious(isOpen);
+
+  const isDialogOpened = isOpen && !previousIsOpen;
 
   /* Local State */
   // State variable used to cause a render and cause a useEffect to run
@@ -114,12 +117,17 @@ export const DialogPayment = ({
   useEffect(() => {
     // If the currentMemberData was undefined and then arrives,
     //  update the form data in the reducer and the local state
-    if (!previousCurrentMemberData && currentMemberData) {
+    if (!previousCurrentMemberData && currentMemberData && isDialogOpened) {
       handleUpdateMemberPaymentForm(currentMemberData);
       setIsActiveMember(currentMemberData.MemberType.toLowerCase() as ActiveMemberRadioOptions);
       setHasFallConferenceFee(currentMemberData.IsRegisteredForFallConference);
     }
-  }, [currentMemberData, handleUpdateMemberPaymentForm, previousCurrentMemberData]);
+  }, [
+    currentMemberData,
+    handleUpdateMemberPaymentForm,
+    isDialogOpened,
+    previousCurrentMemberData,
+  ]);
 
   // Update Firestore database member data
   const handleUpdateFirestoreMemberData = useCallback((updatedMemberForm: MemberFormValues) => {
@@ -133,6 +141,8 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
+    console.log('handleUpdateMemberPaymentData ** payment', payment);
+
     const amountPaid = getAmountPaid(currentMemberData);
 
     const updatedMemberForm: MemberFormValues = {
@@ -148,12 +158,6 @@ export const DialogPayment = ({
     };
 
     handleUpdateFirestoreMemberData(updatedMemberForm);
-
-    // Instead of trying to update all of the data,
-    //  it's easier to reload the Members page
-    if (typeof window !== 'undefined') {
-      window.location.reload();
-    }
   }, [isActiveMember, memberPaymentForm]);
 
   // Called when a payment is successfully completed via PayPal
@@ -184,6 +188,7 @@ export const DialogPayment = ({
           amountToPay={amount}
           hasFallConferenceFee={hasFallConferenceFee}
           isActiveMember={isActiveMember}
+          isDialogOpen={isOpen}
           isDialogView
           memberForm={memberPaymentForm}
           onSetHasFallConferenceFee={handleSetHasFallConferenceFee}

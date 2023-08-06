@@ -156,7 +156,7 @@ export const useGetAllMembers = ({
   // console.log('isLoading', isLoading);
   // console.log('shouldRefetchUserList', shouldRefetchUserList);
   // console.log('previousMemberData', Boolean(previousMemberData));
-  // console.log('memberData', Boolean(memberData));
+  // console.log('memberData', memberData);
 
   const handleUpdateMemberData = useCallback((newMemberData: TfaaMemberData[] | null) => {
     setMemberData(newMemberData);
@@ -173,8 +173,6 @@ export const useGetAllMembers = ({
 
   // Fetch member data when component mounts
   useEffect(() => {
-    // console.count('useGetAllMembers : useEffect');
-
     if (isAuthenticated && (!useTestData || shouldRefetchUserList)) {
       const emptyMemberList: TfaaMemberData[] = [];
 
@@ -185,13 +183,10 @@ export const useGetAllMembers = ({
         handleUpdateShouldRefetchUserList(false);
       }
     }
-    // We do not want to re-run this effect when other values change
-    // Running with shouldRefetchUserList in the dependency array causes
-    //  the PayPal checkout.js to have an error.
   }, [
     handleUpdateMemberData,
     isAuthenticated,
-    // shouldRefetchUserList,
+    shouldRefetchUserList,
     useTestData,
   ]);
 
