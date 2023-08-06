@@ -13,7 +13,7 @@ interface UseSponsorDataQueryArguments {
 
 export interface TfaaMemberData {
   Address1: string;
-  Address2: string;
+  Address2?: string;
   AmountPaid: number;
   CellPhone: string;
   City: string;
@@ -25,16 +25,17 @@ export interface TfaaMemberData {
   MemberType: 'Active' | 'Retired';
   NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
-  PaymentOption: string;
+  PaymentOption: 'Invoiced' | 'Paypal';
+  PaypalPayerID?: string;
   PaypalPaymentID: string;
   State: string;
   Title: string;
-  ZipCode: number;
-  userId: string;
+  ZipCode: string | number;
   invoiceDate: string;
-  invoiceId: string;
+  invoiceId: string | number;
   receiptDate: string;
-  receiptId: string;
+  receiptId: string | number;
+  userId: string;
 }
 
 // Local Variables

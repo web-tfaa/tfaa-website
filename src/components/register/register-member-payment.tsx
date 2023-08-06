@@ -20,12 +20,12 @@ import {
 import { PaymentForm } from './PaymentForm';
 import { PaypalPayment } from './paypal/paypal-button-wrapper';
 import {
+  FIRESTORE_MEMBER_COLLECTION,
   doGetInvoiceId,
   doGetReceiptId,
   doUpdateEntry,
   doUpdateInvoiceId as updateFirestoreInvoiceId,
   doUpdateReceiptId as updateFirestoreReceiptId,
-  FIRESTORE_MEMBER_COLLECTION,
 } from '../../firebase/db';
 import { currentDate } from '../../utils/dateHelpers';
 import { currentSchoolYearLong } from '../../utils/helpers';

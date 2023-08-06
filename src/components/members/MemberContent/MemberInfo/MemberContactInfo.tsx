@@ -39,15 +39,6 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
       fontSize: '0.9rem',
       maxWidth: '70%',
     },
-    // [presets.Mobile]: {
-    //   maxWidth: '60%',
-    // },
-    // [presets.Phablet]: {
-    //   maxWidth: '70%',
-    // },
-    // [theme.breakpoints.up('mobile')]: {
-    //   maxWidth: '80%',
-    // },
     fontSize: '1rem',
     fontWeight: 500,
   },

@@ -6,12 +6,14 @@ import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
+import { DialogPayment } from './DialogPayment';
 import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import {
@@ -23,9 +25,10 @@ import {
   currentSchoolYearEnding,
   currentSchoolYearLong,
 } from '../../../../utils/helpers';
+import CtaButton from '../../../shared/CtaButton';
 import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
-import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
+// import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import { appNameShort } from '../../../../utils/app-constants';
 import { TfaaAuthUser } from '../../../layout';
@@ -87,6 +90,9 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     marginLeft: theme.spacing(1),
   },
   '.paymentActionContainer': {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(3),
+    },
     display: 'flex',
     justifyContent: 'flex-end',
   },
@@ -119,7 +125,17 @@ const MemberStatus: React.FC<Props> = ({
 }) => {
   const theme = useTheme();
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
+
+  const handleOpenDialogPayment = useCallback(() => {
+    setIsDialogOpen(true);
+  }, []);
+
+  const handleCloseDialogPayment = useCallback(() => {
+    setIsDialogOpen(false);
+  }, []);
 
   // If the member paid by check, the TFAA Executive Secretary will manually
   //  add the check number in the PaypalPaymentID field
@@ -181,181 +197,202 @@ const MemberStatus: React.FC<Props> = ({
   ), []);
 
   return (
-    <StyledMemberInfoCard cardTitle="Membership status">
-      <List>
-        <ListItem className="listItem">
-          <ListItemText
-            classes={{
-              primary: 'listItemText',
-            }}
-            primary={(
-              <>
-                {!isRegisteredForCurrentYear && 'Not registered'}
+    <>
+      <StyledMemberInfoCard cardTitle="Membership status">
+        <List>
+          <ListItem className="listItem">
+            <ListItemText
+              classes={{
+                primary: 'listItemText',
+              }}
+              primary={(
+                <>
+                  {!isRegisteredForCurrentYear && 'Not registered'}
 
-                {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
+                  {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
 
-                {isRegisteredForCurrentYear && !needsToPay && (
-                  <>
-                    {currentMemberData?.MemberType || 'Active'} member
-                  </>
-                )}
-              </>
-            )}
-            secondary={(
-              <>
-                for the {currentSchoolYearLong} school year
-                {!needsToPay && (
-                  <>
-                    <br />
-                    through 7/31/{currentSchoolYearEnding}
-                  </>
-                )}
-              </>
-            )}
-          />
-        </ListItem>
-      </List>
+                  {isRegisteredForCurrentYear && !needsToPay && (
+                    <>
+                      {currentMemberData?.MemberType || 'Active'} member
+                    </>
+                  )}
+                </>
+              )}
+              secondary={(
+                <>
+                  for the {currentSchoolYearLong} school year
+                  {!needsToPay && (
+                    <>
+                      <br />
+                      through 7/31/{currentSchoolYearEnding}
+                    </>
+                  )}
+                </>
+              )}
+            />
+          </ListItem>
+        </List>
 
-      {needsToPay && (
-        <Box marginTop={2}>
-          <EnhancedAlert severity="warning">
-            To become a registered member, please
-            {' '}
-            {!isRegisteredForCurrentYear && 'register and '}
-            {' '}
-            pay
-            dues for this school year.
-          </EnhancedAlert>
-        </Box>
-      )}
+        {needsToPay && (
+          <Box marginTop={2}>
+            <EnhancedAlert severity="warning">
+              To become a registered member, please
+              {' '}
+              {!isRegisteredForCurrentYear && 'register and '}
+              {' '}
+              pay
+              dues for this school year.
+            </EnhancedAlert>
+          </Box>
+        )}
 
-      {isRegisteredForCurrentYear && needsToPay && (
-        <>
-          <Typography
-            className="balanceText"
-            component="div"
-            sx={{ marginTop: 3 }}
-            variant="body2"
-          >
-            {currentMemberData?.MemberType} Membership:
-            <Box
-              component="strong"
-              sx={{ marginLeft: 1 }}
-            >
-              ${amountToPayForMembership}.00
-            </Box>
-          </Typography>
-
-          {needsToPayForFallConference && (
+        {isRegisteredForCurrentYear && needsToPay && (
+          <>
             <Typography
-              className="contentText"
+              className="balanceText"
               component="div"
-              sx={{ marginTop: 1 }}
+              sx={{ marginTop: 3 }}
               variant="body2"
             >
-              Fall Conference Fee:
+              {currentMemberData?.MemberType} Membership:
               <Box
                 component="strong"
                 sx={{ marginLeft: 1 }}
               >
-                $75.00
+                ${amountToPayForMembership}.00
               </Box>
             </Typography>
-          )}
-        </>
-      )}
 
-      <Typography
-        className="contentText balanceText"
-        component="div"
-        paragraph
-        variant="body2"
-      >
-        Outstanding balance:
-        <StyledStrong>
-          {!isRegisteredForCurrentYear && '$75.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Active' && !needsToPayForFallConference && '$75.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Active' && needsToPayForFallConference && '$150.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Retired' && needsToPayForFallConference && '$105.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
-          {!needsToPay && '$0.00'}
-        </StyledStrong>
-
-        {!needsToPay && (
-          <>
-            {' '}
-            <Chip
-              className="paidInFullChip"
-              label="Paid in full"
-              variant="outlined"
-            />
+            {needsToPayForFallConference && (
+              <Typography
+                className="contentText"
+                component="div"
+                sx={{ marginTop: 1 }}
+                variant="body2"
+              >
+                Fall Conference Fee:
+                <Box
+                  component="strong"
+                  sx={{ marginLeft: 1 }}
+                >
+                  $75.00
+                </Box>
+              </Typography>
+            )}
           </>
         )}
-      </Typography>
 
-      {needsToPayForFallConference && !needsToPay && (
-        <>
-          <Divider className="memberStatusDivider" />
+        <Typography
+          className="contentText balanceText"
+          component="div"
+          paragraph
+          variant="body2"
+        >
+          Outstanding balance:
+          <StyledStrong>
+            {!isRegisteredForCurrentYear && '$75.00'}
+            {needsToPay && currentMemberData?.MemberType === 'Active' && !needsToPayForFallConference && '$75.00'}
+            {needsToPay && currentMemberData?.MemberType === 'Active' && needsToPayForFallConference && '$150.00'}
+            {needsToPay && currentMemberData?.MemberType === 'Retired' && needsToPayForFallConference && '$105.00'}
+            {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
+            {!needsToPay && '$0.00'}
+          </StyledStrong>
 
-          <Typography>
-            Registered for Fall Conference
-            {successIconElement}
-          </Typography>
-        </>
-      )}
-
-      {isRegisteredForCurrentYear && isInvoiced && (
-        <>
-          <Divider className="memberStatusDivider" />
-
-          <Typography
-            sx={{ fontWeight: 600 }}
-            variant="subtitle1"
-          >
-            Payment Options
-          </Typography>
-
-          <List className="paymentList">
-            <ListItem className="paymentListItem">
-              <ListItemText
-                classes={{
-                  primary: 'listItemText',
-                  secondary: 'listItemSecondaryText',
-                }}
-                primary="Pay online with credit card"
-                secondary={`${appNameShort} uses PayPal to securely process online credit card payments.`}
+          {!needsToPay && (
+            <>
+              {' '}
+              <Chip
+                className="paidInFullChip"
+                label="Paid in full"
+                variant="outlined"
               />
-            </ListItem>
+            </>
+          )}
+        </Typography>
 
-            <div className="paymentActionContainer">
-              <PaypalButtonWrapper
-                amount={amountToPay}
-                noMargin
-                onSuccessfulPayment={handleSuccessfulPayment}
-              />
-            </div>
+        {needsToPayForFallConference && !needsToPay && (
+          <>
+            <Divider className="memberStatusDivider" />
 
-            <ListItem className="paymentListItem">
-              <ListItemText
-                classes={{
-                  primary: 'listItemText',
-                  secondary: 'listItemSecondaryText',
-                }}
-                primary="Send invoice with payment"
-                secondary={
-                  `Mail invoice with payment
-                    to the ${appNameShort} Executive Secretary as indicated on your
-                    invoice.`}
-              />
-            </ListItem>
+            <Typography>
+              Registered for Fall Conference
+              {successIconElement}
+            </Typography>
+          </>
+        )}
 
-            <div className="paymentActionContainer">
-              <PrintInvoiceUI currentUser={currentMemberData} />
-            </div>
-          </List>
-        </>
-      )}
-    </StyledMemberInfoCard>
+        {isRegisteredForCurrentYear && isInvoiced && (
+          <>
+            <Divider className="memberStatusDivider" />
+
+            <Typography
+              sx={{ fontWeight: 600 }}
+              variant="subtitle1"
+            >
+              Payment Options
+            </Typography>
+
+            <List className="paymentList">
+              <ListItem className="paymentListItem">
+                <ListItemText
+                  classes={{
+                    primary: 'listItemText',
+                    secondary: 'listItemSecondaryText',
+                  }}
+                  primary="Pay online with credit card"
+                  secondary={`${appNameShort} uses PayPal to securely process online credit card payments.`}
+                />
+              </ListItem>
+
+              <ListItem className="paymentActionContainer">
+                <ListItemSecondaryAction>
+                  <CtaButton
+                    colorVariant="resources"
+                    fontWeight={600}
+                    onClick={handleOpenDialogPayment}
+                  >
+                    Choose Payment Amount
+                  </CtaButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+
+              {/* <div className="paymentActionContainer">
+                <PaypalButtonWrapper
+                  amount={amountToPay}
+                  noMargin
+                  onSuccessfulPayment={handleSuccessfulPayment}
+                />
+              </div> */}
+
+              <ListItem className="paymentListItem">
+                <ListItemText
+                  classes={{
+                    primary: 'listItemText',
+                    secondary: 'listItemSecondaryText',
+                  }}
+                  primary="Send invoice with payment"
+                  secondary={
+                    `Mail invoice with payment
+                      to the ${appNameShort} Executive Secretary as indicated on your
+                      invoice.`}
+                />
+              </ListItem>
+
+              <div className="paymentActionContainer">
+                <PrintInvoiceUI currentUser={currentMemberData} />
+              </div>
+            </List>
+          </>
+        )}
+      </StyledMemberInfoCard>
+
+      <DialogPayment
+        currentMemberData={currentMemberData}
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialogPayment}
+        userIdForFirestore={userIdForFirestore}
+      />
+    </>
   );
 };
 

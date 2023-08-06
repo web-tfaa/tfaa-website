@@ -7,16 +7,17 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 
 import PaypalButtonWrapper, { PaypalPayment } from './paypal/paypal-button-wrapper';
-import { currentDate } from '../../utils/dateHelpers';
-import { MemberFormValues } from './MemberRegisterContent';
 import { ActiveMemberRadioOptions } from './register-member-payment';
+import { MemberFormValues } from './MemberRegisterContent';
+import { TfaaMemberData } from '../../utils/hooks/useGetAllMembers';
+import { currentDate } from '../../utils/dateHelpers';
 
 // Local Typings
 interface Props {
   amountToPay: number;
   hasFallConferenceFee: boolean;
   isActiveMember: ActiveMemberRadioOptions;
-  memberForm: MemberFormValues;
+  memberForm: MemberFormValues | TfaaMemberData | null;
   onSetHasFallConferenceFee: (hasFee: boolean) => void;
   onSetIsActiveMember: (isActiveMember: ActiveMemberRadioOptions) => void;
   onUpdateCompletedStep: (payment: PaypalPayment) => void;
@@ -35,7 +36,7 @@ export const PaymentForm = ({
   onUpdateCompletedStep,
   onUpdateFirestoreMemberData,
   onUpdateMemberForm,
-}: Props): JSX.Element => {
+}: Props): JSX.Element | null => {
   // Flip between Active and Retired member types
   const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: updatedActiveMemberSelection } = event.target;
@@ -44,13 +45,17 @@ export const PaymentForm = ({
 
     const memberType = isActive ? 'Active' : 'Retired' as ('Active' | 'Retired');
 
+    if (!memberForm) {
+      return;
+    }
+
     const updatedMemberForm = {
       ...memberForm,
       AmountPaid: 0, // probalbly not needed, but just in case
       invoiceDate: currentDate,
-      invoiceId: memberForm.invoiceId,
+      invoiceId: memberForm?.invoiceId,
       MemberType: memberType,
-      receiptId: memberForm.receiptId,
+      receiptId: memberForm?.receiptId,
     };
 
     onSetIsActiveMember(updatedActiveMemberSelection as ActiveMemberRadioOptions);
@@ -64,6 +69,10 @@ export const PaymentForm = ({
   const handleToggleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     onSetHasFallConferenceFee(event.target.checked);
 
+    if (!memberForm) {
+      return;
+    }
+
     const updatedMemberForm = {
       ...memberForm,
       IsRegisteredForFallConference: event.target.checked,
@@ -73,6 +82,10 @@ export const PaymentForm = ({
 
     return onUpdateFirestoreMemberData(updatedMemberForm);
   }, [memberForm]);
+
+  if (!memberForm) {
+    return null;
+  }
 
   return (
     <FormControl
