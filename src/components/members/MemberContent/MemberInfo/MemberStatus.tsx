@@ -9,7 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
@@ -25,11 +25,14 @@ import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import { appNameShort } from '../../../../utils/app-constants';
 import { TfaaAuthUser } from '../../../layout';
+import usePrevious from '../../../../utils/hooks/usePrevious';
 
 // Local Typings
 interface Props {
   currentAuthUser: TfaaAuthUser | null;
   currentMemberData: TfaaMemberData | null;
+  onSetRefetchCurrentMemberData: ((shouldRefetchCurrentMemberData: boolean) => void) | null;
+  onUpdateShouldRefetchUserList: ((shouldRefetchUserList: boolean) => void) | null;
 }
 
 // Local Variables
@@ -87,6 +90,7 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     },
     display: 'flex',
     justifyContent: 'flex-end',
+    marginTop: theme.spacing(1),
   },
   '.paymentList': {
     marginBottom: theme.spacing(1),
@@ -114,13 +118,20 @@ const StyledStrong = styled.strong(({ theme }) => ({
 const MemberStatus: React.FC<Props> = ({
   currentAuthUser,
   currentMemberData,
+  onSetRefetchCurrentMemberData,
+  onUpdateShouldRefetchUserList,
 }) => {
+  console.log('MemberStatus ... currentMemberData', currentMemberData);
+
   const theme = useTheme();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const previousIsDialogOpen = usePrevious(isDialogOpen);
+
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
+  // Local state setter functions
   const handleOpenDialogPayment = useCallback(() => {
     setIsDialogOpen(true);
   }, []);
@@ -128,6 +139,14 @@ const MemberStatus: React.FC<Props> = ({
   const handleCloseDialogPayment = useCallback(() => {
     setIsDialogOpen(false);
   }, []);
+
+  // We refetch data after the member payment dialog closes
+  useEffect(() => {
+    if (previousIsDialogOpen && !isDialogOpen) {
+      onUpdateShouldRefetchUserList?.(true);
+      onSetRefetchCurrentMemberData?.(true);
+    }
+  }, [isDialogOpen, previousIsDialogOpen, onUpdateShouldRefetchUserList]);
 
   // If the member paid by check, the TFAA Executive Secretary will manually
   //  add the check number in the PaypalPaymentID field
@@ -323,9 +342,11 @@ const MemberStatus: React.FC<Props> = ({
                 />
               </ListItem>
 
-              <div className="paymentActionContainer">
-                <PrintInvoiceUI currentUser={currentMemberData} />
-              </div>
+              <ListItem className="paymentActionContainer">
+                <ListItemSecondaryAction>
+                  <PrintInvoiceUI currentUser={currentMemberData} />
+                </ListItemSecondaryAction>
+              </ListItem>
             </List>
           </>
         )}

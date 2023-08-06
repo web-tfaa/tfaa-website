@@ -60,7 +60,7 @@ export const DialogPayment = ({
 
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(currentMemberData?.IsRegisteredForFallConference ?? false);
 
-  // Local state setter functionsm
+  // Local state setter functions
   const handleSetIsActiveMember = useCallback((isActive: ActiveMemberRadioOptions) => {
     setIsActiveMember(isActive);
   }, []);
@@ -169,6 +169,7 @@ export const DialogPayment = ({
 
   return (
     <Dialog
+      disablePortal
       fullWidth
       maxWidth="sm"
       open={isOpen}
@@ -178,11 +179,12 @@ export const DialogPayment = ({
         Pay Online with PayPal
       </DialogTitle>
 
-      <DialogContent>
+      <DialogContent dividers>
         <PaymentForm
           amountToPay={amount}
           hasFallConferenceFee={hasFallConferenceFee}
           isActiveMember={isActiveMember}
+          isDialogView
           memberForm={memberPaymentForm}
           onSetHasFallConferenceFee={handleSetHasFallConferenceFee}
           onSetIsActiveMember={handleSetIsActiveMember}

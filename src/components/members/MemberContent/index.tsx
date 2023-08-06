@@ -26,6 +26,10 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
     currentMemberData,
     setCurrentMemberData,
   ] = useState<TfaaMemberData | null>(null);
+  const [
+    refetchCurrentMemberData,
+    setRefetchCurrentMemberData,
+  ] = useState<boolean>(false);
 
   const {
     allMembersData,
@@ -34,7 +38,8 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
   } = useGetAllMembers({ useTestData });
 
   useEffect(() => {
-    if (currentAuthUser && allMembersData && allMembersData.length > 0 && !currentMemberData) {
+    if (currentAuthUser && allMembersData && allMembersData.length > 0
+      && (!currentMemberData || refetchCurrentMemberData)) {
       const currentMember = allMembersData.find(
         // We use a combination of email and uid to uniquely identify a user.
         // The email part makes it easier to find a user in the database.
@@ -44,7 +49,7 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
 
       setCurrentMemberData(currentMember ?? null);
     }
-  }, [currentAuthUser, currentMemberData, isLoading]);
+  }, [allMembersData, currentAuthUser, currentMemberData, isLoading, refetchCurrentMemberData]);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -67,6 +72,7 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
         currentAuthUser={currentAuthUser}
         currentMemberData={currentMemberData}
         isAdmin={isAdmin}
+        onSetRefetchCurrentMemberData={setRefetchCurrentMemberData}
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}
       />
 

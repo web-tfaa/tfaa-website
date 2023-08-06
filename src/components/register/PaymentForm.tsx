@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 
 import PaypalButtonWrapper, { PaypalPayment } from './paypal/paypal-button-wrapper';
 import { ActiveMemberRadioOptions } from './register-member-payment';
@@ -17,6 +18,7 @@ interface Props {
   amountToPay: number;
   hasFallConferenceFee: boolean;
   isActiveMember: ActiveMemberRadioOptions;
+  isDialogView?: boolean;
   memberForm: MemberFormValues | TfaaMemberData | null;
   onSetHasFallConferenceFee: (hasFee: boolean) => void;
   onSetIsActiveMember: (isActiveMember: ActiveMemberRadioOptions) => void;
@@ -25,11 +27,26 @@ interface Props {
   onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
 }
 
+// Local Variables
+const StyledFormControl = styled(FormControl)({
+  '.memberLevelHeading': {
+    fontSize: 34,
+    fontWeight: 700,
+    marginTop: '1rem',
+  },
+  '.memberLevelHeadingDialog': {
+    fontSize: 24,
+    fontWeight: 700,
+    // marginTop: '1rem',
+  },
+}) as typeof FormControl;
+
 // Component Definition
 export const PaymentForm = ({
   amountToPay,
   hasFallConferenceFee,
   isActiveMember,
+  isDialogView = false,
   memberForm,
   onSetHasFallConferenceFee,
   onSetIsActiveMember,
@@ -88,11 +105,15 @@ export const PaymentForm = ({
   }
 
   return (
-    <FormControl
+    <StyledFormControl
       component="fieldset"
-      style={{ marginLeft: 32 }}
+      style={{ marginLeft: isDialogView ? 0 : 32 }}
     >
-      <h2 className="memberLevelHeading">
+      <h2 className={
+        isDialogView
+          ? 'memberLevelHeadingDialog'
+          : 'memberLevelHeading'}
+      >
         {memberForm.MemberType} Member
         {hasFallConferenceFee && ' + Fall Conference Registration'}
       </h2>
@@ -171,7 +192,7 @@ export const PaymentForm = ({
         amount={amountToPay}
         onSuccessfulPayment={onUpdateCompletedStep}
       />
-    </FormControl>
+    </StyledFormControl>
   )
 };
 
