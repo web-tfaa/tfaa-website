@@ -14,13 +14,7 @@ import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
 import { DialogPayment } from './DialogPayment';
-import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
-import {
-  doUpdateEntry,
-  FIRESTORE_MEMBER_COLLECTION,
-} from '../../../../firebase/db';
-import { currentDate } from '../../../../utils/dateHelpers';
 import {
   currentSchoolYearEnding,
   currentSchoolYearLong,
@@ -28,11 +22,9 @@ import {
 import CtaButton from '../../../shared/CtaButton';
 import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
-// import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import { appNameShort } from '../../../../utils/app-constants';
 import { TfaaAuthUser } from '../../../layout';
-import { getAmountPaid } from '../../../../utils/getAmountPaid';
 
 // Local Typings
 interface Props {
@@ -149,45 +141,6 @@ const MemberStatus: React.FC<Props> = ({
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
   const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
-
-  const amountToPay = needsToPayForFallConference
-    ? amountToPayForMembership + 75.00
-    : amountToPayForMembership;
-
-  const handleSuccessfulPayment = useCallback(async (payment: PaypalPayment) => {
-    const amountPaid = getAmountPaid(currentMemberData);
-
-    const updatedMemberData = {
-      ...currentMemberData,
-      AmountPaid: amountPaid,
-      PaypalPayerID: payment?.payerID,
-      PaypalPaymentID: payment?.paymentID,
-      PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
-      invoiceDate: currentDate,
-      invoiceId: currentMemberData?.invoiceId ?? 0,
-      receiptDate: currentMemberData?.receiptId ? currentDate : '',
-      receiptId: currentMemberData?.receiptId ?? 0,
-    };
-
-    // Update the member's payment data in the Firestore database
-    // This shape should be the same as register-membmer-payment
-    //  in the handleCompleteMemberPaymentStep function
-    try {
-      await doUpdateEntry(
-        updatedMemberData,
-        FIRESTORE_MEMBER_COLLECTION,
-        userIdForFirestore,
-      );
-    } catch (error) {
-      console.error('Error while updating after a successful payment', error);
-    }
-
-    // Instead of trying to update all of the data,
-    //  it's easier to reload the Members page
-    if (typeof window !== 'undefined') {
-      window.location.reload();
-    }
-  }, [currentMemberData]);
 
   const successIconElement = useMemo(() => (
     <CheckCircleIcon
@@ -355,14 +308,6 @@ const MemberStatus: React.FC<Props> = ({
                   </CtaButton>
                 </ListItemSecondaryAction>
               </ListItem>
-
-              {/* <div className="paymentActionContainer">
-                <PaypalButtonWrapper
-                  amount={amountToPay}
-                  noMargin
-                  onSuccessfulPayment={handleSuccessfulPayment}
-                />
-              </div> */}
 
               <ListItem className="paymentListItem">
                 <ListItemText

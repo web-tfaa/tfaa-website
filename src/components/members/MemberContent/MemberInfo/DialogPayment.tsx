@@ -133,7 +133,7 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
-    const amountPaid = getAmountPaid(memberPaymentForm);
+    const amountPaid = getAmountPaid(currentMemberData);
 
     const updatedMemberForm: MemberFormValues = {
       ...memberPaymentForm,
@@ -142,12 +142,18 @@ export const DialogPayment = ({
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
       invoiceDate: currentDate,
-      invoiceId: memberPaymentForm.invoiceId,
-      receiptDate: memberPaymentForm.receiptId ? currentDate : '',
-      receiptId: memberPaymentForm.receiptId,
+      invoiceId: currentMemberData?.invoiceId ?? 1,
+      receiptDate: currentMemberData?.receiptId ? currentDate : '',
+      receiptId: currentMemberData?.receiptId ?? 1,
     };
 
     handleUpdateFirestoreMemberData(updatedMemberForm);
+
+    // Instead of trying to update all of the data,
+    //  it's easier to reload the Members page
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
   }, [isActiveMember, memberPaymentForm]);
 
   // Called when a payment is successfully completed via PayPal
