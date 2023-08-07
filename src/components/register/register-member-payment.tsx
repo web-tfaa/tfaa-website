@@ -2,13 +2,10 @@
 import React, {
   ReactInstance, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
-import { alpha, lighten } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import ReactToPrint from 'react-to-print';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -19,6 +16,7 @@ import {
 } from './MemberRegisterContent';
 import { PaymentForm } from './PaymentForm';
 import { PaypalPayment } from './paypal/paypal-button-wrapper';
+import { PaymentSuccessUI } from './PaymentSuccessUI';
 import {
   FIRESTORE_MEMBER_COLLECTION,
   doGetInvoiceId,
@@ -28,7 +26,6 @@ import {
   doUpdateReceiptId as updateFirestoreReceiptId,
 } from '../../firebase/db';
 import { currentDate } from '../../utils/dateHelpers';
-import { currentSchoolYearLong } from '../../utils/helpers';
 import { appNameShort } from '../../utils/app-constants';
 import CtaButton from '../shared/CtaButton';
 import EnhancedCard from '../shared/EnhancedCard';
@@ -48,9 +45,6 @@ export type ActiveMemberRadioOptions = 'active' | 'retired';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '.MuiCardContent-root': {
-    padding: 0,
-  },
   '.MuiCardHeader-root': {
     '&.top-card-header': {
       backgroundColor: alpha(theme.palette.ui.lilac, 0.4),
@@ -58,39 +52,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     '&.bottom-card-header': {
       backgroundColor: alpha(theme.palette.tfaa.membership, 0.3),
     },
-  },
-  '.classChampionRadioLabelRoot': {
-    alighItems: 'flex-start',
-    display: 'flex',
-  },
-  '.memberLevelAmount': {
-    fontSize: 34,
-    marginLeft: theme.spacing(1),
-  },
-  '.memberLevelHeading': {
-    fontSize: 34,
-    fontWeight: 700,
-    marginTop: '1rem',
-  },
-  '.memberName': {
-    fontSize: '1.25rem',
-    fontWeight: 600,
-    marginTop: theme.spacing(1.5),
-  },
-  '.memberStatusDivider': {
-    backgroundColor: lighten(theme.palette.tfaa.resources, 0.7),
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(2),
-  },
-  '.radioButtonLabel': {
-    display: 'block',
-    fontSize: '90%',
-    letterSpacing: '0.05rem',
-    marginTop: '0.3rem',
-    marginBottom: theme.spacing(1.5),
-  },
-  '.successMemberInfoCard': {
-    padding: theme.spacing(0, 2, 3),
   },
 }));
 
@@ -105,7 +66,6 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   // We have these refs for printing invoice or receipt
   const printInvoiceRef = useRef<ReactInstance>(null);
-  const printReceiptIdRef = useRef<ReactInstance>(null);
 
   const [hasCompletedPayment, setHasCompletedPayment] = useState<boolean>();
   const [
@@ -235,94 +195,12 @@ const RegisterMemberPayment: React.FC<Props> = ({
   // This element is shown if the member successfully
   //  completes an online PayPal payment
   const successfulMemberPaymentElement = useMemo(() => (
-    <div>
-      <Box mb={3}>
-        <h2>Successful Payment!</h2>
-      </Box>
-
-      <Card
-        className="successMemberInfoCard"
-        variant="outlined"
-      >
-        <h3 className="memberLevelHeading">
-          {isActive ? 'Active' : 'Retired'} Member
-          <Typography
-            className="memberLevelAmount"
-            component="span"
-            variant="h4"
-          >
-            — {isActive ? '$75.00' : '$30.00'}
-          </Typography>
-        </h3>
-
-        {hasFallConferenceFee && (
-          <Typography variant="h6">
-            Fall Conference Fee — $75.00
-          </Typography>
-        )}
-
-        <Divider className="memberStatusDivider" />
-
-        <Typography
-          className="memberName"
-          variant="body2"
-        >
-          {memberForm.FirstName} {memberForm.LastName}
-        </Typography>
-        <Typography variant="body2">
-          {memberForm.Title}, {memberForm.District}
-        </Typography>
-        <Typography variant="body2">
-          {memberForm.Email}
-        </Typography>
-        <Typography variant="body2">
-          Cell Phone — {memberForm.CellPhone}
-        </Typography>
-        <Typography variant="body2">
-          Office Phone — {memberForm.OfficePhone}
-        </Typography>
-
-        <Box mt={3}>
-          <ReactToPrint
-            content={() => printReceiptIdRef.current}
-            trigger={() => (
-              <CtaButton
-                fontWeight={600}
-                width={160}
-              >
-                Print Receipt
-              </CtaButton>
-            )}
-          />
-        </Box>
-      </Card>
-
-      <Box
-        mt={5}
-        mx={4}
-      >
-        <Typography
-          className="registerStep3Title"
-          component="h3"
-        >
-          Thank you for joining {appNameShort} for the {currentSchoolYearLong} school year!
-        </Typography>
-      </Box>
-
-      <Box display="none">
-        <Invoice
-          amount={amount}
-          form={memberForm}
-          isInvoice={false}
-          receiptId={memberForm.receiptId}
-          ref={printReceiptIdRef}
-        />
-      </Box>
-    </div>
+    <PaymentSuccessUI
+      hasFallConferenceFee={hasFallConferenceFee}
+      isActive={isActive}
+      memberForm={memberForm}
+    />
   ), [
-    amount,
-    appNameShort,
-    currentSchoolYearLong,
     hasFallConferenceFee,
     isActive,
     memberForm,

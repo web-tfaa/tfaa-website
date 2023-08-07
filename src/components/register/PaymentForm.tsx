@@ -190,7 +190,7 @@ export const PaymentForm = ({
         Click on the PayPal button below to pay with credit card.
       </Typography>
 
-      {isDialogOpen && (
+      {(!isDialogView || (isDialogView && isDialogOpen)) && (
         <PaypalButtonWrapper
           amount={amountToPay}
           onSuccessfulPayment={onUpdateCompletedStep}

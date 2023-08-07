@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { PaymentForm } from '../../../register/PaymentForm';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
@@ -24,6 +24,7 @@ import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
 import { currentDate } from '../../../../utils/dateHelpers';
 import { getAmountPaid } from '../../../../utils/getAmountPaid';
 import usePrevious from '../../../../utils/hooks/usePrevious';
+import { PaymentSuccessUI } from '../../../register/PaymentSuccessUI';
 
 // Local Typings
 interface Props {
@@ -48,6 +49,8 @@ export const DialogPayment = ({
   const isDialogOpened = isOpen && !previousIsOpen;
 
   /* Local State */
+  const [showCompletedUI, setShowCompletedUI] = useState<boolean>(false);
+
   // State variable used to cause a render and cause a useEffect to run
   const [hasCompletedPayment, setHasCompletedPayment] = useState<boolean>();
 
@@ -141,8 +144,6 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
-    console.log('handleUpdateMemberPaymentData ** payment', payment);
-
     const amountPaid = getAmountPaid(currentMemberData);
 
     const updatedMemberForm: MemberFormValues = {
@@ -157,7 +158,10 @@ export const DialogPayment = ({
       receiptId: currentMemberData?.receiptId ?? 1,
     };
 
-    handleUpdateFirestoreMemberData(updatedMemberForm);
+    return Promise.resolve(() => handleUpdateFirestoreMemberData(updatedMemberForm))
+      .then(() => {
+        setShowCompletedUI(true);
+      });
   }, [isActiveMember, memberPaymentForm]);
 
   // Called when a payment is successfully completed via PayPal
@@ -170,6 +174,33 @@ export const DialogPayment = ({
   const isActive = isActiveMember === 'active';
   const membershipAmount = isActive ? 75 : 30;
   const amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
+
+  const contentElement = useMemo(() => showCompletedUI ? (
+    <PaymentSuccessUI
+      hasFallConferenceFee={hasFallConferenceFee}
+      isActive={isActive }
+      memberForm={memberPaymentForm}
+    />
+  ) : (
+    <PaymentForm
+      amountToPay={amount}
+      hasFallConferenceFee={hasFallConferenceFee}
+      isActiveMember={isActiveMember}
+      isDialogOpen={isOpen}
+      isDialogView
+      memberForm={memberPaymentForm}
+      onSetHasFallConferenceFee={handleSetHasFallConferenceFee}
+      onSetIsActiveMember={handleSetIsActiveMember}
+      onUpdateCompletedStep={handleUpdateCompletedStep}
+      onUpdateFirestoreMemberData={handleUpdateFirestoreMemberData}
+      onUpdateMemberForm={handleUpdateMemberPaymentForm}
+    />
+  ), [
+    hasFallConferenceFee,
+    isActiveMember,
+    memberPaymentForm,
+    showCompletedUI,
+  ]);
 
   return (
     <Dialog
@@ -184,19 +215,7 @@ export const DialogPayment = ({
       </DialogTitle>
 
       <DialogContent dividers>
-        <PaymentForm
-          amountToPay={amount}
-          hasFallConferenceFee={hasFallConferenceFee}
-          isActiveMember={isActiveMember}
-          isDialogOpen={isOpen}
-          isDialogView
-          memberForm={memberPaymentForm}
-          onSetHasFallConferenceFee={handleSetHasFallConferenceFee}
-          onSetIsActiveMember={handleSetIsActiveMember}
-          onUpdateCompletedStep={handleUpdateCompletedStep}
-          onUpdateFirestoreMemberData={handleUpdateFirestoreMemberData}
-          onUpdateMemberForm={handleUpdateMemberPaymentForm}
-        />
+        {contentElement}
       </DialogContent>
 
       <DialogActions>
