@@ -144,24 +144,26 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
-    const amountPaid = getAmountPaid(currentMemberData);
+    console.log('payment', payment);
 
-    const updatedMemberForm: MemberFormValues = {
-      ...memberPaymentForm,
-      AmountPaid: amountPaid,
-      PaypalPayerID: payment?.payerID,
-      PaypalPaymentID: payment?.paymentID,
-      PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
-      invoiceDate: currentDate,
-      invoiceId: currentMemberData?.invoiceId ?? 1,
-      receiptDate: currentMemberData?.receiptId ? currentDate : '',
-      receiptId: currentMemberData?.receiptId ?? 1,
-    };
+    if (payment.paid) {
+      const amountPaid = getAmountPaid(currentMemberData);
 
-    return Promise.resolve(() => handleUpdateFirestoreMemberData(updatedMemberForm))
-      .then(() => {
-        setShowCompletedUI(true);
-      });
+      const updatedMemberForm: MemberFormValues = {
+        ...memberPaymentForm,
+        AmountPaid: amountPaid,
+        PaypalPayerID: payment?.payerID,
+        PaypalPaymentID: payment?.paymentID,
+        PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
+        invoiceDate: currentDate,
+        invoiceId: currentMemberData?.invoiceId ?? 1,
+        receiptDate: currentMemberData?.receiptId ? currentDate : '',
+        receiptId: currentMemberData?.receiptId ?? 1,
+      };
+
+      handleUpdateFirestoreMemberData(updatedMemberForm);
+      setShowCompletedUI(true);
+    }
   }, [isActiveMember, memberPaymentForm]);
 
   // Called when a payment is successfully completed via PayPal
@@ -178,7 +180,7 @@ export const DialogPayment = ({
   const contentElement = useMemo(() => showCompletedUI ? (
     <PaymentSuccessUI
       hasFallConferenceFee={hasFallConferenceFee}
-      isActive={isActive }
+      isActive={isActive}
       memberForm={memberPaymentForm}
     />
   ) : (
@@ -196,8 +198,16 @@ export const DialogPayment = ({
       onUpdateMemberForm={handleUpdateMemberPaymentForm}
     />
   ), [
+    amount,
+    handleSetHasFallConferenceFee,
+    handleSetIsActiveMember,
+    handleUpdateCompletedStep,
+    handleUpdateFirestoreMemberData,
+    handleUpdateMemberPaymentForm,
     hasFallConferenceFee,
+    isActive,
     isActiveMember,
+    isOpen,
     memberPaymentForm,
     showCompletedUI,
   ]);

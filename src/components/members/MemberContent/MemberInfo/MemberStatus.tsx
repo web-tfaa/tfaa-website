@@ -146,6 +146,8 @@ const MemberStatus: React.FC<Props> = ({
     }
   }, [isDialogOpen, previousIsDialogOpen, onUpdateShouldRefetchUserList]);
 
+  console.log('currentMemberData', currentMemberData);
+
   // If the member paid by check, the TFAA Executive Secretary will manually
   //  add the check number in the PaypalPaymentID field
   const isInvoiced = currentMemberData?.PaymentOption.toLowerCase() === 'invoiced'
@@ -153,7 +155,7 @@ const MemberStatus: React.FC<Props> = ({
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
-  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference;
+  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid < 100;
 
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 

@@ -124,12 +124,13 @@ export const PaymentSuccessUI = ({
       </EnhancedCard>
 
       <Box
-        mt={5}
+        mt={2}
         mx={4}
       >
         <Typography
-          className="registerStep3Title"
           component="h3"
+          sx={{ fontWeight: 600 }}
+          variant="subtitle2"
         >
           Thank you for joining {appNameShort} for the {currentSchoolYearLong} school year!
         </Typography>
