@@ -231,17 +231,19 @@ const MemberRegistrationTasks: React.FC<Props> = ({
             />
           </ListItem>
 
-          <ListItem className="paymentActionContainer">
-            <ListItemSecondaryAction>
-              <CtaButton
-                colorVariant="resources"
-                fontWeight={600}
-                onClick={handleOpenDialogPayment}
-              >
-                {needsToPayForFallConference ? 'Pay' : 'Register'} for Fall Conference
-              </CtaButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          {!hasPaidForFallConference && (
+            <ListItem className="paymentActionContainer">
+              <ListItemSecondaryAction>
+                <CtaButton
+                  colorVariant="resources"
+                  fontWeight={600}
+                  onClick={handleOpenDialogPayment}
+                >
+                  {needsToPayForFallConference ? 'Pay' : 'Register'} for Fall Conference
+                </CtaButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )}
 
           {isRegisteredForCurrentYear && (
             <>
