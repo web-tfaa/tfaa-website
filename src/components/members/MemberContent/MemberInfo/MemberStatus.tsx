@@ -14,7 +14,9 @@ import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
 import { DialogPayment } from './DialogPayment';
+import { TfaaAuthUser } from '../../../layout';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
+import { appNameShort } from '../../../../utils/app-constants';
 import {
   currentSchoolYearEnding,
   currentSchoolYearLong,
@@ -23,8 +25,6 @@ import CtaButton from '../../../shared/CtaButton';
 import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
-import { appNameShort } from '../../../../utils/app-constants';
-import { TfaaAuthUser } from '../../../layout';
 import usePrevious from '../../../../utils/hooks/usePrevious';
 
 // Local Typings
@@ -145,8 +145,6 @@ const MemberStatus: React.FC<Props> = ({
       onSetRefetchCurrentMemberData?.(true);
     }
   }, [isDialogOpen, previousIsDialogOpen, onUpdateShouldRefetchUserList]);
-
-  console.log('currentMemberData', currentMemberData);
 
   // If the member paid by check, the TFAA Executive Secretary will manually
   //  add the check number in the PaypalPaymentID field

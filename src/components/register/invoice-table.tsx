@@ -24,6 +24,7 @@ interface Props {
   };
   isActive?: boolean;
   isInvoice: boolean;
+  isOnlyForFallConference?: boolean;
   sponsorLevel?: string,
 }
 
@@ -76,6 +77,7 @@ const InvoiceTable: React.FC<Props> = ({
   form,
   isActive,
   isInvoice,
+  isOnlyForFallConference = false,
   sponsorLevel,
 }) => {
   // Work out the correct amount
@@ -90,15 +92,29 @@ const InvoiceTable: React.FC<Props> = ({
       {appNameShort} {sponsorLevel} Sponsor donation amount{' '}
       <br />for <strong>{form.SponsorOrganization}</strong>
     </span>
-  ), [form.SponsorOrganization, sponsorLevel]);
+  ), [
+    form.SponsorOrganization,
+    sponsorLevel,
+  ]);
 
   const memberInfo = useMemo(() => (
     <span>
-      {appNameShort} {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
-      {hasAddedFallConferenceFee && 'and Fall Conference registration fee'}
+      {isOnlyForFallConference ? `${appNameShort} Fall Conference registration fee`
+        : (
+          <>
+            {appNameShort} {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
+            {hasAddedFallConferenceFee && 'and Fall Conference registration fee'}
+          </>
+        )}
       <br />for <strong>{form.FirstName} {form.LastName}</strong>
     </span>
-  ), [form.FirstName, form.LastName, form.MemberType, hasAddedFallConferenceFee, isActive]);
+  ), [
+    form.FirstName,
+    form.LastName,
+    form.MemberType,
+    hasAddedFallConferenceFee,
+    isActive,
+  ]);
 
   return (
     <StyledTableContainer component={Paper}>

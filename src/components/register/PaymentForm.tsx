@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
 import Checkbox from '@mui/material/Checkbox';
+import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import React, { useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
@@ -17,6 +18,7 @@ import { currentDate } from '../../utils/dateHelpers';
 interface Props {
   amountToPay: number;
   hasFallConferenceFee: boolean;
+  hasPaidForMembership?: boolean;
   isActiveMember: ActiveMemberRadioOptions;
   isDialogOpen?: boolean;
   isDialogView?: boolean;
@@ -46,6 +48,7 @@ const StyledFormControl = styled(FormControl)({
 export const PaymentForm = ({
   amountToPay,
   hasFallConferenceFee,
+  hasPaidForMembership,
   isActiveMember,
   isDialogOpen,
   isDialogView = false,
@@ -106,6 +109,8 @@ export const PaymentForm = ({
     return null;
   }
 
+  const showPayPayButtonSection = (!isDialogView || (isDialogView && isDialogOpen)) && Boolean(amountToPay);
+
   return (
     <StyledFormControl
       component="fieldset"
@@ -121,49 +126,51 @@ export const PaymentForm = ({
       </h2>
 
       <FormControl component="fieldset">
-        <RadioGroup
-          aria-label="Member Level"
-          name="MemberLevel*"
-          onChange={handleChangeRadioSelection}
-          value={isActiveMember}
-        >
-          <FormControlLabel
-            control={<Radio size="small" />}
-            label={(
-              <>
-                <Typography component="span">
-                  Active
-                </Typography>
+        {!hasPaidForMembership && (
+          <RadioGroup
+            aria-label="Member Level"
+            name="MemberLevel*"
+            onChange={handleChangeRadioSelection}
+            value={isActiveMember}
+          >
+            <FormControlLabel
+              control={<Radio size="small" />}
+              label={(
+                <>
+                  <Typography component="span">
+                    Active
+                  </Typography>
 
-                <Typography
-                  color="textSecondary"
-                  component="span"
-                >
-                  {' '} — $75
-                </Typography>
-              </>
-            )}
-            value="active"
-          />
-          <FormControlLabel
-            control={<Radio size="small" />}
-            label={(
-              <>
-                <Typography component="span">
-                  Retired
-                </Typography>
+                  <Typography
+                    color="textSecondary"
+                    component="span"
+                  >
+                    {' '} — $75
+                  </Typography>
+                </>
+              )}
+              value="active"
+            />
+            <FormControlLabel
+              control={<Radio size="small" />}
+              label={(
+                <>
+                  <Typography component="span">
+                    Retired
+                  </Typography>
 
-                <Typography
-                  color="textSecondary"
-                  component="span"
-                >
-                  {' '} — $30
-                </Typography>
-              </>
-            )}
-            value="retired"
-          />
-        </RadioGroup>
+                  <Typography
+                    color="textSecondary"
+                    component="span"
+                  >
+                    {' '} — $30
+                  </Typography>
+                </>
+              )}
+              value="retired"
+            />
+          </RadioGroup>
+        )}
 
         <FormControlLabel
           control={(
@@ -183,19 +190,23 @@ export const PaymentForm = ({
         Total: ${Number(amountToPay)?.toFixed(2).toLocaleString()}
       </Typography>
 
-      <Typography
-        sx={{ marginTop: 4 }}
-        variant="body2"
+      <Collapse
+        in={showPayPayButtonSection}
+        mountOnEnter
+        unmountOnExit
       >
-        Click on the PayPal button below to pay with credit card.
-      </Typography>
+        <Typography
+          sx={{ marginTop: 4 }}
+          variant="body2"
+        >
+          Click on the PayPal button below to pay with credit card.
+        </Typography>
 
-      {(!isDialogView || (isDialogView && isDialogOpen)) && (
         <PaypalButtonWrapper
           amount={amountToPay}
           onSuccessfulPayment={onUpdateCompletedStep}
         />
-      )}
+      </Collapse>
     </StyledFormControl>
   )
 };

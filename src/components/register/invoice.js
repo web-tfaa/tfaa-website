@@ -62,6 +62,7 @@ const propTypes = {
   }).isRequired,
   invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isActive: PropTypes.bool,
+  isOnlyForFallConference: PropTypes.bool,
   isInvoice: PropTypes.bool.isRequired,
   receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sponsorLevel: PropTypes.string,
@@ -71,6 +72,7 @@ const propTypes = {
 const defaultProps = {
   invoiceId: 1,
   isActive: true,
+  isOnlyForFallConference: false,
   receiptId: 1,
   sponsorLevel: '',
   sponsorOrganizationName: '',
@@ -88,6 +90,7 @@ class Invoice extends Component {
       invoiceId,
       isActive,
       isInvoice,
+      isOnlyForFallConference,
       receiptId,
       sponsorLevel,
       sponsorOrganizationName,
@@ -196,6 +199,7 @@ class Invoice extends Component {
             form={form}
             isActive={isActive}
             isInvoice={isInvoice}
+            isOnlyForFallConference={isOnlyForFallConference}
             sponsorLevel={sponsorLevel}
           />
 

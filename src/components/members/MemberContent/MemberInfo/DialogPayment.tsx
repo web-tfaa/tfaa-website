@@ -1,9 +1,13 @@
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Collapse from '@mui/material/Collapse';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import Divider from '@mui/material/Divider';
+import React, { ReactInstance, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import ReactToPrint from 'react-to-print';
 
 import { PaymentForm } from '../../../register/PaymentForm';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
@@ -20,15 +24,19 @@ import {
   MemberFormValues,
 } from '../../../register/MemberRegisterContent';
 import { ActiveMemberRadioOptions } from '../../../register/register-member-payment';
+import { PaymentSuccessUI } from '../../../register/PaymentSuccessUI';
 import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
+import { appNameShort } from '../../../../utils/app-constants';
 import { currentDate } from '../../../../utils/dateHelpers';
 import { getAmountPaid } from '../../../../utils/getAmountPaid';
 import usePrevious from '../../../../utils/hooks/usePrevious';
-import { PaymentSuccessUI } from '../../../register/PaymentSuccessUI';
+import Invoice from '../../../register/invoice';
+import CtaButton from '../../../shared/CtaButton';
 
 // Local Typings
 interface Props {
   currentMemberData: TfaaMemberData | null;
+  hasPaidForMembership?: boolean;
   isOpen: boolean;
   onClose: () => void;
   userIdForFirestore: string;
@@ -37,10 +45,13 @@ interface Props {
 // Component Definition
 export const DialogPayment = ({
   currentMemberData,
+  hasPaidForMembership,
   isOpen,
   onClose,
   userIdForFirestore
 }: Props): JSX.Element => {
+  const printInvoiceRef = useRef<ReactInstance>(null);
+
   const memberTypeFromForm = currentMemberData?.MemberType.toLowerCase();
 
   const previousCurrentMemberData = usePrevious(currentMemberData);
@@ -175,7 +186,17 @@ export const DialogPayment = ({
 
   const isActive = isActiveMember === 'active';
   const membershipAmount = isActive ? 75 : 30;
-  const amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
+  let amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
+
+  console.log('amount', amount);
+
+  console.log('hasPaidForMembership', hasPaidForMembership);
+
+  if (hasPaidForMembership) {
+    amount -= membershipAmount;
+  }
+
+  console.log('amount', amount);
 
   const contentElement = useMemo(() => showCompletedUI ? (
     <PaymentSuccessUI
@@ -187,6 +208,7 @@ export const DialogPayment = ({
     <PaymentForm
       amountToPay={amount}
       hasFallConferenceFee={hasFallConferenceFee}
+      hasPaidForMembership={hasPaidForMembership}
       isActiveMember={isActiveMember}
       isDialogOpen={isOpen}
       isDialogView
@@ -205,12 +227,66 @@ export const DialogPayment = ({
     handleUpdateFirestoreMemberData,
     handleUpdateMemberPaymentForm,
     hasFallConferenceFee,
+    hasPaidForMembership,
     isActive,
     isActiveMember,
     isOpen,
     memberPaymentForm,
     showCompletedUI,
   ]);
+
+  const printInvoiceElement = useMemo(() => (
+    <Collapse
+      in={hasPaidForMembership && hasFallConferenceFee}
+      mountOnEnter
+      unmountOnExit
+    >
+      <Divider sx={{ marginY: 2 }} />
+
+      <Box
+        marginBottom={3}
+        sx={{
+          'li': {
+            fontSize: 18,
+          },
+        }}
+      >
+        Follow these steps to pay later:
+        <ol>
+          <li>Click the button below to print an invoice.</li>
+          <li>
+            Send the invoice and payment directly to the {appNameShort}{' '}
+            Executive Secretary as detailed on the invoice.
+          </li>
+        </ol>
+      </Box>
+
+      <ReactToPrint
+        content={() => printInvoiceRef.current}
+        trigger={() => (
+          <CtaButton
+            fontWeight={600}
+            onClick={updateFirestoreInvoiceId}
+            width={160}
+          >
+            Print Invoice
+          </CtaButton>
+        )}
+      />
+
+      <Box display="none">
+        <Invoice
+          amount={amount}
+          form={currentMemberData}
+          isActive={isActive}
+          isInvoice
+          isOnlyForFallConference
+          receiptId={currentMemberData?.invoiceId}
+          ref={printInvoiceRef}
+        />
+      </Box>
+    </Collapse>
+  ), [amount, currentMemberData, isActive, printInvoiceRef]);
 
   return (
     <Dialog
@@ -226,6 +302,8 @@ export const DialogPayment = ({
 
       <DialogContent dividers>
         {contentElement}
+
+        {printInvoiceElement}
       </DialogContent>
 
       <DialogActions>
