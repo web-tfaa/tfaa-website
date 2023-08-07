@@ -140,6 +140,7 @@ export const PaymentSuccessUI = ({
         <Invoice
           amount={getAmountPaid(memberForm)}
           form={memberForm}
+          isActive={isActive}
           isInvoice={false}
           receiptId={memberForm.receiptId}
           ref={printReceiptIdRef}
