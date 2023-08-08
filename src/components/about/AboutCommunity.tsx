@@ -3,6 +3,8 @@ import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
+import { appTagLine } from '../../utils/app-constants';
+
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
   '&& .MuiTypography-root': {
@@ -42,10 +44,8 @@ const StyledRoot = styled.section(({ theme }) => ({
 const AboutCommunity: FC = () => {
   return (
     <StyledRoot>
-      <Typography component="h1">
-        Creating a community of
-        <br />
-        fine arts administrators
+      <Typography component="h1" sx={{ maxWidth: 640 }}>
+        {appTagLine}
       </Typography>
     </StyledRoot>
   );
