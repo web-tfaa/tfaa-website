@@ -35,6 +35,12 @@ const StyledRoot = styled.section(({ theme }) => ({
   },
 
   '.peopleSectionTitle': {
+    [theme.breakpoints.up('lg')]: {
+      marginTop: theme.spacing(5),
+    },
+    [theme.breakpoints.up('xl')]: {
+      marginTop: theme.spacing(8),
+    },
     fontWeight: 900,
     marginBottom: theme.spacing(4),
   },
