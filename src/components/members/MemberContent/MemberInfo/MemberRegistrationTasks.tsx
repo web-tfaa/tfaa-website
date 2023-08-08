@@ -231,7 +231,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({
             />
           </ListItem>
 
-          {!hasPaidForFallConference && (
+          {isRegisteredForCurrentYear && (!needsToPay || needsToPayForFallConference) && (
             <ListItem className="paymentActionContainer">
               <ListItemSecondaryAction>
                 <CtaButton

@@ -19,6 +19,7 @@ import Invoice from './invoice';
 interface Props {
   hasFallConferenceFee: boolean;
   isActive: boolean;
+  isDialogView?: boolean;
   memberForm: MemberFormValues | TfaaMemberData | null;
 }
 
@@ -55,6 +56,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 export const PaymentSuccessUI = ({
   hasFallConferenceFee,
   isActive,
+  isDialogView = false,
   memberForm,
 }: Props): JSX.Element | null => {
   const printReceiptIdRef = useRef<ReactInstance>(null);
@@ -108,19 +110,34 @@ export const PaymentSuccessUI = ({
           Office Phone — {memberForm.OfficePhone}
         </Typography>
 
-        <Box mt={3}>
-          <ReactToPrint
-            content={() => printReceiptIdRef.current}
-            trigger={() => (
-              <CtaButton
-                fontWeight={600}
-                width={160}
-              >
-                Print Receipt
-              </CtaButton>
-            )}
-          />
-        </Box>
+        {!isDialogView && (
+          <>
+            <Box mt={3}>
+              <ReactToPrint
+                content={() => printReceiptIdRef.current}
+                trigger={() => (
+                  <CtaButton
+                    fontWeight={600}
+                    width={160}
+                  >
+                    Print Receipt
+                  </CtaButton>
+                )}
+              />
+            </Box>
+
+            <Box display="none">
+              <Invoice
+                amount={getAmountPaid(memberForm)}
+                form={memberForm}
+                isActive={isActive}
+                isInvoice={false}
+                receiptId={memberForm.receiptId}
+                ref={printReceiptIdRef}
+              />
+            </Box>
+          </>
+        )}
       </EnhancedCard>
 
       <Box
@@ -136,16 +153,6 @@ export const PaymentSuccessUI = ({
         </Typography>
       </Box>
 
-      <Box display="none">
-        <Invoice
-          amount={getAmountPaid(memberForm)}
-          form={memberForm}
-          isActive={isActive}
-          isInvoice={false}
-          receiptId={memberForm.receiptId}
-          ref={printReceiptIdRef}
-        />
-      </Box>
     </StyledRoot>
   );
 };

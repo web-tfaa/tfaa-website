@@ -155,8 +155,6 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
-    console.log('payment', payment);
-
     if (payment.paid) {
       const amountPaid = getAmountPaid(currentMemberData);
 
@@ -188,20 +186,15 @@ export const DialogPayment = ({
   const membershipAmount = isActive ? 75 : 30;
   let amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
 
-  console.log('amount', amount);
-
-  console.log('hasPaidForMembership', hasPaidForMembership);
-
   if (hasPaidForMembership) {
     amount -= membershipAmount;
   }
-
-  console.log('amount', amount);
 
   const contentElement = useMemo(() => showCompletedUI ? (
     <PaymentSuccessUI
       hasFallConferenceFee={hasFallConferenceFee}
       isActive={isActive}
+      isDialogView
       memberForm={memberPaymentForm}
     />
   ) : (
@@ -237,7 +230,7 @@ export const DialogPayment = ({
 
   const printInvoiceElement = useMemo(() => (
     <Collapse
-      in={hasPaidForMembership && hasFallConferenceFee}
+      in={hasPaidForMembership && hasFallConferenceFee && !showCompletedUI && memberPaymentForm.AmountPaid < 100}
       mountOnEnter
       unmountOnExit
     >
