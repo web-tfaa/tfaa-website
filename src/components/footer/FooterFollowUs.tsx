@@ -38,7 +38,7 @@ const FooterFollowUs: FC = () => {
           rel="noreferrer noopener"
           target="_blank"
         >
-          Twitter
+          Twitter/X
         </a>
       </Box>
     </div>
