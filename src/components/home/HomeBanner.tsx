@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import React from 'react';
 import styled from 'styled-components';
 
-import { appNameShort } from '../../utils/app-constants';
+import { appTagLine } from '../../utils/app-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -145,7 +145,7 @@ const HomeBanner: React.FC = () => {
       <div className="bannerLeft">
         <div>
           <h2>
-            {appNameShort} equips leaders to advance high quality fine arts education for all.
+            {appTagLine}
           </h2>
 
           <Box marginTop={1}>
