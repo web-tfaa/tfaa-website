@@ -183,12 +183,7 @@ const MemberStatus: React.FC<Props> = ({
     }
 
     return amountOwed;
-    // {needsToPay && currentMemberData?.MemberType === 'Active' && !needsToPayForFallConference && '$75.00'}
-    // {needsToPay && currentMemberData?.MemberType === 'Active' && needsToPayForFallConference && '$150.00'}
-    // {needsToPay && currentMemberData?.MemberType === 'Retired' && needsToPayForFallConference && '$105.00'}
-    // {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
-    // {!needsToPay && '$0.00'}
-  }, []);
+  }, [currentMemberData, isRegisteredForCurrentYear, needsToPay, needsToPayForFallConference]);
 
   const successIconElement = useMemo(() => (
     <CheckCircleIcon
