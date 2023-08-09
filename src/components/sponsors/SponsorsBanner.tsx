@@ -63,9 +63,9 @@ const SponsorsBanner: FC = () => {
   return (
     <StyledRoot>
       <Typography component="h1">
-        Join. Learn.
+        Support. Promote.
         <br />
-        Lead.
+        Sustain.
       </Typography>
     </StyledRoot>
   );
