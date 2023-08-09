@@ -11,7 +11,7 @@ const ResourcesInfoBanner: React.FC = () => {
   return (
     <InfoBanner color="resources">
       <Typography paragraph>
-        {appNameShort} provides Fine Arts Administrators the resources
+        {appNameShort} provides Fine Arts administrators the resources
         to advance high-quality education for all Texas students.
       </Typography>
 

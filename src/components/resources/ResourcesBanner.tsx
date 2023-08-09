@@ -59,7 +59,7 @@ const ResourcesBanner: FC = () => {
   return (
     <StyledRoot>
       <Typography component="h1">
-        {appNameShort} equips Fine Arts Directors
+        {appNameShort} equips Fine Arts administrators
         to advance high-quality fine arts
         education for all.
       </Typography>
