@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import { useIsAuthenticated } from '../../utils/hooks/useIsAuthenticated';
 import DrumBanner from '../../components/shared/DrumBanner';
+import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
 import LoginForm from '../../components/register/login-form';
 import Motifs from '../../components/shared/Motifs';
@@ -89,6 +90,8 @@ const Login: React.FC<Props> = ({ location }) => {
           </div>
         </StyledRoot>
       </ReCaptchaProvider>
+
+      <FooterTopper color="membership" />
     </Layout>
   );
 };

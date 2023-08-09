@@ -2,12 +2,12 @@
 import React from 'react';
 
 // Internal Dependencies
+import FooterTopper from '../../footer/FooterTopper';
 import MemberInfoList from './MemberInfoList';
 import MembersBanner from './MembersBanner';
 import MembersHeroBannerImage from './MembersHeroBannerImage';
 import MembersInfoBanner from './MembersInfoBanner';
 import MembersOneTwoThree from './MembersOneTwoThree';
-import WhereWeHaveBeen from '../../about/WhereWeHaveBeen';
 
 // Component Definition
 const NonMemberContent: React.FC = () => {
@@ -23,7 +23,7 @@ const NonMemberContent: React.FC = () => {
 
       <MemberInfoList />
 
-      <WhereWeHaveBeen color="membership" />
+      <FooterTopper color="membership" />
     </>
   );
 };

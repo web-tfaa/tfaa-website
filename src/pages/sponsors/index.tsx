@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
+import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
 import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
 import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
 import SponsorsList from '../../components/sponsors/SponsorsList';
-import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -39,7 +39,7 @@ const Sponsors: React.FC<Props> = ({ location }) => {
 
           <SponsorsList />
 
-          <WhereWeHaveBeen color="membership" />
+          <FooterTopper color="membership" />
         </StyledRoot>
       </ReCaptchaProvider>
     </Layout>

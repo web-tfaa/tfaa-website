@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 // Internal Dependencies
 import DrumBanner from '../../components/shared/DrumBanner';
+import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
 import SponsorsTableContent from '../../components/sponsors/SponsorsTable/SponsorsTableContent';
-import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -43,7 +43,7 @@ const SponsorsTable: React.FC<Props> = ({ location }) => {
 
         <SponsorsTableContent />
 
-        <WhereWeHaveBeen color="resources" />
+        <FooterTopper color="membership" />
       </StyledRoot>
     </Layout>
   );
