@@ -75,10 +75,8 @@ const MembershipByLaws: React.FC<Props> = ({
         <dt>Section 2 &mdash; Annual dues</dt>
 
         <dd className="paddingMedium">
-          {`A registration fee of $50 (Active Member) or $30 (Retired Member) per year shall
-          entitle an individual to full membership in the ${appName}. A majority vote of the members present at a regular meeting of the full
-          membership is required to change these amounts. Continued membership is contingent
-          upon being up-to-date on annual membership registration fees.`}
+          Membership and registration fees shall be set annually by the Board of Directors as part of the adopted budget.
+          Continued membership is contingent upon being up-to-date on annual membership fees.
         </dd>
 
         <dt>Section 3 &mdash; Rights of members</dt>
