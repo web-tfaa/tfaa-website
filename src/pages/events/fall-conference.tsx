@@ -1,6 +1,6 @@
 // External Dependencies
 import {
-  Box,
+  Box, Typography,
   // Button,
 } from '@mui/material';
 import { Link } from 'gatsby-theme-material-ui';
@@ -15,6 +15,7 @@ import Container from '../../components/shared/container';
 // import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import Layout from '../../components/layout';
 import { appNameShort } from '../../utils/app-constants';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Typings
 interface Props {
@@ -45,10 +46,10 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 // Component Definition
-const FallRetreat: FC<Props> = ({ location }) => {
+const FallConference: FC<Props> = ({ location }) => {
   const { edges } = useEventData();
 
-  const fallRetreat = edges.find(({ node }: EventList) => node.titleOfEvent.includes('Fall Retreat')).node;
+  const fallRetreat = edges.find(({ node }: EventList) => node.titleOfEvent.includes('Fall Conference')).node;
 
   const hotelReservationButton = null;
   // (
@@ -70,7 +71,7 @@ const FallRetreat: FC<Props> = ({ location }) => {
   return (
     <Layout
       location={location}
-      pageTitle="Fall Retreat"
+      pageTitle="Fall Conference"
     >
       <StyledContainer>
         <h1>{fallRetreat.titleOfEvent}</h1>
@@ -84,20 +85,27 @@ const FallRetreat: FC<Props> = ({ location }) => {
 
           <h4>Who</h4>
 
-          <Box
-            component="p"
-            ml={2}
+          <Typography
+            paragraph
+            sx={{ marginLeft: 2 }}
           >
-            The {appNameShort} Fall Retreat is open to all current {appNameShort} members who are in good standing
-            (paid for membership this school year).
-            There is no separate conference registration process.
+            The Fall Conference is open to all current {appNameShort} members who are in good standing{' '}
+            (paid membership dues for the {currentSchoolYearLong} school year).
+          </Typography>
 
-          </Box>
+          <Typography
+            paragraph
+            sx={{ marginLeft: 2 }}
+          >
+            Registration for the Fall Conference is $75, due by October 30, 2023.
+          </Typography>
+
           <Box
             component="p"
             ml={2}
           >
-            If you need to join {appNameShort} for this year, then please visit the <Link to="/members">Members</Link> page.
+            To join {appNameShort} for this year and pay the Fall Conference registration fee,
+            please visit the <Link to="/members">Members</Link> page
           </Box>
         </section>
 
@@ -110,13 +118,13 @@ const FallRetreat: FC<Props> = ({ location }) => {
           <h4>Schedule</h4>
 
           <h5 className="headerFive">Wednesday</h5>
-          <p className="schedule">7:00pm start</p>
+          <p className="schedule">1:00 PM start</p>
 
           <h5 className="headerFive">Thursday</h5>
-          <p className="schedule">8:00am-5:00pm</p>
+          <p className="schedule">8:00 AM-5:00 PM</p>
 
           <h5 className="headerFive">Friday</h5>
-          <p className="schedule">8:00am-Noon</p>
+          <p className="schedule">8:00-11:00 AM</p>
         </section>
 
         <section>
@@ -159,4 +167,4 @@ const FallRetreat: FC<Props> = ({ location }) => {
   );
 };
 
-export default FallRetreat;
+export default FallConference;

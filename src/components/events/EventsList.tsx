@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { appNameShort } from '../../utils/app-constants';
 import Motifs from '../shared/Motifs';
 import ViewDetailsButton from '../shared/ViewDetailsButton';
+import { currentSchoolYearLong } from '../../utils/helpers';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -65,7 +66,7 @@ const EventsList: FC = () => {
         </Typography>
 
         <div className="eventsList">
-          <section>
+          {/* <section>
             <Typography
               className="sectionTitle"
               component="h3"
@@ -105,33 +106,34 @@ const EventsList: FC = () => {
                 </Link>
               </li>
             </ul>
-          </section>
+          </section> */}
 
           <section>
             <Typography
               className="sectionTitle"
               component="h3"
             >
-              Fall Retreat
+              Fall Conference
             </Typography>
 
             <Box marginBottom={2}>
               <ViewDetailsButton
                 context="event"
-                to="/events/fall-retreat/"
+                to="/events/fall-conference/"
               />
             </Box>
 
             <Typography paragraph>
-              The 2023 Fall Retreat will be Nov. 1-3 in Austin.
+              The 2023 Fall Conference will be held November 1-3 at the Austin Marriott South
+            </Typography>
+
+            <Typography paragraph>
+              The Fall Conference is open to all current {appNameShort} members who are in good standing{' '}
+              (paid membership dues for the {currentSchoolYearLong} school year).
             </Typography>
 
             <Typography>
-              The {appNameShort} Fall Retreat is open to all current {appNameShort}{' '}
-              members who are in good standing
-              (paid for membership this school year).
-              <br />
-              There is no separate conference registration process.
+              Registration for the Fall Conference is $75, due by October 30, 2023.
             </Typography>
           </section>
 
@@ -140,7 +142,7 @@ const EventsList: FC = () => {
               className="sectionTitle"
               component="h3"
             >
-              TMEA Round Table
+              TMEA Roundtable
             </Typography>
 
             <Box marginBottom={2}>
