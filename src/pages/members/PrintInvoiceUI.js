@@ -9,6 +9,7 @@ import Invoice from '../../components/register/invoice';
 
 // Local Variables
 const propTypes = {
+  amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   currentUser: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
@@ -35,7 +36,10 @@ const defaultProps = {
 };
 
 // Component Definition
-const PrintInvoiceUI = ({ currentUser }) => {
+const PrintInvoiceUI = ({
+  amount = 0,
+  currentUser,
+}) => {
   const printInvoiceRef = useRef();
 
   if (!currentUser) {
@@ -60,7 +64,7 @@ const PrintInvoiceUI = ({ currentUser }) => {
 
       <div style={{ display: 'none' }}>
         <Invoice
-          amount={currentUser.AmountPaid}
+          amount={amount || currentUser.AmountPaid}
           form={currentUser}
           invoiceId={currentUser.invoiceId}
           isActive={currentUser.MemberType === 'Active'}

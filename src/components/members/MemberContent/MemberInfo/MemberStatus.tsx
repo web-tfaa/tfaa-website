@@ -159,6 +159,37 @@ const MemberStatus: React.FC<Props> = ({
 
   const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
 
+  // Calculate the amount owed based on member type, registration, and registered for fall conference
+  const getOutstandingBalance = useCallback(() => {
+    let amountOwed = 0;
+    const isActiveMemberType = currentMemberData?.MemberType === 'Active';
+
+    if (!isRegisteredForCurrentYear) {
+      amountOwed = 75;
+    } else if (needsToPay) {
+      if (isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 150;
+        } else {
+          amountOwed = 75;
+        }
+      } else if (!isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 105;
+        } else {
+          amountOwed = 30;
+        }
+      }
+    }
+
+    return amountOwed;
+    // {needsToPay && currentMemberData?.MemberType === 'Active' && !needsToPayForFallConference && '$75.00'}
+    // {needsToPay && currentMemberData?.MemberType === 'Active' && needsToPayForFallConference && '$150.00'}
+    // {needsToPay && currentMemberData?.MemberType === 'Retired' && needsToPayForFallConference && '$105.00'}
+    // {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
+    // {!needsToPay && '$0.00'}
+  }, []);
+
   const successIconElement = useMemo(() => (
     <CheckCircleIcon
       className="listItemIcon"
@@ -260,12 +291,7 @@ const MemberStatus: React.FC<Props> = ({
         >
           Outstanding balance:
           <StyledStrong>
-            {!isRegisteredForCurrentYear && '$75.00'}
-            {needsToPay && currentMemberData?.MemberType === 'Active' && !needsToPayForFallConference && '$75.00'}
-            {needsToPay && currentMemberData?.MemberType === 'Active' && needsToPayForFallConference && '$150.00'}
-            {needsToPay && currentMemberData?.MemberType === 'Retired' && needsToPayForFallConference && '$105.00'}
-            {needsToPay && currentMemberData?.MemberType === 'Retired' && !needsToPayForFallConference &&  '$30.00'}
-            {!needsToPay && '$0.00'}
+            ${getOutstandingBalance()}.00
           </StyledStrong>
 
           {!needsToPay && (
@@ -342,7 +368,10 @@ const MemberStatus: React.FC<Props> = ({
 
               <ListItem className="paymentActionContainer">
                 <ListItemSecondaryAction>
-                  <PrintInvoiceUI currentUser={currentMemberData} />
+                  <PrintInvoiceUI
+                    amount={getOutstandingBalance()}
+                    currentUser={currentMemberData}
+                  />
                 </ListItemSecondaryAction>
               </ListItem>
             </List>
