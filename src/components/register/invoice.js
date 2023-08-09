@@ -132,7 +132,7 @@ class Invoice extends Component {
             marginBottom={1.5}
             sx={{ fontSize: 14 }}
           >
-            <em>&quot;...promoting and supporting music education&quot;</em>
+            <em>&quot;...equipping leaders to advance high-quality fine arts education for all.&quot;</em>
           </Box>
 
           <div>
