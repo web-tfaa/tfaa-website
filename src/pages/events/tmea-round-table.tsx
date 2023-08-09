@@ -29,7 +29,7 @@ const TmeaRoundTable: FC<Props> = ({ location }) => {
   return (
     <Layout
       location={location}
-      pageTitle="TMEA Round Table"
+      pageTitle="TMEA Roundtable"
     >
       <StyledContainer>
         <h1>{tmeaRoundTable.titleOfEvent}</h1>
@@ -42,7 +42,6 @@ const TmeaRoundTable: FC<Props> = ({ location }) => {
         <section>
           <h4>Where</h4>
           <div className="leftSpacing">
-            <p>Details coming soon</p>
             {/* <a
               href="http://www.marriott.com/hotels/travel/satdt-san-antonio-marriott-riverwalk/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2"
               rel="noopener noreferrer"
@@ -64,7 +63,6 @@ const TmeaRoundTable: FC<Props> = ({ location }) => {
         </section>
 
         <section>
-          <h4>Why</h4>
           <p className="leftSpacing">
             Held in conjunction with the&nbsp;
             <a href="https://www.tmea.org/">

@@ -11,6 +11,7 @@ import FooterTopper from '../../footer/FooterTopper';
 import MemberContentBanner from './MemberContentBanner';
 import WelcomeBanner from './WelcomeBanner';
 import MemberInfo from './MemberInfo';
+import usePrevious from '../../../utils/hooks/usePrevious';
 
 // Local Typings
 interface Props {
@@ -26,6 +27,10 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
     currentMemberData,
     setCurrentMemberData,
   ] = useState<TfaaMemberData | null>(null);
+  const [
+    refetchCurrentMemberData,
+    setRefetchCurrentMemberData,
+  ] = useState<boolean>(false);
 
   const {
     allMembersData,
@@ -33,18 +38,37 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
     isLoading,
   } = useGetAllMembers({ useTestData });
 
+  // We need to check if the MemberType or IsRegisteredForFallConference
+  //  values are updated when the allMembersData changes.
+  // If so, we need to update the currentMemberData.
+  const previousIsLoading = usePrevious(isLoading);
+
+  const finishedLoading = Boolean(previousIsLoading && !isLoading);
+
   useEffect(() => {
-    if (currentAuthUser && allMembersData && allMembersData.length > 0 && !currentMemberData) {
+    if (currentAuthUser && allMembersData && allMembersData.length > 0
+      && (!currentMemberData || refetchCurrentMemberData
+        || finishedLoading)) {
       const currentMember = allMembersData.find(
         // We use a combination of email and uid to uniquely identify a user.
-        // The email part makes it easier to find a user in the database.
+        // The email part makes it easier to find a user in the Firestore database.
         (user) => {
           return user.userId === `${currentAuthUser.email}-${currentAuthUser.uid}`;
         });
 
       setCurrentMemberData(currentMember ?? null);
+
+      if (refetchCurrentMemberData) {
+        setRefetchCurrentMemberData(false);
+      }
     }
-  }, [currentAuthUser, currentMemberData, isLoading]);
+  }, [
+    allMembersData,
+    currentAuthUser,
+    currentMemberData,
+    isLoading,
+    refetchCurrentMemberData,
+  ]);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -67,6 +91,7 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
         currentAuthUser={currentAuthUser}
         currentMemberData={currentMemberData}
         isAdmin={isAdmin}
+        onSetRefetchCurrentMemberData={setRefetchCurrentMemberData}
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}
       />
 

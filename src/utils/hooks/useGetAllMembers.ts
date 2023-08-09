@@ -13,27 +13,29 @@ interface UseSponsorDataQueryArguments {
 
 export interface TfaaMemberData {
   Address1: string;
-  Address2: string;
+  Address2?: string;
   AmountPaid: number;
   CellPhone: string;
   City: string;
   District: string;
   Email: string;
   FirstName: string;
+  IsRegisteredForFallConference: boolean;
   LastName: string;
   MemberType: 'Active' | 'Retired';
   NewToTMAC: 'Yes' | 'No';
   OfficePhone: string;
-  PaymentOption: string;
+  PaymentOption: 'Invoiced' | 'Paypal';
+  PaypalPayerID?: string;
   PaypalPaymentID: string;
   State: string;
   Title: string;
-  ZipCode: number;
-  userId: string;
+  ZipCode: string | number;
   invoiceDate: string;
-  invoiceId: string;
+  invoiceId: string | number;
   receiptDate: string;
-  receiptId: string;
+  receiptId: string | number;
+  userId: string;
 }
 
 // Local Variables
@@ -47,6 +49,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Richardson ISD',
     Email: 'breff.jadford@risd.org',
     FirstName: 'Breff',
+    IsRegisteredForFallConference: true,
     LastName: 'Jadford',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -55,7 +58,7 @@ const memberTestData: TfaaMemberData[] = [
     PaypalPaymentID: '',
     State: 'TX',
     Title: 'Director of Fine Arts',
-    ZipCode: 75081,
+    ZipCode: '75081',
     userId: 'tSOu3c33c1Yl5y29HFoHejw88HD3',
     invoiceDate: '01/26/2023',
     invoiceId: '29',
@@ -71,6 +74,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Plano ISD',
     Email: 'DFA@planoisd.org',
     FirstName: 'Plano',
+    IsRegisteredForFallConference: true,
     LastName: 'Administrator',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -79,7 +83,7 @@ const memberTestData: TfaaMemberData[] = [
     PaypalPaymentID: '',
     State: 'TX',
     Title: 'Director of Fine Arts',
-    ZipCode: 75081,
+    ZipCode: '75081',
     userId: '6NNV339SwqO2UEVxedPu2HGsTzL5',
     invoiceDate: '01/03/2023',
     invoiceId: '24',
@@ -95,6 +99,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Dallas ISD',
     Email: 'DFA@dallasisd.org',
     FirstName: 'Head of',
+    IsRegisteredForFallConference: false,
     LastName: 'Fine Arts',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -103,7 +108,7 @@ const memberTestData: TfaaMemberData[] = [
     PaypalPaymentID: '',
     State: 'TX',
     Title: 'Director of Fine Arts',
-    ZipCode: 75081,
+    ZipCode: '75081',
     userId: '6NNV339SwqO2UEVxedPu2HGsTzL6',
     invoiceDate: '01/31/2023',
     invoiceId: '31',
@@ -119,6 +124,7 @@ const memberTestData: TfaaMemberData[] = [
     District: 'Garland ISD',
     Email: 'DFA@dallasisd.org',
     FirstName: 'Director of ',
+    IsRegisteredForFallConference: true,
     LastName: 'Fine Arts Education',
     MemberType: 'Active',
     NewToTMAC: 'No',
@@ -127,7 +133,7 @@ const memberTestData: TfaaMemberData[] = [
     PaypalPaymentID: '',
     State: 'TX',
     Title: 'Director of Fine Arts Education',
-    ZipCode: 75081,
+    ZipCode: '75081',
     userId: '6NNV339SwqO2UEVxedPu2HGsTzL7',
     invoiceDate: '02/02/2023',
     invoiceId: '33',
@@ -144,12 +150,13 @@ export const useGetAllMembers = ({
   const [isLoading, setIsLoading] = React.useState(isAuthenticated);
   const [shouldRefetchUserList, setShouldRefetchUserList] = React.useState(false);
   const [memberData, setMemberData] = React.useState<TfaaMemberData[] | null>(null);
+
   const previousMemberData = usePrevious(memberData);
 
   // console.log('isLoading', isLoading);
   // console.log('shouldRefetchUserList', shouldRefetchUserList);
   // console.log('previousMemberData', Boolean(previousMemberData));
-  // console.log('memberData', Boolean(memberData));
+  // console.log('memberData', memberData);
 
   const handleUpdateMemberData = useCallback((newMemberData: TfaaMemberData[] | null) => {
     setMemberData(newMemberData);
@@ -158,11 +165,15 @@ export const useGetAllMembers = ({
 
   const handleUpdateShouldRefetchUserList = useCallback((newShouldRefetchUserList: boolean) => {
     setShouldRefetchUserList(newShouldRefetchUserList);
+
+    if (!newShouldRefetchUserList) {
+      setIsLoading(false);
+    }
   }, [setShouldRefetchUserList]);
 
   // Fetch member data when component mounts
   useEffect(() => {
-    if (isAuthenticated && !useTestData || shouldRefetchUserList) {
+    if (isAuthenticated && (!useTestData || shouldRefetchUserList)) {
       const emptyMemberList: TfaaMemberData[] = [];
 
       setIsLoading(true);
@@ -170,12 +181,12 @@ export const useGetAllMembers = ({
 
       if (shouldRefetchUserList) {
         handleUpdateShouldRefetchUserList(false);
-        setIsLoading(false);
       }
     }
-    // We do not want to re-run this effect when other values change
   }, [
+    handleUpdateMemberData,
     isAuthenticated,
+    shouldRefetchUserList,
     useTestData,
   ]);
 

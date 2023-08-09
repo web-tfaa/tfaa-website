@@ -151,8 +151,20 @@ const ResourcesList: React.FC = () => {
               </li>
 
               <li>
-                <Link to="https://www.tmea.org/">
-                  Texas Music Educators Association (TMEA)
+                <Link to="https://texasbandmasters.org/">
+                  Texas Bandmasters Association (TBA)
+                </Link>
+              </li>
+
+              <li>
+                <Link to="https://www.tcda.net/">
+                  Texas Choral Directors Association (TCDA)
+                </Link>
+              </li>
+
+              <li>
+                <Link to="https://www.todaweb.org/">
+                  Texas Orchestra Directors Association (TODA)
                 </Link>
               </li>
             </ul>

@@ -1,44 +1,37 @@
 // External Dependencies
 import React, {
-  ReactInstance, useCallback, useEffect, useRef, useState
+  ReactInstance, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import { alpha } from '@mui/material/styles';
 import ReactToPrint from 'react-to-print';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import Checkbox from '@mui/material/Checkbox';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { getAmountPaid } from '../../utils/getAmountPaid';
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
 } from './MemberRegisterContent';
+import { PaymentForm } from './PaymentForm';
+import { PaypalPayment } from './paypal/paypal-button-wrapper';
+import { PaymentSuccessUI } from './PaymentSuccessUI';
 import {
+  FIRESTORE_MEMBER_COLLECTION,
   doGetInvoiceId,
   doGetReceiptId,
   doUpdateEntry,
   doUpdateInvoiceId as updateFirestoreInvoiceId,
   doUpdateReceiptId as updateFirestoreReceiptId,
-  FIRESTORE_MEMBER_COLLECTION,
 } from '../../firebase/db';
 import { currentDate } from '../../utils/dateHelpers';
-import { currentSchoolYearLong } from '../../utils/helpers';
 import { appNameShort } from '../../utils/app-constants';
 import CtaButton from '../shared/CtaButton';
 import EnhancedCard from '../shared/EnhancedCard';
 import FormDivider from '../shared/FormDivider';
 import FormTitle from '../shared/FormTitle';
 import Invoice from './invoice';
-import PaypalButtonWrapper, {
-  PaypalPayment,
-} from './paypal/paypal-button-wrapper';
 import usePrevious from '../../utils/hooks/usePrevious';
 
 // Local Typings
@@ -48,13 +41,10 @@ interface Props {
   onCompleteMemberStep: HandleCompleteMemberStepType;
   onUpdateMemberForm: (updatedMemberForm: MemberFormValues) => void;
 }
-type ActiveMemberRadioOptions = 'active' | 'retired';
+export type ActiveMemberRadioOptions = 'active' | 'retired';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
-  '.MuiCardContent-root': {
-    padding: 0,
-  },
   '.MuiCardHeader-root': {
     '&.top-card-header': {
       backgroundColor: alpha(theme.palette.ui.lilac, 0.4),
@@ -62,34 +52,6 @@ const StyledRoot = styled.section(({ theme }) => ({
     '&.bottom-card-header': {
       backgroundColor: alpha(theme.palette.tfaa.membership, 0.3),
     },
-  },
-  '.classChampionRadioLabelRoot': {
-    alighItems: 'flex-start',
-    display: 'flex',
-  },
-  '.memberLevelAmount': {
-    fontSize: 34,
-    marginLeft: theme.spacing(1),
-  },
-  '.memberLevelHeading': {
-    fontSize: 34,
-    fontWeight: 700,
-    marginTop: '1rem',
-  },
-  '.memberName': {
-    fontSize: '1.25rem',
-    fontWeight: 600,
-    marginTop: theme.spacing(1.5),
-  },
-  '.radioButtonLabel': {
-    display: 'block',
-    fontSize: '90%',
-    letterSpacing: '0.05rem',
-    marginTop: '0.3rem',
-    marginBottom: theme.spacing(1.5),
-  },
-  '.successMemberInfoCard': {
-    padding: theme.spacing(0, 2, 3),
   },
 }));
 
@@ -100,16 +62,10 @@ const RegisterMemberPayment: React.FC<Props> = ({
   onCompleteMemberStep,
   onUpdateMemberForm,
 }) => {
-  const {
-    invoiceId,
-    receiptId,
-  } = memberForm;
-
-  const previousInvoiceId = usePrevious(invoiceId);
+  const previousInvoiceId = usePrevious(memberForm.invoiceId);
 
   // We have these refs for printing invoice or receipt
   const printInvoiceRef = useRef<ReactInstance>(null);
-  const printReceiptIdRef = useRef<ReactInstance>(null);
 
   const [hasCompletedPayment, setHasCompletedPayment] = useState<boolean>();
   const [
@@ -118,14 +74,17 @@ const RegisterMemberPayment: React.FC<Props> = ({
   ] = useState<ActiveMemberRadioOptions>('active');
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(false);
 
-  const handleToogleHasFallConferenceFee = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setHasFallConferenceFee(event.target.checked);
+  // Local state setter functions
+  const handleSetIsActiveMember = useCallback((isActive: ActiveMemberRadioOptions) => {
+    setIsActiveMember(isActive);
+  }, []);
 
-    const updatedMemberForm = {
-      ...memberForm,
-      IsRegisteredForFallConference: event.target.checked,
-    };
+  const handleSetHasFallConferenceFee = useCallback((hasFee: boolean) => {
+    setHasFallConferenceFee(hasFee);
+  }, []);
 
+  // Update Firestore database member data
+  const handleUpdateFirestoreMemberData = useCallback((updatedMemberForm: MemberFormValues) => {
     return doUpdateEntry(
       updatedMemberForm,
       FIRESTORE_MEMBER_COLLECTION,
@@ -134,7 +93,6 @@ const RegisterMemberPayment: React.FC<Props> = ({
   }, []);
 
   const handleGetCurrentInvoiceId = useCallback((currentInvoiceId: number) => {
-    console.log('handleGetCurrentInvoiceId : currentInvoiceId', currentInvoiceId);
     onUpdateMemberForm({
       ...memberForm,
       invoiceId: currentInvoiceId,
@@ -148,10 +106,14 @@ const RegisterMemberPayment: React.FC<Props> = ({
     });
   }, [memberForm, onUpdateMemberForm]);
 
+  // When the step is being completed after a successful payment,
+  //  we update the Firestore database and push the user to the payment success UI
   const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
+    const amountPaid = getAmountPaid(memberForm);
+
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
-      AmountPaid: isActiveMember === 'active' ? 75 : 30,
+      AmountPaid: amountPaid,
       PaypalPayerID: payment?.payerID,
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
@@ -161,15 +123,13 @@ const RegisterMemberPayment: React.FC<Props> = ({
       receiptId: memberForm.receiptId,
     };
 
-    doUpdateEntry(
-      updatedMemberForm,
-      FIRESTORE_MEMBER_COLLECTION,
-      authenticatedUserId,
-    );
+    handleUpdateFirestoreMemberData(updatedMemberForm);
+
     onCompleteMemberStep(2, updatedMemberForm);
-  }, [authenticatedUserId, isActiveMember, memberForm, onCompleteMemberStep]);
+  }, [isActiveMember, memberForm, onCompleteMemberStep]);
 
   useEffect(() => {
+    // Fetch the current invoice and receipt id values from Firestore
     doGetInvoiceId(handleGetCurrentInvoiceId);
     doGetReceiptId(handleGetCurrentReceiptId);
 
@@ -190,152 +150,64 @@ const RegisterMemberPayment: React.FC<Props> = ({
 
   // We want to record the newest invoiceId in the Firestore database
   useEffect(() => {
-    if (!invoiceId) {
+    if (!memberForm.invoiceId) {
       doGetInvoiceId(handleGetCurrentInvoiceId);
     } else if (previousInvoiceId === 0
-        && previousInvoiceId !== invoiceId && !hasCompletedPayment) {
-      const updatedMemberForm: MemberFormValues = {
+        && previousInvoiceId !== memberForm.invoiceId && !hasCompletedPayment) {
+      const updatedFormWithInvoiceData: MemberFormValues = {
         ...memberForm,
         invoiceDate: currentDate,
-        invoiceId,
+        invoiceId: memberForm.invoiceId,
       };
 
-      doUpdateEntry(
-        {
-          ...updatedMemberForm,
-          // Though we have the receipt id in our local reducer state,
-          //  we don't need to store it in the DB until payment is successful
-          receiptId: 0,
-        },
-        FIRESTORE_MEMBER_COLLECTION,
-        authenticatedUserId,
-      );
+      const updatedMemberForm = {
+        ...updatedFormWithInvoiceData,
+        // Though we have the receipt id in our local reducer state,
+        //  we don't need to store it in the DB until payment is successful
+        receiptId: 0,
+      };
+
+      handleUpdateFirestoreMemberData(updatedMemberForm);
+
       onUpdateMemberForm(updatedMemberForm);
     }
   }, [
     authenticatedUserId,
     handleGetCurrentInvoiceId,
     hasCompletedPayment,
-    invoiceId,
+    memberForm.invoiceId,
     memberForm,
     onUpdateMemberForm,
     previousInvoiceId,
   ]);
 
+  // Called when a payment is successfully completed via PayPal
   const handleUpdateCompletedStep = useCallback((payment: PaypalPayment) => {
     doGetReceiptId(handleGetCurrentReceiptId);
     setHasCompletedPayment(true);
     handleCompleteMemberPaymentStep(payment);
   }, [handleCompleteMemberPaymentStep, handleGetCurrentReceiptId]);
 
-  const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value: updatedActiveMemberSelection } = event.target;
-
-    const isActive = updatedActiveMemberSelection === 'active';
-
-    const updatedMemberForm = {
-      ...memberForm,
-      invoiceDate: currentDate,
-      invoiceId,
-      MemberType: isActive ? 'Active' : 'Retired' as ('Active' | 'Retired'),
-      receiptId,
-    };
-
-    setIsActiveMember(updatedActiveMemberSelection as ActiveMemberRadioOptions);
-    onUpdateMemberForm(updatedMemberForm);
-
-    return doUpdateEntry(
-      updatedMemberForm,
-      FIRESTORE_MEMBER_COLLECTION,
-      authenticatedUserId,
-    );
-  }, [authenticatedUserId, invoiceId, memberForm, onUpdateMemberForm, receiptId]);
-
   const isActive = isActiveMember === 'active';
   const membershipAmount = isActive ? 75 : 30;
-
   const amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
 
-  const successfulMemberPaymentElement = (
-    <div>
-      <Box mb={3}>
-        <h2>Successful Payment!</h2>
-      </Box>
+  // This element is shown if the member successfully
+  //  completes an online PayPal payment
+  const successfulMemberPaymentElement = useMemo(() => (
+    <PaymentSuccessUI
+      hasFallConferenceFee={hasFallConferenceFee}
+      isActive={isActive}
+      memberForm={memberForm}
+    />
+  ), [
+    hasFallConferenceFee,
+    isActive,
+    memberForm,
+  ]);
 
-      <Card
-        className="successMemberInfoCard"
-        variant="outlined"
-      >
-        <h3 className="memberLevelHeading">
-          {isActive ? 'Active' : 'Retired'} Member
-          <Typography
-            className="memberLevelAmount"
-            component="span"
-            variant="h4"
-          >
-            — {isActive ? '$75.00' : '$30.00'}
-          </Typography>
-        </h3>
-
-        <Typography
-          className="memberName"
-          variant="body2"
-        >
-          {memberForm.FirstName} {memberForm.LastName}
-        </Typography>
-        <Typography variant="body2">
-          {memberForm.Title}, {memberForm.District}
-        </Typography>
-        <Typography variant="body2">
-          {memberForm.Email}
-        </Typography>
-        <Typography variant="body2">
-          Cell Phone — {memberForm.CellPhone}
-        </Typography>
-        <Typography variant="body2">
-          Office Phone — {memberForm.OfficePhone}
-        </Typography>
-
-        <Box mt={3}>
-          <ReactToPrint
-            content={() => printReceiptIdRef.current}
-            trigger={() => (
-              <CtaButton
-                fontWeight={600}
-                width={160}
-              >
-                Print Receipt
-              </CtaButton>
-            )}
-          />
-        </Box>
-      </Card>
-
-      <Box
-        mt={5}
-        mx={4}
-      >
-        <Typography
-          className="registerStep3Title"
-          component="h3"
-        >
-          Thank you for joining {appNameShort} for the {currentSchoolYearLong} school year!
-        </Typography>
-      </Box>
-
-      <Box display="none">
-        <Invoice
-          amount={amount}
-          form={memberForm}
-          isInvoice={false}
-          receiptId={memberForm.receiptId}
-          ref={printReceiptIdRef}
-        />
-      </Box>
-    </div>
-  );
-
-  // We show this if the user has not made a payment
+  // We show this if the user has not made a payment.
+  // It's assumed that they are wanting an invoice.
   const invoiceMemberElement = (
     <>
       <EnhancedCard sx={{ marginBottom: 3 }}>
@@ -343,92 +215,18 @@ const RegisterMemberPayment: React.FC<Props> = ({
           className="top-card-header"
           title="Pay now with Paypal"
         />
-        <Box mb={6}>
-          <FormControl
-            component="fieldset"
-            style={{ marginLeft: 32 }}
-          >
-            <h2 className="memberLevelHeading">
-              {memberForm.MemberType} Member
-              {hasFallConferenceFee && ' + Fall Conference Registration'}
-            </h2>
 
-            <FormControl component="fieldset">
-              <RadioGroup
-                aria-label="Member Level"
-                name="MemberLevel*"
-                onChange={handleChangeRadioSelection}
-                value={isActiveMember}
-              >
-                <FormControlLabel
-                  control={<Radio size="small" />}
-                  label={(
-                    <>
-                      <Typography component="span">
-                        Active
-                      </Typography>
-
-                      <Typography
-                        color="textSecondary"
-                        component="span"
-                      >
-                        {' '} — $75
-                      </Typography>
-                    </>
-                  )}
-                  value="active"
-                />
-                <FormControlLabel
-                  control={<Radio size="small" />}
-                  label={(
-                    <>
-                      <Typography component="span">
-                        Retired
-                      </Typography>
-
-                      <Typography
-                        color="textSecondary"
-                        component="span"
-                      >
-                        {' '} — $30
-                      </Typography>
-                    </>
-                  )}
-                  value="retired"
-                />
-              </RadioGroup>
-
-              <FormControlLabel
-                control={(
-                  <Checkbox
-                    checked={hasFallConferenceFee}
-                    onChange={handleToogleHasFallConferenceFee}
-                  />
-                )}
-                label="Add Fall Conference Registration (optional) — $75"
-              />
-            </FormControl>
-
-            <Typography
-              sx={{ marginTop: 2.5 }}
-              variant="h6"
-            >
-              Total: ${Number(amount)?.toFixed(2).toLocaleString()}
-            </Typography>
-
-            <Typography
-              sx={{ marginTop: 4 }}
-              variant="body2"
-            >
-              Click on the PayPal button below to pay with credit card.
-            </Typography>
-
-            <PaypalButtonWrapper
-              amount={amount}
-              onSuccessfulPayment={handleUpdateCompletedStep}
-            />
-          </FormControl>
-        </Box>
+        <PaymentForm
+          amountToPay={amount}
+          hasFallConferenceFee={hasFallConferenceFee}
+          isActiveMember={isActiveMember}
+          memberForm={memberForm}
+          onSetHasFallConferenceFee={handleSetHasFallConferenceFee}
+          onSetIsActiveMember={handleSetIsActiveMember}
+          onUpdateCompletedStep={handleUpdateCompletedStep}
+          onUpdateFirestoreMemberData={handleUpdateFirestoreMemberData}
+          onUpdateMemberForm={onUpdateMemberForm}
+        />
       </EnhancedCard>
 
       <EnhancedCard>

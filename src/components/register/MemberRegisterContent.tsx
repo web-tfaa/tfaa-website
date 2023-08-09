@@ -4,6 +4,7 @@ import React, { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { TfaaMemberData } from '../../utils/hooks/useGetAllMembers';
 import { isTodayAfterJuly31st } from '../../utils/helpers';
 import { useGetAuthUser } from '../../utils/hooks/useGetAuthUser';
 import Container from '../shared/container';
@@ -13,31 +14,8 @@ import RegisterMemberPayment from './register-member-payment';
 import RegisterStepper from './RegisterStepper';
 
 // Local Typings
-export interface MemberFormValues {
-  Address1: string;
-  Address2?: string;
-  AmountPaid: 0 | 30 | 75;
-  CellPhone: string;
-  City: string;
-  District: string;
-  Email: string;
-  FirstName: string;
-  LastName: string;
-  MemberType: 'Active' | 'Retired';
-  NewToTMAC: boolean;
-  OfficePhone: string;
-  PaymentOption?: 'Invoiced' | 'Paypal';
-  PaypalPayerID?: string;
-  PaypalPaymentID?: string;
-  State: string;
-  Title: string;
-  ZipCode: string;
+export interface MemberFormValues extends TfaaMemberData {
   honeypot?: string;
-  invoiceDate: string;
-  invoiceId: number;
-  receiptDate: string;
-  receiptId: number;
-  userId?: string;
 }
 type Steps = 0 | 1 | 2;
 export type HandleCompleteMemberStepType = (
@@ -45,12 +23,10 @@ export type HandleCompleteMemberStepType = (
   updatedMemberForm: MemberFormValues,
 ) => void;
 
-
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  // padding: theme.spacing(4, 8),
   width: '100%',
 }));
 
@@ -58,7 +34,7 @@ const COMPLETED_MEMBER_STEPS_INITIAL_STATE: Steps[] = [];
 
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
-const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
+export const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   Address1: '',
   Address2: '',
   AmountPaid: 0,
@@ -67,6 +43,7 @@ const INITIAL_MEMBER_FORM_VALUES: MemberFormValues = {
   District: '',
   Email: '',
   FirstName: '',
+  IsRegisteredForFallConference: false,
   LastName: '',
   MemberType: 'Active',
   NewToTMAC: false,

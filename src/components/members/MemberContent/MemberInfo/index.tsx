@@ -22,6 +22,7 @@ interface Props {
   currentAuthUser: TfaaAuthUser | null;
   currentMemberData: TfaaMemberData | null;
   isAdmin: boolean;
+  onSetRefetchCurrentMemberData: ((shouldRefetchCurrentMemberData: boolean) => void) | null;
   onUpdateShouldRefetchUserList: ((shouldRefetchUserList: boolean) => void) | null;
 }
 
@@ -64,6 +65,7 @@ const MemberInfo: React.FC<Props> = ({
   authUserEmail,
   currentAuthUser,
   currentMemberData,
+  onSetRefetchCurrentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
   const shouldSeeSponsorListLink = authUserEmail
@@ -77,6 +79,8 @@ const MemberInfo: React.FC<Props> = ({
       <MemberStatus
         currentAuthUser={currentAuthUser}
         currentMemberData={currentMemberData}
+        onSetRefetchCurrentMemberData={onSetRefetchCurrentMemberData}
+        onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
       />
 
       {currentMemberData && (
@@ -85,7 +89,12 @@ const MemberInfo: React.FC<Props> = ({
         />
       )}
 
-      <MemberRegistrationTasks currentMemberData={currentMemberData} />
+      <MemberRegistrationTasks
+        currentAuthUser={currentAuthUser}
+        currentMemberData={currentMemberData}
+        onSetRefetchCurrentMemberData={onSetRefetchCurrentMemberData}
+        onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
+      />
 
       <MemberActions
         authUserEmail={authUserEmail}

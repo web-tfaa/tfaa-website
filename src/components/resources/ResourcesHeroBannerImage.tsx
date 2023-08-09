@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
 import HeroBannerImage from '../shared/HeroBannerImage';
-import { appName, appNameShort } from '../../utils/app-constants';
+import { appNameShort } from '../../utils/app-constants';
 
 // Component Definition
 const ResourcesHeroBannerImage: FC = () => {
@@ -20,8 +20,7 @@ const ResourcesHeroBannerImage: FC = () => {
         paragraph
         variant="body2"
       >
-        {appNameShort} — {appName} provide training and resources to transform
-        students through the pursuit of excellence in the Arts.
+        Members can access tools and resources to manage fine arts programs in their respective districts.
       </Typography>
 
       <Typography variant="body2">

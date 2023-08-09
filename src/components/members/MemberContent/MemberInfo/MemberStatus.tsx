@@ -1,38 +1,38 @@
 // External Dependencies
 import { lighten } from '@mui/material';
 import Box from '@mui/material/Box';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React, { useCallback } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
-import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
+import { DialogPayment } from './DialogPayment';
+import { TfaaAuthUser } from '../../../layout';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
-import {
-  doUpdateEntry,
-  FIRESTORE_MEMBER_COLLECTION,
-} from '../../../../firebase/db';
-import { currentDate } from '../../../../utils/dateHelpers';
+import { appNameShort } from '../../../../utils/app-constants';
 import {
   currentSchoolYearEnding,
   currentSchoolYearLong,
 } from '../../../../utils/helpers';
+import CtaButton from '../../../shared/CtaButton';
 import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
-import PaypalButtonWrapper from '../../../register/paypal/paypal-button-wrapper';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
-import { appNameShort } from '../../../../utils/app-constants';
-import { TfaaAuthUser } from '../../../layout';
+import usePrevious from '../../../../utils/hooks/usePrevious';
 
 // Local Typings
 interface Props {
   currentAuthUser: TfaaAuthUser | null;
   currentMemberData: TfaaMemberData | null;
+  onSetRefetchCurrentMemberData: ((shouldRefetchCurrentMemberData: boolean) => void) | null;
+  onUpdateShouldRefetchUserList: ((shouldRefetchUserList: boolean) => void) | null;
 }
 
 // Local Variables
@@ -59,6 +59,12 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     marginBottom: 0,
     paddingBottom: 0,
   },
+  '.listItemIcon': {
+    height: 24,
+    marginLeft: theme.spacing(1),
+    transform: 'translateY(6px)',
+    width: 24,
+  },
   '.listItemText': {
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.9rem',
@@ -79,8 +85,12 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
     marginLeft: theme.spacing(1),
   },
   '.paymentActionContainer': {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(3),
+    },
     display: 'flex',
     justifyContent: 'flex-end',
+    marginTop: theme.spacing(1),
   },
   '.paymentList': {
     marginBottom: theme.spacing(1),
@@ -108,8 +118,33 @@ const StyledStrong = styled.strong(({ theme }) => ({
 const MemberStatus: React.FC<Props> = ({
   currentAuthUser,
   currentMemberData,
+  onSetRefetchCurrentMemberData,
+  onUpdateShouldRefetchUserList,
 }) => {
+  const theme = useTheme();
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const previousIsDialogOpen = usePrevious(isDialogOpen);
+
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
+
+  // Local state setter functions
+  const handleOpenDialogPayment = useCallback(() => {
+    setIsDialogOpen(true);
+  }, []);
+
+  const handleCloseDialogPayment = useCallback(() => {
+    setIsDialogOpen(false);
+  }, []);
+
+  // We refetch data after the member payment dialog closes
+  useEffect(() => {
+    if (previousIsDialogOpen && !isDialogOpen) {
+      onUpdateShouldRefetchUserList?.(true);
+      onSetRefetchCurrentMemberData?.(true);
+    }
+  }, [isDialogOpen, previousIsDialogOpen, onUpdateShouldRefetchUserList]);
 
   // If the member paid by check, the TFAA Executive Secretary will manually
   //  add the check number in the PaypalPaymentID field
@@ -118,169 +153,236 @@ const MemberStatus: React.FC<Props> = ({
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
-  const amountToPay = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
+  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid < 100;
 
-  const handleSuccessfulPayment = useCallback(async (payment: PaypalPayment) => {
-    const updatedMemberData = {
-      ...currentMemberData,
-      AmountPaid: currentMemberData?.MemberType === 'Active' ? 75 : 30,
-      PaypalPayerID: payment?.payerID,
-      PaypalPaymentID: payment?.paymentID,
-      PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
-      invoiceDate: currentDate,
-      invoiceId: currentMemberData?.invoiceId ?? 0,
-      receiptDate: currentMemberData?.receiptId ? currentDate : '',
-      receiptId: currentMemberData?.receiptId ?? 0,
-    };
+  const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
-    const userId = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+  const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
 
-    // Update the member's payment data in the Firestore database
-    // This shape should be the same as register-membmer-payment
-    //  in the handleCompleteMemberPaymentStep function
-    try {
-      await doUpdateEntry(
-        updatedMemberData,
-        FIRESTORE_MEMBER_COLLECTION,
-        userId,
-      );
-    } catch (error) {
-      console.error('Error while updating after a successful payment', error);
+  // Calculate the amount owed based on member type, registration, and registered for fall conference
+  const getOutstandingBalance = useCallback(() => {
+    let amountOwed = 0;
+    const isActiveMemberType = currentMemberData?.MemberType === 'Active';
+
+    if (!isRegisteredForCurrentYear) {
+      amountOwed = 75;
+    } else if (needsToPay) {
+      if (isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 150;
+        } else {
+          amountOwed = 75;
+        }
+      } else if (!isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 105;
+        } else {
+          amountOwed = 30;
+        }
+      }
     }
 
-    // Instead of trying to update all of the data,
-    //  it's easier to reload the Members page
-    if (typeof window !== 'undefined') {
-      window.location.reload();
-    }
-  }, [currentMemberData]);
+    return amountOwed;
+  }, [currentMemberData, isRegisteredForCurrentYear, needsToPay, needsToPayForFallConference]);
+
+  const successIconElement = useMemo(() => (
+    <CheckCircleIcon
+      className="listItemIcon"
+      htmlColor={theme.palette.tfaa.resources}
+    />
+  ), []);
 
   return (
-    <StyledMemberInfoCard cardTitle="Membership status">
-      <List>
-        <ListItem className="listItem">
-          <ListItemText
-            classes={{
-              primary: 'listItemText',
-            }}
-            primary={(
-              <>
-                {!isRegisteredForCurrentYear && 'Not registered'}
-
-                {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
-
-                {isRegisteredForCurrentYear && !needsToPay && (
+    <>
+      <StyledMemberInfoCard cardTitle="Membership status">
+        <List>
+          <ListItem className="listItem">
+            <ListItemText
+              classes={{
+                primary: 'listItemText',
+              }}
+              primary={(
                 <>
-                  {currentMemberData?.MemberType || 'Active'} member
+                  {!isRegisteredForCurrentYear && 'Not registered'}
+
+                  {isRegisteredForCurrentYear && needsToPay && 'Inactive member'}
+
+                  {isRegisteredForCurrentYear && !needsToPay && (
+                    <>
+                      {currentMemberData?.MemberType || 'Active'} member
+                    </>
+                  )}
                 </>
-                )}
-              </>
-            )}
-            secondary={(
-              <>
-                for the {currentSchoolYearLong} school year
-                {!needsToPay && (
-                  <>
-                    <br />
-                    through 6/30/{currentSchoolYearEnding}
-                  </>
-                )}
-              </>
-            )}
-          />
-        </ListItem>
-      </List>
-
-      {needsToPay && (
-        <Box marginTop={2}>
-          <EnhancedAlert severity="warning">
-            To become an active member, please
-            {' '}
-            {!isRegisteredForCurrentYear && 'register and '}
-            {' '}
-            pay
-            dues for this school year.
-          </EnhancedAlert>
-        </Box>
-      )}
-
-      <Typography
-        className="contentText balanceText"
-        component="div"
-        paragraph
-        variant="body2"
-      >
-        Outstanding balance:
-        <StyledStrong>
-          {!isRegisteredForCurrentYear && '$75.00'}
-          {needsToPay && currentMemberData?.MemberType === 'Active' && '$75.00'}
-          {currentMemberData?.MemberType === 'Retired' && '$30.00'}
-          {!needsToPay && '$0.00'}
-        </StyledStrong>
-        {!needsToPay && (
-          <>
-            {' '}
-            <Chip
-              className="paidInFullChip"
-              label="Paid in full"
-              variant="outlined"
+              )}
+              secondary={(
+                <>
+                  for the {currentSchoolYearLong} school year
+                  {!needsToPay && (
+                    <>
+                      <br />
+                      through 7/31/{currentSchoolYearEnding}
+                    </>
+                  )}
+                </>
+              )}
             />
+          </ListItem>
+        </List>
+
+        {needsToPay && (
+          <Box marginTop={2}>
+            <EnhancedAlert severity="warning">
+              To become a registered member, please
+              {' '}
+              {!isRegisteredForCurrentYear && 'register and '}
+              {' '}
+              pay
+              dues for this school year.
+            </EnhancedAlert>
+          </Box>
+        )}
+
+        {isRegisteredForCurrentYear && needsToPay && (
+          <>
+            <Typography
+              className="balanceText"
+              component="div"
+              sx={{ marginTop: 3 }}
+              variant="body2"
+            >
+              {currentMemberData?.MemberType} Membership:
+              <Box
+                component="strong"
+                sx={{ marginLeft: 1 }}
+              >
+                ${amountToPayForMembership}.00
+              </Box>
+            </Typography>
+
+            {needsToPayForFallConference && (
+              <Typography
+                className="contentText"
+                component="div"
+                sx={{ marginTop: 1 }}
+                variant="body2"
+              >
+                Fall Conference Fee:
+                <Box
+                  component="strong"
+                  sx={{ marginLeft: 1 }}
+                >
+                  $75.00
+                </Box>
+              </Typography>
+            )}
           </>
         )}
-      </Typography>
 
-      {isRegisteredForCurrentYear && isInvoiced && (
-        <>
-          <Divider className="memberStatusDivider" />
+        <Typography
+          className="contentText balanceText"
+          component="div"
+          paragraph
+          variant="body2"
+        >
+          Outstanding balance:
+          <StyledStrong>
+            ${getOutstandingBalance()}.00
+          </StyledStrong>
 
-          <Typography
-            sx={{ fontWeight: 600 }}
-            variant="subtitle1"
-          >
-            Payment Options
-          </Typography>
-
-          <List className="paymentList">
-            <ListItem className="paymentListItem">
-              <ListItemText
-                classes={{
-                  primary: 'listItemText',
-                  secondary: 'listItemSecondaryText',
-                }}
-                primary="Pay online with credit card"
-                secondary={`${appNameShort} uses PayPal to securely process online credit card payments.`}
+          {!needsToPay && (
+            <>
+              {' '}
+              <Chip
+                className="paidInFullChip"
+                label="Paid in full"
+                variant="outlined"
               />
-            </ListItem>
+            </>
+          )}
+        </Typography>
 
-            <div className="paymentActionContainer">
-              <PaypalButtonWrapper
-                amount={amountToPay}
-                noMargin
-                onSuccessfulPayment={handleSuccessfulPayment}
-              />
-            </div>
+        {needsToPayForFallConference && !needsToPay && (
+          <>
+            <Divider className="memberStatusDivider" />
 
-            <ListItem className="paymentListItem">
-              <ListItemText
-                classes={{
-                  primary: 'listItemText',
-                  secondary: 'listItemSecondaryText',
-                }}
-                primary="Send invoice with payment"
-                secondary={
-                  `Mail invoice with payment
+            <Typography>
+              Registered for Fall Conference
+              {successIconElement}
+            </Typography>
+          </>
+        )}
+
+        {isRegisteredForCurrentYear && isInvoiced && (
+          <>
+            <Divider className="memberStatusDivider" />
+
+            <Typography
+              sx={{ fontWeight: 600 }}
+              variant="subtitle1"
+            >
+              Payment Options
+            </Typography>
+
+            <List className="paymentList">
+              <ListItem className="paymentListItem">
+                <ListItemText
+                  classes={{
+                    primary: 'listItemText',
+                    secondary: 'listItemSecondaryText',
+                  }}
+                  primary="Pay online with credit card"
+                  secondary={`${appNameShort} uses PayPal to securely process online credit card payments.`}
+                />
+              </ListItem>
+
+              <ListItem className="paymentActionContainer">
+                <ListItemSecondaryAction>
+                  <CtaButton
+                    colorVariant="resources"
+                    fontWeight={600}
+                    onClick={handleOpenDialogPayment}
+                  >
+                    Choose Payment Amount
+                  </CtaButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+
+              <ListItem className="paymentListItem">
+                <ListItemText
+                  classes={{
+                    primary: 'listItemText',
+                    secondary: 'listItemSecondaryText',
+                  }}
+                  primary="Send invoice with payment"
+                  secondary={
+                    `Mail invoice with payment
                       to the ${appNameShort} Executive Secretary as indicated on your
                       invoice.`}
-              />
-            </ListItem>
+                />
+              </ListItem>
 
-            <div className="paymentActionContainer">
-              <PrintInvoiceUI currentUser={currentMemberData} />
-            </div>
-          </List>
-        </>
+              <ListItem className="paymentActionContainer">
+                <ListItemSecondaryAction>
+                  <PrintInvoiceUI
+                    amount={getOutstandingBalance()}
+                    currentUser={currentMemberData}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            </List>
+          </>
+        )}
+      </StyledMemberInfoCard>
+
+      {isDialogOpen && (
+        <DialogPayment
+          currentMemberData={currentMemberData}
+          isOpen={isDialogOpen}
+          onClose={handleCloseDialogPayment}
+          userIdForFirestore={userIdForFirestore}
+        />
       )}
-    </StyledMemberInfoCard>
+    </>
   );
 };
 

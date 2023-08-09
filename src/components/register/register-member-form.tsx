@@ -23,6 +23,7 @@ import CustomTextField from '../shared/CustomTextField';
 import FormikCheckbox from '../shared/FormikCheckbox';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -105,7 +106,6 @@ const RegisterMemberForm: React.FC<Props> = ({
   };
 
   if (!authenticatedUserId) {
-    console.log('bye!');
     navigate('/members');
   }
 
@@ -120,7 +120,7 @@ const RegisterMemberForm: React.FC<Props> = ({
 
   return (
     <StyledRoot className="login-form">
-      <Formik
+      <Formik<MemberFormValues>
         enableReinitialize
         initialValues={initialMemberFormValues}
         onSubmit={handleClickSubmitButton}
@@ -307,9 +307,9 @@ const RegisterMemberForm: React.FC<Props> = ({
 
               <FormikCheckbox
                 inputProps={{
-                  'aria-label': 'New To TMAC',
+                  'aria-label': `New To ${appNameShort}?`,
                 }}
-                label="New To TMAC?"
+                label={`New To ${appNameShort}?`}
                 name="NewToTMAC"
                 onChange={handleChange}
               />
