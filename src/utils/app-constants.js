@@ -2,6 +2,7 @@ export const appName = 'Texas Fine Arts Administrators';
 export const appNameShort = 'TFAA';
 export const appNameOld = 'Texas Music Administrators Conference';
 export const appNameOldShort = 'TMAC';
+export const appTagLine = `${appNameShort} equips leaders to advance high quality fine arts education for all.`;
 
 export const mailingAddress = {
   addressOne: '4107 Natural Bridge Court',

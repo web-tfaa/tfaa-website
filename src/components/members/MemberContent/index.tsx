@@ -7,10 +7,10 @@ import { ADMIN_USER_EMAIL_LIST } from '../../../utils/member-constants';
 import { TfaaAuthUser } from '../../layout';
 import { TfaaMemberData, useGetAllMembers } from '../../../utils/hooks/useGetAllMembers';
 import { getFullName } from '../../../utils/getFullName';
+import FooterTopper from '../../footer/FooterTopper';
 import MemberContentBanner from './MemberContentBanner';
 import WelcomeBanner from './WelcomeBanner';
 import MemberInfo from './MemberInfo';
-import WhereWeHaveBeen from '../../about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -70,7 +70,7 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
         onUpdateShouldRefetchUserList={handleUpdateShouldRefetchUserList}
       />
 
-      <WhereWeHaveBeen color="membership" />
+      <FooterTopper color="membership" />
     </>
   );
 };

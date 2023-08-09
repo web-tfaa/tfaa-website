@@ -1,7 +1,10 @@
 // External Dependencies
 import { Link } from 'gatsby-theme-material-ui';
+import Box from '@mui/material/Box';
 import React from 'react';
 import styled from 'styled-components';
+
+import { appTagLine } from '../../utils/app-constants';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -142,12 +145,15 @@ const HomeBanner: React.FC = () => {
       <div className="bannerLeft">
         <div>
           <h2>
-            We nurture and grow leaders in Fine Arts Education
+            {appTagLine}
           </h2>
 
-          <Link to="/about">
-            Read more about how TFAA can help you
-          </Link>
+          <Box marginTop={1}>
+            <Link to="/about">
+              Read more about how TFAA can help you
+            </Link>
+
+          </Box>
         </div>
       </div>
 

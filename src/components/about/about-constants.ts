@@ -1,5 +1,5 @@
 // Internal Dependencies
-import { appName, appNameShort } from '../../utils/app-constants';
+import { appName, appNameOldShort, appNameShort } from '../../utils/app-constants';
 import AdvocatingIconSvg from './about-icons/AdvocatingIconSvg';
 import CollaboratingIconSvg from './about-icons/CollaboratingIconSvg';
 import DevelopingIconSvg from './about-icons/DevelopingIconSvg';
@@ -37,13 +37,13 @@ export const ABOUT_VIRTUES_DATA = [
 export const WHERE_WE_HAVE_BEEN_DATA = [
   {
     imgSrc: 'https://res.cloudinary.com/tmac/image/upload/v1670856123/bearded-man-looking-at-paintings-in-art-gallery.png',
-    subtitle: `View a list of all past ${appName} Presidents going back to 1983.`,
+    subtitle: `View a list of all Past Presidents going back to 1983.`,
     title: `${appNameShort} Past Presidents`,
     to: '/about/past-presidents',
   },
   {
     imgSrc: 'https://res.cloudinary.com/tmac/image/upload/v1670856123/joyful-young-female-artist-painting-on-canvas.png',
-    subtitle: `View a list of all ${appName} Outstanding Administrators since ${appNameShort} started awarding this honor in 1999.`,
+    subtitle: `View a list of all ${appNameOldShort}/${appNameShort} Outstanding Administrators since 1999.`,
     title: `${appNameShort} Past Oustanding Administrators`,
     to: '/about/past-outstanding-administrators',
   }

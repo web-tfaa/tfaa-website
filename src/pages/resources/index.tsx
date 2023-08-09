@@ -3,12 +3,12 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
 import ResourcesBanner from '../../components/resources/ResourcesBanner';
 import ResourcesHeroBannerImage from '../../components/resources/ResourcesHeroBannerImage';
 import ResourcesList from '../../components/resources/ResourcesList';
 import ResourcesInfoBanner from '../../components/resources/ResourcesInfoBanner';
-import WhereWeHaveBeen from '../../components/about/WhereWeHaveBeen';
 
 // Local Typings
 interface Props {
@@ -40,7 +40,7 @@ const Resources: FC<Props> = ({ location }) => {
 
         <ResourcesList />
 
-        <WhereWeHaveBeen color="resources" />
+        <FooterTopper color="resources" />
       </StyledRoot>
     </Layout>
   );

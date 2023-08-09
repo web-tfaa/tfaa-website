@@ -48,7 +48,8 @@ const AboutInfo: FC = () => {
         conferences, workshops, trainings, and resources for
         Fine Arts administrators. Our goal is to help Fine Arts
         educational leaders thrive by providing a space where
-        they can grow, collaborate, and support one another.
+        they can grow, collaborate, and support one another.{'  '}
+        {appNameShort} is committed to…
       </Typography>
 
       <div className="aboutVirtuesContainer">

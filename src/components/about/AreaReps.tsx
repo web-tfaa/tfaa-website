@@ -10,7 +10,7 @@ import PeopleItem from './PeopleItem';
 
 // Local Typings
 type Office = 'President' | 'Vice-President' | 'Executive Secretary' | 'Secretary' | 'Past-President';
-type Area = 'North Texas' | 'Central Texas' | 'South Texas' | 'Southeast Texas' | 'West Texas';
+type Area = 'North Texas' | 'Northwest Texas' | 'Central Texas' | 'South Texas' | 'Southeast Texas' | 'West Texas';
 export interface TfaaPerson {
   districtTitle: string;
   email: string;
@@ -46,6 +46,7 @@ const AreaReps: FC = () => {
   const { edges } = useAreaRepsData();
 
   const north = edges.find(({ node }: OfficerList) => node.title === 'North Texas').node;
+  const northwest = edges.find(({ node }: OfficerList) => node.title === 'Northwest Texas').node;
   const central = edges.find(({ node }: OfficerList) => node.title === 'Central Texas').node;
   const south = edges.find(({ node }: OfficerList) => node.title === 'South Texas').node;
   const southeast = edges.find(({ node }: OfficerList) => node.title === 'Southeast Texas').node;
@@ -62,6 +63,7 @@ const AreaReps: FC = () => {
 
       <div className="areaRepsContainer">
         <PeopleItem peopleData={north} />
+        <PeopleItem peopleData={northwest} />
         <PeopleItem peopleData={central} />
         <PeopleItem peopleData={south} />
         <PeopleItem peopleData={southeast} />
