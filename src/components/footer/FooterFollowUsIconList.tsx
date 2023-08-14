@@ -29,7 +29,7 @@ const FooterFollowUsIconList: FC = () => {
         </IconButton>
 
         <IconButton
-          aria-label="Facebook Link."
+          aria-label="Instagram Link."
           href={instragramUrl}
           rel="noreferrer noopener"
           target="_blank"
@@ -40,7 +40,7 @@ const FooterFollowUsIconList: FC = () => {
         </IconButton>
 
         <IconButton
-          aria-label="Twitter Link."
+          aria-label="X Link."
           href={twitterUrl}
           rel="noreferrer noopener"
           target="_blank"

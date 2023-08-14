@@ -146,6 +146,10 @@ export const outstandingAdmin = [
     year: '2022',
     name: 'Linda Fletcher',
   },
+  {
+    year: '2023',
+    name: 'JD Janda',
+  },
 ];
 
 export const pastPresidents = [
