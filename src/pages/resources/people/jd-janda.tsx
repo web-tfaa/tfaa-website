@@ -5,6 +5,7 @@ import React, { FC } from 'react';
 import CardHeadline from '../../../components/shared/cards/card-headline';
 import FuturaParagraph from '../../../components/shared/futura-paragraph';
 import PeoplePage from '../../../components/shared/PeoplePage';
+import { appNameOldShort } from '../../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -21,7 +22,8 @@ const JdJanda: FC<Props> = ({ location }) => (
     location={location}
     name={name}
   >
-    <CardHeadline>TMAC Past President, 2017-2018</CardHeadline>
+    <CardHeadline>{appNameOldShort} Past President, 2017-2018</CardHeadline>
+    <CardHeadline>2023 {appNameOldShort} Outstanding Administrator</CardHeadline>
 
     <FuturaParagraph>
       JD (John David) Janda is the Director of Fine Arts in Tomball
