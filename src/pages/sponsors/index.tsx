@@ -7,7 +7,6 @@ import { ReCaptchaProvider } from '../../components/shared/ReCaptchaProvider';
 import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
 import SponsorsBanner from '../../components/sponsors/SponsorsBanner';
-import SponsorsHeroBannerImage from '../../components/sponsors/SponsorsHeroBannerImage';
 import SponsorsList from '../../components/sponsors/SponsorsList';
 
 // Local Typings
@@ -34,8 +33,6 @@ const Sponsors: React.FC<Props> = ({ location }) => {
       <ReCaptchaProvider>
         <StyledRoot>
           <SponsorsBanner />
-
-          <SponsorsHeroBannerImage />
 
           <SponsorsList />
 
