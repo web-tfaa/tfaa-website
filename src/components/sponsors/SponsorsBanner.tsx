@@ -107,11 +107,11 @@ const SponsorsBanner: FC = () => {
         </ListItem>
 
         <ListItem>
-          In return, your business will be recognized as an official sponsor, which benefits you and TFAA.
+          In return, your business will be recognized as an official sponsor, which benefits you and {appNameShort}.
         </ListItem>
 
         <ListItem>
-          The Board seeks to provide relevant professional learning, while simultaneously offering our sponsors the opportunity to interact meaningfully with our members at TFAA events.
+          The Board seeks to provide relevant professional learning, while simultaneously offering our sponsors the opportunity to interact meaningfully with our members at {appNameShort} events.
         </ListItem>
       </List>
     </StyledRoot>
