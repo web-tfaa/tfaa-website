@@ -99,19 +99,19 @@ const SponsorsBanner: FC = () => {
 
       <List>
         <ListItem>
-          &bull; {appNameShort} offers many different sponsorship opportunities at varying levels of engagement.
+          {appNameShort} offers many different sponsorship opportunities at varying levels of engagement.
         </ListItem>
 
         <ListItem>
-          &bull; Our sponsors play a vital role in our organization&apos;s ongoing success by providing financial support and other valuable services.
+          Our sponsors play a vital role in our organization&apos;s ongoing success by providing financial support and other valuable services.
         </ListItem>
 
         <ListItem>
-          &bull; In return, your business will be recognized as an official sponsor, which benefits you and TFAA.
+          In return, your business will be recognized as an official sponsor, which benefits you and {appNameShort}.
         </ListItem>
 
         <ListItem>
-          &bull; The Board seeks to provide relevant professional learning, while simultaneously offering our sponsors the opportunity to interact meaningfully with our members at TFAA events.
+          The Board seeks to provide relevant professional learning, while simultaneously offering our sponsors the opportunity to interact meaningfully with our members at {appNameShort} events.
         </ListItem>
       </List>
     </StyledRoot>
