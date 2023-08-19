@@ -62,8 +62,8 @@ export const STATISTICS_DATA = [
     statValue: '52',
   },
   {
-    statLabel: 'Board committee Voluntary members',
-    statValue: '18',
+    statLabel: 'School Districts',
+    statValue: '153',
   },
   {
     statLabel: 'over 3,000 schools',
