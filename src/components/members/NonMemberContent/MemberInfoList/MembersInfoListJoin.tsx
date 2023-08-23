@@ -85,7 +85,7 @@ const MembersInfoListJoin: React.FC = () => {
           </li>
 
           <li>
-            Pay dues online using a credit card or PayPal (or mail invoice with check via mail).
+            Pay dues online using PayPal (or mail invoice with check via mail).
           </li>
         </ol>
 
