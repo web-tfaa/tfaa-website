@@ -14,8 +14,21 @@ export const getAmountPaid = (member: MemberFormValues | TfaaMemberData | null) 
     return 0;
   }
 
+  // The member previously paid for only their membership, not the Fall Conference fee
+  const hasPaidForMembershipOnly = Boolean(member.AmountPaid > 0 && member.AmountPaid < 100);
+
+  // The member has indicated that they will attend the Fall Conference,
+  //  but they haven't paid for it yet
+  const needsToPayForFallConference = member.IsRegisteredForFallConference
+    && (member.AmountPaid + member.AmountPaid_2) < 100;
+
   // We can assume that !isActive is 'Retired'
   const isActive = member.MemberType === 'Active';
+
+  // Return early if we are only needing the Fall Conference fee
+  if (hasPaidForMembershipOnly && needsToPayForFallConference) {
+    return FALL_CONFERENCE_FEE;
+  }
 
   const membershipAmountPaid: 75 | 30 = isActive
     ? ACTIVE_MEMBER_DUES

@@ -198,13 +198,41 @@ export const DialogPayment = ({
     handleUpdateMemberPaymentData(payment);
   }, [handleGetCurrentReceiptId]);
 
-  const isActive = isActiveMember === 'active';
-  const membershipAmount = isActive ? 75 : 30;
-  let amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
+  const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
 
-  if (hasPaidForMembership) {
-    amount -= membershipAmount;
-  }
+  const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
+
+  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
+
+  const getOutstandingBalance = useCallback(() => {
+    let amountOwed = 75;
+    const isActiveMemberType = currentMemberData?.MemberType === 'Active';
+
+    if (hasPaidForMembershipOnly && needsToPayForFallConference) {
+      amountOwed = 75;
+    } else if (needsToPay) {
+      if (isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 150;
+        } else {
+          amountOwed = 75;
+        }
+      } else if (!isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 105;
+        } else {
+          amountOwed = 30;
+        }
+      }
+    }
+
+    return amountOwed;
+  }, [currentMemberData, needsToPay, needsToPayForFallConference]);
+
+  const outstandingBalance = getOutstandingBalance();
+
+  const isActive = isActiveMember === 'active';
 
   const contentElement = useMemo(() => showCompletedUI ? (
     <PaymentSuccessUI
@@ -215,7 +243,7 @@ export const DialogPayment = ({
     />
   ) : (
     <PaymentForm
-      amountToPay={amount}
+      amountToPay={outstandingBalance}
       hasFallConferenceFee={hasFallConferenceFee}
       hasPaidForMembership={hasPaidForMembership}
       isActiveMember={isActiveMember}
@@ -229,7 +257,6 @@ export const DialogPayment = ({
       onUpdateMemberForm={handleUpdateMemberPaymentForm}
     />
   ), [
-    amount,
     handleSetHasFallConferenceFee,
     handleSetIsActiveMember,
     handleUpdateCompletedStep,
@@ -241,6 +268,7 @@ export const DialogPayment = ({
     isActiveMember,
     isOpen,
     memberPaymentForm,
+    outstandingBalance,
     showCompletedUI,
   ]);
 
@@ -285,7 +313,7 @@ export const DialogPayment = ({
 
       <Box display="none">
         <Invoice
-          amount={amount}
+          amount={outstandingBalance}
           form={currentMemberData}
           isActive={isActive}
           isInvoice
@@ -295,7 +323,7 @@ export const DialogPayment = ({
         />
       </Box>
     </Collapse>
-  ), [amount, currentMemberData, isActive, printInvoiceRef]);
+  ), [currentMemberData, isActive, outstandingBalance, printInvoiceRef]);
 
   return (
     <Dialog
