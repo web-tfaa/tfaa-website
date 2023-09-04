@@ -15,6 +15,7 @@ export interface TfaaMemberData {
   Address1: string;
   Address2?: string;
   AmountPaid: number;
+  AmountPaid_2: number;
   CellPhone: string;
   City: string;
   District: string;
@@ -23,11 +24,12 @@ export interface TfaaMemberData {
   IsRegisteredForFallConference: boolean;
   LastName: string;
   MemberType: 'Active' | 'Retired';
-  NewToTMAC: 'Yes' | 'No';
+  NewToTMAC: boolean | 'Yes' | 'No';
   OfficePhone: string;
   PaymentOption: 'Invoiced' | 'Paypal';
   PaypalPayerID?: string;
   PaypalPaymentID: string;
+  PaypalPaymentID_2: string;
   State: string;
   Title: string;
   ZipCode: string | number;
@@ -44,6 +46,7 @@ const memberTestData: TfaaMemberData[] = [
     Address1: '123 Main St.',
     Address2: '',
     AmountPaid: 0,
+    AmountPaid_2: 0,
     CellPhone: '2145551919',
     City: 'Garland',
     District: 'Richardson ISD',
@@ -56,6 +59,7 @@ const memberTestData: TfaaMemberData[] = [
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
     PaypalPaymentID: '',
+    PaypalPaymentID_2: '',
     State: 'TX',
     Title: 'Director of Fine Arts',
     ZipCode: '75081',
@@ -69,6 +73,7 @@ const memberTestData: TfaaMemberData[] = [
     Address1: '123 Main St.',
     Address2: '',
     AmountPaid: 0,
+    AmountPaid_2: 0,
     CellPhone: '2145551919',
     City: 'Garland',
     District: 'Plano ISD',
@@ -81,6 +86,7 @@ const memberTestData: TfaaMemberData[] = [
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
     PaypalPaymentID: '',
+    PaypalPaymentID_2: '',
     State: 'TX',
     Title: 'Director of Fine Arts',
     ZipCode: '75081',
@@ -94,6 +100,7 @@ const memberTestData: TfaaMemberData[] = [
     Address1: '123 Main St.',
     Address2: '',
     AmountPaid: 0,
+    AmountPaid_2: 0,
     CellPhone: '2145551919',
     City: 'Dallas',
     District: 'Dallas ISD',
@@ -106,6 +113,7 @@ const memberTestData: TfaaMemberData[] = [
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
     PaypalPaymentID: '',
+    PaypalPaymentID_2: '',
     State: 'TX',
     Title: 'Director of Fine Arts',
     ZipCode: '75081',
@@ -119,6 +127,7 @@ const memberTestData: TfaaMemberData[] = [
     Address1: '123 Main St.',
     Address2: '',
     AmountPaid: 0,
+    AmountPaid_2: 0,
     CellPhone: '2145551919',
     City: 'Garland',
     District: 'Garland ISD',
@@ -131,6 +140,7 @@ const memberTestData: TfaaMemberData[] = [
     OfficePhone: '2145551919',
     PaymentOption: 'Invoiced',
     PaypalPaymentID: '',
+    PaypalPaymentID_2: '',
     State: 'TX',
     Title: 'Director of Fine Arts Education',
     ZipCode: '75081',

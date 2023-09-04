@@ -130,6 +130,8 @@ const MemberStatus: React.FC<Props> = ({
 
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
 
+  const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+
   // Local state setter functions
   const handleOpenDialogPayment = useCallback(() => {
     setIsDialogOpen(true);
@@ -160,8 +162,6 @@ const MemberStatus: React.FC<Props> = ({
 
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
-  const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
-
   const hasPaidForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid >= 100;
 
   let fallConferenceSecondaryText = 'Pay online using credit card or send payment with invoice.';
@@ -177,6 +177,8 @@ const MemberStatus: React.FC<Props> = ({
     const isActiveMemberType = currentMemberData?.MemberType === 'Active';
 
     if (!isRegisteredForCurrentYear) {
+      amountOwed = 75;
+    } else if (hasPaidForMembershipOnly && needsToPayForFallConference) {
       amountOwed = 75;
     } else if (needsToPay) {
       if (isActiveMemberType) {
@@ -210,6 +212,8 @@ const MemberStatus: React.FC<Props> = ({
       htmlColor={theme.palette.warning.light}
     />
     ), []);
+
+  const outstandingBalance = getOutstandingBalance();
 
   return (
     <>
@@ -305,10 +309,10 @@ const MemberStatus: React.FC<Props> = ({
         >
           Outstanding balance:
           <StyledStrong>
-            ${getOutstandingBalance()}.00
+            ${outstandingBalance}.00
           </StyledStrong>
 
-          {!needsToPay && (
+          {!outstandingBalance && (
             <>
               {' '}
               <Chip
@@ -419,7 +423,7 @@ const MemberStatus: React.FC<Props> = ({
               <ListItem className="paymentActionContainer">
                 <ListItemSecondaryAction>
                   <PrintInvoiceUI
-                    amount={getOutstandingBalance()}
+                    amount={outstandingBalance}
                     currentUser={currentMemberData}
                   />
                 </ListItemSecondaryAction>

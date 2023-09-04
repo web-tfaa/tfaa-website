@@ -156,11 +156,13 @@ export const DialogPayment = ({
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
     if (payment.paid) {
-      const amountPaid = getAmountPaid(currentMemberData);
+      const amountPaidFromCurrentMemberData = getAmountPaid(currentMemberData);
+
+      console.log('amountPaidFromCurrentMemberData', amountPaidFromCurrentMemberData);
 
       const updatedMemberForm: MemberFormValues = {
         ...memberPaymentForm,
-        AmountPaid: amountPaid,
+        AmountPaid: amountPaidFromCurrentMemberData,
         PaypalPayerID: payment?.payerID,
         PaypalPaymentID: payment?.paymentID,
         PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
