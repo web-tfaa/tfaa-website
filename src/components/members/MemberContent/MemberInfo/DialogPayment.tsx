@@ -155,21 +155,35 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
-    if (payment.paid) {
+    if (payment.paid && currentMemberData) {
       const amountPaidFromCurrentMemberData = getAmountPaid(currentMemberData);
 
-      console.log('amountPaidFromCurrentMemberData', amountPaidFromCurrentMemberData);
+      // The AmountPaid_2 and PaypalPaymentID_2 values can only be sent from this dialog.
+      // An initial PayPal payment is sent from the MemberRegisterContent component.
+      // Subsequent payments are sent from this dialog.
+
+      const hasMadeInitialPayment = Boolean(currentMemberData.AmountPaid && currentMemberData.PaypalPaymentID);
 
       const updatedMemberForm: MemberFormValues = {
         ...memberPaymentForm,
-        AmountPaid: amountPaidFromCurrentMemberData,
+        AmountPaid: !hasMadeInitialPayment
+          ? amountPaidFromCurrentMemberData
+          : currentMemberData.AmountPaid,
+        AmountPaid_2: hasMadeInitialPayment
+          ? amountPaidFromCurrentMemberData
+          : currentMemberData.AmountPaid_2,
         PaypalPayerID: payment?.payerID,
-        PaypalPaymentID: payment?.paymentID,
+        PaypalPaymentID: !hasMadeInitialPayment
+          ? payment?.paymentID
+          : currentMemberData.PaypalPaymentID,
+        PaypalPaymentID_2: hasMadeInitialPayment
+          ? payment?.paymentID
+          : currentMemberData.PaypalPaymentID_2,
         PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
         invoiceDate: currentDate,
-        invoiceId: currentMemberData?.invoiceId ?? 1,
-        receiptDate: currentMemberData?.receiptId ? currentDate : '',
-        receiptId: currentMemberData?.receiptId ?? 1,
+        invoiceId: currentMemberData.invoiceId ?? 1,
+        receiptDate: currentMemberData.receiptId ? currentDate : '',
+        receiptId: currentMemberData.receiptId ?? 1,
       };
 
       handleUpdateFirestoreMemberData(updatedMemberForm);
