@@ -132,7 +132,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({
   if (needsToPayForFallConference) {
     fallConferenceSecondaryText = 'You are registered for the Fall Conference, but have not paid yet.';
   } else if (hasPaidForFallConference) {
-    fallConferenceSecondaryText = 'You are registered for the Fall Conference.';
+    fallConferenceSecondaryText = 'You are registered for the Fall Conference and paid in full.';
   }
 
   const successIconElement = useMemo(() => (
@@ -231,7 +231,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({
             />
           </ListItem>
 
-          {isRegisteredForCurrentYear && needsToPayForFallConference && (
+          {isRegisteredForCurrentYear && !hasPaidForFallConference && (
             <ListItem className="paymentActionContainer">
               <ListItemSecondaryAction>
                 <CtaButton

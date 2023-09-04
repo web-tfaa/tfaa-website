@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
+import ErrorIcon from '@mui/icons-material/Error';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
@@ -153,11 +154,22 @@ const MemberStatus: React.FC<Props> = ({
 
   const needsToPay = !currentMemberData?.AmountPaid;
 
+  const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
+
   const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid < 100;
 
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
   const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
+
+  const hasPaidForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid >= 100;
+
+  let fallConferenceSecondaryText = 'Pay online using credit card or send payment with invoice.';
+  if (needsToPayForFallConference) {
+    fallConferenceSecondaryText = 'You are registered for the Fall Conference, but have not paid yet.';
+  } else if (hasPaidForFallConference) {
+    fallConferenceSecondaryText = 'You are registered for the Fall Conference.';
+  }
 
   // Calculate the amount owed based on member type, registration, and registered for fall conference
   const getOutstandingBalance = useCallback(() => {
@@ -191,6 +203,13 @@ const MemberStatus: React.FC<Props> = ({
       htmlColor={theme.palette.tfaa.resources}
     />
   ), []);
+
+  const warningIconElement = useMemo(() => (
+    <ErrorIcon
+      className="listItemIcon"
+      htmlColor={theme.palette.warning.light}
+    />
+    ), []);
 
   return (
     <>
@@ -301,7 +320,7 @@ const MemberStatus: React.FC<Props> = ({
           )}
         </Typography>
 
-        {needsToPayForFallConference && !needsToPay && (
+        {hasPaidForFallConference && (
           <>
             <Divider className="memberStatusDivider" />
 
@@ -309,6 +328,42 @@ const MemberStatus: React.FC<Props> = ({
               Registered for Fall Conference
               {successIconElement}
             </Typography>
+          </>
+        )}
+
+        {isRegisteredForCurrentYear && !hasPaidForFallConference && (
+          <>
+            <Divider className="memberStatusDivider" />
+
+            <List sx={{ marginBottom: 2 }}>
+              <ListItem className="paymentListItem">
+                <ListItemText
+                  classes={{
+                    primary: 'listItemText',
+                    secondary: 'listItemSecondaryText',
+                  }}
+                  primary={(
+                    <>
+                      Register for Fall Conference (optional)
+                      {hasPaidForFallConference && successIconElement}
+                      {needsToPayForFallConference && warningIconElement}
+                    </>
+                  )}
+                  secondary={fallConferenceSecondaryText}
+                />
+              </ListItem>
+              <ListItem className="paymentActionContainer">
+                <ListItemSecondaryAction>
+                  <CtaButton
+                    colorVariant="resources"
+                    fontWeight={600}
+                    onClick={handleOpenDialogPayment}
+                  >
+                    {needsToPayForFallConference ? 'Pay' : 'Register'} for Fall Conference
+                  </CtaButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            </List>
           </>
         )}
 
@@ -377,6 +432,7 @@ const MemberStatus: React.FC<Props> = ({
       {isDialogOpen && (
         <DialogPayment
           currentMemberData={currentMemberData}
+          hasPaidForMembership={hasPaidForMembershipOnly}
           isOpen={isDialogOpen}
           onClose={handleCloseDialogPayment}
           userIdForFirestore={userIdForFirestore}
