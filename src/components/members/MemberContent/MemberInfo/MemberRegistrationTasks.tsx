@@ -120,10 +120,12 @@ const MemberRegistrationTasks: React.FC<Props> = ({
   const theme = useTheme();
   const printReceiptRef = useRef();
 
-  const needsToPay = !currentMemberData?.AmountPaid;
+  const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
   const hasPaidForMembership = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
-  const needsToPayForFallConference = isRegisteredForFallConference && currentMemberData?.AmountPaid < 100;
-  const hasPaidForFallConference = isRegisteredForFallConference && currentMemberData?.AmountPaid >= 100;
+  const needsToPayForFallConference = isRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
+    const hasPaidForFallConference = isRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) >= 100;
 
   const canPrintReceipt = currentMemberData?.PaymentOption.toLowerCase() === 'paypal'
     || currentMemberData?.PaypalPaymentID;

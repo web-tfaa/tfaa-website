@@ -154,15 +154,17 @@ const MemberStatus: React.FC<Props> = ({
   const isInvoiced = currentMemberData?.PaymentOption.toLowerCase() === 'invoiced'
     && !currentMemberData?.PaypalPaymentID;
 
-  const needsToPay = !currentMemberData?.AmountPaid;
+  const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
 
   const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
 
-  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid < 100;
+  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
 
   const amountToPayForMembership = currentMemberData?.MemberType === 'Active' ? 75.00 : 30.00;
 
-  const hasPaidForFallConference = currentMemberData?.IsRegisteredForFallConference && currentMemberData?.AmountPaid >= 100;
+  const hasPaidForFallConference = currentMemberData?.IsRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) >= 100;
 
   let fallConferenceSecondaryText = 'Pay online using credit card or send payment with invoice.';
   if (needsToPayForFallConference) {
