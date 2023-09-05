@@ -65,6 +65,8 @@ export const PaymentForm = ({
   const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: updatedActiveMemberSelection } = event.target;
 
+    console.log('updatedActiveMemberSelection', updatedActiveMemberSelection);
+
     const isActive = updatedActiveMemberSelection === 'active';
 
     const memberType = isActive ? 'Active' : 'Retired' as ('Active' | 'Retired');

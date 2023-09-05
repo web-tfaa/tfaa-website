@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
+// import CircsularProgress from '@mui/material/CircularProgress';
 import Collapse from '@mui/material/Collapse';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -30,15 +30,16 @@ import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
 import { appNameShort } from '../../../../utils/app-constants';
 import { currentDate } from '../../../../utils/dateHelpers';
 import { getAmountPaid } from '../../../../utils/getAmountPaid';
-import { useLoadCurrentMemberData } from '../../../../utils/hooks/useLoadCurrentMemberData';
+// import { useLoadCurrentMemberData } from '../../../../utils/hooks/useLoadCurrentMemberData';
 import usePrevious from '../../../../utils/hooks/usePrevious';
 import Invoice from '../../../register/invoice';
 import CtaButton from '../../../shared/CtaButton';
+import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 
 // Local Typings
 interface Props {
   // amountToPay: number;
-  // currentMemberData: TfaaMemberData | null;
+  currentMemberData: TfaaMemberData | null;
   hasPaidForMembership?: boolean;
   isOpen: boolean;
   onClose: () => void;
@@ -48,7 +49,7 @@ interface Props {
 // Component Definition
 export const DialogPayment = ({
   // amountToPay,
-  // currentMemberData,
+  currentMemberData,
   hasPaidForMembership,
   isOpen,
   onClose,
@@ -56,11 +57,11 @@ export const DialogPayment = ({
 }: Props): JSX.Element => {
   const printInvoiceRef = useRef<ReactInstance>(null);
 
-  const {
-    currentMemberData,
-    // onUpdateShouldRefetchUserList,
-    isLoading,
-  } = useLoadCurrentMemberData();
+  // const {
+  //   currentMemberData,
+  //   // onUpdateShouldRefetchUserList,
+  //   isLoading,
+  // } = useLoadCurrentMemberData();
 
   // console.log('DialogPayment •• currentMemberData', currentMemberData);
 
@@ -87,7 +88,11 @@ export const DialogPayment = ({
     setIsActiveMember,
   ] = useState<ActiveMemberRadioOptions>(memberTypeFromForm as ActiveMemberRadioOptions ?? 'active');
 
+  console.log('isActiveMember', isActiveMember);
+
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(currentMemberData?.IsRegisteredForFallConference ?? false);
+
+  // console.log('hasFallConferenceFee', hasFallConferenceFee);
 
   // Local state setter functions
   const handleSetIsActiveMember = useCallback((isActive: ActiveMemberRadioOptions) => {
@@ -120,11 +125,19 @@ export const DialogPayment = ({
     });
   }, [memberPaymentForm, handleUpdateMemberPaymentForm]);
 
-  // useEffect(() => {
-  //   if ((previousCurrentMemberData as unknown as TfaaMemberData)?.IsRegisteredForFallConference !== currentMemberData?.IsRegisteredForFallConference) {
-  //     setHasFallConferenceFee(currentMemberData?.IsRegisteredForFallConference ?? false);
-  //   }
-  // }, [currentMemberData, previousCurrentMemberData]);
+  // Update the MemberTypes if the data was missing but arrives later
+  useEffect(() => {
+    if ((previousCurrentMemberData as unknown as TfaaMemberData)?.MemberType !== currentMemberData?.MemberType) {
+      setIsActiveMember(memberTypeFromForm as ActiveMemberRadioOptions ?? 'active');
+    }
+  }, [currentMemberData, previousCurrentMemberData]);
+
+  // Update the IsRegisteredForFallConference if the data was missing but arrives later
+  useEffect(() => {
+    if ((previousCurrentMemberData as unknown as TfaaMemberData)?.IsRegisteredForFallConference !== currentMemberData?.IsRegisteredForFallConference) {
+      setHasFallConferenceFee(currentMemberData?.IsRegisteredForFallConference ?? false);
+    }
+  }, [currentMemberData, previousCurrentMemberData]);
 
   useEffect(() => {
     if (currentMemberData) {
@@ -220,8 +233,8 @@ export const DialogPayment = ({
 
   const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100);
 
-  const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference
-    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
+  const needsToPayForFallConference = hasFallConferenceFee
+    && ((currentMemberData?.AmountPaid ?? 0) + (currentMemberData?.AmountPaid_2 ?? 0)) < 100;
 
   // console.log('currentMemberData', currentMemberData);
 
@@ -232,7 +245,7 @@ export const DialogPayment = ({
       return 0;
     }
 
-    const isActiveMemberType = currentMemberData.MemberType === 'Active';
+    const isActiveMemberType = isActiveMember === 'active';
 
     if (hasPaidForMembershipOnly && !needsToPayForFallConference) {
       console.log('1');
@@ -277,7 +290,7 @@ export const DialogPayment = ({
     />
   ) : (
     <PaymentForm
-      amountToPay={getAmountPaid(currentMemberData)}
+      amountToPay={getOutstandingBalance()}
       hasFallConferenceFee={hasFallConferenceFee}
       hasPaidForMembership={hasPaidForMembership}
       isActiveMember={isActiveMember}
@@ -346,12 +359,9 @@ export const DialogPayment = ({
   ), [currentMemberData, isActive, printInvoiceRef]);
 
   // Return a loading spinner if the data is still loading
-  if (isLoading) {
-    contentElement = <CircularProgress size={24} />;
-  }
-
-  console.log('getAmountPaid(currentMemberData)', getAmountPaid(currentMemberData));
-  console.log('getOutstandingBalance()', getOutstandingBalance());
+  // if (isLoading) {
+  //   contentElement = <CircularProgress size={24} />;
+  // }
 
   return (
     <Dialog
