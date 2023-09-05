@@ -163,10 +163,10 @@ export const useGetAllMembers = ({
 
   const previousMemberData = usePrevious(memberData);
 
-  // console.log('isLoading', isLoading);
-  // console.log('shouldRefetchUserList', shouldRefetchUserList);
-  // console.log('previousMemberData', Boolean(previousMemberData));
-  // console.log('memberData', memberData);
+  // console.log('useGetAllMembers • isLoading', isLoading);
+  // console.log('useGetAllMembers • shouldRefetchUserList', shouldRefetchUserList);
+  // console.log('useGetAllMembers • previousMemberData', Boolean(previousMemberData));
+  // console.log('useGetAllMembers • memberData', memberData);
 
   const handleUpdateMemberData = useCallback((newMemberData: TfaaMemberData[] | null) => {
     setMemberData(newMemberData);

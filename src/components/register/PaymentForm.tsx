@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
@@ -59,6 +59,8 @@ export const PaymentForm = ({
   onUpdateFirestoreMemberData,
   onUpdateMemberForm,
 }: Props): JSX.Element | null => {
+  console.log('amountToPay', amountToPay);
+
   // Flip between Active and Retired member types
   const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: updatedActiveMemberSelection } = event.target;
@@ -73,7 +75,7 @@ export const PaymentForm = ({
 
     const updatedMemberForm = {
       ...memberForm,
-      AmountPaid: 0, // probalbly not needed, but just in case
+      AmountPaid: 0, // probably not needed, but just in case
       MemberType: memberType,
       invoiceDate: currentDate,
       invoiceId: memberForm?.invoiceId,
@@ -84,7 +86,7 @@ export const PaymentForm = ({
     onUpdateMemberForm(updatedMemberForm);
 
     return onUpdateFirestoreMemberData(updatedMemberForm);
-  }, [memberForm, onSetIsActiveMember, onUpdateMemberForm]);
+  }, [memberForm, onSetIsActiveMember, onUpdateFirestoreMemberData, onUpdateMemberForm]);
 
   // Used for the checkbox to indicate if the member will pay
   //  for the separate Fall Conference registration fee
@@ -103,13 +105,43 @@ export const PaymentForm = ({
     onUpdateMemberForm(updatedMemberForm);
 
     return onUpdateFirestoreMemberData(updatedMemberForm);
-  }, [memberForm]);
+  }, [memberForm, onSetHasFallConferenceFee, onUpdateFirestoreMemberData, onUpdateMemberForm]);
 
   if (!memberForm) {
     return null;
   }
 
-  const showPayPayButtonSection = (!isDialogView || (isDialogView && isDialogOpen)) && Boolean(amountToPay);
+  const needsToPayForFallConference = memberForm.IsRegisteredForFallConference
+    && (memberForm.AmountPaid + memberForm.AmountPaid_2) < 100;
+
+  const showPayPalButtonSection = useCallback(() => {
+    const hasAmountToPay = Boolean(amountToPay);
+
+    if (!memberForm) {
+      return false;
+    }
+
+    if (!isDialogView && hasAmountToPay) {
+      return true;
+    } else if (isDialogView && isDialogOpen) {
+      if (hasAmountToPay) {
+        return true;
+      } else if (hasPaidForMembership && needsToPayForFallConference) {
+        return true;
+      }
+    }
+  }, [
+    amountToPay,
+    hasPaidForMembership,
+    isDialogOpen,
+    isDialogView,
+    memberForm,
+    needsToPayForFallConference,
+  ]);
+
+  const formattedAmountToPay = useMemo(() =>
+    Number(amountToPay)?.toFixed(2).toLocaleString(),
+    [amountToPay]);
 
   return (
     <StyledFormControl
@@ -187,11 +219,11 @@ export const PaymentForm = ({
         sx={{ marginTop: 2.5 }}
         variant="h6"
       >
-        Total: ${Number(amountToPay)?.toFixed(2).toLocaleString()}
+        Total: ${formattedAmountToPay}
       </Typography>
 
       <Collapse
-        in={showPayPayButtonSection}
+        in={showPayPalButtonSection()}
         mountOnEnter
         unmountOnExit
       >
@@ -202,10 +234,12 @@ export const PaymentForm = ({
           Click on the PayPal button below to pay with credit card.
         </Typography>
 
-        <PaypalButtonWrapper
-          amount={amountToPay}
-          onSuccessfulPayment={onUpdateCompletedStep}
-        />
+        {amountToPay > 0 && (
+          <PaypalButtonWrapper
+            amount={amountToPay}
+            onSuccessfulPayment={onUpdateCompletedStep}
+          />
+        )}
       </Collapse>
     </StyledFormControl>
   )

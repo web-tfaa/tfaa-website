@@ -20,6 +20,7 @@ export const useLoadCurrentMemberData = () => {
 
   const {
     allMembersData,
+    handleUpdateShouldRefetchUserList,
     isLoading,
   } = useGetAllMembers({ useTestData });
 
@@ -30,7 +31,7 @@ export const useLoadCurrentMemberData = () => {
         // Now we use authUser.email
         // We have to search for both for backwards compatibility
         (user) => {
-          return user.userId === currentAuthUser.uid || user.userId === currentAuthUser.email;
+          return user.userId === `${currentAuthUser.email}-${currentAuthUser.uid}`;
         });
 
       setCurrentMemberData(currentMember ?? null);
@@ -39,6 +40,7 @@ export const useLoadCurrentMemberData = () => {
 
   return {
     currentMemberData,
+    onUpdateShouldRefetchUserList: handleUpdateShouldRefetchUserList,
     isLoading,
   };
 };

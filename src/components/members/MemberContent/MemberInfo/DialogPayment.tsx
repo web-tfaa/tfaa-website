@@ -29,13 +29,15 @@ import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
 import { appNameShort } from '../../../../utils/app-constants';
 import { currentDate } from '../../../../utils/dateHelpers';
 import { getAmountPaid } from '../../../../utils/getAmountPaid';
+import { useLoadCurrentMemberData } from '../../../../utils/hooks/useLoadCurrentMemberData';
 import usePrevious from '../../../../utils/hooks/usePrevious';
 import Invoice from '../../../register/invoice';
 import CtaButton from '../../../shared/CtaButton';
 
 // Local Typings
 interface Props {
-  currentMemberData: TfaaMemberData | null;
+  // amountToPay: number;
+  // currentMemberData: TfaaMemberData | null;
   hasPaidForMembership?: boolean;
   isOpen: boolean;
   onClose: () => void;
@@ -44,13 +46,22 @@ interface Props {
 
 // Component Definition
 export const DialogPayment = ({
-  currentMemberData,
+  // amountToPay,
+  // currentMemberData,
   hasPaidForMembership,
   isOpen,
   onClose,
   userIdForFirestore
 }: Props): JSX.Element => {
   const printInvoiceRef = useRef<ReactInstance>(null);
+
+  const {
+    currentMemberData,
+    onUpdateShouldRefetchUserList,
+    // isLoading,
+  } = useLoadCurrentMemberData();
+
+  console.log('DialogPayment •• currentMemberData', currentMemberData);
 
   const memberTypeFromForm = currentMemberData?.MemberType.toLowerCase();
 
@@ -107,6 +118,12 @@ export const DialogPayment = ({
       receiptId: currentReceiptId,
     });
   }, [memberPaymentForm, handleUpdateMemberPaymentForm]);
+
+  useEffect(() => {
+    if ((previousCurrentMemberData as unknown as TfaaMemberData)?.IsRegisteredForFallConference !== currentMemberData?.IsRegisteredForFallConference) {
+      setHasFallConferenceFee(currentMemberData?.IsRegisteredForFallConference ?? false);
+    }
+  }, [currentMemberData, previousCurrentMemberData]);
 
   useEffect(() => {
     if (currentMemberData) {
@@ -200,41 +217,57 @@ export const DialogPayment = ({
 
   const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
 
-  const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
+  const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100);
 
   const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference
     && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
 
-  const getOutstandingBalance = useCallback(() => {
-    let amountOwed = 75;
-    const isActiveMemberType = currentMemberData?.MemberType === 'Active';
+  // console.log('currentMemberData', currentMemberData);
 
-    if (hasPaidForMembershipOnly && needsToPayForFallConference) {
+  const getOutstandingBalance = () => {
+    let amountOwed = 0;
+
+    if (!currentMemberData) {
+      return 0;
+    }
+
+    const isActiveMemberType = currentMemberData.MemberType === 'Active';
+
+    if (hasPaidForMembershipOnly && !needsToPayForFallConference) {
+      console.log('1');
+      amountOwed = 0;
+    } else if (hasPaidForMembershipOnly && needsToPayForFallConference) {
+      console.log('2');
       amountOwed = 75;
     } else if (needsToPay) {
+      console.log('3');
       if (isActiveMemberType) {
+        console.log('4');
         if (needsToPayForFallConference) {
+          console.log('5');
           amountOwed = 150;
         } else {
+          console.log('6');
           amountOwed = 75;
         }
       } else if (!isActiveMemberType) {
+        console.log('7');
         if (needsToPayForFallConference) {
+          console.log('8');
           amountOwed = 105;
         } else {
+          console.log('9');
           amountOwed = 30;
         }
       }
     }
 
     return amountOwed;
-  }, [currentMemberData, needsToPay, needsToPayForFallConference]);
-
-  const outstandingBalance = getOutstandingBalance();
+  };
 
   const isActive = isActiveMember === 'active';
 
-  const contentElement = useMemo(() => showCompletedUI ? (
+  const contentElement = showCompletedUI ? (
     <PaymentSuccessUI
       hasFallConferenceFee={hasFallConferenceFee}
       isActive={isActive}
@@ -243,7 +276,7 @@ export const DialogPayment = ({
     />
   ) : (
     <PaymentForm
-      amountToPay={outstandingBalance}
+      amountToPay={getOutstandingBalance()}
       hasFallConferenceFee={hasFallConferenceFee}
       hasPaidForMembership={hasPaidForMembership}
       isActiveMember={isActiveMember}
@@ -255,22 +288,9 @@ export const DialogPayment = ({
       onUpdateCompletedStep={handleUpdateCompletedStep}
       onUpdateFirestoreMemberData={handleUpdateFirestoreMemberData}
       onUpdateMemberForm={handleUpdateMemberPaymentForm}
+      onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
     />
-  ), [
-    handleSetHasFallConferenceFee,
-    handleSetIsActiveMember,
-    handleUpdateCompletedStep,
-    handleUpdateFirestoreMemberData,
-    handleUpdateMemberPaymentForm,
-    hasFallConferenceFee,
-    hasPaidForMembership,
-    isActive,
-    isActiveMember,
-    isOpen,
-    memberPaymentForm,
-    outstandingBalance,
-    showCompletedUI,
-  ]);
+  );
 
   const printInvoiceElement = useMemo(() => (
     <Collapse
@@ -313,7 +333,7 @@ export const DialogPayment = ({
 
       <Box display="none">
         <Invoice
-          amount={outstandingBalance}
+          amount={getOutstandingBalance()}
           form={currentMemberData}
           isActive={isActive}
           isInvoice
@@ -323,7 +343,7 @@ export const DialogPayment = ({
         />
       </Box>
     </Collapse>
-  ), [currentMemberData, isActive, outstandingBalance, printInvoiceRef]);
+  ), [currentMemberData, getOutstandingBalance, isActive, printInvoiceRef]);
 
   return (
     <Dialog

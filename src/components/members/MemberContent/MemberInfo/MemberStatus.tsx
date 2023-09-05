@@ -27,6 +27,7 @@ import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import usePrevious from '../../../../utils/hooks/usePrevious';
+import RegisterForFallConferenceListItem from './RegisterForFallConferenceListItem';
 
 // Local Typings
 interface Props {
@@ -122,6 +123,8 @@ const MemberStatus: React.FC<Props> = ({
   onSetRefetchCurrentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
+  // console.log('MemberStatus .. currentMemberData', currentMemberData);
+
   const theme = useTheme();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -156,7 +159,8 @@ const MemberStatus: React.FC<Props> = ({
 
   const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
 
-  const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
+  const hasPaidForMembershipOnly = Boolean(currentMemberData
+    && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
 
   const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference
     && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
@@ -166,14 +170,8 @@ const MemberStatus: React.FC<Props> = ({
   const hasPaidForFallConference = currentMemberData?.IsRegisteredForFallConference
     && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) >= 100;
 
-  let fallConferenceSecondaryText = 'Pay online using credit card or send payment with invoice.';
-  if (needsToPayForFallConference) {
-    fallConferenceSecondaryText = 'You are registered for the Fall Conference, but have not paid yet.';
-  } else if (hasPaidForFallConference) {
-    fallConferenceSecondaryText = 'You are registered for the Fall Conference.';
-  }
-
   // Calculate the amount owed based on member type, registration, and registered for fall conference
+  // Call this function when needed. It doesn't work when assigned to a variable.
   const getOutstandingBalance = useCallback(() => {
     let amountOwed = 0;
     const isActiveMemberType = currentMemberData?.MemberType === 'Active';
@@ -214,8 +212,6 @@ const MemberStatus: React.FC<Props> = ({
       htmlColor={theme.palette.warning.light}
     />
     ), []);
-
-  const outstandingBalance = getOutstandingBalance();
 
   return (
     <>
@@ -311,10 +307,10 @@ const MemberStatus: React.FC<Props> = ({
         >
           Outstanding balance:
           <StyledStrong>
-            ${outstandingBalance}.00
+            ${getOutstandingBalance()}.00
           </StyledStrong>
 
-          {!outstandingBalance && (
+          {!getOutstandingBalance() && (
             <>
               {' '}
               <Chip
@@ -342,33 +338,14 @@ const MemberStatus: React.FC<Props> = ({
             <Divider className="memberStatusDivider" />
 
             <List sx={{ marginBottom: 2 }}>
-              <ListItem className="paymentListItem">
-                <ListItemText
-                  classes={{
-                    primary: 'listItemText',
-                    secondary: 'listItemSecondaryText',
-                  }}
-                  primary={(
-                    <>
-                      Register for Fall Conference (optional)
-                      {hasPaidForFallConference && successIconElement}
-                      {needsToPayForFallConference && warningIconElement}
-                    </>
-                  )}
-                  secondary={fallConferenceSecondaryText}
-                />
-              </ListItem>
-              <ListItem className="paymentActionContainer">
-                <ListItemSecondaryAction>
-                  <CtaButton
-                    colorVariant="resources"
-                    fontWeight={600}
-                    onClick={handleOpenDialogPayment}
-                  >
-                    {needsToPayForFallConference ? 'Pay' : 'Register'} for Fall Conference
-                  </CtaButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+              <RegisterForFallConferenceListItem
+                hasPaidForFallConference={hasPaidForFallConference}
+                isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+                needsToPayForFallConference={needsToPayForFallConference}
+                onOpenDialogPayment={handleOpenDialogPayment}
+                successIconElement={successIconElement}
+                warningIconElement={warningIconElement}
+              />
             </List>
           </>
         )}
@@ -425,7 +402,7 @@ const MemberStatus: React.FC<Props> = ({
               <ListItem className="paymentActionContainer">
                 <ListItemSecondaryAction>
                   <PrintInvoiceUI
-                    amount={outstandingBalance}
+                    amount={getOutstandingBalance()}
                     currentUser={currentMemberData}
                   />
                 </ListItemSecondaryAction>
@@ -437,7 +414,8 @@ const MemberStatus: React.FC<Props> = ({
 
       {isDialogOpen && (
         <DialogPayment
-          currentMemberData={currentMemberData}
+          // amountToPay={getOutstandingBalance()}
+          // currentMemberData={currentMemberData}
           hasPaidForMembership={hasPaidForMembershipOnly}
           isOpen={isDialogOpen}
           onClose={handleCloseDialogPayment}

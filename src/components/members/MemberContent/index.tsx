@@ -32,6 +32,8 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
     setRefetchCurrentMemberData,
   ] = useState<boolean>(false);
 
+  // console.log('MemberContent → currentMemberData', refetchCurrentMemberData, currentMemberData);
+
   const {
     allMembersData,
     handleUpdateShouldRefetchUserList,
@@ -44,6 +46,8 @@ const MemberContent: React.FC<Props> = ({ currentAuthUser }) => {
   const previousIsLoading = usePrevious(isLoading);
 
   const finishedLoading = Boolean(previousIsLoading && !isLoading);
+
+  // console.log('logic...', !currentMemberData || refetchCurrentMemberData || finishedLoading);
 
   useEffect(() => {
     if (currentAuthUser && allMembersData && allMembersData.length > 0
