@@ -294,8 +294,7 @@ const MemberRegistrationTasks: React.FC<Props> = ({
 
       {isDialogOpen && (
         <DialogPayment
-          // amountToPay={0} // TODO: Fix me!
-          // currentMemberData={currentMemberData}
+          currentMemberData={currentMemberData}
           hasPaidForMembership={hasPaidForMembership}
           isOpen={isDialogOpen}
           onClose={handleCloseDialogPayment}

@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-// import CircsularProgress from '@mui/material/CircularProgress';
 import Collapse from '@mui/material/Collapse';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,8 +9,8 @@ import Divider from '@mui/material/Divider';
 import React, { ReactInstance, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactToPrint from 'react-to-print';
 
+// Internal Dependencies
 import { PaymentForm } from '../../../register/PaymentForm';
-// import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import {
   FIRESTORE_MEMBER_COLLECTION,
   doGetInvoiceId,
@@ -27,18 +26,16 @@ import {
 import { ActiveMemberRadioOptions } from '../../../register/register-member-payment';
 import { PaymentSuccessUI } from '../../../register/PaymentSuccessUI';
 import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
+import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import { appNameShort } from '../../../../utils/app-constants';
 import { currentDate } from '../../../../utils/dateHelpers';
 import { getAmountPaid } from '../../../../utils/getAmountPaid';
-// import { useLoadCurrentMemberData } from '../../../../utils/hooks/useLoadCurrentMemberData';
 import usePrevious from '../../../../utils/hooks/usePrevious';
 import Invoice from '../../../register/invoice';
 import CtaButton from '../../../shared/CtaButton';
-import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 
 // Local Typings
 interface Props {
-  // amountToPay: number;
   currentMemberData: TfaaMemberData | null;
   hasPaidForMembership?: boolean;
   isOpen: boolean;
@@ -46,9 +43,16 @@ interface Props {
   userIdForFirestore: string;
 }
 
+/*
+ * For some reason, this component will not receive the currentMemberData more than once.
+ * Due to that, we are using local state to keep track of changes in the MemberType and
+ * IsRegisteredForFallConference values.
+ * The extra logic around the local state needs to stay until we figure out why the
+ * currentMemberData is not being updated and causing this component to re-render.
+ */
+
 // Component Definition
 export const DialogPayment = ({
-  // amountToPay,
   currentMemberData,
   hasPaidForMembership,
   isOpen,
@@ -56,14 +60,6 @@ export const DialogPayment = ({
   userIdForFirestore
 }: Props): JSX.Element => {
   const printInvoiceRef = useRef<ReactInstance>(null);
-
-  // const {
-  //   currentMemberData,
-  //   // onUpdateShouldRefetchUserList,
-  //   isLoading,
-  // } = useLoadCurrentMemberData();
-
-  // console.log('DialogPayment •• currentMemberData', currentMemberData);
 
   const memberTypeFromForm = currentMemberData?.MemberType.toLowerCase();
 
@@ -88,11 +84,7 @@ export const DialogPayment = ({
     setIsActiveMember,
   ] = useState<ActiveMemberRadioOptions>(memberTypeFromForm as ActiveMemberRadioOptions ?? 'active');
 
-  console.log('isActiveMember', isActiveMember);
-
   const [hasFallConferenceFee, setHasFallConferenceFee] = useState<boolean>(currentMemberData?.IsRegisteredForFallConference ?? false);
-
-  // console.log('hasFallConferenceFee', hasFallConferenceFee);
 
   // Local state setter functions
   const handleSetIsActiveMember = useCallback((isActive: ActiveMemberRadioOptions) => {
@@ -236,8 +228,6 @@ export const DialogPayment = ({
   const needsToPayForFallConference = hasFallConferenceFee
     && ((currentMemberData?.AmountPaid ?? 0) + (currentMemberData?.AmountPaid_2 ?? 0)) < 100;
 
-  // console.log('currentMemberData', currentMemberData);
-
   const getOutstandingBalance = () => {
     let amountOwed = 0;
 
@@ -248,29 +238,20 @@ export const DialogPayment = ({
     const isActiveMemberType = isActiveMember === 'active';
 
     if (hasPaidForMembershipOnly && !needsToPayForFallConference) {
-      console.log('1');
       amountOwed = 0;
     } else if (hasPaidForMembershipOnly && needsToPayForFallConference) {
-      console.log('2');
       amountOwed = 75;
     } else if (needsToPay) {
-      console.log('3');
       if (isActiveMemberType) {
-        console.log('4');
         if (needsToPayForFallConference) {
-          console.log('5');
           amountOwed = 150;
         } else {
-          console.log('6');
           amountOwed = 75;
         }
       } else if (!isActiveMemberType) {
-        console.log('7');
         if (needsToPayForFallConference) {
-          console.log('8');
           amountOwed = 105;
         } else {
-          console.log('9');
           amountOwed = 30;
         }
       }
@@ -358,10 +339,6 @@ export const DialogPayment = ({
     </Collapse>
   ), [currentMemberData, isActive, printInvoiceRef]);
 
-  // Return a loading spinner if the data is still loading
-  // if (isLoading) {
-  //   contentElement = <CircularProgress size={24} />;
-  // }
 
   return (
     <Dialog

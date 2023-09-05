@@ -412,9 +412,8 @@ const MemberStatus: React.FC<Props> = ({
         )}
       </StyledMemberInfoCard>
 
-      {/* {isDialogOpen && ( */}
+      {isDialogOpen && (
         <DialogPayment
-          // amountToPay={getOutstandingBalance()}
           currentMemberData={currentMemberData}
           hasPaidForMembership={hasPaidForMembershipOnly}
           isOpen={isDialogOpen}
