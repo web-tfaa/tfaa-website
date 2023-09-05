@@ -17,6 +17,10 @@ interface Props {
   warningIconElement: JSX.Element;
 }
 
+/*
+ * Deprecated
+ */
+
 // Component Definition
 const RegisterForFallConferenceListItem = ({
   hasPaidForFallConference,

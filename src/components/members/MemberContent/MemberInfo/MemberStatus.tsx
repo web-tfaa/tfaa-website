@@ -1,17 +1,15 @@
 // External Dependencies
 import { lighten } from '@mui/material';
 import Box from '@mui/material/Box';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
-import ErrorIcon from '@mui/icons-material/Error';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import styled, { useTheme } from 'styled-components';
+import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { DialogPayment } from './DialogPayment';
@@ -27,7 +25,6 @@ import EnhancedAlert from '../../../shared/EnhancedAlert';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
 import PrintInvoiceUI from '../../../../pages/members/PrintInvoiceUI';
 import usePrevious from '../../../../utils/hooks/usePrevious';
-import RegisterForFallConferenceListItem from './RegisterForFallConferenceListItem';
 
 // Local Typings
 interface Props {
@@ -47,6 +44,18 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
   },
   '.contentText': {
     marginBottom: theme.spacing(2),
+  },
+  '.fallConferenceTitle': {
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 18,
+    },
+    fontSize: 26,
+    fontWeight: 700,
+    width: '100%',
+  },
+  '.fallConferenceSecondaryText': {
+    marginLeft: theme.spacing(1),
+    paddingTop: theme.spacing(0.5),
   },
   '.innerContainer': {
     paddingBottom: theme.spacing(2),
@@ -123,8 +132,6 @@ const MemberStatus: React.FC<Props> = ({
   onSetRefetchCurrentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
-  const theme = useTheme();
-
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const previousIsDialogOpen = usePrevious(isDialogOpen);
@@ -158,7 +165,9 @@ const MemberStatus: React.FC<Props> = ({
   const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
 
   const hasPaidForMembershipOnly = Boolean(currentMemberData
-    && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
+    && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100);
+
+  const isRegisteredForFallConference = currentMemberData?.IsRegisteredForFallConference;
 
   const needsToPayForFallConference = currentMemberData?.IsRegisteredForFallConference
     && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
@@ -196,20 +205,6 @@ const MemberStatus: React.FC<Props> = ({
 
     return amountOwed;
   }, [currentMemberData, isRegisteredForCurrentYear, needsToPay, needsToPayForFallConference]);
-
-  const successIconElement = useMemo(() => (
-    <CheckCircleIcon
-      className="listItemIcon"
-      htmlColor={theme.palette.tfaa.resources}
-    />
-  ), []);
-
-  const warningIconElement = useMemo(() => (
-    <ErrorIcon
-      className="listItemIcon"
-      htmlColor={theme.palette.warning.light}
-    />
-    ), []);
 
   return (
     <>
@@ -320,33 +315,61 @@ const MemberStatus: React.FC<Props> = ({
           )}
         </Typography>
 
-        {hasPaidForFallConference && (
-          <>
-            <Divider className="memberStatusDivider" />
+        <Divider className="memberStatusDivider" />
 
-            <Typography>
-              Registered for Fall Conference
-              {successIconElement}
-            </Typography>
-          </>
-        )}
+        <Typography
+          className="fallConferenceTitle"
+          component="h3"
+        >
+          Fall Conference
+        </Typography>
 
-        {isRegisteredForCurrentYear && !hasPaidForFallConference && (
-          <>
-            <Divider className="memberStatusDivider" />
+        <List>
+          <ListItem className="listItem">
+            <ListItemText
+              classes={{
+                primary: 'listItemText',
+                secondary: 'fallConferenceSecondaryText',
+              }}
+              primary={(
+                <>
+                  {!isRegisteredForFallConference && 'Not registered'}
 
-            <List sx={{ marginBottom: 2 }}>
-              <RegisterForFallConferenceListItem
-                hasPaidForFallConference={hasPaidForFallConference}
-                isRegisteredForCurrentYear={isRegisteredForCurrentYear}
-                needsToPayForFallConference={needsToPayForFallConference}
-                onOpenDialogPayment={handleOpenDialogPayment}
-                successIconElement={successIconElement}
-                warningIconElement={warningIconElement}
-              />
-            </List>
-          </>
-        )}
+                  {isRegisteredForFallConference && 'Registered'}
+                </>
+              )}
+              secondary={(
+                <>
+                  {isRegisteredForFallConference && needsToPayForFallConference && (
+                    <>
+                      Outstanding balance: $75.00
+                    </>
+                  )}
+
+                  {isRegisteredForFallConference && hasPaidForFallConference && (
+                    <>
+                      Paid in full
+                    </>
+                  )}
+                </>
+              )}
+            />
+          </ListItem>
+
+          {isRegisteredForCurrentYear && !hasPaidForFallConference && (
+            <ListItem className="paymentActionContainer">
+              <ListItemSecondaryAction>
+                <CtaButton
+                  colorVariant="resources"
+                  fontWeight={600}
+                  onClick={handleOpenDialogPayment}
+                >
+                  {needsToPayForFallConference ? 'Pay' : 'Register'} for Fall Conference
+                </CtaButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )}
+        </List>
 
         {isRegisteredForCurrentYear && isInvoiced && (
           <>
