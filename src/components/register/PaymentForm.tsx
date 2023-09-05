@@ -59,7 +59,7 @@ export const PaymentForm = ({
   onUpdateFirestoreMemberData,
   onUpdateMemberForm,
 }: Props): JSX.Element | null => {
-  console.log('amountToPay', amountToPay);
+  // console.log('amountToPay', amountToPay);
 
   // Flip between Active and Retired member types
   const handleChangeRadioSelection = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +86,7 @@ export const PaymentForm = ({
     onUpdateMemberForm(updatedMemberForm);
 
     return onUpdateFirestoreMemberData(updatedMemberForm);
-  }, [memberForm, onSetIsActiveMember, onUpdateFirestoreMemberData, onUpdateMemberForm]);
+  }, [memberForm, onSetIsActiveMember, onUpdateMemberForm]);
 
   // Used for the checkbox to indicate if the member will pay
   //  for the separate Fall Conference registration fee
@@ -105,14 +105,10 @@ export const PaymentForm = ({
     onUpdateMemberForm(updatedMemberForm);
 
     return onUpdateFirestoreMemberData(updatedMemberForm);
-  }, [memberForm, onSetHasFallConferenceFee, onUpdateFirestoreMemberData, onUpdateMemberForm]);
+  }, [memberForm]);
 
-  if (!memberForm) {
-    return null;
-  }
-
-  const needsToPayForFallConference = memberForm.IsRegisteredForFallConference
-    && (memberForm.AmountPaid + memberForm.AmountPaid_2) < 100;
+  const needsToPayForFallConference = memberForm?.IsRegisteredForFallConference
+    && (memberForm?.AmountPaid + memberForm?.AmountPaid_2) < 100;
 
   const showPayPalButtonSection = useCallback(() => {
     const hasAmountToPay = Boolean(amountToPay);
@@ -142,6 +138,10 @@ export const PaymentForm = ({
   const formattedAmountToPay = useMemo(() =>
     Number(amountToPay)?.toFixed(2).toLocaleString(),
     [amountToPay]);
+
+  if (!memberForm) {
+    return null;
+  }
 
   return (
     <StyledFormControl

@@ -123,7 +123,7 @@ const MemberStatus: React.FC<Props> = ({
   onSetRefetchCurrentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
-  // console.log('MemberStatus .. currentMemberData', currentMemberData);
+  console.log('MemberStatus .. currentMemberData', currentMemberData);
 
   const theme = useTheme();
 

@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import Collapse from '@mui/material/Collapse';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,7 +11,7 @@ import React, { ReactInstance, useCallback, useEffect, useMemo, useRef, useState
 import ReactToPrint from 'react-to-print';
 
 import { PaymentForm } from '../../../register/PaymentForm';
-import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
+// import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import {
   FIRESTORE_MEMBER_COLLECTION,
   doGetInvoiceId,
@@ -57,11 +58,11 @@ export const DialogPayment = ({
 
   const {
     currentMemberData,
-    onUpdateShouldRefetchUserList,
-    // isLoading,
+    // onUpdateShouldRefetchUserList,
+    isLoading,
   } = useLoadCurrentMemberData();
 
-  console.log('DialogPayment •• currentMemberData', currentMemberData);
+  // console.log('DialogPayment •• currentMemberData', currentMemberData);
 
   const memberTypeFromForm = currentMemberData?.MemberType.toLowerCase();
 
@@ -119,11 +120,11 @@ export const DialogPayment = ({
     });
   }, [memberPaymentForm, handleUpdateMemberPaymentForm]);
 
-  useEffect(() => {
-    if ((previousCurrentMemberData as unknown as TfaaMemberData)?.IsRegisteredForFallConference !== currentMemberData?.IsRegisteredForFallConference) {
-      setHasFallConferenceFee(currentMemberData?.IsRegisteredForFallConference ?? false);
-    }
-  }, [currentMemberData, previousCurrentMemberData]);
+  // useEffect(() => {
+  //   if ((previousCurrentMemberData as unknown as TfaaMemberData)?.IsRegisteredForFallConference !== currentMemberData?.IsRegisteredForFallConference) {
+  //     setHasFallConferenceFee(currentMemberData?.IsRegisteredForFallConference ?? false);
+  //   }
+  // }, [currentMemberData, previousCurrentMemberData]);
 
   useEffect(() => {
     if (currentMemberData) {
@@ -267,7 +268,7 @@ export const DialogPayment = ({
 
   const isActive = isActiveMember === 'active';
 
-  const contentElement = showCompletedUI ? (
+  let contentElement = showCompletedUI ? (
     <PaymentSuccessUI
       hasFallConferenceFee={hasFallConferenceFee}
       isActive={isActive}
@@ -276,7 +277,7 @@ export const DialogPayment = ({
     />
   ) : (
     <PaymentForm
-      amountToPay={getOutstandingBalance()}
+      amountToPay={getAmountPaid(currentMemberData)}
       hasFallConferenceFee={hasFallConferenceFee}
       hasPaidForMembership={hasPaidForMembership}
       isActiveMember={isActiveMember}
@@ -288,7 +289,6 @@ export const DialogPayment = ({
       onUpdateCompletedStep={handleUpdateCompletedStep}
       onUpdateFirestoreMemberData={handleUpdateFirestoreMemberData}
       onUpdateMemberForm={handleUpdateMemberPaymentForm}
-      onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
     />
   );
 
@@ -343,7 +343,15 @@ export const DialogPayment = ({
         />
       </Box>
     </Collapse>
-  ), [currentMemberData, getOutstandingBalance, isActive, printInvoiceRef]);
+  ), [currentMemberData, isActive, printInvoiceRef]);
+
+  // Return a loading spinner if the data is still loading
+  if (isLoading) {
+    contentElement = <CircularProgress size={24} />;
+  }
+
+  console.log('getAmountPaid(currentMemberData)', getAmountPaid(currentMemberData));
+  console.log('getOutstandingBalance()', getOutstandingBalance());
 
   return (
     <Dialog

@@ -18,6 +18,8 @@ export const useLoadCurrentMemberData = () => {
     setCurrentMemberData,
   ] = useState<TfaaMemberData | null>(null);
 
+  // console.log('useLoadCurrentMemberData •• currentMemberData', currentMemberData);
+
   const {
     allMembersData,
     handleUpdateShouldRefetchUserList,
