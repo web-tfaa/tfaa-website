@@ -20,6 +20,7 @@ import CtaButton from '../../../shared/CtaButton';
 import Invoice from '../../../register/invoice';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
 import usePrevious from '../../../../utils/hooks/usePrevious';
+import RegisterForFallConferenceListItem from './RegisterForFallConferenceListItem';;
 
 // Local Typings
 interface Props {
@@ -120,20 +121,16 @@ const MemberRegistrationTasks: React.FC<Props> = ({
   const theme = useTheme();
   const printReceiptRef = useRef();
 
-  const needsToPay = !currentMemberData?.AmountPaid;
-  const hasPaidForMembership = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100)
-  const needsToPayForFallConference = isRegisteredForFallConference && currentMemberData?.AmountPaid < 100;
-  const hasPaidForFallConference = isRegisteredForFallConference && currentMemberData?.AmountPaid >= 100;
+  const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
+  const hasPaidForMembership = Boolean(currentMemberData
+    && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100);
+  const needsToPayForFallConference = isRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
+    const hasPaidForFallConference = isRegisteredForFallConference
+    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) >= 100;
 
   const canPrintReceipt = currentMemberData?.PaymentOption.toLowerCase() === 'paypal'
     || currentMemberData?.PaypalPaymentID;
-
-  let fallConferenceSecondaryText = 'Pay online using credit card or send payment with invoice.';
-  if (needsToPayForFallConference) {
-    fallConferenceSecondaryText = 'You are registered for the Fall Conference, but have not paid yet.';
-  } else if (hasPaidForFallConference) {
-    fallConferenceSecondaryText = 'You are registered for the Fall Conference and paid in full.';
-  }
 
   const successIconElement = useMemo(() => (
     <CheckCircleIcon
@@ -214,36 +211,14 @@ const MemberRegistrationTasks: React.FC<Props> = ({
             />
           </ListItem>
 
-          <ListItem className="paymentListItem">
-            <ListItemText
-              classes={{
-                primary: 'listItemText',
-                secondary: 'listItemSecondaryText',
-              }}
-              primary={(
-                <>
-                  Register for Fall Conference (optional)
-                  {hasPaidForFallConference && successIconElement}
-                  {needsToPayForFallConference && warningIconElement}
-                </>
-              )}
-              secondary={fallConferenceSecondaryText}
-            />
-          </ListItem>
-
-          {isRegisteredForCurrentYear && !hasPaidForFallConference && (
-            <ListItem className="paymentActionContainer">
-              <ListItemSecondaryAction>
-                <CtaButton
-                  colorVariant="resources"
-                  fontWeight={600}
-                  onClick={handleOpenDialogPayment}
-                >
-                  {needsToPayForFallConference ? 'Pay' : 'Register'} for Fall Conference
-                </CtaButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          )}
+          <RegisterForFallConferenceListItem
+            hasPaidForFallConference={hasPaidForFallConference}
+            isRegisteredForCurrentYear={isRegisteredForCurrentYear}
+            needsToPayForFallConference={needsToPayForFallConference}
+            onOpenDialogPayment={handleOpenDialogPayment}
+            successIconElement={successIconElement}
+            warningIconElement={warningIconElement}
+          />
 
           {isRegisteredForCurrentYear && (
             <>
@@ -316,7 +291,6 @@ const MemberRegistrationTasks: React.FC<Props> = ({
           </div>
         )}
       </StyledMemberInfoCard>
-
 
       {isDialogOpen && (
         <DialogPayment

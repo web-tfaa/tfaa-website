@@ -109,11 +109,13 @@ const RegisterMemberPayment: React.FC<Props> = ({
   // When the step is being completed after a successful payment,
   //  we update the Firestore database and push the user to the payment success UI
   const handleCompleteMemberPaymentStep = useCallback((payment: PaypalPayment) => {
-    const amountPaid = getAmountPaid(memberForm);
+    const amountPaidFromCurrentMemberForm = getAmountPaid(memberForm);
+
+    // The amountPaidFromCurrentMemberForm value will always be exactly 30, 75, 105, or 150
 
     const updatedMemberForm: MemberFormValues = {
       ...memberForm,
-      AmountPaid: amountPaid,
+      AmountPaid: amountPaidFromCurrentMemberForm,
       PaypalPayerID: payment?.payerID,
       PaypalPaymentID: payment?.paymentID,
       PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',

@@ -9,8 +9,8 @@ import Divider from '@mui/material/Divider';
 import React, { ReactInstance, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactToPrint from 'react-to-print';
 
+// Internal Dependencies
 import { PaymentForm } from '../../../register/PaymentForm';
-import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import {
   FIRESTORE_MEMBER_COLLECTION,
   doGetInvoiceId,
@@ -26,6 +26,7 @@ import {
 import { ActiveMemberRadioOptions } from '../../../register/register-member-payment';
 import { PaymentSuccessUI } from '../../../register/PaymentSuccessUI';
 import { PaypalPayment } from '../../../register/paypal/paypal-button-wrapper';
+import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import { appNameShort } from '../../../../utils/app-constants';
 import { currentDate } from '../../../../utils/dateHelpers';
 import { getAmountPaid } from '../../../../utils/getAmountPaid';
@@ -41,6 +42,14 @@ interface Props {
   onClose: () => void;
   userIdForFirestore: string;
 }
+
+/*
+ * For some reason, this component will not receive the currentMemberData more than once.
+ * Due to that, we are using local state to keep track of changes in the MemberType and
+ * IsRegisteredForFallConference values.
+ * The extra logic around the local state needs to stay until we figure out why the
+ * currentMemberData is not being updated and causing this component to re-render.
+ */
 
 // Component Definition
 export const DialogPayment = ({
@@ -108,6 +117,20 @@ export const DialogPayment = ({
     });
   }, [memberPaymentForm, handleUpdateMemberPaymentForm]);
 
+  // Update the MemberTypes if the data was missing but arrives later
+  useEffect(() => {
+    if ((previousCurrentMemberData as unknown as TfaaMemberData)?.MemberType !== currentMemberData?.MemberType) {
+      setIsActiveMember(memberTypeFromForm as ActiveMemberRadioOptions ?? 'active');
+    }
+  }, [currentMemberData, previousCurrentMemberData]);
+
+  // Update the IsRegisteredForFallConference if the data was missing but arrives later
+  useEffect(() => {
+    if ((previousCurrentMemberData as unknown as TfaaMemberData)?.IsRegisteredForFallConference !== currentMemberData?.IsRegisteredForFallConference) {
+      setHasFallConferenceFee(currentMemberData?.IsRegisteredForFallConference ?? false);
+    }
+  }, [currentMemberData, previousCurrentMemberData]);
+
   useEffect(() => {
     if (currentMemberData) {
       // Fetch the current invoice and receipt id values from Firestore
@@ -155,19 +178,35 @@ export const DialogPayment = ({
   // After a successful payment, we update the Firestore
   //  database and push the user to the payment success UI
   const handleUpdateMemberPaymentData = useCallback((payment: PaypalPayment) => {
-    if (payment.paid) {
-      const amountPaid = getAmountPaid(currentMemberData);
+    if (payment.paid && currentMemberData) {
+      const amountPaidFromCurrentMemberData = getAmountPaid(currentMemberData);
+
+      // The AmountPaid_2 and PaypalPaymentID_2 values can only be sent from this dialog.
+      // An initial PayPal payment is sent from the MemberRegisterContent component.
+      // Subsequent payments are sent from this dialog.
+
+      const hasMadeInitialPayment = Boolean(currentMemberData.AmountPaid && currentMemberData.PaypalPaymentID);
 
       const updatedMemberForm: MemberFormValues = {
         ...memberPaymentForm,
-        AmountPaid: amountPaid,
+        AmountPaid: !hasMadeInitialPayment
+          ? amountPaidFromCurrentMemberData
+          : currentMemberData.AmountPaid,
+        AmountPaid_2: hasMadeInitialPayment
+          ? amountPaidFromCurrentMemberData
+          : currentMemberData.AmountPaid_2,
         PaypalPayerID: payment?.payerID,
-        PaypalPaymentID: payment?.paymentID,
+        PaypalPaymentID: !hasMadeInitialPayment
+          ? payment?.paymentID
+          : currentMemberData.PaypalPaymentID,
+        PaypalPaymentID_2: hasMadeInitialPayment
+          ? payment?.paymentID
+          : currentMemberData.PaypalPaymentID_2,
         PaymentOption: payment?.paymentID ? 'Paypal' : 'Invoiced',
         invoiceDate: currentDate,
-        invoiceId: currentMemberData?.invoiceId ?? 1,
-        receiptDate: currentMemberData?.receiptId ? currentDate : '',
-        receiptId: currentMemberData?.receiptId ?? 1,
+        invoiceId: currentMemberData.invoiceId ?? 1,
+        receiptDate: currentMemberData.receiptId ? currentDate : '',
+        receiptId: currentMemberData.receiptId ?? 1,
       };
 
       handleUpdateFirestoreMemberData(updatedMemberForm);
@@ -182,15 +221,48 @@ export const DialogPayment = ({
     handleUpdateMemberPaymentData(payment);
   }, [handleGetCurrentReceiptId]);
 
+  const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
+
+  const hasPaidForMembershipOnly = Boolean(currentMemberData && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100);
+
+  const needsToPayForFallConference = hasFallConferenceFee
+    && ((currentMemberData?.AmountPaid ?? 0) + (currentMemberData?.AmountPaid_2 ?? 0)) < 100;
+
+  const getOutstandingBalance = () => {
+    let amountOwed = 0;
+
+    if (!currentMemberData) {
+      return 0;
+    }
+
+    const isActiveMemberType = isActiveMember === 'active';
+
+    if (hasPaidForMembershipOnly && !needsToPayForFallConference) {
+      amountOwed = 0;
+    } else if (hasPaidForMembershipOnly && needsToPayForFallConference) {
+      amountOwed = 75;
+    } else if (needsToPay) {
+      if (isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 150;
+        } else {
+          amountOwed = 75;
+        }
+      } else if (!isActiveMemberType) {
+        if (needsToPayForFallConference) {
+          amountOwed = 105;
+        } else {
+          amountOwed = 30;
+        }
+      }
+    }
+
+    return amountOwed;
+  };
+
   const isActive = isActiveMember === 'active';
-  const membershipAmount = isActive ? 75 : 30;
-  let amount = hasFallConferenceFee ? membershipAmount + 75 : membershipAmount;
 
-  if (hasPaidForMembership) {
-    amount -= membershipAmount;
-  }
-
-  const contentElement = useMemo(() => showCompletedUI ? (
+  let contentElement = showCompletedUI ? (
     <PaymentSuccessUI
       hasFallConferenceFee={hasFallConferenceFee}
       isActive={isActive}
@@ -199,7 +271,7 @@ export const DialogPayment = ({
     />
   ) : (
     <PaymentForm
-      amountToPay={amount}
+      amountToPay={getOutstandingBalance()}
       hasFallConferenceFee={hasFallConferenceFee}
       hasPaidForMembership={hasPaidForMembership}
       isActiveMember={isActiveMember}
@@ -212,21 +284,7 @@ export const DialogPayment = ({
       onUpdateFirestoreMemberData={handleUpdateFirestoreMemberData}
       onUpdateMemberForm={handleUpdateMemberPaymentForm}
     />
-  ), [
-    amount,
-    handleSetHasFallConferenceFee,
-    handleSetIsActiveMember,
-    handleUpdateCompletedStep,
-    handleUpdateFirestoreMemberData,
-    handleUpdateMemberPaymentForm,
-    hasFallConferenceFee,
-    hasPaidForMembership,
-    isActive,
-    isActiveMember,
-    isOpen,
-    memberPaymentForm,
-    showCompletedUI,
-  ]);
+  );
 
   const printInvoiceElement = useMemo(() => (
     <Collapse
@@ -269,7 +327,7 @@ export const DialogPayment = ({
 
       <Box display="none">
         <Invoice
-          amount={amount}
+          amount={getOutstandingBalance()}
           form={currentMemberData}
           isActive={isActive}
           isInvoice
@@ -279,7 +337,15 @@ export const DialogPayment = ({
         />
       </Box>
     </Collapse>
-  ), [amount, currentMemberData, isActive, printInvoiceRef]);
+  ), [
+    currentMemberData,
+    hasPaidForMembership,
+    hasFallConferenceFee,
+    isActive,
+    memberPaymentForm.AmountPaid,
+    printInvoiceRef,
+  ]);
+
 
   return (
     <Dialog
@@ -296,7 +362,7 @@ export const DialogPayment = ({
       <DialogContent dividers>
         {contentElement}
 
-        {printInvoiceElement}
+        {!showCompletedUI && printInvoiceElement}
       </DialogContent>
 
       <DialogActions>
