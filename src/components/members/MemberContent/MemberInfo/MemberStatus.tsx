@@ -123,8 +123,6 @@ const MemberStatus: React.FC<Props> = ({
   onSetRefetchCurrentMemberData,
   onUpdateShouldRefetchUserList,
 }) => {
-  console.log('MemberStatus .. currentMemberData', currentMemberData);
-
   const theme = useTheme();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);

@@ -337,7 +337,14 @@ export const DialogPayment = ({
         />
       </Box>
     </Collapse>
-  ), [currentMemberData, isActive, printInvoiceRef]);
+  ), [
+    currentMemberData,
+    hasPaidForMembership,
+    hasFallConferenceFee,
+    isActive,
+    memberPaymentForm.AmountPaid,
+    printInvoiceRef,
+  ]);
 
 
   return (
@@ -355,7 +362,7 @@ export const DialogPayment = ({
       <DialogContent dividers>
         {contentElement}
 
-        {printInvoiceElement}
+        {!showCompletedUI && printInvoiceElement}
       </DialogContent>
 
       <DialogActions>
