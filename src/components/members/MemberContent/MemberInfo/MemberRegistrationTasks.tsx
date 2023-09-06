@@ -5,29 +5,22 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import Typography from '@mui/material/Typography';
 import styled, { useTheme } from 'styled-components';
 
 // Internal Dependencies
-import { DialogPayment } from './DialogPayment';
-import { TfaaAuthUser } from '../../../layout';
 import { TfaaMemberData } from '../../../../utils/hooks/useGetAllMembers';
 import { appNameShort } from '../../../../utils/app-constants';
 import { currentSchoolYearLong } from '../../../../utils/helpers';
 import CtaButton from '../../../shared/CtaButton';
 import Invoice from '../../../register/invoice';
 import MemberInfoCard from '../../../shared/MemberInfoCard';
-import usePrevious from '../../../../utils/hooks/usePrevious';
-import RegisterForFallConferenceListItem from './RegisterForFallConferenceListItem';;
 
 // Local Typings
 interface Props {
-  currentAuthUser: TfaaAuthUser | null;
   currentMemberData: TfaaMemberData | null;
-  onSetRefetchCurrentMemberData: ((shouldRefetchCurrentMemberData: boolean) => void) | null;
-  onUpdateShouldRefetchUserList: ((shouldRefetchUserList: boolean) => void) | null;
 }
 
 // Local Variables
@@ -87,47 +80,14 @@ const StyledMemberInfoCard = styled(MemberInfoCard)(({ theme }) => ({
 
 // Component Definition
 const MemberRegistrationTasks: React.FC<Props> = ({
-  currentAuthUser,
   currentMemberData,
-  onSetRefetchCurrentMemberData,
-  onUpdateShouldRefetchUserList,
 }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const previousIsDialogOpen = usePrevious(isDialogOpen);
-
-  // Local state setter functions
-  const handleOpenDialogPayment = useCallback(() => {
-    setIsDialogOpen(true);
-  }, []);
-
-  const handleCloseDialogPayment = useCallback(() => {
-    setIsDialogOpen(false);
-  }, []);
-
-  // We refetch data after the member payment dialog closes
-  useEffect(() => {
-    if (previousIsDialogOpen && !isDialogOpen) {
-      onUpdateShouldRefetchUserList?.(true);
-      onSetRefetchCurrentMemberData?.(true);
-    }
-  }, [isDialogOpen, previousIsDialogOpen, onUpdateShouldRefetchUserList]);
-
-  const userIdForFirestore = `${currentAuthUser?.email}-${currentAuthUser?.uid}`;
-
   const isRegisteredForCurrentYear = Boolean(currentMemberData);
-  const isRegisteredForFallConference  = currentMemberData?.IsRegisteredForFallConference;
 
   const theme = useTheme();
   const printReceiptRef = useRef();
 
   const needsToPay = !currentMemberData?.AmountPaid && !currentMemberData?.AmountPaid_2;
-  const hasPaidForMembership = Boolean(currentMemberData
-    && currentMemberData?.AmountPaid > 0 && currentMemberData?.AmountPaid < 100);
-  const needsToPayForFallConference = isRegisteredForFallConference
-    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) < 100;
-    const hasPaidForFallConference = isRegisteredForFallConference
-    && (currentMemberData?.AmountPaid + currentMemberData?.AmountPaid_2) >= 100;
 
   const canPrintReceipt = currentMemberData?.PaymentOption.toLowerCase() === 'paypal'
     || currentMemberData?.PaypalPaymentID;
@@ -211,15 +171,6 @@ const MemberRegistrationTasks: React.FC<Props> = ({
             />
           </ListItem>
 
-          <RegisterForFallConferenceListItem
-            hasPaidForFallConference={hasPaidForFallConference}
-            isRegisteredForCurrentYear={isRegisteredForCurrentYear}
-            needsToPayForFallConference={needsToPayForFallConference}
-            onOpenDialogPayment={handleOpenDialogPayment}
-            successIconElement={successIconElement}
-            warningIconElement={warningIconElement}
-          />
-
           {isRegisteredForCurrentYear && (
             <>
               <ListItem className="paymentListItem">
@@ -291,16 +242,6 @@ const MemberRegistrationTasks: React.FC<Props> = ({
           </div>
         )}
       </StyledMemberInfoCard>
-
-      {isDialogOpen && (
-        <DialogPayment
-          currentMemberData={currentMemberData}
-          hasPaidForMembership={hasPaidForMembership}
-          isOpen={isDialogOpen}
-          onClose={handleCloseDialogPayment}
-          userIdForFirestore={userIdForFirestore}
-        />
-      )}
     </>
   );
 };

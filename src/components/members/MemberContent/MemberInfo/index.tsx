@@ -90,10 +90,7 @@ const MemberInfo: React.FC<Props> = ({
       )}
 
       <MemberRegistrationTasks
-        currentAuthUser={currentAuthUser}
         currentMemberData={currentMemberData}
-        onSetRefetchCurrentMemberData={onSetRefetchCurrentMemberData}
-        onUpdateShouldRefetchUserList={onUpdateShouldRefetchUserList}
       />
 
       <MemberActions
