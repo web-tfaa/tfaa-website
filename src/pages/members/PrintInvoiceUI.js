@@ -4,11 +4,12 @@ import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 
 // Internal Dependencies
+import CtaButton from '../../components/shared/CtaButton';
 import Invoice from '../../components/register/invoice';
-import RegisterButton from '../../components/register/register-button';
 
 // Local Variables
 const propTypes = {
+  amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   currentUser: PropTypes.shape({
     Address1: PropTypes.string,
     Address2: PropTypes.string,
@@ -17,6 +18,7 @@ const propTypes = {
     City: PropTypes.string,
     District: PropTypes.string,
     FirstName: PropTypes.string,
+    IsRegisteredForFallConference: PropTypes.bool,
     LastName: PropTypes.string,
     MemberType: PropTypes.string,
     OfficePhone: PropTypes.string,
@@ -34,7 +36,10 @@ const defaultProps = {
 };
 
 // Component Definition
-const PrintInvoiceUI = ({ currentUser }) => {
+const PrintInvoiceUI = ({
+  amount = 0,
+  currentUser,
+}) => {
   const printInvoiceRef = useRef();
 
   if (!currentUser) {
@@ -47,16 +52,19 @@ const PrintInvoiceUI = ({ currentUser }) => {
         <ReactToPrint
           content={() => printInvoiceRef.current}
           trigger={() => (
-            <RegisterButton green>
+            <CtaButton
+              colorVariant="about"
+              fontWeight={600}
+            >
               Print Invoice
-            </RegisterButton>
+            </CtaButton>
           )}
         />
       </div>
 
       <div style={{ display: 'none' }}>
         <Invoice
-          amount={currentUser.AmountPaid}
+          amount={amount || currentUser.AmountPaid}
           form={currentUser}
           invoiceId={currentUser.invoiceId}
           isActive={currentUser.MemberType === 'Active'}

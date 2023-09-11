@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Typography,
 } from '@mui/material';
-import React, { FC, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
 import styled from 'styled-components';
 
@@ -15,8 +15,7 @@ import styled from 'styled-components';
 import {
   HandleCompleteSponsorStepType,
   SponsorFormValues,
-} from '../../pages/sponsors/register';
-import { SPONSORSHIP_LEVELS } from '../shared/sponsor-card';
+} from './SponsorRegisterContent';
 import { doCreateEntry } from '../../firebase/db';
 import { formatPhone } from '../../utils/formatPhone';
 import { logError } from '../../utils/logError';
@@ -24,8 +23,8 @@ import { registerSponsorSchema } from './schemas';
 import CustomTextField from '../shared/CustomTextField';
 import EnhancedAlert from '../shared/EnhancedAlert';
 import LoadingContainer from '../shared/LoadingContainer';
-import RegisterButton from './register-button';
 import theme from '../../gatsby-theme-material-ui-top-layout/theme';
+import CtaButton from '../shared/CtaButton';
 
 // Local Typings
 interface Props {
@@ -63,13 +62,19 @@ const StyledRoot = styled.div({
   },
 });
 
+const SPONSORSHIP_LEVELS = {
+  CLASS_CHAMPION: 'Class Champion',
+  GOLD_MEDAL: 'Gold Medal',
+  SILVER_MEDAL: 'Silver Medal',
+};
+
 // This will tell the Firestore database action where to put the new record
 const FIRESTORE_SPONSOR_COLLECTION = 'sponsor';
 
 export const classChampionAlreadySecured = true;
 
 // Component Definition
-const RegisterSponsorForm: FC<Props> = ({
+const RegisterSponsorForm: React.FC<Props> = ({
   authenticatedUserId,
   initialSponsorFormValues,
   onCompleteSponsorStep,
@@ -437,12 +442,16 @@ const RegisterSponsorForm: FC<Props> = ({
                   </EnhancedAlert>
                 </Box>
 
-                <RegisterButton
-                  buttonType="submit"
-                  isDisabled={hasTouchedform && hasErrors}
+                <CtaButton
+                  disabled={hasTouchedform && hasErrors}
+                  fontWeight={600}
+                  rightArrow
+                  size="large"
+                  type="submit"
+                  width={220}
                 >
-                  Continue to Step 3
-                </RegisterButton>
+                  Continue
+                </CtaButton>
               </div>
             </Form>
           );

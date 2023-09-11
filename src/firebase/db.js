@@ -65,7 +65,7 @@ export const doUpdateEntry = (
 export const doGetUsers = (collection, userList, callback) => {
   const collectionName = getFirebaseCollectionName(collection);
 
-  console.log('getting data...', collectionName);
+  console.log('getting data for...', collectionName);
 
   const updatedUserList = userList;
 

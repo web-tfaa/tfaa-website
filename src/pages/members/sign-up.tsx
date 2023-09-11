@@ -1,15 +1,12 @@
 // External Dependencies
-import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
+import React from 'react';
 import { Link } from 'gatsby-theme-material-ui';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import Container from '../../components/shared/container';
-import FormHr from '../../components/shared/form-hr';
 import Layout from '../../components/layout';
-import SignupForm from '../../components/register/signup-form';
-import presets from '../../utils/presets';
+// import SignupForm from '../../components/register/SignupForm';
 
 // Local Typings
 interface Props {
@@ -17,7 +14,7 @@ interface Props {
 }
 
 // Local Variables
-const StyledRoot = styled.div({
+const StyledRoot = styled.div(({ theme }) => ({
   '.signup-h2': {
     margin: '1rem 0',
   },
@@ -27,23 +24,21 @@ const StyledRoot = styled.div({
     maxWidth: '70%',
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: '1.5rem',
   },
   paddingLeft: 0,
-});
+}));
 
 // Component Definition
-const SignUp: FC<Props> = ({ location }) => (
-  <Layout location={location}>
+const SignUp: React.FC<Props> = ({ location }) => (
+  <Layout
+    location={location}
+    pageTitle="Sign Up"
+  >
     <StyledRoot>
       <Container className="sign-up">
-        <Helmet>
-          <title>TMAC | Sign Up</title>
-        </Helmet>
         <h2 className="signup-h2">Sign Up</h2>
-
-        <FormHr />
 
         <div
           className="signup-message"
@@ -54,7 +49,7 @@ const SignUp: FC<Props> = ({ location }) => (
           <Link to="/members">Members page</Link>.
         </div>
 
-        <SignupForm />
+        {/* <SignupForm /> */}
       </Container>
     </StyledRoot>
   </Layout>

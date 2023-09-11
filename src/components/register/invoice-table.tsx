@@ -1,18 +1,17 @@
 // External Dependencies
-import React, { FC, useMemo } from 'react';
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import React, { useMemo } from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import styled from 'styled-components';
 
 // Internal Dependencies
 import { currentSchoolYearLong } from '../../utils/helpers';
+import { appNameShort } from '../../utils/app-constants';
 
 // Local Typings
 interface Props {
@@ -25,6 +24,7 @@ interface Props {
   };
   isActive?: boolean;
   isInvoice: boolean;
+  isOnlyForFallConference?: boolean;
   sponsorLevel?: string,
 }
 
@@ -69,34 +69,52 @@ const StyledTableContainer = styled(TableContainer)(({
   marginRight: 32,
   marginTop: theme.spacing(2),
   width: '75%',
-}));
+})) as typeof TableContainer;
 
 // Component Definition
-const InvoiceTable: FC<Props> = ({
+const InvoiceTable: React.FC<Props> = ({
   amount,
   form,
   isActive,
   isInvoice,
+  isOnlyForFallConference = false,
   sponsorLevel,
 }) => {
   // Work out the correct amount
   const isString = typeof amount === 'string';
-  const updatedAmount = amount === 0 ? 50 : amount;
+  const updatedAmount = amount === 0 ? 75 : amount;
   const formattedAmount = isString ? updatedAmount : `$${Number(updatedAmount)?.toFixed(2).toLocaleString()}`;
+
+  const hasAddedFallConferenceFee = Number(amount) > 100;
 
   const sponsorInfo = useMemo(() => (
     <span>
-      TMAC {sponsorLevel} Sponsor donation amount{' '}
+      {appNameShort} {sponsorLevel} Sponsor donation amount{' '}
       <br />for <strong>{form.SponsorOrganization}</strong>
     </span>
-  ), [form.SponsorOrganization, sponsorLevel]);
+  ), [
+    form.SponsorOrganization,
+    sponsorLevel,
+  ]);
 
   const memberInfo = useMemo(() => (
     <span>
-      TMAC {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
+      {isOnlyForFallConference ? `${appNameShort} Fall Conference registration fee`
+        : (
+          <>
+            {appNameShort} {isActive || !form.MemberType ? 'Active' : 'Retired'} membership fee{' '}
+            {hasAddedFallConferenceFee && 'and Fall Conference registration fee'}
+          </>
+        )}
       <br />for <strong>{form.FirstName} {form.LastName}</strong>
     </span>
-  ), [form.FirstName, form.LastName, form.MemberType, isActive]);
+  ), [
+    form.FirstName,
+    form.LastName,
+    form.MemberType,
+    hasAddedFallConferenceFee,
+    isActive,
+  ]);
 
   return (
     <StyledTableContainer component={Paper}>

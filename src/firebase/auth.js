@@ -1,3 +1,7 @@
+// External Dependencies
+import React from 'react';
+
+// Internal Dependencies
 import { auth } from './firebase';
 
 // Sign Up

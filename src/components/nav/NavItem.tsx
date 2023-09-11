@@ -1,22 +1,21 @@
 // External Dependencies
-import React, { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
+import React, { FC, ReactNode } from 'react';
 import clsx from 'clsx';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import presets from '../../utils/presets';
-import { rhythm, scale } from '../../utils/typography';
+import { scale } from '../../utils/typography';
 
 // Local Typings
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   linkTo: string;
 }
 
 // Local Variables
-const StyledRoot = styled.li({
+const StyledRoot = styled.li(({ theme }) => ({
   '.active': {
     fontWeight: 600,
   },
@@ -27,23 +26,28 @@ const StyledRoot = styled.li({
       textDecoration: 'underline',
     },
 
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 16,
+      padding: theme.spacing(0, 1.5),
+    },
+
     ...scale(-1 / 3),
     boxSizing: 'border-box',
     color: 'inherit',
     display: 'inline-block',
+    fontSize: 18,
     letterSpacing: '0.03em',
-    lineHeight: `calc(${presets.headerHeight} - 6px)`,
-    padding: `6px ${rhythm(1 / 2)} 0`,
+    padding: theme.spacing(0, 2),
     position: 'relative',
     textDecoration: 'none',
-    textTransform: 'uppercase',
+    textTransform: 'none',
     top: 0,
     transition: 'color .15s ease-out',
   },
 
   display: 'inline-block',
   margin: 0,
-});
+}));
 
 // Component Definition
 const NavItem: FC<Props> = ({ linkTo, children, ...otherProps }) => (

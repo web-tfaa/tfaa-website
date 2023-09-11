@@ -5,51 +5,25 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import PropTypes from 'prop-types';
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
+import { TfaaMemberData } from '../../../utils/hooks/useGetAllMembers'
+import EnhancedAlert from '../../../components/shared/EnhancedAlert';
 import MemberTableHead from './member-table-head';
 import MemberTableRowActionElements from './MemberTableRowActionElements';
 
 // Local Typings
 interface Props {
-  data: UserData[];
+  data: TfaaMemberData[] | null;
   isAdmin: boolean;
+  noAuthUser: boolean;
 }
-export interface UserData {
-  Address1: string;
-  Address2: string;
-  AmountPaid: number;
-  CellPhone: string;
-  City: string;
-  District: string;
-  Email: string;
-  FirstName: string;
-  LastName: string;
-  MemberType: 'active' | 'retired';
-  NewToTMAC: string;
-  OfficePhone: string;
-  PaymentOption: string;
-  PaypalPaymentID: string;
-  State: string;
-  Title: string;
-  ZipCode: number;
-  userId: string;
-  invoiceDate: string;
-  invoiceId: string;
-  receiptDate: string;
-  receiptId: string;
-}
+
 export type Order = 'asc' | 'desc';
 
 // Local Variables
-const propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  isAdmin: PropTypes.bool.isRequired,
-};
-
 const StyledRoot = styled(Paper)(({ theme }) => ({
   '.MuiToolbar-root': {
     display: 'flex',
@@ -68,6 +42,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.overflowWrapper': {
     overflowX: 'auto',
+    width: '100%',
   },
 
   '.pagerButton': {
@@ -87,11 +62,10 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.table': {
     marginBottom: 0,
-    minWidth: 200,
+    // width: 1000,
   },
 
   margin: theme.spacing(3, 0),
-  width: '100%',
 }));
 
 // Local Functions
@@ -105,7 +79,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function getComparator<Key extends keyof UserData>(
+function getComparator<Key extends keyof TfaaMemberData>(
   order: Order,
   orderBy: Key,
 ): (
@@ -117,31 +91,16 @@ function getComparator<Key extends keyof UserData>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function uglifyEmail(email: string) {
-  if (!email) {
-    return '';
-  }
-  const index = email.indexOf('@');
-
-  // Remove it & insert -at- back in → Array.prototype.splice()
-  const uglyEmailArray = email.split('');
-
-  uglyEmailArray.splice(index, 1, '-at-');
-
-  return uglyEmailArray.join('');
-}
-
 // Component Definition
 const MemberTable: FC<Props> = ({
   data,
   isAdmin,
+  noAuthUser,
 }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('LastName');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  console.log('data', data);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -154,12 +113,23 @@ const MemberTable: FC<Props> = ({
 
   const handleRequestSort = (
     _event: React.MouseEvent<unknown>,
-    property: keyof UserData,
+    property: keyof TfaaMemberData,
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+
+  if (noAuthUser && !data) {
+    return (
+      <EnhancedAlert
+        severity="info"
+        title="Not Authorized"
+      >
+        Sign in to the view the current member list
+      </EnhancedAlert>
+    );
+  }
 
   if (!data) {
     return null;
@@ -220,7 +190,7 @@ const MemberTable: FC<Props> = ({
                       className="cell"
                       key={user.Email}
                     >
-                      {uglifyEmail(user.Email)}
+                      {user.Email}
                     </TableCell>
 
                     {isAdmin && (
@@ -264,7 +234,5 @@ const MemberTable: FC<Props> = ({
     </StyledRoot>
   );
 };
-
-MemberTable.propTypes = propTypes;
 
 export default MemberTable;

@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-// import { isTodayAfterJune30th } from '../../utils/helpers';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
 import ArrowForwardIcon from '../../components/shared/ArrowForwardIcon';
 import AuthUserContext from '../../components/session/AuthUserContext';
 import CardHeadline from '../../components/shared/cards/card-headline';
@@ -16,7 +16,6 @@ import CtaButton from '../../components/masthead/cta-button';
 import EnhancedAlert from '../../components/shared/EnhancedAlert';
 import FuturaDiv from '../../components/shared/futura-div';
 import Layout from '../../components/layout';
-import Status from './status';
 
 // Sidebar Data
 import MobileDivider from '../../components/shared/MobileDivider';
@@ -45,94 +44,94 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const JoinContainer = ({ location }) => (
-  <Layout location={location}>
-    <StyledRoot>
-      <Status />
+const JoinContainer = ({ location }) => {
+  return (
+    <Layout location={location}>
+      <StyledRoot>
+        <Container>
+          <Helmet>
+            <title>TMAC | Join TMAC</title>
+          </Helmet>
 
-      <Container>
-        <Helmet>
-          <title>TMAC | Join TMAC</title>
-        </Helmet>
+          <div className="topContent">
+            <CardHeadline>Join TMAC</CardHeadline>
 
-        <div className="topContent">
-          <CardHeadline>Join TMAC</CardHeadline>
+            {!isTodayAfterJuly31st
+              ? (
+                <Box mt={3}>
+                  <EnhancedAlert title="Membership Notice">
+                    TMAC Membership will open up again on August 1st.
+                  </EnhancedAlert>
+                </Box>
+              ) : (
+                <>
+            <FuturaDiv>
+              To join TMAC please complete these three steps:
+            </FuturaDiv>
 
-          {/* {!isTodayAfterJune30th
-            ? (
-              <Box mt={3}>
-                <EnhancedAlert title="Membership Notice">
-                  TMAC Membership will open up again on July 1st.
-                </EnhancedAlert>
-              </Box>
-            ) : (
-              <> */}
-          <FuturaDiv>
-            To join TMAC please complete these three steps:
-          </FuturaDiv>
+            <FuturaDiv>
+              <span className="strong">
+                1.
+                {' '}
+              </span>
+              Sign up for a TMAC website login.
+            </FuturaDiv>
 
-          <FuturaDiv>
-            <span className="strong">
-              1.
+            <FuturaDiv>
+              <span className="strong">
+                2.
+                {' '}
+              </span>
+              Complete the Membership Form.
+            </FuturaDiv>
+
+            <FuturaDiv>
+              <span className="strong">
+                3.
+                {' '}
+              </span>
+              Pay dues online using PayPal (or mail invoice with check via mail).
+            </FuturaDiv>
+
+            <p>
+              Note: Sponsors should complete the
               {' '}
-            </span>
-            Sign up for a TMAC website login.
-          </FuturaDiv>
+              <Link to="/sponsors">Sponsor Form</Link>
+              .
+            </p>
+            </>
+              )}
+          </div>
 
-          <FuturaDiv>
-            <span className="strong">
-              2.
-              {' '}
-            </span>
-            Complete the Membership Form.
-          </FuturaDiv>
+          {isTodayAfterJuly31st && (
+            <>
+              <div className="bottomContent">
+                <CtaButton
+                  buttonColor="blue"
+                  to="/members/register"
+                >
+                  Begin Membership
+                  <ArrowForwardIcon />
+                </CtaButton>
+              </div>
 
-          <FuturaDiv>
-            <span className="strong">
-              3.
-              {' '}
-            </span>
-            Pay dues online using PayPal (or mail invoice with check via mail).
-          </FuturaDiv>
+              <div style={{ marginTop: '1.5rem' }}>
+                * Membership is not complete until payment is received.
+              </div>
+            </>
+          )}
+        </Container>
 
-          <p>
-            Note: Sponsors should complete the
-            {' '}
-            <Link to="/sponsors">Sponsor Form</Link>
-            .
-          </p>
-          {/* </>
-            )} */}
-        </div>
-
-        {/* {isTodayAfterJune30th && (
-          <> */}
-        <div className="bottomContent">
-          <CtaButton
-            buttonColor="blue"
-            to="/members/register"
-          >
-            Begin Membership
-            <ArrowForwardIcon />
-          </CtaButton>
-        </div>
-
-        <div style={{ marginTop: '1.5rem' }}>
-          * Membership is not complete until payment is received.
-        </div>
-        {/* </>
-        )} */}
-      </Container>
-
-      <MobileDivider>
-        <SidebarBody
-          inline
-          yaml={membersSidebar}
-        />
-      </MobileDivider>
-    </StyledRoot>
-  </Layout>
-);
+        <MobileDivider>
+          <SidebarBody
+            inline
+            yaml={membersSidebar}
+          />
+        </MobileDivider>
+      </StyledRoot>
+    </Layout>
+  );
+};
 
 JoinContainer.propTypes = {
   location: PropTypes.shape({}).isRequired,

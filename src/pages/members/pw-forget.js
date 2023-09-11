@@ -1,5 +1,4 @@
 // External Dependencies
-import { Helmet } from 'react-helmet';
 import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -11,9 +10,8 @@ import { auth } from '../../firebase';
 import { options } from '../../utils/typography';
 import { emailRegex } from '../../utils/helpers';
 import Container from '../../components/shared/container';
-import FormHr from '../../components/shared/form-hr';
+import FormDivider from '../../components/shared/FormDivider';
 import Layout from '../../components/layout';
-import presets from '../../utils/presets';
 
 // Local Variables
 const propTypes = {
@@ -52,7 +50,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     width: 288,
   },
 
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     paddingLeft: theme.spacing(3),
   },
 
@@ -96,7 +94,7 @@ class PasswordForgetForm extends Component {
           showSuccessMessage: true,
         }));
 
-        setTimeout(this.handleRedirectToMembers, 7000);
+        setTimeout(this.handleRedirectToMembers, 4000);
       })
       .catch((error) => {
         this.setState({
@@ -119,19 +117,18 @@ class PasswordForgetForm extends Component {
     const isInvalid = email === '' || !emailRegex.test(email);
 
     return (
-      <Layout location={location}>
+      <Layout
+        location={location}
+        pageTitle="Forgot Password"
+      >
         <ReCaptchaProvider>
           <StyledRoot>
             <Container className="password-forget">
-              <Helmet>
-                <title>TMAC | Forgot Password</title>
-              </Helmet>
-
               <h2 className="title">
                 Password Reset
               </h2>
 
-              <FormHr />
+              <FormDivider />
 
               {showSuccessMessage && (
                 <div className="successMessage">

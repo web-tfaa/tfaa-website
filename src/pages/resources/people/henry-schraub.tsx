@@ -31,6 +31,7 @@ const HenrySchraub: FC<Props> = ({ location }) => (
       and was the Supervisor of Music and Director of Bands with the
       Weatherford, Texas Independent School District.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Mr. Schraub&apos;s bands were consistent Sweepstakes winners in UIL
       competition, and his Bishop and Weatherford bands ranked third in the
@@ -42,6 +43,7 @@ const HenrySchraub: FC<Props> = ({ location }) => (
       Texas and has served as an adjudicator at the district, regional, area
       and state levels.
     </FuturaParagraph>
+
     <FuturaParagraph>
       He presently serves as the conductor of The Greater Fort Worth
       Community Band. Mr. Schraub received his Bachelor of Music with honors
@@ -52,6 +54,7 @@ const HenrySchraub: FC<Props> = ({ location }) => (
       Bandmasters Association, Phi Mu Alpha, Pi Kappa Lambda, and Phi Beta
       Mu National Honorary Bandmasters Fraternity.
     </FuturaParagraph>
+
     <FuturaParagraph>
       He served as TMEA Region 5 Band Chairman and Region 5 TMEA Chairman.
       He is a Past-President of the Texas Music Educators Association and

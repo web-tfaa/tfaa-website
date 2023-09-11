@@ -1,9 +1,7 @@
 // External Dependencies
 import {
   Palette as MuiPalette,
-  PaletteColor as MuiPaletteColor,
   PaletteOptions as MuiPaletteOptions,
-  SimplePaletteColorOptions as MuiSimplePaletteColorOptions,
   Theme as MuiTheme,
 } from '@mui/material/styles';
 
@@ -32,6 +30,24 @@ interface PaletteLegacyGray {
   dark: string;
 }
 
+interface PaletteShapes {
+  topNavHeight: number;
+}
+
+interface PaletteTFAA {
+  about: string;
+  background: string;
+  backgroundLight: string;
+  backgroundMediumLight: string;
+  backgroundDark: string;
+  events: string;
+  grey: string;
+  membership: string;
+  resources: string;
+  signIn: string;
+  text: string;
+}
+
 interface PaletteUi {
   borderBlue: string;
   bright: string;
@@ -43,6 +59,15 @@ interface PaletteUi {
 declare module '@mui/material/styles' {
   export type Theme = MuiTheme
 
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    mobile: true; // adds the `mobile` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+
   interface Palette extends MuiPalette {
     alert: PaletteAlert;
     altBackground: string;
@@ -50,8 +75,10 @@ declare module '@mui/material/styles' {
     gatsby: string;
     legacyGray: PaletteLegacyGray;
     loginStatus: string;
+    shapes: PaletteShapes;
     table: PaletteTable;
     texasFlag: PaletteTexasFlag;
+    tfaa: PaletteTFAA;
     ui: PaletteUi;
   }
 
@@ -62,32 +89,10 @@ declare module '@mui/material/styles' {
     gatsby: string;
     legacyGray: PaletteLegacyGray;
     loginStatus: string;
+    shapes: PaletteShapes;
     table: PaletteTable;
     texasFlag: PaletteTexasFlag;
+    tfaa: PaletteTFAA;
     ui: PaletteUi;
-  }
-
-  interface PaletteColor extends MuiPaletteColor {
-    alert?: PaletteAlert;
-    altBackground?: string;
-    events?: PaletteEvents;
-    gatsby?: string;
-    legacyGray?: PaletteLegacyGray;
-    loginStatus?: string;
-    table?: PaletteTable;
-    texasFlag?: PaletteTexasFlag;
-    ui?: PaletteUi;
-  }
-
-  interface SimplePaletteColorOptions extends MuiSimplePaletteColorOptions {
-    alert?: PaletteAlert;
-    altBackground?: string;
-    events?: PaletteEvents;
-    gatsby?: string;
-    legacyGray?: PaletteLegacyGray;
-    loginStatus?: string;
-    table?: PaletteTable;
-    texasFlag?: PaletteTexasFlag;
-    ui?: PaletteUi;
   }
 }

@@ -12,12 +12,13 @@ import presets from '../../utils/presets';
 
 // Local Typings
 interface Props {
-  buttonColor: 'blue' | 'green';
+  buttonColor: ButtonColor;
   children: React.ReactNode;
   to?: string;
 }
+type ButtonColor = 'blue' | 'green';
 interface StyledLinkProps {
-  $buttonColor: 'blue' | 'green';
+  $buttonColor: ButtonColor;
 }
 
 // Local Variables
@@ -27,7 +28,7 @@ const getButtonColor = ({
   buttonColor,
   theme
 }: {
-  buttonColor: 'blue' | 'green';
+  buttonColor: ButtonColor;
   theme: Theme;
 }) => {
   let background: string = blue['50'];

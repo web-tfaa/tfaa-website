@@ -56,7 +56,7 @@ const StyledRoot = styled(Card)(({ theme }) => ({
     [presets.Phablet]: {
       maxWidth: '70%',
     },
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       maxWidth: '80%',
     },
     fontSize: '1rem',

@@ -1,132 +1,66 @@
 // External Dependencies
 import { Helmet } from 'react-helmet';
 import styled, {
-  ThemeProvider,
+  ThemeProvider as StyledComponentsThemeProvider,
 } from 'styled-components';
-import React, { FC, ReactElement } from 'react';
-import clsx from 'clsx';
-import hex2rgba from 'hex2rgba';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 // Internal Dependencies
-import AuthUserContext from './session/AuthUserContext';
+import { FirebaseAuthUser } from '../types/shared';
+import { appName, appNameShort } from '../utils/app-constants';
+import { firebase } from '../firebase';
+import AuthUserContext from '../components/session/AuthUserContext';
 import Footer from './footer';
-import MobileNav from './nav/mobile-nav';
-import SidebarBody from './shared/sidebar/SidebarBody';
 import TopNav from './nav/top-nav';
-import withAuthentication from './session/withAuthentication';
 import theme from '../gatsby-theme-material-ui-top-layout/theme';
 
-// Sidebar data
-import aboutSidebar from '../pages/about/about-links.yml';
-import eventsSidebar from '../pages/events/events-links.yml';
-import membersSidebar from '../pages/members/members-links.yml';
-import resourcesSidebar from '../pages/resources/resources-links.yml';
-
 // Helpers
-import { rhythm } from '../utils/typography';
-import presets, { colors } from '../utils/presets';
+import presets from '../utils/presets';
 
-// Import Futura PT typeface
-import '../fonts/Webfonts/futurapt_book_macroman/stylesheet.css';
-import '../fonts/Webfonts/futurapt_bookitalic_macroman/stylesheet.css';
-import '../fonts/Webfonts/futurapt_demi_macroman/stylesheet.css';
-import '../fonts/Webfonts/futurapt_demiitalic_macroman/stylesheet.css';
-
-// Other fonts
-import 'typeface-spectral';
-import 'typeface-space-mono';
+// Import global styles, including custom fonts
+import '../../styles/global.css';
 
 // Local Typings
 interface Props {
   children: ReactElement;
-  isAuthenticated: boolean;
   location: Location;
   pageTitle?: string;
 }
-interface StyledRootProps {
-  $hasSidebar: boolean;
+export type AuthUserFromFirebase = FirebaseAuthUser | null;
+export interface TfaaAuthUser {
+  email: string;
+  uid: string;
 }
 
 // Local Variables
-const StyledRoot = styled.div<StyledRootProps>(({
-  $hasSidebar,
-  theme,
-}) => ({
-  '.hide-header': {
-    [presets.Tablet]: {
-      paddingTop: 0,
-    },
-  },
+const StyledRoot = styled.div(({ theme }) => ({
   '.main-body': {
     [presets.Desktop]: {
-      minHeight: 'calc(100vh - 4rem)',
+      minHeight: 'calc(100vh - 5rem)',
     },
-    [presets.Tablet]: {
+    [theme.breakpoints.down('lg')]: {
       margin: 'inherit',
-      paddingTop: presets.headerHeight,
     },
     display: 'flex',
     flex: 1,
     paddingTop: 0,
-    minHeight: 'calc(100vh - 4rem)',
+    minHeight: 'calc(100vh - 5rem)',
   },
 
   '.main-content': {
-    [presets.Tablet]: {
-      paddingLeft: $hasSidebar ? theme.spacing(25) : 0,
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.palette.shapes.topNavHeight,
     },
-    [presets.Desktop]: {
-      paddingLeft: $hasSidebar ? theme.spacing(38) : 0,
-      paddingRight: theme.spacing(3),
+    [theme.breakpoints.up('mobile')]: {
+      paddingLeft: 0,
+      paddingTop: theme.palette.shapes.topNavHeight - 16,
     },
-  },
 
-  '.sidebar': {
-    [presets.Desktop]: {
-      padding: rhythm(1),
-      paddingBottom: rhythm(3.5),
-      width: rhythm(10),
-    },
-    backgroundColor: theme.palette.ui.whisper,
-    borderRight: `1px solid ${theme.palette.ui.light}`,
-    boxShadow: `inset 0 4px 5px 0 ${hex2rgba(
-      colors.gatsby,
-      presets.shadowKeyPenumbraOpacity,
-    )}, inset 0 1px 10px 0 ${hex2rgba(
-      colors.lilac,
-      presets.shadowAmbientShadowOpacity,
-    )}, inset 0 2px 4px -1px ${hex2rgba(
-      colors.lilac,
-      presets.shadowKeyUmbraOpacity,
-    )}`,
-    display: 'none',
-    height: `calc(100vh - ${presets.headerHeight} + 1px)`,
-    overflowY: 'auto',
-    paddingBottom: rhythm(3.5),
-    position: 'fixed',
-    top: `calc(${presets.headerHeight} - 1px)`,
-    width: rhythm(8),
-    WebkitOverflowScrolling: 'touch',
-    '::-webkit-scrollbar': {
-      height: '6px',
-      width: '6px',
-    },
-    '::-webkit-scrollbar-thumb': {
-      background: colors.ui.bright,
-    },
-    '::-webkit-scrollbar-track': {
-      background: colors.ui.light,
-    },
-  },
-
-  '.sidebar.show-sidebar': {
-    [presets.Tablet]: {
-      display: 'block',
-    },
+    width: '100vw',
   },
 
   '.sponsors': {
-    [presets.Tablet]: {
+    [theme.breakpoints.up('mobile')]: {
       margin: '0 auto',
     },
     backgroundColor: theme.palette.altBackground,
@@ -134,30 +68,45 @@ const StyledRoot = styled.div<StyledRootProps>(({
 
   display: 'flex',
   flexDirection: 'column',
+  width: '100vw',
 }));
 
+const formatAuthUser = (user: AuthUserFromFirebase): TfaaAuthUser | null => {
+  if (!user) {
+    return null;
+  }
+
+  return {
+    email: user.email ?? '',
+    uid: user.uid ?? '',
+  };
+};
+
 // Component Definition
-const DefaultLayout: FC<Props> = ({
+const DefaultLayout: React.FC<Props> = ({
   children,
-  isAuthenticated,
   location: {
-    pathname: path,
+    pathname,
   },
   pageTitle,
 }) => {
-  const isHome = path === '/';
-  const isSponsors = path.slice(0, 9) === '/sponsors';
-  const isAbout = path.slice(0, 6) === '/about';
-  const isEvents = path.slice(0, 7) === '/events';
-  const isResources = path.slice(0, 10) === '/resources';
-  const isMembers = path.slice(0, 8) === '/members';
+  const [authUser, setAuthUser] = useState<TfaaAuthUser | null>(null);
 
-  const hasSidebar = isAbout || isEvents || isResources
-    || (isAuthenticated && isMembers);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      firebase.auth.onAuthStateChanged((authUser: AuthUserFromFirebase) => {
+        if (authUser) {
+          setAuthUser(formatAuthUser(authUser));
+        } else {
+          setAuthUser(null);
+        }
+      });
+    }
+  }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Helmet defaultTitle="Texas Music Administrators Conference">
+    <StyledComponentsThemeProvider theme={theme}>
+      <Helmet defaultTitle={appName}>
         <meta
           name="twitter:site"
           content="@TXMusicLeaders"
@@ -168,84 +117,32 @@ const DefaultLayout: FC<Props> = ({
         />
         <meta
           name="og:site_name"
-          content="TMAC"
+          content={appName}
         />
         <html lang="en" />
-        {pageTitle && <title>TMAC | {pageTitle}</title>}
+        {pageTitle && <title>{appNameShort} | {pageTitle}</title>}
       </Helmet>
-      <StyledRoot
-        $hasSidebar={hasSidebar}
-        className={isHome ? 'is-homepage' : ''}
+
+      <AuthUserContext.Provider
+        value={{
+          currentAuthUser: authUser,
+          setCurrentAuthUser: setAuthUser,
+        }}
       >
-        <TopNav />
+        <StyledRoot>
+          <TopNav pathname={pathname} />
 
-        <div
-          className={
-            clsx(
-              'main-body',
-              hasSidebar ? 'has-sidebar' : '',
-              isSponsors ? 'sponsors' : '',
-              isHome ? 'hide-header' : '',
-            )
-          }
-        >
-          {/* TODO Move this under about/index.js once Gatsby supports
-            multiple levels of layouts */}
-          <div
-            className={clsx('sidebar', isAbout ? 'show-sidebar' : '')}
-          >
-            <SidebarBody yaml={aboutSidebar} />
+          <div className="main-body">
+            <main className="main-content">
+              {children}
+            </main>
           </div>
 
-          {/* TODO Move this under events/index.js once Gatsby supports
-            multiple levels of layouts */}
-          <div
-            className={clsx('sidebar', isEvents ? 'show-sidebar' : '')}
-          >
-            <SidebarBody yaml={eventsSidebar} />
-          </div>
-
-          {/* TODO Move this under resources/index.js once Gatsby supports
-            multiple levels of layouts */}
-          <div
-            className={clsx('sidebar', isResources ? 'show-sidebar' : '')}
-          >
-            <SidebarBody yaml={resourcesSidebar} />
-          </div>
-
-          {/* TODO Move this under members/index.js once Gatsby supports
-            multiple levels of layouts */}
-          {isAuthenticated && (
-            <div
-              className={clsx('sidebar', isMembers ? 'show-sidebar' : '')}
-            >
-              <SidebarBody yaml={membersSidebar} />
-            </div>
-          )}
-
-          {/* Main container */}
-          <main className="main-content">
-            {children}
-          </main>
-        </div>
-
-        <MobileNav />
-
-        <Footer />
-      </StyledRoot>
-    </ThemeProvider>
+          <Footer />
+        </StyledRoot>
+      </AuthUserContext.Provider>
+    </StyledComponentsThemeProvider>
   );
 };
 
-const DefaultLayoutWithContext = (props: unknown) => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (
-      <DefaultLayout
-        {...props}
-        isAuthenticated={!!authUser}
-      />
-    )}
-  </AuthUserContext.Consumer>
-);
-
-export default withAuthentication(DefaultLayoutWithContext);
+export default DefaultLayout;

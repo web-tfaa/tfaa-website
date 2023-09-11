@@ -11,14 +11,13 @@ interface Props {
   children: React.ReactNode;
   gutterBottom?: boolean;
 }
-
 // Local Variables
-const StyledH2 = styled.h2(({ $gutterBottom }) => ({
+const StyledH2 = styled.h2(({ theme }) => ({
   ...scale(2 / 5),
   lineHeight: 1.2,
   marginTop: 0,
-  marginBottom: $gutterBottom ? 'inherit' : 0,
-  [presets.Tablet]: {
+  marginBottom: theme.spacing(2),
+  [theme.breakpoints.up('mobile')]: {
     fontSize: scale(1 / 10).fontSize,
   },
   [presets.Desktop]: {
@@ -33,13 +32,12 @@ const StyledH2 = styled.h2(({ $gutterBottom }) => ({
 }));
 
 // Component Definition
-const CardHeadline: FC<Props> = ({
-  children,
-  gutterBottom = true,
-}) => (
-  <StyledH2 $gutterBottom={gutterBottom}>
-    {children}
-  </StyledH2>
-);
+const CardHeadline: FC<Props> = ({ children }) => {
+  return (
+    <StyledH2>
+      {children}
+    </StyledH2>
+  );
+};
 
 export default CardHeadline;

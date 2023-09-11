@@ -22,6 +22,7 @@ const JayLester: FC<Props> = ({ location }) => (
     name={name}
   >
     <CardHeadline>TMAC Past President, 2019-2020</CardHeadline>
+
     <FuturaParagraph>
       A product of the Abilene public schools, Jay Lester currently
       serves Abilene ISD as Executive Director of Fine Arts. He also serves as the UIL Music
@@ -37,6 +38,7 @@ const JayLester: FC<Props> = ({ location }) => (
       year, Jay co-conducted the Allen Full Orchestra at the Midwest Clinic in Chicago,
       Illinois.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Jay is proud graduate of Cooper High School in Abilene where he graduated with honors
       while participating in golf, band, choir, show choir, theatre, speech, and film club.
@@ -53,6 +55,7 @@ const JayLester: FC<Props> = ({ location }) => (
       In addition, he has participated in workshops at the Conn Selmer Institute, Texas Tech,
       West Texas A&M, UNT, and the Ohio State University.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Mr. Lester has presented workshops for many conferences including the Texas Music
       Educators Association, Texas Bandmasters Association, Texas Orchestra Directors
@@ -63,6 +66,7 @@ const JayLester: FC<Props> = ({ location }) => (
       each year. He has also judged TMEA Honor Band and Orchestra contests at the Area and State
       level. Jay enjoys judging music festivals for Director&apos;s Choice, Peak, and South Coast.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Additionally, Mr. Lester has also been involved with the Texas Art Educators Association,
       the Texas Dance Educators Association, the Texas Theatre Administrators Conference. In
@@ -75,6 +79,7 @@ const JayLester: FC<Props> = ({ location }) => (
       Celebration Orchestra at First Baptist Church in Abilene as well as in orchestra pits for
       local musicals.
     </FuturaParagraph>
+
     <FuturaParagraph>
       Jay serves on the board of directors for the Abilene Teachers Federal Credit Union, the
       Grace Museum, the Paramount Theatre (Chairman), the HSU Cowboy Band Foundation. He is also

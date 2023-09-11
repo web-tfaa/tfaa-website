@@ -2,27 +2,24 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-// Internal Dependencies
-import presets from '../../utils/presets';
-
 // Local Typings
 interface Props {
   children: React.ReactNode;
 }
 
 // Local Variables
-const StyledRoot = styled.div({
+const StyledRoot = styled.div(({ theme }) => ({
   '.mobileHr': {
     border: 0,
     height: 2,
     marginTop: 10,
   },
-  [presets.Tablet]: {
+  [theme.breakpoints.up('mobile')]: {
     display: 'none',
   },
 
   display: 'block',
-});
+}));
 
 // Component Definition
 const MobileDivider: FC<Props> = ({ children }) => (

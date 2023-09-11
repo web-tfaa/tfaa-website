@@ -4,9 +4,24 @@ import {
 import { createTheme } from '@mui/material';
 import gray from 'gray-percentage';
 
+// Local Variables
+const defaultTheme = createTheme();
+
 // A custom theme for this app, smartly merged with the default MUI theme
 // The plugin 'gatsby-theme-material-ui' will use this theme
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      ...defaultTheme.breakpoints.values,
+      // as of 2022-12-10, the default breakpoints are:
+      // xs: 0,
+      // sm: 600,
+      mobile: 768,
+      // md: 900,
+      // lg: 1200,
+      // xl: 1536,
+    },
+  },
   palette: {
     primary: {
       main: '#556cd6',
@@ -32,6 +47,9 @@ const theme = createTheme({
       dark: gray(8, 270),
     },
     loginStatus: '#f5eefe',
+    shapes: {
+      topNavHeight: 128,
+    },
     table: {
       background: 'linear-gradient(180deg, #B8CCE3, #EDF2F8)',
       header: '#EDF2F8',
@@ -39,6 +57,19 @@ const theme = createTheme({
     texasFlag: {
       blue: '#002868',
       red: '#BF0A30',
+    },
+    tfaa: {
+      about: '#CF0025',
+      background: '#FAFAFA',
+      backgroundLight: '#F7F7F7',
+      backgroundMediumLight: '#F8F8F8',
+      backgroundDark: '#111113',
+      events: '#032A56',
+      grey: '#DEDEDE',
+      membership: '#005897',
+      resources: '#009FAE',
+      signIn: '#F05B21',
+      text: '#333333',
     },
     ui: {
       borderBlue: '#2D456F',
@@ -49,7 +80,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: ['Spectral', 'Georgia', 'Times New Roman', 'Times', 'serif'].join(','),
+    fontFamily: ['RNS Sanz', 'sans-serif'].join(','),
     fontSize: 16,
   },
 });

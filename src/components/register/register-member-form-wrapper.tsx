@@ -1,13 +1,17 @@
 // External Dependencies
-import React, { FC } from 'react';
+import React from 'react';
 
 // Internal Dependencies
 import {
   HandleCompleteMemberStepType,
   MemberFormValues,
-} from '../../pages/members/register';
-import FormHr from '../shared/form-hr';
+} from './MemberRegisterContent';
+import { appNameShort } from '../../utils/app-constants';
+import { isTodayAfterJuly31st } from '../../utils/helpers';
+import FormDivider from '../shared/FormDivider';
+import FormTitle from '../shared/FormTitle';
 import RegisterForm from './register-member-form';
+import RegistrationPausedAlert from '../shared/RegistrationPausedAlert';
 
 // Local Typings
 interface Props {
@@ -17,7 +21,7 @@ interface Props {
 }
 
 // Component Definition
-const MemberFormValuesWrapper: FC<Props> = ({
+const MemberFormValuesWrapper: React.FC<Props> = ({
   authenticatedUserId,
   initialMemberFormValues,
   onCompleteMemberStep,
@@ -26,13 +30,20 @@ const MemberFormValuesWrapper: FC<Props> = ({
     return null;
   }
 
+  // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
+  const showMembershipForm = isTodayAfterJuly31st;
+
+  if (!showMembershipForm) {
+    return <RegistrationPausedAlert />;
+  }
+
   return (
     <section>
-      <h2>
-        2. Join TMAC
-      </h2>
+      <FormTitle>
+        2. Join {appNameShort}
+      </FormTitle>
 
-      <FormHr />
+      <FormDivider />
 
       <RegisterForm
         authenticatedUserId={authenticatedUserId}

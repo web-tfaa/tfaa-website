@@ -1,7 +1,62 @@
-import React from 'react';
+import * as React from 'react';
 
-import Page from './src/components/layout';
-
-export function wrapPageElement({ element, props }) {
-  return <Page {...props}>{element}</Page>;
-}
+export const onRenderBody = ({ setHeadComponents }) => {
+  setHeadComponents([
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Black.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-Black-Font"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-Bold-Font"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-ExtraBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-ExtraBold-Font"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Light.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-Light-Font"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-Medium-Font"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-Normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-Normal-Font"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/RNS_Sanz-WOOF2/RNSSanz-SemiBold.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="RNS_Sanz-SemiBold-Font"
+    />,
+  ]);
+};

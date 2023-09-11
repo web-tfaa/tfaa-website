@@ -8,9 +8,10 @@ import React, { FC, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 
 // Local Dependencies
+import { appNameShort } from '../../../utils/app-constants';
+import { logError } from '../../../utils/logError';
 import PaypalButton from './paypal-button';
 import EnhancedAlert from '../../shared/EnhancedAlert';
-import { logError } from '../../../utils/logError';
 
 // Local Typings
 export interface PaypalPayment {
@@ -77,7 +78,7 @@ const PaypalButtonWrapper: FC<Props> = ({
       button again.
       <br />
       You can also print an invoice and
-      send payment to the TMAC Treasurer.
+      send payment to the {appNameShort} Executive Secretary.
     </>
   );
 

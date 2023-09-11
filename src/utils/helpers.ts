@@ -40,21 +40,31 @@ export const currentYearLong = format(new Date(), 'yyyy');
 // Current Year - two-digit string
 export const currentYearShort = format(new Date(), 'yy');
 
-// The "year" for TMAC starts on 7/1
+// We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
+// Use the `isTodayAfterJune30th` helper
+
+// The "year" for TMAC starts on 8/1
 // new Date(2021, 6, 1) → 7/1/2021
-export const isTodayAfterJune30th = isAfter(
+// export const isTodayAfterJune30th = isAfter(
+//   new Date(),
+//   new Date(parseInt(currentYearLong, 10), 6, 1),
+// );
+
+// As of 2023-06-28, the "year" for TMAC starts on 8/1
+// new Date(2023, 7, 1) → 8/1/2023
+export const isTodayAfterJuly31st = isAfter(
   new Date(),
-  new Date(parseInt(currentYearLong, 10), 6, 1),
+  new Date(parseInt(currentYearLong, 10), 7, 1),
 );
 
-export const currentSchoolYearShort = isTodayAfterJune30th
+export const currentSchoolYearShort = isTodayAfterJuly31st
   ? `${currentYearShort}-${Number(currentYearShort) + 1}`
   : `${Number(currentYearShort) - 1}-${currentYearShort}`;
 
-export const currentSchoolYearLong = isTodayAfterJune30th
+export const currentSchoolYearLong = isTodayAfterJuly31st
   ? `${currentYearLong}-${Number(currentYearLong) + 1}`
   : `${Number(currentYearLong) - 1}-${currentYearLong}`;
 
-export const currentSchoolYearEnding = isTodayAfterJune30th
+export const currentSchoolYearEnding = isTodayAfterJuly31st
   ? `${Number(currentYearLong) + 1}`
   : currentYearLong;

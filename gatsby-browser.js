@@ -1,6 +1,10 @@
+// External Dependencies
 import { init } from '@sentry/gatsby';
 import { BrowserTracing } from '@sentry/tracing';
 import { Dedupe, ExtraErrorData } from '@sentry/integrations';
+
+// Internal Dependencies
+import './styles/global.css';
 
 /**
  * Called when the Gatsby browser runtime first starts.

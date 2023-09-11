@@ -1,6 +1,7 @@
 // External Dependencies
-import { CircularProgress } from '@mui/material';
-import React, { FC } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import React from 'react';
+import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Local Typings
@@ -14,6 +15,11 @@ const StyledRoot = styled.div(({ theme }) => ({
   '.loadingText': {
     marginBottom: theme.spacing(4),
   },
+  '.loadingTitle': {
+    fontSize: 34,
+    fontWeight: 900,
+    marginBottom: theme.spacing(4),
+  },
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
@@ -21,15 +27,22 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const LoadingContainer: FC<Props> = ({
+const LoadingContainer: React.FC<Props> = ({
   step,
   title,
 }) => (
   <StyledRoot>
-    <h2>{title}</h2>
+    <Typography
+      className="loadingTitle"
+      component="h2"
+    >
+      {title}
+    </Typography>
+
     <p className="loadingText">
       Now loading step {step}...
     </p>
+
     <CircularProgress
       size={64}
       thickness={4}

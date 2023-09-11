@@ -1,16 +1,17 @@
 // External Dependencies
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import FormHr from '../shared/form-hr';
-import InvoiceTable from './invoice-table';
+import { appName, appNameShort } from '../../utils/app-constants';
 import {
   currentSchoolYearLong,
 } from '../../utils/helpers';
+import FormDivider from '../shared/FormDivider';
+import InvoiceTable from './invoice-table';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -61,6 +62,7 @@ const propTypes = {
   }).isRequired,
   invoiceId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isActive: PropTypes.bool,
+  isOnlyForFallConference: PropTypes.bool,
   isInvoice: PropTypes.bool.isRequired,
   receiptId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sponsorLevel: PropTypes.string,
@@ -70,6 +72,7 @@ const propTypes = {
 const defaultProps = {
   invoiceId: 1,
   isActive: true,
+  isOnlyForFallConference: false,
   receiptId: 1,
   sponsorLevel: '',
   sponsorOrganizationName: '',
@@ -87,6 +90,7 @@ class Invoice extends Component {
       invoiceId,
       isActive,
       isInvoice,
+      isOnlyForFallConference,
       receiptId,
       sponsorLevel,
       sponsorOrganizationName,
@@ -106,10 +110,10 @@ class Invoice extends Component {
       >
         <header>
           <img
-            alt="TMAC logo"
-            height="80px"
-            src="https://res.cloudinary.com/tmac/image/upload/v1523131020/tmac-logo.jpg"
-            style={{ position: 'absolute' }}
+            alt={`${appNameShort} logo`}
+            height="60px"
+            src="https://res.cloudinary.com/tmac/image/upload/v1670094162/tfaa-logo.png"
+            style={{ position: 'absolute', top: 40 }}
           />
           <Box
             component="h2"
@@ -119,16 +123,16 @@ class Invoice extends Component {
           </Box>
         </header>
 
-        <FormHr red />
+        <FormDivider />
 
         <Box sx={{ fontSize: 16, margin: '0 32px' }}>
-          <h3>Texas Music Administrators Conference</h3>
+          <h3>{appName}</h3>
 
           <Box
             marginBottom={1.5}
             sx={{ fontSize: 14 }}
           >
-            <em>&quot;...promoting and supporting music education&quot;</em>
+            <em>&quot;...equipping leaders to advance high-quality fine arts education for all.&quot;</em>
           </Box>
 
           <div>
@@ -172,14 +176,13 @@ class Invoice extends Component {
               </Box>
 
               <div>
-                <strong>Texas Music Administrators Conference</strong>
+                <strong>{appName}</strong>
               </div>
 
-              <div>c/o Jeff Turner</div>
-              <div>Allen ISD</div>
-              <div>Fine Arts Dept.</div>
-              <div>300 Rivercrest Blvd. </div>
-              <div>Allen, TX 75002</div>
+              <div>c/o Peter Warshaw</div>
+              <div>{appNameShort} Executive Secretary</div>
+              <div>4107 Natural Bridge Court</div>
+              <div>Round Rock, TX. 78681</div>
             </div>
 
             <div>
@@ -196,6 +199,7 @@ class Invoice extends Component {
             form={form}
             isActive={isActive}
             isInvoice={isInvoice}
+            isOnlyForFallConference={isOnlyForFallConference}
             sponsorLevel={sponsorLevel}
           />
 
@@ -204,11 +208,11 @@ class Invoice extends Component {
               <span>
                 Make all checks payable to:
                 <br />
-                <strong>Texas Music Administrators Conference (TMAC)</strong>
+                <strong>{appName} ({appNameShort})</strong>
               </span>
             ) : (
               <strong>
-                Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} TMAC for the{' '}
+                Thank you for {sponsorLevel ? 'sponsoring' : 'joining'} {appNameShort} for the{' '}
                 {currentSchoolYearLong} school year!
               </strong>
             )}
@@ -216,7 +220,7 @@ class Invoice extends Component {
         </div>
 
         <footer>
-          The Texas Music Administrators Conference is an organization supporting music educators,
+          The {appName} is an organization supporting music educators,
           music administrators, and Texas schools in the quest to deliver music and arts education
           to all students.
         </footer>

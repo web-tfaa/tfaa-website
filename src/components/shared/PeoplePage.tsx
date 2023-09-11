@@ -1,6 +1,5 @@
 // External Dependencies
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // Internal Dependencies
@@ -8,9 +7,6 @@ import Container from './container';
 
 // Sidebar data
 import Layout from '../layout';
-import resourcesSidebar from '../../pages/resources/resources-links.yml';
-import MobileDivider from './MobileDivider';
-import SidebarBody from './sidebar/SidebarBody';
 
 // Local Typings
 interface Props {
@@ -26,7 +22,8 @@ const StyledRoot = styled.div(({ theme }) => ({
     marginBottom: theme.spacing(4),
   },
   '.image': {
-    marginBottom: 0,
+    marginBottom: theme.spacing(2),
+    maxWidth: '50%',
   },
 
   display: 'flex',
@@ -42,11 +39,10 @@ const PeoplePage: FC<Props> = ({
   location,
   name,
 }) => (
-  <Layout location={location}>
-    <Helmet>
-      <title>TMAC | {name}</title>
-    </Helmet>
-
+  <Layout
+    location={location}
+    pageTitle={name}
+  >
     <StyledRoot>
       <Container>
         {imgSrc ? (
@@ -60,13 +56,6 @@ const PeoplePage: FC<Props> = ({
         <h2 className="headingName">{name}</h2>
 
         {children}
-
-        <MobileDivider>
-          <SidebarBody
-            inline
-            yaml={resourcesSidebar}
-          />
-        </MobileDivider>
       </Container>
     </StyledRoot>
   </Layout>

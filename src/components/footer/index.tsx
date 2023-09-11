@@ -1,23 +1,25 @@
 // External Dependencies
-import React, { FC } from 'react';
-import styled from 'styled-components';
+import { Link } from 'gatsby-theme-material-ui';
+import React, { FC, useMemo } from 'react';
+import styled, { useTheme } from 'styled-components';
+import { useMediaQuery } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
-import presets from '../../utils/presets';
-import { options } from '../../utils/typography';
-import { currentYearLong } from '../../utils/helpers';
+import { anchorStyles } from '../../utils/sharedStyles';
+import { appNameShort } from '../../utils/app-constants';
+import FooterBottomRow from './FooterBottomRow';
+import FooterContactUs from './FooterContactUs';
+import FooterLearnMore from './FooterLearnMore';
+import FooterFollowUs from './FooterFollowUs';
+import FooterFollowUsIconList from './FooterFollowUsIconList';
+import TabletFooter from './TabletFooter';
 
 // Local Variables
 const StyledRoot = styled.footer(({ theme }) => {
   const linkStyles = {
-    color: 'inherit',
-    textDecoration: 'none',
-    transition: `all ${presets.animation.speedFast} ${presets.animation.curveDefault}`,
-    borderBottom: `1px solid ${theme.palette.ui.bright}`,
-    boxShadow: `inset 0 -2px 0px 0px ${theme.palette.ui.bright}`,
-    fontFamily: options.headerFontFamily.join(','),
-    fontWeight: 'bold',
-    marginLeft: 5,
+    ...anchorStyles(theme),
+    fontWeight: theme.typography.fontWeightMedium,
 
     '&:hover': {
       background: theme.palette.ui.bright,
@@ -29,64 +31,171 @@ const StyledRoot = styled.footer(({ theme }) => {
   };
 
   return {
-    '.footer-left': {
-      maxWidth: '60%',
+    '.footerTop': {
+      display: 'flex',
+      justifyContent: 'space-around',
+      flexWrap: 'wrap',
+      gap: theme.spacing(2),
 
-      '& a': linkStyles,
+      '.footerTopLeft': {
+        '.logoImage': {
+          marginBottom: 0,
+        },
+
+        alignItems: 'center',
+        display: 'flex',
+        width: 240,
+      },
+
+      '.footerTopMiddle': {
+        [theme.breakpoints.down('xl')]: {
+          gap: theme.spacing(8),
+        },
+        [theme.breakpoints.down('lg')]: {
+          fontSize: 15,
+          gap: theme.spacing(5),
+        },
+
+        color: theme.palette.grey['700'],
+        display: 'flex',
+        flex: 2,
+        gap: theme.spacing(12),
+        justifyContent: 'center',
+        justifySelf: 'center',
+      },
+
+      '.footerTopRight': {
+        '.forEveryone': {
+          [theme.breakpoints.down('lg')]: {
+            fontSize: 24,
+          },
+
+          color: theme.palette.tfaa.about,
+          fontSize: 34,
+          lineHeight: 1,
+          textAlign: 'right',
+          fontWeight: 900,
+        },
+
+        '.followUsIconList': {
+          '.MuiAvatar-root': {
+            backgroundColor: theme.palette.tfaa.resources,
+          },
+
+          marginTop: theme.spacing(2),
+          textAlign: 'left',
+        },
+
+        justifySelf: 'end',
+        display: 'flex',
+        alignItems: 'flex-end',
+        flexDirection: 'column',
+      },
     },
 
-    '.footer-right': {
-      textAlign: 'right',
+    '.linkList': {
+      '.MuiBox-root': {
+        '& > a': {
+          ...linkStyles,
+          color: theme.palette.grey['700'],
+          marginLeft: 0,
 
-      '& a': linkStyles,
+          '&:visited': {
+            color: theme.palette.grey['700'],
+          },
+        },
+
+        marginBottom: theme.spacing(0.5),
+        minWidth: 100,
+      },
     },
 
-    [presets.Tablet]: {
-      fontSize: 16,
-      padding: '2em',
-      position: 'static',
+    '.tabletContactUs': {
+      [theme.breakpoints.up('mobile')]: {
+        display: 'none',
+      },
     },
 
-    alignItems: 'center',
-    background: '#fbfafc',
-    borderTop: '4px solid #2D456F',
-    bottom: 68,
-    boxShadow: '-2px 0 5px #444',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flex: 1,
-    fontFamily: options.headerFontFamily.join('/'),
-    fontSize: 12,
-    justifyContent: 'space-between',
-    padding: '1.25em',
-    position: 'relative',
-    zIndex: 10,
+    hr: {
+      marginBottom: theme.spacing(1.5),
+    },
+
+    [theme.breakpoints.down('xl')]: {
+      padding: theme.spacing(4),
+    },
+    [theme.breakpoints.down('lg')]: {
+      fontSize: 15,
+      padding: theme.spacing(3),
+    },
+    [theme.breakpoints.down('md')]: {
+      fontSize: 14,
+      padding: theme.spacing(2),
+    },
+    [theme.breakpoints.down('mobile')]: {
+      fontSize: 14,
+      padding: theme.spacing(2, 2, 4),
+    },
+
+    fontFamily: theme.typography.fontFamily,
+    fontSize: 16,
+    padding: theme.spacing(8, 8, 4),
+    position: 'static',
+    background: theme.palette.common.white,
+    borderTop: `2px solid ${theme.palette.grey['200']}`,
+    zIndex: 1,
   };
 });
 
 // Component Definition
-const Footer: FC = () => (
-  <StyledRoot className="footer">
-    <div className="footer-left">
-      &copy; {currentYearLong} |
-      <a href="https://www.texasmusicadmin.com/">
-        Texas Music Administrators Conference
-      </a>
-    </div>
+const Footer: FC = () => {
+  const theme = useTheme();
+  const isTabletOrSmallerScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-    <div className="footer-right">
-      <div>
-        Built by
-        <a
-          href="https://www.mikemathew.com/"
-          rel="noreferrer noopener"
-          target="_blank"
-        >
-          Drumsensei Media
-        </a>
+  const largeLogoElement = useMemo(() => (
+    <img
+      alt={`${appNameShort} logo.`}
+      className="logoImage"
+      src="/tfaa-logo-svg.svg"
+    />
+  ), []);
+
+  if (isTabletOrSmallerScreen) {
+    return <TabletFooter />;
+  }
+
+  return (
+    <StyledRoot className="footer">
+      <div className="footerTop">
+        <div className="footerTopLeft">
+          <Link to="/">
+            <div className="logoImageWrapper">
+              {largeLogoElement}
+            </div>
+          </Link>
+        </div>
+
+        <div className="footerTopMiddle">
+          <FooterContactUs />
+
+          <FooterLearnMore />
+
+          <FooterFollowUs />
+        </div>
+
+        <div className="footerTopRight">
+          <Typography className="forEveryone">
+            Fine Arts is
+            <br />
+            for Everyone
+          </Typography>
+
+          <FooterFollowUsIconList />
+        </div>
       </div>
-    </div>
-  </StyledRoot>
-);
+
+      <FooterBottomRow />
+    </StyledRoot>
+  );
+};
 
 export default Footer;

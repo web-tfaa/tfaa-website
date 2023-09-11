@@ -1,15 +1,16 @@
 // External Dependencies
-import React, { FC } from 'react';
 import { Link } from 'gatsby-theme-material-ui';
+import { lighten } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import React from 'react';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import Card from '../components/shared/cards/card';
-import Cards from '../components/shared/cards';
-import Container from '../components/shared/container';
-import FuturaParagraph from '../components/shared/futura-paragraph';
+import { appNameShort } from '../utils/app-constants';
 import Layout from '../components/layout';
-import MastheadBg from '../components/masthead/masthead-bg';
+import DrumBanner from '../components/shared/DrumBanner';
 
 // Local Typings
 interface Props {
@@ -17,26 +18,67 @@ interface Props {
 }
 
 // Local Variables
-const StyledCard = styled(Card)({
-  width: '100%'
-});
+const StyledRoot = styled.div(({ theme }) => ({
+  '.fourOhFourCard': {
+    backgroundColor: lighten(theme.palette.tfaa.resources, 0.8),
+  },
+
+  '.fourOhFourCardContent': {
+    '&:last-child': {
+      paddingBottom: theme.spacing(6),
+    },
+    padding: theme.spacing(4, 6),
+  },
+
+  '.fourOhFourTitle': {
+    fontSize: 34,
+    fontWeight: 900,
+    marginBottom: theme.spacing(4),
+  },
+
+  section: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: theme.spacing(10),
+  },
+
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
+  width: '100vw',
+}));
 
 // Component Definition
-const FourOhFour: FC<Props> = ({ location }) => (
-  <Layout location={location}>
-    <MastheadBg />
-    <Container hasSideBar={false}>
-      <Cards>
-        <StyledCard>
-          <h2>This is not the page you are looking for</h2>
-          <FuturaParagraph>
-            Try heading back to our <Link to="/">main page</Link> to find out
-            more about TMAC!
-          </FuturaParagraph>
-        </StyledCard>
-      </Cards>
-    </Container>
-  </Layout>
-);
+const FourOhFour: React.FC<Props> = ({ location }) => {
+  return (
+    <Layout location={location} pageTitle="Not Found">
+      <StyledRoot>
+        <DrumBanner drumBannerTitle="Page Not Found" />
+
+        <section>
+          <Typography
+            className="fourOhFourTitle"
+            component="h2"
+            variant="h4"
+          >
+            Page Not Found
+          </Typography>
+
+          <Card className="fourOhFourCard" variant="outlined">
+            <CardContent className="fourOhFourCardContent">
+              <Typography>
+                Try heading back to our <Link to="/">main page</Link> to find out more
+                about {appNameShort}!
+              </Typography>
+            </CardContent>
+          </Card>
+        </section>
+      </StyledRoot>
+    </Layout>
+  );
+};
 
 export default FourOhFour;
