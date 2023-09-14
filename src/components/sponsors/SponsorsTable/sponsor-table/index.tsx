@@ -31,6 +31,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
     '&:first-child': {
       paddingLeft: theme.spacing(3),
     },
+    fontFeatureSettings: 'inherit',
   },
 
   '.empty': {
@@ -155,6 +156,13 @@ const SponsorTable: FC<Props> = ({
                       key={user.SponsorLevel}
                     >
                       {user.SponsorLevel}
+                    </TableCell>
+
+                    <TableCell
+                      className="cell"
+                      key={user.OrganizationWebsiteAddress}
+                    >
+                      {user.OrganizationWebsiteAddress}
                     </TableCell>
 
                     <TableCell

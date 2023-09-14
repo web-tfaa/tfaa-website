@@ -30,6 +30,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.table.header,
   color: theme.palette.common.black,
   fontWeight: 500,
+  fontFeatureSettings: 'inherit',
 }));
 
 const rows = [

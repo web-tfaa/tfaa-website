@@ -34,11 +34,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.table.header,
   color: theme.palette.common.black,
   fontWeight: 500,
+  fontFeatureSettings: 'inherit',
 }));
 
 const rows = [
   { id: 'SponsorOrganization', disablePadding: true, label: 'Organization' },
   { id: 'SponsorLevel', disablePadding: false, label: 'Level' },
+  { id: 'OrganizationWebsiteAddress', disablePadding: false, label: 'Website' },
   { id: 'OrganizationContactName', disablePadding: true, label: 'Contact Name' },
   { id: 'Title', disablePadding: false, label: 'Title' },
   { id: 'Email', disablePadding: false, label: 'Email' },

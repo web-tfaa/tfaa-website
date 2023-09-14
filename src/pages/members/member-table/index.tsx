@@ -34,6 +34,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
     '&:first-child': {
       paddingLeft: theme.spacing(3),
     },
+    fontFeatureSettings: 'inherit',
   },
 
   '.empty': {
