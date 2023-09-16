@@ -1,17 +1,20 @@
 // External Dependencies
+import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import React, { FC, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import React, { FC, useState } from 'react';
+import Toolbar from '@mui/material/Toolbar';
 import styled from 'styled-components';
+// import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import { Sponsor } from '../../../../utils/hooks/useGetSponsorData';;
 import SponsorTableHead from './sponsor-table-head';
-import SponsorTableRowActionElements from './SponsorTableRowActionElements';
 
 // Local Typings
 interface Props {
@@ -23,7 +26,7 @@ export type Order = 'asc' | 'desc';
 const StyledRoot = styled(Paper)(({ theme }) => ({
   '.MuiToolbar-root': {
     display: 'flex',
-    alignItems: 'baseline',
+    alignItems: 'center',
   },
 
   '.cell': {
@@ -123,6 +126,15 @@ const SponsorTable: FC<Props> = ({
   return (
     <StyledRoot variant="outlined">
       <div className="overflowWrapper">
+        <Toolbar>
+          <Button
+            startIcon={<AddIcon />}
+            variant="outlined"
+          >
+            Add Sponsor
+          </Button>
+        </Toolbar>
+
         {data.length > 0 ? (
           <Table className="table">
             <SponsorTableHead
