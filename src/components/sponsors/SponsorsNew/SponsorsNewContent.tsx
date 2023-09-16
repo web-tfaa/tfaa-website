@@ -10,6 +10,7 @@ import {
 } from '../../../utils/member-constants';
 import { useGetAuthUser } from '../../../utils/hooks/useGetAuthUser';
 import DrumBanner from '../../shared/DrumBanner';
+import NewSponsorForm from './NewSponsorForm';
 import RestrictedAccess from '../../shared/RestrictedAccess';
 
 // Local Variables
@@ -54,7 +55,7 @@ const SponsorsNewContent: React.FC = () => {
           Add Sponsor
         </Typography>
 
-        form goes here
+        <NewSponsorForm />
       </StyledRoot>
     </>
   );
