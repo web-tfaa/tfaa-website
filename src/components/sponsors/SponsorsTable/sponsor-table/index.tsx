@@ -2,7 +2,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,7 +10,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Toolbar from '@mui/material/Toolbar';
 import styled from 'styled-components';
-// import { navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 
 // Internal Dependencies
 import { Sponsor } from '../../../../utils/hooks/useGetSponsorData';;
@@ -66,7 +66,6 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   marginTop: theme.spacing(3),
   width: '100%',
-  // width: '98%',
 }));
 
 // Local Functions
@@ -119,6 +118,10 @@ const SponsorTable: FC<Props> = ({
     setOrderBy(property);
   };
 
+  const handlePressAddSponsor = useCallback(() => {
+    navigate('/sponsors/new');
+  }, []);
+
   if (!data) {
     return null;
   }
@@ -128,7 +131,9 @@ const SponsorTable: FC<Props> = ({
       <div className="overflowWrapper">
         <Toolbar>
           <Button
+            onClick={handlePressAddSponsor}
             startIcon={<AddIcon />}
+            size="small"
             variant="outlined"
           >
             Add Sponsor
