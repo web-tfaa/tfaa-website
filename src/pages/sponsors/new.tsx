@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import DrumBanner from '../../components/shared/DrumBanner';
 import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
+import SponsorsNewContent from '../../components/sponsors/SponsorsNew/SponsorsNewContent';
 
 // Local Typings
 interface Props {
@@ -39,9 +40,7 @@ const SponsorsNew: React.FC<Props> = ({ location })=> {
       pageTitle="Add Sponsor"
     >
       <StyledRoot>
-        <DrumBanner drumBannerTitle="Add Sponsor" />
-
-        <Typography>Add Sponsor Form</Typography>
+        <SponsorsNewContent />
 
         <FooterTopper color="membership" />
       </StyledRoot>
