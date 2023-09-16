@@ -17,6 +17,7 @@ export interface Sponsor {
   ContactAddress2: string;
   ContactPhone: string;
   Email: string;
+  LogoUrl?: string;
   OrganizationContactName: string;
   OrganizationWebsiteAddress: string;
   PaymentOption?: 'Invoiced' | 'Paypal';

@@ -63,7 +63,6 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.table': {
     marginBottom: 0,
-    // width: 1000,
   },
 
   margin: theme.spacing(3, 0),
