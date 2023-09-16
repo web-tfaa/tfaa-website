@@ -81,7 +81,7 @@ const SponsorsTableContent: React.FC = () => {
               to="/"
               width={180}
               >
-              Go Back Home
+              View Home Page
             </CtaButton>
           </Box>
         </Box>
@@ -98,20 +98,7 @@ const SponsorsTableContent: React.FC = () => {
         Sponsors Table
       </Typography>
 
-      {shouldSeeSponsorListLink && (
-        <EnhancedAlert
-          className="adminCard"
-          severity="info"
-          title="Admin View"
-        >
-          You can print any sponsor&apos;s invoice or receipt from each row.
-        </EnhancedAlert>
-      )}
-
-      <SponsorListTable
-        data={sponsorData}
-        isAdmin={shouldSeeSponsorListLink}
-      />
+      <SponsorListTable data={sponsorData} />
     </StyledRoot>
   );
 };

@@ -16,7 +16,6 @@ import SponsorTableRowActionElements from './SponsorTableRowActionElements';
 // Local Typings
 interface Props {
   data: Sponsor[] | null;
-  isAdmin: boolean;
 }
 export type Order = 'asc' | 'desc';
 
@@ -63,7 +62,8 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
   },
 
   marginTop: theme.spacing(3),
-  width: '98%',
+  width: '100%',
+  // width: '98%',
 }));
 
 // Local Functions
@@ -92,7 +92,6 @@ function getComparator<Key extends keyof Sponsor>(
 // Component Definition
 const SponsorTable: FC<Props> = ({
   data,
-  isAdmin,
 }) => {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof Sponsor>('SponsorOrganization');
@@ -127,7 +126,6 @@ const SponsorTable: FC<Props> = ({
         {data.length > 0 ? (
           <Table className="table">
             <SponsorTableHead
-              isAdmin={isAdmin}
               onRequestSort={handleRequestSort}
               order={order}
               orderBy={orderBy}
@@ -136,68 +134,55 @@ const SponsorTable: FC<Props> = ({
             <TableBody>
               {data.sort(getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user) => (
+                .map((sponsor) => (
                   <TableRow
                     className="row"
-                    key={user.userId}
+                    key={sponsor.userId}
                   >
                     <TableCell
                       className="cell"
                       component="th"
-                      key={user.SponsorOrganization}
+                      key={sponsor.SponsorOrganization}
                       padding="none"
                       scope="row"
                     >
-                      {user.SponsorOrganization}
+                      {sponsor.SponsorOrganization}
                     </TableCell>
 
                     <TableCell
                       className="cell"
-                      key={user.SponsorLevel}
+                      key={sponsor.SponsorLevel}
                     >
-                      {user.SponsorLevel}
+                      {sponsor.SponsorLevel}
                     </TableCell>
 
                     <TableCell
                       className="cell"
-                      key={user.OrganizationWebsiteAddress}
+                      key={sponsor.OrganizationWebsiteAddress}
                     >
-                      {user.OrganizationWebsiteAddress}
+                      {sponsor.OrganizationWebsiteAddress}
                     </TableCell>
 
                     <TableCell
                       className="cell"
-                      key={user.OrganizationContactName}
+                      key={sponsor.LogoUrl}
                     >
-                      {user.OrganizationContactName}
+                      <a
+                        href={sponsor.LogoUrl}
+                        rel="noreferrer noopener"
+                        style={{ fontWeight: 500 }}
+                        target="_blank"
+                      >
+                        link to image
+                      </a>
                     </TableCell>
-
-                    <TableCell
-                      className="cell"
-                      key={user.Title}
-                    >
-                      {user.Title}
-                    </TableCell>
-
-                    <TableCell
-                      className="cell"
-                      key={user.Email}
-                    >
-                      {user.Email}
-                    </TableCell>
-
-                    {isAdmin && (
-                      <TableCell className="cell">
-                        <SponsorTableRowActionElements user={user} />
-                      </TableCell>
-                    )}
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
         ) : (
           <div className="empty">
-            No sponsors for the current school year
+            No sponsors for the current year
           </div>
         )}
       </div>

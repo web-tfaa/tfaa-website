@@ -33,7 +33,7 @@ const SponsorImageLink = ({
   return (
     <StyledAnchor
       href={websiteUrl}
-      rel="noreferrer"
+      rel="noreferrer noopener"
       target="_blank"
     >
       <img
