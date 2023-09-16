@@ -1,5 +1,4 @@
 // External Dependencies
-import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import React from 'react';
 import Typography from '@mui/material/Typography';
@@ -12,16 +11,12 @@ import {
   TMAC_WEB_ADMIN_EMAIL_LIST,
 } from '../../../utils/member-constants';
 import { useGetAuthUser } from '../../../utils/hooks/useGetAuthUser';
-import CtaButton from '../../shared/CtaButton';
 import DrumBanner from '../../shared/DrumBanner';
-import EnhancedAlert from '../../../components/shared/EnhancedAlert';
 import SponsorListTable from './sponsor-table';
+import RestrictedAccess from '../../shared/RestrictedAccess';
 
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
-  '.adminCard': {
-    maxWidth: '75%',
-  },
   '.sponsorsTableTitle': {
     fontSize: 32,
     fontWeight: 700,
@@ -60,46 +55,24 @@ const SponsorsTableContent: React.FC = () => {
     || currentAuthUser?.email === TMAC_WEB_EXECUTIVE_SECRETARY);
 
   if (!shouldSeeSponsorListLink) {
-    return (
-      <>
-        <DrumBanner drumBannerTitle="Not Allowed" />
-
-        <Box margin={4}>
-          <EnhancedAlert
-            className="adminCard"
-            severity="warning"
-            title="Admin Users Only"
-            >
-            This data is only available for admin users.
-          </EnhancedAlert>
-
-          <Box marginTop={4}>
-            <CtaButton
-              colorVariant="resources"
-              fontWeight={600}
-              size="large"
-              to="/"
-              width={180}
-              >
-              View Home Page
-            </CtaButton>
-          </Box>
-        </Box>
-      </>
-    );
+    return <RestrictedAccess />;
   }
 
   return (
-    <StyledRoot>
-      <Typography
-        className="sponsorsTableTitle"
-        component="h2"
-      >
-        Sponsors Table
-      </Typography>
+    <>
+      <DrumBanner drumBannerTitle="Sponsors Table" />
 
-      <SponsorListTable data={sponsorData} />
-    </StyledRoot>
+      <StyledRoot>
+        <Typography
+          className="sponsorsTableTitle"
+          component="h2"
+        >
+          Sponsors Table
+        </Typography>
+
+        <SponsorListTable data={sponsorData} />
+      </StyledRoot>
+    </>
   );
 };
 
