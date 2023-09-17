@@ -1,11 +1,16 @@
 // External Dependencies
-import Box from '@mui/material/Box';
-import React from 'react';
 import { Form, Formik } from 'formik';
+import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Collapse from '@mui/material/Collapse';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
 import { addSponsorSchema } from './schema';
+import CloudinaryUploadWidget from '../../shared/CloudinaryUploadWidget';
 import CtaButton from '../../shared/CtaButton';
 import CustomTextField from '../../shared/CustomTextField';
 import EnhancedAlert from '../../shared/EnhancedAlert';
@@ -26,6 +31,17 @@ interface NewSponsorForm {
   OrganizationWebsiteAddress: string;
   SponsorLevel: SponsorLevelType;
   SponsorOrganization: string;
+}
+
+interface CloudinaryUploadResult {
+  info: {
+    secure_url: string;
+  }
+}
+
+interface CloudinaryWidget {
+  open: () => void;
+  close: (options: { quiet: boolean }) => void;
 }
 
 // Local Variables
@@ -51,6 +67,28 @@ const handlePressSubmitButton = (values: NewSponsorForm) => {
 
 // Component Definition
 const NewSponsorForm: React.FC = () => {
+  const [imageUrl, updateImageUrl] = useState<string>('');
+  const [imageError, updateImageError] = useState<string>('');
+
+  function handleOnUpload(
+    error: string,
+    result: CloudinaryUploadResult,
+    widget: CloudinaryWidget,
+  ) {
+
+    if (error) {
+      updateImageError(error);
+
+      widget.close({
+        quiet: true
+      });
+      return;
+    }
+
+    updateImageUrl(result?.info?.secure_url);
+  }
+
+
   return (
     <StyledRoot>
       <Formik
@@ -83,6 +121,50 @@ const NewSponsorForm: React.FC = () => {
                   value={values.SponsorOrganization}
                 />
               </Box>
+
+              {imageUrl ? null : (
+                <Box mb={3}>
+                  <Typography sx={{ marginBottom: 3 }}>Add Sponsor Logo</Typography>
+
+                  <CloudinaryUploadWidget onUpload={handleOnUpload}>
+                    {({ open }: CloudinaryWidget) => {
+                      function handleOnClick(event: React.SyntheticEvent<HTMLButtonElement>) {
+                        event.preventDefault();
+                        open();
+                      }
+
+                      return (
+                        <Button
+                          onClick={handleOnClick}
+                          startIcon={<AddIcon />}
+                          variant="outlined"
+                        >
+                          Upload an Image
+                        </Button>
+                      )
+                    }}
+                  </CloudinaryUploadWidget>
+
+                  <Collapse in={Boolean(imageError)}>
+                    <Box mt={2}>
+                      <EnhancedAlert severity="error">
+                        {imageError}
+                      </EnhancedAlert>
+                    </Box>
+                  </Collapse>
+                </Box>
+              )}
+
+              {imageUrl ? (
+                <Box mb={3}>
+                  <Typography sx={{ marginBottom: 3 }}>Sponsor Logo</Typography>
+
+                  <img
+                    alt="sponsor logo"
+                    src={imageUrl}
+                  />
+                </Box>
+              ) : null}
 
               {/* Hidden input to help curtail spam */}
               <input
