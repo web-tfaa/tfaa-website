@@ -64,6 +64,10 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           <script src="https://www.paypalobjects.com/api/checkout.js" />
+          <script
+            src="https://widget.cloudinary.com/v2.0/global/all.js"
+            type="text/javascript"
+          />
           {this.props.postBodyComponents}
         </body>
       </html>

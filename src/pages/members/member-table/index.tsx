@@ -34,6 +34,7 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
     '&:first-child': {
       paddingLeft: theme.spacing(3),
     },
+    fontFeatureSettings: 'inherit',
   },
 
   '.empty': {
@@ -62,7 +63,6 @@ const StyledRoot = styled(Paper)(({ theme }) => ({
 
   '.table': {
     marginBottom: 0,
-    // width: 1000,
   },
 
   margin: theme.spacing(3, 0),

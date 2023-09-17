@@ -1,11 +1,13 @@
 // External Dependencies
 import React from 'react';
 import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
+import DrumBanner from '../../components/shared/DrumBanner';
 import FooterTopper from '../../components/footer/FooterTopper';
 import Layout from '../../components/layout';
-import SponsorsTableContent from '../../components/sponsors/SponsorsTable/SponsorsTableContent';
+import SponsorsNewContent from '../../components/sponsors/SponsorsNew/SponsorsNewContent';
 
 // Local Typings
 interface Props {
@@ -14,6 +16,10 @@ interface Props {
 
 // Local Variables
 const StyledRoot = styled.div(({ theme }) => ({
+  '.adminCard': {
+    maxWidth: '75%',
+  },
+
   '.paddingContainer': {
     padding: theme.spacing(0, 3, 3),
   },
@@ -27,14 +33,14 @@ const StyledRoot = styled.div(({ theme }) => ({
 }));
 
 // Component Definition
-const SponsorsTable: React.FC<Props> = ({ location }) => {
+const SponsorsNew: React.FC<Props> = ({ location })=> {
   return (
     <Layout
       location={location}
-      pageTitle="Sponsors List"
+      pageTitle="Add Sponsor"
     >
       <StyledRoot>
-        <SponsorsTableContent />
+        <SponsorsNewContent />
 
         <FooterTopper color="membership" />
       </StyledRoot>
@@ -42,4 +48,4 @@ const SponsorsTable: React.FC<Props> = ({ location }) => {
   );
 };
 
-export default SponsorsTable;
+export default SponsorsNew;

@@ -1,6 +1,6 @@
 // External Dependencies
 import Box from '@mui/material/Box';
-import React from 'react';
+import React, { useMemo } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { appNameShort } from '../../utils/app-constants';
 import { useGetSponsorData } from '../../utils/hooks/useGetSponsorData';
 import Motifs from '../shared/Motifs';
-// import SponsorCard from './SponsorCard';
+import SponsorGrid from './SponsorGrid';
 
 // Local Variables
 const StyledRoot = styled.section(({ theme }) => ({
@@ -24,11 +24,11 @@ const StyledRoot = styled.section(({ theme }) => ({
     color: theme.palette.tfaa.resources,
   },
 
-  '.eventsList > a': {
+  '.sponsorInfo > a': {
     fontSize: 19,
   },
 
-  '.eventsList > img': {
+  '.sponsorInfo > img': {
     maxWidth: 800,
     width: '100%',
   },
@@ -74,12 +74,29 @@ const useTestData = false;
 const SponsorsList: React.FC = () => {
   const {
     isLoading,
-    // sponsorData,
+    sponsorData,
   } = useGetSponsorData({ useTestData });
 
-  // const classChampionSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Class Champion');
-  // const goldMedalSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Gold Medal');
-  // const silverMedalSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Silver Medal');
+  const hasSponsorData = sponsorData && sponsorData?.length > 0;
+
+  const sponsorInfoElement = useMemo(() => (
+    <div className="sponsorInfo">
+      <img
+        alt={`${appNameShort} sponsorship levels`}
+        src="https://res.cloudinary.com/tmac/image/upload/v1692272429/Sponsor_Levels_combined.png"
+      />
+
+      <Box marginTop={3}>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLScixBGNVLwsLURlTHn0Y35Ix11uYOM9s4gEG00SPH3BVhPrZA/viewform?usp=sharing"
+          target="_blank"
+        >
+          Please select this link to complete the Sponsorship Registration Form and submit payments.
+          <StyledOpenInNewIcon />
+        </a>
+      </Box>
+    </div>
+  ), []);
 
   return (
     <StyledRoot>
@@ -96,36 +113,20 @@ const SponsorsList: React.FC = () => {
 
         <Divider />
 
+        {hasSponsorData && (
+          <>
+            <SponsorGrid sponsorData={sponsorData} />
+
+            <Divider />
+          </>
+        )}
+
         <Collapse in={isLoading}>
           <CircularProgress />
         </Collapse>
 
         <Collapse in={!isLoading}>
-          <div className="eventsList">
-            {/* <SponsorCard
-              sponsorData={classChampionSponsors}
-              sponsorLevel="Class Champion"
-            />
-            <SponsorCard
-              sponsorData={goldMedalSponsors}
-              sponsorLevel="Gold Medal"
-            />
-            <SponsorCard
-              sponsorData={silverMedalSponsors}
-              sponsorLevel="Silver Medal"
-            /> */}
-            <img src="https://res.cloudinary.com/tmac/image/upload/v1692272429/Sponsor_Levels_combined.png"/>
-
-            <Box marginTop={3}>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLScixBGNVLwsLURlTHn0Y35Ix11uYOM9s4gEG00SPH3BVhPrZA/viewform?usp=sharing"
-              target="_blank"
-            >
-              Please select this link to complete the Sponsorship Registration Form and submit payments.
-              <StyledOpenInNewIcon />
-            </a>
-            </Box>
-          </div>
+          {sponsorInfoElement}
         </Collapse>
       </div>
     </StyledRoot>

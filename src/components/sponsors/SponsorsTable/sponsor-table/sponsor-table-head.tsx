@@ -1,11 +1,9 @@
 // External Dependencies
-import {
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-  Tooltip,
-} from '@mui/material';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import Tooltip from '@mui/material/Tooltip';
 import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 
@@ -15,7 +13,6 @@ import { Sponsor } from '../../../../utils/hooks/useGetSponsorData';
 
 // Local Typings
 interface Props {
-  isAdmin: boolean;
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Sponsor) => void;
   order: Order;
   orderBy: string;
@@ -34,19 +31,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.table.header,
   color: theme.palette.common.black,
   fontWeight: 500,
+  fontFeatureSettings: 'inherit',
 }));
 
 const rows = [
   { id: 'SponsorOrganization', disablePadding: true, label: 'Organization' },
   { id: 'SponsorLevel', disablePadding: false, label: 'Level' },
-  { id: 'OrganizationContactName', disablePadding: true, label: 'Contact Name' },
-  { id: 'Title', disablePadding: false, label: 'Title' },
-  { id: 'Email', disablePadding: false, label: 'Email' },
+  { id: 'OrganizationWebsiteAddress', disablePadding: false, label: 'Website' },
+  { id: 'LogoUrl', disablePadding: false, label: 'Logo URL' },
 ];
 
 // Component Definition
 const SponsorTableHead: FC<Props> = ({
-  isAdmin,
   onRequestSort,
   order,
   orderBy,
@@ -55,14 +51,8 @@ const SponsorTableHead: FC<Props> = ({
     onRequestSort(event, property);
   }, [onRequestSort]);
 
-  if (isAdmin && rows.length === 5) {
-    rows.push(
-      { id: 'Actions', disablePadding: false, label: 'Actions' },
-    );
-  }
-
   return (
-    <TableHead>
+    <TableHead sx={{ width: '100%' }}>
       <TableRow key="table-head">
         {rows.map((row) => (
           <StyledTableCell

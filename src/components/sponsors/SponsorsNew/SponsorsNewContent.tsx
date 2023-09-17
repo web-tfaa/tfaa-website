@@ -1,23 +1,22 @@
 // External Dependencies
-import CircularProgress from '@mui/material/CircularProgress';
+import Container from '@mui/material/Container';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
 // Internal Dependencies
-import { useGetSponsorData } from '../../../utils/hooks/useGetSponsorData';
 import {
   TMAC_WEB_EXECUTIVE_SECRETARY,
   TMAC_WEB_ADMIN_EMAIL_LIST,
 } from '../../../utils/member-constants';
 import { useGetAuthUser } from '../../../utils/hooks/useGetAuthUser';
 import DrumBanner from '../../shared/DrumBanner';
-import SponsorListTable from './sponsor-table';
+import NewSponsorFormUI from './NewSponsorFormUI';
 import RestrictedAccess from '../../shared/RestrictedAccess';
 
 // Local Variables
-const StyledRoot = styled.div(({ theme }) => ({
-  '.sponsorsTableTitle': {
+const StyledRoot = styled(Container)(({ theme }) => ({
+  '.addSponsorTitle': {
     fontSize: 32,
     fontWeight: 700,
     marginBottom: theme.spacing(4),
@@ -27,53 +26,40 @@ const StyledRoot = styled.div(({ theme }) => ({
   width: '0 auto',
 }));
 
-// Flip this to test with fake Sponsor data in local development
-const useTestData = false;
-
 // Component Definition
-const SponsorsTableContent: React.FC = () => {
+const SponsorsNewContent: React.FC = () => {
   const { currentAuthUser } = useGetAuthUser();
 
   const isAuthenticated = Boolean(currentAuthUser);
-
-  const {
-    isLoading,
-    sponsorData,
-  } = useGetSponsorData({ useTestData });
-
-
-  if (isLoading && !isAuthenticated) {
-    return <CircularProgress />;
-  }
 
   if (!isAuthenticated) {
     return null;
   }
 
-  const shouldSeeSponsorListLink = currentAuthUser?.email
+  const shouldSeeAddSponsorUI = currentAuthUser?.email
     && (TMAC_WEB_ADMIN_EMAIL_LIST.includes(currentAuthUser?.email)
     || currentAuthUser?.email === TMAC_WEB_EXECUTIVE_SECRETARY);
 
-  if (!shouldSeeSponsorListLink) {
+  if (!shouldSeeAddSponsorUI) {
     return <RestrictedAccess />;
   }
 
   return (
     <>
-      <DrumBanner drumBannerTitle="Sponsors Table" />
+      <DrumBanner drumBannerTitle="Add Sponsor" />
 
-      <StyledRoot>
+      <StyledRoot maxWidth="md">
         <Typography
-          className="sponsorsTableTitle"
+          className="addSponsorTitle"
           component="h2"
         >
-          Sponsors Table
+          Add Sponsor
         </Typography>
 
-        <SponsorListTable data={sponsorData} />
+        <NewSponsorFormUI />
       </StyledRoot>
     </>
   );
 };
 
-export default SponsorsTableContent;
+export default SponsorsNewContent;
