@@ -54,8 +54,9 @@ const NewSponsorFormUI: React.FC = () => {
     updateImageUrl('');
     updateImageError('');
 
-    // Return the admin user to the Sponsors table
-    navigate('/sponsors/sponsors-table');
+    // We do a hard push to the sponsor table page to ensure that the
+    //  data around the image upload is reset correctly
+    window.location.href = '/sponsors/sponsors-table';
   }, []);
 
   const handlePressSubmitButton = useCallback(async (values: NewSponsorForm) => {
@@ -71,8 +72,6 @@ const NewSponsorFormUI: React.FC = () => {
       SponsorOrganization: values.SponsorOrganization,
       LogoUrl: imageUrl,
     };
-
-    console.log('updatedValues', updatedValues);
 
     // Create a new record in the Firestore database
     //  using the form values and the image URL
@@ -90,6 +89,7 @@ const NewSponsorFormUI: React.FC = () => {
   return (
     <StyledRoot>
       <Formik
+        enableReinitialize
         initialValues={initialNewSponsorFormValues}
         validationSchema={addSponsorSchema}
         onSubmit={handlePressSubmitButton}
