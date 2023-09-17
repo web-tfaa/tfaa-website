@@ -1,7 +1,6 @@
 // External Dependencies
 import Collapse from '@mui/material/Collapse';
 import { Formik } from 'formik';
-import { navigate } from 'gatsby';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 

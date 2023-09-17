@@ -1,4 +1,5 @@
 // External Dependencies
+import Container from '@mui/material/Container';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
@@ -14,7 +15,7 @@ import NewSponsorFormUI from './NewSponsorFormUI';
 import RestrictedAccess from '../../shared/RestrictedAccess';
 
 // Local Variables
-const StyledRoot = styled.div(({ theme }) => ({
+const StyledRoot = styled(Container)(({ theme }) => ({
   '.addSponsorTitle': {
     fontSize: 32,
     fontWeight: 700,
@@ -47,7 +48,7 @@ const SponsorsNewContent: React.FC = () => {
     <>
       <DrumBanner drumBannerTitle="Add Sponsor" />
 
-      <StyledRoot>
+      <StyledRoot maxWidth="md">
         <Typography
           className="addSponsorTitle"
           component="h2"
