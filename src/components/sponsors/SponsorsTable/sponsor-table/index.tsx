@@ -177,7 +177,14 @@ const SponsorTable: FC<Props> = ({
                       className="cell"
                       key={sponsor.OrganizationWebsiteAddress}
                     >
-                      {sponsor.OrganizationWebsiteAddress}
+                      <a
+                        href={sponsor.OrganizationWebsiteAddress}
+                        rel="noreferrer noopener"
+                        style={{ fontWeight: 500 }}
+                        target="_blank"
+                      >
+                        link to website
+                      </a>
                     </TableCell>
 
                     <TableCell
