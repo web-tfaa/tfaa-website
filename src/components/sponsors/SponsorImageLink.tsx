@@ -20,6 +20,9 @@ const StyledAnchor = styled.a({
     borderBottom: 'none',
     boxShadow: 'none',
   },
+  img: {
+    maxWidth: 240,
+  },
   maxWidth: '33%',
 });
 

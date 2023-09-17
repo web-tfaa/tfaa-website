@@ -1,6 +1,8 @@
 // External Dependencies
+import Divider from '@mui/material/Divider';
 import React from 'react';
 import Stack from '@mui/material/Stack';
+import styled from 'styled-components';
 
 // Internal Dependencies
 import { Sponsor } from '../../utils/hooks/useGetSponsorData';
@@ -11,6 +13,17 @@ import { Typography } from '@mui/material';
 interface Props {
   sponsorData: Sponsor[];
 }
+
+// Local Variables
+const StyledStack = styled(Stack)(({ theme }) => ({
+  '.sponsorLevelDivider': {
+    backgroundColor: theme.palette.text.primary,
+    height: 1,
+  },
+  '.sponsorLevelTitle': {
+    fontWeight: 600,
+  },
+}));
 
 // Component Definition
 const SponsorGrid = ({
@@ -95,17 +108,29 @@ const SponsorGrid = ({
   ));
 
   return (
-    <Stack
+    <StyledStack
       direction="column"
       spacing={{ xs: 1, sm: 2, md: 4 }}
       useFlexGap
     >
       {georgiaOKeeffeSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Georgia O'Keeffe Sponsors</Typography>
+        <div>
+          <Typography
+            className="sponsorLevelTitle"
+            variant="h6"
+          >
+            Georgia O'Keeffe Sponsors
+          </Typography>
+
+          <Divider className="sponsorLevelDivider" />
+        </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {georgiaOKeeffeElements}
@@ -114,10 +139,22 @@ const SponsorGrid = ({
       )}
       {gustavMahlerSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Gustav Mahler Sponsors</Typography>
+          <div>
+            <Typography
+              className="sponsorLevelTitle"
+              variant="h6"
+            >
+              Gustav Mahler Sponsors
+            </Typography>
+
+            <Divider className="sponsorLevelDivider" />
+          </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {gustavMahlerElements}
@@ -126,10 +163,22 @@ const SponsorGrid = ({
       )}
       {marthaGrahamSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Martha Graham Sponsors</Typography>
+          <div>
+            <Typography
+              className="sponsorLevelTitle"
+              variant="h6"
+            >
+              Martha Graham Sponsors
+            </Typography>
+
+            <Divider className="sponsorLevelDivider" />
+          </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {marthaGrahamElements}
@@ -138,10 +187,22 @@ const SponsorGrid = ({
       )}
       {arthurMillerSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Arthur Miller Sponsors</Typography>
+          <div>
+            <Typography
+              className="sponsorLevelTitle"
+              variant="h6"
+            >
+              Arthur Miller Sponsors
+            </Typography>
+
+            <Divider className="sponsorLevelDivider" />
+          </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {arthurMillerElements}
@@ -150,10 +211,22 @@ const SponsorGrid = ({
       )}
       {platinumSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Platinum Sponsors</Typography>
+          <div>
+            <Typography
+              className="sponsorLevelTitle"
+              variant="h6"
+            >
+              Platinum Sponsors
+            </Typography>
+
+            <Divider className="sponsorLevelDivider" />
+          </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {platinumElements}
@@ -162,10 +235,22 @@ const SponsorGrid = ({
       )}
       {goldSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Gold Sponsors</Typography>
+          <div>
+            <Typography
+              className="sponsorLevelTitle"
+              variant="h6"
+            >
+              Gold Sponsors
+            </Typography>
+
+            <Divider className="sponsorLevelDivider" />
+          </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {goldElements}
@@ -174,17 +259,29 @@ const SponsorGrid = ({
       )}
       {silverSponsors?.length > 0 && (
         <>
-          <Typography variant="h6">Silver Sponsors</Typography>
+          <div>
+            <Typography
+              className="sponsorLevelTitle"
+              variant="h6"
+            >
+              Silver Sponsors
+            </Typography>
+
+            <Divider className="sponsorLevelDivider" />
+          </div>
+
           <Stack
+            alignItems="center"
             direction="row"
             flexWrap="wrap"
+            spacing={{ xs: 1, sm: 2, md: 4 }}
             useFlexGap
           >
             {silverElements}
           </Stack>
         </>
       )}
-    </Stack>
+    </StyledStack>
   );
 };
 
