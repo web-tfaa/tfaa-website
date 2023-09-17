@@ -18,9 +18,4 @@ export const addSponsorSchema = yup.object({
     .string()
     .trim()
     .required('Sponsor Organization is required'),
-  LogoUrl: yup
-    .string()
-    .url()
-    .trim()
-    .required('Logo URL is required'),
 });

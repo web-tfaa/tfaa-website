@@ -48,7 +48,7 @@ const AdminActions: React.FC = () => {
             classes={{
               primary: 'listItemText',
             }}
-            primary="View the Sponsors for this year."
+            primary="View the sponsors for this year or add new ones."
           />
         </ListItem>
 

@@ -1,3 +1,6 @@
+// External Dependencies
+import kebabcase from 'lodash.kebabcase';
+
 // Internal Dependencies
 import { db } from './firebase';
 import { currentSchoolYearShort } from '../utils/helpers';
@@ -36,6 +39,44 @@ export const doCreateEntry = (
       logError(`Error adding membership for ${documentId} document`, err);
     });
 };
+
+export const createSponsorDocument = (form, callback) => {
+  const collectionName = getFirebaseCollectionName('sponsor');
+
+  console.log('creating data...', `${collectionName}`);
+
+  const documentName = kebabcase(form.SponsorOrganization);
+
+  let hasError = false;
+
+  // All of our data expects a `userId`, so we add the document name as the userId
+  const formWithUserId = {
+    ...form,
+    userId: documentName,
+  };
+
+  return db
+    .collection(collectionName)
+    .doc(documentName)
+    .set(formWithUserId)
+    .then(() => {
+      console.log(`Sponsorship for ${documentName} in ${currentSchoolYearShort} was successful`, formWithUserId);
+
+      if (callback) {
+        callback(hasError);
+      }
+    })
+    .catch((err) => {
+      hasError = true;
+
+      console.log(`Error adding sponsorship for ${documentName} document`, err);
+      logError(`Error adding sponsorship for ${documentName} document`, err);
+
+      if (callback) {
+        handleCompleteCreateNewSponsor(hasError);
+      }
+    });
+}
 
 export const doUpdateEntry = (
   form,
