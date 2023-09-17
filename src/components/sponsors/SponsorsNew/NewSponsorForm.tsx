@@ -10,8 +10,10 @@ import Typography from '@mui/material/Typography';
 
 // Internal Dependencies
 import { addSponsorSchema } from './schema';
+import { SPONSOR_LEVEL_OPTIONS } from './constants';
 import CloudinaryUploadWidget from '../../shared/CloudinaryUploadWidget';
 import CtaButton from '../../shared/CtaButton';
+import CustomSelect from '../../shared/CustomSelect';
 import CustomTextField from '../../shared/CustomTextField';
 import EnhancedAlert from '../../shared/EnhancedAlert';
 
@@ -29,7 +31,7 @@ interface NewSponsorForm {
   honeypot?: string;
   LogoUrl: string;
   OrganizationWebsiteAddress: string;
-  SponsorLevel: SponsorLevelType;
+  SponsorLevel: SponsorLevelType | '';
   SponsorOrganization: string;
 }
 
@@ -55,9 +57,11 @@ const StyledRoot = styled.div({
 
 // All form values here must exactly match the column header names in the
 //  associated Google Sheet to which we are writing this form data
-const initialNewSponsorFormValues: Partial<NewSponsorForm> = {
+const initialNewSponsorFormValues: NewSponsorForm = {
   honeypot: '',
+  LogoUrl: '',
   OrganizationWebsiteAddress: '',
+  SponsorLevel: '',
   SponsorOrganization: '',
 };
 
@@ -104,12 +108,14 @@ const NewSponsorForm: React.FC = () => {
           touched,
           values,
         }) => {
+          // console.log('values', values);
+
           const hasTouchedform = Object.values(touched).length > 0;
           const hasErrors = Object.values(errors).length > 0;
 
           return (
             <Form onSubmit={handleSubmit}>
-              <Box mb={3}>
+              <Box marginBottom={3}>
                 <CustomTextField
                   errorMessage={errors.SponsorOrganization}
                   hasError={Boolean(errors.SponsorOrganization)}
@@ -122,8 +128,29 @@ const NewSponsorForm: React.FC = () => {
                 />
               </Box>
 
+              <Box marginBottom={3}>
+                <CustomSelect
+                  label="Sponsor Level*"
+                  name="SponsorLevel"
+                  options={SPONSOR_LEVEL_OPTIONS}
+                />
+              </Box>
+
+              <Box marginBottom={3}>
+                <CustomTextField
+                  errorMessage={errors.OrganizationWebsiteAddress}
+                  hasError={Boolean(errors.OrganizationWebsiteAddress)}
+                  isTouched={touched.OrganizationWebsiteAddress}
+                  label="Sponsor Website Address*"
+                  name="OrganizationWebsiteAddress"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.OrganizationWebsiteAddress}
+                />
+              </Box>
+
               {imageUrl ? null : (
-                <Box mb={3}>
+                <Box marginBottom={3}>
                   <Typography sx={{ marginBottom: 3 }}>Add Sponsor Logo</Typography>
 
                   <CloudinaryUploadWidget onUpload={handleOnUpload}>
@@ -146,7 +173,7 @@ const NewSponsorForm: React.FC = () => {
                   </CloudinaryUploadWidget>
 
                   <Collapse in={Boolean(imageError)}>
-                    <Box mt={2}>
+                  <Box marginBottom={2}>
                       <EnhancedAlert severity="error">
                         {imageError}
                       </EnhancedAlert>
@@ -156,7 +183,7 @@ const NewSponsorForm: React.FC = () => {
               )}
 
               {imageUrl ? (
-                <Box mb={3}>
+                <Box marginBottom={3}>
                   <Typography sx={{ marginBottom: 3 }}>Sponsor Logo</Typography>
 
                   <img
