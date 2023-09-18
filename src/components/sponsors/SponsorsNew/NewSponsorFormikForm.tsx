@@ -14,7 +14,6 @@ import {
 } from '.';
 import { SPONSOR_LEVEL_OPTIONS } from './constants';
 import CloudinaryUploadWidget from '../../shared/CloudinaryUploadWidget';
-import CtaButton from '../../shared/CtaButton';
 import CustomSelect from '../../shared/CustomSelect';
 import CustomTextField from '../../shared/CustomTextField';
 import EnhancedAlert from '../../shared/EnhancedAlert';
@@ -73,6 +72,7 @@ const NewSponsorFormikForm: React.FC<Props> = ({
   }
 
   const shouldPreventSubmit = hasTouchedForm && (hasErrors || !imageUrl);
+  const isReadyToSubmit = hasTouchedForm && !shouldPreventSubmit;
 
   return (
     <Form onSubmit={onFormikSubmit}>
@@ -169,26 +169,38 @@ const NewSponsorFormikForm: React.FC<Props> = ({
         value={formikValues.honeypot}
       />
 
-      <Box
-        mb={2.5}
-        mt={1}
-        width="100%"
-      >
-        <EnhancedAlert severity={shouldPreventSubmit ? 'error' : 'info'}>
-          Please enter a value in each required field and upload a logo image.
-        </EnhancedAlert>
-      </Box>
+      <Collapse in={!isReadyToSubmit}>
+        <Box
+          mb={2.5}
+          mt={1}
+          width="100%"
+        >
+          <EnhancedAlert severity={shouldPreventSubmit ? 'error' : 'info'}>
+            Please enter a value in each required field and upload a logo image.
+          </EnhancedAlert>
+        </Box>
+      </Collapse>
 
-      <CtaButton
+      <Collapse in={isReadyToSubmit}>
+        <Box
+          mb={2.5}
+          mt={1}
+          width="100%"
+        >
+          <EnhancedAlert severity="success">
+            Data looks good! Press the button below to add this sponsor.
+          </EnhancedAlert>
+        </Box>
+      </Collapse>
+
+      <Button
         disabled={shouldPreventSubmit}
-        fontWeight={600}
-        rightArrow
         size="large"
         type="submit"
-        width={240}
+        variant="contained"
       >
         Add Sponsor
-      </CtaButton>
+      </Button>
     </Form>
   );
 };
