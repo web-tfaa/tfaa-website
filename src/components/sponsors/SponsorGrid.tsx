@@ -29,7 +29,7 @@ const StyledStack = styled(Stack)(({ theme }) => ({
 const SponsorGrid = ({
   sponsorData,
 }: Props): JSX.Element => {
-  const georgiaOKeeffeSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Georgia O\'Keeffe');
+  const georgiaOKeeffeSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Georgia O\' Keeffe');
   const gustavMahlerSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Gustav Mahler');
   const marthaGrahamSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Martha Graham');
   const arthurMillerSponsors = sponsorData?.filter((sponsor) => sponsor.SponsorLevel === 'Arthur Miller');
