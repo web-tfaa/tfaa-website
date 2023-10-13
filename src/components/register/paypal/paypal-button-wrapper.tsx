@@ -117,6 +117,15 @@ const PaypalButtonWrapper: FC<Props> = ({
         </Box>
       </Collapse>
 
+      <Box marginTop={2}>
+        <EnhancedAlert
+          severity="info"
+          title="To complete your payment"
+        >
+          After finishing the PayPal payment, keep the {appNameShort} website open until you see a "Success" message here.
+        </EnhancedAlert>
+      </Box>
+
       <Collapse in={Boolean(paymentError)}>
         <Box mt={2}>
           <EnhancedAlert severity="error">
