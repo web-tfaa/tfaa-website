@@ -355,9 +355,11 @@ export const DialogPayment = ({
       open={isOpen}
       onClose={onClose}
     >
-      <DialogTitle>
-        Pay Online with PayPal
-      </DialogTitle>
+      {!showCompletedUI && (
+        <DialogTitle>
+          Pay Online with PayPal
+        </DialogTitle>
+      )}
 
       <DialogContent dividers>
         {contentElement}

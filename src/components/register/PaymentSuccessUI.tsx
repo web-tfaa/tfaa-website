@@ -48,6 +48,7 @@ const StyledRoot = styled.div(({ theme }) => ({
     marginTop: theme.spacing(2),
   },
   '.successMemberInfoCard': {
+    backgroundColor: lighten(theme.palette.tfaa.resources, 0.9),
     padding: theme.spacing(0, 2, 3),
   },
 }));
@@ -67,7 +68,10 @@ export const PaymentSuccessUI = ({
 
   return (
     <StyledRoot>
-      <Box mb={3}>
+      <Box
+        marginBottom={3}
+        textAlign="center"
+      >
         <h2>Successful Payment!</h2>
       </Box>
 
