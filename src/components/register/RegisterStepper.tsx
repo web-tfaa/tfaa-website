@@ -102,7 +102,7 @@ const RegisterStepper: React.FC<Props> = ({
   const steps = getSteps(isAuthenticated, isViewingSponsors);
 
   // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
-  if (!isTodayAfterJuly31st) {
+  if (isTodayAfterJuly31st) {
     return <DrumBanner drumBannerTitle="Registration Closed" />;
   }
 

@@ -42,7 +42,7 @@ const StyledRoot = styled.div(({ theme }) => ({
 // Component Definition
 const SponsorInfo: React.FC<Props> = ({ location }) => {
   // We normally shut down registration and sponsorship after TMEA each year and open it up on 8/1
-  const showSponsorshipInfo = isTodayAfterJuly31st;
+  const showSponsorshipInfo = !isTodayAfterJuly31st;
 
   return (
     <Layout
